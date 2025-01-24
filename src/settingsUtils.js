@@ -79,6 +79,11 @@ export function formatNationName(name, language = "en") {
   // Default to English if the specified language is not available
   const hyphenator = hyphenators[language] || hyphenators.en;
 
+  // Helper to insert zero-width space between alpha and numeric boundaries
+  function insertZeroWidthSpace(input) {
+    return input.replace(/([a-zA-Z])(?=\d)|(\d)(?=[a-zA-Z])/g, '$1\u200B$2');
+  }
+
   // Helper to insert soft hyphens
   function insertShy(word) {
     // Try using the hyphenator for the specified language
@@ -94,20 +99,20 @@ export function formatNationName(name, language = "en") {
 
   // Process the name
   return name
-  .replace(/_/g, " ") // Replace underscores with spaces
-  .split(/(?=[-\s])|(?<=[-\s])/g) // Split by spaces or hyphens, retaining the delimiters
-  .map((segment) => {
-    if (segment === "-" || segment.trim() === "") {
-      // Retain hyphens and spaces as-is
-      return segment;
-    }
+    .replace(/_/g, " ") // Replace underscores with spaces
+    .split(/(?=[-\s])|(?<=[-\s])/g) // Split by spaces or hyphens, retaining the delimiters
+    .map((segment) => {
+      if (segment === "-" || segment.trim() === "") {
+        // Retain hyphens and spaces as-is
+        return segment;
+      }
 
-    const hyphenated = segment.length > 8 ? insertShy(segment) : segment; // Insert soft hyphens for long segments
-    return capitalizeSegment(hyphenated); // Capitalize each segment
-  })
-  .join(""); // Rejoin without adding extra spaces
+      const withZeroWidthSpace = insertZeroWidthSpace(segment); // Add zero-width space
+      const hyphenated = withZeroWidthSpace.length > 8 ? insertShy(withZeroWidthSpace) : withZeroWidthSpace; // Insert soft hyphens for long segments
+      return capitalizeSegment(hyphenated); // Capitalize each segment
+    })
+    .join(""); // Rejoin without adding extra spaces
 }
-
 
 // Utility to format dates
 export function formatDate(ts) {
