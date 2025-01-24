@@ -1,5 +1,5 @@
-const fs = require('fs');
-const fetch = require('node-fetch'); // Add this dependency in package.json if not already installed
+import fs from 'fs';
+import fetch from 'node-fetch';
 
 const sheets = [
   {
@@ -45,21 +45,22 @@ async function fetchData(sheet) {
     const columns = line.split('\t');
     const puppet = columns[sheet.puppetColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
     const master = columns[sheet.mainColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
-    return puppet && master ? { puppet, master, sheet: sheet.name } : null;
+    return puppet && master ? `${puppet}\t${master}\t${sheet.name}` : null; // Format as TSV row
   }).filter(Boolean);
 }
 
 async function aggregateData() {
-  const aggregatedData = [];
+  const tsvLines = ['puppet\tmaster\tsheet']; // Header row
 
   for (const sheet of sheets) {
     console.log(`Fetching data from ${sheet.name}...`);
     const sheetData = await fetchData(sheet);
-    aggregatedData.push(...sheetData);
+    tsvLines.push(...sheetData); // Append rows from the sheet
   }
 
-  fs.writeFileSync('static/puppetData.json', JSON.stringify(aggregatedData, null, 2));
-  console.log('Data aggregated and saved to static/puppetData.json');
+  const tsvContent = tsvLines.join('\n'); // Combine rows with newline separator
+  fs.writeFileSync('static/puppetData.tsv', tsvContent); // Save to TSV file
+  console.log('Data aggregated and saved to static/puppetData.tsv');
 }
 
 aggregateData().catch((error) => {

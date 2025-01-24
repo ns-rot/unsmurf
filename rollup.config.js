@@ -8,6 +8,7 @@ import postcss from 'rollup-plugin-postcss';
 import sveltePreprocess from 'svelte-preprocess';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
+import copy from 'rollup-plugin-copy';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -55,6 +56,12 @@ export default {
 				  }
 			},
         }),
+        serve({
+            open: true,                // Open the browser
+            contentBase: ['public', 'static'], // Serve both public/ and static/
+            host: 'localhost',
+            port: 8080,
+          }),
 
         // Process TailwindCSS and PostCSS plugins
 		postcss({
@@ -65,6 +72,7 @@ export default {
 			  autoprefixer(),
 			],
 		  }),
+          
 
         // Resolve dependencies
         resolve({
@@ -73,6 +81,12 @@ export default {
             exportConditions: ['svelte'],
         }),
         commonjs(),
+
+        copy({
+            targets: [
+                { src: 'static/*', dest: 'public/static' }, // Copy all files from static/ to public/static
+            ],
+        }),
 
         // Run the development server in dev mode
         !production && serve(),
