@@ -2,7 +2,8 @@ import { settingsStore, useSettings } from "./settingsStore";
 
 export let puppetMasterCache = null; // Cache for puppet-master mappings
 const CACHE_DURATION = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
-const tsvFileUrl = "/static/puppetData.tsv"; // URL to your preprocessed TSV file
+//const tsvFileUrl = "/static/puppetData.tsv"; // URL to your preprocessed TSV file
+const tsvFileUrl = "https://ns-rot.github.io/unsmurf/static/puppetData.tsv";
 
 /**
  * Load puppet data from the TSV file via HTTP.
