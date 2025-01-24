@@ -43,7 +43,7 @@ export default {
         file: 'public/build/bundle.js',
         globals: {
             base: production ? `/${repoName}/` : ""
-        }
+        },  
     },
     plugins: [
         svelte({
