@@ -1,3 +1,6 @@
+import { promises as fs } from 'fs'; // Node.js filesystem module
+import fetch from 'node-fetch'; // Use node-fetch for HTTP requests
+
 const sheets = [
   {
     name: "9003",
@@ -20,24 +23,24 @@ const sheets = [
     mainColumn: 1,
     headerRows: 1,
   },
-  {
+  /*{
     name: "Rot Ext",
     url: "https://docs.google.com/spreadsheets/d/1osIbavh59GHFqQCO909jFRDX5XerSvZ7sWFfgMHLFs4/export?format=tsv&id=1osIbavh59GHFqQCO909jFRDX5XerSvZ7sWFfgMHLFs4&gid=708581263",
     puppetColumn: 0,
     mainColumn: 1,
     headerRows: 1,
-  },
+  },*/
 ];
 
 async function fetchData(sheet) {
   try {
-    const response = await fetch(sheet.url); // Use the browser's native fetch API
+    const response = await fetch(sheet.url); // Fetch data from the URL
     if (!response.ok) {
       console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`);
       return [];
     }
 
-    const data = await response.text(); // Read response as text
+    const data = await response.text(); // Get response as text
     const lines = data.split('\n').slice(sheet.headerRows); // Skip header rows
 
     return lines
@@ -66,14 +69,10 @@ async function aggregateData() {
   const tsvContent = tsvLines.join('\n'); // Combine rows with newline separator
   console.log('Aggregated TSV Data:\n', tsvContent);
 
-  // If you want to download the data as a file in the browser:
-  const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'puppetData.tsv';
-  link.click();
-
-  return tsvContent; // Optionally return the TSV content
+  // Save the TSV data to a file
+  const filePath = './puppetData.tsv';
+  await fs.writeFile(filePath, tsvContent, 'utf8'); // Write the TSV content to a file
+  console.log(`Data saved to ${filePath}`);
 }
 
 aggregateData().catch((error) => {

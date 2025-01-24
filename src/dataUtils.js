@@ -279,9 +279,12 @@ export function makeRows(records, role, filterCondition, includePrice, showRelat
       if (settings.showPuppetmasters) {
         const puppetMaster = findPuppetmaster(r[role] || "N/A"); // Resolve puppet master
         if (puppetMaster.master !== r[role]) { // Only show if the puppet master is different
-          puppetMasterText = `<span class="text-gray-500 text-sm">${formatNationName(puppetMaster.master)}</span>`;
+          puppetMasterText = `<span class="text-gray-500 text-sm"><a href="https://www.nationstates.net/nation=${puppetMaster.master}"
+        target="_blank" rel="noopener noreferrer">${formatNationName(puppetMaster.master)}</a></span>`;
         }
       }
+
+
 
       // Build the base row with nation, puppet master (if enabled), and card links
       const row = [
