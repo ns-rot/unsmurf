@@ -1,6 +1,3 @@
-import fs from 'fs';
-import fetch from 'node-fetch';
-
 const sheets = [
   {
     name: "9003",
@@ -33,20 +30,28 @@ const sheets = [
 ];
 
 async function fetchData(sheet) {
-  const response = await fetch(sheet.url);
-  if (!response.ok) {
-    console.error(`Failed to fetch ${sheet.name}`);
+  try {
+    const response = await fetch(sheet.url); // Use the browser's native fetch API
+    if (!response.ok) {
+      console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`);
+      return [];
+    }
+
+    const data = await response.text(); // Read response as text
+    const lines = data.split('\n').slice(sheet.headerRows); // Skip header rows
+
+    return lines
+      .map((line) => {
+        const columns = line.split('\t');
+        const puppet = columns[sheet.puppetColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
+        const master = columns[sheet.mainColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
+        return puppet && master ? `${puppet}\t${master}\t${sheet.name}` : null; // Format as TSV row
+      })
+      .filter(Boolean);
+  } catch (error) {
+    console.error(`Error fetching data for ${sheet.name}:`, error);
     return [];
   }
-
-  const data = await response.text();
-  const lines = data.split('\n').slice(sheet.headerRows); // Skip header rows
-  return lines.map((line) => {
-    const columns = line.split('\t');
-    const puppet = columns[sheet.puppetColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
-    const master = columns[sheet.mainColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
-    return puppet && master ? `${puppet}\t${master}\t${sheet.name}` : null; // Format as TSV row
-  }).filter(Boolean);
 }
 
 async function aggregateData() {
@@ -59,8 +64,16 @@ async function aggregateData() {
   }
 
   const tsvContent = tsvLines.join('\n'); // Combine rows with newline separator
-  fs.writeFileSync('static/puppetData.tsv', tsvContent); // Save to TSV file
-  console.log('Data aggregated and saved to static/puppetData.tsv');
+  console.log('Aggregated TSV Data:\n', tsvContent);
+
+  // If you want to download the data as a file in the browser:
+  const blob = new Blob([tsvContent], { type: 'text/tab-separated-values' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'puppetData.tsv';
+  link.click();
+
+  return tsvContent; // Optionally return the TSV content
 }
 
 aggregateData().catch((error) => {
