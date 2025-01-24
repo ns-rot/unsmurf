@@ -29,7 +29,6 @@
     "tailwindcss": "^3.4.17"
   },
   "dependencies": {
-    "fs": "^0.0.1-security",
     "hyphenation.de": "^0.2.1",
     "hyphenation.en-us": "^0.2.1",
     "hyphenation.fr": "^0.2.1",
