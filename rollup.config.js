@@ -11,6 +11,7 @@ import autoprefixer from 'autoprefixer';
 import copy from 'rollup-plugin-copy';
 
 const production = !process.env.ROLLUP_WATCH;
+const repoName = "unsmurf";
 
 function serve() {
     let server;
@@ -41,7 +42,7 @@ export default {
         name: 'app',
         file: 'public/build/bundle.js',
         globals: {
-            "base": production ? "/<REPO_NAME>" : ""
+            base: production ? `/${repoName}` : ""
         }
     },
     plugins: [
