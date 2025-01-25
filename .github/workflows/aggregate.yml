@@ -10,24 +10,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Check out repository
       - name: Check out repository
         uses: actions/checkout@v3
 
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
+      # Step 4: Run aggregation script
       - name: Run aggregation script
         run: node aggregateData.js
 
-      - name: Commit and push changes
+      # Step 5: Commit and push changes (only if there are changes)
+      - name: Commit and push changes if needed
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
-          git add static/puppetData.json
-          git commit -m "Update puppet data"
-          git push
+
+          # Check for changes in the target file
+          if [ -n "$(git status --porcelain static/puppetData.json)" ]; then
+            git add static/puppetData.json
+            git commit -m "Update puppet data"
+            git push
+          else
+            echo "No changes detected, skipping commit and push."
+          fi
