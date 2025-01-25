@@ -53,6 +53,11 @@ export function normalizeName(name) {
   return name;
 }
 
+//Canonicalize the nation name
+export function canonicalizeName(name) {
+  return name.toLowerCase().trim().replace(/\s+/g, "_");
+}
+
 // Helper to validate Roman numerals
 function isValidRoman(roman) {
   const romanRegex = /^(M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3}))$/i;

@@ -1,68 +1,106 @@
+//sheetFetch.js
+
 import { settingsStore } from "./settingsStore";
 
 export let puppetMasterCache = null; // Cache for puppet-master mappings
 export let s4Cache = null; // Cache for S4 data mappings
-const tsvFileUrl = "./static/puppetData.tsv"; // URL to your preprocessed TSV file
-const s4SheetUrl = "./static/s4.tsv"; // URL to your preprocessed S4 TSV file
+export let currentNationsCache = null; // Cache for current nations list
+export let currentNationSet = null; // Set for fast current nation lookups
+
+const puppetDataUrl = "./static/puppetData.tsv"; // URL to your preprocessed Puppet TSV file
+const s4DataUrl = "./static/s4.tsv"; // URL to your preprocessed S4 TSV file
+const currentNationsUrl = "./static/currentNations.txt"; // URL to your current nations file
 
 /**
- * Load puppet data and S4 data from their respective TSV files via HTTP.
+ * Preprocesses the current nations cache into a Set for fast lookups.
+ */
+function preprocessCurrentNationSet() {
+  if (!currentNationsCache) {
+    console.warn("Current nations cache is not initialized.");
+    return;
+  }
+
+  console.log("Preprocessing current nations cache into a Set...");
+  currentNationSet = new Set(currentNationsCache); // Convert to Set
+  console.log("Current nation Set created.");
+}
+
+/**
+ * Fetches and caches puppet data, S4 data, and current nations from their respective files.
  */
 export async function fetchSheets() {
-  console.log("Loading puppet and S4 data from TSV files via HTTP...");
-  puppetMasterCache = {}; // Reset the puppet cache
-  s4Cache = {}; // Reset the S4 cache
+  console.log("Fetching puppet data, S4 data, and current nations...");
+
+  // Reset all caches
+  puppetMasterCache = {};
+  s4Cache = {};
+  currentNationsCache = [];
+  currentNationSet = null;
 
   try {
-    // Fetch the puppet data TSV
-    const puppetResponse = await fetch(tsvFileUrl);
+    // Fetch and parse the Puppet Data TSV
+    const puppetResponse = await fetch(puppetDataUrl);
     if (!puppetResponse.ok) {
-      throw new Error(`Failed to fetch puppet TSV file: ${puppetResponse.statusText}`);
+      throw new Error(`Failed to fetch puppet data: ${puppetResponse.statusText}`);
     }
 
     const puppetData = await puppetResponse.text();
-    const puppetLines = puppetData.split("\n").slice(1); // Skip the header row
+    const puppetLines = puppetData.split("\n").slice(1); // Skip header row
     puppetLines.forEach((line) => {
       const [puppet, master, sheet] = line.split("\t").map((col) =>
         col.trim().toLowerCase().replace(/\s+/g, "_")
       );
-
       if (puppet && master) {
-        puppetMasterCache[puppet] = { master, sheet };
+        puppetMasterCache[puppet] = { master, sheet }; // Store puppet-master mappings
       }
     });
-
     console.log("Puppet data loaded and cached.");
 
-    // Fetch the S4 data TSV
-    const s4Response = await fetch(s4SheetUrl);
+    // Fetch and parse the S4 Data TSV
+    const s4Response = await fetch(s4DataUrl);
     if (!s4Response.ok) {
-      throw new Error(`Failed to fetch S4 TSV file: ${s4Response.statusText}`);
+      throw new Error(`Failed to fetch S4 data: ${s4Response.statusText}`);
     }
 
     const s4Data = await s4Response.text();
-    const s4Lines = s4Data.split("\n").slice(1); // Skip the header row
+    const s4Lines = s4Data.split("\n").slice(1); // Skip header row
     s4Lines.forEach((line) => {
-      const [key, value] = line.split("\t").map((col) =>
+      const [cardId, cardName] = line.split("\t").map((col) =>
         col.trim().toLowerCase().replace(/\s+/g, "_")
       );
-
-      if (key && value) {
-        s4Cache[key] = value; // Populate the S4 cache
+      if (cardId && cardName) {
+        s4Cache[cardId] = cardName; // Store card ID-to-name mappings
       }
     });
-
     console.log("S4 data loaded and cached.");
+
+    // Fetch and parse the Current Nations file
+    const currentNationsResponse = await fetch(currentNationsUrl);
+    if (!currentNationsResponse.ok) {
+      throw new Error(`Failed to fetch current nations data: ${currentNationsResponse.statusText}`);
+    }
+
+    const currentNationsData = await currentNationsResponse.text();
+    currentNationsCache = currentNationsData
+      .split("\n")
+      .map((nation) => nation.trim().toLowerCase().replace(/\s+/g, "_")); // Normalize nation names
+    console.log("Current nations data loaded and cached.");
+
+    // Preprocess the current nations into a Set for fast lookups
+    preprocessCurrentNationSet();
   } catch (error) {
-    console.error("Failed to load TSV data:", error);
+    console.error("Error fetching sheet data:", error);
   }
 
-  // Update the settings store to indicate that data has been fetched
+  // Update the settings store to indicate data has been fetched
   settingsStore.update((s) => ({
     ...s,
-    dataFetched: true, // Flag to indicate data has been fetched (optional)
+    dataFetched: true,
   }));
+
+  console.log("All sheet data fetched and processed.");
 }
+
 
 /**
  * Find the master of a given puppet name.
@@ -100,4 +138,19 @@ export function queryS4(key) {
   }
 
   return null; // Default to null if not found
+}
+
+/**
+ * Check if a given nation is in the current nations cache.
+ * @param {string} nation - The nation name to check.
+ * @returns {boolean} - True if the nation is found, false otherwise.
+ */
+export function isNationCurrent(nation) {
+  if (!currentNationSet) {
+    console.warn("Current nation Set is not initialized.");
+    return false;
+  }
+
+  const normalizedNation = nation.trim().toLowerCase().replace(/\s+/g, "_");
+  return currentNationSet.has(normalizedNation);
 }

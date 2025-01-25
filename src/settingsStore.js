@@ -3,6 +3,7 @@ import { get, writable } from 'svelte/store';
 const defaultSettings = {
   section: "puppets",
   showPuppetmasters: true,
+  showCTE: true,
   showRelativeDate: false,
   redEpics: true,
   rainbowLegs: true,

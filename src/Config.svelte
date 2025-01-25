@@ -27,19 +27,7 @@
       <input type="radio" name="section" value="puppets" bind:group={settings.section} />
       Tally record by known puppets
     </label>
-    <label
-    class="flex items-center gap-2 pl-6 transition-opacity duration-300 ease-in-out"
-  >
-  
-    <input
-      type="checkbox"
-      bind:checked={settings.showPuppetmasters}
-      disabled={settings.section !== 'puppets'}
-      class:opacity-50={settings.section !== 'puppets'}
-      class:cursor-not-allowed={settings.section !== 'puppets'}
-    />
-    Append puppetmasters in detailed records
-  </label>
+
     <label
       class="flex items-center gap-2 transition-opacity duration-300 ease-in-out"
     >
@@ -48,6 +36,19 @@
       Tally record by similar name
     </label>
   </div>
+
+  <!-- Nation Display Options-->
+  <div class="mb-4">
+    <h3 class="text-lg font-semibold">Nation Display Options</h3>
+    <label class="flex items-center gap-2 transition-opacity duration-300 ease-in-out">
+    <input type="checkbox"bind:checked={settings.showPuppetmasters}/>
+    Append puppetmasters in detailed records
+  </label>
+  <label class="flex items-center gap-2 transition-opacity duration-300 ease-in-out">
+    <input type="checkbox" bind:checked={settings.showCTE}/>
+    Mark CTE nations
+  </label>
+</div>
 
   <!-- Date Options -->
   <div class="mb-4">
@@ -60,7 +61,7 @@
 
   <!-- UI Options-->
   <div class="mb-4">
-    <h3 class="text-lg font-semibold">UI Options</h3>
+    <h3 class="text-lg font-semibold">Colour Options</h3>
     <label class="flex items-center gap-2">
       <input type="checkbox" bind:checked={settings.redEpics} />
       Red epics

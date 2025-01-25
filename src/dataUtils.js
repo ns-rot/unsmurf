@@ -1,8 +1,8 @@
-// util.js
+// dataUtil.js
 
 import { formatNationName, formatPrice, formatDate, formatLargeNumber, normalizeName } from './settingsUtils';
 import { useSettings } from './settingsStore';
-import { findPuppetmaster, queryS4 } from './sheetFetch';
+import { findPuppetmaster, isNationCurrent, queryS4 } from './sheetFetch';
 
 export function tallyCounts(trades, roleKey, isTrade) {
   const tally = {};
@@ -50,41 +50,32 @@ function buildTallyContent(tally, rawToNormalizedMap) {
         aggregatedName = rawNames[0];
       }
 
+      let cte = "";
+      if (useSettings().showCTE) {
+      cte = isNationCurrent(aggregatedName)  ? '' : `<svg xmlns="http://www.w3.org/2000/svg" class="fill-black h-3.5 inline -translate-y-[2px] pr-[3px]" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 19 24">
+      <path d="m16.317 21.569h.091c.645 0 1.263.256 1.718.712.456.456.712 1.074.712 1.718v.001h-18.838s0 0 0-.001c0-.644.256-1.262.712-1.718.455-.456 1.074-.712 1.718-.712h.091v-.175c0-2.069 1.677-3.746 3.746-3.746h.001v-14.076l3.16-3.572 3.142 3.572v14.076h.001c2.069 0 3.746 1.677 3.746 3.746z"></path>
+    </svg>`;
+  }
+
       const displayName = `<a href="https://www.nationstates.net/nation=${encodeURIComponent(
         aggregatedName
-      )}/page=deck/show_trades" target="_blank" rel="noopener noreferrer">${formatNationName(
+      )}/page=deck/show_trades" target="_blank" rel="noopener noreferrer">${cte}${formatNationName(
         aggregatedName
       )}</a>`;
 
-      const filteredRawNames = rawNames.filter(
-        (name) => name.toLowerCase() !== aggregatedName.toLowerCase()
-      );
-
       // Only add tally info if there are multiple nations grouped
-      let additionalInfo = "";
-      if (filteredRawNames.length > 0) {
-        // Exclude self (aggregatedName) from rawNames
-
-
-        // Format the remaining names
-        rawNames = rawNames.map(formatNationName);
-
-        const hiddenList = rawNames.join(", ");
-        additionalInfo = `<div class="tally-info ml-0.25 inline text-gray-500" alias-nations="${hiddenList}">
+      let puppetTally = "";
+      if (rawNames.length > 1) {
+        puppetTally = `<div class="tally-info ml-0.25 inline text-gray-500">
           <span>[${rawNames.length}]</span>
         </div>`;
       }
 
-      // Wrap everything in a main div
-      const wrappedDisplay = `<div class="tally-entry">
-        ${displayName}
-        ${additionalInfo}
-      </div>`;
+      const wrappedDisplay = `${displayName}${puppetTally}`;
 
       console.debug({
-        normalizedName,
-        rawNames,
         aggregatedName,
+        rawNames,
         count,
       });
 
@@ -141,6 +132,7 @@ export function makeTallyRows(tally) {
 
     // Format the count using the formatLargeNumber function
     const formattedCount = formatLargeNumber(c);
+    
 
     // Return the formatted row
     return [n, formattedCount];
@@ -178,7 +170,13 @@ export function makeRows(records, role, filterCondition, includePrice, showRelat
   return records
     .filter(filterCondition)
     .map((r) => {
-      const nationDisplay = formatNationName(r[role] || "N/A");
+      let cte = "";
+      if (useSettings().showCTE) {
+      cte = isNationCurrent(r[role])  ? '' : `<svg xmlns="http://www.w3.org/2000/svg" class="fill-black h-3.5 inline -translate-y-[2px] pr-[3px]" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 19 24">
+      <path d="m16.317 21.569h.091c.645 0 1.263.256 1.718.712.456.456.712 1.074.712 1.718v.001h-18.838s0 0 0-.001c0-.644.256-1.262.712-1.718.455-.456 1.074-.712 1.718-.712h.091v-.175c0-2.069 1.677-3.746 3.746-3.746h.001v-14.076l3.16-3.572 3.142 3.572v14.076h.001c2.069 0 3.746 1.677 3.746 3.746z"></path>
+    </svg>`;
+      }
+      let nationDisplay = cte + formatNationName(r[role] || "N/A");
       const nationLink = `<a href="https://www.nationstates.net/nation=${encodeURIComponent(r[role] || "N/A")}"
         target="_blank" rel="noopener noreferrer">${nationDisplay}</a>`;
       const cardLink = `<a href="https://www.nationstates.net/page=deck/card=${r.card_id}/season=${r.season}"
@@ -202,8 +200,14 @@ export function makeRows(records, role, filterCondition, includePrice, showRelat
       if (settings.showPuppetmasters) {
         const puppetMaster = findPuppetmaster(r[role] || "N/A"); // Resolve puppet master
         if (puppetMaster.master !== r[role]) { // Only show if the puppet master is different
-          puppetMasterText = `<span class="text-gray-500 text-sm"><a href="https://www.nationstates.net/nation=${puppetMaster.master}"
-        target="_blank" rel="noopener noreferrer">${formatNationName(puppetMaster.master)}</a></span>`;
+          let cte = "";
+          if (useSettings().showCTE) {
+          cte = isNationCurrent(puppetMaster.master) ? '' : `<svg xmlns="http://www.w3.org/2000/svg" class="fill-gray-500 h-[0.65rem] inline -translate-y-[1.5px] pr-[2.5px]" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 19 24">
+       <path d="m16.317 21.569h.091c.645 0 1.263.256 1.718.712.456.456.712 1.074.712 1.718v.001h-18.838s0 0 0-.001c0-.644.256-1.262.712-1.718.455-.456 1.074-.712 1.718-.712h.091v-.175c0-2.069 1.677-3.746 3.746-3.746h.001v-14.076l3.16-3.572 3.142 3.572v14.076h.001c2.069 0 3.746 1.677 3.746 3.746z"></path>
+     </svg>`;
+        }
+          puppetMasterText += `<span class="text-gray-500 text-sm"><a href="https://www.nationstates.net/nation=${puppetMaster.master}"
+        target="_blank" rel="noopener noreferrer">${cte}${formatNationName(puppetMaster.master)}</a></span>`;
         }
       }
 

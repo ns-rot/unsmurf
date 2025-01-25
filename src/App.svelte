@@ -3,9 +3,11 @@
 	import { onMount } from 'svelte';
 	import { settingsStore, useSettings } from './settingsStore.js';
 	import Config from './Config.svelte';
+	import { isNationCurrent, findPuppetmaster } from './sheetFetch';
   
 	
 	import {
+	canonicalizeName,   // Canonicalizes names
 	normalizeName,      // Handles normalization of names
 	formatNationName,   // Formats nation names
 	formatPrice,        // Formats prices
@@ -90,8 +92,52 @@
 	  sellTallyTrades = await tallyCounts(sells, 'buyer', true);
 	  sellTallyGifts = await tallyCounts(sells, 'buyer', false);
   
+
+	  if (safeNation != null) {
+	  const canonicalizedName = canonicalizeName(safeNation);
+	  const isCTE = !isNationCurrent(canonicalizedName);
+	  const puppetOf = findPuppetmaster(canonicalizedName).master;
+	  let formattedName = formatNationName(canonicalizedName);
+	  let formattedMasterName;
+	  let isPuppet;
+	  if (puppetOf != null) {
+		if (puppetOf != canonicalizedName){
+			isPuppet = true;
+			formattedMasterName = formatNationName(puppetOf);
+
+		}
+	  }
+
+	  let alertMessage = '';
+	  if (isCTE && isPuppet) {
+		alertMessage = `<strong>${formattedName}</strong>, a puppet of <strong>${formattedMasterName}</strong>, is not an active nation`;
+		} else if (isCTE) {
+		alertMessage = `<strong>${formattedName}</strong> is not an active nation`;
+		} else if (isPuppet) {
+		alertMessage = `<strong>${formattedName}</strong> is a puppet of <strong>${formattedMasterName}</strong>`;
+		}
+
+
+	  // Show alert if nation is not current
+	  if (isCTE) {
+		document.querySelector('.alert').innerHTML = `
+	<div class="w-[120%] mx-[-10%] bg-black text-white text-center font-inter py-3 mt-7.5 mb-4.5" role="alert">
+  		<div class="w-[75%] mx-auto">${alertMessage}</div>
+  	</div>
+		`;
+	  } else if (isPuppet){
+		document.querySelector('.alert').innerHTML = `
+	<div class="rounded-full bg-black text-white text-center font-inter py-3 mt-7.5 mb-4.5" role="alert">
+		<div class="w-[90%] mx-auto">${alertMessage}</div>
+	</div>
+		`;
+	  }
+
+
+	}
 	  loading = false;
 	}
+	
   
 	onMount(async () => {
   console.log("onMount triggered.");
@@ -167,12 +213,16 @@
 		</div>
 	</div>
 
-  <!-- Config Overlay -->
-  {#if showConfig}
-    <div class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center">
-      <Config {settingsStore} on:close={closeConfig} />
-    </div>
-  {/if}
+	<!-- Config Overlay -->
+	{#if showConfig}
+		<div class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center">
+		<Config {settingsStore} on:close={closeConfig} />
+		</div>
+	{/if}
+
+	<!-- Alert Banner -->
+	<div class="alert"></div>
+
 
 	<!-- TALLY ROWS -->
 	<div id="tally-row" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 :gap-4"> <!-- Cards Sold -->

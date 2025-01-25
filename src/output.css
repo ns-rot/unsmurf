@@ -586,6 +586,16 @@ video {
   z-index: 50;
 }
 
+.mx-\[-10\%\]{
+  margin-left: -10%;
+  margin-right: -10%;
+}
+
+.mx-auto{
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .my-16{
   margin-top: 4rem;
   margin-bottom: 4rem;
@@ -658,16 +668,36 @@ video {
   height: 1.5rem;
 }
 
+.h-3\.5{
+  height: 0.875rem;
+}
+
 .h-6{
   height: 1.5rem;
+}
+
+.h-\[0\.65rem\]{
+  height: 0.65rem;
 }
 
 .w-6{
   width: 1.5rem;
 }
 
+.w-\[120\%\]{
+  width: 120%;
+}
+
+.w-\[75\%\]{
+  width: 75%;
+}
+
 .w-\[80\%\]{
   width: 80%;
+}
+
+.w-\[90\%\]{
+  width: 90%;
 }
 
 .w-full{
@@ -708,6 +738,16 @@ video {
   border-spacing: var(--tw-border-spacing-x) var(--tw-border-spacing-y);
 }
 
+.-translate-y-\[1\.5px\]{
+  --tw-translate-y: -1.5px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-y-\[2px\]{
+  --tw-translate-y: -2px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .rotate-180{
   --tw-rotate: 180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -715,10 +755,6 @@ video {
 
 .transform{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.cursor-not-allowed{
-  cursor: not-allowed;
 }
 
 .grid-cols-1{
@@ -865,6 +901,14 @@ video {
   background-image: linear-gradient(120deg, #FCA5A5, #FDBA74, #FDE68A, #A7F3D0, #93C5FD, #C4B5FD, #F9A8D4);
 }
 
+.fill-black{
+  fill: #000;
+}
+
+.fill-gray-500{
+  fill: #6b7280;
+}
+
 .p-2{
   padding: 0.5rem;
 }
@@ -898,8 +942,17 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.pl-6{
-  padding-left: 1.5rem;
+.py-3{
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.pr-\[2\.5px\]{
+  padding-right: 2.5px;
+}
+
+.pr-\[3px\]{
+  padding-right: 3px;
 }
 
 .text-left{
@@ -985,10 +1038,6 @@ video {
 
 .underline{
   text-decoration-line: underline;
-}
-
-.opacity-50{
-  opacity: 0.5;
 }
 
 .shadow-lg{
