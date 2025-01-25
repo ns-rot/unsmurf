@@ -41,17 +41,8 @@
     Append puppetmasters in detailed records
   </label>
     <label
-      class="flex items-center gap-2 pl-6 transition-opacity duration-300 ease-in-out"
+      class="flex items-center gap-2 transition-opacity duration-300 ease-in-out"
     >
-      <input
-        type="checkbox"
-        bind:checked={settings.includeSuspectedPuppets}
-        disabled={settings.section !== 'puppets'}
-        class:opacity-50={settings.section !== 'puppets'}
-        class:cursor-not-allowed={settings.section !== 'puppets'}
-      />
-      Include suspected puppets
-    </label>
     <label class="flex items-center gap-2">
       <input type="radio" name="section" value="similar-name" bind:group={settings.section} />
       Tally record by similar name

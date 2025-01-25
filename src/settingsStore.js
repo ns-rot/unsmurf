@@ -2,7 +2,6 @@ import { get, writable } from 'svelte/store';
 
 const defaultSettings = {
   section: "puppets",
-  includeSuspectedPuppets: true,
   showPuppetmasters: true,
   showRelativeDate: false,
   redEpics: true,

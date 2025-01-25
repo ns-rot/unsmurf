@@ -23,14 +23,10 @@ const sheets = [
     mainColumn: 1,
     headerRows: 1,
   },
-  /*{
-    name: "Rot Ext",
-    url: "https://docs.google.com/spreadsheets/d/1osIbavh59GHFqQCO909jFRDX5XerSvZ7sWFfgMHLFs4/export?format=tsv&id=1osIbavh59GHFqQCO909jFRDX5XerSvZ7sWFfgMHLFs4&gid=708581263",
-    puppetColumn: 0,
-    mainColumn: 1,
-    headerRows: 1,
-  },*/
 ];
+
+const nationStatesApi = "https://www.nationstates.net/cgi-bin/api.cgi?q=nations";
+const userAgent = "script=ns-unsmurf-github by=rotenaple";
 
 async function fetchData(sheet) {
   try {
@@ -57,20 +53,65 @@ async function fetchData(sheet) {
   }
 }
 
+async function fetchNationStatesData() {
+  const filePath = './public/static/currentNations.txt';
+
+  try {
+    const response = await fetch(nationStatesApi, {
+      headers: {
+        'User-Agent': userAgent,
+      },
+    });
+
+    if (!response.ok) {
+      console.error(`Failed to fetch NationStates API: ${response.statusText}`);
+      return [];
+    }
+
+    const data = await response.text();
+
+    // Extract nations from XML
+    const match = data.match(/<NATIONS>(.*?)<\/NATIONS>/);
+    if (!match) {
+      console.error('No nations found in NationStates API response.');
+      return [];
+    }
+
+    const nations = match[1].split(',').map((nation) => {
+      return nation.trim().toLowerCase().replace(/\s+/g, '_');
+    });
+
+    // Save nations to a text file
+    await fs.writeFile(filePath, nations.join('\n'), 'utf8');
+    console.log(`Nations saved to ${filePath}`);
+
+    return nations;
+  } catch (error) {
+    console.error(`Error fetching data from NationStates API:`, error);
+    return [];
+  }
+}
+
 async function aggregateData() {
   const tsvLines = ['puppet\tmaster\tsheet']; // Header row
 
+  // Fetch data from Google Sheets
   for (const sheet of sheets) {
     console.log(`Fetching data from ${sheet.name}...`);
     const sheetData = await fetchData(sheet);
     tsvLines.push(...sheetData); // Append rows from the sheet
   }
 
+  // Fetch data from NationStates API
+  console.log('Fetching data from NationStates API...');
+  const nationStatesData = await fetchNationStatesData();
+  tsvLines.push(...nationStatesData.map((nation) => `${nation}\tnationstates_api\tnationstates`));
+
   const tsvContent = tsvLines.join('\n'); // Combine rows with newline separator
-  console.log('Aggregated TSV Data:\n', tsvContent);
+  //console.log('Aggregated TSV Data:\n', tsvContent);
 
   // Save the TSV data to a file
-  const filePath = './static/puppetData.tsv';
+  const filePath = './public/static/puppetData.tsv';
   await fs.writeFile(filePath, tsvContent, 'utf8'); // Write the TSV content to a file
   console.log(`Data saved to ${filePath}`);
 }
