@@ -56,9 +56,17 @@ function buildTallyContent(tally, rawToNormalizedMap) {
         aggregatedName
       )}</a>`;
 
+      const filteredRawNames = rawNames.filter(
+        (name) => name.toLowerCase() !== aggregatedName.toLowerCase()
+      );
+
       // Only add tally info if there are multiple nations grouped
       let additionalInfo = "";
-      if (rawNames.length > 1) {
+      if (filteredRawNames.length > 0) {
+        // Exclude self (aggregatedName) from rawNames
+
+
+        // Format the remaining names
         rawNames = rawNames.map(formatNationName);
 
         const hiddenList = rawNames.join(", ");
@@ -84,7 +92,6 @@ function buildTallyContent(tally, rawToNormalizedMap) {
     })
     .sort((a, b) => b[1] - a[1]); // Sort by count in descending order
 }
-
 
 // Utility function to manage URL parameters
 export function getQueryParam(name) {
