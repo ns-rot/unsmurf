@@ -1,5 +1,7 @@
 import { promises as fs } from 'fs'; // Node.js filesystem module
 import fetch from 'node-fetch'; // Use node-fetch for HTTP requests
+import { exec } from 'child_process'; // For running Git commands
+import { existsSync, rmSync } from 'fs'; // For checking and removing directories
 
 const sheets = [
   {
@@ -24,6 +26,19 @@ const sheets = [
     headerRows: 1,
   },
 ];
+
+async function runGitCommand(command) {
+  return new Promise((resolve, reject) => {
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error running command "${command}":`, stderr);
+        reject(error);
+      } else {
+        resolve(stdout.trim());
+      }
+    });
+  });
+}
 
 async function fetchData(sheet) {
   try {
@@ -51,21 +66,48 @@ async function fetchData(sheet) {
 }
 
 async function processGoogleSheets() {
+  const worktreePath = '../gh-pages';
+  const filePath = `${worktreePath}/static/puppetData.tsv`;
   const tsvLines = ['puppet\tmaster\tsheet']; // Header row
-  for (const sheet of sheets) {
-    console.log(`Fetching data from ${sheet.name}...`);
-    const sheetData = await fetchData(sheet);
-    tsvLines.push(...sheetData);
-  }
-
-  const tsvContent = tsvLines.join('\n');
-  const filePath = './public/static/puppetData.tsv';
 
   try {
+    // Check if the worktree directory already exists
+    if (existsSync(worktreePath)) {
+      console.log(`Worktree directory ${worktreePath} already exists. Removing it...`);
+      rmSync(worktreePath, { recursive: true, force: true });
+    }
+
+    // Set up the gh-pages worktree
+    console.log('Setting up gh-pages worktree...');
+    await runGitCommand(`git worktree add ${worktreePath} gh-pages`);
+
+    // Fetch data from Google Sheets
+    for (const sheet of sheets) {
+      console.log(`Fetching data from ${sheet.name}...`);
+      const sheetData = await fetchData(sheet);
+      tsvLines.push(...sheetData);
+    }
+
+    const tsvContent = tsvLines.join('\n');
+
+    // Write data to the file in the gh-pages branch
     await fs.writeFile(filePath, tsvContent, 'utf8');
     console.log(`Google Sheets data saved to ${filePath}`);
+
+    // Commit and push changes to gh-pages
+    console.log('Committing and pushing changes to gh-pages...');
+    await runGitCommand(`
+      cd ${worktreePath} &&
+      git add static/puppetData.tsv &&
+      git commit -m "Update Google Sheets data" &&
+      git push origin gh-pages
+    `);
+
+    // Clean up the worktree
+    console.log('Removing gh-pages worktree...');
+    await runGitCommand(`git worktree remove ${worktreePath}`);
   } catch (error) {
-    console.error('Error saving Google Sheets data:', error);
+    console.error('Error processing Google Sheets:', error);
   }
 }
 
