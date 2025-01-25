@@ -1,7 +1,6 @@
 import { get, writable } from 'svelte/store';
 
 const defaultSettings = {
-  lastFetchTime: 0,
   section: "puppets",
   includeSuspectedPuppets: true,
   showPuppetmasters: true,

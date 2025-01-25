@@ -70,7 +70,7 @@ async function aggregateData() {
   console.log('Aggregated TSV Data:\n', tsvContent);
 
   // Save the TSV data to a file
-  const filePath = './puppetData.tsv';
+  const filePath = './static/puppetData.tsv';
   await fs.writeFile(filePath, tsvContent, 'utf8'); // Write the TSV content to a file
   console.log(`Data saved to ${filePath}`);
 }

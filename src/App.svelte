@@ -28,8 +28,8 @@
 
 
 	import {
-		fetchPuppets,       // Fetch puppet mappings from Google Sheets
-	} from './puppetsFetch';
+		fetchSheets,
+	} from './sheetFetch';
   
 	import CollapsibleTable from './CollapsibleTable.svelte';
 	import LoadingTable from './LoadingTable.svelte';
@@ -48,6 +48,16 @@
 	import { get } from 'svelte/store';
 	$: settings = get(settingsStore);
   
+	function redirectToPage() {
+		if (!nationId.trim()) {
+			alert('Please enter a nation name.');
+			return;
+		}
+		const safeNation = nationId.trim();
+		const targetURL = `./?q=${encodeURIComponent(safeNation)}`;
+		window.location.href = targetURL; // Navigate to the target page
+	}
+
 	async function loadTradeData() {
 	  if (!nationId.trim()) {
 		alert('Please enter a nation name.');
@@ -55,9 +65,11 @@
 	  }
   
 	  loading = true;
-	  const safeNation = nationId.trim().replace(/\s+/g, '_');
+	  const safeNation = nationId.trim();
 	  setQueryParam('q', safeNation);
   
+	  document.title = `Unsmurf | ${safeNation}`;
+
 	  buys = [];
 	  sells = [];
 	  buyTallyTrades = [];
@@ -83,14 +95,12 @@
   
 	onMount(async () => {
   console.log("onMount triggered.");
-  console.log("Current settings before fetch:", useSettings());
-  console.log("Fetching puppets on initialization...");
-  await fetchPuppets();
-  console.log("Puppets fetched.");
+  await fetchSheets();
+  console.log("Sheets fetched.");
 
   const fromURL = getQueryParam('q');
   if (fromURL) {
-    console.log("Loading trade data for:", fromURL);
+    console.log("Redirecting to page:", fromURL);
     nationId = fromURL;
     loadTradeData();
   }
@@ -99,7 +109,7 @@
   
 	function handleEnter(e) {
 	  if (e.key === 'Enter') {
-		loadTradeData();
+		redirectToPage();
 	  }
 	}
   
@@ -137,7 +147,7 @@
 					class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
 				/>
 				<button
-					on:click={loadTradeData}
+					on:click={redirectToPage}
 					class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition"
 				>
 					Lookup
@@ -145,11 +155,14 @@
 			</div>
 			<div class="flex-1 flex justify-end">
 				<button
-					on:click={openConfig}
-					class="bg-black text-white font-bold p-2 size-10 rounded-full hover:bg-gray-600 focus:ring focus:ring-gray-300 transition"
-				>
-					≣
-				</button>
+				on:click={openConfig}
+				aria-label="Config"
+				class="bg-black text-white font-bold p-2 size-10
+					   rounded-full hover:bg-gray-600 focus:outline-none
+					   focus:ring focus:ring-gray-300 transition"
+			  >
+				<img src="https://ns-rot.github.io/unsmurf/icons/config.svg" alt="Config" class="w-6 h-6" />
+			  </button>
 			</div>
 		</div>
 	</div>

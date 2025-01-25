@@ -15,7 +15,6 @@ export default {
     'bg-rarity-C',
     'text-center',
     'text-right',
-    
   ],
   theme: {
     extend: {

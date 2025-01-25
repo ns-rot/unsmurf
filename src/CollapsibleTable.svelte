@@ -14,6 +14,10 @@
     function showMore() {
       visibleCount = Math.min(visibleCount + increment, rows.length);
     }
+
+    function showAll() {
+      visibleCount = rows.length;
+    }
   
     function collapse() {
       visibleCount = defaultRows;
@@ -83,7 +87,7 @@
   
   
   <!-- Toggle Buttons -->
-  <div class="flex justify-end items-center gap-2 mb-2">
+  <div class="flex justify-end items-center gap-1">
     <!-- Always show the row count -->
     <span class="text-sm text-gray-600">
       showing {visibleCount}/{rows.length} rows
@@ -91,28 +95,46 @@
   
     <!-- Conditionally show More/Collapse -->
     {#if rows.length > defaultRows}
-      {#if visibleCount < rows.length}
-        <button
-          on:click={showMore}
-          aria-label="Show More"
-          class="bg-blue-500 text-white font-bold p-2 size-10
-                 rounded-full hover:bg-blue-600 focus:outline-none
-                 focus:ring focus:ring-blue-300 transition"
-        >
-          ▼
-        </button>
-      {/if}
-  
-      {#if visibleCount > defaultRows}
-        <button
-          on:click={collapse}
-          aria-label="Collapse"
-          class="bg-blue-500 text-white font-bold p-2 size-10
-                 rounded-full hover:bg-blue-600 focus:outline-none
-                 focus:ring focus:ring-blue-300 transition"
-        >
-          ▲
-        </button>
-      {/if}
-    {/if}
+  <!-- Show More Button -->
+  {#if visibleCount < rows.length}
+    <button
+      on:click={showMore}
+      aria-label="Show More"
+      class="bg-blue-500 text-white size-6
+            rounded-full hover:bg-blue-600 focus:outline-none
+            focus:ring focus:ring-blue-300 transition flex items-center justify-center"
+    >
+      <img src="./icons/arrow_down.svg" alt="Show More" class="size-5" />
+    </button>
+  {/if}
+    <!-- Show All Button -->
+    {#if visibleCount + defaultRows < rows.length}
+    <button
+      on:click={showAll}
+      aria-label="Show All"
+      class="bg-blue-500 text-white size-6
+            rounded-full hover:bg-blue-600 focus:outline-none
+            focus:ring focus:ring-blue-300 transition flex items-center justify-center"
+    >
+      <img src="./icons/arrows_down.svg" alt="Show More" class="size-5" />
+    </button>
+  {/if}
+  <!-- Collapse Button -->
+  {#if visibleCount > defaultRows}
+    <button
+      on:click={collapse}
+      aria-label="Collapse"
+      class="bg-blue-500 text-white size-6
+            rounded-full hover:bg-blue-600 focus:outline-none
+            focus:ring focus:ring-blue-300 transition flex items-center justify-center"
+    >
+      <img
+        src="./icons/arrows_down.svg"
+        alt="Collapse"
+        class="size-5 transform rotate-180"
+      />
+    </button>
+  {/if}
+
+  {/if}
   </div>
