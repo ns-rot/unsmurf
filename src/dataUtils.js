@@ -6,12 +6,12 @@ import { findPuppetmaster, queryS4 } from './sheetFetch';
 
 export function tallyCounts(trades, roleKey, isTrade) {
   const tally = {};
-  const rawToNormalizedMap = {}; // Map to track raw names for each normalized name
+  const rawToNormalizedMap = {};
 
   trades
     .filter((t) => (isTrade ? t.price !== 0 : t.price === 0))
     .forEach((t) => {
-      const rawName = t[roleKey]; // Raw name from the trade
+      const rawName = t[roleKey];
       if (!rawName) return; // Skip invalid entries
 
       let tallyName;
@@ -28,38 +28,51 @@ export function tallyCounts(trades, roleKey, isTrade) {
       if (!rawToNormalizedMap[tallyName]) {
         rawToNormalizedMap[tallyName] = new Set();
       }
-
-      rawToNormalizedMap[tallyName].add(rawName); // Add the raw name for reference
+      rawToNormalizedMap[tallyName].add(rawName);
 
       // Tally counts using the normalized name
       tally[tallyName] = (tally[tallyName] || 0) + 1;
     });
 
-  // Convert tally to an array and include debugging info
+  // Format and return the tally
+  return buildTallyContent(tally, rawToNormalizedMap);
+}
+
+function buildTallyContent(tally, rawToNormalizedMap) {
   return Object.entries(tally)
     .map(([normalizedName, count]) => {
-      const rawNames = Array.from(rawToNormalizedMap[normalizedName]).sort(); // Sort raw names alphabetically
+      let rawNames = Array.from(rawToNormalizedMap[normalizedName]).sort();
       let aggregatedName;
 
       if (useSettings().section === "puppets") {
-        aggregatedName = normalizedName; // Use puppet master name for aggregation
+        aggregatedName = normalizedName;
       } else {
-        aggregatedName = rawNames[0]; // Use first alphabetical raw name
+        aggregatedName = rawNames[0];
       }
 
-      // Build the hyperlink for the aggregated name
-      let displayName = `<a href="https://www.nationstates.net/nation=${encodeURIComponent(
+      const displayName = `<a href="https://www.nationstates.net/nation=${encodeURIComponent(
         aggregatedName
       )}/page=deck/show_trades" target="_blank" rel="noopener noreferrer">${formatNationName(
         aggregatedName
       )}</a>`;
 
-      // Append number of nations if multiple raw names are grouped
+      // Only add tally info if there are multiple nations grouped
+      let additionalInfo = "";
       if (rawNames.length > 1) {
-        displayName += ` [${rawNames.length}]`;
+        rawNames = rawNames.map(formatNationName);
+
+        const hiddenList = rawNames.join(", ");
+        additionalInfo = `<div class="tally-info ml-0.25 inline text-gray-500" alias-nations="${hiddenList}">
+          <span>[${rawNames.length}]</span>
+        </div>`;
       }
 
-      // Debugging: Log normalized name, raw names, and aggregated name
+      // Wrap everything in a main div
+      const wrappedDisplay = `<div class="tally-entry">
+        ${displayName}
+        ${additionalInfo}
+      </div>`;
+
       console.debug({
         normalizedName,
         rawNames,
@@ -67,11 +80,12 @@ export function tallyCounts(trades, roleKey, isTrade) {
         count,
       });
 
-      return [displayName, count]; // Return the formatted name and count
+      return [wrappedDisplay, count];
     })
     .sort((a, b) => b[1] - a[1]); // Sort by count in descending order
 }
-  
+
+
 // Utility function to manage URL parameters
 export function getQueryParam(name) {
   const params = new URLSearchParams(window.location.search);
@@ -170,8 +184,8 @@ export function makeRows(records, role, filterCondition, includePrice, showRelat
       const normalizedRarity = settings.redEpics && rarityCategory.toUpperCase() === "E"
         ? "E1"
         : settings.rainbowLegs && rarityCategory.toUpperCase() === "L"
-        ? "L1"
-        : rarityCategory.toUpperCase();
+          ? "L1"
+          : rarityCategory.toUpperCase();
 
       const rarityClass = `bg-rarity-${normalizedRarity}`;
       const { formatted, relative } = formatDate(r.timestamp);
@@ -232,9 +246,9 @@ export function makeGiftRows(records, role) {
 }
 
 
-  /**
- * Toggles the visibility of all formatted and relative date spans in the table.
- */
+/**
+* Toggles the visibility of all formatted and relative date spans in the table.
+*/
 export function toggleDateFormat() {
   // Select all date cells
   const dateCells = document.querySelectorAll('.date-cell');

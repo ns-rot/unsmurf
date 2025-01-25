@@ -53,8 +53,8 @@
 			alert('Please enter a nation name.');
 			return;
 		}
-		const safeNation = nationId.trim();
-		const targetURL = `./?q=${encodeURIComponent(safeNation)}`;
+ 		const safeNation = nationId.trim().replace(/\s+/g, '_');
+  		const targetURL = `./?q=${encodeURIComponent(safeNation)}`;
 		window.location.href = targetURL; // Navigate to the target page
 	}
 
