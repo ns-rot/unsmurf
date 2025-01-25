@@ -30,11 +30,67 @@ const nationStatesApi = "https://www.nationstates.net/cgi-bin/api.cgi?q=nations"
 const userAgent = "script=ns-unsmurf-github by=rotenaple";
 
 async function fetchData(sheet) {
-  // ... Fetch data logic remains the same ...
+  try {
+    const response = await fetch(sheet.url); // Fetch data from the URL
+    if (!response.ok) {
+      console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`);
+      return [];
+    }
+
+    const data = await response.text(); // Get response as text
+    const lines = data.split('\n').slice(sheet.headerRows); // Skip header rows
+
+    return lines
+      .map((line) => {
+        const columns = line.split('\t');
+        const puppet = columns[sheet.puppetColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
+        const master = columns[sheet.mainColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
+        return puppet && master ? `${puppet}\t${master}\t${sheet.name}` : null; // Format as TSV row
+      })
+      .filter(Boolean);
+  } catch (error) {
+    console.error(`Error fetching data for ${sheet.name}:`, error);
+    return [];
+  }
 }
 
 async function fetchNationStatesData() {
-  // ... Fetch NationStates API data logic remains the same ...
+  const filePath = './public/static/currentNations.txt';
+
+  try {
+    const response = await fetch(nationStatesApi, {
+      headers: {
+        'User-Agent': userAgent,
+      },
+    });
+
+    if (!response.ok) {
+      console.error(`Failed to fetch NationStates API: ${response.statusText}`);
+      return [];
+    }
+
+    const data = await response.text();
+
+    // Extract nations from XML
+    const match = data.match(/<NATIONS>(.*?)<\/NATIONS>/);
+    if (!match) {
+      console.error('No nations found in NationStates API response.');
+      return [];
+    }
+
+    const nations = match[1].split(',').map((nation) => {
+      return nation.trim().toLowerCase().replace(/\s+/g, '_');
+    });
+
+    // Save nations to a text file
+    await fs.writeFile(filePath, nations.join('\n'), 'utf8');
+    console.log(`Nations saved to ${filePath}`);
+
+    return nations;
+  } catch (error) {
+    console.error(`Error fetching data from NationStates API:`, error);
+    return [];
+  }
 }
 
 async function runGitCommand(command) {
@@ -63,7 +119,7 @@ async function aggregateData() {
   // Fetch data from NationStates API
   console.log('Fetching data from NationStates API...');
   const nationStatesData = await fetchNationStatesData();
-  tsvLines.push(...nationStatesData.map((nation) => `${nation}\tnationstates_api\tnationstates`));
+  tsvLines.push(...nationStatesData.map((NATION) => `${NATION}\tnationstates_api\tnationstates`));
 
   const tsvContent = tsvLines.join('\n'); // Combine rows with newline separator
 
