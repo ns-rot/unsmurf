@@ -1,2 +1,8379 @@
-var app=function(){"use strict";const e=32,t=64,r=128,a=256,n=512,i=1024,s=2048,l=4096,o=8192,u=16384,c=65536,h=1<<18,d=1<<20,p=Symbol("$state"),f=Symbol("$state metadata"),m=Symbol("legacy props"),g=Symbol(""),b=globalThis.process?.env?.NODE_ENV;var _=b&&!b.toLowerCase().startsWith("prod"),k=Array.isArray,v=Array.prototype.indexOf,w=Array.from,z=Object.defineProperty,y=Object.getOwnPropertyDescriptor,x=Object.getOwnPropertyDescriptors,j=Object.prototype,$=Array.prototype,C=Object.getPrototypeOf;const A=()=>{};function q(e){return e()}function E(e){for(var t=0;t<e.length;t++)e[t]()}const B="undefined"==typeof requestIdleCallback?e=>setTimeout(e,1):requestIdleCallback;let S=!1,D=!1,F=[],T=[];function L(){S=!1;const e=F.slice();F=[],E(e)}function R(){D=!1;const e=T.slice();T=[],E(e)}function O(e){S||(S=!0,queueMicrotask(L)),F.push(e)}var P="font-weight: bold",M="font-weight: normal";function N(e){_?console.warn(`%c[svelte] hydration_mismatch\n%c${e?`Hydration failed because the initial UI does not match what was rendered on the server. The error occurred near ${e}`:"Hydration failed because the initial UI does not match what was rendered on the server"}\nhttps://svelte.dev/e/hydration_mismatch`,P,M):console.warn("https://svelte.dev/e/hydration_mismatch")}function I(e,t){_?console.warn(`%c[svelte] ownership_invalid_mutation\n%c${e?`${e} mutated a value owned by ${t}. This is strongly discouraged. Consider passing values to child components with \`bind:\`, or use a callback instead`:"Mutating a value outside the component that created it is strongly discouraged. Consider passing values to child components with `bind:`, or use a callback instead"}\nhttps://svelte.dev/e/ownership_invalid_mutation`,P,M):console.warn("https://svelte.dev/e/ownership_invalid_mutation")}function U(e){_?console.warn(`%c[svelte] state_proxy_equality_mismatch\n%cReactive \`$state(...)\` proxies and the values they proxy have different identities. Because of this, comparisons with \`${e}\` will produce unexpected results\nhttps://svelte.dev/e/state_proxy_equality_mismatch`,P,M):console.warn("https://svelte.dev/e/state_proxy_equality_mismatch")}const G="[!",H={},V=Symbol(),K=Symbol("filename"),W={},X=/at (?:.+ \()?(.+):(\d+):(\d+)\)?$/,Z=/@(.+):(\d+):(\d+)$/;function J(){const e=function(){const e=(new Error).stack;if(!e)return null;const t=[];for(const r of e.split("\n")){let e=X.exec(r)??Z.exec(r);e&&t.push({file:e[1],line:+e[2],column:+e[3]})}return t}()?.slice(4);if(!e)return null;for(let t=0;t<e.length;t++){const r=e[t],a=W[r.file];if(a)for(const e of a){if(null==e.end)return null;if(e.start.line<r.line&&e.end.line>r.line)return e.component}else if(0===t)return null}return null}function Y(e,t){if(null!==t.owners)for(;e;){if(null===e.owners){t.owners=null;break}for(const r of e.owners)t.owners.add(r);e=e.parent}}function Q(e,t){return null===e.owners||(e.owners.has(t)||null!==e.parent&&Q(e.parent,t))}function ee(e){return e?.owners?.values().next().value??ee(e.parent)}function te(e){const t=J();if(t&&!Q(e,t)){let r=ee(e);r[K]!==t[K]?I(t[K],r[K]):I()}}function re(e){return e===this.v}function ae(e,t){return e!=e?t==t:e!==t||null!==e&&"object"==typeof e||"function"==typeof e}function ne(e){return!ae(e,this.v)}function ie(){if(_){const e=new Error("bind_invalid_checkbox_value\nUsing `bind:value` together with a checkbox input is not allowed. Use `bind:checked` instead\nhttps://svelte.dev/e/bind_invalid_checkbox_value");throw e.name="Svelte error",e}throw new Error("https://svelte.dev/e/bind_invalid_checkbox_value")}let se=!1;let le=new Set;function oe(e){le=e}function ue(e,t){var r={f:0,v:e,reactions:null,equals:re,rv:0,wv:0};return r}function ce(e,t=!1){const r=ue(e);return t||(r.equals=ne),se&&null!==Xe&&null!==Xe.l&&(Xe.l.s??=[]).push(r),r}function he(e,t=!1){return function(e){null!==Re&&2&Re.f&&(null===Ie?Ie=[e]:Ie.push(e));return e}(ce(e,t))}function de(e,t){return pe(e,bt((()=>gt(e)))),t}function pe(e,t){return null!==Re&&!Oe&&Ye()&&18&Re.f&&(null===Ie||!Ie.includes(e))&&function(){if(_){const e=new Error("state_unsafe_mutation\nUpdating state inside a derived or a template expression is forbidden. If the value should not be reactive, declare it without `$state`\nhttps://svelte.dev/e/state_unsafe_mutation");throw e.name="Svelte error",e}throw new Error("https://svelte.dev/e/state_unsafe_mutation")}(),fe(e,t)}function fe(e,t){if(!e.equals(t)){e.v;if(e.v=t,e.wv=Je(),me(e,s),Ye()&&null!==Me&&Me.f&i&&!(96&Me.f)&&(null===He?function(e){He=e}([e]):He.push(e)),_&&le.size>0){const e=Array.from(le);var r=Ee;Se(!0);try{for(const t of e)t.f&i&&kt(t,l),Qe(t)&&lt(t)}finally{Se(r)}le.clear()}}return t}function me(e,t){var r=e.reactions;if(null!==r)for(var a=Ye(),n=r.length,i=0;i<n;i++){var o=r[i],u=o.f;u&s||(a||o!==Me)&&(_&&u&h?le.add(o):(kt(o,t),1280&u&&(2&u?me(o,l):pt(o))))}}function ge(e){var t=2050;null===Me?t|=a:Me.f|=d;var r=null!==Re&&2&Re.f?Re:null;const n={children:null,ctx:Xe,deps:null,equals:re,f:t,fn:e,reactions:null,rv:0,v:null,wv:0,parent:r??Me};return null!==r&&(r.children??=[]).push(n),n}function be(e){const t=ge(e);return t.equals=ne,t}function _e(e){var t=e.children;if(null!==t){e.children=null;for(var r=0;r<t.length;r+=1){var a=t[r];2&a.f?ze(a):sr(a)}}}let ke=[];function ve(e){var t,r=Me;if(Ne(function(e){for(var t=e.parent;null!==t;){if(!(2&t.f))return t;t=t.parent}return null}(e)),_){let a=le;oe(new Set);try{ke.includes(e)&&function(){if(_){const e=new Error("derived_references_self\nA derived value cannot reference itself recursively\nhttps://svelte.dev/e/derived_references_self");throw e.name="Svelte error",e}throw new Error("https://svelte.dev/e/derived_references_self")}(),ke.push(e),_e(e),t=nt(e)}finally{Ne(r),oe(a),ke.pop()}}else try{_e(e),t=nt(e)}finally{Ne(r)}return t}function we(e){var t=ve(e);kt(e,(We||e.f&a)&&null!==e.deps?l:i),e.equals(t)||(e.v=t,e.wv=Je())}function ze(e){_e(e),st(e,0),kt(e,u),e.v=e.children=e.deps=e.ctx=e.reactions=null}function ye(e){if(_){const t=new Error(`lifecycle_outside_component\n\`${e}(...)\` can only be used during component initialisation\nhttps://svelte.dev/e/lifecycle_outside_component`);throw t.name="Svelte error",t}throw new Error("https://svelte.dev/e/lifecycle_outside_component")}const xe=0,je=new WeakSet;let $e=!1,Ce=xe,Ae=!1,qe=null,Ee=!1,Be=!1;function Se(e){Ee=e}function De(e){Be=e}let Fe=[],Te=0,Le=[],Re=null,Oe=!1;function Pe(e){Re=e}let Me=null;function Ne(e){Me=e}let Ie=null;let Ue=null,Ge=0,He=null;let Ve=1,Ke=0,We=!1,Xe=null,Ze=null;function Je(){return++Ve}function Ye(){return!se||null!==Xe&&null===Xe.l}function Qe(e){var t=e.f;if(t&s)return!0;if(t&l){var r=e.deps,o=!!(t&a);if(null!==r){var u,c,h=!!(t&n),d=o&&null!==Me&&!We,p=r.length;if(h||d){for(u=0;u<p;u++)c=r[u],!h&&c?.reactions?.includes(e)||(c.reactions??=[]).push(e);h&&(e.f^=n)}for(u=0;u<p;u++)if(Qe(c=r[u])&&we(c),c.wv>e.wv)return!0}o&&(null===Me||We)||kt(e,i)}return!1}function et(e,t){for(var a=t;null!==a;){if(a.f&r)try{return void a.fn(e)}catch{a.f^=r}a=a.parent}throw $e=!1,e}function tt(e){return!(e.f&u||null!==e.parent&&e.parent.f&r)}function rt(e,t,r,a){if($e){if(null===r&&($e=!1),tt(t))throw e;return}if(null!==r&&($e=!0),!_||null===a||!(e instanceof Error)||je.has(e))return void et(e,t);je.add(e);const n=[],i=t.fn?.name;i&&n.push(i);let s=a;for(;null!==s;){if(_){var l=s.function?.[K];if(l){const e=l.split("/").pop();n.push(e)}}s=s.p}const o=/Firefox/.test(navigator.userAgent)?"  ":"\t";z(e,"message",{value:e.message+`\n${n.map((e=>`\n${o}in ${e}`)).join("")}\n`}),z(e,"component_stack",{value:n});const u=e.stack;if(u){const t=u.split("\n"),r=[];for(let e=0;e<t.length;e++){const a=t[e];a.includes("svelte/src/internal")||r.push(a)}z(e,"stack",{value:r.join("\n")})}if(et(e,t),tt(t))throw e}function at(e,t,r=0){var a=e.reactions;if(null!==a)for(var n=0;n<a.length;n++){var o=a[n];2&o.f?at(o,t,r+1):t===o&&(0===r?kt(o,s):o.f&i&&kt(o,l),pt(o))}}function nt(e){var t=Ue,r=Ge,n=He,i=Re,s=We,l=Ie,o=Xe,u=Oe,c=e.f;Ue=null,Ge=0,He=null,Re=96&c?null:e,We=!Ee&&!!(c&a),Ie=null,Xe=e.ctx,Oe=!1,Ke++;try{var h=(0,e.fn)(),d=e.deps;if(null!==Ue){var p;if(st(e,Ge),null!==d&&Ge>0)for(d.length=Ge+Ue.length,p=0;p<Ue.length;p++)d[Ge+p]=Ue[p];else e.deps=d=Ue;if(!We)for(p=Ge;p<d.length;p++)(d[p].reactions??=[]).push(e)}else null!==d&&Ge<d.length&&(st(e,Ge),d.length=Ge);if(Ye()&&null!==He&&!(6146&e.f))for(p=0;p<He.length;p++)at(He[p],e);return null!==i&&Ke++,h}finally{Ue=t,Ge=r,He=n,Re=i,We=s,Ie=l,Xe=o,Oe=u}}function it(e,t){let r=t.reactions;if(null!==r){var a=v.call(r,e);if(-1!==a){var i=r.length-1;0===i?r=t.reactions=null:(r[a]=r[i],r.pop())}}null===r&&2&t.f&&(null===Ue||!Ue.includes(t))&&(kt(t,l),768&t.f||(t.f^=n),st(t,0))}function st(e,t){var r=e.deps;if(null!==r)for(var a=t;a<r.length;a++)it(e,r[a])}function lt(t){var r=t.f;if(!(r&u)){kt(t,i);var a=Me,n=Xe;if(Me=t,_){var s=Ze;Ze=t.component_function}try{16&r?function(t){var r=t.first;for(;null!==r;){var a=r.next;r.f&e||sr(r),r=a}}(t):ir(t),nr(t),ar(t);var l=nt(t);t.teardown="function"==typeof l?l:null,t.wv=Ve;t.deps;_&&Le.push(t)}catch(e){rt(e,t,a,n||t.ctx)}finally{Me=a,_&&(Ze=s)}}}function ot(){console.error("Last ten effects were: ",Le.slice(-10).map((e=>e.fn))),Le=[]}function ut(){if(Te>1e3){Te=0;try{!function(){if(_){const e=new Error("effect_update_depth_exceeded\nMaximum update depth exceeded. This can happen when a reactive block or effect repeatedly sets a new value. Svelte limits the number of nested updates to prevent infinite loops\nhttps://svelte.dev/e/effect_update_depth_exceeded");throw e.name="Svelte error",e}throw new Error("https://svelte.dev/e/effect_update_depth_exceeded")}()}catch(e){if(_&&z(e,"stack",{value:""}),null===qe)throw _&&ot(),e;if(_)try{rt(e,qe,null,null)}catch(e){throw ot(),e}else rt(e,qe,null,null)}}Te++}function ct(e){var t=e.length;if(0!==t){ut();var r=Ee;Ee=!0;try{for(var a=0;a<t;a++){var n=e[a];n.f&i||(n.f^=i);var s=[];ft(n,s),ht(s)}}finally{Ee=r}}}function ht(e){var t=e.length;if(0!==t)for(var r=0;r<t;r++){var a=e[r];if(!(24576&a.f))try{Qe(a)&&(lt(a),null===a.deps&&null===a.first&&null===a.nodes_start&&(null===a.teardown?lr(a):a.fn=null))}catch(e){rt(e,a,null,a.ctx)}}}function dt(){if(Ae=!1,Te>1001)return;const e=Fe;Fe=[],ct(e),Ae||(Te=0,qe=null,_&&(Le=[]))}function pt(e){Ce===xe&&(Ae||(Ae=!0,queueMicrotask(dt))),qe=e;for(var t=e;null!==t.parent;){var r=(t=t.parent).f;if(96&r){if(!(r&i))return;t.f^=i}}Fe.push(t)}function ft(t,r){var a=t.first,n=[];e:for(;null!==a;){var s=a.f,l=!!(s&e),u=l&&!!(s&i),c=a.next;if(!(u||s&o))if(8&s){if(l)a.f^=i;else try{Qe(a)&&lt(a)}catch(e){rt(e,a,null,a.ctx)}var h=a.first;if(null!==h){a=h;continue}}else 4&s&&n.push(a);if(null===c){let e=a.parent;for(;null!==e;){if(t===e)break e;var d=e.next;if(null!==d){a=d;continue e}e=e.parent}}a=c}for(var p=0;p<n.length;p++)h=n[p],r.push(h),ft(h,r)}function mt(e){var t=Ce,r=Fe;try{ut();const t=[];Ce=1,Fe=t,Ae=!1,ct(r);var a=e?.();return S&&L(),D&&R(),(Fe.length>0||t.length>0)&&mt(),Te=0,qe=null,_&&(Le=[]),a}finally{Ce=t,Fe=r}}function gt(e){var t=e.f,r=!!(2&t);if(r&&t&u){var a=ve(e);return ze(e),a}if(null===Re||Oe){if(r&&null===e.deps)for(var n=e,i=n.parent,s=n;null!==i;){if(!(2&i.f)){var l=i;l.deriveds?.includes(s)||(l.deriveds??=[]).push(s);break}s=i,i=i.parent}}else{null!==Ie&&Ie.includes(e)&&function(){if(_){const e=new Error("state_unsafe_local_read\nReading state that was created inside the same derived is forbidden. Consider using `untrack` to read locally created state\nhttps://svelte.dev/e/state_unsafe_local_read");throw e.name="Svelte error",e}throw new Error("https://svelte.dev/e/state_unsafe_local_read")}();var o=Re.deps;e.rv<Ke&&(e.rv=Ke,null===Ue&&null!==o&&o[Ge]===e?Ge++:null===Ue?Ue=[e]:Ue.push(e))}return r&&Qe(n=e)&&we(n),e.v}function bt(e){var t=Oe;try{return Oe=!0,e()}finally{Oe=t}}const _t=-7169;function kt(e,t){e.f=e.f&_t|t}function vt(e,t=!1,r){Xe={p:Xe,c:null,e:null,m:!1,s:e,x:null,l:null},se&&!t&&(Xe.l={s:null,u:null,r1:[],r2:ue(!1)}),_&&(Xe.function=r,Ze=r)}function wt(e){const t=Xe;if(null!==t){void 0!==e&&(t.x=e);const s=t.e;if(null!==s){var r=Me,a=Re;t.e=null;try{for(var n=0;n<s.length;n++){var i=s[n];Ne(i.effect),Pe(i.reaction),Zt(i.fn)}}finally{Ne(r),Pe(a)}}Xe=t.p,_&&(Ze=t.p?.function??null),t.m=!0}return e||{}}function zt(e){if("object"==typeof e&&e&&!(e instanceof EventTarget))if(p in e)yt(e);else if(!Array.isArray(e))for(let t in e){const r=e[t];"object"==typeof r&&r&&p in r&&yt(r)}}function yt(e,t=new Set){if(!("object"!=typeof e||null===e||e instanceof EventTarget||t.has(e))){t.add(e),e instanceof Date&&e.getTime();for(let r in e)try{yt(e[r],t)}catch(e){}const r=C(e);if(r!==Object.prototype&&r!==Array.prototype&&r!==Map.prototype&&r!==Set.prototype&&r!==Date.prototype){const t=x(r);for(let r in t){const a=t[r].get;if(a)try{a.call(e)}catch(e){}}}}}if(_){function on(e){if(!(e in globalThis)){let t;Object.defineProperty(globalThis,e,{configurable:!0,get:()=>{if(void 0!==t)return t;!function(e){if(_){const t=new Error(`rune_outside_svelte\nThe \`${e}\` rune is only available inside \`.svelte\` and \`.svelte.js/ts\` files\nhttps://svelte.dev/e/rune_outside_svelte`);throw t.name="Svelte error",t}throw new Error("https://svelte.dev/e/rune_outside_svelte")}(e)},set:e=>{t=e}})}}on("$state"),on("$effect"),on("$derived"),on("$inspect"),on("$props"),on("$bindable")}let xt,jt=!1;function $t(e){jt=e}function Ct(e){if(null===e)throw N(),H;return xt=e}function At(){return Ct(Nt(xt))}function qt(e){if(jt){if(null!==Nt(xt))throw N(),H;xt=e}}function Et(e=1){if(jt){for(var t=e,r=xt;t--;)r=Nt(r);xt=r}}function Bt(){for(var e=0,t=xt;;){if(8===t.nodeType){var r=t.data;if("]"===r){if(0===e)return t;e-=1}else"["!==r&&r!==G||(e+=1)}var a=Nt(t);t.remove(),t=a}}function St(e,t=null,r){if("object"!=typeof e||null===e||p in e)return e;const a=C(e);if(a!==j&&a!==$)return e;var n,i=new Map,s=k(e),l=ue(0);if(s&&i.set("length",ue(e.length)),_)if(n={parent:t,owners:null},r){const e=r.v?.[f]?.owners;n.owners=e?new Set(e):null}else n.owners=null===t?null!==Xe?new Set([Xe.function]):null:new Set;return new Proxy(e,{defineProperty(e,t,r){"value"in r&&!1!==r.configurable&&!1!==r.enumerable&&!1!==r.writable||function(){if(_){const e=new Error("state_descriptors_fixed\nProperty descriptors defined on `$state` objects must contain `value` and always be `enumerable`, `configurable` and `writable`.\nhttps://svelte.dev/e/state_descriptors_fixed");throw e.name="Svelte error",e}throw new Error("https://svelte.dev/e/state_descriptors_fixed")}();var a=i.get(t);return void 0===a?(a=ue(r.value),i.set(t,a)):pe(a,St(r.value,n)),!0},deleteProperty(e,t){var r=i.get(t);if(void 0===r)t in e&&i.set(t,ue(V));else{if(s&&"string"==typeof t){var a=i.get("length"),n=Number(t);Number.isInteger(n)&&n<a.v&&pe(a,n)}pe(r,V),Dt(l)}return!0},get(t,r,a){if(_&&r===f)return n;if(r===p)return e;var s=i.get(r),l=r in t;if(void 0!==s||l&&!y(t,r)?.writable||(s=ue(St(l?t[r]:V,n)),i.set(r,s)),void 0!==s){var o=gt(s);if(_){var u=o?.[f];u&&u?.parent!==n&&Y(n,u)}return o===V?void 0:o}return Reflect.get(t,r,a)},getOwnPropertyDescriptor(e,t){var r=Reflect.getOwnPropertyDescriptor(e,t);if(r&&"value"in r){var a=i.get(t);a&&(r.value=gt(a))}else if(void 0===r){var n=i.get(t),s=n?.v;if(void 0!==n&&s!==V)return{enumerable:!0,configurable:!0,value:s,writable:!0}}return r},has(e,t){if(_&&t===f)return!0;if(t===p)return!0;var r=i.get(t),a=void 0!==r&&r.v!==V||Reflect.has(e,t);if((void 0!==r||null!==Me&&(!a||y(e,t)?.writable))&&(void 0===r&&(r=ue(a?St(e[t],n):V),i.set(t,r)),gt(r)===V))return!1;return a},set(e,t,r,a){var o=i.get(t),u=t in e;if(s&&"length"===t)for(var c=r;c<o.v;c+=1){var h=i.get(c+"");void 0!==h?pe(h,V):c in e&&(h=ue(V),i.set(c+"",h))}if(void 0===o?u&&!y(e,t)?.writable||(pe(o=ue(void 0),St(r,n)),i.set(t,o)):(u=o.v!==V,pe(o,St(r,n))),_){var d=r?.[f];d&&d?.parent!==n&&Y(n,d),te(n)}var p=Reflect.getOwnPropertyDescriptor(e,t);if(p?.set&&p.set.call(a,r),!u){if(s&&"string"==typeof t){var m=i.get("length"),g=Number(t);Number.isInteger(g)&&g>=m.v&&pe(m,g+1)}Dt(l)}return!0},ownKeys(e){gt(l);var t=Reflect.ownKeys(e).filter((e=>{var t=i.get(e);return void 0===t||t.v!==V}));for(var[r,a]of i)a.v===V||r in e||t.push(r);return t},setPrototypeOf(){!function(){if(_){const e=new Error("state_prototype_fixed\nCannot set prototype of `$state` object\nhttps://svelte.dev/e/state_prototype_fixed");throw e.name="Svelte error",e}throw new Error("https://svelte.dev/e/state_prototype_fixed")}()}})}function Dt(e,t=1){pe(e,e.v+t)}function Ft(e){return null!==e&&"object"==typeof e&&p in e?e[p]:e}var Tt,Lt,Rt;function Ot(){if(void 0===Tt){Tt=window;var e=Element.prototype,t=Node.prototype;Lt=y(t,"firstChild").get,Rt=y(t,"nextSibling").get,e.__click=void 0,e.__className="",e.__attributes=null,e.__styles=null,e.__e=void 0,Text.prototype.__t=void 0,_&&(e.__svelte_meta=null,function(){const e=Array.prototype,t=Array.__svelte_cleanup;t&&t();const{indexOf:r,lastIndexOf:a,includes:n}=e;e.indexOf=function(e,t){const a=r.call(this,e,t);if(-1===a)for(let r=t??0;r<this.length;r+=1)if(Ft(this[r])===e){U("array.indexOf(...)");break}return a},e.lastIndexOf=function(e,t){const r=a.call(this,e,t??this.length-1);if(-1===r)for(let r=0;r<=(t??this.length-1);r+=1)if(Ft(this[r])===e){U("array.lastIndexOf(...)");break}return r},e.includes=function(e,t){const r=n.call(this,e,t);if(!r)for(let t=0;t<this.length;t+=1)if(Ft(this[t])===e){U("array.includes(...)");break}return r},Array.__svelte_cleanup=()=>{e.indexOf=r,e.lastIndexOf=a,e.includes=n}}())}}function Pt(e=""){return document.createTextNode(e)}function Mt(e){return Lt.call(e)}function Nt(e){return Rt.call(e)}function It(e,t){if(!jt)return Mt(e);var r=Mt(xt);if(null===r)r=xt.appendChild(Pt());else if(t&&3!==r.nodeType){var a=Pt();return r?.before(a),Ct(a),a}return Ct(r),r}function Ut(e,t){if(!jt){var r=Mt(e);return r instanceof Comment&&""===r.data?Nt(r):r}if(t&&3!==xt?.nodeType){var a=Pt();return xt?.before(a),Ct(a),a}return xt}function Gt(e,t=1,r=!1){let a=jt?xt:e;for(var n;t--;)n=a,a=Nt(a);if(!jt)return a;var i=a?.nodeType;if(r&&3!==i){var s=Pt();return null===a?n?.after(s):a.before(s),Ct(s),s}return Ct(a),a}function Ht(e){e.textContent=""}function Vt(e){null===Me&&null===Re&&function(e){if(_){const t=new Error(`effect_orphan\n\`${e}\` can only be used inside an effect (e.g. during component initialisation)\nhttps://svelte.dev/e/effect_orphan`);throw t.name="Svelte error",t}throw new Error("https://svelte.dev/e/effect_orphan")}(e),null!==Re&&Re.f&a&&function(){if(_){const e=new Error("effect_in_unowned_derived\nEffect cannot be created inside a `$derived` value that was not itself created inside an effect\nhttps://svelte.dev/e/effect_in_unowned_derived");throw e.name="Svelte error",e}throw new Error("https://svelte.dev/e/effect_in_unowned_derived")}(),Be&&function(e){if(_){const t=new Error(`effect_in_teardown\n\`${e}\` cannot be used inside an effect cleanup function\nhttps://svelte.dev/e/effect_in_teardown`);throw t.name="Svelte error",t}throw new Error("https://svelte.dev/e/effect_in_teardown")}(e)}function Kt(e,r,a,n=!0){var i=!!(e&t),l=Me;if(_)for(;null!==l&&l.f&h;)l=l.parent;var o={ctx:Xe,deps:null,deriveds:null,nodes_start:null,nodes_end:null,f:e|s,first:null,fn:r,last:null,next:null,parent:i?null:l,prev:null,teardown:null,transitions:null,wv:0};if(_&&(o.component_function=Ze),a){var u=Ee;try{Se(!0),lt(o),o.f|=32768}catch(e){throw sr(o),e}finally{Se(u)}}else null!==r&&pt(o);if(!(a&&null===o.deps&&null===o.first&&null===o.nodes_start&&null===o.teardown&&!(1048704&o.f))&&!i&&n&&(null!==l&&function(e,t){var r=t.last;null===r?t.last=t.first=e:(r.next=e,e.prev=r,t.last=e)}(o,l),null!==Re&&2&Re.f)){var c=Re;(c.children??=[]).push(o)}return o}function Wt(e){const t=Kt(8,null,!1);return kt(t,i),t.teardown=e,t}function Xt(t){Vt("$effect");var r=null!==Me&&!!(Me.f&e)&&null!==Xe&&!Xe.m;if(_&&z(t,"name",{value:"$effect"}),!r)return Zt(t);var a=Xe;(a.e??=[]).push({fn:t,effect:Me,reaction:Re})}function Zt(e){return Kt(4,e,!1)}function Jt(e,t){var r=Xe,a={effect:null,ran:!1};r.l.r1.push(a),a.effect=Qt((()=>{e(),a.ran||(a.ran=!0,pe(r.l.r2,!0),bt(t))}))}function Yt(){var e=Xe;Qt((()=>{if(gt(e.l.r2)){for(var t of e.l.r1){var r=t.effect;r.f&i&&kt(r,l),Qe(r)&&lt(r),t.ran=!1}e.l.r2.v=!1}}))}function Qt(e){return Kt(8,e,!0)}function er(e,t=[],r=ge){const a=t.map(r),n=()=>e(...a.map(gt));return _&&z(n,"name",{value:"{expression}"}),tr(n)}function tr(e,t=0){return Kt(24|t,e,!0)}function rr(e,t=!0){return Kt(40,e,!0,t)}function ar(e){var t=e.teardown;if(null!==t){const e=Be,r=Re;De(!0),Pe(null);try{t.call(null)}finally{De(e),Pe(r)}}}function nr(e){var t=e.deriveds;if(null!==t){e.deriveds=null;for(var r=0;r<t.length;r+=1)ze(t[r])}}function ir(e,t=!1){var r=e.first;for(e.first=e.last=null;null!==r;){var a=r.next;sr(r,t),r=a}}function sr(e,t=!0){var r=!1;if((t||524288&e.f)&&null!==e.nodes_start){for(var a=e.nodes_start,n=e.nodes_end;null!==a;){var i=a===n?null:Nt(a);a.remove(),a=i}r=!0}ir(e,t&&!r),nr(e),st(e,0),kt(e,u);var s=e.transitions;if(null!==s)for(const e of s)e.stop();ar(e);var l=e.parent;null!==l&&null!==l.first&&lr(e),_&&(e.component_function=null),e.next=e.prev=e.teardown=e.ctx=e.deps=e.fn=e.nodes_start=e.nodes_end=null}function lr(e){var t=e.parent,r=e.prev,a=e.next;null!==r&&(r.next=a),null!==a&&(a.prev=r),null!==t&&(t.first===e&&(t.first=a),t.last===e&&(t.last=r))}function or(e,t){var r=[];cr(e,r,!0),ur(r,(()=>{sr(e),t&&t()}))}function ur(e,t){var r=e.length;if(r>0){var a=()=>--r||t();for(var n of e)n.out(a)}else t()}function cr(t,r,a){if(!(t.f&o)){if(t.f^=o,null!==t.transitions)for(const e of t.transitions)(e.is_global||a)&&r.push(e);for(var n=t.first;null!==n;){var i=n.next;cr(n,r,!!(!!(n.f&c)||!!(n.f&e))&&a),n=i}}}function hr(e){dr(e,!0)}function dr(t,r){if(t.f&o){t.f^=o,t.f&i||(t.f^=i),Qe(t)&&(kt(t,s),pt(t));for(var a=t.first;null!==a;){var n=a.next;dr(a,!!(!!(a.f&c)||!!(a.f&e))&&r),a=n}if(null!==t.transitions)for(const e of t.transitions)(e.is_global||r)&&e.in()}}let pr=!1;function fr(){pr||(pr=!0,document.addEventListener("reset",(e=>{Promise.resolve().then((()=>{if(!e.defaultPrevented)for(const t of e.target.elements)t.__on_r?.()}))}),{capture:!0}))}function mr(e){var t=Re,r=Me;Pe(null),Ne(null);try{return e()}finally{Pe(t),Ne(r)}}function gr(e,t,r,a=r){e.addEventListener(t,(()=>mr(r)));const n=e.__on_r;e.__on_r=n?()=>{n(),a(!0)}:()=>a(!0),fr()}const br=new Set,_r=new Set;function kr(e,t,r,a,n){var i={capture:a,passive:n},s=function(e,t,r,a){function n(e){if(a.capture||vr.call(t,e),!e.cancelBubble)return mr((()=>r.call(this,e)))}return e.startsWith("pointer")||e.startsWith("touch")||"wheel"===e?O((()=>{t.addEventListener(e,n,a)})):t.addEventListener(e,n,a),n}(e,t,r,i);t!==document.body&&t!==window&&t!==document||Wt((()=>{t.removeEventListener(e,s,i)}))}function vr(e){var t=this,r=t.ownerDocument,a=e.type,n=e.composedPath?.()||[],i=n[0]||e.target,s=0,l=e.__root;if(l){var o=n.indexOf(l);if(-1!==o&&(t===document||t===window))return void(e.__root=t);var u=n.indexOf(t);if(-1===u)return;o<=u&&(s=o)}if((i=n[s]||e.target)!==t){z(e,"currentTarget",{configurable:!0,get:()=>i||r});var c=Re,h=Me;Pe(null),Ne(null);try{for(var d,p=[];null!==i;){var f=i.assignedSlot||i.parentNode||i.host||null;try{var m=i["__"+a];if(void 0!==m&&!i.disabled)if(k(m)){var[g,...b]=m;g.apply(i,[e,...b])}else m.call(i,e)}catch(e){d?p.push(e):d=e}if(e.cancelBubble||f===t||null===f)break;i=f}if(d){for(let e of p)queueMicrotask((()=>{throw e}));throw d}}finally{e.__root=t,delete e.currentTarget,Pe(c),Ne(h)}}}function wr(e){var t=document.createElement("template");return t.innerHTML=e,t.content}function zr(e,t){var r=Me;null===r.nodes_start&&(r.nodes_start=e,r.nodes_end=t)}function yr(e,t){var r,a=!!(1&t),n=!!(2&t),i=!e.startsWith("<!>");return()=>{if(jt)return zr(xt,null),xt;void 0===r&&(r=wr(i?e:"<!>"+e),a||(r=Mt(r)));var t=n?document.importNode(r,!0):r.cloneNode(!0);a?zr(Mt(t),t.lastChild):zr(t,t);return t}}function xr(){if(jt)return zr(xt,null),xt;var e=document.createDocumentFragment(),t=document.createComment(""),r=Pt();return e.append(t,r),zr(t,r),e}function jr(e,t){if(jt)return Me.nodes_end=xt,void At();null!==e&&e.before(t)}const $r=/\r/g;const Cr=["touchstart","touchmove"];function Ar(e,t){var r=null==t?"":"object"==typeof t?t+"":t;r!==(e.__t??=e.nodeValue)&&(e.__t=r,e.nodeValue=null==r?"":r+"")}function qr(e,t){return Sr(e,t)}function Er(e,t){Ot(),t.intro=t.intro??!1;const r=t.target,a=jt,n=xt;try{for(var i=Mt(r);i&&(8!==i.nodeType||"["!==i.data);)i=Nt(i);if(!i)throw H;$t(!0),Ct(i),At();const a=Sr(e,{...t,anchor:i});if(null===xt||8!==xt.nodeType||"]"!==xt.data)throw N(),H;return $t(!1),a}catch(a){if(a===H)return!1===t.recover&&function(){if(_){const e=new Error("hydration_failed\nFailed to hydrate the application\nhttps://svelte.dev/e/hydration_failed");throw e.name="Svelte error",e}throw new Error("https://svelte.dev/e/hydration_failed")}(),Ot(),Ht(r),$t(!1),qr(e,t);throw a}finally{$t(a),Ct(n)}}const Br=new Map;function Sr(e,{target:r,anchor:a,props:n={},events:i,context:s,intro:l=!0}){Ot();var o=new Set,u=e=>{for(var t=0;t<e.length;t++){var a=e[t];if(!o.has(a)){o.add(a);var n=(s=a,Cr.includes(s));r.addEventListener(a,vr,{passive:n});var i=Br.get(a);void 0===i?(document.addEventListener(a,vr,{passive:n}),Br.set(a,1)):Br.set(a,i+1)}}var s};u(w(br)),_r.add(u);var c=void 0,h=function(e){const r=Kt(t,e,!0);return(e={})=>new Promise((t=>{e.outro?or(r,(()=>{sr(r),t(void 0)})):(sr(r),t(void 0))}))}((()=>{var t=a??r.appendChild(Pt());return rr((()=>{s&&(vt({}),Xe.c=s);i&&(n.$$events=i),jt&&zr(t,null),c=e(t,n)||{},jt&&(Me.nodes_end=xt),s&&wt()})),()=>{for(var e of o){r.removeEventListener(e,vr);var n=Br.get(e);0==--n?(document.removeEventListener(e,vr),Br.delete(e)):Br.set(e,n)}_r.delete(u),t!==a&&t.parentNode?.removeChild(t)}}));return Dr.set(c,h),c}let Dr=new WeakMap;function Fr(e,t){const r=Dr.get(e);return r?(Dr.delete(e),r(t)):(_&&(_?console.warn("%c[svelte] lifecycle_double_unmount\n%cTried to unmount a component that was not mounted\nhttps://svelte.dev/e/lifecycle_double_unmount",P,M):console.warn("https://svelte.dev/e/lifecycle_double_unmount")),Promise.resolve())}function Tr(e){return new Lr(e)}class Lr{#e;#t;constructor(e){var t=new Map,r=(e,r)=>{var a=ce(r);return t.set(e,a),a};const a=new Proxy({...e.props||{},$$events:{}},{get:(e,a)=>gt(t.get(a)??r(a,Reflect.get(e,a))),has:(e,a)=>a===m||(gt(t.get(a)??r(a,Reflect.get(e,a))),Reflect.has(e,a)),set:(e,a,n)=>(pe(t.get(a)??r(a,n),n),Reflect.set(e,a,n))});this.#t=(e.hydrate?Er:qr)(e.component,{target:e.target,anchor:e.anchor,props:a,context:e.context,intro:e.intro??!1,recover:e.recover}),e?.props?.$$host&&!1!==e.sync||mt(),this.#e=a.$$events;for(const e of Object.keys(this.#t))"$set"!==e&&"$destroy"!==e&&"$on"!==e&&z(this,e,{get(){return this.#t[e]},set(t){this.#t[e]=t},enumerable:!0});this.#t.$set=e=>{Object.assign(a,e)},this.#t.$destroy=()=>{Fr(this.#t)}}$set(e){this.#t.$set(e)}$on(e,t){this.#e[e]=this.#e[e]||[];const r=(...e)=>t.call(this,...e);return this.#e[e].push(r),()=>{this.#e[e]=this.#e[e].filter((e=>e!==r))}}$destroy(){this.#t.$destroy()}}function Rr(e,t,r=!1){jt&&At();var a=e,n=null,i=null,s=V,l=!1;const o=(e,t=!0)=>{l=!0,u(t,e)},u=(e,t)=>{if(s===(s=e))return;let r=!1;if(jt){const e=a.data===G;!!s===e&&(Ct(a=Bt()),$t(!1),r=!0)}s?(n?hr(n):t&&(n=rr((()=>t(a)))),i&&or(i,(()=>{i=null}))):(i?hr(i):t&&(i=rr((()=>t(a)))),n&&or(n,(()=>{n=null}))),r&&$t(!0)};tr((()=>{l=!1,t(o),l||u(null,null)}),r?c:0),jt&&(a=xt)}function Or(e,t){return t}function Pr(e,t,r,a,n,i=null){var s=e,l={flags:t,items:new Map,first:null};if(!!(4&t)){var u=e;s=jt?Ct(Mt(u)):u.appendChild(Pt())}jt&&At();var c=null,h=!1,d=be((()=>{var e=r();return k(e)?e:null==e?[]:w(e)}));tr((()=>{var e=gt(d),u=e.length;if(h&&0===u)return;h=0===u;let p=!1;jt&&(s.data===G!==(0===u)&&(Ct(s=Bt()),$t(!1),p=!0));if(jt){for(var f,m=null,g=0;g<u;g++){if(8===xt.nodeType&&"]"===xt.data){s=xt,p=!0,$t(!1);break}var b=e[g],_=a(b,g);f=Nr(xt,l,m,null,b,_,g,n,t,r),l.items.set(_,f),m=f}u>0&&Ct(Bt())}jt||function(e,t,r,a,n,i,s,l){var u,c,h,d,p,f,m=!!(8&n),g=!!(3&n),b=e.length,_=t.items,k=t.first,v=k,z=null,y=[],x=[];if(m)for(f=0;f<b;f+=1)d=s(h=e[f],f),void 0!==(p=_.get(d))&&(p.a?.measure(),(c??=new Set).add(p));for(f=0;f<b;f+=1)if(d=s(h=e[f],f),void 0!==(p=_.get(d))){if(g&&Mr(p,h,f,n),p.e.f&o&&(hr(p.e),m&&(p.a?.unfix(),(c??=new Set).delete(p))),p!==v){if(void 0!==u&&u.has(p)){if(y.length<x.length){var j,$=x[0];z=$.prev;var C=y[0],A=y[y.length-1];for(j=0;j<y.length;j+=1)Ir(y[j],$,r);for(j=0;j<x.length;j+=1)u.delete(x[j]);Ur(t,C.prev,A.next),Ur(t,z,C),Ur(t,A,$),v=$,z=A,f-=1,y=[],x=[]}else u.delete(p),Ir(p,v,r),Ur(t,p.prev,p.next),Ur(t,p,null===z?t.first:z.next),Ur(t,z,p),z=p;continue}for(y=[],x=[];null!==v&&v.k!==d;)!i&&v.e.f&o||(u??=new Set).add(v),x.push(v),v=v.next;if(null===v)continue;p=v}y.push(p),z=p,v=p.next}else{z=Nr(v?v.e.nodes_start:r,t,z,null===z?t.first:z.next,h,d,f,a,n,l),_.set(d,z),y=[],x=[],v=z.next}if(null!==v||void 0!==u){for(var q=void 0===u?[]:w(u);null!==v;)!i&&v.e.f&o||q.push(v),v=v.next;var E=q.length;if(E>0){var B=4&n&&0===b?r:null;if(m){for(f=0;f<E;f+=1)q[f].a?.measure();for(f=0;f<E;f+=1)q[f].a?.fix()}!function(e,t,r,a){for(var n=[],i=t.length,s=0;s<i;s++)cr(t[s].e,n,!0);var l=i>0&&0===n.length&&null!==r;if(l){var o=r.parentNode;Ht(o),o.append(r),a.clear(),Ur(e,t[0].prev,t[i-1].next)}ur(n,(()=>{for(var r=0;r<i;r++){var n=t[r];l||(a.delete(n.k),Ur(e,n.prev,n.next)),sr(n.e,!l)}}))}(t,q,B,_)}}m&&O((()=>{if(void 0!==c)for(p of c)p.a?.apply()}));Me.first=t.first&&t.first.e,Me.last=z&&z.e}(e,l,s,n,t,!!(Re.f&o),a,r);null!==i&&(0===u?c?hr(c):c=rr((()=>i(s))):null!==c&&or(c,(()=>{c=null}))),p&&$t(!0),gt(d)})),jt&&(s=xt)}function Mr(e,t,r,a){1&a&&fe(e.v,t),2&a?fe(e.i,r):e.i=r}function Nr(e,t,r,a,n,i,s,l,o,u){var c=!!(1&o),h=c?!(16&o)?ce(n):ue(n):n,d=2&o?ue(s):s;_&&c&&(h.debug=()=>{var e="number"==typeof d?s:d.v;u()[e]});var p={i:d,v:h,k:i,a:null,e:null,prev:r,next:a};try{return p.e=rr((()=>l(e,h,d)),jt),p.e.prev=r&&r.e,p.e.next=a&&a.e,null===r?t.first=p:(r.next=p,r.e.next=p.e),null!==a&&(a.prev=p,a.e.prev=p.e),p}finally{}}function Ir(e,t,r){for(var a=e.next?e.next.e.nodes_start:r,n=t?t.e.nodes_start:r,i=e.e.nodes_start;i!==a;){var s=Nt(i);n.before(i),i=s}}function Ur(e,t,r){null===t?e.first=r:(t.next=r,t.e.next=r&&r.e),null!==r&&(r.prev=t,r.e.prev=t&&t.e)}function Gr(e,t,r){if(!t||t===function(e){let t=5381,r=(e=e.replace($r,"")).length;for(;r--;)t=(t<<5)-t^e.charCodeAt(r);return(t>>>0).toString(36)}(String(r??"")))return;let a;const n=e.__svelte_meta?.loc;n?a=`near ${n.file}:${n.line}:${n.column}`:Ze?.[K]&&(a=`in ${Ze[K]}`),function(e){_?console.warn(`%c[svelte] hydration_html_changed\n%c${e?`The value of an \`{@html ...}\` block ${e} changed between server and client renders. The client value will be ignored in favour of the server value`:"The value of an `{@html ...}` block changed between server and client renders. The client value will be ignored in favour of the server value"}\nhttps://svelte.dev/e/hydration_html_changed`,P,M):console.warn("https://svelte.dev/e/hydration_html_changed")}(function(e){return e?.replace(/\//g,"/​")}(a))}function Hr(e,t,r,a,n){var i,s=e,l="";tr((()=>{l!==(l=t()??"")?(void 0!==i&&(sr(i),i=void 0),""!==l&&(i=rr((()=>{if(jt){for(var e=xt.data,t=At(),i=t;null!==t&&(8!==t.nodeType||""!==t.data);)i=t,t=Nt(t);if(null===t)throw N(),H;return _&&!n&&Gr(t.parentNode,e,l),zr(xt,i),void(s=Ct(t))}var o=l+"";r?o=`<svg>${o}</svg>`:a&&(o=`<math>${o}</math>`);var u=wr(o);if((r||a)&&(u=Mt(u)),zr(Mt(u),u.lastChild),r||a)for(;Mt(u);)s.before(Mt(u));else s.before(u)})))):jt&&At()}))}function Vr(e){if(jt){var t,r=!1,a=()=>{if(!r){if(r=!0,e.hasAttribute("value")){var t=e.value;Kr(e,"value",null),e.value=t}if(e.hasAttribute("checked")){var a=e.checked;Kr(e,"checked",null),e.checked=a}}};e.__on_r=a,t=a,D||(D=!0,B(R)),T.push(t),fr()}}function Kr(e,t,r,a){var n=e.__attributes??={};jt&&(n[t]=e.getAttribute(t),"src"===t||"srcset"===t||"href"===t&&"LINK"===e.nodeName)?a||function(e,t,r){if(!_)return;if("srcset"===t&&function(e,t){var r=Zr(e.srcset),a=Zr(t);return a.length===r.length&&a.every((([e,t],a)=>t===r[a][1]&&(Xr(r[a][0],e)||Xr(e,r[a][0]))))}(e,r))return;if(Xr(e.getAttribute(t)??"",r))return;!function(e,t,r){_?console.warn(`%c[svelte] hydration_attribute_changed\n%cThe \`${e}\` attribute on \`${t}\` changed its value between server and client renders. The client value, \`${r}\`, will be ignored in favour of the server value\nhttps://svelte.dev/e/hydration_attribute_changed`,P,M):console.warn("https://svelte.dev/e/hydration_attribute_changed")}(t,e.outerHTML.replace(e.innerHTML,e.innerHTML&&"..."),String(r))}(e,t,r??""):n[t]!==(n[t]=r)&&("style"===t&&"__styles"in e&&(e.__styles={}),"loading"===t&&(e[g]=r),null==r?e.removeAttribute(t):"string"!=typeof r&&function(e){var t,r=Wr.get(e.nodeName);if(r)return r;Wr.set(e.nodeName,r=[]);var a=e,n=Element.prototype;for(;n!==a;){for(var i in t=x(a))t[i].set&&r.push(i);a=C(a)}return r}(e).includes(t)?e[t]=r:e.setAttribute(t,r))}"undefined"!=typeof window&&(window.__svelte||={v:new Set}).v.add("5"),se=!0;var Wr=new Map;function Xr(e,t){return e===t||new URL(e,document.baseURI).href===new URL(t,document.baseURI).href}function Zr(e){return e.split(",").map((e=>e.trim().split(" ").filter(Boolean)))}function Jr(e,t,r){var a=e.__className,n=function(e,t){return(null==e?"":e)+(t?" "+t:"")}(t,r);jt&&e.className===n?e.__className=n:(a!==n||jt&&e.className!==n)&&(null!=t||r?e.className=n:e.removeAttribute("class"),e.__className=n)}const Yr=new Set;function Qr(e,t,r,a,n=a){var i="checkbox"===r.getAttribute("type"),s=e;let l=!1;if(null!==t)for(var o of t)s=s[o]??=[];s.push(r),gr(r,"change",(()=>{var e=r.__value;i&&(e=ta(s,e,r.checked)),n(e)}),(()=>n(i?[]:null))),Qt((()=>{var e,t,n=a();jt&&r.defaultChecked!==r.checked?l=!0:i?(n=n||[],r.checked=n.includes(r.__value)):r.checked=(e=r.__value,t=n,Object.is(Ft(e),Ft(t)))})),Wt((()=>{var e=s.indexOf(r);-1!==e&&s.splice(e,1)})),Yr.has(s)||(Yr.add(s),O((()=>{s.sort(((e,t)=>4===e.compareDocumentPosition(t)?-1:1)),Yr.delete(s)}))),O((()=>{if(l){var e;if(i)e=ta(s,e,r.checked);else{var t=s.find((e=>e.checked));e=t?.__value}n(e)}}))}function ea(e,t,r=t){gr(e,"change",(t=>{var a=t?e.defaultChecked:e.checked;r(a)})),(jt&&e.defaultChecked!==e.checked||null==bt(t))&&r(e.checked),Qt((()=>{var r=t();e.checked=Boolean(r)}))}function ta(e,t,r){for(var a=new Set,n=0;n<e.length;n+=1)e[n].checked&&a.add(e[n].__value);return r||a.delete(t),Array.from(a)}function ra(e){var t=e.type;return"number"===t||"range"===t}function aa(e){return""===e?null:+e}function na(e=!1){const t=Xe,r=t.l.u;if(!r)return;let a=()=>zt(t.s);if(e){let e=0,r={};const n=ge((()=>{let a=!1;const n=t.s;for(const e in n)n[e]!==r[e]&&(r[e]=n[e],a=!0);return a&&e++,e}));a=()=>gt(n)}var n;r.b.length&&(n=()=>{ia(t,a),E(r.b)},Vt("$effect.pre"),_&&z(n,"name",{value:"$effect.pre"}),Qt(n)),Xt((()=>{const e=bt((()=>r.m.map(q)));return()=>{for(const t of e)"function"==typeof t&&t()}})),r.a.length&&Xt((()=>{ia(t,a),E(r.a)}))}function ia(e,t){if(e.l.s)for(const t of e.l.s)gt(t);t()}function sa(e,t,r){e.$$events||={},e.$$events[t]||=[],e.$$events[t].push(r)}function la(e){for(var t in e)t in this&&(this[t]=e[t])}function oa(){const e=Xe;return null===e&&ye("createEventDispatcher"),(t,r,a)=>{const n=e.s.$$events?.[t];if(n){const i=k(n)?n.slice():[n],s=function(e,t,{bubbles:r=!1,cancelable:a=!1}={}){return new CustomEvent(e,{detail:t,bubbles:r,cancelable:a})}(t,r,a);for(const t of i)t.call(e.x,s);return!s.defaultPrevented}return!0}}const ua=[];function ca(e){let t;return function(e,t,r){if(null==e)return t(void 0),r&&r(void 0),A;const a=bt((()=>e.subscribe(t,r)));return a.unsubscribe?()=>a.unsubscribe():a}(e,(e=>t=e))(),t}let ha=!1;function da(e){for(var t=Me,r=Me;null!==t&&!(96&t.f);)t=t.parent;try{return Ne(t),e()}finally{Ne(r)}}function pa(e,t,r,a){var n,i=!!(1&r),s=!se||!!(2&r),l=!!(8&r),o=!!(16&r),u=!1;l?[n,u]=function(e){var t=ha;try{return ha=!1,[e(),ha]}finally{ha=t}}((()=>e[t])):n=e[t];var c,h=p in e||m in e,d=l&&(y(e,t)?.set??(h&&t in e&&(r=>e[t]=r)))||void 0,f=a,g=!0,b=!1,k=()=>(b=!0,g&&(g=!1,f=o?bt(a):a),f);if(void 0===n&&void 0!==a&&(d&&s&&function(e){if(_){const t=new Error(`props_invalid_value\nCannot do \`bind:${e}={undefined}\` when \`${e}\` has a fallback value\nhttps://svelte.dev/e/props_invalid_value`);throw t.name="Svelte error",t}throw new Error("https://svelte.dev/e/props_invalid_value")}(t),n=k(),d&&d(n)),s)c=()=>{var r=e[t];return void 0===r?k():(g=!0,b=!1,r)};else{var v=da((()=>(i?ge:be)((()=>e[t]))));v.f|=131072,c=()=>{var e=gt(v);return void 0!==e&&(f=void 0),void 0===e?f:e}}if(!(4&r))return c;if(d){var w=e.$$legacy;return function(e,t){return arguments.length>0?(s&&t&&!w&&!u||d(t?c():e),e):c()}}var z=!1,x=ce(n),j=da((()=>ge((()=>{var e=c(),t=gt(x);return z?(z=!1,t):x.v=e}))));return i||(j.equals=ne),function(e,t){if(arguments.length>0){const r=t?gt(j):s&&l?St(e):e;return j.equals(r)||(z=!0,pe(x,r),b&&void 0!==f&&(f=r),bt((()=>gt(j)))),e}return gt(j)}}const fa=function(e,t=A){let r=null;const a=new Set;function n(t){if(ae(e,t)&&(e=t,r)){const t=!ua.length;for(const t of a)t[1](),ua.push(t,e);if(t){for(let e=0;e<ua.length;e+=2)ua[e][0](ua[e+1]);ua.length=0}}}function i(t){n(t(e))}return{set:n,update:i,subscribe:function(s,l=A){const o=[s,l];return a.add(o),1===a.size&&(r=t(n,i)||A),s(e),()=>{a.delete(o),0===a.size&&r&&(r(),r=null)}}}}(JSON.parse(localStorage.getItem("unsmurfSettings"))||{section:"puppets",showPuppetmasters:!0,showCTE:!0,showRelativeDate:!1,redEpics:!0,rainbowLegs:!0});function ma(){return ca(fa)}fa.subscribe((e=>{try{localStorage.setItem("unsmurfSettings",JSON.stringify(e))}catch(e){console.error("Error saving to localStorage:",e)}}));var ga=yr('<div class="settings-modal bg-white rounded-lg shadow-lg p-6 max-w-2xl w-[80%] md:w-[50%] relative"><h2 class="text-xl font-bold mb-2.5">Settings</h2> <div class="mb-4"><h3 class="text-lg font-semibold">Tally Record Options</h3> <label class="flex items-center gap-2"><input type="radio" name="section"> Tally record by known puppets</label> <label class="flex items-center gap-2 transition-opacity duration-300 ease-in-out"><label class="flex items-center gap-2"><input type="radio" name="section"> Tally record by similar name</label></label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Nation Display Options</h3> <label class="flex items-center gap-2 transition-opacity duration-300 ease-in-out"><input type="checkbox"> Append puppetmasters in detailed records</label> <label class="flex items-center gap-2 transition-opacity duration-300 ease-in-out"><input type="checkbox"> Mark CTE nations</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Date Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Show relative date by default</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Colour Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Red epics</label> <label class="flex items-center gap-2"><input type="checkbox"> Rainbow legendaries</label></div> <div class="flex justify-end mt-4"><button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Confirm</button></div></div>');function ba(e,t){if(new.target)return Tr({component:ba,...e});vt(t,!1);const r=[],a=oa();let n=he();fa.subscribe((e=>{pe(n,e)})),na();var i=ga(),s=Gt(It(i),2),l=Gt(It(s),2),o=It(l);Vr(o),o.value=null==(o.__value="puppets")?"":"puppets",Et(),qt(l);var u=Gt(l,2),c=It(u),h=It(c);Vr(h),h.value=null==(h.__value="similar-name")?"":"similar-name",Et(),qt(c),qt(u),qt(s);var d=Gt(s,2),p=Gt(It(d),2),f=It(p);Vr(f),Et(),qt(p);var m=Gt(p,2),g=It(m);Vr(g),Et(),qt(m),qt(d);var b=Gt(d,2),_=Gt(It(b),2),k=It(_);Vr(k),Et(),qt(_),qt(b);var v=Gt(b,2),w=Gt(It(v),2),z=It(w);Vr(z),Et(),qt(w);var y=Gt(w,2),x=It(y);Vr(x),Et(),qt(y),qt(v);var j=Gt(v,2),$=It(j);return qt(j),qt(i),Qr(r,[],o,(()=>gt(n).section),(e=>de(n,gt(n).section=e))),Qr(r,[],h,(()=>gt(n).section),(e=>de(n,gt(n).section=e))),ea(f,(()=>gt(n).showPuppetmasters),(e=>de(n,gt(n).showPuppetmasters=e))),ea(g,(()=>gt(n).showCTE),(e=>de(n,gt(n).showCTE=e))),ea(k,(()=>gt(n).showRelativeDate),(e=>de(n,gt(n).showRelativeDate=e))),ea(z,(()=>gt(n).redEpics),(e=>de(n,gt(n).redEpics=e))),ea(x,(()=>gt(n).rainbowLegs),(e=>de(n,gt(n).rainbowLegs=e))),kr("click",$,(function(){console.log("[Config] Saving Settings:",gt(n)),fa.set(gt(n)),a("close")})),jr(e,i),wt({$set:la,$on:(e,r)=>sa(t,e,r)})}let _a=null,ka=null,va=null,wa=null;async function za(){console.log("Fetching puppet data, S4 data, and current nations..."),_a={},ka={},va=[],wa=null;try{const e=await fetch("./static/puppetData.tsv");if(!e.ok)throw new Error(`Failed to fetch puppet data: ${e.statusText}`);const t=await e.text();t.split("\n").slice(1).forEach((e=>{const[t,r,a]=e.split("\t").map((e=>e.trim().toLowerCase().replace(/\s+/g,"_")));t&&r&&(_a[t]={master:r,sheet:a})})),console.log("Puppet data loaded and cached.");const r=await fetch("./static/s4.tsv");if(!r.ok)throw new Error(`Failed to fetch S4 data: ${r.statusText}`);const a=await r.text();a.split("\n").slice(1).forEach((e=>{const[t,r]=e.split("\t").map((e=>e.trim().toLowerCase().replace(/\s+/g,"_")));t&&r&&(ka[t]=r)})),console.log("S4 data loaded and cached.");const n=await fetch("./static/currentNations.txt");if(!n.ok)throw new Error(`Failed to fetch current nations data: ${n.statusText}`);const i=await n.text();va=i.split("\n").map((e=>e.trim().toLowerCase().replace(/\s+/g,"_"))),console.log("Current nations data loaded and cached."),va?(console.log("Preprocessing current nations cache into a Set..."),wa=new Set(va),console.log("Current nation Set created.")):console.warn("Current nations cache is not initialized.")}catch(e){console.error("Error fetching sheet data:",e)}fa.update((e=>({...e,dataFetched:!0}))),console.log("All sheet data fetched and processed.")}function ya(e){if(!_a)return console.warn("Puppet cache is not initialized. Returning the original name."),{master:e,sheet:null};const t=_a[e.toLowerCase()];return t?{master:t.master,sheet:t.sheet}:{master:e,sheet:null}}function xa(e){if(!wa)return console.warn("Current nation Set is not initialized."),!1;const t=e.trim().toLowerCase().replace(/\s+/g,"_");return wa.has(t)}function ja(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}function $a(e){var t=[],r=0;if(this.trie=this.createTrie(e.patterns),this.leftMin=e.leftmin,this.rightMin=e.rightmin,this.exceptions={},e.exceptions)for(t=e.exceptions.split(/,\s?/g);r<t.length;r+=1)this.exceptions[t[r].replace(/\u2027/g,"").toLowerCase()]=new RegExp("("+t[r].split("‧").join(")(")+")","i")}$a.TrieNode,$a.prototype.createTrie=function(e){var t,r=0,a=0,n=0,i=0,s=null,l=null,o=null,u=null,c={_points:[]};for(r in e)if(e.hasOwnProperty(r))for(t=e[r].match(new RegExp(".{1,"+ +r+"}","g")),a=0;a<t.length;a+=1){for(s=t[a].replace(/[0-9]/g,"").split(""),l=t[a].split(/\D/),u=c,n=0;n<s.length;n+=1)u[o=s[n].charCodeAt(0)]||(u[o]={}),u=u[o];for(u._points=[],i=0;i<l.length;i+=1)u._points[i]=l[i]||0}return c},$a.prototype.hyphenateText=function(e,t){t=t||4;for(var r=e.split(/([a-zA-Z0-9_\u0027\u00AD\u00DF-\u00EA\u00EB\u00EC-\u00EF\u00F1-\u00F6\u00F8-\u00FD\u0101\u0103\u0105\u0107\u0109\u010D\u010F\u0111\u0113\u0117\u0119\u011B\u011D\u011F\u0123\u0125\u012B\u012F\u0131\u0135\u0137\u013C\u013E\u0142\u0144\u0146\u0148\u0151\u0153\u0155\u0159\u015B\u015D\u015F\u0161\u0165\u016B\u016D\u016F\u0171\u0173\u017A\u017C\u017E\u017F\u0219\u021B\u02BC\u0390\u03AC-\u03CE\u03F2\u0401\u0410-\u044F\u0451\u0454\u0456\u0457\u045E\u0491\u0531-\u0556\u0561-\u0587\u0902\u0903\u0905-\u090B\u090E-\u0910\u0912\u0914-\u0928\u092A-\u0939\u093E-\u0943\u0946-\u0948\u094A-\u094D\u0982\u0983\u0985-\u098B\u098F\u0990\u0994-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BE-\u09C3\u09C7\u09C8\u09CB-\u09CD\u09D7\u0A02\u0A03\u0A05-\u0A0A\u0A0F\u0A10\u0A14-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A3E-\u0A42\u0A47\u0A48\u0A4B-\u0A4D\u0A82\u0A83\u0A85-\u0A8B\u0A8F\u0A90\u0A94-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABE-\u0AC3\u0AC7\u0AC8\u0ACB-\u0ACD\u0B02\u0B03\u0B05-\u0B0B\u0B0F\u0B10\u0B14-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3E-\u0B43\u0B47\u0B48\u0B4B-\u0B4D\u0B57\u0B82\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB5\u0BB7-\u0BB9\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCD\u0BD7\u0C02\u0C03\u0C05-\u0C0B\u0C0E-\u0C10\u0C12\u0C14-\u0C28\u0C2A-\u0C33\u0C35-\u0C39\u0C3E-\u0C43\u0C46-\u0C48\u0C4A-\u0C4D\u0C82\u0C83\u0C85-\u0C8B\u0C8E-\u0C90\u0C92\u0C94-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBE-\u0CC3\u0CC6-\u0CC8\u0CCA-\u0CCD\u0D02\u0D03\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D28\u0D2A-\u0D39\u0D3E-\u0D43\u0D46-\u0D48\u0D4A-\u0D4D\u0D57\u0D60\u0D61\u0D7A-\u0D7F\u1F00-\u1F07\u1F10-\u1F15\u1F20-\u1F27\u1F30-\u1F37\u1F40-\u1F45\u1F50-\u1F57\u1F60-\u1F67\u1F70-\u1F7D\u1F80-\u1F87\u1F90-\u1F97\u1FA0-\u1FA7\u1FB2-\u1FB4\u1FB6\u1FB7\u1FBD\u1FBF\u1FC2-\u1FC4\u1FC6\u1FC7\u1FD2\u1FD3\u1FD6\u1FD7\u1FE2-\u1FE7\u1FF2-\u1FF4\u1FF6\u1FF7\u200D\u2019]+)/gi),a=0;a<r.length;a+=1)-1!==r[a].indexOf("/")?0===a||a===r.length-1||/\s+\/|\/\s+/.test(r[a])||(r[a]+="​"):r[a].length>t&&(r[a]=this.hyphenate(r[a]).join("­"));return r.join("")},$a.prototype.hyphenate=function(e){var t,r,a,n,i,s,l,o,u,c=[],h=[],d=e.toLowerCase(),p=Math.max,f=this.trie,m=[""];if(this.exceptions.hasOwnProperty(d))return e.match(this.exceptions[d]).slice(1);if(-1!==e.indexOf("­"))return[e];for(t=(e="_"+e+"_").toLowerCase().split(""),r=e.split(""),l=t.length,a=0;a<l;a+=1)h[a]=0,c[a]=t[a].charCodeAt(0);for(a=0;a<l;a+=1)for(s=f,n=a;n<l&&(s=s[c[n]]);n+=1)if(o=s._points)for(i=0,u=o.length;i<u;i+=1)h[a+i]=p(h[a+i],o[i]);for(a=1;a<l-1;a+=1)a>this.leftMin&&a<l-this.rightMin&&h[a]%2?m.push(r[a]):m[m.length-1]+=r[a];return m};var Ca=ja($a),Aa=ja({id:["en-us","en"],leftmin:2,rightmin:3,patterns:{3:"x1qei2e1je1f1to2tlou2w3c1tue1q4tvtw41tyo1q4tz4tcd2yd1wd1v1du1ta4eu1pas4y1droo2d1psw24sv1dod1m1fad1j1su4fdo2n4fh1fi4fm4fn1fopd42ft3fu1fy1ga2sss1ru5jd5cd1bg3bgd44uk2ok1cyo5jgl2g1m4pf4pg1gog3p1gr1soc1qgs2oi2g3w1gysk21coc5nh1bck1h1fh1h4hk1zo1ci4zms2hh1w2ch5zl2idc3c2us2igi3hi3j4ik1cab1vsa22btr1w4bp2io2ipu3u4irbk4b1j1va2ze2bf4oar1p4nz4zbi1u2iv4iy5ja1jeza1y1wk1bk3fkh4k1ikk4k1lk1mk5tk1w2ldr1mn1t2lfr1lr3j4ljl1l2lm2lp4ltn1rrh4v4yn1q1ly1maw1brg2r1fwi24ao2mhw4kr1cw5p4mkm1m1mo4wtwy4x1ar1ba2nn5mx1ex1h4mtx3i1muqu2p3wx3o4mwa1jx3p1naai2x1ua2fxx4y1ba2dn1jy1cn3fpr2y1dy1i",4:"4dryn2itni4on1inn1im_up3nik4ni4dy5giye4tyes4_ye44ab_nhe4nha4abe2n2gyn1guy1ery5eep2pe4abry3lay3lone4wne4v1nesy3chn1erne2q3neo1nenp2seps4hy2cey5lu2nedne2cyme44nk2y5at2adine2b2ne_y5ac2p1tp2ten1den1cun1cryn5dp2th4adup4twpub3ae4rxu3ayn5gaff4pue4n2au4p1ppuf4n2atag1ipu4mag1na2gon4asx3tix1t2pu2na4gya3haa3heah4la3ho_ti2a5ian2an5puspu2tnak4_th2n1kl_te4_ta4mu4u4mupmun23mum2alex4ob_sy25ynxal1i_st4y1o4xi5cxi5a4alm_si2_sh2m5sixhu4m4sh4m3r4amam2py2rabm2pixhi2yo5dr2ai4m1pmo2vmos2x2edmo2r4n1la2mor2asx3c2xas5yom4x4apxam3nme44mokrbi2nne44andy4osp4ot3noemn4omn4a4m1n4nog4m1l2angws4l1posw3shwri4wra4yp3iwom11wo2m2izrb4ow4nopo4pr2cem2isrd2iano4mig4y3pomi3awiz55mi_no4n4m1fme4v2re_wir42mes1menme2mme2gre1o2med4me_4nop4m5c4m1bwil21noureu2whi4w3ev4maprev2w1era2plpo4crfu4r4fyy5pu2maha3pu2mab2a2rn1p4npi44lyb4lya2p3nwam42l1w1lut4luplu3or1glluf4lu5a2wacltu2y3rol1tr4vv4r3guyr4rl1te4rh_nru4ar1il2sel4sc4l1rl5prl4plys4c4lovri3ar4ib4lof3lo_ar2par3q_os3ll4oll2i4as_ri1o3vokl2levoi44p1mlka35vo_ns4cas4ll1izr4iqr2is3vivl1it3lika2tan2sen2slrle42l3hlgo3l5gal5frns3mvi4p3ley_od2r2meles24athr4myle2al3drv1inldi4l2de2vilnt2il3civik4lce42l1b4lavv3ifrno4r3nua1trr2ocnt4sy4sok4syks4la2tuk4sck3ouko5ryss4a2tyau4b4klyys1tnu1akis4au3rki4pro4ek4ima2va5ki_nu4dn4umn3uokes4k1erav1irok2ke4g1keek2ed_me2aw3ikal4aws4k5agk3ab3ka_aye4ays4veg3jo4p5ba_4vedjew3n1v24ve_ja4pzar23vatizi4n1w41batba4z2b1bb2beix4o4i5w4b1d4be_rox5nym4nyp4n3za4ittr3por1r4i1ti1bel2ith2itei2su4rs2r1sars4cr2seis1p3betvag4i2sor1shbe3wr1sioad34b3hbi2bbi4d3bie3isf4ise2is_1bilr1sp5va_r5sw_le2uz4eir1ibi2tuxu3r1tiu1v2i1raze4nze4pb2l2uu4mo1biip3iz1eripe4b4louts44b1m4b3no3br3bodi4osbo4eru3aio4mi1ol4io_3booo1ce4inyin1u2insru2n2inn4inl4inkrv4e2inioch42iner3vo4indpi2np4idbt4lb4tob3trry4cry3t2in_o4elbu4ni2muim1i5saiil3v4ilnil1iil5fs1apo3er4b5w5by_bys4_in1sau4i1lazet4u2suo3ev2z1ii2go4igius1p5saw4s5bo2fi4ifti3fl4if_i3etsch2usc22ie4i2dui4dri2diid5dpi3au3ruz4ils1cuz4is4s5d4se_se4a2ce_2ici4ich3ceii1bri5bo1ceni1blse2g5seiibe43cepi2aniam4ur2li2al2i1acet4hy2scew41phy4ch_5phuhu4thu4gche2h4tyh4shur1durc44hr44h5p5sev5sexu1ra4s3fup3p2s3gph3t2sh_ho4g2h1n_he23ciau3pl4h1mci5ch2lozo4m4ciihi2vhi4p2cim2cin4phsu1peu1ouo1geu5osheu4sho4he4th1es4shwun5zun5ysi1bunu45cizo4glck3ihep5he2nh4ed1sioph2l5hazsi2rcly4zte4_ge21siscoe22cog5siu1siv5siz_ga24skes1l2s2leha4m2s1ms3ma1ogyo1h2u1ni3gus3gun2guegu4acov1gth3_eu3g4ros1n4_es3u2nez4zyum2pu1mi3som_ev2oig4cri2gov15goos4opgon2ul5v5goeu3lugob53go_2c1t4ph_g1nog1nic2te4sov4ulsgn4ag4myc4twcud5c4ufc4uipe2t3glo1gleul2igla4_eg23giz3cun5givgi4u3gir5gio1cusul4e2spagil4g1ic5gi__eb4cze41d2a5da_u1laggo44daf2dagg2gege4v1geo1gen2ged3dato1la2ge_ol2dol2i5daypek4p4eed1d42de_4gazol2tuiv3ol2vo2lys1sa2gamgaf4o2meui4n2ui2pe2cd4em4fugi4jku3fl3ufaf2tyf4to1denu4du4pe_2f3sfri2de1ps1si4f5pfos5d3eqs4sls4snfo2rss2tdes25fon4p1b_ci23payss5w2st_de1tf4l2de1v2fin4dey4d1fd4gast2idg1id2gyd1h25di_ud5dfi3au4cy_ch4pav43didu3cud1iff2fyu3crd1inst4r4f1ffev4fer11dio2fedfe4bdir2s2ty4fe_dis1on1au3ca4f5bon1c2ondd5k25far4fagpa1peys45eyc1exps4ul2dlyp4ale3whon3s3do_e1wa5doee5vud4oge1visu2msu2nub4euav4su2rp4ai6rk_d4or3dosu1atdo4v3doxp4adoo4k4swoo2padre4eus4e3upe5un2ophet5z4syc3syl4y3hoy1ads4pd4swd4syd2tho4wo3ta_du2c4etn2tabta2luac4es4wdu4g2ess4uabdu4n4duptav4st5bow1io1pr5dyn2tawe1sp2t1bop1uead1tz4et4chopy5ea4l4t1d4te_2tyle1si4esh1tee4tyat1cr4twoteg4es2c4eru1teoer1s2eroea2tte4po1rat1wh3tusea2v3teu3texer1i2e1ber1h4tey2t1f4t1ge3br2th_th2e4thle1ce3tumec2i2ths2erb1tia4tueer1aou5vtud2tif22tige1potu1aou4lttu41timt5toos4le1cre2pat4swe5owe1cue4ottsh4eos4e1ort4sce3ol4edieo2ge5of1tio4eno4enn5tiq4edoti4u1tive3my1tiz4othee2ct5laee2ft5lo4t1mee2mtme4e1meem5bcoi4to3be5exo1ry2tof1effel2iel2ftos24t1pe1la1traos2ceig2ei5de5ico2soe1h45egyeg5n",5:"_ach4e4go_e4goseg1ule5gurtre5feg4iceher4eg5ibeger44egaltre4mei5gle3imbe3infe1ingtra3beir4deit3eei3the5ity5triae4jud3efiteki4nek4la2trime4la_e4lactri4v4toute4law5toure3leaefil45elece4ledto2rae5len4tonye1lestro3ve4fic4tonoto3mytom4bto2mato5ice5limto2gre3lioe2listru5i4todo4ellaee4tyello4e5locel5ogeest4el2shel4tae5ludel5uge4mace4mage5man2t1n2ee2s4ee4p1e2mele4metee4naemi4eee4lyeel3i3tled3tle_e4mistlan4eed3iem3iztrus4emo4gti3zaem3pie4mule4dulemu3ne4dritiv4aedon2e4dolti3tle5neae5neeen3emtis4pti5sotis4m3tisee3newti3sae5niee5nile3nioedi5zen3ite5niu5enized1ited3imeno4ge4nosen3oven4swti5oc4t1s2en3uaen5ufe3ny_4en3zed3ibe3diae4oi4ede4s3tini4ed3deo3ret2ina2e2dae4culeo4toe5outec4te4t3t2t4tes2t1ine5pel4timpe2corephe4e4plie2col5tigutu3arti5fytu4bie3pro3tienep4sh5tidie4putt4icoeci4t4tick2ti2bec3imera4bti4aber3ar4tuf45tu3ier4bler3che4cib2ere_4thooecca54thil3thet4thea3turethan4e4cade4bitere4qe4ben5turieret4tur5oeav5oeav5itu5ry4tess4tes_ter5ve1rio4eriter4iueri4v1terier3m4ter3cte5pe4t1waer3noeast3er5obe5rocero4rer1oue3assea5sp1tent4ertler3twtwis4eru4t3tende1s4a3tenc5telsear2te2scateli4e3scres5cue1s2ee2sec3tel_te5giear5kear4cte5diear3ae3sha2t1ede5ande2sice2sid5tecttece44teattype3ty5phesi4uea4gees4mie2sole3acte2sone1a4bdys5pdy4sedu4petaun4d3uleta5sytas4e4tare4tarctar4ata5pl2estrta5mo4talke2surtal3idu5eleta4bta5lae3teoua5naet1ic4taf4etin4ta5doe5tir4taciuan4id1ucad1u1ae3trae3tre2d1s2syn5ouar2d4drowet3uaet5ymdro4pdril4dri4b5dreneu3rouar3ieute44draieu5truar3te2vasdop4pe5veadoo3ddoni4u4belsum3iev1erdoli4do4laev3idevi4le4vinevi4ve5voc2d5ofdo5dee4wage5wee4d1n4ewil54d5lue3wit2d3lou3ber5eye_u1b4i3dledfa3blfab3rfa4ce3dle_fain4suit3su5issu2g34d5lasu4b3fa3tasu1al4fato1di1vd2iti5disiuci4bfeas4di1redi4pl4feca5fectdio5gfe3life4mofen2d4st3wuc4it5ferr5diniucle3f4fesf4fie4stry1dinaf4flydi3ge3dictd4icedia5bs4tops1tle5stirs3tifs4ties1ticfic4is5tias4ti_4ficsfi3cuud3ers3thefil5iste2w4filyudev45finas4tedfi2nes2talfin4ns2tagde2tode4suflin4u1dicf2ly5ud5isu5ditde1scd2es_der5sfon4tu4don5dermss4lid4erhfor4is4siede2pudepi4fra4tf5reade3pade3nufril4frol5ud4side3nou4eneuens4ug5infu5el5dem_s5setfu5nefu3rifusi4fus4s4futade5lode5if4dee_5gal_3galiga3lo2d1eds3selg5amos2s5cssas3u1ing4ganouir4mgass4gath3uita4deaf5dav5e5dav44dato4darygeez44spotspor4s4pon4gelydark5s4ply4spio4geno4genydard5ge3omg4ery5gesigeth54getoge4tydan3g4g1g2da2m2g3gergglu5dach4gh3inspil4gh4to4cutr1gi4agia5rula5bspho5g4icogien5s2pheulch42sperspa4n5spai3c4utu1lenul4gigir4lg3islcu5pycu3picu4mic3umecu2maso5vi5glasu5liagli4bg3lig5culiglo3r4ul3mctu4ru1l4og4na_c3terul1tig2ning4nio4ultug4noncta4b4c3s2cru4dul5ulsor5dgo3isum5absor5ccris4go3nic4rinson4gsona45gos_cri5fcre4vum4bi5credg4raigran25solvsoft3so4ceunat44graygre4nco5zi4gritcoz5egruf4cow5ag5stecove4cos4es5menun4ersmel44corbco4pl4gu4tco3pacon5tsman3gy5racon3ghach4hae4mhae4th5aguha3lac4onecon4aun4ims3latu2ninhan4gs3ket5colocol5ihan4kuni3vhap3lhap5ttras4co4grhar2dco5agsir5aclim45sionhas5shaun44clichaz3acle4m1head3hearun3s4s3ingun4sws2ina2s1in4silysil4eh5elohem4p4clarhena45sidiheo5r1c4l4h4eras5icc2c1itu4orsh3ernshor4h3eryci3phshon34cipecion45cinoc1ingc4inahi5anhi4cohigh5h4il2shiv5h4ina3ship3cilihir4lhi3rohir4phir4rsh3iohis4ssh1inci4lau5pia4h1l4hlan44cier5shevcia5rhmet4ch4tish1erh5ods3cho2hoge4chi2z3chitho4mahome3hon4aho5ny3hoodhoon45chiouptu44ura_ho5ruhos4esew4ihos1p1housu4ragses5tu4rasur4behree5se5shs1e4s4h1s24chedh4tarht1enht5esur4fru3rifser4os4erlhun4tsen5gur1inu3riosen4dhy3pehy3phu1ritces5tur3iz4cesa4sencur4no4iancian3i4semeia5peiass45selv5selfi4atu3centse1le4ceniib5iaib3inseg3ruros43cencib3li3cell5cel_s5edli5bun4icam5icap4icar4s4ed3secticas5i4cayiccu44iceour4pe4ced_i5cidsea5wi2cipseas4i4clyur4pi4i1cr5icrai4cryic4teictu2ccon4urti4ic4umic5uoi3curcci4ai4daiccha5ca4thscof4ide4s4casys4cliscle5i5dieid3ios4choid1itid5iui3dlei4domid3owu5sadu5sanid5uous4apied4ecany4ield3s4cesien4ei5enn4sceii1er_i3esci1estus3ciuse5as4cedscav5if4frsca4pi3fieu5siau3siccan4eiga5bcan5d4calous5sli3gibig3ilig3inig3iti4g4lus1trig3orig5oti5greigu5iig1ur2c5ah4i5i44cag4cach4ca1blusur4sat3usa5tab5utoi3legil1erilev4uta4b4butail3iail2ibil3io3sanc2ilitil2izsal4t5bustil3oqil4tyil5uru3tati4magsa5losal4m4ute_4imetbu3res3act5sack2s1ab4imitim4nii3mon4utelbumi4bu3libu4ga4inav4utenbsor42b5s2u4tis4briti3neervi4vr3vic4inga4inger3vey4ingir3ven4ingo4inguu4t1li5ni_i4niain3ioin1isbo4tor5uscrunk5both5b5ota5bos42i1no5boriino4si4not5borein3seru3in2int_ru4glbor5di5nusut5of5bor_uto5gioge4io2grbon4au5tonru3enu4touion3iio5phior3ibod3iio5thi5otiio4toi4ourbne5gb3lisrt4shblen4ip4icr3triip3uli3quar4tivr3tigrti4db4le_b5itzira4bi4racird5ert5ibi4refbi3tri4resir5gibi5ourte5oir4isr3tebr4tagbin4diro4gvac3uir5ul2b3ifis5agis3arisas52is1cis3chbi4eris3erbi5enrson3be5yor5shais3ibisi4di5sisbe3tw4is4krs3es4ismsbe5trr3secva4geis2piis4py4is1sbe3sp4bes4be5nuval5ois1teis1tirrys4rros44be5mis5us4ita_rron4i4tagrri4vi3tani3tatbe3lorri4or4reoit4esbe1libe5gu4itiarre4frre4cbe3giit3igbe3dii2tim2itio4itisrp4h4r3pet4itonr4peait5rybe3debe3dai5tudit3ul4itz_4be2dbeat3beak4ro4varo4tyros4sro5roiv5ioiv1itror3i5root1roomval1ub3berva5mo4izarva5piron4eban3ijac4qban4ebal1ajer5srom4prom4iba4geazz5i5judgay5alax4idax4ickais4aw4ly3awaya1vorav5ocav3igke5liv3el_ve4lov4elyro1feke4tyv4erdv4e2sa5vanav3ag5k2ick4illkilo5au1thk4in_4ves_ro3crkin4gve4teaun5dk5ishau4l2au3gu4kleyaugh3ve4tyk5nes1k2noat3ulkosh4at5uekro5n4k1s2at5uaat4that5te5vianat4sk5vidil4abolaci4l4adela3dylag4nlam3o3landrob3la4tosr4noular4glar3ilas4ea4topr3nivr3nita2tomr5nica4toglbin44l1c2vi5gnat3ifat1ica5tiar3neyr5net4ati_ld5isat4hol4driv2incle4bileft55leg_5leggr4nerr3nel4len_3lencr4nar1lentle3phle4prvin5dler4e3lergr3mitl4eroat5evr4mio5lesq3lessr3menl3eva4vingrma5cvio3lvi1ou4leyevi5rovi3so4l1g4vi3sulgar3l4gesate5cat5apli4agli2amr3lo4li4asr4lisli5bir4ligr2led4lics4vitil4icul3icyl3idaat5ac3lidirk4lel4iffli4flr3ket3lighvit3r4vityriv3iri2tulim3ili4moris4pl4inar3ishris4clin3ir4is_li5og4l4iqlis4pas1trl2it_as4shas5phri2pla4socask3ia3sicl3kallka4ta3sibl4lawashi4l5leal3lecl3legl3lel5riphas4abar2shrin4grin4ear4sarin4dr2inal5lowarre4l5met3rimol4modlmon42l1n2a3roorim5ilo4civo4la5rigil5ogo3loguri5et5longlon4iri1erlood5r4icolop3il3opmlora44ricir4icerib3a5los_v5oleri4agria4blos4tlo4taar2mi2loutar2izar3iolpa5bl3phal5phi4rhall3pit5voltar4im3volv2l1s2vom5ivori4l4siear4fllt5agar4fivo4rylten4vo4talth3ia3reeltis4ar4drw5ablrgo4naraw4lu3brluch4lu3cilu3enwag5olu5idlu4ma5lumia5raur5gitwait5luo3rw5al_luss4r5gisar4atl5venrgi4nara3pwar4tar3alwas4tly5mely3no2lys4l5ysewa1teaque5ma2car3gicma4clr3get5magnwed4nmaid54maldrg3erweet3wee5vwel4lapoc5re4whwest3ap3in4aphires2tr4es_mar3vre5rumas4emas1t5matemath3rero4r4eriap5atr1er4m5bilre1pumbi4vapar4a5nuran3ul4med_an3uare5lure1lian4twre5itmel4tan2trre4fy4antomen4are3fire2fe4menemen4imens4re1de3ment2r2edme5onre4awwin4g5reavme4tare3anme1tere1alm4etr3wiserdin4rdi4aan4stwith3an2span4snan2samid4amid4gan5otwl4esr4dalm4illmin4a3mindrcum3rc4itr3charcen4min4tm4inumiot4wl3ina3niumis5lan3ita3nip4mithan3ioan1gla3neuws4per2bina3nena5neem4ninw5s4tan1dl4mocrrbi4fmo2d1mo4gomois2xac5ex4agor4bagmo3mer4baba3narrau4ta5monrare4rar5cra5nor4aniam1inr2amiam5ifra4lomo3spmoth3m5ouf3mousam3icxer4ixe5roraf4tr5aclm3petra3bixhil5mpi4aam3ag3quetm5pirmp5is3quer2que_qua5vmpov5mp4tram5ab3alyz4m1s25alyt4alysa4ly_ali4exi5di5multx4ime4aldia4laral3adal5abak1enain5opu3trn4abu4nac_na4can5act5putexpe3dna4lia4i4n4naltai5lya3ic_pur4rag5ulnank4nar3c4narenar3inar4ln5arm3agognas4c4ag4l4ageupul3cage4oaga4na4gab3nautnav4e4n1b4ncar5ad5umn3chaa3ducptu4rpti3mnc1innc4itad4suad3owad4len4dain5dana5diua3ditndi4ba3dion1ditn3dizn5ducndu4rnd2we3yar4n3eara3dianeb3uac4um5neckac3ulp4siba3cio5negene4laac1inne5mine4moa3cie4nene4a2cine4poyc5erac1er2p1s2pro1tn2erepro3lner4rych4e2nes_4nesp2nest4neswpri4sycom4n5evea4carab3uln4gabn3gelpre3vpre3rycot4ng5han3gibng1inn5gitn4glangov4ng5shabi5an4gumy4erf4n1h4a5bannhab3a5bal3n4iani3anni4apni3bani4bl_us5ani5dini4erni2fip3petn5igr_ure3_un3up3per_un5op3pennin4g_un5k5nis_p5pel_un1en4ithp4ped_un1ani3tr_to4pympa3_til4n3ketnk3inyn5ic_se2ny4o5gy4onsnmet44n1n2_ru4d5pounnni4vnob4lpo4tan5ocly4ped_ro4qyper5noge4pos1s_ri4gpo4ry1p4or_res2no4mono3my_ree2po4ninon5ipoin2y4poc5po4gpo5em5pod_4noscnos4enos5tno5tayp2ta3noun_ra4cnowl3_pi2tyra5m_pi4eyr5ia_out3_oth32n1s2ns5ab_or3t_or1d_or3cplu4mnsid1nsig4y3s2eys3ion4socns4pen5spiploi4_odd5nta4bpli4n_ni4cn5tib4plignti2fpli3a3plannti4p1p2l23ysis2p3k2ys3ta_mis1nu5enpi2tun3uinp3ithysur4nu1men5umi3nu4nyt3icnu3trz5a2b_li4t_li3o_li2n_li4g_lev1_lep5_len4pion4oard3oas4e3pi1ooat5ip4inoo5barobe4l_la4mo2binpind4_ju3rob3ul_is4i_ir5rp4in_ocif3o4cil_in3so4codpi3lopi3enocre33piec5pidipi3dep5ida_in2kod3icodi3oo2do4odor3pi4cypian4_ine2o5engze3rooe4ta_im3m_id4l_hov5_hi3b_het3_hes3_go4r_gi4bpho4ro5geoo4gero3gie3phobog3it_gi5azo5ol3phizo4groogu5i4z1z22ogyn_fes3ohab5_eye55phieph1icoiff4_en3sph4ero3ing_en3go5ism_to2qans3v_el5d_eer4bbi4to3kenok5iebio5mo4lanper1v4chs_old1eol3erpe5ruo3letol4fi_du4co3liaper3op4ernp4erio5lilpe5ono5liop4encpe4la_do4tpee4do5livcin2q3pediolo4rol5pld3tabol3ub3pedeol3uno5lusedg1le1loaom5ahoma5l2p2edom2beom4bl_de3o3fich3pe4ao4met_co4ro3mia_co3ek3shao5midom1inll1fll3teapa2teo4monom3pi3pare_ca4tlue1pon4aco3nanm2an_pa4pum2en_on5doo3nenng1hoon4guon1ico3nioon1iso5niupa3nypan4ao3nou_bri2pain4ra1oronsu4rk1hopac4tpa4ceon5umonva5_ber4ood5eood5i6rks_oop3io3ordoost5rz1scope5dop1erpa4ca_ba4g_awn4_av4i_au1down5io3pito5pon1sync_as1s_as1p_as3ctch1c_ar5so5ra_ow3elo3visov4enore5auea1mor3eioun2d_ant4orew4or4guou5etou3blo5rilor1ino1rio_ang4o3riuor2miorn2eo5rofoto5sor5pe3orrhor4seo3tisorst4o3tif_an5cor4tyo5rum_al3tos3al_af1tos4ceo4teso4tano5scros2taos4poos4paz2z3wosi4ue3pai",6:"os3ityos3itoz3ian_os4i4ey1stroos5tilos5titxquis3_am5atot3er_ot5erso3scopor3thyweek1noth3i4ot3ic_ot5icao3ticeor3thiors5enor3ougor3ityor3icaouch5i4o5ria_ani5mv1ativore5sho5realus2er__an3teover3sov4erttot3icoviti4o5v4olow3dero4r3agow5esto4posiop3ingo5phero5phanthy3sc3operaontif5on3t4ionten45paganp3agattele2gonspi4on3omyon4odipan3elpan4tyon3keyon5est3oncil_ar4tyswimm6par5diompro5par5elp4a4ripar4isomo4gepa5terst5scrpa5thy_atom5sta1tio5miniom3icaom3ic_ss3hatsky1scpear4lom3ena_ba5naol3umer1veilpedia4ped4icolli4er1treuo5liteol3ishpeli4epe4nano5lis_pen4thol3ingp4era_r1thoup4erago3li4f_bas4er1krauperme5ol5id_o3liceper3tio3lescolass4oi3terpe5tenpe5tiz_be5raoi5son_be3smphar5iphe3nooi5letph4es_oi3deroic3esph5ingr3ial_3ognizo5g2ly1o1gis3phone5phonio5geneo4gatora3mour2amenofit4tof5itera3chupi4ciepoly1eod5dedo5cureoc3ula1pole_5ocritpee2v1param4oc3raco4clamo3chetob5ingob3a3boast5eoke1st3nu3itpi5thanuf4fentu3meoerst2o3chasplas5tn3tinepli5ernti4ernter3sntre1pn4s3esplum4bnsati4npre4cns4moonon1eqnor5abpo3et5n5lessn5oniz5pointpoly5tnon4agnk3rup3nomicng1sprno5l4inois5i4n3o2dno3blenni3aln5keroppa5ran3itor3nitionis4ta5nine_ni3miznd3thrmu2dron3geripray4e5precipre5copre3emm3ma1bpre4lan5gerep3rese3press_can5cmedi2c5pri4e_ce4la3neticpris3op3rocal3chain4er5ipros3en4erarnera5bnel5iz_cit5rne4gatn5d2ifpt5a4bjanu3aign4itn3chisn5chiln5cheon4ces_nau3seid4iosna3talnas5tinan4itnanci4na5mitna5liahnau3zput3er2n1a2bhex2a3hatch1multi3hair1sm4pousg1utanmpo3rim4p1inmp5iesmphas4rach4empar5iraf5figriev1mpara5mo5seyram3et4mora_rane5oran4gemo3ny_monol4rap3er3raphymo3nizgno5morar5ef4raril1g2nacg1leadmoni3ara5vairav3elra5ziemon5gemon5etght1wemoi5sege3o1dmma5ryr5bine3fluoren1dixmis4ti_de3ra_de3rie3chasrch4err4ci4bm4inglm5ineedu2al_3miliame3tryrdi4er_des4crd3ingdi2rerme5thimet3alre5arr3mestim5ersadi2rende2ticdes3icre4cremen4temensu5re3disred5itre4facmen4dede2mosmen5acmem1o3reg3ismel5onm5e5dyme3died2d5ibren4te5mediare5pindd5a5bdata1bmba4t5cle4arma3tisma5scemar4lyre4spichs3huma5riz_dumb5re3strre4terbrus4qre3tribio1rhre5utiman3izre4valrev3elbi1orbbe2vie_eas3ire5vilba1thyman5is5maniamal4tymal4lima5linma3ligmag5inav3ioul5vet4rg3inglus3teanti1dl5umn_ltur3a_el3emltera4ltane5lp5ingloun5dans5gra2cabllos5etlor5ouric5aslo5rie_enam35ricidri4cie5lope_rid5erri3encri3ent_semi5lom3errig5an3logicril3iz5rimanlob5allm3ingrim4pell5out5rina__er4ril5linal2lin4l3le4tl3le4nriph5eliv3er_ge5og_han5k_hi3er_hon3olin3ea1l4inel4im4p_idol3_in3ci_la4cy_lath5rit3iclim4blrit5urriv5elriv3et4l4i4lli4gra_leg5elif3errk4linlid5er4lict_li4cor5licioli4atorl5ish_lig5a_mal5o_man5a_mer3c5less_rm5ersrm3ingy3thinle5sco3l4erilera5b5lene__mon3ele4matld4erild4erela4v4ar1nis44lativ_mo3rola5tanlan4telan5etlan4dllab3ic_mu5takin4dek3est_ro5filk3en4dro5ker5role__of5te4jestyys3icaron4al5izont_os4tlron4tai4v3ot_pe5tero3pelrop3ici5voreiv5il__pio5n_pre3mro4the_ran4tiv3en_rov5eliv3ellit3uati4tramr5pentrp5er__rit5ui4tismrp3ingit5ill_ros5tit3ica4i2tici5terirre4stit3era4ita5mita4bi_row5dist4lyis4ta_is4sesrsa5tiissen4is4sal_sci3erse4crrs5er_islan4rse5v2yo5netish5opis3honr4si4bis5han5iron_ir4minrtach4_self5iri3turten4diri5dei4rel4ire4de_sell5r4tieriq3uidrtil3irtil4lr4tilyr4tistiq5uefip4re4_sing4_ting4yn3chrru3e4lion3at2in4th_tin5krum3pli4no4cin3ityrun4ty_ton4aruti5nymbol5rvel4i_top5irv5er_r5vestin5geni5ness_tou5s_un3cein3cerincel45ryngei4n3auim3ulai5miniimi5lesac3riim5ida_ve5rasalar4ima5ryim3ageill5abil4istsan4deila5rai2l5am_wil5ii4ladeil3a4bsa5voright3iig3eraab5erd4ific_iff5enif5eroi3entiien5a45ie5gaidi5ou3s4cieab5latidi4arid5ianide3al4scopyab5rogid5ancic3ulaac5ardi2c5ocic3ipaic5inase2c3oi4carai4car_se4d4ei2b5riib5iteib5it_ib5ertib3eraac5aroi4ativ4ian4tse4molsen5ata5ceouh4warts5enedhus3t4s5enin4sentd4sentlsep3a34s1er_hun5kehu4min4servohro3poa5chethov5el5se5umhouse3sev3enho5senhort3eho5rishor5at3hol4ehol5arh5odizhlo3riac5robhis3elhion4ehimer4het4edsh5oldhe2s5ph5eroushort5here5aher4bahera3p3side_5sideshen5atsi5diz4signahel4lyact5ifhe3l4ihe5do55sine_h5ecathe4canad4dinsion5aad5er_har4lehard3e3sitioha5rasha3ranhan4tead3icahang5oadi4ersk5inesk5ing5hand_han4cyhan4cislith5hala3mh3ab4lsmall32g5y3n5gui5t3guard5smithad5ranaeri4eag5ellag3onia5guerso4labsol3d2so3licain5in4grada3s4on_gor5ougo5rizgondo5xpan4dait5ens5ophyal3end3g4o4ggnet4tglad5i5g4insgin5ge3g4in_spen4d2s5peog3imen5gies_3spher5giciagh5outsp5ingge5nizge4natge5lizge5lisgel4inxi5miz4gativgar5n4a5le5oga3nizgan5isga5mets5sengs4ses_fu4minfres5cfort5assi4erss5ilyfore5tfor5ayfo5ratal4ia_fon4dessur5aflo3ref5lessfis4tif1in3gstam4i5stands4ta4p5stat_fin2d5al5levs5tero4allicstew5afight5fi5del5ficie5ficiafi3cer5stickf3icena5log_st3ingf3icanama5ra5stockstom3a5stone2f3ic_3storef2f5iss4tradam5ascs4trays4tridf5fin_fend5efeath3fault5fa3thefar5thfam5is4fa4mafall5eew3inge5verbeven4ie5vengevel3oev3ellev5asteva2p5euti5let5roset3roget5rifsy5rinet3ricet5onaam5eraam5ilyami4noamor5ieti4noe5tidetai5loethod3eten4dtal5enes5urramp5enan3ageta5loge5strotan4detanta3ta5pere3ston4es2toes5times3tigta3rizestan43analy4taticta4tures4prean3arces3pertax4ises5onaes3olue5skintch5etanar4ies4i4ntead4ie2s5ima3natiande4sesh5enan3disan4dowang5iete5geres5ences5ecres5cana4n1icte2ma2tem3at3tenanwrita45erwau4tenesert3era3nieser3set5erniz4erniter4nis5ter3de4rivaan3i3fter3isan4imewo5vener3ineeri4ere3rient3ess_teth5e5ericke1ria4er3ester5esser3ent4erenea5nimier5enaer3emoth3easthe5atthe3iser5el_th5ic_th5icaere3in5thinkere5coth5odea5ninee3realan3ishan4klier4che5anniz4erandti4atoanoth5equi3lep5utat4ic1uan4scoe4probep3rehe4predans3poe4precan4surantal4e3penttim5ulep5anceo5rol3tine_eop3aran4tiewin4deap5eroen3ishen5icsen3etren5esten5esien5eroa3pheren3dicap3itae4nanten5amoem5ulaa3pituti3zen5emnize5missem5ishap5olaem5ine3tles_t5let_em1in2apor5iem3icaem5anael3op_el4labapos3te3liv3el5ishaps5esweath3e3lierel3icaar3actwa5verto3nate3libee4l1erel3egato3rietor5iza5radeelaxa4aran4gto3warelan4dej5udie5insttra5chtraci4ar5av4wa5gere5git5arbal4ar5easeg5ing4voteetrem5iar3enta5ressar5ial4tricsvor5abe3finetro5mitron5i4tronyar3iantro3sp5eficia3rieted5uloed3icae4d1erec3ulaec4tane4cremeco5roec3orae4concar5o5de4comme4cluse4clame5citeec5ifya5ronias3anta5sia_tu4nis2t3up_ecan5ce4belstur3ise4bel_eav3ene4a3tue5atifeath3ieat5eneart3eear4ilear4icear5eseam3ereal3oueal5erea5geread5iedum4be4ducts4duct_duc5eras3tenasur5adrea5rat3abl4d5outdo3natdom5izdo5lor4dlessu4bero3dles_at3alou3ble_d4is3tdirt5idi5niz3dine_at5ech5di3endi4cam1d4i3ad3ge4tud5estdev3ilde3strud3iedud3iesdes3tide2s5oat3egovis3itde4nardemor5at3en_uen4teuer4ilde5milat3eraugh3en3demicater5nuil5izdeli4ede5comde4cildecan4de4bonv3io4rdeb5it4dativ2d3a4bat3estu5laticu4tie5ulcheul3dercuss4icu5riaath5em3cultua5thenul3ingul5ishul4lar4vi4naul4liscu5ityctim3ic4ticuuls5esc5tantultra3ct5angcros4ecrop5ocro4pl5critiath5omum4blycre3at5vilitumor5oat5i5b5crat_cras5tcoro3ncop3iccom5ercol3orun5ishco3inc5clareat3ituunt3abat5ropun4tescit3iz4cisti4cista4cipicc5ing_cin3em3cinatuper5s5videsup3ingci2a5b5chini5videdupt5ib5vide_at4tag4ch1inch3ersch3er_ch5ene3chemiche5loure5atur4fercheap3vi5aliat3uravet3er4ch3abc5e4taau5sib3cessives4tece5ram2cen4e4cedenccou3turs5erur5tesur3theaut5enur4tiecav5al4cativave4nover3thcar5omca5percan4tycan3izcan5iscan4icus4lin3versecal4laver3ieca3latca5dencab3in3butiobuss4ebus5iebunt4iv4eresuten4i4u1t2iv3erenu3tineut3ingv4erelbroth35u5tizbound34b1orabon5at5vere_bom4bibol3icblun4t5blespblath5av3erav5enuebi3ogrbi5netven3om2v1a4bvac5ilbi3lizbet5izbe5strva5liebe5nigbbi4nabas4siva5nizbari4aav5ernbarbi5av5eryvel3liazi4eravi4er",7:"_dri5v4ban5dagvar5iedbina5r43bi3tio3bit5ua_ad4derution5auti5lizver5encbuf4ferus5terevermi4ncall5incast5ercas5tigccompa5z3o1phros5itiv5chanicuri4fico5stati5chine_y5che3dupport54v3iden5cific_un4ter_at5omiz4oscopiotele4g5craticu4m3ingv3i3liz4c3retaul4li4bcul4tiscur5a4b4c5utiva5ternauiv4er_del5i5qdem5ic_de4monsdenti5fdern5izdi4latou4b5ingdrag5on5drupliuar5ant5a5si4tec5essawo4k1enec5ifiee4compear5inate4f3eretro5phewide5sp5triciatri5cesefor5ese4fuse_oth5esiar5dinear4chantra5ventrac4tetrac4itar5ativa5ratioel5ativor5est_ar5adisel5ebraton4alie4l5ic_wea5rieel5igibe4l3ingto5cratem5igraem3i3niemoni5oench4erwave1g4a4pillavoice1ption5eewill5inent5age4enthesvaude3vtill5inep5recaep5ti5bva6guer4erati_tho5rizthor5it5thodicer5ence5ternitteri5zater5iesten4tage4sage_e4sagese4sert_an5est_e4sertse4servaes5idenes5ignaesis4tees5piraes4si4btal4lisestruc5e5titioounc5erxe4cutota5bleset5itiva4m5atoa4matis5stratu4f3ical5a5lyst4ficatefill5instern5isspend4gani5zasqual4la4lenti4g3o3nas5ophiz5sophicxpecto55graph_or5angeuri4al_4graphy4gress_smol5d4hang5erh5a5nizharp5enhar5terhel4lishith5erhro5niziam5eteia4tricic4t3uascour5au2r1al_5scin4dover4nescan4t55sa3tiou5do3ny_ven4de_under5ty2p5al_anti5sylla5bliner4arturn3ari5nite_5initioinsur5aion4eryiphras4_tim5o5_ten5an_sta5blrtroph4_se5rieiq3ui3t5i5r2izis5itiviso5mer4istral5i5ticki2t5o5mtsch3ie_re5mittro3fiti4v3er_i4vers_ros5per_pe5titiv3o3ro_ped5alro5n4is_or5ato4jestierom5ete_muta5bk5iness4latelitr4ial__mist5i_me5terr4ming_lev4er__mar5tilev4eralev4ers_mag5a5liar5iz5ligaterit5ers_lat5errit5er_r5ited__im5pinri3ta3blink5er_hon5ey5litica_hero5ior5aliz_hand5irip5lic_gen3t4tolo2gylloqui5_con5grt1li2erbad5ger4operag_eu4lertho3donter2ic__ar4tie_ge4ome_ge5ot1_he3mo1_he3p6a_he3roe_in5u2tpara5bl5tar2rht1a1mintalk1a5ta3gon_par5age_aster5_ne6o3f_noe1thstyl1is_poly1s5pathic_pre1ampa4tricl3o3niz_sem4ic_semid6_semip4_semir45ommend_semiv4lea4s1a_spin1oom5etryspher1o_to6poglo4ratospe3cio3s2paceso2lute_we2b1l_re1e4ca5bolicom5erseaf6fishside5swanal6ysano5a2cside5stl5ties_5lumniasid2ed_anti1reshoe1stscy4th1s4chitzsales5wsales3cat6tes_augh4tlau5li5fom5atizol5ogizo5litiorev5olure5vertre5versbi5d2ifbil2lab_earth5pera5blro1tronro3meshblan2d1blin2d1blon2d2bor1no5ro1bot1re4ti4zr5le5quperi5stper4malbut2ed_but4tedcad5e1moist5enre5stalress5ibchie5vocig3a3roint5er4matizariv1o1lcous2ticri3tie5phisti_be5stoog5ativo2g5a5rr3a3digm4b3ingre4posir4en4tade4als_od5uctsquasis6quasir6re5fer_p5trol3rec5olldic1aiddif5fra3pseu2dr5ebrat5metric2d1lead2d1li2epro2g1epre1neuod5uct_octor5apoin3came5triem5i5liepli5narpara3memin5glim5inglypi4grappal6matmis4er_m5istryeo3graporth1riop1ism__but4tio3normaonom1icfeb1ruafermi1o_de4moio5a5lesodit1icodel3lirb5ing_gen2cy_n4t3ingmo5lestration4get2ic_4g1lishobli2g1mon4ismnsta5blmon4istg2n1or_nov3el3ns5ceivno1vembmpa5rabno4rarymula5r4nom1a6lput4tinput4tedn5o5miz_cam4penag5er_nge5nesh2t1eoun1dieck2ne1skiifac1etncour5ane3backmono1s6mono3chmol1e5cpref5ac3militapre5tenith5i2lnge4n4end5est__capa5bje1re1mma1la1ply5styr1kovian_car5olprin4t3lo2ges_l2l3ishprof5it1s2tamp",8:"lead6er_url5ing_ces5si5bch5a5nis1le1noidlith1o5g_chill5ilar5ce1nym5e5trych5inessation5arload4ed_load6er_la4c3i5elth5i2lyneg5ativ1lunk3erwrit6er_wrap3arotrav5es51ke6linga5rameteman3u1scmar1gin1ap5illar5tisticamedio6c1me3gran3i1tesima3mi3da5bves1titemil2l1agv1er1eigmi6n3is_1verely_e4q3ui3s5tabolizg5rapher5graphicmo5e2lasinfra1s2mon4ey1lim3ped3amo4no1enab5o5liz_cor5nermoth4et2m1ou3sinm5shack2ppo5sitemul2ti5uab5it5abimenta5rignit1ernato5mizhypo1thani5ficatuad1ratu4n5i4an_ho6r1ic_ua3drati5nologishite3sidin5dling_trib5utin5glingnom5e1non1o1mistmpos5itenon1i4so_re5stattro1p2istrof4ic_g2norespgnet1ism5glo5binlem5aticflow2er_fla1g6elntrol5lifit5ted_treach1etra1versl5i5ticso3mecha6_for5mer_de5rivati2n3o1me3spac6i2t3i4an_thy4l1antho1k2er_eq5ui5to4s3phertha4l1amt3ess2es3ter1geiou3ba3dotele1r6ooxi6d1iceli2t1isonspir5apar4a1leed1ulingea4n3iesoc5ratiztch3i1er_kil2n3ipi2c1a3dpli2c1abt6ap6athdrom3e5d_le6icesdrif2t1a_me4ga1l1prema3cdren1a5lpres2plipro2cess_met4ala3do5word1syth3i2_non1e2m_post1ampto3mat4rec5ompepu5bes5cstrib5utqu6a3si31stor1ab_sem6is4star3tliqui3v4arr1abolic_sph6in1de5clar12d3aloneradi1o6gs3qui3tosports3wsports3cra5n2hascro5e2cor3bin1gespokes5wspi2c1il_te3legrcroc1o1d_un3at5t_dictio5cat1a1s2buss4ingbus6i2esbus6i2erbo2t1u1lro5e2las1s2pacinb1i3tivema5rine_r3pau5li_un5err5r5ev5er__vi2c3arback2er_ma5chinesi5resid5losophyan3ti1n2sca6p1ersca2t1olar2rangesep3temb1sci2uttse3mes1tar3che5tsem1a1ph",9:"re4t1ribuuto5maticl3chil6d1a4pe5able1lec3ta6bas5ymptotyes5ter1yl5mo3nell5losophizlo1bot1o1c5laratioba6r1onierse1rad1iro5epide1co6ph1o3nscrap4er_rec5t6angre2c3i1prlai6n3ess1lum5bia_3lyg1a1miec5ificatef5i5nites2s3i4an_1ki5neticjapan1e2smed3i3cinirre6v3ocde2c5linao3les3termil5li5listrat1a1gquain2t1eep5etitiostu1pi4d1v1oir5du1su2per1e6_mi1s4ers3di1methy_mim5i2c1i5nitely_5maph1ro15moc1ra1tmoro6n5isdu1op1o1l_ko6r1te1n3ar4chs_phi2l3ant_ga4s1om1teach4er_parag6ra4o6v3i4an_oth3e1o1sn3ch2es1to5tes3toro5test1eror5tively5nop5o5liha2p3ar5rttrib1ut1_eth1y6l1e2r3i4an_5nop1oly_graph5er_5eu2clid1o1lo3n4omtrai3tor1_ratio5na5mocratiz_rav5en1o",10:"se1mi6t5ic3tro1le1um5sa3par5iloli3gop1o1am1en3ta5bath3er1o1s3slova1kia3s2og1a1myo3no2t1o3nc2tro3me6c1cu2r1ance5noc3er1osth1o5gen1ih3i5pel1a4nfi6n3ites_ever5si5bs2s1a3chu1d1ri3pleg5_ta5pes1trproc3i3ty_s5sign5a3b3rab1o1loiitin5er5arwaste3w6a2mi1n2ut1erde3fin3itiquin5tes5svi1vip3a3r",11:"pseu3d6o3f2s2t1ant5shimi1n2ut1estpseu3d6o3d25tab1o1lismpo3lyph1onophi5lat1e3ltravers3a3bschro1ding12g1o4n3i1zat1ro1pol3it3trop1o5lis3trop1o5lesle3g6en2dreeth1y6l1eneor4tho3ni4t",12:"3ra4m5e1triz1e6p3i3neph1"}}),qa=ja({id:"fr",leftmin:2,rightmin:3,patterns:{2:"1ç1j1q",3:"1gè’â41zu1zo1zi1zè1zé1ze1za’y4_y41wu1wo1wi1we1wa1vy1vû1vu1vô1vo1vî1vi1vê1vè1vé1ve1vâ1va’û4_û4’u4_u41ba1bâ1ty1be1bé1bè1bê1tû1tu1tô1bi1bî1to1tî1ti1tê1tè1té1te1tà1tâ1ta1bo1bô1sy1sû1su1sœ1bu1bû1by2’21ca1câ1sô1ce1cé1cè1cê1so1sî1si1sê1sè1sé1se1sâ1sa1ry1rû1ru1rô1ro1rî1ri1rê1rè1ré1re1râ1ra’a41py1pû1pu1pô1po1pî1pi1pê1pè1pé1pe1pâ1pa_ô41ci1cî’ô4’o4_o41nyn1x1nû1nu1nœ1nô1no1nî1ni1nê1nè1né1ne1nâ1co1cô1na1my1mû1mu1mœ1mô1mo1mî1mi1cœ1mê1mè1mé1me1mâ1ma1ly1lû1lu1lô1lo1lî1li1lê1lè1cu1cû1cy1lé1d’1da1dâ1le1là1de1dé1dè1dê1lâ1la1ky1kû1ku1kô1ko1kî1ki1kê1kè1ké1ke1kâ1ka2jk_a4’î4_î4’i4_i41hy1hû1hu1hô1ho1hî1hi1hê1hè1hé1he1hâ1ha1gy1gû1gu1gô1go1gî1gi1gê_â41gé1ge1gâ1ga1fy1di1dî1fû1fu1fô1fo’e41fî1fi1fê1fè1do1dô1fé1fe1fâ1fa’è41du1dû1dy_è4’é4_é4’ê4_ê4_e41zy",4:"1f2lab2h2ckg2ckp2cksd1s22ckb4ck_1c2k2chw4ze_4ne_2ckt1c2lad2hm1s22cht2chsch2r2chp4pe_1t2r1p2h_ph44ph_ph2l2phnph2r2phs1d2r2pht2chn4fe_2chm1p2l1p2r4me_1w2rch2l2chg1c2r2chb4ch_1f2r4le_4re_4de_f1s21k2r4we_1r2h_kh44kh_1k2h4ke_1c2h_ch44ge_4je_4se_1v2r_sh41s2h4ve_4sh_2shm2shr2shs4ce_il2l1b2r4be_1b2l4he_4te__th41t2h4th_g1s21g2r2thl1g2l2thm2thnth2r1g2n2ths2ckf",5:"2ck3h4rhe_4kes_4wes_4res_4cke_éd2hi4vre_4jes_4tre_4zes_4ges_4des_i1oxy4gle_d1d2h_cul44gne_4fre_o1d2l_sch44nes_4les_4gre_1s2ch_réu24sch_4the_1g2hy4gue_2schs4cle_1g2ho1g2hi1g2he4ses_4tes_1g2ha4ves_4she_4che_4cre_4ces_t1t2l4hes_l1s2t4bes_4ble__con4xil3lco1ap4que_vil3l4fle_co1arco1exco1enco1auco1axco1ef4pes_co1é2per3h4mes__pe4r4bre_4pre_4phe_1p2né4ple__dé2smil3llil3lhil3l4dre_cil3lgil3l4fes_",6:"’in1o2rcil4l4phre_4dres_l3lioni1algi2fent_émil4l4phle_rmil4l4ples_4phes_1p2neuextra14pres_y1asthpé2nul2xent__mé2sa2pent_y1algi4chre_1m2nès4bres_1p2tèr1p2tér4chle_’en1o24fles_oxy1a2avil4l_en1o24ques_uvil4lco1a2d4bles__in1a2’in1a21s2por_cons4_bi1u2’as2ta_in1e2’in1e2_in1é2’in1é21s2lov1s2lavco1acq2cent__as2ta_co1o24ches_hémi1é_in2er’in2er2s3homo1ioni_in1i2’in1i22went_4shes__ré1a2_ré1é2_ré1e2_ré2el_in1o2ucil4lco1accu2s3tr_ré2er_ré2èr4cles_2vent__ré1i22sent_2tent_2gent__ré1o24gues__re1s24sche_4thes_’en1a2e2s3ch4gres_1s2cop2lent__en1a22nent__in1u2’in1u24gnes_4cres_wa2g3n4fres_4tres_4gles_1octet_dé1o2_dé1io4thre__bi1au2jent__dé1a22zent_4vres_2dent_4ckes_4rhes__dy2s3sub1s22kent_2rent_2bent_3d2hal",7:"a2g3nos3d2houdé3rent__dé3s2t_dé3s2pé3dent_2r3heur2r3hydri1s2tat2frent_io1a2ctla2w3re’in2u3l_in2u3l2crent_’in2uit_in2uit1s2caph1s2clér_ré2ussi2s3ché_re2s3t_re2s3s4sches_é3cent__seu2le’in2ond_in2ond’in2i3t_in2i3t’in2i3q_ré2aux_in2i3q2shent__di1alduni1a2x’in2ept2flent__in2eptuni1o2v2brent_co2nurb2chent_2quent_1s2perm1s2phèr_ma2c3kuevil4l1s2phér1s2piel1s2tein1s2tigm4chles_1s2tock1s2tyle1p2sych_pro1é2_ma2r1x_stil3lpusil3libril3lcyril3l_pré1s2thril3l_mé3san_pré1u2_mé2s1i_pré1o2_pré1i2piril3lpupil3lâ2ment__pré1e2_pré1é2_pré2au_pré1a22prent_2vrent_supero2_di1e2npoly1u2è2ment_poly1s2poly1o2poly1i2poly1è2poly1é2poly1e2poly1a2supe4r1capil3l2plent_armil5lsemil4lmil4letvacil4l_di2s3h3ph2tis2dlent_a2s3tro4phres_l2ment_i1è2drei1arthr2drent_4phles_supers2ô2ment_extra2i2phent_su3r2ah_su2r3hextra2chypo1u21alcool_per1u2_per1o2_per1i2_per1é2hypo1s2_per1a2hypo1o2hypo1i2hypo1é2_pen2tahypo1e2hypo1a2y1s2tome2s3cophyperu2hype4r1hypers2hypero21m2némohyperi21m2nési4chres_a1è2drehyperé2hypere2hypera2’oua1ou_oua1ouo1s2tomo1s2timo1s2tato1s2tasomni1s2tung2s3_dé3s2c2blent__bio1a2télé1e2télé1i22clent_télé1s22guent_1é2nerg2grent_2trent__dé2s1œ2t3heuro1è2dre2gnent_2glent_4thres__bi1a2t1é2drie_bi1a2c_i2g3nin3s2at_’i2g3ni2ckent__i2g3né’ab3réa’i2g3né_ab3réa_per1e2",8:"_ma2l1ap_dy2s1u2_dy2s1o2_dy2s1i2n3s2ats__dy2s1a2distil3l1é2lectrinstil3l1s2trophe2n1i2vro2b3long1s2tomos_ae3s4ch’ae3s4ch_eu2r1a2ombud2s3’eu2r1a2_mono1s2_mono1u2o1s2téro_mono1o2eu1s2tato1s2tradfritil3la2l1algi_mono1i2_mono1é2_ovi1s2c’ovi1s2c_mono1e2_mono1a2co1assocpaléo1é2boutil3l1s2piros_ré2i3fi_pa2n1ischevil4l1s2patiaca3ou3t2_di1a2cé_para1s2_pa2r3héco1assur_su2b1é2tu2ment_su2ment__su2b1in_su2b3lupapil3lire3pent_’inte4r3_su2b1urab3sent__su2b1a2di2s3cophu2ment_fu2ment__intera2au2ment_as2ment_or2ment_’intera2_intere2pé1r2é2q_péri1os_péri1s2ja3cent__anti1a2_péri1u2’anti1a2er2ment__anti1e2ac3cent_ar2ment_to2ment_’intere2ré3gent_papil3leom2ment_’anti1e2photo1s2_anti1é2_interé2’anti1é2_anti1s2’anti1s23ph2talé’interé2ri2ment__interi2’interi2mi2ment_apo2s3tri2s3chio_pluri1ai2s3chia_intero2’intero2_inte4r3po1astre_interu2’interu2_inters2ai2ment_’inters2papil3la_tri1o2n_su2r1a2_pon2tet_pos2t3h_dés2a3mes3cent__pos2t3r_post1s2_tri1a2tta2ment__tri1a2nra2ment_is3cent__su2r1e2_tri1a2cfa2ment_da2ment__su3r2et_su2r1é2_mé2s1es_mé2g1oh_su2r1of_su2r1ox_re3s4ty_re3s4tu_ma2l1oc’a2g3nat_dé2s1é2_ma2l1entachy1a2_pud1d2ltchin3t2_re3s4trtran2s3p_bi2s1a2tran2s3hhémo1p2té3quent__a2g3nat_dé2s1i2télé1o2bo2g3nosiradio1a2télé1o2ppu2g3nacru3lent__sta2g3nre3lent__ré2a3le_di1a2mi",9:"_ré2a3lit_dé3s2o3lthermo1s2_dé3s2ist_dé3s2i3rmit3tent_éni3tent__do3lent__ré2a3lisopu3lent__pa3tent__re2s3cap_la3tent__co2o3lie_re2s3cou_re2s3cri_ma2g3num_re2s3pir_dé3s2i3dco2g3nititran2s1a2tran2s1o2_dé3s2exu_re3s4tab_re3s4tag_dé3s2ert_re3s4tat_re3s4tén_re3s4tér_re3s4tim_re3s4tip_re3s4toc_re3s4toptran2s1u2_no2n1obs_ma2l1a2v_ma2l1int_prou3d2hpro2s3tativa3lent__ta3lent__rétro1a2_pro1s2cé_ma2l1o2dcci3dent__pa3rent__su2r1int_su2r1inf_su2r1i2mtor3rent_cur3rent__mé2s1u2stri3dent__dé3s2orm_su3r2ell_ar3dent__su3r2eaupru3dent__pré2a3lacla2ment__su3r2a3t_pos2t1o2_pos2t1inqua2ment_ter3gent_ser3gent_rai3ment_abî2ment_éci2ment_’ar3gent__ar3gent_rin3gent_tan3gent_éli2ment_ani2ment_’apo2s3ta_apo2s3tavélo1s2kivol2t1amp_dé3s2orp_dé2s1u2n_péri2s3ssesqui1a2’ana3s4trfir2ment_écu2ment_ser3pent_pré3sent_’ar3pent__ar3pent_’in1s2tab_in1s2tab’in2o3cul_in2o3culplu2ment_bou2ment_’in2exora_in2exora_su2b3linbru2ment__su3b2é3r_milli1am’in2effab_in2effab’in2augur_di1a2cid_in2augur_pa2n1opt’in2a3nit_in2a3nit1informat_ana3s4trvanil3lis_di1a2tom_su3b2altvanil3linstéréo1s2_pa2n1a2fo1s2tratuépi2s3cop_ci2s1alp1s2tructu1é2lément1é2driquepapil3lomllu2ment_",10:"1s2tandardimmi3nent__émi3nent_imma3nent_réma3nent_épi3s4cope_in2i3miti’in2i3miti_res3sent_moye2n1â2gréti3cent__dé3s2a3crmon2t3réalinno3cent__mono1ï2dé_pa2n1a2méimpu3dent__pa2n1a2ra_amino1a2c’amino1a2c_pa2n1o2phinci3dent__ser3ment_appa3rent_déca3dent__dacryo1a2_dé3s2astr_re4s5trin_dé3s2é3gr_péri2s3ta_sar3ment__dé3s2oufr_re3s4tandchro2ment__com3ment__re2s3quil_re2s3pons_gem2ment__re2s3pect_re2s3ciso_dé3s2i3gn_dé3s2i3ligram2ment__dé3s2invo_re2s3cisitran3s2act’anti2enneindo3lent__sou3vent_indi3gent_dili3gent_flam2ment_impo3tent_inso3lent_esti2ment_’on3guent__on3guent_inti2ment__dé3s2o3défécu3lent_veni2ment_reli2ment_vidi2ment_chlo2r3é2tpu2g3nablechlo2r3a2cryth2ment_o2g3nomonicarê2ment__méta1s2ta_ma2l1aisé_macro1s2célo3quent_tran3s2ats_anti2enne",11:"_contre1s2cperti3nent_conti3nent__ma2l1a2dro_in2é3lucta_psycho1a2n_dé3s2o3pil’in2é3luctaperma3nent__in2é3narratesta3ment__su2b3liminrésur3gent_’in2é3narraimmis4cent__pro2g3nathchien3dent_sporu4lent_dissi3dent_corpu3lent_archi1é2pissubli2ment_indul3gent_confi3dent__syn2g3nathtrucu3lent_détri3ment_nutri3ment_succu3lent_turbu3lent__pa2r1a2che_pa2r1a2chèfichu3ment_entre3gent_conni3vent_mécon3tent_compé3tent__re4s5trict_dé3s2i3nen_re2s3plend1a2nesthésislalo2ment__dé3s2ensib_re4s5trein_phalan3s2tabsti3nent_",12:"polyva3lent_équiva4lent_monova3lent_amalga2ment_omnipo3tent__ma2l1a2dreséquipo3tent__dé3s2a3tellproémi3nent_contin3gent_munifi3cent__ma2g3nicideo1s2trictionsurémi3nent_préémi3nent__bai2se3main",13:"acquies4cent_intelli3gent_tempéra3ment_transpa3rent__ma2g3nificatantifer3ment_",14:"privatdo3cent_diaphrag2ment_privatdo3zent_ventripo3tent__contre3maître",15:"grandilo3quent_",16:"_chè2vre3feuille"}}),Ea=ja({id:"de",leftmin:2,rightmin:2,patterns:{3:"2aaa1äa1ba1da1ga1j2aoa1öa1p2aqa1ßa2ua1xä1aä1bä1dä1gä1jä1k1äqä1ß1äxä1z1bibl21cacä3c1dc4h1cic1jc4k3co2cp2cs3cu1cy1de1did1ö1due1be1d4eee1fe1ge1ke1m2eoe1pe1qe1ße1te3üe1wey1e1z1fa1fä1fe1fi1fo1fö1fu1fü1fy2gd1geg1n1guh1j2hl2hnh1q2hr4hsh2ü2hwh1zi1a2iä2ici1d2ifi1ji1ßi1üj2u1ka1käkl21ko1kök1q2ks1kü1le1li4ln1lo1lö1ly1ma3mä1me1mi1mo1mö1mu1mü1my1na1nä1ne1nin1j1noo1b2oco1d2oi2ol2omo1qo2uo1vo1xö1bö1dö1e1öf2önöo1ö1ßö1vö1wö1zp2a1päp2e1php1j1puqu42rc1re1ri4rnr1q1ru1rü1ry1sa1sä1sc1se1si1so1sös1t1su1sü1ße1ßiß1j1ßu1ta1tä1tet1h1ti1to2tö2ts1tu2tü2ua2ucu1h2uiu1ju1lun12uou1q2usu1w1üb2üc2üdü1gü1k2ünü1ß2ütü1vü1zve2v2r2vsw2aw2ä2wnw2rw2ux1a1xe1xix1jx1q1xu2xyx1zy1by1ey1gy1hy1jy1ly1py1ry1vy1wy1yzä2zu1zw2",4:"_ax4_äm3_ch2_en1_eu1_fs4_gd2_gs4_he2_ia4_in1_ks2_oa3_öd2_pf4_ph4_ps2_st4_th4_ts2_um3_ur1_xe3a1abaa1ca3au2abaab1ä1abd1abf1abg1abh2abi1abkab1l1abnab3r1abs2abu2abü1abw2aby1abz2aca2acc2acu1add2adf2adh5adj2ado2adp2adq2adu2a1eae2bae2cae2da2ekae2pa2eta2ewae2xaf1a2afe2afia2fö2agaag2n2agt2ah_2ahsa1huah1wa1hyaif2a2il2aisaje22ak_2akb2akc2akd4ako2aks1akza1laa1lä2ale2ali2aloa1lu4aly2am_2amä2amf2amk2amla2mö2amu1anb2ane1anf1anh2anj1anl2anna1nö1anra1nü1anwao1ia1opa1or2ap_2apa2apea2pfap2n2apr2ar_a1raa1rä1arb2are2arf2arh2ari2arr2arua2rü2arv2ary4asha2söa2süaße22a1tata1at2cat2eat2h3atmat1ö4atra3tü2au_2aub4auc2aue2aug2auj4aum4aunau1o2auu2auw2aux2auz2a1ü2a1v4avia2vr2a1wax2eays4ay3t2a1zaz2aaz2oaz2uäb2sä1ckä2daä2dräd2s2ä1eäf3läf3räf2säg2näh1aä3hi2ähm2ähsä1huäh1wä1imä1la2äleä1lu2ämläm2s2än_2äne2änsä1onä1paär1äär1c4äreä1röä2rü1ärzä3suä3teät2häu1cä2uf1äug4äul2äumä2un2äur1äuß4ä1v3bah3basb2ärb2äs4b1bb3bebb2sbbu12b1c3be_3bea3beb3bek3bel1bembe1o3bet1bezbge3bib23bilbiz24b1j2bl_b2leb2lo3blü2b1mbni2bo4abo2cboe1b1op2böfb1öl2b1qb2r42br_3brä3brü4b1sb3säb3scb4slb2söbss2bs2t4b3tb5teb4thbt4rbtü1bu2fbü1c2b1v2b1w3by1by3pbys2ca1h3camc4an3carcäs22c1ccch22cec2cefce1i2cek1cen1cer1cetce1u2c1f4ch_2chb2chc2chd2chf2chg2chh2chj2chk2chp4chs2cht4chü2chv4chw1chy2chzci1cci2s4ck_ck1ack1ä2ckb2ckc2ckd1cke2ckf2ckg2ckh1cki2ckk2ckm2ckp4cks2ckt1cku2ckv2ckw1cky2ckzclo1co2ccoi22c1qcre2cry2cs2ac2si4c1tcti22c1z3da_da1ad1afd1agda1sdä2u2d1cd3dhd5dodeg2d1eides1det2dga2d3gl3di_3dicdi2edi1p2d1j4d1ld3ladni2d1obdo2o2d1qd2r4d3rid3rö2d1s4dsb4dsld2södss4dst42d1td2thdto2d3tödt3rd3tüdu2fdu1idu1odur22düb3düf3dün2d1wdwa2dy2s2d1z2e1aea2ceak1eam3e2ase1ä22eba2ebl2ebre3bue1ce2ecle3cr2ected2eed2öee1eeeg2e1eie1en2ef_2efa2efe2efi2eflefs22efu2efüegd4e3gee2gn2egue1hee1hi2ehme1hoehs22ehte1hue1hüeh1we1hy4eibe2idei1ee4ilei1p2eire2it2eiu2e1jek2a1ekdek4nek2oek4r2ektek2ue1la2eli2eln2eloe1lü2elz2ema2emm2emüen3fe4nre4nten1ue1nüe1nye1ofe1ohe4ole1ore1ove1ö2e3pae3puer1ae1räer1cer3h2erie1roer1ö2eru2esbes2c2esf4eshes3l2esmes2ö2esp2esres3we3syes3ze3teet2he3tie3tö2etre3tü2etz2euf1euke1um2euneu1p2eut2eux2e1ve3vo2ewae3wä2eweew2s2ex_3exp2exuey4neys4e3ziez2wfab43facf4ahf2alf2arf3atfä1cf1äu2f1cfe2c3fewf1ex3fez2f1fff2efff4ff3lff2s3fi_fid2fi2ofi2r3fis3fiz2f1jf2l22fl_1fläf3löf4lü2föf2f1qf2r2f3ruf3rü4f1sf3scf3sifs2tf2süf3sy4f1tf2thf3töf3tü3fugf1umf2ur3fut2fübfü2r2f1v2f1w2f1zfz2afz2öfzu33ga_ga1c5gaiga1kgäs5gä4ugbi22g1cg1dag1dog1dögdt4gd1uge1cged4gef4g2el4g1gg3gegg4r2g1h4gh_gh2egh1lg2hugh1w2g1j4gl_2gls3glüg2ly2gn_gn2e2gng2gnp2gns2gnt2gnug2nüg2ny2gnzgo4a2goggo1igo1y2g1qg2r4gse2g4slgso2gsp4g4swg3sy2g1tg3tegt2sg3tügu1cgu2egu2t2gübgür1güs32g1v2g1w3haah1ahh1aph2as2h1c2heahe3x2hi_2hiahi2ehi2n2hio2hiuhlb4hld4hlg4hll2hlm2h2lo2h1mh2moh3möhm2sh2muh2nah2nähn2eh1nu2hodhoe42hoih2on2hoo2hop3hov1h2öhö2ch4örhr1chr3dhrf2hrg2h2rihrr4h3rüh2ryhrz2hss24h1th2thhto2h4tshtt4h3tühu1chu2n2hurhüs32h1vhvi23hyg3hyphz2o2ia_i4aai2ab2iaci2afi2ahi3aii2aji2ak2iali2am2iani2apia1q2iasi3au2iavi1ämiär22i1bib2oi2böice1idt4i2dyie1ci1eii1exif3lif3rif2s2i1gi2gli3go4i1hi3heih3mih3nih3rihs2ih1wi3i2ii4s2i1k4ikei2kni1la6ilbil2cilf22iloilv42im_2ime2imo2imt2imu2inein3f2inoi1nö2inp2inrin1ui1ny2i1oio1cio2dion2i2ori2oui2ovio2xi3ön2ip_i1pai1peiph2ip4li1pr2ips2ipu2i1qi1räir1cir2eir2i2irki1roi1rö2isb2iseis3ti2sü4itäi6tli3töi3tü2itzium12i1v2i1w2i1xi2xai3xi2i1zi2zöja1c2jatje2aje1cje2gje2pje3wji2ajit3ji2vjoa3jo2iju2kjus32j1v3ka_ka1ck2adk2agka2o3kask1ähk1änkär2kby42k3cki1c3kir2kiz2k3j4kl_k2lek1lu2kly2k1mk2n2k3nek3nu3knü3komk2onk2os3kowkö2fk1ölk2r4kst44k1tk2thktt2k3tükt3zku1ckuh12kübkü1c2k1v2k1w3la_1lad2laf1lai3lao1lawlay1lä1c1läd2läf4lät2l1blb2slb2u2l1c4l1dld3rldt43le_2lec3ledle2e3lehl2ek2leple2u3levl2ey2l1flf4u2l1glgd4l3go3li_3liali1cl2ie3ligli3l2limli2o3liu4l1j2l1klk2l4l1lllb4llg4llk4ll5mlln22l1mlm3plm3tlnd2l3nil1nul1nü3loklo2o2lox2löd4lög4löß2l1plp2fl3pu2l1q4l1s4l1tl2thl6tsltt2l3tü1luf4luo2lur3lux2lüb5lüd2l1v2l3wly3c3lynly1oly3u2l1zl2zölz1wm1abmae2ma1f3mas3maßm4aymb4lmby42m3c2m1dmd1ameb43mehme1o2meö3mesmeu13mi_mi1c3mig3mil3mit2m1jm3ka4m1lm3li4m1mmmd2mmm2mm3pmm2smoa33moh3mom3mos3motmo1ymö2c4mökm1öl2m1pm2pfm3pim3pu2m1q4m1sm3säm3scm3sem2süm3sy4m1tm2thm3tömtt2m3tümt3zmu1a3munm4us2müb3mün3müt2m1vmwa2my4s2m1z3na_n1af3nain1ar3nas3natn1au3näe3näs2näunby42n1cn2ck2n1dn2döndy33ne_2nec3nedn1efneg4ne2l3nenne2un2ew3nez2n1fnf2änff4n3finf4lnf2onf4rnf3s4n1gng3mn2gnn3hän3hen3hu3nian1idn4ie3niknin1n2ip2nitni3v3nix2n1k4n1nnn3fnng4n3ni3no_no1cn1of3nov3now3noz2nödn2ör2n1q6n1snsp4n3sy2n1tn3ton3tön4tsn3tun3tü1nu_1nud3nuenuf21nug1nuinu2n1nuo2nup2nur1nut1nuu1nux1nuz3nü_3nüs1nüt4n1w1ny_1nyhn1yo1nyr1nys1nyw2n1znz3so4aco4ado4aho2aro2aso4ato5au2obbob2e1objob1lo3cao1ceo1ck2odrodt4o2ecoen12ofa2ofiof3l2ofo2oft2o1go3ghogs2o1hao1häo1heo1hio1hooh1soh3to1huoh1wo3ieo1imo1inoi2r2o1j2o1kok4n4okrokt4o1lao1läol2io3loo1lu3olyoms2omy12ona2onä2onc2oneono1o1nuon3v1onyon3zoof2o1opo1oro1pao1pi2or_or1ao3räor1c4ore2orf2orh2orm2orq2orro3ru2osh2osio3sk2oso2o1to3tüoub4oug2o3uho3um2our2ouv2o1ü2ovi2ovo2o1wo3wiox2aox2eo2xu1oxyo1yo2o1zoz2eo3ziöb2l2ö1cödi3öf3lög3lög3rö1heö1huö1keök3r3öl_öls2öm2sön2eö3niön2sö1nuö1peör1cöru4ö2saö2spö2stö3su2ö1töt2höts2öze31pa_1paa1pacpag41pak1pap2paß1pat1pau3päd3pär3päs2p1b2p3cpda41pe_pe2a1pedpef4pei13pel1pem1pep3pet4pf_1pfäpff4pf3r2p1g4ph_ph2a2phä2phb4phd2phf4phg4phkph2l2phm2phn2phöph4r2phs2phz3pik1pilpi2o3pip3pispku22pl_3pläp4lo2p1n1p2opo1c3podpo2i3pokpo2wpo3xpö2c2p1ppp3lppt2p2r2p4rä2p1s4ps_p3sep2söp2st2p1tpt1ap3tep2thptt2ptü4pt3zpu1apub42puc2pur3put1püf2pülpün22p1v2p1w3py1pys4py3t2p1z1ra_r1abr2ad1raer2afr2air2alr2apr1arr2as2raß1rat1raür2ax4räf4räg2räh2rämrä2u2r1brbb2rb2orb2srb2ur1ce2r1dr2dördt43re_2reä3reg3rekre2u2reür1ew3rez2r1frf2u4r1gr1h42rh_2rha2rhä2rhö2rhsrid2r2ie3rigr2isr2itrix12r1j2r1krk4n4r1lrl2erl3t4r1mrm2urnd4r3nern3frng2r3nirn1ör1nur1nür1nyro1c2rof3roir2onr1or4roß2rox2röf4rögr1ök4röpr1örrp4erpf4r3porp3tr3pu2r1rrrb2rr1crr2or3ru4r1sr3sirs3lr3sor3sy4r1tr3tör4tsrtt4r3türt3zru1a3ruf4rug2rum3rut4ruz2rüb2r1v2r1w4r1xry2c2r1zrz2ö3sa_3saa3sams1an3sat3säl2sc_s2ci2scj4scl2scos2cr2scs2scusd4r3see3seh3seq3set2s1hsh2as3häsh3ns3hösh4rsib43sio2s1j4sk_4skbsk4lsk4n4skö4skss3läsl3bs3les3li4sna4snö3so_so4aso1c3sog3sol3somso3o3sos3sov3sow3sozsö2csö2fs1ös1sp22sp_s2pä2spls3pn4spy2s1q6s1sss3l6st_s2ta2stb2stdst2e2stf2stg4sth2stj2stk4stl4stm2stns2to1stö2stp2stqs2trst2u1stü2stv2stwsu2n3suv3süc3sün4s3v2s1ws3was3we1s4ysyl12s1zsz2os3zü2ß1c2ß1d2ß1f2ß1h2ß1l2ß1mß1o2ßos2ßst22ß1t2ß1ü2ß1v2ß1w2ß1z3ta_4taatah2t2ai2tam3tas3tav3tax4täbtä1c4täd3täe3täg2täh4tämt1äptä2st2ät2täx4t1ct4ckt3cr3te_2teh3ten3tes4th_th2e1thi2thk2thp2ths2thü2thvt2hy3tig3tik3tio3tip3tis3tiv2t1j4t3ltl4e3to_to1c3tod3tok3ton3too4toß3tow4töftö4l3tön4töß3töttpf42t1q2tr_3tritry14ts_ts1ot2söt3sy4t1tt3tit3tot3töttt4t3tut3tü2tub3tuc2tud3tue4tuf2tuh2tuk4tüb3tüf3tüm4t3v4t3wtwa21ty13typtys44t1ztz1ätz2öu1amu3auu1ayu1ämu1äu2u1bub2lub1ru1ce2u1d2u1eu2edu2eguen1u2ep2uffuf3luf3r2u1gugo3u2göu2gü2uh_uh1wu1ieu3iguk2au1keu1kiuk4nuk2öu1kuulb4ulg4u2lü1umf1umg1umk1uml4umm1umr1umz4un_u3ne2unk1unruns21unt1unw2unzu3ofuos2u1pau3piu1pr2ur_u1raurd22ure2urfu1röur3purt2u3ruurü2u2sü2u1ß2u1tu3teuto1u3töu3tüu1ü22u1xux2eux2oux3tu1ya2u1z2übc2übdübe2üb3lüb3rüd3rüf3lü2gnüg3süh1aü1heüh1iüh1süh3tü1huüh1wül1aül2cül4eü1luün2sünt2ü1nuü1peü1piür1aürr2ür2süs2aü2stva1cva1sv4at2v1b2v1dve3bve3cve3dve3gve3hve4ive3over1ves12veüve3v2v1g2v1hvi2cvig22v1k2v1m2v1n3vol3voyvö2c2v1pv3revs2e2v3t2v1v2v1w2v1z1waa1wag1wah1walwa2p1was1wäh1wäl1wäswbu22w1c2w1dwe2a1weg1wehwe2i1wet2w1g2w3h1widwi2ewik21wil2w1k2w1l2w1mwn3s1wohwot21wöc2w1pw3ro2w1sws2t2w1twti21wucwul2wus21wühwül2wün32w1w1xa_1xae2x1b2x1c4x1d2xekxe2lx1emx2en3xes2x1f2x1g2x1hxib4xi1cxi3gxil12x1l2x1m2x1nx1or4x1p2x1r4x1txt1äxt1uxu1axu2s2x1v2x1w3xy_3xys1yacy1äty1c2y1d4y2efy1f2ygi2yg2lyhr2y1i4y1k2yl3cynt2y1nuy1ofyom2y1osy1ouypa2ype2y2pfy3phypo3y3riyrr2yse1y1t2yu2ry1z2za1c3zahz1anz1as2z3czdä1ze1e2z1h2z1j3zolzo2oz1orz1öl2zön2z1qz3saz3shz3skz3sz2z1tz3töz3tüzu3azub4zud4zu3kzuz22züb2z1v4z1zzz2ö",5:"_ab1a_abi4_ab3l_abo2_ack2_ag4n_ag4r_ag2u_ai2s_ang2_an3s_apo1_aps2_as3t_at4h_au3d_ät2s_by4t_dab4_de1i_de1s_dü1b_dys1_ei3k_eke2_enn2_er1e_erf4_er1i_es1p_et2s_eu3t_ext4_fe2i_fi2s_ga4t_ge3u_hi2s_im2a_im5m_in3e_ink4_inu1_ire3_is2a_jor3_ka2i_ki4e_kus2_li2f_ma3d_ma2i_me2e_ne4s_ni4e_nob4_nus2_ob1a_obe2_or2a_ort2_ozo4_pro1_ro4a_ro3m_rü1b_sch4_sha2_te2e_te2f_te2s_ti2a_tid1_ti2s_to2w_umo2_un3d_un3e_un3g_un3s_ur2i_ut2a_ut3r_übe4_vo4r_wa2s_wi4e_wor2_ya4l_za2s_zi2e_zwe2aa2beaa2gr4a2araart2aas5tab2äuab1ebabe1eabei12abela3ber2abet2abew3abfiab1irab1it2ableab3liab4loa2blua2bo_ab2of2abora3braa4brä2abrü2abs_abs2aab5scab3spabst4ab3szab1uraby4ta1cem2ach_ach1a2achba1che4achfa1chiach3lach3mach3na1choach3öach3ra4chta1chuach3ü2achvac1in2ada_ad2agada2m4adav1a2dä2ade_2aden4a3diad2obad3ru2ads2ad3stad3szad2t1ad4tead4tra2elaa2eleae2o3aes5ta2faka2fana3faraf4ata2faua2fexaf2fl2af3lafo1saf3raaf3räaf3reaf3röaf2spag1abag1arag1auag2diag2drag2duage1iag2er2agesag3gl1aggr2a2glag4laa4glöag4nuag4roagsa2ags3pag2th2a1haah4at2a1heahe1sa1h2iahin3ah2löahnt21ahorah1osa2h3öahr1aah3riaht3saian3aid2sai1e2aien3ai3g4a3ik_ai3keai3kuai2loa1indain4ea1ingai2saaiso2a3iv_aive3a3ivla3ivs2akal2akarak4at4a1kea2kefa2keu2a1ki2ak3lak4li2a1kr4akra3akroak3sh2akta2aktb2a1kua2kun4a3kü2ala_al1abal1afala2ga3lalal1ama2larala4s2alatal1aual1ämal2bralb3sal2däal2dral3dualen1ale2pale4talf4r3algi3almba2l1öal3öfal2ös1alphal2ufa2lumal1ural2zw2am2aamab4amad2ama3g2am4e4ame_a2meba3meta2mewa3miea3mis2ammlammu2am3pr2am2sam3sa1amt_am4töam2tu2ana_2anabana3ca3nak2anam2ananan1äs2anbuan3ch2and_2andua3nee2anfi4ang_2angf2anghang1l2angoang1r2a3ni2ank_an3klank1rankt42anmu3annäan1oda3nola3nos2anpr1ansä1ansc2ansk2ant_2anto1antr1antw2a1nuanu3s2anzb2anzg2anzs1anzü2anzwa1os3ao3t2a3ot_a2pefap2faa3pfla3phäa2pht2ap3la2pot3applap3pu2a3pua3ra_ar2ab2arb_4arba2arbiar2bl2arbr2arbt2arbu1ar1ca2reaa4rega2reha4reka3renare3uar2ewarf1rar2glar2gnar2iaar1ima3riuarm2äarn2e2a1roar1oba2rorar2rh2arsaarse32arsiar2st2arto2artsar1ufar1uhar1umarwa2ar2zä2arze1arztas3aua2s1äa2sca4as2ea2seba3ses2asisas1ora2s1pas2phas2pias2poa3spuas2stas3teas3tias3to2astraßen3at1abat2afat4agata3la3tama2tatat1aua2t1ä4ate_a2teb4atena2tep4atesat3ha3athl4a3ti4atorat3räat3reat2saat2seat2siat2soat3taatt3sa3tubatu2nat2zoau2draue2baue2sau2faauff43aufn4au1iau2isau3lüaun2eau1nua4unz2aup22ausc1ausd3ausf1ausg1auslau2so1ausr1ausü1ausz2aut_2aute1autoauz2wa3v4aawi3eax4am2a1yaa1yeuaysi1ä2b3lä1cheä1chiäch3lä2chrä1chuäck2eäf2fläge1iäge3sä2g3lä2g3räg4ra1ä2gy2ä3heähl1aähl2eäh3neäh3riä1is_ä1iskä2k3lä2k3rälbe2äl2bläl2p3ämt2eän5deän2dräne1sän2f52ängeän2glän2gr2ä3niänk2eän2kränk2säp2pläp2präp4stär4afäre2när2grärk2särm2sär1o2ärse2är4siär2stärt4eär2thär2zwä5s4eäse3tä2s1päss2eäs2stäs4träte2nät1obä2t3rät2saät2sääts3lät4trät2zwäu2bräude3äu3eläuf2eäug3läu2maäun2eäu1nuäu3seä3usgä3uskä3usnäu2späu2trba2bl2babs2b1afbais2ba2kabak1lbak1rbal2a2b1amban2ab1ang2banlban3tb1anzbar3bbar3nba2scba2stbau3gbau1sba1yobben3bbe4pbb2lö2b3d4bde1sbe3anbe3arbe3asb2ebe1be1cbedi4be1eh3bef4be3g2beil2b2einbe3li1ben_ben3nbe1ra3be1sbes2abe1ur3b2ew2b1ex2b5f4bfal22b1g2bges42b5h2bhut2bi3akbibe2bie2sbik2abil2abi2lubin2ebi2o1bio3dbi3onbiri1bi3seb1isobi2spb2it_b2itebi2tu2b1k4b3lad3blatb3leb3blemb4letb3leub2lie2bligb4lisb2litb4locb3los2blun3blut4b3n2bnis1bo5asb1ob3bo2blbo2brbo3d22b1ofbo3febo1is3bon_bond1bo2ne3bonsbo4räbor2sb1ortbo2scbo3thbo2xibö2b32b1p2bpa2gb4ra_b4rahbrä4u2bre_3brea2breg3bremb4rer2brigb4riob3rohb4ronb4rucbru4sbs3arbsat2b4särbs2äubs2cabs4cub3se_bse2bbsi4tbs2kubso2rbs2plb3stob3stöb3stübtal3btil4b4ts2bu2e3bu3libung4b2urgbu2sa2b3z22c1abca2chca2e3ca3g4cal3tca2pecar3ncas3tca1y2ceco4ce2drcen3gcere3ce3sh2ceta2chab2chaf1chaoch1äs1chef4chei2chic2chl2ch2lech2lu4ch2m2chn42chobcho2fch1ohch2r44chrech3rh2chuf2chuh2chum1cka_2ckac1ckag2ckalcka4r2ckau2ckeh2ckexck1imck1in3ckis2ck3l2ck3nck1o22ck3rckt2e3c4l2clet4co3chco2d2co3dicoff4co1itco2keco2lecol2oco2peco1racor3dco3recos3tco4te1c4r2cte3ecti4octur6cu2p32d1ab2d1acd2ac_dagi2dah3lda1ho3d4aida1inda1isdal2ada3löd1altdamo3d4ampd2an_d1ang2danw2d1apd2aph4dapp3darlda2rod3arrdar3sd1artda2rudas4tdat2a4datmdau3e2dauk2d1äh2d1äp2därzdä3us2d1b4dbu2cdco4r2d1d2ddar2de2adde3asde3b43de1cde1e4de3gldehe2de3hod2eicde2löd2en_dend2den3gd2enhde2nide1nude1ondepi2d4er_de3rude2sade2spde2sude1unde3us2dexp2d1f42d1g2dga3gd2ge_2d1h2d2hisdi4abdi2addi4amdi1cediet3dik2adin2adi2obdi2spdist2di2tadi2thdit3sdi2tu3di5vdi3z22d1k4d3l2edli2f2d3m24d5n2dnis1d2obadob4ld2obrdole4doll22doped2opp2dorc2dordd2orp2dortd2os_dos3sdost1dot6hdo3undö2l13d2ör2d3p2drag4d3rai2drädd4räh4dre_2dreg4drem2d3rhd4ri_d4ridd4ried4rifd4rikd4rild3robd3rocd4roid3roud5rubdrü1bd2sands1änd3seidse4td3shodso2rd2späds2pods2pud2steds2tids2tud2sundta2dd5teadt3hodt5s2du1ardub3l2d1uh2dumd2dumf2dumg2dumld2ump2dumrd1umsdung42dunrdun2s2duntdus3t2d1v2e3a2beab3lea2drea2g4ea3gaea3gleakt2ea2laeam1oea2nae2anoe3ar_ea2rae3arre3arveas3se3athea5tre3aug2ebedebe2i2ebeleb2en2ebeteb3loeb2lö2eb2oebot2ebö2seb4rueb2s1ebse22e3caech1äe1chiech3lech3mech3ne1chuech1weci6a2eckteco3dec1s4e3d2aed2dre3deiede2re3d2oeds2äed2suedu2se3dy3ee3a2eeb2lee2ceee1chee2ckeede3e1effeef4leef3see1imeel2ee1empeena2e2enäe2encee3nie2enoeen3see1rae1erde1erkee1röeert2e1erzee3s2ees3kee3taee2thee1u2e1e2xef1are2fate2fäue3fe_ef1emef2er2eff_1effief2flefi2s1efkue3fraef4rüef3soef3spe2fumege1ue2gloeg3nieg2thegus32e1ha2e1häeh2eceh2ele3hereh1läehle2eh3loeh3mue3holehr1äeh3rieh3sheh3übei2blei3de2eidn1eifrei3gl2eigt2eigu2eil_2eilbeil3d2eilne1impei4näein3kei3o2eip2fei3ree1irre2is_2eitäei3teei2theitt4e3ke_e3kene3kese3keye3k2lekt2oe3k2wela2cel1afela2h2elaoela4s2e1läel2da2ele_elea2ele2c2eleh2elei1eleke3lepel2ete3leu2elevele2x1elf_el3feelf4l1elfm1elfte3lieel3klel3leelm2ael5nae2lofe2lolelon2elö2selto22e1luel1ure2lyaelz2eema2keme2se2mop3empfem2saem2stem3t21emule2n1a4ena_2enace3nade4naf4enahe4nak4enam4enaten1äu2ene_2enem2enen2enesenf2aenf2uen3geen2gl1engpe3ni_e3nice2nide3niee3nio2enise3nit2enive2nofen1ohe3nolen1one3noteno2w2e1nöen3sp1entd1entn2entü1entw1entz2enut4enwüeo2fee1on_e1onde1onfe1onhe1onle1onre1onse1opee1opfeop4te3or_e3orbe3orse3orweo1s2e3os_eo3ulepa2gep3leep2paep4plep2prept2aepu2se3ra_era2ge1raie2rake1rale1rape2rare1rasera2ße1rawe1razer1äher1ämerb2eer3brer3da1erdber3de4ere_er1ebere2l2erer2ereserf2eerf4rerg3s2erhüe3ribe3rio2erk_erk3te3ro_er3oaer1ofer1ohe3rone3rose3rowerö2d2eröker3p4er3rä2errüers2aer3seers2ier3sker3sner3sper3sz4ertier3uzerü4bes3abes3ake3sceesch2es2eles2hues2ide2siles2ire4skees3kles3kue4skye3sote3spies3sces3se2essoe1stre1stues4tüeße2setab4et1am3etapet4atet1ähet2enete2oet3hüeti2m2e3toeto2bets2pet3suett1aet2thet2zäet2zweu1a2eu2gaeugs4euil4eu1ineu2käe3um_e3umbe3umleun2eeu1o2eur2eeu3speust4eut2heu2zw4everewä2se2we_e3wirewi2se3witex3atex1er1exis2ext_ex2tu2e3xye3z2aezi2sf1abefab5sfa2drfaib4fa2ke2fanb2fanf2fanlf1anp2fanrfan3s2fanw2f1ap3farifa3shf3aug3f4avfa2xa2f1b22f3d4fdie2f2echfe2drfe2eife1emfef4lf4eief1eisfel3tf2em_fem4m2fempfe2näfen3gfe2nof1entf2er_fe1raf2eref2ertf1erwfe2st3fete2fexpff3arff1auffe2eff3eiffe2mff4enf2fexff4laff4läff4lof3fluf3flüff3roff3röffs3t4f3g2fge3s2f1h2fi3atfien3fi3klfi2krfil3dfilg4fi3lif2inafi3nifin2sfi3olfi3rafis2afis2pfi3tu4f1k4f3ladf3lapf3länf4leef3lerflo2wf4luc2f3m2fma2d2f3n2fni2sfob2l2f1offoli3fo2nafon2efo2nu2f1opfo1ra3form2f1ök2f1ölför2s4f1p2f4racf5radfra4mf5rap2fre_f3recf3red2fregf3repf4reufri3dfri2e2frig1frisf3rocfro2sf3rotf2sanfs3arf4scefs4cofse4tf2sphfs1prfs3s4fs3thf4ta_f2tabft1afft1anft1arf3tatft3hoft1opft2s1ftsa2ftse4ft3stf2tumftwa4ft3z23f2uhfung42funt2gabfgab4r2gabz2gadlga1flga2kagal2ag4amo2ganbgan3d2ganh2ganl2ganwga1ny2garb2garc3gardg2arsga3ruga2saga2siga3spgas3sgat2a2gatmgat4rgau1cg2aukg1aus2g1äp2gärz2g1b2gber2gby4tgd1ing1d3rgd3s2ge3a2geb2ageb4rge1e2ge3ecge2esge1imge1irge2isge3lege3lügelz2ge3migem2uge3nagen3ggen3ngeo2rge1ouge3p4ge1ragerm4ge3sigest2ge5trge1ulge1ur2g1ex2g1f4gga4tg2g3lgg4log2g3n3gh2rgie3ggi2elgi2gugi3negi3tugi4us4g3k2g1labg1lac3glad3glätg2l4e2gle_3gleag3lecg3leg2glehg3len2glesg4lia2glib2glif2gligg2lik4gling2lio2glisg2lizglo3gg2lom2g1luglu2t2g1m2g2n2ag4na_2gnacg4nat3g2näg3neh2gneug2nieg2nifg4nin3g2nogno1r2g1of2g1ohgol2a2gord2gorggo2s1go3stgo3th2g1p2g4rebg4remg4rerg3retg3revgri2e3grif2grig2groc2grohgron4g4rosgro4ug4ruf2grut4g2s1gsa2gg3salgs3angs3arg3s2cg4scagsch4g4scogs2ehgsen1gs3ergse4tgsi2dg3silg3spigs3plgsrü2gs5s4gs3tag3stog3stögs3trg3stugs3tügti2mg5t4rgu3amgu1as2guedguet42g1uhgu1is3gummgu4stgut1agut3h2g3z2hab2ahab2eh2absha1kl2haleh1alph1amth2an_h2andh4ann2hanr2hantha2plha2pr2harbh2ardhasi1h1äff2h3b22h3d4hdan2he2adhe3behe2blhe3brhed2ghee4she2fä2heffhe2frhe2fuhe3guh1eieh1eifh1eighe2im4heioh1eiwhe3lihe3lohe2lö3hemdhe3mi3hemmh2en_he2näheng22henihe2nohen3z4he2ohe3onhe3ophe3phherg22hermhe3roh1eröhert2he3thhet2ih2e2uheu3ghe1y22h3f4hfi2s2h3g2hget42h1h2hi2achi1ce2hi3dh2idehi2krh1infh1inhhi3nohi4onhi3or2hip1hi2phhi2pih2i2rhi3rahi3rihirn1hi3rohir2shis2ahi2sehi2sthi1thhi3ti2h1k4h4lachla2nh1lash1lath3lädh1läsh1läuh3lebhle3eh3lerh3lesh3lexh2lieh2lifh2liph2lish2lith3lochl1ofhl1oph4lorh3löch2löshl3t2h3lufh3lukh1lüfh2mabh3magh3manh3marh4mäch4mähh4mälh4mäuh3me_hme1eh3menh4monhm3p4hm3sahms1phn1adh3namhn1anhn3d4h2nelhn3exh2nich2nidh2niehn1imhn1inh2niphn3k4h2norhnts2h2nuch2nulho2blho2efho4fa3hole4holo3holzhom2ehono3ho1rahor3dh1orgho3slho2spho4st2hot_ho3thh1o2xho1y2hö3ckhö2s1h3öst2h3p2hr1achr3adh1raih3räuh2rech3redh3refh3relh3rephre2th3revh3richri4eh3rinh2robh3rohh3rolh4ronh2rorh3rouhrs3khr2suhr4swhr2thh3ruhh4rübh2sanh2sauh2späh2sphh1stah1stoh2s1uh2t1ahta4nht2ash2tärht1ehhte2sh4thohtod1h3töpht4riht3röht2soht2sphtti2ht3z2hu2buhuko3hu2lähu2loh1umsh1unah1up_h1upshurg2hu3sahu2sohu2tihut2th4übsh3übuhvil4hwe1c2hy2thzug4iab4liaf4li3ak_i3akti5al_ia2läial3bial3dialk2i3allia2lui3am_i4amoian2ei3anni2anoi3anti3anzi3ar_ia2rai2ascia3shi2asiias3siast4i3at_i4ate1iatri3atsia3uni1är_i1ärsi1ät_i1ätaib1eiibe4nibi2ki3blai3blei4bräich1aich1äi1chei1chiich3lich3mi1choi1chuich1wi3damid2ani2deiidni3i2dol2i2drie3a2ie2bäie2blie2ckie2drie1e2iel3di1ell2i1eni3en_i3enai3endi2enei3enfi3enhi3enji3enki3enmi3enni3enöi3enpi3enrien2sie1nui3envi3enwi3enzie1o2i2erei4erii1ernie2röie3sui1ettieu2eie1unif1arif4atif1aui2fecife2iif2enif2flif4läi1flüif4rai1freif3seif3spif2taiga3iig1läig4nai4gnäig4noig4raig3säig4seig3soi2harihe1eihe4ni4is_i4i3ti2käri3ki_ik1ini2k3lik3noiko3si2kölik3räik3reik1s2ik3soik3szikt2eikt3ri2kuni3kusi1lä1il2daild1oil2drile2hil1el2ill_2illsil3öfi1lu2i2lumi3lusim4ati2megi2meji2meki2mew1immo1impoimp4s1impuim2stin2afin3ami3napina4sin1äsin3do2indrin3eii3nelin1euine2x2ingain2gl4inhei3nie2inigin2ir2inis2inn_2innlin1odin1orino3tin3suint2hin3zwi2odaio3e4iof4li2o3hio3k4i3ol_i3om_i3omsi3on_ion3di2onyi2o1pio4pfi3opsi3opti3or_i3orci3orpi3orsi3ortio3s2i2osti3ot_i3otsi3oz_i1ö2ki1ös_ipen3i3perip3fa2i1piipi2sip2plip3pui1r2ai3radirat2ir2bli3ree2irekir2glirg4sir2he2irigir4mäir2no1ironiro2sirr2hir3seir3shir2sti3sacis2api2saui2scaise3eisi2ais1opis1pais1peis3sais2stis4töis4tüit1amit1ani3tatit1auit2ärität22itelite4ni2texi5thr1itiii5tocit3rei3truit2sait2soit1uhitut4it2zä2i3u2i2vebive4niwur2ix2emiz1apiz1auize2niz4erizo2bi2z1wja3nejani1ja1stje3najet3tjo2b1job3rjoni1jo1rajord2jo2scjou4lju2blju3nijur2ok3a2aka3ar2kabh2kabska1frka1inka3kak1allkalo5k3amakand4kan2ekank42kanlk1anska3nu2kanw3kara2karbk2ardk2argk2arkk2arskar3tkaru2k2arwka3sekasi1kas3s2kattk1auskäse32k3b4kbo4nkbu2s2k3d2k1effkefi4kege2ke2glk1einkei1skeit2ke2lake2läkel1ek4eltk2en_ke2no2keo2ke2plk2er_k2erck2erlkerz2k6es_ket3ske1up2k3f42k1g22k1h4kho3mki3a4ki3drki2elki3k4ki3liki3lok2imik2in_k2ing2kinhk2inik2innkin3ski3orkio4skis2pkist2ki3zi2k1k44kla_k4lar4kle_4kleh2klic2kligk2link3lipk2lir4klizk4lopklö2sk2lötkluf23knabk4neiko2al2kobjkoff4ko1i2kol4ako3leko4muko3nu2kop_ko1pe2kops2kopzko3riko2spko2stko3ta2k1ouko2wek1o2x2k1p2k4rawk4raz2kre_2kreg2k3rh2krib2krip3kris2krufkrü1bk2sanks3ark2sauks2änksch4ks3hak3sofks1pak3speks2puks3s2k1stak1stek1stok1strk1stuk2s1uk3talkt1amkt1anktä3skte3ekt1eik2texkt3hokt1imk3topkt4rokt3s4kul2a4kulpkung42kuntku2roku2spkus3tku2sukür4s2k3z2kze3lla3ba2labb2labf2labg2labhlab2ol2abrl1abt3labu2labwla1celad2il1adl2ladm3ladul1advla2falaf3slaf3tla2gala2gnlago2l2akk2l1al4lall4lalpl2amil2amp2lanb2lanf2lanll1anp2lanslar3sla2ru4lasdla3se2lash2lasila2so2laspla2stlat2ala3telat2s1lauglawa41länd2läub2läuc2läue1läufl3bacl3blälb3lel2blil3blolb3salb3selb4sklb3splbs6tl3chel3chilch3llch3rlch3ülch1wlda2gld1all3daml3dasl3datld1auld1ärl2deil2dexldo2rld2osld2ö2l2dreld4rüld3sald3stld3thle2adle2bl4leddle3dele3eilef2ale2gäle2glleg4r4lehs4lehtl2eicl2eidl2eitlel3s4lemplem3sl2en_le2näl2enfle3nil2enkle1os3lepa3lepf3leprl2er_lerb4lerk2ler3tl1erzles2ele3shlesi1le3skles2t4lesw2lesy2leto4leud3leut2lexe2lexzl3fahlfe1elf3lolf2trlfur1lga3tlg3rel3gro2l1h23lhi_li3acli3akli3amli3arlia1sli3b4libi34lickli4ds3lie_lig4nli3keli2krlil2a3limol1inv2linzli4om3lis_li2spliss2lit2ali3telit2hli3tu2lixili2zalk3lolk4nelk4ralk2s1lk3sälks3tl3k2ülla2nl3lapll1aullch4ll3d4ll2emll2esl2lexll3l2ll1obl3lowll3shll5t4llu2fll1urll3z2lme2el2möllmpf4lms2tlna4rl3n4e2lobjl2obrlo1fllof4rloi4rlol2a2lopf2loptlo1ralo4rä2lorcl1ordlo3ro3lorq3los_lo4sa3loselo2talot4h2l1ovlo2velö2b3l2ö2fl1öhrlpi4plp3t42l3r2lre1slrut4lrü1bl3sacl2saul3sexl4shalsho2ls2pols3s2lst2al2stels4trls2tuls1uml2sunlsu3sl2tabltag4lt1aklt1ehlt2enlt3hol3thul2toblt1oplto2wlt1öll3törlt1ösl3trält3relt3sclt2solt1uhlu1anluba2lubs2lu2drlu2es2lufflu2golu2gu2l1uhlume22lumf2lumll2umpl1umsl1umw1lu2n2lunt2lunwl1urnl1urt2luselu2splu4stlu2tälüh1lly1ar2lymply3nolzo2flz3t2m2abe2mabk2mabs2mabtma2cima3damal3dmalu4mam3m2manbm2anfm2anh2manlm4ann2manzma2orm2app2marb4marrm1arzmat4cma3unma1yom1ähnmä1i2m1ärg2m1b2mbe2em3b4rm2d1äm2deimds2em2e1cmedi32medyme1efmega1m2eil3meldmell2m2en_m2ens2meou3mer_me1rame2ro3mersmes1ame4sä4mesume3th2m1ex2m1f4mfi4l4m1g22m1h4mi2admi3akmibi1mi3damie3lmi2ermi4etmi2kimi2ku4milzmi3nimi1nu3mir_mi3ra3miri3mirs3mirwmi2samise1mi2tami2th4mitz4m1k4m2mabmm1eimm3simm3spm2mummm2unmmül22m3n22mobj3m2odmo2dr4mog_mo2i32mol_mom2e3m2onmo3ne3mo2o2moptmo1ramork4m1o2xmp2flm3ponmp3ta2m3r2m2sanm4sapms1asm2saumsch2m4scom4sexmso2rm2späms2poms2pums3s2m3stoms4trms4tüms1ummt1abmt1akm3tammt1armt3homti2smt1ösm4ts1mt2samt2semt1um2m3uhmu3la2mulsmu3nim4unkmunt24munzmu3ra3musimu2spmus3tmu2sumuts32m1w2mwa4rmwel42n1abna2bä4nabg4nabhna2bln2abona2br4nabt3n2ac4naddn2ade3n2ag3n2ahn3ahnnai2en1aig2n1akna2ka3nakon2al_na2län4alena2lu2nalyn4am_3name3namon1an_4nanb2nanh2nani4nank2nanl3nannna3non1anp2nanr2nanw5nar_2narcn2ard4narg3narin2ark2narmn2arpn2as_4naspn4ata4natmnats14natt4naufn3aug5naui3n2äcn1ähn2n1ännä2scn2äss2n3b4nbe3nnbes4nbu2snch3mnd2agndat2nd1aun2dein2dobndo1cnd1opnd1orn2drönd3thndt4rn2dü4ne2apne3asne3atne2bl3necane1ckne2de2nee33nehm2n1ein2eid4neifne2ke3nelanel3bne3lin2em_n4en_n2enbn2encn2enhne2nin2enjnen3kne2non2ensn2envn2enwne2obne1os2nepfn2er_ne1ranere2n1erfn1erh3nerin1erkne2ron2erpn2erv3n2esn4es_nes4cnes1one2thneu1cneu3gneur22n1exnf1aknfo1snft2on2f1ung1adng3d4n3gefn3gerng3g4ng3hun2glon2glöng3neng1orngs3cng3tsn2gum2n1h4n3hann3harn3haunhe2rnib4lni2deni3drnie3bni1elnig2anig3rni3klni2kr3n2ilnim2o2ninfni2obni3okni3olni3ra3n2isni2tinit4sni3tunk2amn2kähnke2cnk2lonk2lunk4nan2knenk2öfn2köl2n3l22n1m4n2naunne2snn2exn2nofnn3scnn3senn2thnn1ur3nobl2no2dno3drn3olen2on_3nor_nor2a2norc3norh3norm3norsn1ortno3shno2täno2tr2nö2f2n3p4npa2gnpro1npsy32n3r2n3savns2cans1ebnse2tn3sexn3siln4sphn2sponsrü2ns3s2ns2tins2tunst2ün2styns2umnta3mnt4atnt1ämnte2bnte1ent1ehnt2enn3ternteu3nte3vn3thrnti3cntmo2nt3sants2onts2pnts2tntum4nt3z21nu1anu3arnubi11nu1cnu2esnu2fe2n1uhnu3k4n2um_2numf2numg3numm2numr2nuna2nunt3nu2snu3scnu3senu3slnu2ta2nü4bnür1c2n1v2n3ver2nymun2zadn2zann2zärnz1ecn2zornz2öln2zwö2o3a2o4abioa3deo4a3ioa3ke2obano3bar2obe_2obea2obewobi4t2o3boo3briob3skobs2pob3sz2o3buobu2s2o3bü2oby4och1ao1cheoch3loch3moch1ooch3roch1socht2o1chuoch1wo3ckeo3ckio2ckoo3d2aod2dro3debo3dexo3diro2donodo4so2dre2o3du2o1e2o4e3so2e3to3et_o3etsof1amof1auof2eno3feroffs2of2fuof1laof4läof4löof3raof3räof4rüofs1aof3thoga3dog2loo3g4nog3spohl1aoh3looh2lu3ohngoh2ni1ohnmo2h3öohr1aoh1ro2o1hyo1i2do2isco1ismoiss2oi1thoki2ook1läo2labol2arol4drole3eoler2ole3sol1exol2faol2flolf1rol2glol2grol2klolk3rol2of1olymol2zwo2mabo2mebome3co2melo2mepom2esom3maom3pfomtu3ona2bo2naeo3nalon1apon2auonbe3one2ion3f2ong4rong3s4o3nion3k2onli4o3nodono3sons1aonsi2ons3lons1pont2hont3s2onukoor3foo4skoo2tr2o1ö2opab4o3panopa5so1peco1pei2opf_op2fäo2pfeopf1l4oph2o3pheopin2op3li2o3poop4plop2pr2o1pr1opsiop3szo1rad2orak2oral3oramo1rasor1ätorb2l2orcaor2ce4orda1ordnor2do2ordr2ords2ordwore2hor1eror3gaor2glor2gn4oril2oritork2aork2s2o1ro2o1röorr4aor3rh2ors2or3shor3szor4töor2ufo2r3üo2ryaos3ados4anosa1sos4co2o3seose3eose2no3shoo4skaos3keo4skios2lo2os1pos2peos2saos4säos3to2osu42o3syo2tebote2s4ot2hot4heo2throt2inotli2ot4olot2oroto1so3traot2saot3scots1pot2thou2ceou2geou3glouri4outu4ove3so3wecoy1s4o3z2aozon1ö2bleö2b3röb2s3öch1lö2chröch2söcht4öd2stöf2flöh3riö3ig_ö2ko3öl1a2öl1eiöl1emöl4enöl1imöl1inöl3laöl1o2öl3saöl3szö2l1uölz2wönn2eön3scön3spöpf3lör3a2ör2drör2glör2klör1o2örs2eört2eör2trös2stös3teös2thös3trö2t3aöt2scöt2trözes4pa3dapa2drpa3ghpa1ho3pala1paläpa3li2paltpank42panl2pannpant2panz4papi23para1parc2parg1paro2parppa4stpat4cp3auf3pä2cpä2to2p1d2pea4rpech1pe2en2peicpe1im2pekupel3dpena41pennpe1rapere21perl3pero5perspe3sape2stp2fabp2fadp2fafpf1aip2feipf3lopf3lup2forpf1ra2pfs2pf3slpf3sz2pf3tpgra2p3hopph3t2phu4s2p1hüpi2a3pias4p4id2pi2el3pierpi3lepin2epi3oipi2pepi3ri4pisopi1thpit2s2pitz2p1k2pkur11p2l43p4lap5la_p5lad2ple_ple1cp4legp4lem2pligp4likp4liz2p3lu2p1m2po3b42p3ohpo3id3poin3p4olpo3li2pondpo1pepo2plpo3pt2pornpor3spos2epo3ta3potepö2blp2p1hpp1läp2plep2pripp3sa1prak1prax1präd1präg3präm3präs2pre_2prec1pred1preipri4e2prig1p4ro3prob2proc3prod3prog3proj3prot1prüf2prünps4anp3s2hps1idps2pop3staps2tup3stü3p2syps2zept2abpt3atpte4lp4tospto2wp2t3rpt3s2pt1um3p2typu2dr2p1uh2pundpun2s2puntput2spwa4r1queura2abr3aalra3ar2rabd2rabf2rabgra2br2rabs2rabt1rabyra1cer2ackr4ad_3radf3radlrad5tra2gn4raht2raic1rake3rakür4al_ral3bra3le2ralgr4aliralk2r4alsra2lu3ralyr2ammr2an_4ranc2ranf2ranl2ranr2rapfr2ara2rarbr2arkr2arpr4as_ras2ar4at_r3atlrat4r4rau_4raud2rauf2raug3raum3r2äd3rän_3räni3räns2r1ärr2är_rä3raräu2s4räutr2bakr3blärb2lörb4rirb3serbs1orb3sprby4tr1chirch3lrch3mrch3rrch1wr2ck1r2dafrd2amr4dapr2deir3denrd1itr2dobr3donrd1osrd4rird3tard3thrdwa4re2amre3asreb1rre2bür2ech3red_4reddre1elre1er3refe4reff3refl3refo5reg_rehl4r2ei_r2eie2reigr1einre3larel2ere3lorelu2r4em_r2emi4remur4en_r2enare2näre2nir2enzre3or3repe3repo4reppr1erfr1ergr1erkr1erlrer2nr2eror1erör1ertre2sa3rese3reso2ress3rest3resu2reulre2wi4rezirf2äurf2esrf4lör3flür3forrf4rurf4rürf2sarf2targ2abrg2anr2gnorg3spr2ha_r3herr2hoe2rholrhu2sri3amria1sri3atri1ceri1elri1euri2frrif3s5rig_5rigjrig1l4rigrrik1lr2imb2rimprim2s2rink3rinn2rint4r1irris2ari3so3rissri2strit4r5riturk2amr2kährk4lork2lur3krirk2sprk1strk2tark1uhrk2umrku2nr3l2arle2ar3lecrle2ir3letr3l2irli2sr3l2orm2ärrm3d2r3me_r2meorm2esrmo1srm3sarmt2arna2brna4nr2naurn3drr4nefrn2eirne2nr5nesrn2etr4nexr3nodr1nötrn1ur2robj2robsro3e4roh1lro1irro3lerol3s2roly4rom_4romm4romt3ronnrons2ro1pero3phr2oraro3shro2ßu3routrö2du1r2öh1r2öl3römir2ös_r2öse2r1p2r3p4ar2plirpro1rps3trr2abrr2arrr1ämr3r2er4rewrr2herrik2rro3mrr2strr2thr3r2ürrü1brs3abrs2anrs3arr3shors2klr4skor4skrr4skurs4nor4sobrs2p4rs3s2rs2thrs2tir3stor3störs2tur3swirtal2rt1amrt1ärrten1r2thirto1prt1orr5trirt2sorube2ru2drru2fa3ruinru1is4rumfru2mi4ruml4rumz2rund4runn2runwru3pr4r3urru2ra5ruroru2siru2strut3hru2zwrü1ch4rümmrz2anr2zarr2zasrz1idrz1oprz3terz2thr3zwä2s1absa2besa2blsa2br4sabss1adm3safasa2fe3safi3sagasag4nsa2gr3s2aisail22s1aksa2ka3saki3sakr4sakt3salo5samms1amps2an_s3anbs2and3sani2s1apsa2po3sapr2s1ar3saris3arrs1aspsat2a4satmsa2trsa3tss1a4u3sau_3sauc3saue3saum3saur2s3avsa2vos3ähns1ält2s1äm2s1är3s2ät3säul2säuß4s3b4sba4n2scams2cans2cap2scar2s1ce4sch_s4chä4schb4schc2schd2schf2schg2schh2schks4chls4chö2schp2schq4schss4chu3schü2schv2schz4s3d2sde1sseb4rse1ecse2glseg4rse3heseh1lseh1sseh3ts1ein3s2eks2el_s2elsse2nä3senkse2noseo2rs4er_3seraser3gs1erh3seriseru25ses_se3su2s1exse2xe4sexpsex3t4s3f4sflo44s3g2sha2k1shass3h2e3shi_3shidshi4rs3hoc4shof3shop3showsi2ad2siat5si1cs2ido3s4iesien3sie2ssi1f43s4igsig4nsi2kisik1lsi2krsik3ssi2ku3silosin1ision43s2issi2sasis3s3s2itsit3rsi3tusiv1asive3si2vr2s1k24skams3kar4skasskel1s4keps2kifs2kig4skirski1s3skiz4skom4skor4skow4sk3t2s1l23slal4slans2laws3lo_s3loe2s3m22s3n4snab4so3baso3et3softso3la3s2onsone22sopf3sor_s1orc3sorsso4rus4os_2s1ox2s1ök2spaa4spak4spap3spaß4spaus2paz3späh2spärs3pe_2spel4spet4s3pf2sphas4phäs3phespi2k4spil3spio4spis4spla4splä4sple2spod2spogs2poi2spok4spol4spr_3spru2s3ps2s4pt2spun2spup3spur4sput4s3r4sret3srü2ds5safs3sagss1ajs3sals3s2äs4sces4scoss1ecssoi4ss2poss3s4sst2ass2thss2tis3stü4sta_3staast2ac2stag3stah2stak2stax3s2tä4stäg2st3c2steas2ted4stee2stem4stens2tep2ster4stes2stetst3ev4stexs4thäs4this2thu2stia2stibs2ticsti2e2stig2stiks2til2stio2stis2stiv2sto_s3tob1stof4ston4stoo1stoß4stou2stow2stoz2stöt1stru1stub4stuc2stue3stuf3stuhstu2n3stüt4st3zsu1ansuba24subi3su1c2s1uhsu1issul2asul2isult23summ3sun_su4nes1unf4sunt3s2upsup3psu2ras1urtsu2s1su3sasu3shsu3sisus3s2sü4bsü2d1sweh24swie4swilsy4n34s3zas2zess2zis4s3zu4s3zw2ß1a22ß1b22ß1ec2ß1eißen3gße2niße2noße2roßer3t2ß3g2ßig4s2ß1in2ß1k4ßler32ß1n22ß1p22ß3r22ß1s22ß1um5taan4tab_2tabf2tabg2tabh2tabkta2br4tabsta2bü2tabw2tabz2t1ac3tacut1adatadi33taf_4tafft1afg3t2agt3agotai2ltai4r2takzta2latal3d3talo2talt3tameta2mit1amt3tan_2tanbta3ne4tanf2tang3tanit2ank4tanlt2anot1ansta2nuta3or2tapfta2pl2tarb4tark2taro2tartta2ruta3sata2tht3atlt4atmt1auk3taum4tägyt1ämt3tänzt2är_tä2ru4tätt2täuß4t3b2t3chat3chetch2itch3lt2chutch1w4t3d4tdun2te2a22teakte3alte3an3tebat2ech2teckte1emte2es2teff3teha3tehä3tei_teik43teiltekt25tel_3telatelb43telg3telk5teln3telp5tels3tem_tem3st6en_ten3ate2nät4enbten3gt4enhte2nit4enjt4enmten3n3terct4erit4erot3erötert2teru2t2estte2su3tet2t2et_4teth4tetl3teuf3teumte1unte2vite1xa4texp3text4t1f4tfi2l4t1g2tger22th4at2hagt3hait2hak2t3hä3thea2thebt2hect2hekt2hem1then3theot2hest2heut2hik4th3l4th3m2th3n1t2hot3hoft3horthou24t3hö2thub4thunti2ad3tib4ti1cetieg42tiehti1elti1etti1eu3tif_ti1fr4tift3tilgti2lötil3stilt4ti2lut2imiti3nat1inbt1infti1nuti3orti3plti1rhti2sptium2tive3ti2za4t3k45tlem6t5li4t3m24t5n4tnes2to4asto5at4tobjtob2ltode2toi4rto3la3tole4tolz2tomg3topo2topt3tor_to1ra4torct1ord3toret1orgto2rö3torsto2rut2orwto3sc3toseto4sktos2p4toss3totrtots23t4outo3un3töch4t1ökt1öst4t3p21t2r45tra_3trac3trag3trak3tral4traß5träc3träg4träs4träß4treb4trec3tref4treg2trekt4remt4rert4rett4reut3rev2trez2t3rh4trict4riptri2x3tro_3troe3tront4rop3troyt3röc2tröh3trös3trua4truktrum2t4rübt4rügts1adts1alt2sants1ast2sauts1emts3krtso2rt3sout2spät2spht2spots3s4t1st4ts2tut2s1u1tsubtt1abtt2actt1aktt2altta1st3telttes1tto1st3trott3rutt3rütts1ptt2untu3antuf2etuff3tu2istul2at2um_3tun_3tune3tungt1up_tu2rätur1c3turntu2rotu4rutu2satu2sotu3ta3tüch3tür_tür1c3türe3türg4tütztwi4ety2pat2za2tz1agtz1altz1artz1aut3ze_t2zortz2thtz1wätz1witz1wuu1a2bu1a2cuad4ru1al_u1albu1alfu1alru1alsu1altua2luu1ansu3ar_u1arsua3saua2thuat2iubau1u3b4iu2bopub3räu2bübuch1auch1äu1cheu1chiuch3luch3much3nu1chuuch3üuch1wu2ckiu3d2au2donud3rau3druue2ckue2enu2elaue2leueli4ue2miue2näue2niue2nou2ereu3errue2tau3fahuf1akuf3aru3fasuf1au2ufe_uff4luffs4u2fobufo2ruf3säuf4sou2fumug1afug1akuga4sug1auug3d2ug3huu2g1lug3lou4gluu2g3nug1orug3roug3seug3siuh1lauh1läuh2liuhme4uhr1auh3riuhrt4uh2ruuh4rüui2chui1emu4igeu1in_u1is_u3käuu1k2lu1k4ruk2tauku2sul1abul1amula2sul1ämul2drule4nule2tu2lexul3f4uli2kul3kaul2knull2aull3sulo2iul1orul2sauls3z2ultaul3thult3sul2vrulz2wuma4rum2enum1irumm2aum2suum3t2um2un2una_1unabun3acun4alun3at1unda1undd1undf2undg1undn1undv1undzune2bune2hung5hun2idunik4un2imuni2r2unisunks23unkuunna2uno4run2os2uns_un3se1unsiun3skun3spun3taun3trunt3s2untuu1o2bu3or_u3orsu1os_uote2u1pe2uper1up2faup2plup2prupt1oup4tru2rabu2rar2u1räur1änurch1ur3diure4nurf3turi2cur1imurk2s4u1rou3roluro1sur4swur2zaur2zäur2ziur2zou4safu3sepus3klu4skous3ocu3sohus1ouus1peu2spou2spuus2thus3tru1stuus2uru2tärut1egute2lut2esut2etu4tevutfi4ut2heu2thiu2thuuto3cut4orutos4ut3rüut3teutts2ut2zo2u1u2uufe22u1v4u2ve_uz1weuz3z4übe3cüber3ü1cheüch3lüd3a4üd1o4üd3s2üdsa1üd3t4ü2f1aüfer2üf2flü2f1iüf2toü2g3lüg4stühla2ühl2eüh3moüh3neühn2süh1roühs2püh4thül2laül2loül2löü2n1aün2daün2dründ3sünen3ün2faün2frünn2sün3scün3seün3spün2zaüp2plür2flür2frür3scür3seür3spürt2hüse3hüse3lüse1süss2eüs2stü2t3rüt2s1üt2tr2v1abval2s2vang2varb2v1auve3arveit4ve3lave3leve3live3love3maven2cve3neve3nive3növer3averd2vere2verf4verg4ve3river3kvert2ver3uve3tavete1ve3trve3x22v1f4vi3arvi2elvi2ervima2vi4navin2svi3savise4vi2spvis2u2v1l22v1obvo3gavo2gu2v1opvo2r1vor3avor3dvor3evor3gvo3ri2v3rav4ree2v3rov1stav3s2zvu2et2vumfwa5gewa3gowai2b2walb2walmwa3nawa3sawa3sewa3sh2wängwäs2c2w1b2we2bawe2blweb3swe2e4weed3we2fl2weiewe3niwerd2we2röwer2s1wesewe4stwet2s2w1eywie3lwin2e2wing1wi4rwi2sp1wisswi3th1wo1c1wolfwor3aw3s2kwun2s4wur_wur2s2xa2b1x2adxa1fl1x2agx3a2mx2anz1x2asx1e4gx2er_x2erexers22x3euxich2xide2xie3lxil2axi2loxi2lux2is1xis2cxi2sexis3sxi2su2x1k22x3s2x2t1axt2asx2tänxtfi4xt3s2x3turx1u2n2y1aby1al_y1a2myan2gy1anky2chiych3nyen4ny2erey2es_yes2pye2thygie5yke3nyk3s2y4le_yli4nyl3s2y2l1uyma4tym3p4ympi1y2n1oyno4dyon4iy1ontyp3any4p3sy3r2eyri2ayri1ey3r4oys2any3s2cy3s2hy4s3lysme3ys2poys1prys3t4y3s2zy2te_y2tesy3to1yure3zab3lz1a2dza3de2z1afza3grzale32z1amza2na3zani2zarb2zarcz1arm3zaubz3aug3zaun2z1äc3z2äh2z1ämz1ärgz1ärm4z3b4zbü1b2z3d2zdan2zeik4zelu25zen_zen3nze2no3zentz2er_zerk2z2ernzers2ze2säze3sczes1ezes1ize2spze2tr2z1ex2z1f42z1g2z2henzhir3zi3arzid3rzil2ezin2ezi2o3zi3opzirk22z3k42z1l22z1m2zme2e2z3n42z1ob2z1ofzo2gl2z1oh2zopezo2ri2z3ot2zö2f2z3p42z3r24z1s2zt3hozt3s2zu4chzudi4zu2elzu3f4zu3gl2zumf2zumg2zumlzun2ezung42zuntz1urkzu3s4zu5t2zür1cz1wac4zwahz1war2zwas4zwäl2zweg2zwet4zwirz2wit2z1woz1wörz1wur2z1wüz3z4az3z2o",6:"_ab3ol_ab1or_akt2a_al3br_alt3s_ampe4_an3d2_angs4_ans2p_ans2t_an3th_ari1e_ark2a_ar2sc_as4ta_au2f3_au4s3_be3ra_boge2_da2r1_darm1_de2al_de1o2_des2e_de3sk_des2t_do2mo_do1pe_dorf1_ehe1i_ei3e2_ei4na_ei2sp_ei4st_ei4tr_el2bi_elb3s_em3m2_end3s_enns3_en2t3_en4tr_er2da_ere3c_es3ta_est2h_es3to_es5tr_eu3g4_eve4r_flug1_for2t_fu2sc_ge3ne_guss1_he3fe_he3ri_inn2e_kamp2_kle2i_kni4e_kopf1_le4ar_li4tu_ma3la_ma2st_mel2a_mi4t1_näs1c_no4th_oper4_oste2_ost3r_poka2_ram3s_reli1_ri2as_rom2a_rö2s1_se3ck_sen3s_ser2u_se2t1_si4te_ski1e_tal2e_ta2to_te3no_te4st_ti5ta_tite4_to4pl_tro2s_tu3ri_uf2e2_ufer1_un3a2_uni4t_uns4t_uro2p_ur3s2_wah4l4a1a2naa2r1aaar3f4aat4s3ab1aufab1eilabe2laab1erkab1erzab1ins1a2blaab5lag1a2bläab4le_3a2blö1a2bon2absarab3s2i2abst_ab3ste1abteia1chalach3auach1eia3cho_ach1orach3su4ach1wa1ckarack2ena2ckinack2seack3slacon4na3d2abad3amaa2d1an3a4dapade2aladefi4a2deina2deri4ade1sades4sadi3enad4resa2f1eca2fentaf1erlaf4fluaf3s2aaf3s2haf2t1aaf2teiaf2t3raf2tura2f3urag1a2da3gen_age4naage2saage4si3a2gitag4ne_a2g3rea2g3riag4samag4setag4spoag3staag3stea2gundahl3a2ahl3szah4n1aah3r2eahrta2ain3spai3s2e2a3kam1a2kazaken2nak3rauak5tan2aktikak2t3r2aktstal1ageal3amealami5al3ampal1anaal1ansal1anza3lar_a3lareal2armal3arral1asial1assal3augal2b1lalb3lial2bohalb3rualds2ta4l1eha2l1eia2l1ela2lengal1epoal1erl3alermal1etaal1etha2l1eua4leur3a2lexal2glial1insa2linvalk1ar1alkohalk3s2alks4tal2labal2laual3les1allgäal2lobalo2gaal1opeal1orc3alpe_al3sklal3sunal4takal3tamal2treal2trial2troalt2seal1umbame2n1amer2aa2meriame3rua4mesh2a3mirami3taami3ti2ammalam2meiam2minam3stram2t1aam2t1äam4tel2amtemam2t3ram4treanadi3an1algan3dacande2san2dexand2suand1uran3e2can2ei_an3eifan1e4kan1ethanft5san3f2uang1ar3angeb2angiean2gla4angs_an2i3d3a4nima4ninsan2keian4klöank3ra3an3naann2aban3n2ea2n1orans2enan2seuan3skrans1pa1anspran3s2z1antei1anthran2tro2anwet1anzeian2zwiar3abtara3d2a2r3al2a2rara2r1auar2bauar2bec2arbenar2bre2arbs2ar2droar1effar1ehra2reinar2erfa2reria2rerlar1intar2kalar2knear2korar4kriark1s4ark3saark3shar2lesar2nana2r1oparr3hear3s2har3staar3t2ear2thear3t2iartin2art3rear2z1was1alaa3schea3schia2schma3schua3s2hiasin2gaska3sa3skopas3s2aas3s2eas3s2ias2s1pass3tias3stras3stu2as3taas4tauas4tofast3räaswa2s3a2sylat1apfa2tausat3eiga2teliate2ru4athe1atil4sati2st4atmusatra4tat3romat4setat2s1pat4takat4tauat2teiatz1eratz3t2at2z1w2au1a2au2bliau2bloauf1an2aufe_2aufehauf1er2aufs_2auft_4augehaule2sau2malau2m1oaum3p2aum3s6au3n4aau2nio2au3r2au2sauau2spraus3s22auts4ava3t4äche1eäch2späch4stä2d1iaäft4s3äg3str2äh3t4äl2l1aämi3enäne2n1äng3seän2k3län2s1cänse3häp2s1cä2r3a2ä2r1eiär1intär2k3lärt2s3äse3g2äser2iäskop2ä3s2kräs6s1cä4s3t2äß1erkä4t1a2ät2e1iätein2ät2s1iät2s1pät2s3täum4s52ä3us_backs4b1a2drbah2nuba2k1iba2krabal3th3b2andban2drba3n2eban4klban2kr2b1ansbar3deba2reibar2enbar3zwba3s2abau3sp3b2ä1cbbens2bb3lerbbru2cbe2delbe2erkbe1erlbe1etabei1f4bei3k4bei3labe1indbei3scbeis2ebei1stbeit2sbe3lasbe3lecbe3leibe2letbel3label3szbel3t4ben3arbe3nei3ben3gbe3n2iben2sebenst4ben2su2bentbb2entib1ents2bentwben3unben3z2ber3ambe2ranbere4sber3nab1erntbe2robbe3ropbe3rumbe3slobes2pobess4ebes3szbe2tapbe3thabien3sbi2ke_bi2kes2b1inb2b1infbin3gl2b1intbi2solbi2s5tb2it2abla3b4b2lancb2latt2b3law3ble2a2b3legb3lein3ble4nb3leseble3sz2blich3blickbling43blitzbo3ch2bo2e3ibon2debo1r2abo2reibo4rigbo4s3pbot2st2b3radb4ra3k2b3refb3reif2b3repbri2er2b3rolbrust3bru2thb2s1adb3sandb3sel_bse2n1b3s2esb2s1ofb3s2pubst3acbst1akbs3tätbst3erb2stipb4stodbs4trib4stübb2s1unbu2chibul2la2b3umkbu3r4ibus1erbu2sinbu2s1pbu2s1ubzeit1carri1ca3t4hcha2ck2ch1akch2anb3chancch1ang4chanz4char_1characha2sc3chato4chatuch1ärm3chef_3chefi3chefsch1eimcher3ach1ess2cheta1ch1iachi3na4chind2chinf2chinhch1insch1int1chiruch1offch1orcchre3s1chron2chunt2ck3an4ckeffck1ehe4ck1eick1entcke2rack2ereck1erhck2ern2ckero2ck1id2ckunt2ck1upcon2nec1s4trcussi43d2abäda2ben3d2ablda2bredab4rüdach3ada2chodach1sdal3b2d1amma2d1amt2d1ana2dangedan4kldan2kr2d1ans2dantwd2anz_4danzida2r3a2darb2dar2mada3s2hdat4e2da3teidate4n4d3atl4daush2d1ämt2d1änd2d1ängde3a2tde4ca_de2cka2d1eff2d1ehrdein2ddein2sdel1ändel1ec2delek2delem2delfmdelle2de2lopde3lordel5scdel2sodel3t4dem2ar2d1empden3th2dentwdera2bde1radde2rapder2bl2derdbderer33derieder3m2de4ruhde4rumde3sacdesa2gde4samdes2äcde2sebde4sehde2seide4setde2sinde2sordes3s2de2sto2d1etwde1urlde2xisdha1s4di3e2ddi3enidie2thdige4sdil2s52d1imb2d1ind2d1inf2d1inh2d1ins2d1intdion3sdi4re_di2rendi2ris2d1irl2d1isrdi4t3rdle2ra2d1o2fdo2mardo5n4adoni1e2d1opfdor2fädor2fldor2fr2d1orgdo2riedor2tadö2s1c3d4ra_2d3rad2drahm3d4ramd3rand2d3rät2d3räud4rea_d4reas3d4rehd4reiv4d3ren2d3rep4d3rer4dres_d4resc3d4ria2d5ricd5riegd4rin_3d4rit4dritu2d3rod2d3rot2d3rovdrö2s13d4ruc2d3ruh2d5rutd2sau2d2s1efds2eigd2serhds1errd3s2had2s1imds2infd3skuld2s1opds1orids1pasd2sprods3tabd4stagd4stead3steid4stemds4tilds4tipds1umsds2zend4theidtran2du1alvdu2bli2d1ufe2d1umb2d3umkd2ums_2d1umvdund2a2d1unfdun3kedun2kl2d1url2dursadwest3ea3dereadli4e3aleiealti2eat4e2eater1eat3s2e3au2feau1ste3b2akebert4eb3lereb4leue3blieeb3reiebs3paeb3staeb3strebu2t12e3cheech1eie2cho_e2ch3rech3taech1uheck3seede2aledens1edi4aled2s1oed2s1pee2choeed3s2ee2lekee3lenee4nage1e2pie1erbtee3r2eeere2see4reteer2öse1ertree3r2uee4tateewa4re2f1adef1anae2fente3f4lu2e3f2oef3reaef3rolef3romef2tanege2raeg4saleg4stoegung4eh1ache3h2aleh2auseh1eff1e2hepehe1raeh1inteh1lameh2linehl2seehr1a2eh2reiehre3seh1ro2ehr1obehr1ofeh1stee2hunt2ei3a2ei2bareibu4tei2choei2d1aei3danei3dra4eien33eifrüeig2er2eigew2eigrueik2arei3kauei2lareilen1eil3f41eilzuei2moreim2plei2n1aei4nasein3dr2einduei4nelei2neu2einfoein3g2e1initein4szei2sa4eis2peeis4thei1stoei2sumei2tabei2tanei2tarei2troeit3umek1s4tek5triel3abiel2abte2l1akel4amiel4ampel1ansel1anze2l1apel3ariel1asiel1aspel2ast3elbiseld3s22e3lebe2l1el1e2leme3lem_el1empel1erdel1erfel1erkel1erl2eles2el1esse2l1ideli2neel1itael3lanel5le_el3linell3spel1opee2l1orelo2riel2sumelte2kel2t3re2l1umel3useel2zwae2m1ad3emanze3m2ene2m1imemi5naem1intemi3tiemma3uem2meiem3pflem2spren4amee4nanden3angen3areen2ascen3atte3nauee2n1ären4ce_en2dalend3siend3szend2umen1e2ce2neffe4neine2n1elene4lee2nerfe4nerhe4nerk4enerne4nerz1engad3engagen3g2ien3gloeng3see2n1inen3k2üeno2mae2n1openost3en1ö2den3sacen2sauen2sebens2el1ensemensen1en3skaens2po2enstoent4agen2teb1entfa3entgaen2thi3entlaenü1ste1o2b1e3p2f41episo1e2pocep2tale3rad_er3admeraf4aera1frer3aicer3alleran3de3raneer3anfe2ranher3anmer3apfe3rarie2rathe3ratie2ratme1rauber3aueerau2fer3augerb4sper3chl2erdece3recher1effer1eige2reiner1ele2e3reme3renae3renz4erer_e4rerl4ererne3reroer1errer1erse2rerter1erwer1esser1eul4erfür1ergolergs4t1erhabe2riat4e3ric4e3rieer1inber1inker1inter1ita1erklä2erkreern1oser1o2ber3onye4ro2rer3smoert2aker2thoerts2eeruf4ser1u4mer1underung4er1unses2aches3anze3s2ases3cape3schaes3evaes2haresi1eres3intes2kates4loges2ortes2sau4essemessi2aes2sofes2spues3stres3stuest1ake1stare1state3stele1stile2stipes4trie2s1umes3umse4teinet3haleti2tae4t1ofetons4e2treset4riget2tabet2teiet2t3ret4troett3szetwa4retze4seu2esceu4glae3um2seum4sceums1peum3steu4neie3un2geu2nioeun3ka3eu3roeu1staeu1stoeu1stre2velae2vent1e2xeme2x1inex2tinfa2benfa2chof1aderfa3l2afal2klfal3tefalt2sfan2gr2f1ankf1an3zfar2br2f3arcfarr3s3f4art2f3arzfa3s4afa2to32f1auff1ausb2f1ärmfä2ßerfeatu42f1eckfe1inifek2tafe2l1afel2drfe2lesfe2l1ofen3safer2anfe2rauferde3fer2erf1erfaf2erl_f4erpaf2ers_fest1afest3r2f1etafe4tagfeu4ruf2f3efffe1inf3f4räff3shoffs4trfi2kinfik1o2fi2kobfi2lesfi4linfil2ipfin3sp2f1intfi2s5tfit1o2fi2tor3f4läc2f5läd2f3läu2f3leb3f6limfli4ne2f5lon1f4lop1f4lot1f4lug4f3orgfo3rinfor4stfor2thfor3tu2f1o2xf3rand1f4ränfreik2frein42f3ricf4risc1f4ronfro2nafs1allfs4ammf2s1asf2sauff2sausf2sautfs1e2bf2s1emf2s1erf2si2df2s1o2f3spanfs1penf3s2plf2sprefs2prif2sprofs2pruf2stasf3steif2stipf3st4rf2s1unf2t1alft1e2hft1eigft1eisf4theif2t3rof2t3röf3t4ruft4samft3s2cft4sehfts3elfts2tift1url2f1unffun2klfun2ko2f1unmfu4re_fus2safus2stfzu4gaga2b5l2ga2dr2g1amtgan2gagan2grg3anla3g2ano2g1armga3r2og1arti2g1arzgas3eiga2sorga4spega4sprgas4taga4ste2g1auf2g1autg2d1aug2d1erge3g2l2g1eifge2in_gein2sge2intgein2vgei3shgelb1rge5lehgell2age3lorgels2tgel3szge3lumge4namge4nargen1ebge3necgen3szgen3th2gentwge2rabger2erger3noge1r2öge3r2ug1erwag2e1s23ge3scges4pige3steges3thge3t2a2getapge3t4ugge2ne3g2het3g2hiegi3alogi2e1igie1stgi2me_gi4mesgi2met2g1indgin2ga2g1insgi3t2ag2lade2g1lag3glanz2gläuf2g3leb4g5lerg3lese3g2lid3g2lie3g2lit3g2loa3g2lobg3loch3g4lok3g2lop3g2lotgne2tr4g3notgoa3li2gonis2g1ope2g1opfg2o1ragra2bigra2bl2gradl2g3rah2g3rak2g3räu2g5re_2g3recg4re2eg3reit2g3ric2g3röh2g3rui2g3rum3g4rup2g3rüc3g4rüng3s2ahg4saltgs3amags3augg4s3cegs4chig4s3crg3sel_gs3elig3selngs5erkg4setags4pieg4spingsrat4g3stang3starg4s3täg5stämg3stelg1steugst2heg3stirgs3tocg4stolgs3topgst4rig4sturgs4tücgu1an_gu1antgu4d3r2g1u2fgu1ins2g1unfg2ung_gunge2g2un4s2gunt22g1urlgurt3sgu2s3agus2spgus2stha2choha2delha4dinh1adle2h2al_ha2lauhal2bahalb3rhal2lahal2sthand3shan2krh4a3rah1arm_h2armehar2thh1arti2ha3sahat5t2h1aukthau2sahau2sc2hautohau2trhä3usphe1choh1echthe3ckehe2e3lhe2fanhe2f3lhe3friheim3phei4muheine2h1einkhe1ismhe1isthel1eche3lenhe4lof4h1emphend2she2nethenst2hen5trh1entshe2ral2heraphe3rasherb4she2relh1erfüh1erkeher3thher2zwhe1stahe2tapheter2he3t4she1x4ahfell1hi2angh1i4dihi3enshier1ihiers2hil2frh1induhin2enhi3n2ihin3n2hin3s22hi3rehl1anzh1lauth5len_hlen3ghl2ennhle2rahl1erghl1erwh4lerzh4lesihl1indh3listhlo2reh3losihl2sanhl2serhl3skuhl3slohme1inhmen2shme2rahn3eighn3einhne4n1hne4pfh3nerlh3nerzhn3s2khn1unfho2ch3ho2ckahock3tho2f3rhol1au4holdyhol3g4ho4lor3hol3sh1o2lyho2mecho2medho4seihotli42ho2w1h1raneh3rechh4rei_h3reich3r2enhr2erghr2erkhr2ermhr2erzh4rickh4rineh4rinhh4risth4romeh4romihr2sauhr2serhr4sethr2tabhr2tanhr2torhrt3rihr2trohrt2sahrt2sehr1umsh2s1ech3s2exh2s1ofhs2porh2spräh2sprohst2anh1stechst2heh1s2tih2storh1s4trhst3rih1stunhs2ungh3t2alht3aneh3tankh4tasyht3a2tht1e2ch2t1efhte2heh2teifh2temph2t1euh2t1exh4theihthe3uh2t1inh2tolyh2torgh4trefh2t3ruh2t3rühts2tihu2b1ahu2b3lhu4b3rhu2h1ahu2h1ihuk3t4hu2l3ahu2lerhu2lethu3m2ahung4shu3ni1hus4sahus2sphu2tabhu3t2hhühne4h2wallh1weibhy2pe_i4a3g2ia2l1ai3aleiial3laia2lorial3t4ial3z2ia2nali3and2ia3p2fi2a3spi3a4tai3at4hib2blii2beigi2beisibela2iben3aib3renib4stei2bunki2buntibu2s1ich1eii2chini3chloi2ch3ri3ck2eid2ab4i2d1au1i2deeidel2äide3soide3sp1i2dio1idol_i3d2scid2s1pie2breie2choie2fauief3f4ie2f3lie2froie4g5lie3g4nie2g3riegs3cie3lasiel3auiel1ecielo4biel3sziel3taiena2bi3e2näien1ebie3neri3en3gi3e2noien3scien3siiens2kien3szier3a2ie2rapie3resi3ereuierin3ier3k2i3ern_iers2tier3teies2spie1staie2t1aie4t1oie2triiet2seiet3zwifens2if1ergif1erhi1f4lai1frauif4reii1f4rüif2topift3szig2absig1artiga1s4ige4naig1erzi2g1imig3reiig4salig3sprig4stoig4stöig3strig3stüigung4i2h1ami2h1umi4i3a4ik1amtik1anzik1artik3atti2k1aui2k1eiike2l1ik1erfi2kindi3k4läi2k3raik2trei2l3abi2l1acil1a2di2l1akil1ansil1aspi2l1auil3ausild2eril2doril1e2cil1eheil1einil2f3lilf4s3ilie4ni2l1ipi3lip_i3lipsil3l2ail3l2iil2makil2mauil2mini2l1oril3t2hilung4i2manwima2tri2melei2melfi4meshi2metiim2meiim1orgim3pseim3staimt3s2in3a2ci4nacki2n1adin2arain2arsin4arti2n3auin2dalin2dan1indexind4riin3drü1indusin1ehein2erhi4neskine3un1info_1infosing1af1inhab2inhar2inhauin2i3dini3krini3sei3nitzin2nor1inntain3olsino1s4in1ö2dins2aminsch2in2seb2insenin3skr1insta1insufin3s2z1integin3t4rin5trii3n2umin3unzinvil4io2i3dio2naui3ons3ion4stiore4nipi3elipi3en1i2rakir2k3lirli4nir2makir2mauir2mumir2narirpla4irt2stiru2s1isage2is3arei2s1äni2schmi2s3crise3haise3hiise2n1is2endisen3si2serhiser2uis2hasi2s1idi2s1of3i2soti2sparis1picis2pitis2pori2sprois4sauis3stais3stoiss3tris3stuis2sumis4tabis4tamist2anis4teliste4nistes3is4tocis5törist4raist3reisum3piß1ersit1ab_ital1ait1altit2an_it1arti3tauci4t1axi2t1äsi2t1eii4teigit2eili4teinite2lai4tepoi2t1idit2innitmen2i2t1ofit3rafit3rasit3rauit3räuit3ricit3romit4ronit3runit2stoit2tebit4triitt2spi2t1umi2tunsit1urgitzes4it2z1wi2v1akiv1angi2v1eiiv1elti2v1urizei3ci2z1irjahr4sja3l2ajean2sjek2trje4s3tje2t1aje2t3hje2t3rjet3s2jugen2jut2e1kab2blka2ben2kabla2kabläka3b4r2k1abt2k3adaka1f4lkaf3t2kaken42kala_ka2lanka3leikal2kakal2krkal4trkan2alka2nau2kanda2k1angk2ans_k2anz_2k1apfka3r2i2k1armk2arp3kar2pfk2artaka2s3tka3tanka3t4hka4t3r4kaufrkau3t22kautok1ä2mikä2s1ckdamp22k1e1cke2he_kehr2s2k1eic2k1eig2keinhkel1acke3lagkel3b4ke2lenke2lerkell4e2k1empken3au2kenläkens2kken3szk2enteken3thk2entrk2entu2kentwke1radk2erkok1e2rok2ers_ke2selke4t1ake2t3h2k1e2xki1f4lki1f4r2k1intkis4to4k1lack4leidk3lem_2k3lerkle2ra2k3leukle3usk2lisc2klistklit2s2k3locklo2i3klost4klung42k1lüc2k5nerkno4bl2k5norkoh3lukol2k5ko3n2ekon3s4ko1r2a2k1orckot3s22k3radk3rats2kraum2k3rät2k3rec2kred_2k3refk3reick3reih2k3rick3ries3k4ronks1e2bk2s1emk2sentks1erlk2s1idk2s1ink2s1o2ks2pork1s2tik2stork2sträk2stumks2zenk2t1adkt1aktkta4rek2t1auk2tempk2tentkte3ruk2t1idkt1insk2t1ofkt1opekt4rankt3rask4trefktro1skt3runk2tuns2k1uhrku3l2eku3l2i2k3umlkum2s1kun4s4kunst32k1up_kur2blku2reikuri2ekur2spkur2stlab4ralab4ri2l3absla2ce_la2gio2la1hola2kesla2k1ila1k4lla3min1lammf2l1amtlamt4sla4munl1analla2nau3l2andlan2gl2lanhäl2anhe4lanli2l3ann4lansä2lantrlan2zwlap4pll3artila2saulast1ola4tel2l3athl2auf_lau2fol2aufz2lausl2lausr2lauto2l1ähnlä2s1cl4betal2b1idlb2latl4bre_lb3ritlbst3elb4stol2b3uflbzei2l3d2acl2d1akld1amml2da2rld3arild1arml2delel3der_ld1erpl2d1idl2d1iml2dranl3d4rul2d1umle2chile2gau3l2ei_lei2br4l1eigl2ein_l2eindl2eine2leinkl2eintl4eistlei2talekt2a2lektr3l2ela3lemesle4nad2lendul2e2nolen3szl1ents4lentzlen2zil2e1rale2ragle2raul1erfol2erfrl2erfül2erkal2erkol2erlel4ers_lers2klers2tl2ert_l2ertel2erzales2amle3serleste3le1stole2tat2le3thlet4tule3u2f2leurole2xislfang3l2f1ecl4feisl3f4läl3f4lulf3ramlgen2alge3ral2getilian2gli3chili2ckali3d2ali2deo2l1idolid3scli3enelien3slie2stli2grelik2spli3m2ali3n2alin3alli2nefli2nehli2nepli2nes2l1inflings52l1inh2l1injlink2sli2noll2ins_l2insal2insc2linsp2linst2l1intli3os_li2p3ali3s2a2l1islli2tallit1s2lit3szlizei3lk1alpl3k2anl3kar_lken3tl3k4lul2k3rol2k3rulk4ställ1abbl2labtll1affll1aktl3l2alll3amall2anwll1anzll1armll3augl2lausl2l1ämll1echlle3enl2l1efll1eiml3len_llen3gl3ler_lle2ral2lerzll1imbll1impll1insl2lobel2l1ofll1opfl3lor_l3lorel2l1oul2l3öfll3s2kll2sprllti2mllt5s2l2marclm1auslm1indlm1inslm3stelm3s2zln3are3l2ob_lo2berlob4ril1o2felo2gaulo3h2e2l1ohrlo2k3rl1o2lylo2minlo2n1olo3renlo4skelo2speloss2elo4stelo3thalo3thiloti4o2l3öfelpe2n3l2p1holrat4sl3s2all2sannl3sarel2s1ecl2s1emls1erels1ergl2serhls1erlls2logl3s2pil2sprol3s2pulstab6ls4tafl3stecl3steil3stell4stemls2tiel2stitls2zenlt1a2mlt3andlt1angl3tarblt1artl2t1aultbau1lt3elil5ten_lter3alt2erglt4erölte2thl2t1eul4theiltimo4l2t1ofl4t3ötltra3llt3räult4rielt3roclt3rosl2t3röl2t1umltu2ri4lu4b32l1ufelu2g1alu4g3llu2g3rlug3salug3splu1id_2l1una2l1unf2l1unilu2s1ulu2t1alu4teglu2toplu4t3rl2z3acl3z2anlz2erklz1indlz2wecm2ab4rma2d4rma4d2sma2ge_ma2gebma2gefma2gegma2gekma2gepma2getma2gevma2gew2m1aggma3g4n2m1agomai4se2m1aktmal1akma2lanma2lauma3lermali1emal3lo2malltma2nauman3d2ma2net2mansa2mansä2mansc2mantwmar3g2maro3dma3r2uma2tanma2telma5trimat3semat3sp2mausg4m1ändmä3t4rm2d1ummedie4mee2n12m1eif2m1eig3meistme3lamme2laume2lekme2lermelet42melf_mel2semel5t4mena2bme3nalmen3armen3aumen3glme3normen4skmen2somen3ta2mentnmer2er3merinme2sal4meser2me3shmes2stmeste2me1stome3t2amie3drmi2e1imien3smie2romie4timi2karmi3l2amilch1mild4s2m1impmin2enmin2eumin2ga3min2omi2t1rmit3s2mit5sami5tsumi2t1umk5re_m2m1akm2m1almm1angmm1anzm2m1aumme4namme2samm1inbmm1infmm1inhmm1insmm1intmmi3scmm3stamm3strmmüll1m4nesimode3smo2galmo2k1lmon2s3mon3su2m1opemo2rar2m1orcmor2drmo2rermos4tampf3limpf1ormp3strms3andm4s1efms1erwms1inims1orim2spedm2spotm2sprom4stagm3stelm3s2tims5träm3s2tumt3aremt1eltm2t1eum2t1immtmen2m2t3romt2sprmt1urtmu3cke4m3unfmu4s1amu2s1omut1aumut2stmvoll14n3absna2ch1nach3s4na2drna1f4rna2gemna2h1a3n2aldna2letnal3lanalmo2na2lopnal2phn2als_nal3t4n4amenna3m4n2n1amtnamt4sn1and24n1ang2n1ans2nantrnap2sina2r1an2arle4n3artna3r2unasyl2na3t4hnat4sanat4sc3n2aul4nausb4nausgn2auso4nauss4nausw2n1ä2mnär4s53nä1umnbe2inn2d1akn2danlnd1annnde2sendi2a3ndo2ben2d3ren2drobnd3rolnd3rosn2druind2sornd2spr2n1ebnne3ein4n1ehr3neigtnek3t42n1ele5neleb4nelek4nelemne3lennel4la3ne3lu2n1embn1e2mi2n3emp2n1emsnen3a2n1endgnen3einenen14nengb4nengs4nengtnens4enen3skn1entb4nentn5nentrn1ents4nentzne2n3u2n1epone2posne2ranne2rapne2raun1erbine2reb2nerfü3nergrn2erlin1ermän2ern_ne1rösn2ert_n1ertrne2rup2n1erzne3sanne3skane2s1pne1stanes3tine2tadne2tapn1etatne2taunet3han1e2tunet2zi2n1eupnfalt4nf5linnft4s3ng2absn2g1acn2g1akng2anfng1anzn2g1äln3g2enngen2an3gläsn2glicngrab6ng3ratng3rocngs3panich1s3n2id_nie4n3ni3eneni1eronifes3ni2grenig4spni2kalni2karni3ker4n1imp3n2in_n2in4a4n3ind4n1inhni2nor2n1insn2ins_4ninse4n1int2n1invni2s1eni3se_ni2s1pni3spinis3s4ni2s1uni3t4rni3tscnitts1n2k3adn2k1akn3k2aln2kansn2kausn2k1ärnk4ergnk1inhnk3lennk3lesn2klienk3lunn2k3ronks2eink3s2znk2taknk2tannkt1itnk4topnk2trunmen2snna2ben2nadan2n1annnen3gnn2erhnn2erknne2rönner2znnes1enne4stnn1o2rnn3s2pn2n1ufno2blano2leu3n2opano2radno1rakno3ral3n2os_no2s3pn2ostenost1r2nostvno3tabno2telno3t3hno4thano4thi2n1o2x4n1ö4lnräu3snre3sznrö2s1n2sangn2santn2sausn2s1änns1e2dns1entn2s1epns1erfns1ergn2serhns1ersnsfi4lnsho2fn2simpnsi4tensi2trns2kaln2s1opn4spatn3s2pins4piens3ponn4sprän4spronst1akn3starn3statns4tornstü1bn2s1unns2ungns4unrns4unsn4s3zint3absn3t2alnt1angnt2arbnt1arknt2armn2t1äunte3aunt1ebente3g6n2teignt4enent4ernnt4ersnt4ertnt2hern2t3hon3t4hunti3kln2tinfntini1nt2insn3ti1tnt4lemntmen2nto3ment3recn5trepnt4rign5tropn2t3rünt4saunt2sto3n4tu_ntu2ra2n3umb2n1ums2n3umz3nung_n3ungl2n1uninu4t3rn2z1aun2z1ännzdi1snzi2ganzig4snz1inin2zurkn2z1wan2z1wän2z1wuoa3cheoa3chioa4k1lo4a3lao4a3mi3oa3seo3b2al2o3b2äob3ein2o3b2iob3iteo2b3li2o3bloo2b3reob3s2hob2staocha2boche4boch1eioch3ö2och3teochu2fo2ckarock2erock3szodein3ode2n1odene4ode3sp2o3diaof1a2co2f1eiof2f1a1offizof2f5lof2f3r2o1f1rof4samof2speof2sprof2s1uof2teio2g1abog1alaog1ango2g1eiogi2erog1steohen3sohl3auoh3lecohl1eioh3lemoh3lenoh3lepohls2eoh2n1ooho2laoh1o2poh4rinoimmu4oka2laokale43o2kelok2s1po2l1akolars2ol1aufol4damol1eieol1eisol2fraoli3k4ol2kreol2lakol2lelolo3p2ol1ortol2strol2z1aol2zinom2anwom1arto2m1auo2m1eio3men_o2meruom1erzomiet1om1ingom1orgo4munto2narbon3ausone2n3onens2on1erbon1ergon1eröo3netton3g2lon2i3do4nikro4n1imon3ingonlo2con3n2eo2nokeon1orconsa2gon4samon2sebonse2lonst2hon3t2aoo2k3lo2p3adop3aktopa2leo1pe4nop2f3aop3fahopf3laop1flüopi5a4op5lago2p3le1op3t4or3a2bor4altor2ando2ranhor3arbor3attor1ändor2baror2dauor2deuor2ditor2dumore4aso2r1efor1eigo2reino2rerfor1ethor2fleorf3s42orgetor3g2h2orgiaorgi1eor3gle2o3ric4orie_o3rier4orin1or5ne_or3s4aor2täror2tefor2theor2torort3reo4r3un2o3s2ao3scheo2s1eio3s2hi2os2kl2os2koos3peco3s2poos2seios2s3oos4sonos2s3pos2s3tost1auos4teios2t3hos3tilost3räost3reost3ufo3s2zeo2ß1elota2goo5tarko3tarto2t1auot3augotei4not4em3otemp2ot5helo2t3hiot3hosot1opfoto2rao2t3reot3rinot4spaots2peot2sprot2t3rot4triou1f4lou4le_o3undsou3s2ioviso3owe2r11o2xidöbe2laöbe4liöh3l2eöl2k3löl2naröl2ungönizi1öp4s3tö2r3ecö2r1eiör2ergö2rerlör2f3lö2r1imörner2ör3s2kö2schaö2schlö2schwö2s1eiös2s1cöte4n3pa1f4rpa1k4lpak2topala3tpa2narpa3neipa2neu1pa2nopan3slpa5regpa5rek1park_par2klpar2kr1partn1partypar3z2pa3s2ppat4e2pa5t4rpa3unipä3ckepä2t3hpät3s4pekt4spe2letpe2lexpell2apell4epen3dape4nenpe2n1o3pensi1pensupen3z2per2anper4nape2robperwa4pes3s2p2f1akpf1ansp2fa4rpf3arepf3armp2f1au4p3fe_pf1eimpf1einp3fen_p2fentp3fer_pf2erwp3f2esp2f3läpf3leipf3lie2p1heiphen3dphen3sphi2ka2phthepi3as_pi3chlpiela2ping3s3pinsepi3onupi4pel3pirinpi3t2aplan3gpo2laupo4lorpo1o2bpo1ralpo1raupo4stapo4stäpo2stopos6trpo2t1upp3anlppe2n1p2p1f4p3p2hopp5lanp2p3rap2p3repre2e13preis2p3rer3p4res1prinz2prosspro1stp3steap3stelp3s2tipt3albp4t3ecp4t1eip4telept1in1pto3mept1urspul2sppu2s3t2r3aacra2barrab2blr2aber1r4abi2r3abwra2chura2dam2radapraf3arra2ferra3gle3r2ahmrail4l2r3airra2krera2kro2raktira2la2ral3abr3alar3r4aldral3larall2e2rallgr3alp_2ralper3al3trama3srambi2ra2mer1r2ami2r1amtramt4sr4andar4anderand3sr4aner1rangirani1eran2kr2r1anm2r1anpr2ans_r2ansp2rantr2r3anw3rareirar3f42r3arz2rato_rat2st3raub_rau2mi3rausc2rausgrau2spraut5srä2s1c3rätser2b1abrbal3arba3rerb1artrb1aufrb1echr4belärb1entr3b2larbla2dr2ble_rb3lerrb2linrb4seirb3skarb4stärb3strr1che_r1chenrch1s2rch3sprch3tar3d2acr2d1akr2d1alrdani1rd1antrd1anzrd2ei_rden3drde3rerde3sprdi3a2rdia4lrdo2berd3ratre2altre3at_re3atsre2b1are2b1lreb3ra4rechs2reck_2recki2reditre2hacre2h1ire2h1orei4bl4reifrrei3gareim2p4reingr3eink4reinr4re2ke2r1elbre3lei2r1elf2r1elt4rempfrena2bre3nal3rendiren3drren4gl2rengp2rengsr1ense2rentw3r4er_2r1erbr2erbr2r1erdr2erenr2erki2rerlö2r1ermre2robr2erse2rerspr2erte2rertr2r1erzrer5zer2erzy3r4es_ress2ere1stare2thyreu3g2re3uni2r1eurrewa4rrf1ältr2fentrf3licrf3linrf2s1ärf2s3trf3t4rr2g1ahr2g1akrge4anrge2blr2getor2glanr2gleur2g1obr2gregr2gresr2gretrg3rinrgs4tr3r4he_3r4henrho2i3rib2blri1cha2ridolrie2frriene4rien3srie2nuri1er_ri4ereri2f1ari2ferri2f1orim4scr2i3na2r1indri3n4erine1i2r1infrin2foring3lrin2gr2r1inh2rinitr1innu2r1insrin4sorin2sp2r1inv3risikri4s1pri3t2irit2trr3klaur2klisrk5nebr2k5nurk3räurk3rinrk2s1erk3shirk2tinrk2t3rrk3trark4trirk1unirlös3srl2s1prl3ster3m2agrma2larm1ansrm1anzrm1a2pr2maphr2m1efr2mider2m1imrm3starm3umsrn2andrn3anirn2a2rrn3arern3arirn3eifr4nerfr4nerkr4n1inr2n1opr2n1orrn3s2ärn3s2prn3s2zrn3t2ero2bei3rock_r2o3deroh3na3r2ohrro2madro2mer4ro1nyror3alro2ratro2reiro2r1oror3thro3s2iro3smoro3starost1rro4tagrote3iro2thoro4trirots2orot2taro3t2uro3untrö2b3lrpe2rerrer4srre2strr2n3ar2r3obrr3stur4samprs3anprs3antrsch2lr3schur3schwr2seinrse2n1rs2endrse4ners1erers1erörs1ersrs1erzrs1etars2kalrs2kanrs2kiers2kisr4s1opr4sordr2s3phrs2tecr3stier2stinr2stiprs4tobr4stotr3s4trr3s4türtals1rt1angrt1annrt1antrt1anzr2t1arrte1e2rt4eifr2telfr2temort1ersrt3holrt2humr2t1idr2tinfrto2rirt3recrt3rosrtrü2crt2spart2sprru2ckurude2aruf2s32r1uhrru1insru2m3ar2ums_2r1unar2unde2r1unf2runglrun2kr2r1unl2r1unm4r3untru2r1erus4stru3staru4teiru2t3rrü1benrwun3srz1a2cr5zenerz1engr3z2ofrzug2u3sabetsa3blesach3t2s1ada2s3affsa1f4r3s2al_sal2se2s1alt3s2alz4s1amnsam2tos2an2cs4and_3sang_2s3anh2s3anl2s3anssan4sk2s3anw3s4ar_3s2ara4s3arb3s2ard3s2ars4sartisa4ru24s3ath4s3atlsauri1s3ausw2s1änd3sänge2schak2schao3sche_2schefsch2en3sches4schexschi4es4chim3schis2schmö2schn_2schoxschs2e4sch3tscht2ascht4rsch2up3s4cop3sco4rsda3mese3at_s1echtsee3igseein2se1er_se1erö2s1effse2galse4helse2hinseh3rese2hüb2s1ei_2s1eie2s1eig2seinb4seing2seinh4seink2seinl2seinn4seinr2seinw4s1eis3s2eitse2l1ase3ladsela2gse3lamsel1ec4selem2self_s3elixse2l3ösel3szsel3trs4e3ma2s1emp3s2en_se4nagsen3gl3s2enise4nob3s2enss2ent_s2enti2sentw2sentzse2n3use5refser2ers2erfrs3erfüs2ergr2serhöse2robs2ers_2sersas4ert_s2ertase3rum3s4ervse2selse1stase2tatse1u2n3s2ha_4s3hansho4resi2achsi3enesi1errsi3gnusi2g3rsig4stsi2k1äsik3t42s1immsi3n4a2s1ind2s1infsing1asin3ghsin2gr4s1inhsini1e2s1inq2s1ins2s1int4s1invsi2s1esi2s1osi2s1psi2tausi2tra3skala4skanz3s2ki_3s2kik3skulpsla2vesler3s3s4lipsli4tuslo3be4s5not2s1o2bs1o2he4sohng2s1ohr4so2lyson3auson3säso1ral2s3ordso2rei4s1ostso3unt2s1ö2l2spala2spara4sparo3sparuspe3p4s1peri2sperl2speros2perr4spers3s2pez4spi4p3s2plis3p4lu4s3poss2potts2pracs2pran4sprax2spräm4spräs2spred2spres2sprob4sprüfsrat2ssrö2s1ssa3bos2sanos4sansss2antss3attsse3hass1erös3s2essse3tass1offs2s1opss1oris2spros3stelss4tipss2turss1ums2stabb3s4tad3staff2stale2stalkst1almst1alpst1ami4stan_sta4na3stand2stani2stans2stanws4tar_4staris4tarsst1asis3tat_2stauf2staum3staur2staus4stälts4tänd5stätts3täus4s5te_3s2tegste2gr3s4tehs2te2i3steig4steil1s2tel2stel_2steln2stels4stem_s5ten_st4ens4stermste4sts4teti3s2teu1steue4steufs2t3ho2stie_s2tiegs2tiel2stien3s2tif3s4tims4tinfs3tinnst1ins1stitu2sto3d4stod_s4toffs4t3om2stopo2stor_2store2storg2storis3tort2stose4stote2stöch2strad2strag4strai4strak2stral5straß2strua2strug3struk2strup2st3t43s4tud2stumt2stun_4stunn2stuntstu3rest3url2sturn2s3tus2stüch2stür_2stüre2stürg2stürs3s2tyl3su2b3su2cha2s1u2fsu1it_su2marsu2mau3s2umesu2mels3umfesum1o2su2mors3umsas3umst2s1uni2s1urlsüden24s3zeis2zena4szent4s3zet2ß1e2gße2l1aß2ers_2ßerseßge2bl2t1abb3tabel2taben3table2t3abn2t3abtta3d2s3taf2et1af4rta2ga24ta3gltag4sttah3leta3i2kta1insta1ir_t1a2kata2krotak6ta3taktb3t2al_ta3lagta3lakt1alb_t1albk3t4aletal2löta2mert1amplt1a2na4t2andt3ankl2tanwa2tanwät2anz_t1anzat1anzuta2pe_ta2pes2t1armt1artitar2to2t1arz4t1aspta2tanta2tautat3eita2temtat3heta2tom4tatue2t1auf4taufg4taufnt1ausb3tausct2auset1ausk4tausltaxi1s2t1ältt1ängs3t4ebbte3cha3technteck2ete2ckite2en3te1erwteg3ret3eifr2t1ein4teinf4teinnt3eis_t3eisb3te3letel1eb2telemtel1ente4leute2littell2ete2l1ö3telt4tel3tatel3thte2min2temme2tempfte4m1utena2bte4naste4nauten3dat6endit6endote2nefte2nettens2et4entat3entb4tentdt4ente4tentnten3zwt3e2pi3t4er_tera2bte1rafter3am4terbs4terbtte2relt4erfrte3ria3termi2ternct4ers_terst4ter3zatesa2cte2santesä2cte2selte2sprtes3s2te2tat3teur_2t1exz3t4ha_3thal_4t3hau1t2he_2t3heit4heint4henet4heni2therr3these2t3hil2t3himth4mag2t3hoc2t3hoht4hol_2t3hot1th2r2ti3a2mtiden2ti2deo3tief_3ti2erti2kamti2karti2kinti2kräti2larti2leiti2lel4t1imp3t2in_4t1indti3n2eting3lting3s2t1inj2t1int4t1invti2seiti1sta2ti3tuti2vanti2velti2v1oti2v3rtlung4tnes4s3tochtto4d1utom1e2to2mento2nauto2nehto2pakto2patto2rauto4ränto2relt3orga3torint1ort_3tost4to1sta3to3teto2thotouil44tractt3rad_6trahm5t4rai2trand3trankt3rann3transt3raset3rasi3träne4t5re_tre2brt3recht4reck6t3red5t4ree4trefe4trefot4rei_4treic2treift3reigt3reint3reis6treitt3reiz6t3relt4ren_3trendt3rent2trepe2trepot4reprt4res_3treuh5trieb2triegtri4er5triggt3rind4tringtri3ni4trinn4tripttrizi13t4roitro2ke4trom_tro2mi4troml2t3roo3tropf2t3röttrums15t4ruptru2thtrü1betrü1bu2t3rüct4sa4bt3s2act2s1aht4s3art2s1änts4cort3seiltse2n1t2s1erts1init2s1irt1slalt3spalts1parts2pedt3spekt3s2pit4stagts3takts4talt2stipt4stitts3tocts3tort2strits3türtta2bet2t1adtt2anttt1arttt1ebett1eiftt1eistte2lattel1otte2satte2sätt2häut2t3hott4roctt2sentt2sortt2spett2sprtt2stitu1almtu2chitu3fent3u2kr3t2ume2t3umf2t3umg2t3umk2t3umrtum2situm2so2t3umt2t3umz2t1una2t1und2t3unft3unga2tunif2t3unttu2re_tu2reitu2resturin1tück2s3tür3s3tütentze4n1tz2enetz1erltze2rotz2erst3ze2stzgel2tz1indtz1inttz2tinua2lauu3aletual2mau3a2louara2bu2be2cub3licu2b3luub2sanub2s1oub2spau1cha_uch1eiu3chesuch1iluch1inu2ch3ruch2souchst4u2ckemuder2eudert4udi3enuditi4ue2neruenge4uen2zuue2r3aue2r1äu3erehu3ereru3erexuer3g2uer2neue2r3ouer3scuer3t2u3erumue4teku2f1äsu2f1eiu2f1emu3fen_u2fentuf2ernuf2frouf1oriuf4sinuf2spouft3s2u2g1apu2g1eiug3ladu3g2löug4serug3spaug4sprug4spuug5stäug3strug3stüuhe3s6uh2reruh4rinuisi4nui4s5tukle1iuk2t3ruld2seu2l1elul1erful1erhul1erwule2saul1etaul1insul2lesul2p1hul4samuls2thul4trium1allum1anzu2maut1um3d2umer2aum1ins3umsatum4serum2simu2m1uru3n2amu2n3an2un2asun4dabun4deiun2didun2dorun2d3r4unds_und3spund3stun2ei_un3einunen2tun4es41unget1ungew1unglüun2g1rung3raung3riung4saun3ide1u2nifun3islu3n2it3u2nivun2keiun3n2eunvol2u1or3cu2pf2eu2pf1iu3rabaura2beur2anbur2anhu2r1auur3b2aur1effu2releu4r1epur1erhur1erwur2griurg3s4ur1iniur3insur1int1urlauur3sacur2sanur2sauur2serur4sinurst4rur2z1wus4annu2s1ecu2s1eiu3seiduse1rau2serpu2s1opu2spatus1picus2porus4sezus2sofu1stalus3tauust2inu2stunu2sturut1altut3a2mu2t1apu2t1arute4geut1ei_ut1eieutel1eute2n1u2tentu4t1exu2t3hout1opfu2topsut3reaut3s2aut2s1äut2spaut5t4lutu4reutu5ruut2z1wuve3räüb2s3tücht4eü3ckenück1erü3den_üden4güdwes2ü2f1eiü2h1eiühl1acüh3r2eühr3taü2mentün2fliün2g3lün3strü2r1eiü3r2o1ü2schlüs2s1cü2t1alva2teiva2t3hvatik2va2t3rvat3s4va2t1uveits32ve3muve3nalve3radve3rasver3b2ve4rekve4rinver3stver5te2ve3scves3tivi4a3tvie2w1vi2l1avi4leh2v1i2m2v1intvi3s2ovoll1avol2livo5rigv1steuwab2blwa3chewaffe2wa2g3nwah2liwal4dawal2tawal2towang4s1war2eware1iwart4ewass4e4webebwe2g1awe2g3lwe2g3rweg3s4wei4blwei2gawei3k4wei4trwel2t1wel4trwen3a4we2r3awer2bl1werbu1werduwerer2wer2fl1werk_wer2ka1werkewer2klwer2kuwer2tawer2to1wertswe2s1pwest1awes2thwest3rwes4tuwett3swi3ckawien2ewie2stwim2mawin2drwi3s2e1witzlwo2chawoche4woh2lewo2r3iwo4r3uwört2hwul3sewur2fa1wurstwus3te1wu4t1xe3lei3x2em_xen3s2x1i2doxin3s2xi2so2xis4täx1i2tuxtblo4x2t1eix4tentx2t3evy3chisyloni1y2p1iny1s4tyy2s1u22z3a2b2z3a2k2z1all2z3anf2z3anlz1artizar2tr2z1arzza1st42z3at3z1au2fzbübe32zecho2z1eck2z1effzei3lazeile42z1einzei3s4zeist4zei2trze2lenzell2azel3sz2z1empzens2ezent3sze2r3a2zerhöz2erl_2zerlö2z1erq2z1erzze3skuzes2spzes2stze2s3tze3sta2zettszger2azi3alozi1erhziers1zi1es_2z1impzin4er2z1inf2z1inhzin1itzin2sa2z1invzirk6szi3s2zzi1t2hzor4ne2z1oszz2t1auz4tehezt1inszt3reczu3ckezug1un2z1uhr2z1um_zumen22z1umszup2fizu3r2a2z1url2z1urs2z1urtz2wangz2weigz1weis2z1wel2z1wen2z1werz2werg2z1weszzi1s4",7:"_al4tei_amt4s3_and4ri_an3gli_angst3_an4si__an4tag_ausch3_be3erb_be3r2e_berg3a_bo4s3k_bu4ser_da4rin_da4te__da4tes_de4in__dien4e_ebe2r1_en2d3r_en4tei_er4dan_er4dar_er4dei_er4der_es5t4e_fer4no_fi3est_fi4le__fi4len_ge5nar_ge3r2a_ge3r2e_ger4in_hau2t1_her3an_ho4met_ima4ge_ka2b5l_li4ve__lo3ver_lus4tr_men3t4_orts3e_pa4r1e_reb3s2_re3cha_rein4t_reli3e_res6tr_sali3e_sim3p4_sto4re_tage4s_ti4me__ti4mes_to4nin_tri3es_ul4mei_urin4s_ur3o2m_ve5n2e_wei4ta_wor4tu_zin4stab1er2raber4ziaber4zoab3essea4cherfa4cherka4cheröach1o2bach2t1oach1u2fa3d2ar3ade1r2aade3s2pade5str2ad3recaf4t5reage4neba4gentuage4ralage4selage2s3pag3esseags4toca2h1erhah4l1eiahner4eahre4s3ahr6tria3isch_ajekt4o1a2k4adak5t4riala5ch2a2l1angalb3einalb3eisal4berh3a2l1efa4l3einal3endsa2l1erfa2l1erha2l1ert3a2lerza2l1eskali4eneali4nalal3lenda2l1o2balt3eigalt3ricalt4stüalzer4zamen4seamp2fa2am4schlana4lin2ana1s4and4artandel4san2d3rüand4sasand3stean2f5laan2g1eian4gerwan2g3raan2k1anan2k3noan2k3rä3antennan3t4heant3rina3ra3lia2r1anga2r1ansa2r1anza2r3appar2b3unaren4seare3r2aa2r1erhar2f3raari3e4nari3erdari3ergarin3itark3amtar2k1arark3aueark3lagark4trear4merkar3m2ora2r1o2dar2r3adarre4n3ar4schla4schecasch3laa2s3e2ma2s1o2fas4s3eia1s4tasas6t3rea2t1aktater3s2ato4mana2t1ortat4schnatt3angat3t4häat2t3räat4zerkat4zerwat2z1inau2b1alauch3taau4ferkaup4terau2s1ahau4schmau4schoaus3erp3aussagaus4se_aus5triau2t1äuä3isch_äl4schlän3n4e2ä2r1eneär4mentäser4eiäse4renäskopf3ät4schlät4schräu4schmäus2s1cba2k1erban2k1aba2r1ambau3s2k2b1eierbei4ge_2b1eimebe1in2hbe2l1enben3dorben4spaben4sprben5t4rber4ei_be4rerkber4in_ber3issbe2s1erb3esst_be3s4ze4b1illubis2s1cb2i3tusbjek4to2b3leidbo2l1anbor2d1ibor2d3rbor2t3rbra1st42b3rat_2b3riemb4schanb6schefb4s1erfb4s1ersbst1a2bb2s3träbs3treubtast3rbu4schlbu4schmbu4schwbügel3eca3s2a3ch3a2bich3anst3chartache4fer4chelemche4ler4chents4chentwche3rei2ch1e4x3chines2ch1invch3leinch4sper2ch1unf4ckense4ckentw4ckerhö4ckerke2ck1err4ckerze2ck1eseck4stro2ck1um3com4te_comtes4cre4mes2d1alar2d1ammädan4ce_dan5kladan2k1odar2m1i2d1au2f2d1aus3delei4gde3leindel4lebdel4leide2l1obdel4sandel2s5edel2s1p4denergden4sende2re2bde4reckder3ediderer4tderin4f4derklä4derneuder3taudert4rades3eltde2sen1de4stredes4tumdeten4tdge4t1edie4nebdi3ens_die2s3cdi2s5tedi4tengd2o3r4ador2f1a2d3rast2d3rauc3d4reck2d3reic3d4riscdrunge3drü5cked4s1amtds3assid4schind2s1e2bd4seinsd2s1engd2s1entd2s1erfd2s1erkd2s1erzd4s1etad3s2kand2s1pard3stell2d1un3ddu4schndu4schrdu4schwe4aler_e3at5t4ebens3eebet2s3eb4scheeb4stätebs3temebs3t2hech1o2bede3n2eeden4seeden4speder3t2ed2s1esed2s3treein4see2f1e2be2f1i2de2f1insege4strehen6t3ehe3strehl3eineh4lenteh5l2erehr1e2cehr3erleienge44eigeno1ei2g3nei3k4laei4leineil3inseim3allei4nengein4fo_ein4fosein4hab3einkomei2n1o23einsate4inverekt4antekt3erfekt3ergela4bene2l3a2me2l1a2re2l1eine3leinee4leing2e3len_e4lensee2l1ente2l1erge2l1errell3ebeell3eiseller4nelt3eng3elternelt3s2kelt3s2pe2m3anfe2m1ansem2d3a2e2m1erw1e2metiem2p3leena3l2ien3d2acend4ortend3romend3s2pene4bene4n1enten4entr4e3ner_e2n1erd1e2nerge2n1erle2n1erre2n1erse2n1erte2n3erue2n1erwe4n3essenge3raeni3er_e2n1i4me2n1o2benob4lee2n1o2ren4terb3entspr4entwetenz3erte4ratemerd3erwer3echser1e2ckere4dite2r1e2h4e3rei_4e3ren_e4rensee4rentne2r3erfe2r1erher3e4tiere4vid3ergebn4ergehäe3ri3k44e3rin_e2r1ini3erlebnermen4serm3erse2r1o2pers4toder4tersert3ins3erweck6erweise4s3atoe2s3einese4lere3s2peke3s2pore3s4praess3erges2s1paestab4be4starb1e2stase1s2tecest3ories3tropeße3r2eeten3d2eter4höeter4tre4traume6t3recetsch3wet2t3auette4n1et4t1umeu3ereieu3g2ereve5r2iewinde3e2z1ennfa4chebfa2ch1ifäh2r1ufeh4lei2f1eing4f1einh2f1einw2fe2lekfe2l1erfel4sohfe4rangfer3erz4ferneufest3eifet2t3afeuer3effel2d1f2f3emifi1er2ffi2l1anfisch3o2f3leinflu4gerfor4teifor2t3r2f5raucf4schanf4scheff4s1ehrf2s1entf4s1etaf3s2kief2s1pasf3s2porf4stechf3s4telf3sternft1a2bef4t1entft4scheft4s3täft4stri2f1u2nifun2k3rfus2s1pfu2ß1er4gangeb2g3ankugas5tangebe4amge4lanzge4lessgel3stegel3t2agen4auggen2d1rgen3eidgen3erngen4samgen4ta_2g1entfge4renggerin4fgerin4tger4satger4stoges3aufges3eltge2s3erges3s2tgien2e12g3isel3g2laub2g1lauf4g3lein4g3lisc2gni2s13g2num_2g3rede2g3reic2g3rein2g3renng3riese2g3ringg4s3a2kg4schefg3s2eilg3s2pekg3s2porgst3entgst3errg4s3torgs4trat4gungew2g1unglguschi5gus4serhaf3f4lhalan4chal4beihal4t3rhar4mes2h1aufmhau4spahäu2s1chba2r3ahe4b1eihe5ch2ehe2f1eihef3ermheiler4heit4s3he2l3auh3e2lekhel3ershel4meihe4n3a2hen3endhen3erg2h3entwher3a2bhe4reck4hereighe4rerwh1er2foherin4fherin4sh3erlauhe2s5trhie4rinhif3f4rhi2l3a4hin4t1ahir4nerhlags4ohle3runhner3eih3nungeho2l1ei2hot3s2hrei4bah4r3eigh3re2s1h2r1etah3rieslhr2s1achr2s3anhr3schlhr2s1enhr4s1inhr4s1ofh2s1achh4schanhse4lerh2s1erlh2s1ingh2s1parhst3alth2s3tauh3steinh5stellhst3ranh3taktsh4t3alth4t3a2mh4t3assh2t1eimh2t1eish4tentfht3erfoht3erfüh2t1erhh4terklht3erscht3ersth2t1erzh4t1eseh4t1esshte3stah4t3rakht3randh2t3rath4t5rinh2t3rolh2t3rosh4t1rösht3spriht4stabhts4tieht4stürh2t1urshu2b3eihu2b1enhu2l3eihu4lenthu2l1inhut4zeni3alenti3alerfi3alerhi3a2leti3a4liai1ät3s4i2b1aufich4speich2t3rieb4stoieb4strie2f1akie2f1anie3g4rai2e2l1aien4erfienge4fien3s2eie3r2erie4rerfi2er5niier4sehier3staier3steies2s3tie2t3hoie4t1ö4i2f3armift3erkif4t3riift3s2pi2g1angi4gefari3g4neuig3steiig4strei2k1a4ki2k1anoi4kanzei2k1erhi2ker2li2k1etaik4leriik2o3p4ikt3erki2l3a2mi4lentsi2l1erfi2l1ergi2l1erril2f3reilig1a2ili4gabi2l1indil3l2eril4mangil2m3atil2z1arilz3erki2m1armimat5scima4turi2m1erfi2m1erzi2m1infi2m1insindes4ii2n1engin3erbei4nerbiiner4löing4sam3inkarninma4leinn4stains3ertin3skanin3stelin4s3umional3aion4spiir2m1eii4s1amtisch3ari3s2chei4schefi4schini2sch1lisch3leisch3obisch3reisch3rui4schwai4schwoisch3wuise3infi4seinti2s1ermi2s1essis4s1aci1s4tati1s4teui1s4tilit3a4reiten3s2iti4kaniti3k2ei2t1in1i2t3ranits1a2git2s1e4its3er1it2s1peit4stafi2v1enei2v1enti2z1enejek4terjektor4je2t1u2jugend3jung3s42k1a2bo2k3a2drka3len_ka4lenskal3eri2k1annakari3es2k1artikau2f1okauf4spke1in2d2k1eiseke4leim2ke2lek2ke3letkel3s2kk3enten2k1ents4kerfahk4erfamk3ergebk3er4hökerin4tker4kenker4neuker4zeu2k1i2dekie2l3o2ki3l2aki3n4o32k1inse4k1lastkle3ari4k3leit2k1o2fekop4fenkot4tak2k3räum2k3redekreier4k4s1amtk2s1ersk2s1erwk3stat4k2t3a2rk2t1erhk2t1ingkti4terk4torgakt3oriek2u3n2akuri4erku4schl4l3aben4l1a2bl2l1a2drla2g1oblan2d3rlang3s4l1a2po2la2r1anla2r1eila4rene3l2ar3glar3ini2l1ar3t3lasserla2t3ralat4tanlat2t3rlau2b3rlaub4se2l1ausslär2m1al2b1edel2b1insld3a2b1ld3a2ckl2d1a2dl2d3a2nld4arm_lecht4ele2g1asleh3r2elein4dulei4ßerleit3s22le2lekle2m1o24lendet4lenerg2l1ennilen4sem2l3entwlent4wäle2r3asler3engle4rers3lergehl3ergen2l1ergilerin4s2l1er2ö3l2erra2l1esellgeräu33lichem3licherliebe4slie2s3clik4ter2l1indulingst4lin2k1ali4schu2l1i4solkor2b1ll1a2bel2l1a2mlle4n3all3endul4lentsl4lerfol4lergoll3erntll3ertrl2l1indl2l1o2rll1ö4sellus5t6l2m3a2blm3einsl2m1e2pl2m1erz2l1o2bllos3t4r2l1ö4l3l2s1a2dl4s1ambl4schinl4schmül2s1e2bl2s1ersl2s1erwl2s1impls3ohnel4t3amel2t3atol2t1eislt4stablt4stocltu4ranluf2t1aluf2t1eluf2t5rlung4sclus4s3alus2s1cluss3erlus2s1olus2s1plus2s3tlus4stälus4t1alust3relut1o2fmach4trma4ges_ma4laktma4l3atma2l3ut2m1analman4ce_man3ers2m1angr4ma3r2oma3s2pa4m1aspemassen3mas4telma1s4trma2ta2b2m1au2fmäu2s1cmbast3emedien3mein4dame1i4so2m1e2miment4spme2r3apme4rensmerin4dmerin4tmerz4en4m1essames2s1omes2s1pme4t3römierer4mil4cheminde4sming3s4mi4schami4schnmi4schwmis2s1cmi2s5tem2m1ansmme4linm4mentwmme2ra2mme4recmmi1s4tmo4n1ermor2d3amoster4mpf3erpmpf3errms5trenm2t1erfm4t1ergm2t1erlm2t1ersm2t1ertm4t1etam2t1insmt3s2kamun2d1amül4lenmütter3na3chenna2l1a2na4lent4n1a2nana4schw4n1a2synauf4frn4austenbe3r2en3ce2n3n2d1anznde4al_nde4lännde4robn2d3ratn4d3runnd4stabnds3taune2e2i22ne2he_2nehen44n3eing4n3eink3ne3l2o4n1endb4n1endd4n1endf4n1endh4n1endk4n1endp4n1endt4n1endwne4nenenen4ge_nen4gen4n1entl4n3entwne2ra2bne3r4alne2r3am4nerbe_4nerben4n5erfonerfor42n3erhö2n1erlöner4mit4n1ernt3n2ers_2n3ersa4n3essine2t1akne2t1annett4scnfi4le_n2g3a2mn2g1andn2g1einnge4ramnge4zänn2g1i2dn3g2locngs5trinie3l2a3n2ing4ni4schwnitt4san4k3algn2k1insn2k1ortnk2s1aln4n1alln4nentsn2n1unfn2o3ble2n1ob2s2n3o2fenor2d5rno4t3eino2t3inno2t1opn2s1a2dn2s1alln2s1äusn6schefn4schronsen4spn2s1erkn2s1erön2s1erwn2s1erzn4s1etan2s1inin4sperin4stat_nst3eifn3stemmns4tentnst4erön4stracn4strien3t2a3cn4tanzan2t1eisn4t1essn2t1inhnton2s1nt3reifnt3riegntu4re_ntu4res1n2ung4n2z1a2gn4zensen4zentwn4zentznz3erwe2o3b4enoben3d4oben3seobe4riso2ch1ecocher4ko3d2e1iof2f1inoge2l1io2h1eiso2h1erto2h1erzoh4lergoh4lerwo3isch_ol2l3auoll1e2col2l1eiol4lerkoma4nero3m2eiso2m1indo2m1into2n1erdon3n2anont3antont3erwon4t3riop4ferdopi3er_o2r3almor2d3amor2d1irord3s2to4rientor2k3aror4mansor4mentor3n2o1oro3n2aor2t1akor4t1anor2t1auort3eigort3erfor2t3evort3insor4trauort3ricor2t1umo4sentsoss3andost1a2bos4t3amost3angos3tarros4ta4soster3eos4t1obost3ranost3roto2ß1enzo2ß1ereo2ß1erfo3t2e1iote2l1aote4leio2t1erwo2t1i2mot4terkoun4ge_our4ne_ozen4taöchs4tuögen2s1öl2f1eiö2r1e2lö3r2erzö2r1uneö2sch3mpa2r3afpar3akt2par2erpar4kampar4kaupe2l1a2pe3li4npe3n2alper2r1a2ph1erspil4zerpingen4pi2z1in3ple5n4po2p3akpo2p3arpor4tinpor4trepor6tripo2s3tepost3eipost3rap2p3a2bppe4lerp4t1entpt3ereip4t1erwp4t1erz2r1acetra4chebra4chinracht3rr3a2d3r3ra1k4l2r3alm_r4alt2hram4manram4m3uram2p3lran4dep4r3aneiran4spara2r1inra4schl2r3asph2r3attarau3e2nrau4man2raus5srbe3r2erchst4rr2d1elbrden4glrder4err2d1innre3alerrech3ar3reigewrei3l2arei3l2irei3necre1in2v2re2lek2r1entl2r1ents4r3entzr4ergen2r1ernä4r3erns4r3ernt3r2ers_2r1ersare2s2tu2r3evid2r3e2x1rfi4le_rfolg4srf4s1idrf2s3prr2g1a2drge4ralrge4taprgi4selr2g3ralrg5s2turi2d3anri3ers_ri3estiri2f1eirif4terri4generin4dexrin4diz4rinnta3r4ins_r4inspirin4tegrin4t5rri4schori4schwr3i2talr2k3reark4stecrkt3ersrk2t1o2rl2s3tor2m1aldr2n1anzr4n3eisr4n1enern3enser4n1ergrn4erhir4n1ertrol4lanro4nerbron4tanros2s1crre4aler2s1a2dr4s1amtr2s3angr3sch2er4stantrs4temprs4terbrst3ingrst3ranr2t1almrt3a4rer2t3attrtei3lartei1s4rten3s2rt3ereir4terfar4terfor4t3erhr2t1erkrter4rerte3s2kr2t1imar4t3rakr4treisrt4s1ehr2t1urtru3a2r3ruch3strun2d1arund3er2r1u2ni4r3uniorus2s1pru2t1o2rve4n1er2z1erfr2z1ergr2z1erkr2z1erwrz2t3ror3z2wecsa2cho22s1a2drsa4gentsa3i2k1sa2l1ids3ameri6s1amma2s3a2nasan4dri4s3antr4s3a2sy2s3aufb2s3ausb3s2ausesbe3r2es4ch2al4schanc4schangsch3ei_4schemp4schess4schiru4schle_sch6lit4schre_4schrinsch3rom4schrousch3s2k4schunt4schwetsch4wilsdien4e2s1echo2s1e2ckse2e1i4se2h1a2se4h1eise4herk5s4ein_sein4dusei3n2esein4fos4eins_4seinsp4seinstsel3ers2s1endl4s1entf2s3entg2s1entsser3a2dse2r3als3erbe_s3ereig2s1erfo4serfül4serken2s3ernt4s3eröf4sersehse4r1ufse3rund4se4tap4s1e2thsi3ach_siege4ssi2g1a2si2k1absik3erlsin3g4lsing3sasi4schuska4te_4skategska4tes4s3klassni3er_sni3ersso4l3eisol4lerson2s1o2s1orga5s2orgeso2r1o24s1o2ve4spensi3s2pi4e4spier43s4prec3sprosssrat4scss1a2cks4s1alas4s1albs4s3amts4s3angs4s3anzs3sa1s2s2s1egasse3infss3ersessquet4s3ta3li4s3tann3staus_st3a2ve4stechn3steilhstei4naste4mar6s5ter_3sterncs4t3ese3s4tett1s2ti2rst1i4sosto3s2t1s4trah4strans3s4tras4straum4s5träg4sträne4s5tref4streibst3renn2s4trig2s5trisst3rollstro4ma4st3run2s4t3s42stum2sstum4sc3s4tunds2t3uni2s3tuns2st3urtsuch4st3s4zene2ß1estrßi2g1a2ta2b1anta4bend2t1a2drta2g1eitahl3sk3t2aktuta4lensta2l1optan4gar2t1anme4t1anna3t2ans_4t3ansi4t3anspta4rens3t4a3rita2ta2bta2t3erta2t1um4t3ausg4t3auss4t1auswtbauer4tbe3r2e4teilhet3einget3einlate2l3abte2l1acte2l1autele4bete4l1ecte4l1ehte4leinte4lerd4t3elf_te2l1inte4losttel3s2kte2m1ei3temperte4na2dte4na2g4t3endf4t1endl4t3endpten3d4rten3eidten3ens4tenerg4t1eng_ten4glate4n3in4tensem4t3entw4t3entzte3ran_te2re2bter3endte4rengte4rerkterer4z4terfol4terfül3ter3g2t6ergru4terklä2t1erlöter4mert3erneuter4re_ter4sert4erst_t4erstit4erstute4r1ufter4wäh2t3erzbtes3tantest3eitestes4teu3ereteu3eriteu2r3a2t3e2xe2t1e2xi4thrin_4thrinsti4dendti3e4n3tie4recti4gerzti2ma2gtim2m1atin2g1at1in1ittin2k1l3t2ins_4t1inseti4que_ti4schatisch3w3ti3t2etle2r3atmen6t3tmo4desto2d1ertor3inttra3chatra4demtra4far2t3rams3t4ran_tre4ale3t4reib2t3reih4trenditre2t3r2t3rund3t4runkt3s2chat4schart3sch2et4schefts4chemtsch4lit4schrot2s1e2bt4seindt2s1engt2s1entt2s1i2dts4paret3s2pont3s2port4spreits3tätit2s3tepts3tradt4strants3traut2s3trät4streut4stropt2s3trütte4lebtte4lent3u2fertums5trtung4s5tu2r1ertu4schlt2z1e2ct2z1eiet2z1eistz3entsubal3l2ubi3os_u2b3rituch4spruch4toruch2t3ru4ckentu3ck2eruden3s2ue3reigue4rergue4rerku4erinnuer4neru3erunfu3eruntu2f1ä2ßu2f1erhu4ferleufs3temuf2t1ebu4gabteu2g1erfu2g1erlugge4stu2g3rüsu3isch_u3ischsuk2t1inulm3einu2m3a2ku2m1artu2m1ausument4su2m1ergu2m1erlu2m1erwumpf4lium2p3leum2s1peun2d1umun2k1a2unk4titunk2t3run2n3aduns4t1runte4riunvoll3up4t3a2upt3ergu2r3a2mu2r1anau2r1angurgros4ur3s2zeu2s1eseusi3er_us3partu2s1pasu3s2peku5s4pizust3abeu5strasus6trisute4leiuter4eruto4berut4schlut4schmut4schöutz3engut2z1inüch2s1cück3eriü4ckersück4speü3d2ensü2f1ergü2h1engü2h1erkü2h1erzühr3ei_ül2l1eiün2f1eiü2r1entüste3neva2t3a4va4t1inve4l1auvenen4dve3rand2ve3s2evid3s2tvie2h3avie4recvi2l1invollen4vormen4waffel3wah4lerwalt4stwar3stewa4schawä3schewe3cke_we3ckeswei3strwer4gelwe4r3iowest3eiwest1o2wim4m3uwolf4s3wol4lerwor2t3rxi2d1emx2t1e2dxtra3b4x2t3rany2l3a2myl4antezei2t1aze2l1a2ze2l1erze2l1inzel3t2hze4n3aczen4semzen4zerze2re2b2z1ergäz3erhalzerin4tzer4neb2z1ersazert1a2zert4anzer4tin4zerwei3z2erzazessen4zger4s1zin4ser4zinsufzon4terz3t2herzu2g1arzu4gentzwan2d1",8:"_al1e2r1_al5l4en_anden6k_ar4m3ac_ar4t3ei_ber6gab_ber4g3r_de3r4en_einen6g_en4d3er_en5der__er4zen4_ka4t3io_lo4g3in_mode6ra_ost5end_oste6re_par3t4h_richt6e_sucher6_tan4k3la2ch1e2ca4ch3erwacht5ergach6tritack3sta43a2er2o1af4t3erlage4s3tiah4l3erhal4b3erw3a2l1e2bal2l3a4rall5erfaalli5er_al4t3erfam4t3ernand6spas3a4n1erban4g3erfan4g3erlan4g3erzang4s3poani5ers_an2t3a4ran2z1i4nar4t3ramau5ereinau4s3erwauster6mau4ten4gau4t3erhäs4s3erkbach7t4ebal4l3ehbe4r3eiwber6gan_ber3st4abe6steinbe4s3tolbote3n4ebst5einbbu4s3chach3e4ben6chergebcher6zie6ckergeb4d3achse2d1an3d22d1e4ben3d2e1i2mde2l1a2gde4l3augdel5sterde4n3endden4k3li4den4semde4r3eisde3r4erbde3r4erfde4r3ero4d3erhöh4d3ersatdest5altdest5ratdienst5r2d1in1it4d3innerdi4t3erldi4t3ermdi4t3ersd4s3tätid3s4tern2d1u2m1edu4sch3le3a4reneech3t4eiege4n3a2eg4se4r1ehr6erleei4b3uteei4d3errei2m1a2gein6karnein6stalei6schwuei4s3erwek4t3erzeld5erstel4d3erwe4ler4fae4ler4lae4l3ernäe4l3e4taelgi5er_elgi5ersel4l3einemen4t3he6mentspen4d3esse4n3ermoeni5ers_en5sch4eenst5alten4s3täten4t3rolen4z3erfen4z3ergen4z3erke2r3a4sie4r3eis_e4r3entferi3e4n3er6tereier4t3erfess4e3rees4t3enges4t3erhes4t3essestmo6deet4z3enteue6reifeut6schnfacher5ffal6schafal6schmfe4r3anzfrach6trf4s3tätif4s3tresf4s3tütef4t1e4tift4s3tanfzeiten6gas4t3el2g1eise2gel4b3ragel4b3rogel6dersge4l3ers4g3ereigge4ren4sge4r3entge4s3terglei4t5rgrammen6gros6selg3s4tatigs4t3rosgu4t3erhhaft4s3phal6lerfhau3f4lihau5steihau6terkhe4f3inghel4l3auhe2n1e2bhe4r3eishe4r3o4bhfel6lerhich6terho6ckerlhol6zeneh6rerlebh3s4terbh3t4akt_h4teil4zh4t3elith4t3entsht5erkenh6terneuh4t3erreh6terstaht6ersteht6raumeht4s3turhu4l3enghut4z3eria4l3ermie4n3a2gie4n3ergienst5räie4r3erziesen3s4ie4t3erhie4t3ertiker6fahi3l4aufbim4m3enti2n1e2bei4ner4trin2g1a2gin4n3ermin4s3tätir4m3untir4sch3wi4sch3eii5schingi6schwiri4s3etatiso6nendis4s3cheit4z3ergjah4r3eika4n1a4s6kantennkehr4s3o4ken4gagken5steiker6gebnkerin6stk3er4lauk3er4lebk6erlebe2k1er2zikeu6schlkor6dergkre1i2e4k4s3tanzk4t3erfolan2d3a22lat2t1alat4t3inl2d1e2seleben4s3lei6nerble4n3end5lentwet4l3ereigle4r3eim3l4ergew6lerwerbli4g3ers2l1in1itl6lergebl6lergen2l1or3g2l4s3ort_l4s3tätils6ternels6ternsl4te4leml4t1e4skl2t1o2rilu2g1e2blus6serflus6serklus6serslu4t3ergl2z1u4femagi5er_magi5ersmar6schmmar6schrma4t3erdmen6tanz4m3entwi4m3ergänmes6sergmp4f3ergmp4f3erz4m3ungebmu4r1u2fnacht6ra4n3a2mernavi5er_navi5ersn4d3entsnder5stene2n1e2bn4g3erseng4s3e4h2n3i2gelni4k3ingn4k3erfanseh5eren4s3ort_n4s3prien4s3tatens6terbenst5opfenten6te_nt4s3parober3in4ode6rat_ode6rateoh4l3erholl5endsoll5erweol4z3ernonderer5on4t3endopf5erdeopi5ers_or4d3engo2r1e2ckorsch5lior4t3entor4t3ereor4t3offor4t3räuos4s3enzo2ß1en2kö4sch3eipargel6dpä4t1e2hpä4t3entpe4l3inkp2f1in3spos4t3agrach6trärali5er_rali5ersran4d3errau4m3agräu5scher2b1a2der4b3lastrch6terwrderin6sr4d3erntrege4l3äre4h3entreister6re4n3end4r3erken4r3erlaurge4l3errgen4z3w4r3innerrkstati6rk4t3engrk4t3erfrk6terscrk4t3erwr2m1o2rirn3e4benrol3l4enrpe4r3inr6scherlr4s3ort_r6strangr4t3erler4t3ernäru6ckerlrun6derlrun6dersrun6derwr4z3entssa4l3erbsat4z3en6schlein2s1e2bense4l3erl4s1e2pos6sereignse4r3eimse4r3enk2s1i2deoson5ende2s1o2riesrücker6sse3in4tstel4l3äs4t3endss4t3engls4t3entfste6rersstes6se_5st4reif1s4tri2ksun6derhtan6zerhta4r3eretau3f4litau6schrtau6schwtblock5e4t1e2bentein3e4cte2m1o2rte2n1e2bte3n4ei_ten4t3riten6zerh4t3erde_te4r3eif6tergreiter4n3art6erscha6terwerbtes6terkti4v3erlto6ckenttrücker6t4s1amt4t4s3esset3s4terotta6gess2t1u2niotu2r1a2gtu2r1e4tu2ch1e4cu3erin4tuern3s4tu4g3reisun4d3erfund5erhau2r1an5sur3a4renu6schentusch5werusi5ers_u4t3ersaüge6leiswach6stuwach4t4rwahl5entwandels6we5cken_wein4s3aweis4s3pwel6schlwel6schrwel4t3a2wen4k3ri5werdensxpor6terx2t1er2fx2t1il2l2z1e2benzeit5endzei4t3er4z3ergebzer4n3ei4z3erstezer4t3agzer6terezer6trau",9:"_char8me__er8stein_he6r5inn_men8schl_men8schw_os5t6alg_rü6cker6_wort5en6_wor8tendach8traumalli7ers_allkon8tral5s6terbausan8ne_äh4l3e4be6b5rechtebs3e4r3inchner8ei_dampf8erfden6s5taue6ch5erziee4r3en4ge6l5eier_erg3el4s3fal6l5erk6fel6ternfor4m3a4gforni7er_fzei8tendgot6t5erggrab8schegren6z5eihä6s5chenhe6rin6nuherin8terh6l3er4näh6t5erspaieler8gebi2k1e2r2eil4d3en4ti4sch3e4hkamp8ferfke6rin6nulan6d5erwlan6d5erzleis6s5erlepositi86mel6ternmorgen5s65n2en3t2aner8schlenich8tersn4n3er4wano6t5entrnsch7werdn5s6ternen5s6ternsos4s3en4kpapieren8ram6m5ersr8blasserres6s5erw6r5innenmris6t5ersr6st5eingrs4t3er4wr4t3er4lasfal6l5erspani7er_sse6r5atts4s3e4strsu6m5ents4t3a4genttblocken8tes6ter6gür4g3en4gvati8ons_vol6l5endwer6t5ermwin4d3e4czes6s5end",10:"_er8brecht_os8ten8deder6t5en6deren8z7endgram8m7endhrei6b5e6cos6t5er6werein8s7trewel6t5en6dwin8n7ersczge8rin8nu",11:"_er8stritt__spiege8leiach8träume_lei8t7er8scpapie8r7endpiegelei8en",12:"ach8träumen_7sprechende_",13:"_er8stritten_"},charSubstitution:{"ſ":"s"}});const Ba={en:new Ca(Aa),fr:new Ca(qa),de:new Ca(Ea)};function Sa(e,t="en"){if(!e)return e;const r=Ba[t]||Ba.en;return e.replace(/_/g," ").split(/(?=[-\s])|(?<=[-\s])/g).map((e=>{if("-"===e||""===e.trim())return e;const t=e.replace(/([a-zA-Z])(?=\d)|(\d)(?=[a-zA-Z])/g,"$1​$2");return function(e){return e.charAt(0).toUpperCase()+e.slice(1)}(t.length>8?function(e){const t=r.hyphenate(e).join("&shy;");return t===e?e.match(/.{1,3}/g).join("&shy;"):t}(t):t)})).join("")}function Da(e){if("number"!=typeof e)return"N/A";const[t,r]=e.toFixed(2).split(".");return"00"===r?`<span class="whitespace-nowrap">${t}-</span>`:`<span class="whitespace-nowrap">${t}<span class="text-sm font-medium underline relative top-[-0.4em]">${r}</span></span>`}function Fa(e){return e>1e4?`${Math.floor(e/1e3)}K`:e>1e3?`${(e/1e3).toFixed(1)}K`:e}function Ta(e,t,r){const a={},n={};return e.filter((e=>r?0!==e.price:0===e.price)).forEach((e=>{const r=e[t];if(!r)return;let i;i="puppets"===ma().section?ya(r.toLowerCase().replace(/\s+/g,"_")).master:function(e){if(!e)return e;const t=/^[0-9A-Fa-f]+$/,r=/^[IVXLCDM]+$/i,a=[...e.matchAll(/\d(?:[\d_-]*\d)?/g)].reduce(((e,t)=>t[0].length>(e?.length||0)?t[0]:e),null),n=e.split(/[_\s-]/);let i=null;if(n.forEach((e=>{t.test(e)&&(!i||"decimal"!==i.type&&e.length>i.value.length)&&(i={type:"hex",value:e}),r.test(e)&&/^(M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3}))$/i.test(e)&&(!i||"decimal"!==i.type&&"hex"!==i.type)&&(i={type:"roman",value:e})})),a&&(!i||a.length>=i.value.length)&&(i={type:"decimal",value:a}),i){const{type:t,value:r}=i;if("decimal"===t)return e.replace(r,r.replace(/\d/g,"@"));if("hex"===t)return e.replace(r,r.replace(/[0-9A-Fa-f]/g,"@"));if("roman"===t)return e.replace(r,"#")}return e}(r),n[i]||(n[i]=new Set),n[i].add(r),a[i]=(a[i]||0)+1})),function(e,t){return Object.entries(e).map((([e,r])=>{let a,n=Array.from(t[e]).sort();a="puppets"===ma().section?e:n[0];let i="";ma().showCTE&&(i=xa(a)?"":'<svg xmlns="http://www.w3.org/2000/svg" class="fill-black h-3.5 inline -translate-y-[2px] pr-[3px]" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 19 24">\n      <path d="m16.317 21.569h.091c.645 0 1.263.256 1.718.712.456.456.712 1.074.712 1.718v.001h-18.838s0 0 0-.001c0-.644.256-1.262.712-1.718.455-.456 1.074-.712 1.718-.712h.091v-.175c0-2.069 1.677-3.746 3.746-3.746h.001v-14.076l3.16-3.572 3.142 3.572v14.076h.001c2.069 0 3.746 1.677 3.746 3.746z"></path>\n    </svg>');const s=`<a href="https://www.nationstates.net/nation=${encodeURIComponent(a)}/page=deck/show_trades" target="_blank" rel="noopener noreferrer">${i}${Sa(a)}</a>`;let l="";n.length>1&&(l=`<div class="tally-info ml-0.25 inline text-gray-500">\n          <span>[${n.length}]</span>\n        </div>`);const o=`${s}${l}`;return console.debug({aggregatedName:a,rawNames:n,count:r}),[o,r]})).sort(((e,t)=>t[1]-e[1]))}(a,n)}async function La(e,t){const r=`https://maki.kractero.com/api/trades?limit=-1&${e}=${t}&category=All&sortval=Timestamp&sortorder=Desc`;try{const t=await fetch(r);if(!t.ok)return console.error(`Failed to fetch ${e} data:`,t.status),[];return(await t.json()).trades||[]}catch(t){return console.error(`Error fetching ${e} data:`,t),[]}}function Ra(e){return[{label:"Nation",alignment:"left"},{label:Fa(e.reduce(((e,[t,r])=>e+r),0)),alignment:"right"}]}function Oa(e){return e.map((([e,t])=>[e,Fa(t)]))}function Pa(e){return[{label:"buyer"===e?"Buyer":"Seller",alignment:"left",styles:["min-w-[8ch]","max-w-[18ch]"]},{label:"Card",alignment:"left",styles:["min-w-[8ch]","max-w-[18ch]"]},{label:"Price",alignment:"center",styles:["min-w-[3ch]"]},{label:"Date",alignment:"center",styles:["min-w-[7ch]"]}]}function Ma(e){return[{label:"buyer"===e?"Buyer":"Seller",alignment:"left",styles:["min-w-[8ch]","max-w-[18ch]"]},{label:"Card",alignment:"left",styles:["min-w-[8ch]","max-w-[18ch]"]},{label:"Date",alignment:"center",styles:["min-w-[7ch]"]}]}function Na(e,t,r,a,n){return e.filter(r).map((e=>{let r="";ma().showCTE&&(r=xa(e[t])?"":'<svg xmlns="http://www.w3.org/2000/svg" class="fill-black h-3.5 inline -translate-y-[2px] pr-[3px]" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 19 24">\n      <path d="m16.317 21.569h.091c.645 0 1.263.256 1.718.712.456.456.712 1.074.712 1.718v.001h-18.838s0 0 0-.001c0-.644.256-1.262.712-1.718.455-.456 1.074-.712 1.718-.712h.091v-.175c0-2.069 1.677-3.746 3.746-3.746h.001v-14.076l3.16-3.572 3.142 3.572v14.076h.001c2.069 0 3.746 1.677 3.746 3.746z"></path>\n    </svg>');let i=r+Sa(e[t]||"N/A");const s=`<a href="https://www.nationstates.net/nation=${encodeURIComponent(e[t]||"N/A")}"\n        target="_blank" rel="noopener noreferrer">${i}</a>`,l=`<a href="https://www.nationstates.net/page=deck/card=${e.card_id}/season=${e.season}"\n        target="_blank" rel="noopener noreferrer">S${e.season} ${Sa(e.card_name||function(e){if(!ka)return console.warn("S4 cache is not initialized."),null;return ka[e]||null}(e.card_id))}</a>`,o=ma(),u=e.category||"C",c=`bg-rarity-${o.redEpics&&"E"===u.toUpperCase()?"E1":o.rainbowLegs&&"L"===u.toUpperCase()?"L1":u.toUpperCase()}`,{formatted:h,relative:d}=function(e){if(!e)return{formatted:"",relative:""};const t=new Date,r=new Date(1e3*e),a=`${String(r.getDate()).padStart(2,"0")}/${String(r.getMonth()+1).padStart(2,"0")}/${String(r.getFullYear()).slice(-2)}`,n=t-r,i=Math.floor(n/864e5),s=Math.floor(i/365);return{formatted:a,relative:s>0?`${s}y ${i%365}d ago`:`${i}d ago`}}(e.timestamp);let p="";if(o.showPuppetmasters){const r=ya(e[t]||"N/A");if(r.master!==e[t]){let e="";ma().showCTE&&(e=xa(r.master)?"":'<svg xmlns="http://www.w3.org/2000/svg" class="fill-gray-500 h-[0.65rem] inline -translate-y-[1.5px] pr-[2.5px]" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 19 24">\n       <path d="m16.317 21.569h.091c.645 0 1.263.256 1.718.712.456.456.712 1.074.712 1.718v.001h-18.838s0 0 0-.001c0-.644.256-1.262.712-1.718.455-.456 1.074-.712 1.718-.712h.091v-.175c0-2.069 1.677-3.746 3.746-3.746h.001v-14.076l3.16-3.572 3.142 3.572v14.076h.001c2.069 0 3.746 1.677 3.746 3.746z"></path>\n     </svg>'),p+=`<span class="text-gray-500 text-sm"><a href="https://www.nationstates.net/nation=${r.master}"\n        target="_blank" rel="noopener noreferrer">${e}${Sa(r.master)}</a></span>`}}const f=[`${s}${p?`<br>${p}`:""}`,{value:l,class:c}];return a&&f.push({value:Da(e.price),class:""}),f.push({value:`<span class="date-formatted ${n?"hidden":"block"}">${h}</span>\n                <span class="date-relative ${n?"block":"hidden"}">${d}</span>`,class:"date-cell",onClick:Ga}),f}))}function Ia(e,t){return Na(e,t,(e=>0!==e.price),!0,ma().showRelativeDate)}function Ua(e,t){return Na(e,t,(e=>0===e.price),!1,ma().showRelativeDate)}function Ga(){document.querySelectorAll(".date-cell").forEach((e=>{const t=e.querySelector(".date-formatted"),r=e.querySelector(".date-relative");t&&r&&(t.classList.toggle("hidden"),r.classList.toggle("hidden"))}))}var Ha=yr('<h2 class="text-xl font-semibold font-inter mt-2 mb-2"> </h2>'),Va=yr("<th> </th>"),Ka=yr("<td><!></td>"),Wa=yr("<td><!></td>"),Xa=yr('<tr class="bg-white hover:bg-gray-100 transition"></tr>'),Za=yr('<button aria-label="Show More" class="bg-blue-500 text-white size-6\n            rounded-full hover:bg-blue-600 focus:outline-none\n            focus:ring focus:ring-blue-300 transition flex items-center justify-center"><img src="./icons/arrow_down.svg" alt="Show More" class="size-5"></button>'),Ja=yr('<button aria-label="Show All" class="bg-blue-500 text-white size-6\n            rounded-full hover:bg-blue-600 focus:outline-none\n            focus:ring focus:ring-blue-300 transition flex items-center justify-center"><img src="./icons/arrows_down.svg" alt="Show More" class="size-5"></button>'),Ya=yr('<button aria-label="Collapse" class="bg-blue-500 text-white size-6\n            rounded-full hover:bg-blue-600 focus:outline-none\n            focus:ring focus:ring-blue-300 transition flex items-center justify-center"><img src="./icons/arrows_down.svg" alt="Collapse" class="size-5 transform rotate-180"></button>'),Qa=yr("<!> <!> <!>",1),en=yr('<!> <table class="w-full border-separate mb-3 text-left tabular-nums border-spacing-0"><thead><tr></tr></thead><tbody></tbody></table> <div class="flex justify-end items-center gap-1"><span class="text-sm text-gray-600"> </span> <!></div>',1);function tn(e,t){if(new.target)return Tr({component:tn,...e});vt(t,!1);let r=pa(t,"title",12,""),a=pa(t,"columns",28,(()=>[])),n=pa(t,"rows",28,(()=>[])),i=pa(t,"defaultRows",12,25),s=pa(t,"increment",12,25),l=he(i());function o(){pe(l,Math.min(gt(l)+s(),n().length))}function u(){pe(l,n().length)}function c(){pe(l,i())}Jt((()=>(gt(l),zt(n()))),(()=>{pe(l,Math.min(gt(l),n().length))})),Yt(),na();var h=en(),d=Ut(h),p=e=>{var t=Ha(),a=It(t,!0);qt(t),er((()=>Ar(a,r()))),jr(e,t)};Rr(d,(e=>{r()&&e(p)}));var f=Gt(d,2),m=It(f),g=It(m);Pr(g,5,a,Or,((e,t,r)=>{var n=Va(),i=It(n,!0);qt(n),er((()=>{Jr(n,`px-1.5 py-2 bg-black text-white font-medium align-top ${0===r?"rounded-tl-md rounded-bl-md":""} \n      ${r===a().length-1?"rounded-tr-md rounded-br-md":""} text-${gt(t).alignment||"left"}`),Ar(i,gt(t).label)})),jr(e,n)})),qt(g),qt(m);var b=Gt(m);Pr(b,5,(()=>n().slice(0,gt(l))),Or,((e,t)=>{var r=Xa();Pr(r,5,(()=>gt(t)),Or,((e,t,r)=>{var n=xr(),i=Ut(n),s=e=>{var n=Ka();Hr(It(n),(()=>"object"==typeof gt(t)?gt(t).value:gt(t)),!1,!1),qt(n),er((e=>Jr(n,e)),[()=>`px-1.5 py-1 align-top border-b border-gray-300 \n              ${"left"===a()[r]?.alignment?"text-left":""} \n              ${"center"===a()[r]?.alignment?"text-center":""} \n              ${"right"===a()[r]?.alignment?"text-right":""} \n              ${a()[r]?.styles?.join(" ")||""} \n              ${"object"==typeof gt(t)?gt(t).class:""}`],be),kr("click",n,(e=>gt(t).onClick(e))),jr(e,n)},l=e=>{var n=Wa();Hr(It(n),(()=>"object"==typeof gt(t)?gt(t).value:gt(t)),!1,!1),qt(n),er((e=>Jr(n,e)),[()=>`px-1.5 py-1 align-top border-b border-gray-300 \n              ${"left"===a()[r]?.alignment?"text-left":""} \n              ${"center"===a()[r]?.alignment?"text-center":""} \n              ${"right"===a()[r]?.alignment?"text-right":""} \n              ${a()[r]?.styles?.join(" ")||""} \n              ${"object"==typeof gt(t)?gt(t).class:""}`],be),jr(e,n)};Rr(i,(e=>{gt(t).onClick?e(s):e(l,!1)})),jr(e,n)})),qt(r),jr(e,r)})),qt(b),qt(f);var _=Gt(f,2),k=It(_),v=It(k);qt(k);var w=Gt(k,2),z=e=>{var t=Qa(),r=Ut(t),a=e=>{var t=Za();kr("click",t,o),jr(e,t)};Rr(r,(e=>{gt(l)<n().length&&e(a)}));var s=Gt(r,2),h=e=>{var t=Ja();kr("click",t,u),jr(e,t)};Rr(s,(e=>{gt(l)+i()<n().length&&e(h)}));var d=Gt(s,2),p=e=>{var t=Ya();kr("click",t,c),jr(e,t)};Rr(d,(e=>{gt(l)>i()&&e(p)})),jr(e,t)};return Rr(w,(e=>{n().length>i()&&e(z)})),qt(_),er((()=>Ar(v,`showing ${gt(l)??""}/${n().length??""} rows`))),jr(e,h),wt({get title(){return r()},set title(e){r(e),mt()},get columns(){return a()},set columns(e){a(e),mt()},get rows(){return n()},set rows(e){n(e),mt()},get defaultRows(){return i()},set defaultRows(e){i(e),mt()},get increment(){return s()},set increment(e){s(e),mt()},$set:la,$on:(e,r)=>sa(t,e,r)})}var rn=yr('<h2 class="text-xl font-semibold font-inter mt-2 mb-2"> </h2> <p> </p>',1);function an(e,t){if(new.target)return Tr({component:an,...e});vt(t,!1);let r=pa(t,"title",12,""),a=pa(t,"content",12,"");var n=xr(),i=Ut(n),s=e=>{var t=rn(),n=Ut(t),i=It(n,!0);qt(n);var s=Gt(n,2),l=It(s,!0);qt(s),er((()=>{Ar(i,r()),Ar(l,a())})),jr(e,t)};return Rr(i,(e=>{r()&&e(s)})),jr(e,n),wt({get title(){return r()},set title(e){r(e),mt()},get content(){return a()},set content(e){a(e),mt()},$set:la,$on:(e,r)=>sa(t,e,r)})}var nn=yr('<div class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center"><!></div>'),sn=yr('<div class="px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-16"><div class="relative text-center mb-4"><h1 class="text-2xl font-bold font-inter">Unsmurf thru Card Trades</h1> <p class="text-gray-600">An alternative UI for <a href="https://bazaar.kractero.com/" class="text-blue-500 hover:underline">Kractero\'s Bazaar</a> to make identifying puppets easier.</p> <div class="flex items-center justify-between mt-4 w-full"><div class="flex-1"></div> <div class="flex-3 flex items-center justify-center gap-2"><input id="nationId" type="text" placeholder="Testlandia" class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"> <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Lookup</button></div> <div class="flex-1 flex justify-end"><button aria-label="Config" class="bg-black text-white font-bold p-2 size-10\n\t\t\t\t\t   rounded-full hover:bg-gray-600 focus:outline-none\n\t\t\t\t\t   focus:ring focus:ring-gray-300 transition"><img src="https://ns-rot.github.io/unsmurf/icons/config.svg" alt="Config" class="w-6 h-6"></button></div></div></div> <!> <div class="alert"></div> <div id="tally-row" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 :gap-4"><div><!></div> <div><!></div> <div><!></div> <div><!></div></div> <div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-2.5 md:gap-4 mt-6"><div><!></div> <div><!></div> <div><!></div> <div><!></div></div></div>');const ln=new function e(t,r){if(new.target)return Tr({component:e,...t});vt(r,!1);const a=he();let n=he(""),i=he(!1),s=he([]),l=he([]),o=he([]),u=he([]),c=he([]),h=he([]),d=he(!1);function p(){if(!gt(n).trim())return void alert("Please enter a nation name.");const e=gt(n).trim().replace(/[^A-Za-z0-9_\-\s]/g,"").replace(/\s+/g,"_"),t=`./?q=${encodeURIComponent(e)}`;window.location.href=t}async function f(){if(!gt(n).trim())return void alert("Please enter a nation name.");pe(i,!0);const e=gt(n).trim();!function(e,t){const r=new URLSearchParams(window.location.search);t?r.set(e,t):r.delete(e);const a=`${window.location.pathname}?${r.toString()}`;history.replaceState({},"",a)}("q",e),document.title=`Unsmurf | ${e}`,pe(s,[]),pe(l,[]),pe(o,[]),pe(u,[]),pe(c,[]),pe(h,[]);const[t,r]=await Promise.all([La("buyer",e),La("seller",e)]);if(pe(s,t),pe(l,r),pe(o,await Ta(gt(s),"seller",!0)),pe(u,await Ta(gt(s),"seller",!1)),pe(c,await Ta(gt(l),"buyer",!0)),pe(h,await Ta(gt(l),"buyer",!1)),null!=e){const t=e.toLowerCase().trim().replace(/\s+/g,"_"),r=!xa(t),a=ya(t).master;let n,i,s=Sa(t);null!=a&&a!=t&&(i=!0,n=Sa(a));let l="";r&&i?l=`<strong>${s}</strong>, a puppet of <strong>${n}</strong>, is not an active nation`:r?l=`<strong>${s}</strong> is not an active nation`:i&&(l=`<strong>${s}</strong> is a puppet of <strong>${n}</strong>`),r?document.querySelector(".alert").innerHTML=`\n\t<div class="w-[120%] mx-[-10%] bg-black text-white text-center font-inter py-3 mt-7.5 mb-4.5" role="alert">\n  \t\t<div class="w-[75%] mx-auto">${l}</div>\n  \t</div>\n\t\t`:i&&(document.querySelector(".alert").innerHTML=`\n\t<div class="rounded-full bg-black text-white text-center font-inter py-3 mt-7.5 mb-4.5" role="alert">\n\t\t<div class="w-[90%] mx-auto">${l}</div>\n\t</div>\n\t\t`)}pe(i,!1)}var m,g,b;function k(){pe(d,!1)}m=async()=>{console.log("onMount triggered."),await za(),console.log("Sheets fetched.");const e=(t="q",new URLSearchParams(window.location.search).get(t));var t;e&&(console.log("Redirecting to page:",e),pe(n,e),f())},null===Xe&&ye("onMount"),se&&null!==Xe.l?(g=Xe,b=g.l,b.u??={a:[],b:[],m:[]}).m.push(m):Xt((()=>{const e=bt(m);if("function"==typeof e)return e})),Jt((()=>fa),(()=>{pe(a,ca(fa))})),Yt(),na();var v=sn(),w=It(v),z=Gt(It(w),4),y=Gt(It(z),2),x=It(y);Vr(x);var j=Gt(x,2);qt(y);var $=Gt(y,2),C=It($);qt($),qt(z),qt(w);var A=Gt(w,2),q=e=>{var t=nn();ba(It(t),{settingsStore:fa,$$events:{close:k}}),qt(t),jr(e,t)};Rr(A,(e=>{gt(d)&&e(q)}));var E=Gt(A,4),B=It(E),S=It(B),D=e=>{an(e,{title:"Gifts Sent",content:"Loading data..."})},F=e=>{const t=be((()=>Ra(gt(h))));var r=be((()=>gt(t)));const a=be((()=>Oa(gt(h))));var n=be((()=>gt(a)));tn(e,{title:"Gifts Sent",defaultRows:10,increment:10,get columns(){return gt(r)},get rows(){return gt(n)}})};Rr(S,(e=>{gt(i)?e(D):e(F,!1)})),qt(B);var T=Gt(B,2),L=It(T),R=e=>{an(e,{title:"Gifts Received",content:"Loading data..."})},O=e=>{const t=be((()=>Ra(gt(u))));var r=be((()=>gt(t)));const a=be((()=>Oa(gt(u))));var n=be((()=>gt(a)));tn(e,{title:"Gifts Received",defaultRows:10,increment:10,get columns(){return gt(r)},get rows(){return gt(n)}})};Rr(L,(e=>{gt(i)?e(R):e(O,!1)})),qt(T);var P=Gt(T,2),M=It(P),N=e=>{an(e,{title:"Cards Sold",content:"Loading data..."})},I=e=>{const t=be((()=>Ra(gt(c))));var r=be((()=>gt(t)));const a=be((()=>Oa(gt(c))));var n=be((()=>gt(a)));tn(e,{title:"Cards Sold",defaultRows:10,increment:10,get columns(){return gt(r)},get rows(){return gt(n)}})};Rr(M,(e=>{gt(i)?e(N):e(I,!1)})),qt(P);var U=Gt(P,2),G=It(U),H=e=>{an(e,{title:"Cards Purchased",content:"Loading data..."})},V=e=>{const t=be((()=>Ra(gt(o))));var r=be((()=>gt(t)));const a=be((()=>Oa(gt(o))));var n=be((()=>gt(a)));tn(e,{title:"Cards Purchased",defaultRows:10,increment:10,get columns(){return gt(r)},get rows(){return gt(n)}})};Rr(G,(e=>{gt(i)?e(H):e(V,!1)})),qt(U),qt(E);var K=Gt(E,2),W=It(K),X=It(W),Z=e=>{an(e,{title:"Detailed Gifts Sent",content:"Loading data..."})},J=e=>{const t=be((()=>Ma("buyer")));var r=be((()=>gt(t)));const a=be((()=>Ua(gt(l),"buyer")));var n=be((()=>gt(a)));tn(e,{title:"Detailed Gifts Sent",get columns(){return gt(r)},get rows(){return gt(n)},defaultRows:25,increment:25})};Rr(X,(e=>{gt(i)?e(Z):e(J,!1)})),qt(W);var Y=Gt(W,2),Q=It(Y),ee=e=>{an(e,{title:"Detailed Gifts Received",content:"Loading data..."})},te=e=>{const t=be((()=>Ma("seller")));var r=be((()=>gt(t)));const a=be((()=>Ua(gt(s),"seller")));var n=be((()=>gt(a)));tn(e,{title:"Detailed Gifts Received",get columns(){return gt(r)},get rows(){return gt(n)},defaultRows:25,increment:25})};Rr(Q,(e=>{gt(i)?e(ee):e(te,!1)})),qt(Y);var re=Gt(Y,2),ae=It(re),ne=e=>{an(e,{title:"Detailed Cards Sold",content:"Loading data..."})},le=e=>{const t=be((()=>Pa("buyer")));var r=be((()=>gt(t)));const a=be((()=>Ia(gt(l),"buyer")));var n=be((()=>gt(a)));tn(e,{title:"Detailed Cards Sold",get columns(){return gt(r)},get rows(){return gt(n)},defaultRows:25,increment:25})};Rr(ae,(e=>{gt(i)?e(ne):e(le,!1)})),qt(re);var oe=Gt(re,2),ue=It(oe),ce=e=>{an(e,{title:"Detailed Cards Purchased",content:"Loading data..."})},de=e=>{const t=be((()=>Pa("seller")));var r=be((()=>gt(t)));const a=be((()=>Ia(gt(s),"seller")));var n=be((()=>gt(a)));tn(e,{title:"Detailed Cards Purchased",get columns(){return gt(r)},get rows(){return gt(n)},defaultRows:25,increment:25})};return Rr(ue,(e=>{gt(i)?e(ce):e(de,!1)})),qt(oe),qt(K),qt(v),function(e,t,r=t){var a=Ye();gr(e,"input",(n=>{_&&"checkbox"===e.type&&ie();var i=n?e.defaultValue:e.value;if(i=ra(e)?aa(i):i,r(i),a&&i!==(i=t())){var s=e.selectionStart,l=e.selectionEnd;e.value=i??"",null!==l&&(e.selectionStart=s,e.selectionEnd=Math.min(l,e.value.length))}})),(jt&&e.defaultValue!==e.value||null==bt(t)&&e.value)&&r(ra(e)?aa(e.value):e.value),Qt((()=>{_&&"checkbox"===e.type&&ie();var r=t();ra(e)&&r===aa(e.value)||("date"!==e.type||r||e.value)&&r!==e.value&&(e.value=r??"")}))}(x,(()=>gt(n)),(e=>pe(n,e))),kr("keypress",x,(function(e){"Enter"===e.key&&p()})),kr("click",j,p),kr("click",C,(function(){pe(d,!0)})),jr(t,v),wt({$set:la,$on:(e,t)=>sa(r,e,t)})}({target:document.body,props:{name:"world"}});return ln}();
+
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+var app = (function () {
+	'use strict';
+
+	const DERIVED = 1 << 1;
+	const EFFECT = 1 << 2;
+	const RENDER_EFFECT = 1 << 3;
+	const BLOCK_EFFECT = 1 << 4;
+	const BRANCH_EFFECT = 1 << 5;
+	const ROOT_EFFECT = 1 << 6;
+	const BOUNDARY_EFFECT = 1 << 7;
+	const UNOWNED = 1 << 8;
+	const DISCONNECTED = 1 << 9;
+	const CLEAN = 1 << 10;
+	const DIRTY = 1 << 11;
+	const MAYBE_DIRTY = 1 << 12;
+	const INERT = 1 << 13;
+	const DESTROYED = 1 << 14;
+	const EFFECT_RAN = 1 << 15;
+	/** 'Transparent' effects do not create a transition boundary */
+	const EFFECT_TRANSPARENT = 1 << 16;
+	/** Svelte 4 legacy mode props need to be handled with deriveds and be recognized elsewhere, hence the dedicated flag */
+	const LEGACY_DERIVED_PROP = 1 << 17;
+	const INSPECT_EFFECT = 1 << 18;
+	const HEAD_EFFECT = 1 << 19;
+	const EFFECT_HAS_DERIVED = 1 << 20;
+
+	const STATE_SYMBOL = Symbol('$state');
+	const STATE_SYMBOL_METADATA = Symbol('$state metadata');
+	const LEGACY_PROPS = Symbol('legacy props');
+	const LOADING_ATTR_SYMBOL = Symbol('');
+
+	const node_env = globalThis.process?.env?.NODE_ENV;
+	var DEV = node_env && !node_env.toLowerCase().startsWith('prod');
+
+	// Store the references to globals in case someone tries to monkey patch these, causing the below
+	// to de-opt (this occurs often when using popular extensions).
+	var is_array = Array.isArray;
+	var index_of = Array.prototype.indexOf;
+	var array_from = Array.from;
+	var define_property = Object.defineProperty;
+	var get_descriptor = Object.getOwnPropertyDescriptor;
+	var get_descriptors = Object.getOwnPropertyDescriptors;
+	var object_prototype = Object.prototype;
+	var array_prototype = Array.prototype;
+	var get_prototype_of = Object.getPrototypeOf;
+
+	const noop = () => {};
+
+	/** @param {Function} fn */
+	function run(fn) {
+		return fn();
+	}
+
+	/** @param {Array<() => void>} arr */
+	function run_all(arr) {
+		for (var i = 0; i < arr.length; i++) {
+			arr[i]();
+		}
+	}
+
+	// Fallback for when requestIdleCallback is not available
+	const request_idle_callback =
+		typeof requestIdleCallback === 'undefined'
+			? (/** @type {() => void} */ cb) => setTimeout(cb, 1)
+			: requestIdleCallback;
+
+	let is_micro_task_queued$1 = false;
+	let is_idle_task_queued = false;
+
+	/** @type {Array<() => void>} */
+	let current_queued_micro_tasks = [];
+	/** @type {Array<() => void>} */
+	let current_queued_idle_tasks = [];
+
+	function process_micro_tasks() {
+		is_micro_task_queued$1 = false;
+		const tasks = current_queued_micro_tasks.slice();
+		current_queued_micro_tasks = [];
+		run_all(tasks);
+	}
+
+	function process_idle_tasks() {
+		is_idle_task_queued = false;
+		const tasks = current_queued_idle_tasks.slice();
+		current_queued_idle_tasks = [];
+		run_all(tasks);
+	}
+
+	/**
+	 * @param {() => void} fn
+	 */
+	function queue_micro_task(fn) {
+		if (!is_micro_task_queued$1) {
+			is_micro_task_queued$1 = true;
+			queueMicrotask(process_micro_tasks);
+		}
+		current_queued_micro_tasks.push(fn);
+	}
+
+	/**
+	 * @param {() => void} fn
+	 */
+	function queue_idle_task(fn) {
+		if (!is_idle_task_queued) {
+			is_idle_task_queued = true;
+			request_idle_callback(process_idle_tasks);
+		}
+		current_queued_idle_tasks.push(fn);
+	}
+
+	/**
+	 * Synchronously run any queued tasks.
+	 */
+	function flush_tasks() {
+		if (is_micro_task_queued$1) {
+			process_micro_tasks();
+		}
+		if (is_idle_task_queued) {
+			process_idle_tasks();
+		}
+	}
+
+	/* This file is generated by scripts/process-messages/index.js. Do not edit! */
+
+
+	var bold$1 = 'font-weight: bold';
+	var normal$1 = 'font-weight: normal';
+
+	/**
+	 * Your `console.%method%` contained `$state` proxies. Consider using `$inspect(...)` or `$state.snapshot(...)` instead
+	 * @param {string} method
+	 */
+	function console_log_state(method) {
+		if (DEV) {
+			console.warn(`%c[svelte] console_log_state\n%cYour \`console.${method}\` contained \`$state\` proxies. Consider using \`$inspect(...)\` or \`$state.snapshot(...)\` instead\nhttps://svelte.dev/e/console_log_state`, bold$1, normal$1);
+		} else {
+			console.warn(`https://svelte.dev/e/console_log_state`);
+		}
+	}
+
+	/**
+	 * The `%attribute%` attribute on `%html%` changed its value between server and client renders. The client value, `%value%`, will be ignored in favour of the server value
+	 * @param {string} attribute
+	 * @param {string} html
+	 * @param {string} value
+	 */
+	function hydration_attribute_changed(attribute, html, value) {
+		if (DEV) {
+			console.warn(`%c[svelte] hydration_attribute_changed\n%cThe \`${attribute}\` attribute on \`${html}\` changed its value between server and client renders. The client value, \`${value}\`, will be ignored in favour of the server value\nhttps://svelte.dev/e/hydration_attribute_changed`, bold$1, normal$1);
+		} else {
+			console.warn(`https://svelte.dev/e/hydration_attribute_changed`);
+		}
+	}
+
+	/**
+	 * The value of an `{@html ...}` block %location% changed between server and client renders. The client value will be ignored in favour of the server value
+	 * @param {string | undefined | null} [location]
+	 */
+	function hydration_html_changed(location) {
+		if (DEV) {
+			console.warn(`%c[svelte] hydration_html_changed\n%c${location ? `The value of an \`{@html ...}\` block ${location} changed between server and client renders. The client value will be ignored in favour of the server value` : 'The value of an `{@html ...}` block changed between server and client renders. The client value will be ignored in favour of the server value'}\nhttps://svelte.dev/e/hydration_html_changed`, bold$1, normal$1);
+		} else {
+			console.warn(`https://svelte.dev/e/hydration_html_changed`);
+		}
+	}
+
+	/**
+	 * Hydration failed because the initial UI does not match what was rendered on the server. The error occurred near %location%
+	 * @param {string | undefined | null} [location]
+	 */
+	function hydration_mismatch(location) {
+		if (DEV) {
+			console.warn(`%c[svelte] hydration_mismatch\n%c${location ? `Hydration failed because the initial UI does not match what was rendered on the server. The error occurred near ${location}` : 'Hydration failed because the initial UI does not match what was rendered on the server'}\nhttps://svelte.dev/e/hydration_mismatch`, bold$1, normal$1);
+		} else {
+			console.warn(`https://svelte.dev/e/hydration_mismatch`);
+		}
+	}
+
+	/**
+	 * Tried to unmount a component that was not mounted
+	 */
+	function lifecycle_double_unmount() {
+		if (DEV) {
+			console.warn(`%c[svelte] lifecycle_double_unmount\n%cTried to unmount a component that was not mounted\nhttps://svelte.dev/e/lifecycle_double_unmount`, bold$1, normal$1);
+		} else {
+			console.warn(`https://svelte.dev/e/lifecycle_double_unmount`);
+		}
+	}
+
+	/**
+	 * %component% mutated a value owned by %owner%. This is strongly discouraged. Consider passing values to child components with `bind:`, or use a callback instead
+	 * @param {string | undefined | null} [component]
+	 * @param {string | undefined | null} [owner]
+	 */
+	function ownership_invalid_mutation(component, owner) {
+		if (DEV) {
+			console.warn(`%c[svelte] ownership_invalid_mutation\n%c${component ? `${component} mutated a value owned by ${owner}. This is strongly discouraged. Consider passing values to child components with \`bind:\`, or use a callback instead` : 'Mutating a value outside the component that created it is strongly discouraged. Consider passing values to child components with `bind:`, or use a callback instead'}\nhttps://svelte.dev/e/ownership_invalid_mutation`, bold$1, normal$1);
+		} else {
+			console.warn(`https://svelte.dev/e/ownership_invalid_mutation`);
+		}
+	}
+
+	/**
+	 * Reactive `$state(...)` proxies and the values they proxy have different identities. Because of this, comparisons with `%operator%` will produce unexpected results
+	 * @param {string} operator
+	 */
+	function state_proxy_equality_mismatch(operator) {
+		if (DEV) {
+			console.warn(`%c[svelte] state_proxy_equality_mismatch\n%cReactive \`$state(...)\` proxies and the values they proxy have different identities. Because of this, comparisons with \`${operator}\` will produce unexpected results\nhttps://svelte.dev/e/state_proxy_equality_mismatch`, bold$1, normal$1);
+		} else {
+			console.warn(`https://svelte.dev/e/state_proxy_equality_mismatch`);
+		}
+	}
+
+	const EACH_ITEM_REACTIVE = 1;
+	const EACH_INDEX_REACTIVE = 1 << 1;
+	/** See EachBlock interface metadata.is_controlled for an explanation what this is */
+	const EACH_IS_CONTROLLED = 1 << 2;
+	const EACH_IS_ANIMATED = 1 << 3;
+	const EACH_ITEM_IMMUTABLE = 1 << 4;
+
+	const PROPS_IS_IMMUTABLE = 1;
+	const PROPS_IS_RUNES = 1 << 1;
+	const PROPS_IS_UPDATED = 1 << 2;
+	const PROPS_IS_BINDABLE = 1 << 3;
+	const PROPS_IS_LAZY_INITIAL = 1 << 4;
+
+	const TEMPLATE_FRAGMENT = 1;
+	const TEMPLATE_USE_IMPORT_NODE = 1 << 1;
+
+	const HYDRATION_START = '[';
+	/** used to indicate that an `{:else}...` block was rendered */
+	const HYDRATION_START_ELSE = '[!';
+	const HYDRATION_END = ']';
+	const HYDRATION_ERROR = {};
+
+	const UNINITIALIZED = Symbol();
+
+	// Dev-time component properties
+	const FILENAME = Symbol('filename');
+
+	/** @import { ProxyMetadata } from '#client' */
+	/** @typedef {{ file: string, line: number, column: number }} Location */
+
+
+	/** @type {Record<string, Array<{ start: Location, end: Location, component: Function }>>} */
+	const boundaries = {};
+
+	const chrome_pattern = /at (?:.+ \()?(.+):(\d+):(\d+)\)?$/;
+	const firefox_pattern = /@(.+):(\d+):(\d+)$/;
+
+	function get_stack$1() {
+		const stack = new Error().stack;
+		if (!stack) return null;
+
+		const entries = [];
+
+		for (const line of stack.split('\n')) {
+			let match = chrome_pattern.exec(line) ?? firefox_pattern.exec(line);
+
+			if (match) {
+				entries.push({
+					file: match[1],
+					line: +match[2],
+					column: +match[3]
+				});
+			}
+		}
+
+		return entries;
+	}
+
+	/**
+	 * Determines which `.svelte` component is responsible for a given state change
+	 * @returns {Function | null}
+	 */
+	function get_component() {
+		// first 4 lines are svelte internals; adjust this number if we change the internal call stack
+		const stack = get_stack$1()?.slice(4);
+		if (!stack) return null;
+
+		for (let i = 0; i < stack.length; i++) {
+			const entry = stack[i];
+			const modules = boundaries[entry.file];
+			if (!modules) {
+				// If the first entry is not a component, that means the modification very likely happened
+				// within a .svelte.js file, possibly triggered by a component. Since these files are not part
+				// of the bondaries/component context heuristic, we need to bail in this case, else we would
+				// have false positives when the .svelte.ts file provides a state creator function, encapsulating
+				// the state and its mutations, and is being called from a component other than the one who
+				// called the state creator function.
+				if (i === 0) return null;
+				continue;
+			}
+
+			for (const module of modules) {
+				if (module.end == null) {
+					return null;
+				}
+				if (module.start.line < entry.line && module.end.line > entry.line) {
+					return module.component;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Together with `mark_module_end`, this function establishes the boundaries of a `.svelte` file,
+	 * such that subsequent calls to `get_component` can tell us which component is responsible
+	 * for a given state change
+	 */
+	function mark_module_start() {
+		const start = get_stack$1()?.[2];
+
+		if (start) {
+			(boundaries[start.file] ??= []).push({
+				start,
+				// @ts-expect-error
+				end: null,
+				// @ts-expect-error we add the component at the end, since HMR will overwrite the function
+				component: null
+			});
+		}
+	}
+
+	/**
+	 * @param {Function} component
+	 */
+	function mark_module_end(component) {
+		const end = get_stack$1()?.[2];
+
+		if (end) {
+			const boundaries_file = boundaries[end.file];
+			const boundary = boundaries_file[boundaries_file.length - 1];
+
+			boundary.end = end;
+			boundary.component = component;
+		}
+	}
+
+	/**
+	 * @param {ProxyMetadata | null} from
+	 * @param {ProxyMetadata} to
+	 */
+	function widen_ownership(from, to) {
+		if (to.owners === null) {
+			return;
+		}
+
+		while (from) {
+			if (from.owners === null) {
+				to.owners = null;
+				break;
+			}
+
+			for (const owner of from.owners) {
+				to.owners.add(owner);
+			}
+
+			from = from.parent;
+		}
+	}
+
+	/**
+	 * @param {ProxyMetadata} metadata
+	 * @param {Function} component
+	 * @returns {boolean}
+	 */
+	function has_owner(metadata, component) {
+		if (metadata.owners === null) {
+			return true;
+		}
+
+		return (
+			metadata.owners.has(component) ||
+			(metadata.parent !== null && has_owner(metadata.parent, component))
+		);
+	}
+
+	/**
+	 * @param {ProxyMetadata} metadata
+	 * @returns {any}
+	 */
+	function get_owner(metadata) {
+		return (
+			metadata?.owners?.values().next().value ??
+			get_owner(/** @type {ProxyMetadata} */ (metadata.parent))
+		);
+	}
+
+	/**
+	 * @param {ProxyMetadata} metadata
+	 */
+	function check_ownership(metadata) {
+
+		const component = get_component();
+
+		if (component && !has_owner(metadata, component)) {
+			let original = get_owner(metadata);
+
+			// @ts-expect-error
+			if (original[FILENAME] !== component[FILENAME]) {
+				// @ts-expect-error
+				ownership_invalid_mutation(component[FILENAME], original[FILENAME]);
+			} else {
+				ownership_invalid_mutation();
+			}
+		}
+	}
+
+	/** @import { Equals } from '#client' */
+	/** @type {Equals} */
+	function equals$1(value) {
+		return value === this.v;
+	}
+
+	/**
+	 * @param {unknown} a
+	 * @param {unknown} b
+	 * @returns {boolean}
+	 */
+	function safe_not_equal(a, b) {
+		return a != a
+			? b == b
+			: a !== b || (a !== null && typeof a === 'object') || typeof a === 'function';
+	}
+
+	/** @type {Equals} */
+	function safe_equals(value) {
+		return !safe_not_equal(value, this.v);
+	}
+
+	/* This file is generated by scripts/process-messages/index.js. Do not edit! */
+
+
+	/**
+	 * Using `bind:value` together with a checkbox input is not allowed. Use `bind:checked` instead
+	 * @returns {never}
+	 */
+	function bind_invalid_checkbox_value() {
+		if (DEV) {
+			const error = new Error(`bind_invalid_checkbox_value\nUsing \`bind:value\` together with a checkbox input is not allowed. Use \`bind:checked\` instead\nhttps://svelte.dev/e/bind_invalid_checkbox_value`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/bind_invalid_checkbox_value`);
+		}
+	}
+
+	/**
+	 * A derived value cannot reference itself recursively
+	 * @returns {never}
+	 */
+	function derived_references_self() {
+		if (DEV) {
+			const error = new Error(`derived_references_self\nA derived value cannot reference itself recursively\nhttps://svelte.dev/e/derived_references_self`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/derived_references_self`);
+		}
+	}
+
+	/**
+	 * `%rune%` cannot be used inside an effect cleanup function
+	 * @param {string} rune
+	 * @returns {never}
+	 */
+	function effect_in_teardown(rune) {
+		if (DEV) {
+			const error = new Error(`effect_in_teardown\n\`${rune}\` cannot be used inside an effect cleanup function\nhttps://svelte.dev/e/effect_in_teardown`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/effect_in_teardown`);
+		}
+	}
+
+	/**
+	 * Effect cannot be created inside a `$derived` value that was not itself created inside an effect
+	 * @returns {never}
+	 */
+	function effect_in_unowned_derived() {
+		if (DEV) {
+			const error = new Error(`effect_in_unowned_derived\nEffect cannot be created inside a \`$derived\` value that was not itself created inside an effect\nhttps://svelte.dev/e/effect_in_unowned_derived`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/effect_in_unowned_derived`);
+		}
+	}
+
+	/**
+	 * `%rune%` can only be used inside an effect (e.g. during component initialisation)
+	 * @param {string} rune
+	 * @returns {never}
+	 */
+	function effect_orphan(rune) {
+		if (DEV) {
+			const error = new Error(`effect_orphan\n\`${rune}\` can only be used inside an effect (e.g. during component initialisation)\nhttps://svelte.dev/e/effect_orphan`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/effect_orphan`);
+		}
+	}
+
+	/**
+	 * Maximum update depth exceeded. This can happen when a reactive block or effect repeatedly sets a new value. Svelte limits the number of nested updates to prevent infinite loops
+	 * @returns {never}
+	 */
+	function effect_update_depth_exceeded() {
+		if (DEV) {
+			const error = new Error(`effect_update_depth_exceeded\nMaximum update depth exceeded. This can happen when a reactive block or effect repeatedly sets a new value. Svelte limits the number of nested updates to prevent infinite loops\nhttps://svelte.dev/e/effect_update_depth_exceeded`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/effect_update_depth_exceeded`);
+		}
+	}
+
+	/**
+	 * Failed to hydrate the application
+	 * @returns {never}
+	 */
+	function hydration_failed() {
+		if (DEV) {
+			const error = new Error(`hydration_failed\nFailed to hydrate the application\nhttps://svelte.dev/e/hydration_failed`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/hydration_failed`);
+		}
+	}
+
+	/**
+	 * Cannot do `bind:%key%={undefined}` when `%key%` has a fallback value
+	 * @param {string} key
+	 * @returns {never}
+	 */
+	function props_invalid_value(key) {
+		if (DEV) {
+			const error = new Error(`props_invalid_value\nCannot do \`bind:${key}={undefined}\` when \`${key}\` has a fallback value\nhttps://svelte.dev/e/props_invalid_value`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/props_invalid_value`);
+		}
+	}
+
+	/**
+	 * The `%rune%` rune is only available inside `.svelte` and `.svelte.js/ts` files
+	 * @param {string} rune
+	 * @returns {never}
+	 */
+	function rune_outside_svelte(rune) {
+		if (DEV) {
+			const error = new Error(`rune_outside_svelte\nThe \`${rune}\` rune is only available inside \`.svelte\` and \`.svelte.js/ts\` files\nhttps://svelte.dev/e/rune_outside_svelte`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/rune_outside_svelte`);
+		}
+	}
+
+	/**
+	 * Property descriptors defined on `$state` objects must contain `value` and always be `enumerable`, `configurable` and `writable`.
+	 * @returns {never}
+	 */
+	function state_descriptors_fixed() {
+		if (DEV) {
+			const error = new Error(`state_descriptors_fixed\nProperty descriptors defined on \`$state\` objects must contain \`value\` and always be \`enumerable\`, \`configurable\` and \`writable\`.\nhttps://svelte.dev/e/state_descriptors_fixed`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/state_descriptors_fixed`);
+		}
+	}
+
+	/**
+	 * Cannot set prototype of `$state` object
+	 * @returns {never}
+	 */
+	function state_prototype_fixed() {
+		if (DEV) {
+			const error = new Error(`state_prototype_fixed\nCannot set prototype of \`$state\` object\nhttps://svelte.dev/e/state_prototype_fixed`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/state_prototype_fixed`);
+		}
+	}
+
+	/**
+	 * Reading state that was created inside the same derived is forbidden. Consider using `untrack` to read locally created state
+	 * @returns {never}
+	 */
+	function state_unsafe_local_read() {
+		if (DEV) {
+			const error = new Error(`state_unsafe_local_read\nReading state that was created inside the same derived is forbidden. Consider using \`untrack\` to read locally created state\nhttps://svelte.dev/e/state_unsafe_local_read`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/state_unsafe_local_read`);
+		}
+	}
+
+	/**
+	 * Updating state inside a derived or a template expression is forbidden. If the value should not be reactive, declare it without `$state`
+	 * @returns {never}
+	 */
+	function state_unsafe_mutation() {
+		if (DEV) {
+			const error = new Error(`state_unsafe_mutation\nUpdating state inside a derived or a template expression is forbidden. If the value should not be reactive, declare it without \`$state\`\nhttps://svelte.dev/e/state_unsafe_mutation`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/state_unsafe_mutation`);
+		}
+	}
+
+	let legacy_mode_flag = false;
+	let tracing_mode_flag = false;
+
+	function enable_legacy_mode_flag() {
+		legacy_mode_flag = true;
+	}
+
+	/* This file is generated by scripts/process-messages/index.js. Do not edit! */
+
+
+	var bold = 'font-weight: bold';
+	var normal = 'font-weight: normal';
+
+	/**
+	 * The following properties cannot be cloned with `$state.snapshot` — the return value contains the originals:
+	 * 
+	 * %properties%
+	 * @param {string | undefined | null} [properties]
+	 */
+	function state_snapshot_uncloneable(properties) {
+		if (DEV) {
+			console.warn(`%c[svelte] state_snapshot_uncloneable\n%c${properties
+			? `The following properties cannot be cloned with \`$state.snapshot\` — the return value contains the originals:
+
+${properties}`
+			: 'Value cannot be cloned with `$state.snapshot` — the original value was returned'}\nhttps://svelte.dev/e/state_snapshot_uncloneable`, bold, normal);
+		} else {
+			console.warn(`https://svelte.dev/e/state_snapshot_uncloneable`);
+		}
+	}
+
+	/** @import { Snapshot } from './types' */
+
+	/**
+	 * In dev, we keep track of which properties could not be cloned. In prod
+	 * we don't bother, but we keep a dummy array around so that the
+	 * signature stays the same
+	 * @type {string[]}
+	 */
+	const empty = [];
+
+	/**
+	 * @template T
+	 * @param {T} value
+	 * @param {boolean} [skip_warning]
+	 * @returns {Snapshot<T>}
+	 */
+	function snapshot(value, skip_warning = false) {
+		if (DEV && !skip_warning) {
+			/** @type {string[]} */
+			const paths = [];
+
+			const copy = clone(value, new Map(), '', paths);
+			if (paths.length === 1 && paths[0] === '') {
+				// value could not be cloned
+				state_snapshot_uncloneable();
+			} else if (paths.length > 0) {
+				// some properties could not be cloned
+				const slice = paths.length > 10 ? paths.slice(0, 7) : paths.slice(0, 10);
+				const excess = paths.length - slice.length;
+
+				let uncloned = slice.map((path) => `- <value>${path}`).join('\n');
+				if (excess > 0) uncloned += `\n- ...and ${excess} more`;
+
+				state_snapshot_uncloneable(uncloned);
+			}
+
+			return copy;
+		}
+
+		return clone(value, new Map(), '', empty);
+	}
+
+	/**
+	 * @template T
+	 * @param {T} value
+	 * @param {Map<T, Snapshot<T>>} cloned
+	 * @param {string} path
+	 * @param {string[]} paths
+	 * @param {null | T} original The original value, if `value` was produced from a `toJSON` call
+	 * @returns {Snapshot<T>}
+	 */
+	function clone(value, cloned, path, paths, original = null) {
+		if (typeof value === 'object' && value !== null) {
+			var unwrapped = cloned.get(value);
+			if (unwrapped !== undefined) return unwrapped;
+
+			if (value instanceof Map) return /** @type {Snapshot<T>} */ (new Map(value));
+			if (value instanceof Set) return /** @type {Snapshot<T>} */ (new Set(value));
+
+			if (is_array(value)) {
+				var copy = /** @type {Snapshot<any>} */ (Array(value.length));
+				cloned.set(value, copy);
+
+				if (original !== null) {
+					cloned.set(original, copy);
+				}
+
+				for (var i = 0; i < value.length; i += 1) {
+					var element = value[i];
+					if (i in value) {
+						copy[i] = clone(element, cloned, DEV ? `${path}[${i}]` : path, paths);
+					}
+				}
+
+				return copy;
+			}
+
+			if (get_prototype_of(value) === object_prototype) {
+				/** @type {Snapshot<any>} */
+				copy = {};
+				cloned.set(value, copy);
+
+				if (original !== null) {
+					cloned.set(original, copy);
+				}
+
+				for (var key in value) {
+					// @ts-expect-error
+					copy[key] = clone(value[key], cloned, DEV ? `${path}.${key}` : path, paths);
+				}
+
+				return copy;
+			}
+
+			if (value instanceof Date) {
+				return /** @type {Snapshot<T>} */ (structuredClone(value));
+			}
+
+			if (typeof (/** @type {T & { toJSON?: any } } */ (value).toJSON) === 'function') {
+				return clone(
+					/** @type {T & { toJSON(): any } } */ (value).toJSON(),
+					cloned,
+					DEV ? `${path}.toJSON()` : path,
+					paths,
+					// Associate the instance with the toJSON clone
+					value
+				);
+			}
+		}
+
+		if (value instanceof EventTarget) {
+			// can't be cloned
+			return /** @type {Snapshot<T>} */ (value);
+		}
+
+		try {
+			return /** @type {Snapshot<T>} */ (structuredClone(value));
+		} catch (e) {
+			if (DEV) {
+				paths.push(path);
+			}
+
+			return /** @type {Snapshot<T>} */ (value);
+		}
+	}
+
+	/** @import { Derived, Reaction, Signal, Value } from '#client' */
+
+	/** @type { any } */
+	let tracing_expressions = null;
+
+	/**
+	 * @param {string} label
+	 */
+	function get_stack(label) {
+		let error = Error();
+		const stack = error.stack;
+
+		if (stack) {
+			const lines = stack.split('\n');
+			const new_lines = ['\n'];
+
+			for (let i = 0; i < lines.length; i++) {
+				const line = lines[i];
+
+				if (line === 'Error') {
+					continue;
+				}
+				if (line.includes('validate_each_keys')) {
+					return null;
+				}
+				if (line.includes('svelte/src/internal')) {
+					continue;
+				}
+				new_lines.push(line);
+			}
+
+			if (new_lines.length === 1) {
+				return null;
+			}
+
+			define_property(error, 'stack', {
+				value: new_lines.join('\n')
+			});
+
+			define_property(error, 'name', {
+				// 'Error' suffix is required for stack traces to be rendered properly
+				value: `${label}Error`
+			});
+		}
+		return error;
+	}
+
+	/** @import { Derived, Effect, Reaction, Source, Value } from '#client' */
+
+	let inspect_effects = new Set();
+
+	/**
+	 * @param {Set<any>} v
+	 */
+	function set_inspect_effects(v) {
+		inspect_effects = v;
+	}
+
+	/**
+	 * @template V
+	 * @param {V} v
+	 * @param {Error | null} [stack]
+	 * @returns {Source<V>}
+	 */
+	function source(v, stack) {
+		/** @type {Value} */
+		var signal = {
+			f: 0, // TODO ideally we could skip this altogether, but it causes type errors
+			v,
+			reactions: null,
+			equals: equals$1,
+			rv: 0,
+			wv: 0
+		};
+
+		if (DEV && tracing_mode_flag) {
+			signal.created = stack ?? get_stack('CreatedAt');
+			signal.debug = null;
+		}
+
+		return signal;
+	}
+
+	/**
+	 * @template V
+	 * @param {V} initial_value
+	 * @param {boolean} [immutable]
+	 * @returns {Source<V>}
+	 */
+	/*#__NO_SIDE_EFFECTS__*/
+	function mutable_source(initial_value, immutable = false) {
+		const s = source(initial_value);
+		if (!immutable) {
+			s.equals = safe_equals;
+		}
+
+		// bind the signal to the component context, in case we need to
+		// track updates to trigger beforeUpdate/afterUpdate callbacks
+		if (legacy_mode_flag && component_context !== null && component_context.l !== null) {
+			(component_context.l.s ??= []).push(s);
+		}
+
+		return s;
+	}
+
+	/**
+	 * @template V
+	 * @param {V} v
+	 * @param {boolean} [immutable]
+	 * @returns {Source<V>}
+	 */
+	function mutable_state(v, immutable = false) {
+		return push_derived_source(mutable_source(v, immutable));
+	}
+
+	/**
+	 * @template V
+	 * @param {Source<V>} source
+	 */
+	/*#__NO_SIDE_EFFECTS__*/
+	function push_derived_source(source) {
+		if (active_reaction !== null && (active_reaction.f & DERIVED) !== 0) {
+			if (derived_sources === null) {
+				set_derived_sources([source]);
+			} else {
+				derived_sources.push(source);
+			}
+		}
+
+		return source;
+	}
+
+	/**
+	 * @template V
+	 * @param {Value<V>} source
+	 * @param {V} value
+	 */
+	function mutate(source, value) {
+		set(
+			source,
+			untrack(() => get$1(source))
+		);
+		return value;
+	}
+
+	/**
+	 * @template V
+	 * @param {Source<V>} source
+	 * @param {V} value
+	 * @returns {V}
+	 */
+	function set(source, value) {
+		if (
+			active_reaction !== null &&
+			!untracking &&
+			is_runes() &&
+			(active_reaction.f & (DERIVED | BLOCK_EFFECT)) !== 0 &&
+			// If the source was created locally within the current derived, then
+			// we allow the mutation.
+			(derived_sources === null || !derived_sources.includes(source))
+		) {
+			state_unsafe_mutation();
+		}
+
+		return internal_set(source, value);
+	}
+
+	/**
+	 * @template V
+	 * @param {Source<V>} source
+	 * @param {V} value
+	 * @returns {V}
+	 */
+	function internal_set(source, value) {
+		if (!source.equals(value)) {
+			var old_value = source.v;
+			source.v = value;
+			source.wv = increment_write_version();
+
+			if (DEV && tracing_mode_flag) {
+				source.updated = get_stack('UpdatedAt');
+				if (active_effect != null) {
+					source.trace_need_increase = true;
+					source.trace_v ??= old_value;
+				}
+			}
+
+			mark_reactions(source, DIRTY);
+
+			// It's possible that the current reaction might not have up-to-date dependencies
+			// whilst it's actively running. So in the case of ensuring it registers the reaction
+			// properly for itself, we need to ensure the current effect actually gets
+			// scheduled. i.e: `$effect(() => x++)`
+			if (
+				is_runes() &&
+				active_effect !== null &&
+				(active_effect.f & CLEAN) !== 0 &&
+				(active_effect.f & (BRANCH_EFFECT | ROOT_EFFECT)) === 0
+			) {
+				if (untracked_writes === null) {
+					set_untracked_writes([source]);
+				} else {
+					untracked_writes.push(source);
+				}
+			}
+
+			if (DEV && inspect_effects.size > 0) {
+				const inspects = Array.from(inspect_effects);
+				var previously_flushing_effect = is_flushing_effect;
+				set_is_flushing_effect(true);
+				try {
+					for (const effect of inspects) {
+						// Mark clean inspect-effects as maybe dirty and then check their dirtiness
+						// instead of just updating the effects - this way we avoid overfiring.
+						if ((effect.f & CLEAN) !== 0) {
+							set_signal_status(effect, MAYBE_DIRTY);
+						}
+						if (check_dirtiness(effect)) {
+							update_effect(effect);
+						}
+					}
+				} finally {
+					set_is_flushing_effect(previously_flushing_effect);
+				}
+				inspect_effects.clear();
+			}
+		}
+
+		return value;
+	}
+
+	/**
+	 * @param {Value} signal
+	 * @param {number} status should be DIRTY or MAYBE_DIRTY
+	 * @returns {void}
+	 */
+	function mark_reactions(signal, status) {
+		var reactions = signal.reactions;
+		if (reactions === null) return;
+
+		var runes = is_runes();
+		var length = reactions.length;
+
+		for (var i = 0; i < length; i++) {
+			var reaction = reactions[i];
+			var flags = reaction.f;
+
+			// Skip any effects that are already dirty
+			if ((flags & DIRTY) !== 0) continue;
+
+			// In legacy mode, skip the current effect to prevent infinite loops
+			if (!runes && reaction === active_effect) continue;
+
+			// Inspect effects need to run immediately, so that the stack trace makes sense
+			if (DEV && (flags & INSPECT_EFFECT) !== 0) {
+				inspect_effects.add(reaction);
+				continue;
+			}
+
+			set_signal_status(reaction, status);
+
+			// If the signal a) was previously clean or b) is an unowned derived, then mark it
+			if ((flags & (CLEAN | UNOWNED)) !== 0) {
+				if ((flags & DERIVED) !== 0) {
+					mark_reactions(/** @type {Derived} */ (reaction), MAYBE_DIRTY);
+				} else {
+					schedule_effect(/** @type {Effect} */ (reaction));
+				}
+			}
+		}
+	}
+
+	/** @import { Derived, Effect } from '#client' */
+
+	/**
+	 * @template V
+	 * @param {() => V} fn
+	 * @returns {Derived<V>}
+	 */
+	/*#__NO_SIDE_EFFECTS__*/
+	function derived(fn) {
+		var flags = DERIVED | DIRTY;
+
+		if (active_effect === null) {
+			flags |= UNOWNED;
+		} else {
+			// Since deriveds are evaluated lazily, any effects created inside them are
+			// created too late to ensure that the parent effect is added to the tree
+			active_effect.f |= EFFECT_HAS_DERIVED;
+		}
+
+		var parent_derived =
+			active_reaction !== null && (active_reaction.f & DERIVED) !== 0
+				? /** @type {Derived} */ (active_reaction)
+				: null;
+
+		/** @type {Derived<V>} */
+		const signal = {
+			children: null,
+			ctx: component_context,
+			deps: null,
+			equals: equals$1,
+			f: flags,
+			fn,
+			reactions: null,
+			rv: 0,
+			v: /** @type {V} */ (null),
+			wv: 0,
+			parent: parent_derived ?? active_effect
+		};
+
+		if (DEV && tracing_mode_flag) {
+			signal.created = get_stack('CreatedAt');
+		}
+
+		if (parent_derived !== null) {
+			(parent_derived.children ??= []).push(signal);
+		}
+
+		return signal;
+	}
+
+	/**
+	 * @template V
+	 * @param {() => V} fn
+	 * @returns {Derived<V>}
+	 */
+	/*#__NO_SIDE_EFFECTS__*/
+	function derived_safe_equal(fn) {
+		const signal = derived(fn);
+		signal.equals = safe_equals;
+		return signal;
+	}
+
+	/**
+	 * @param {Derived} derived
+	 * @returns {void}
+	 */
+	function destroy_derived_children(derived) {
+		var children = derived.children;
+
+		if (children !== null) {
+			derived.children = null;
+
+			for (var i = 0; i < children.length; i += 1) {
+				var child = children[i];
+				if ((child.f & DERIVED) !== 0) {
+					destroy_derived(/** @type {Derived} */ (child));
+				} else {
+					destroy_effect(/** @type {Effect} */ (child));
+				}
+			}
+		}
+	}
+
+	/**
+	 * The currently updating deriveds, used to detect infinite recursion
+	 * in dev mode and provide a nicer error than 'too much recursion'
+	 * @type {Derived[]}
+	 */
+	let stack = [];
+
+	/**
+	 * @param {Derived} derived
+	 * @returns {Effect | null}
+	 */
+	function get_derived_parent_effect(derived) {
+		var parent = derived.parent;
+		while (parent !== null) {
+			if ((parent.f & DERIVED) === 0) {
+				return /** @type {Effect} */ (parent);
+			}
+			parent = parent.parent;
+		}
+		return null;
+	}
+
+	/**
+	 * @template T
+	 * @param {Derived} derived
+	 * @returns {T}
+	 */
+	function execute_derived(derived) {
+		var value;
+		var prev_active_effect = active_effect;
+
+		set_active_effect(get_derived_parent_effect(derived));
+
+		if (DEV) {
+			let prev_inspect_effects = inspect_effects;
+			set_inspect_effects(new Set());
+			try {
+				if (stack.includes(derived)) {
+					derived_references_self();
+				}
+
+				stack.push(derived);
+
+				destroy_derived_children(derived);
+				value = update_reaction(derived);
+			} finally {
+				set_active_effect(prev_active_effect);
+				set_inspect_effects(prev_inspect_effects);
+				stack.pop();
+			}
+		} else {
+			try {
+				destroy_derived_children(derived);
+				value = update_reaction(derived);
+			} finally {
+				set_active_effect(prev_active_effect);
+			}
+		}
+
+		return value;
+	}
+
+	/**
+	 * @param {Derived} derived
+	 * @returns {void}
+	 */
+	function update_derived(derived) {
+		var value = execute_derived(derived);
+		var status =
+			(skip_reaction || (derived.f & UNOWNED) !== 0) && derived.deps !== null ? MAYBE_DIRTY : CLEAN;
+
+		set_signal_status(derived, status);
+
+		if (!derived.equals(value)) {
+			derived.v = value;
+			derived.wv = increment_write_version();
+		}
+	}
+
+	/**
+	 * @param {Derived} derived
+	 * @returns {void}
+	 */
+	function destroy_derived(derived) {
+		destroy_derived_children(derived);
+		remove_reactions(derived, 0);
+		set_signal_status(derived, DESTROYED);
+
+		derived.v = derived.children = derived.deps = derived.ctx = derived.reactions = null;
+	}
+
+	/* This file is generated by scripts/process-messages/index.js. Do not edit! */
+
+
+	/**
+	 * `%name%(...)` can only be used during component initialisation
+	 * @param {string} name
+	 * @returns {never}
+	 */
+	function lifecycle_outside_component(name) {
+		if (DEV) {
+			const error = new Error(`lifecycle_outside_component\n\`${name}(...)\` can only be used during component initialisation\nhttps://svelte.dev/e/lifecycle_outside_component`);
+
+			error.name = 'Svelte error';
+			throw error;
+		} else {
+			throw new Error(`https://svelte.dev/e/lifecycle_outside_component`);
+		}
+	}
+
+	/** @import { ComponentContext, Derived, Effect, Reaction, Signal, Source, Value } from '#client' */
+
+	const FLUSH_MICROTASK = 0;
+	const FLUSH_SYNC = 1;
+	// Used for DEV time error handling
+	/** @param {WeakSet<Error>} value */
+	const handled_errors = new WeakSet();
+	let is_throwing_error = false;
+
+	// Used for controlling the flush of effects.
+	let scheduler_mode = FLUSH_MICROTASK;
+	// Used for handling scheduling
+	let is_micro_task_queued = false;
+
+	/** @type {Effect | null} */
+	let last_scheduled_effect = null;
+
+	let is_flushing_effect = false;
+	let is_destroying_effect = false;
+
+	/** @param {boolean} value */
+	function set_is_flushing_effect(value) {
+		is_flushing_effect = value;
+	}
+
+	/** @param {boolean} value */
+	function set_is_destroying_effect(value) {
+		is_destroying_effect = value;
+	}
+
+	// Handle effect queues
+
+	/** @type {Effect[]} */
+	let queued_root_effects = [];
+
+	let flush_count = 0;
+	/** @type {Effect[]} Stack of effects, dev only */
+	let dev_effect_stack = [];
+	// Handle signal reactivity tree dependencies and reactions
+
+	/** @type {null | Reaction} */
+	let active_reaction = null;
+
+	let untracking = false;
+
+	/** @param {null | Reaction} reaction */
+	function set_active_reaction(reaction) {
+		active_reaction = reaction;
+	}
+
+	/** @type {null | Effect} */
+	let active_effect = null;
+
+	/** @param {null | Effect} effect */
+	function set_active_effect(effect) {
+		active_effect = effect;
+	}
+
+	/**
+	 * When sources are created within a derived, we record them so that we can safely allow
+	 * local mutations to these sources without the side-effect error being invoked unnecessarily.
+	 * @type {null | Source[]}
+	 */
+	let derived_sources = null;
+
+	/**
+	 * @param {Source[] | null} sources
+	 */
+	function set_derived_sources(sources) {
+		derived_sources = sources;
+	}
+
+	/**
+	 * The dependencies of the reaction that is currently being executed. In many cases,
+	 * the dependencies are unchanged between runs, and so this will be `null` unless
+	 * and until a new dependency is accessed — we track this via `skipped_deps`
+	 * @type {null | Value[]}
+	 */
+	let new_deps = null;
+
+	let skipped_deps = 0;
+
+	/**
+	 * Tracks writes that the effect it's executed in doesn't listen to yet,
+	 * so that the dependency can be added to the effect later on if it then reads it
+	 * @type {null | Source[]}
+	 */
+	let untracked_writes = null;
+
+	/** @param {null | Source[]} value */
+	function set_untracked_writes(value) {
+		untracked_writes = value;
+	}
+
+	/**
+	 * @type {number} Used by sources and deriveds for handling updates.
+	 * Version starts from 1 so that unowned deriveds differentiate between a created effect and a run one for tracing
+	 **/
+	let write_version = 1;
+
+	/** @type {number} Used to version each read of a source of derived to avoid duplicating depedencies inside a reaction */
+	let read_version = 0;
+
+	// If we are working with a get() chain that has no active container,
+	// to prevent memory leaks, we skip adding the reaction.
+	let skip_reaction = false;
+
+	// Handling runtime component context
+	/** @type {ComponentContext | null} */
+	let component_context = null;
+
+	/**
+	 * The current component function. Different from current component context:
+	 * ```html
+	 * <!-- App.svelte -->
+	 * <Foo>
+	 *   <Bar /> <!-- context == Foo.svelte, function == App.svelte -->
+	 * </Foo>
+	 * ```
+	 * @type {ComponentContext['function']}
+	 */
+	let dev_current_component_function = null;
+
+	function increment_write_version() {
+		return ++write_version;
+	}
+
+	/** @returns {boolean} */
+	function is_runes() {
+		return !legacy_mode_flag || (component_context !== null && component_context.l === null);
+	}
+
+	/**
+	 * Determines whether a derived or effect is dirty.
+	 * If it is MAYBE_DIRTY, will set the status to CLEAN
+	 * @param {Reaction} reaction
+	 * @returns {boolean}
+	 */
+	function check_dirtiness(reaction) {
+		var flags = reaction.f;
+
+		if ((flags & DIRTY) !== 0) {
+			return true;
+		}
+
+		if ((flags & MAYBE_DIRTY) !== 0) {
+			var dependencies = reaction.deps;
+			var is_unowned = (flags & UNOWNED) !== 0;
+
+			if (dependencies !== null) {
+				var i;
+				var dependency;
+				var is_disconnected = (flags & DISCONNECTED) !== 0;
+				var is_unowned_connected = is_unowned && active_effect !== null && !skip_reaction;
+				var length = dependencies.length;
+
+				// If we are working with a disconnected or an unowned signal that is now connected (due to an active effect)
+				// then we need to re-connect the reaction to the dependency
+				if (is_disconnected || is_unowned_connected) {
+					for (i = 0; i < length; i++) {
+						dependency = dependencies[i];
+
+						// We always re-add all reactions (even duplicates) if the derived was
+						// previously disconnected
+						if (is_disconnected || !dependency?.reactions?.includes(reaction)) {
+							(dependency.reactions ??= []).push(reaction);
+						}
+					}
+
+					if (is_disconnected) {
+						reaction.f ^= DISCONNECTED;
+					}
+				}
+
+				for (i = 0; i < length; i++) {
+					dependency = dependencies[i];
+
+					if (check_dirtiness(/** @type {Derived} */ (dependency))) {
+						update_derived(/** @type {Derived} */ (dependency));
+					}
+
+					if (dependency.wv > reaction.wv) {
+						return true;
+					}
+				}
+			}
+
+			// Unowned signals should never be marked as clean unless they
+			// are used within an active_effect without skip_reaction
+			if (!is_unowned || (active_effect !== null && !skip_reaction)) {
+				set_signal_status(reaction, CLEAN);
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param {unknown} error
+	 * @param {Effect} effect
+	 */
+	function propagate_error(error, effect) {
+		/** @type {Effect | null} */
+		var current = effect;
+
+		while (current !== null) {
+			if ((current.f & BOUNDARY_EFFECT) !== 0) {
+				try {
+					// @ts-expect-error
+					current.fn(error);
+					return;
+				} catch {
+					// Remove boundary flag from effect
+					current.f ^= BOUNDARY_EFFECT;
+				}
+			}
+
+			current = current.parent;
+		}
+
+		is_throwing_error = false;
+		throw error;
+	}
+
+	/**
+	 * @param {Effect} effect
+	 */
+	function should_rethrow_error(effect) {
+		return (
+			(effect.f & DESTROYED) === 0 &&
+			(effect.parent === null || (effect.parent.f & BOUNDARY_EFFECT) === 0)
+		);
+	}
+
+	/**
+	 * @param {unknown} error
+	 * @param {Effect} effect
+	 * @param {Effect | null} previous_effect
+	 * @param {ComponentContext | null} component_context
+	 */
+	function handle_error(error, effect, previous_effect, component_context) {
+		if (is_throwing_error) {
+			if (previous_effect === null) {
+				is_throwing_error = false;
+			}
+
+			if (should_rethrow_error(effect)) {
+				throw error;
+			}
+
+			return;
+		}
+
+		if (previous_effect !== null) {
+			is_throwing_error = true;
+		}
+
+		if (
+			!DEV ||
+			component_context === null ||
+			!(error instanceof Error) ||
+			handled_errors.has(error)
+		) {
+			propagate_error(error, effect);
+			return;
+		}
+
+		handled_errors.add(error);
+
+		const component_stack = [];
+
+		const effect_name = effect.fn?.name;
+
+		if (effect_name) {
+			component_stack.push(effect_name);
+		}
+
+		/** @type {ComponentContext | null} */
+		let current_context = component_context;
+
+		while (current_context !== null) {
+			if (DEV) {
+				/** @type {string} */
+				var filename = current_context.function?.[FILENAME];
+
+				if (filename) {
+					const file = filename.split('/').pop();
+					component_stack.push(file);
+				}
+			}
+
+			current_context = current_context.p;
+		}
+
+		const indent = /Firefox/.test(navigator.userAgent) ? '  ' : '\t';
+		define_property(error, 'message', {
+			value: error.message + `\n${component_stack.map((name) => `\n${indent}in ${name}`).join('')}\n`
+		});
+		define_property(error, 'component_stack', {
+			value: component_stack
+		});
+
+		const stack = error.stack;
+
+		// Filter out internal files from callstack
+		if (stack) {
+			const lines = stack.split('\n');
+			const new_lines = [];
+			for (let i = 0; i < lines.length; i++) {
+				const line = lines[i];
+				if (line.includes('svelte/src/internal')) {
+					continue;
+				}
+				new_lines.push(line);
+			}
+			define_property(error, 'stack', {
+				value: new_lines.join('\n')
+			});
+		}
+
+		propagate_error(error, effect);
+
+		if (should_rethrow_error(effect)) {
+			throw error;
+		}
+	}
+
+	/**
+	 * @param {Value} signal
+	 * @param {Effect} effect
+	 * @param {number} [depth]
+	 */
+	function schedule_possible_effect_self_invalidation(signal, effect, depth = 0) {
+		var reactions = signal.reactions;
+		if (reactions === null) return;
+
+		for (var i = 0; i < reactions.length; i++) {
+			var reaction = reactions[i];
+			if ((reaction.f & DERIVED) !== 0) {
+				schedule_possible_effect_self_invalidation(
+					/** @type {Derived} */ (reaction),
+					effect,
+					depth + 1
+				);
+			} else if (effect === reaction) {
+				if (depth === 0) {
+					set_signal_status(reaction, DIRTY);
+				} else if ((reaction.f & CLEAN) !== 0) {
+					set_signal_status(reaction, MAYBE_DIRTY);
+				}
+				schedule_effect(/** @type {Effect} */ (reaction));
+			}
+		}
+	}
+
+	/**
+	 * @template V
+	 * @param {Reaction} reaction
+	 * @returns {V}
+	 */
+	function update_reaction(reaction) {
+		var previous_deps = new_deps;
+		var previous_skipped_deps = skipped_deps;
+		var previous_untracked_writes = untracked_writes;
+		var previous_reaction = active_reaction;
+		var previous_skip_reaction = skip_reaction;
+		var prev_derived_sources = derived_sources;
+		var previous_component_context = component_context;
+		var previous_untracking = untracking;
+		var flags = reaction.f;
+
+		new_deps = /** @type {null | Value[]} */ (null);
+		skipped_deps = 0;
+		untracked_writes = null;
+		active_reaction = (flags & (BRANCH_EFFECT | ROOT_EFFECT)) === 0 ? reaction : null;
+		skip_reaction = !is_flushing_effect && (flags & UNOWNED) !== 0;
+		derived_sources = null;
+		component_context = reaction.ctx;
+		untracking = false;
+		read_version++;
+
+		try {
+			var result = /** @type {Function} */ (0, reaction.fn)();
+			var deps = reaction.deps;
+
+			if (new_deps !== null) {
+				var i;
+
+				remove_reactions(reaction, skipped_deps);
+
+				if (deps !== null && skipped_deps > 0) {
+					deps.length = skipped_deps + new_deps.length;
+					for (i = 0; i < new_deps.length; i++) {
+						deps[skipped_deps + i] = new_deps[i];
+					}
+				} else {
+					reaction.deps = deps = new_deps;
+				}
+
+				if (!skip_reaction) {
+					for (i = skipped_deps; i < deps.length; i++) {
+						(deps[i].reactions ??= []).push(reaction);
+					}
+				}
+			} else if (deps !== null && skipped_deps < deps.length) {
+				remove_reactions(reaction, skipped_deps);
+				deps.length = skipped_deps;
+			}
+
+			// If we're inside an effect and we have untracked writes, then we need to
+			// ensure that if any of those untracked writes result in re-invalidation
+			// of the current effect, then that happens accordingly
+			if (
+				is_runes() &&
+				untracked_writes !== null &&
+				(reaction.f & (DERIVED | MAYBE_DIRTY | DIRTY)) === 0
+			) {
+				for (i = 0; i < /** @type {Source[]} */ (untracked_writes).length; i++) {
+					schedule_possible_effect_self_invalidation(
+						untracked_writes[i],
+						/** @type {Effect} */ (reaction)
+					);
+				}
+			}
+
+			// If we are returning to an previous reaction then
+			// we need to increment the read version to ensure that
+			// any dependencies in this reaction aren't marked with
+			// the same version
+			if (previous_reaction !== null) {
+				read_version++;
+			}
+
+			return result;
+		} finally {
+			new_deps = previous_deps;
+			skipped_deps = previous_skipped_deps;
+			untracked_writes = previous_untracked_writes;
+			active_reaction = previous_reaction;
+			skip_reaction = previous_skip_reaction;
+			derived_sources = prev_derived_sources;
+			component_context = previous_component_context;
+			untracking = previous_untracking;
+		}
+	}
+
+	/**
+	 * @template V
+	 * @param {Reaction} signal
+	 * @param {Value<V>} dependency
+	 * @returns {void}
+	 */
+	function remove_reaction(signal, dependency) {
+		let reactions = dependency.reactions;
+		if (reactions !== null) {
+			var index = index_of.call(reactions, signal);
+			if (index !== -1) {
+				var new_length = reactions.length - 1;
+				if (new_length === 0) {
+					reactions = dependency.reactions = null;
+				} else {
+					// Swap with last element and then remove.
+					reactions[index] = reactions[new_length];
+					reactions.pop();
+				}
+			}
+		}
+		// If the derived has no reactions, then we can disconnect it from the graph,
+		// allowing it to either reconnect in the future, or be GC'd by the VM.
+		if (
+			reactions === null &&
+			(dependency.f & DERIVED) !== 0 &&
+			// Destroying a child effect while updating a parent effect can cause a dependency to appear
+			// to be unused, when in fact it is used by the currently-updating parent. Checking `new_deps`
+			// allows us to skip the expensive work of disconnecting and immediately reconnecting it
+			(new_deps === null || !new_deps.includes(dependency))
+		) {
+			set_signal_status(dependency, MAYBE_DIRTY);
+			// If we are working with a derived that is owned by an effect, then mark it as being
+			// disconnected.
+			if ((dependency.f & (UNOWNED | DISCONNECTED)) === 0) {
+				dependency.f ^= DISCONNECTED;
+			}
+			remove_reactions(/** @type {Derived} **/ (dependency), 0);
+		}
+	}
+
+	/**
+	 * @param {Reaction} signal
+	 * @param {number} start_index
+	 * @returns {void}
+	 */
+	function remove_reactions(signal, start_index) {
+		var dependencies = signal.deps;
+		if (dependencies === null) return;
+
+		for (var i = start_index; i < dependencies.length; i++) {
+			remove_reaction(signal, dependencies[i]);
+		}
+	}
+
+	/**
+	 * @param {Effect} effect
+	 * @returns {void}
+	 */
+	function update_effect(effect) {
+		var flags = effect.f;
+
+		if ((flags & DESTROYED) !== 0) {
+			return;
+		}
+
+		set_signal_status(effect, CLEAN);
+
+		var previous_effect = active_effect;
+		var previous_component_context = component_context;
+
+		active_effect = effect;
+
+		if (DEV) {
+			var previous_component_fn = dev_current_component_function;
+			dev_current_component_function = effect.component_function;
+		}
+
+		try {
+			if ((flags & BLOCK_EFFECT) !== 0) {
+				destroy_block_effect_children(effect);
+			} else {
+				destroy_effect_children(effect);
+			}
+			destroy_effect_deriveds(effect);
+
+			execute_effect_teardown(effect);
+			var teardown = update_reaction(effect);
+			effect.teardown = typeof teardown === 'function' ? teardown : null;
+			effect.wv = write_version;
+
+			var deps = effect.deps;
+
+			// In DEV, we need to handle a case where $inspect.trace() might
+			// incorrectly state a source dependency has not changed when it has.
+			// That's beacuse that source was changed by the same effect, causing
+			// the versions to match. We can avoid this by incrementing the version
+			if (DEV && tracing_mode_flag && (effect.f & DIRTY) !== 0 && deps !== null) {
+				for (let i = 0; i < deps.length; i++) {
+					var dep = deps[i];
+					if (dep.trace_need_increase) {
+						dep.wv = increment_write_version();
+						dep.trace_need_increase = undefined;
+						dep.trace_v = undefined;
+					}
+				}
+			}
+
+			if (DEV) {
+				dev_effect_stack.push(effect);
+			}
+		} catch (error) {
+			handle_error(error, effect, previous_effect, previous_component_context || effect.ctx);
+		} finally {
+			active_effect = previous_effect;
+
+			if (DEV) {
+				dev_current_component_function = previous_component_fn;
+			}
+		}
+	}
+
+	function log_effect_stack() {
+		// eslint-disable-next-line no-console
+		console.error(
+			'Last ten effects were: ',
+			dev_effect_stack.slice(-10).map((d) => d.fn)
+		);
+		dev_effect_stack = [];
+	}
+
+	function infinite_loop_guard() {
+		if (flush_count > 1000) {
+			flush_count = 0;
+			try {
+				effect_update_depth_exceeded();
+			} catch (error) {
+				if (DEV) {
+					// stack is garbage, ignore. Instead add a console.error message.
+					define_property(error, 'stack', {
+						value: ''
+					});
+				}
+				// Try and handle the error so it can be caught at a boundary, that's
+				// if there's an effect available from when it was last scheduled
+				if (last_scheduled_effect !== null) {
+					if (DEV) {
+						try {
+							handle_error(error, last_scheduled_effect, null, null);
+						} catch (e) {
+							// Only log the effect stack if the error is re-thrown
+							log_effect_stack();
+							throw e;
+						}
+					} else {
+						handle_error(error, last_scheduled_effect, null, null);
+					}
+				} else {
+					if (DEV) {
+						log_effect_stack();
+					}
+					throw error;
+				}
+			}
+		}
+		flush_count++;
+	}
+
+	/**
+	 * @param {Array<Effect>} root_effects
+	 * @returns {void}
+	 */
+	function flush_queued_root_effects(root_effects) {
+		var length = root_effects.length;
+		if (length === 0) {
+			return;
+		}
+		infinite_loop_guard();
+
+		var previously_flushing_effect = is_flushing_effect;
+		is_flushing_effect = true;
+
+		try {
+			for (var i = 0; i < length; i++) {
+				var effect = root_effects[i];
+
+				if ((effect.f & CLEAN) === 0) {
+					effect.f ^= CLEAN;
+				}
+
+				/** @type {Effect[]} */
+				var collected_effects = [];
+
+				process_effects(effect, collected_effects);
+				flush_queued_effects(collected_effects);
+			}
+		} finally {
+			is_flushing_effect = previously_flushing_effect;
+		}
+	}
+
+	/**
+	 * @param {Array<Effect>} effects
+	 * @returns {void}
+	 */
+	function flush_queued_effects(effects) {
+		var length = effects.length;
+		if (length === 0) return;
+
+		for (var i = 0; i < length; i++) {
+			var effect = effects[i];
+
+			if ((effect.f & (DESTROYED | INERT)) === 0) {
+				try {
+					if (check_dirtiness(effect)) {
+						update_effect(effect);
+
+						// Effects with no dependencies or teardown do not get added to the effect tree.
+						// Deferred effects (e.g. `$effect(...)`) _are_ added to the tree because we
+						// don't know if we need to keep them until they are executed. Doing the check
+						// here (rather than in `update_effect`) allows us to skip the work for
+						// immediate effects.
+						if (effect.deps === null && effect.first === null && effect.nodes_start === null) {
+							if (effect.teardown === null) {
+								// remove this effect from the graph
+								unlink_effect(effect);
+							} else {
+								// keep the effect in the graph, but free up some memory
+								effect.fn = null;
+							}
+						}
+					}
+				} catch (error) {
+					handle_error(error, effect, null, effect.ctx);
+				}
+			}
+		}
+	}
+
+	function process_deferred() {
+		is_micro_task_queued = false;
+		if (flush_count > 1001) {
+			return;
+		}
+		const previous_queued_root_effects = queued_root_effects;
+		queued_root_effects = [];
+		flush_queued_root_effects(previous_queued_root_effects);
+
+		if (!is_micro_task_queued) {
+			flush_count = 0;
+			last_scheduled_effect = null;
+			if (DEV) {
+				dev_effect_stack = [];
+			}
+		}
+	}
+
+	/**
+	 * @param {Effect} signal
+	 * @returns {void}
+	 */
+	function schedule_effect(signal) {
+		if (scheduler_mode === FLUSH_MICROTASK) {
+			if (!is_micro_task_queued) {
+				is_micro_task_queued = true;
+				queueMicrotask(process_deferred);
+			}
+		}
+
+		last_scheduled_effect = signal;
+
+		var effect = signal;
+
+		while (effect.parent !== null) {
+			effect = effect.parent;
+			var flags = effect.f;
+
+			if ((flags & (ROOT_EFFECT | BRANCH_EFFECT)) !== 0) {
+				if ((flags & CLEAN) === 0) return;
+				effect.f ^= CLEAN;
+			}
+		}
+
+		queued_root_effects.push(effect);
+	}
+
+	/**
+	 *
+	 * This function both runs render effects and collects user effects in topological order
+	 * from the starting effect passed in. Effects will be collected when they match the filtered
+	 * bitwise flag passed in only. The collected effects array will be populated with all the user
+	 * effects to be flushed.
+	 *
+	 * @param {Effect} effect
+	 * @param {Effect[]} collected_effects
+	 * @returns {void}
+	 */
+	function process_effects(effect, collected_effects) {
+		var current_effect = effect.first;
+		var effects = [];
+
+		main_loop: while (current_effect !== null) {
+			var flags = current_effect.f;
+			var is_branch = (flags & BRANCH_EFFECT) !== 0;
+			var is_skippable_branch = is_branch && (flags & CLEAN) !== 0;
+			var sibling = current_effect.next;
+
+			if (!is_skippable_branch && (flags & INERT) === 0) {
+				if ((flags & RENDER_EFFECT) !== 0) {
+					if (is_branch) {
+						current_effect.f ^= CLEAN;
+					} else {
+						try {
+							if (check_dirtiness(current_effect)) {
+								update_effect(current_effect);
+							}
+						} catch (error) {
+							handle_error(error, current_effect, null, current_effect.ctx);
+						}
+					}
+
+					var child = current_effect.first;
+
+					if (child !== null) {
+						current_effect = child;
+						continue;
+					}
+				} else if ((flags & EFFECT) !== 0) {
+					effects.push(current_effect);
+				}
+			}
+
+			if (sibling === null) {
+				let parent = current_effect.parent;
+
+				while (parent !== null) {
+					if (effect === parent) {
+						break main_loop;
+					}
+					var parent_sibling = parent.next;
+					if (parent_sibling !== null) {
+						current_effect = parent_sibling;
+						continue main_loop;
+					}
+					parent = parent.parent;
+				}
+			}
+
+			current_effect = sibling;
+		}
+
+		// We might be dealing with many effects here, far more than can be spread into
+		// an array push call (callstack overflow). So let's deal with each effect in a loop.
+		for (var i = 0; i < effects.length; i++) {
+			child = effects[i];
+			collected_effects.push(child);
+			process_effects(child, collected_effects);
+		}
+	}
+
+	/**
+	 * Internal version of `flushSync` with the option to not flush previous effects.
+	 * Returns the result of the passed function, if given.
+	 * @param {() => any} [fn]
+	 * @returns {any}
+	 */
+	function flush_sync(fn) {
+		var previous_scheduler_mode = scheduler_mode;
+		var previous_queued_root_effects = queued_root_effects;
+
+		try {
+			infinite_loop_guard();
+
+			/** @type {Effect[]} */
+			const root_effects = [];
+
+			scheduler_mode = FLUSH_SYNC;
+			queued_root_effects = root_effects;
+			is_micro_task_queued = false;
+
+			flush_queued_root_effects(previous_queued_root_effects);
+
+			var result = fn?.();
+
+			flush_tasks();
+			if (queued_root_effects.length > 0 || root_effects.length > 0) {
+				flush_sync();
+			}
+
+			flush_count = 0;
+			last_scheduled_effect = null;
+			if (DEV) {
+				dev_effect_stack = [];
+			}
+
+			return result;
+		} finally {
+			scheduler_mode = previous_scheduler_mode;
+			queued_root_effects = previous_queued_root_effects;
+		}
+	}
+
+	/**
+	 * @template V
+	 * @param {Value<V>} signal
+	 * @returns {V}
+	 */
+	function get$1(signal) {
+		var flags = signal.f;
+		var is_derived = (flags & DERIVED) !== 0;
+
+		// If the derived is destroyed, just execute it again without retaining
+		// its memoisation properties as the derived is stale
+		if (is_derived && (flags & DESTROYED) !== 0) {
+			var value = execute_derived(/** @type {Derived} */ (signal));
+			// Ensure the derived remains destroyed
+			destroy_derived(/** @type {Derived} */ (signal));
+			return value;
+		}
+
+		// Register the dependency on the current reaction signal.
+		if (active_reaction !== null && !untracking) {
+			if (derived_sources !== null && derived_sources.includes(signal)) {
+				state_unsafe_local_read();
+			}
+			var deps = active_reaction.deps;
+			if (signal.rv < read_version) {
+				signal.rv = read_version;
+				// If the signal is accessing the same dependencies in the same
+				// order as it did last time, increment `skipped_deps`
+				// rather than updating `new_deps`, which creates GC cost
+				if (new_deps === null && deps !== null && deps[skipped_deps] === signal) {
+					skipped_deps++;
+				} else if (new_deps === null) {
+					new_deps = [signal];
+				} else {
+					new_deps.push(signal);
+				}
+			}
+		} else if (is_derived && /** @type {Derived} */ (signal).deps === null) {
+			var derived = /** @type {Derived} */ (signal);
+			var parent = derived.parent;
+			var target = derived;
+
+			while (parent !== null) {
+				// Attach the derived to the nearest parent effect, if there are deriveds
+				// in between then we also need to attach them too
+				if ((parent.f & DERIVED) !== 0) {
+					var parent_derived = /** @type {Derived} */ (parent);
+
+					target = parent_derived;
+					parent = parent_derived.parent;
+				} else {
+					var parent_effect = /** @type {Effect} */ (parent);
+
+					if (!parent_effect.deriveds?.includes(target)) {
+						(parent_effect.deriveds ??= []).push(target);
+					}
+					break;
+				}
+			}
+		}
+
+		if (is_derived) {
+			derived = /** @type {Derived} */ (signal);
+
+			if (check_dirtiness(derived)) {
+				update_derived(derived);
+			}
+		}
+
+		if (
+			DEV &&
+			tracing_mode_flag &&
+			tracing_expressions !== null &&
+			active_reaction !== null &&
+			tracing_expressions.reaction === active_reaction
+		) {
+			// Used when mapping state between special blocks like `each`
+			if (signal.debug) {
+				signal.debug();
+			} else if (signal.created) {
+				var entry = tracing_expressions.entries.get(signal);
+
+				if (entry === undefined) {
+					entry = { read: [] };
+					tracing_expressions.entries.set(signal, entry);
+				}
+
+				entry.read.push(get_stack('TracedAt'));
+			}
+		}
+
+		return signal.v;
+	}
+
+	/**
+	 * When used inside a [`$derived`](https://svelte.dev/docs/svelte/$derived) or [`$effect`](https://svelte.dev/docs/svelte/$effect),
+	 * any state read inside `fn` will not be treated as a dependency.
+	 *
+	 * ```ts
+	 * $effect(() => {
+	 *   // this will run when `data` changes, but not when `time` changes
+	 *   save(data, {
+	 *     timestamp: untrack(() => time)
+	 *   });
+	 * });
+	 * ```
+	 * @template T
+	 * @param {() => T} fn
+	 * @returns {T}
+	 */
+	function untrack(fn) {
+		var previous_untracking = untracking;
+		try {
+			untracking = true;
+			return fn();
+		} finally {
+			untracking = previous_untracking;
+		}
+	}
+
+	const STATUS_MASK = ~(DIRTY | MAYBE_DIRTY | CLEAN);
+
+	/**
+	 * @param {Signal} signal
+	 * @param {number} status
+	 * @returns {void}
+	 */
+	function set_signal_status(signal, status) {
+		signal.f = (signal.f & STATUS_MASK) | status;
+	}
+
+	/**
+	 * @param {Record<string, unknown>} props
+	 * @param {any} runes
+	 * @param {Function} [fn]
+	 * @returns {void}
+	 */
+	function push(props, runes = false, fn) {
+		component_context = {
+			p: component_context,
+			c: null,
+			e: null,
+			m: false,
+			s: props,
+			x: null,
+			l: null
+		};
+
+		if (legacy_mode_flag && !runes) {
+			component_context.l = {
+				s: null,
+				u: null,
+				r1: [],
+				r2: source(false)
+			};
+		}
+
+		if (DEV) {
+			// component function
+			component_context.function = fn;
+			dev_current_component_function = fn;
+		}
+	}
+
+	/**
+	 * @template {Record<string, any>} T
+	 * @param {T} [component]
+	 * @returns {T}
+	 */
+	function pop(component) {
+		const context_stack_item = component_context;
+		if (context_stack_item !== null) {
+			if (component !== undefined) {
+				context_stack_item.x = component;
+			}
+			const component_effects = context_stack_item.e;
+			if (component_effects !== null) {
+				var previous_effect = active_effect;
+				var previous_reaction = active_reaction;
+				context_stack_item.e = null;
+				try {
+					for (var i = 0; i < component_effects.length; i++) {
+						var component_effect = component_effects[i];
+						set_active_effect(component_effect.effect);
+						set_active_reaction(component_effect.reaction);
+						effect(component_effect.fn);
+					}
+				} finally {
+					set_active_effect(previous_effect);
+					set_active_reaction(previous_reaction);
+				}
+			}
+			component_context = context_stack_item.p;
+			if (DEV) {
+				dev_current_component_function = context_stack_item.p?.function ?? null;
+			}
+			context_stack_item.m = true;
+		}
+		// Micro-optimization: Don't set .a above to the empty object
+		// so it can be garbage-collected when the return here is unused
+		return component || /** @type {T} */ ({});
+	}
+
+	/**
+	 * Possibly traverse an object and read all its properties so that they're all reactive in case this is `$state`.
+	 * Does only check first level of an object for performance reasons (heuristic should be good for 99% of all cases).
+	 * @param {any} value
+	 * @returns {void}
+	 */
+	function deep_read_state(value) {
+		if (typeof value !== 'object' || !value || value instanceof EventTarget) {
+			return;
+		}
+
+		if (STATE_SYMBOL in value) {
+			deep_read(value);
+		} else if (!Array.isArray(value)) {
+			for (let key in value) {
+				const prop = value[key];
+				if (typeof prop === 'object' && prop && STATE_SYMBOL in prop) {
+					deep_read(prop);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Deeply traverse an object and read all its properties
+	 * so that they're all reactive in case this is `$state`
+	 * @param {any} value
+	 * @param {Set<any>} visited
+	 * @returns {void}
+	 */
+	function deep_read(value, visited = new Set()) {
+		if (
+			typeof value === 'object' &&
+			value !== null &&
+			// We don't want to traverse DOM elements
+			!(value instanceof EventTarget) &&
+			!visited.has(value)
+		) {
+			visited.add(value);
+			// When working with a possible SvelteDate, this
+			// will ensure we capture changes to it.
+			if (value instanceof Date) {
+				value.getTime();
+			}
+			for (let key in value) {
+				try {
+					deep_read(value[key], visited);
+				} catch (e) {
+					// continue
+				}
+			}
+			const proto = get_prototype_of(value);
+			if (
+				proto !== Object.prototype &&
+				proto !== Array.prototype &&
+				proto !== Map.prototype &&
+				proto !== Set.prototype &&
+				proto !== Date.prototype
+			) {
+				const descriptors = get_descriptors(proto);
+				for (let key in descriptors) {
+					const get = descriptors[key].get;
+					if (get) {
+						try {
+							get.call(value);
+						} catch (e) {
+							// continue
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if (DEV) {
+		/**
+		 * @param {string} rune
+		 */
+		function throw_rune_error(rune) {
+			if (!(rune in globalThis)) {
+				// TODO if people start adjusting the "this can contain runes" config through v-p-s more, adjust this message
+				/** @type {any} */
+				let value; // let's hope noone modifies this global, but belts and braces
+				Object.defineProperty(globalThis, rune, {
+					configurable: true,
+					// eslint-disable-next-line getter-return
+					get: () => {
+						if (value !== undefined) {
+							return value;
+						}
+
+						rune_outside_svelte(rune);
+					},
+					set: (v) => {
+						value = v;
+					}
+				});
+			}
+		}
+
+		throw_rune_error('$state');
+		throw_rune_error('$effect');
+		throw_rune_error('$derived');
+		throw_rune_error('$inspect');
+		throw_rune_error('$props');
+		throw_rune_error('$bindable');
+	}
+
+	/** @import { TemplateNode } from '#client' */
+
+
+	/**
+	 * Use this variable to guard everything related to hydration code so it can be treeshaken out
+	 * if the user doesn't use the `hydrate` method and these code paths are therefore not needed.
+	 */
+	let hydrating = false;
+
+	/** @param {boolean} value */
+	function set_hydrating(value) {
+		hydrating = value;
+	}
+
+	/**
+	 * The node that is currently being hydrated. This starts out as the first node inside the opening
+	 * <!--[--> comment, and updates each time a component calls `$.child(...)` or `$.sibling(...)`.
+	 * When entering a block (e.g. `{#if ...}`), `hydrate_node` is the block opening comment; by the
+	 * time we leave the block it is the closing comment, which serves as the block's anchor.
+	 * @type {TemplateNode}
+	 */
+	let hydrate_node;
+
+	/** @param {TemplateNode} node */
+	function set_hydrate_node(node) {
+		if (node === null) {
+			hydration_mismatch();
+			throw HYDRATION_ERROR;
+		}
+
+		return (hydrate_node = node);
+	}
+
+	function hydrate_next() {
+		return set_hydrate_node(/** @type {TemplateNode} */ (get_next_sibling(hydrate_node)));
+	}
+
+	/** @param {TemplateNode} node */
+	function reset(node) {
+		if (!hydrating) return;
+
+		// If the node has remaining siblings, something has gone wrong
+		if (get_next_sibling(hydrate_node) !== null) {
+			hydration_mismatch();
+			throw HYDRATION_ERROR;
+		}
+
+		hydrate_node = node;
+	}
+
+	function next(count = 1) {
+		if (hydrating) {
+			var i = count;
+			var node = hydrate_node;
+
+			while (i--) {
+				node = /** @type {TemplateNode} */ (get_next_sibling(node));
+			}
+
+			hydrate_node = node;
+		}
+	}
+
+	/**
+	 * Removes all nodes starting at `hydrate_node` up until the next hydration end comment
+	 */
+	function remove_nodes() {
+		var depth = 0;
+		var node = hydrate_node;
+
+		while (true) {
+			if (node.nodeType === 8) {
+				var data = /** @type {Comment} */ (node).data;
+
+				if (data === HYDRATION_END) {
+					if (depth === 0) return node;
+					depth -= 1;
+				} else if (data === HYDRATION_START || data === HYDRATION_START_ELSE) {
+					depth += 1;
+				}
+			}
+
+			var next = /** @type {TemplateNode} */ (get_next_sibling(node));
+			node.remove();
+			node = next;
+		}
+	}
+
+	/** @import { ProxyMetadata, ProxyStateObject, Source } from '#client' */
+
+	/**
+	 * @template T
+	 * @param {T} value
+	 * @param {ProxyMetadata | null} [parent]
+	 * @param {Source<T>} [prev] dev mode only
+	 * @returns {T}
+	 */
+	function proxy(value, parent = null, prev) {
+		/** @type {Error | null} */
+		var stack = null;
+		if (DEV && tracing_mode_flag) {
+			stack = get_stack('CreatedAt');
+		}
+		// if non-proxyable, or is already a proxy, return `value`
+		if (typeof value !== 'object' || value === null || STATE_SYMBOL in value) {
+			return value;
+		}
+
+		const prototype = get_prototype_of(value);
+
+		if (prototype !== object_prototype && prototype !== array_prototype) {
+			return value;
+		}
+
+		/** @type {Map<any, Source<any>>} */
+		var sources = new Map();
+		var is_proxied_array = is_array(value);
+		var version = source(0);
+
+		if (is_proxied_array) {
+			// We need to create the length source eagerly to ensure that
+			// mutations to the array are properly synced with our proxy
+			sources.set('length', source(/** @type {any[]} */ (value).length, stack));
+		}
+
+		/** @type {ProxyMetadata} */
+		var metadata;
+
+		if (DEV) {
+			metadata = {
+				parent,
+				owners: null
+			};
+
+			if (prev) {
+				// Reuse owners from previous state; necessary because reassignment is not guaranteed to have correct component context.
+				// If no previous proxy exists we play it safe and assume ownerless state
+				// @ts-expect-error
+				const prev_owners = prev.v?.[STATE_SYMBOL_METADATA]?.owners;
+				metadata.owners = prev_owners ? new Set(prev_owners) : null;
+			} else {
+				metadata.owners =
+					parent === null
+						? component_context !== null
+							? new Set([component_context.function])
+							: null
+						: new Set();
+			}
+		}
+
+		return new Proxy(/** @type {any} */ (value), {
+			defineProperty(_, prop, descriptor) {
+				if (
+					!('value' in descriptor) ||
+					descriptor.configurable === false ||
+					descriptor.enumerable === false ||
+					descriptor.writable === false
+				) {
+					// we disallow non-basic descriptors, because unless they are applied to the
+					// target object — which we avoid, so that state can be forked — we will run
+					// afoul of the various invariants
+					// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/Proxy/getOwnPropertyDescriptor#invariants
+					state_descriptors_fixed();
+				}
+
+				var s = sources.get(prop);
+
+				if (s === undefined) {
+					s = source(descriptor.value, stack);
+					sources.set(prop, s);
+				} else {
+					set(s, proxy(descriptor.value, metadata));
+				}
+
+				return true;
+			},
+
+			deleteProperty(target, prop) {
+				var s = sources.get(prop);
+
+				if (s === undefined) {
+					if (prop in target) {
+						sources.set(prop, source(UNINITIALIZED, stack));
+					}
+				} else {
+					// When working with arrays, we need to also ensure we update the length when removing
+					// an indexed property
+					if (is_proxied_array && typeof prop === 'string') {
+						var ls = /** @type {Source<number>} */ (sources.get('length'));
+						var n = Number(prop);
+
+						if (Number.isInteger(n) && n < ls.v) {
+							set(ls, n);
+						}
+					}
+					set(s, UNINITIALIZED);
+					update_version(version);
+				}
+
+				return true;
+			},
+
+			get(target, prop, receiver) {
+				if (DEV && prop === STATE_SYMBOL_METADATA) {
+					return metadata;
+				}
+
+				if (prop === STATE_SYMBOL) {
+					return value;
+				}
+
+				var s = sources.get(prop);
+				var exists = prop in target;
+
+				// create a source, but only if it's an own property and not a prototype property
+				if (s === undefined && (!exists || get_descriptor(target, prop)?.writable)) {
+					s = source(proxy(exists ? target[prop] : UNINITIALIZED, metadata), stack);
+					sources.set(prop, s);
+				}
+
+				if (s !== undefined) {
+					var v = get$1(s);
+
+					// In case of something like `foo = bar.map(...)`, foo would have ownership
+					// of the array itself, while the individual items would have ownership
+					// of the component that created bar. That means if we later do `foo[0].baz = 42`,
+					// we could get a false-positive ownership violation, since the two proxies
+					// are not connected to each other via the parent metadata relationship.
+					// For this reason, we need to widen the ownership of the children
+					// upon access when we detect they are not connected.
+					if (DEV) {
+						/** @type {ProxyMetadata | undefined} */
+						var prop_metadata = v?.[STATE_SYMBOL_METADATA];
+						if (prop_metadata && prop_metadata?.parent !== metadata) {
+							widen_ownership(metadata, prop_metadata);
+						}
+					}
+
+					return v === UNINITIALIZED ? undefined : v;
+				}
+
+				return Reflect.get(target, prop, receiver);
+			},
+
+			getOwnPropertyDescriptor(target, prop) {
+				var descriptor = Reflect.getOwnPropertyDescriptor(target, prop);
+
+				if (descriptor && 'value' in descriptor) {
+					var s = sources.get(prop);
+					if (s) descriptor.value = get$1(s);
+				} else if (descriptor === undefined) {
+					var source = sources.get(prop);
+					var value = source?.v;
+
+					if (source !== undefined && value !== UNINITIALIZED) {
+						return {
+							enumerable: true,
+							configurable: true,
+							value,
+							writable: true
+						};
+					}
+				}
+
+				return descriptor;
+			},
+
+			has(target, prop) {
+				if (DEV && prop === STATE_SYMBOL_METADATA) {
+					return true;
+				}
+
+				if (prop === STATE_SYMBOL) {
+					return true;
+				}
+
+				var s = sources.get(prop);
+				var has = (s !== undefined && s.v !== UNINITIALIZED) || Reflect.has(target, prop);
+
+				if (
+					s !== undefined ||
+					(active_effect !== null && (!has || get_descriptor(target, prop)?.writable))
+				) {
+					if (s === undefined) {
+						s = source(has ? proxy(target[prop], metadata) : UNINITIALIZED, stack);
+						sources.set(prop, s);
+					}
+
+					var value = get$1(s);
+					if (value === UNINITIALIZED) {
+						return false;
+					}
+				}
+
+				return has;
+			},
+
+			set(target, prop, value, receiver) {
+				var s = sources.get(prop);
+				var has = prop in target;
+
+				// variable.length = value -> clear all signals with index >= value
+				if (is_proxied_array && prop === 'length') {
+					for (var i = value; i < /** @type {Source<number>} */ (s).v; i += 1) {
+						var other_s = sources.get(i + '');
+						if (other_s !== undefined) {
+							set(other_s, UNINITIALIZED);
+						} else if (i in target) {
+							// If the item exists in the original, we need to create a uninitialized source,
+							// else a later read of the property would result in a source being created with
+							// the value of the original item at that index.
+							other_s = source(UNINITIALIZED, stack);
+							sources.set(i + '', other_s);
+						}
+					}
+				}
+
+				// If we haven't yet created a source for this property, we need to ensure
+				// we do so otherwise if we read it later, then the write won't be tracked and
+				// the heuristics of effects will be different vs if we had read the proxied
+				// object property before writing to that property.
+				if (s === undefined) {
+					if (!has || get_descriptor(target, prop)?.writable) {
+						s = source(undefined, stack);
+						set(s, proxy(value, metadata));
+						sources.set(prop, s);
+					}
+				} else {
+					has = s.v !== UNINITIALIZED;
+					set(s, proxy(value, metadata));
+				}
+
+				if (DEV) {
+					/** @type {ProxyMetadata | undefined} */
+					var prop_metadata = value?.[STATE_SYMBOL_METADATA];
+					if (prop_metadata && prop_metadata?.parent !== metadata) {
+						widen_ownership(metadata, prop_metadata);
+					}
+					check_ownership(metadata);
+				}
+
+				var descriptor = Reflect.getOwnPropertyDescriptor(target, prop);
+
+				// Set the new value before updating any signals so that any listeners get the new value
+				if (descriptor?.set) {
+					descriptor.set.call(receiver, value);
+				}
+
+				if (!has) {
+					// If we have mutated an array directly, we might need to
+					// signal that length has also changed. Do it before updating metadata
+					// to ensure that iterating over the array as a result of a metadata update
+					// will not cause the length to be out of sync.
+					if (is_proxied_array && typeof prop === 'string') {
+						var ls = /** @type {Source<number>} */ (sources.get('length'));
+						var n = Number(prop);
+
+						if (Number.isInteger(n) && n >= ls.v) {
+							set(ls, n + 1);
+						}
+					}
+
+					update_version(version);
+				}
+
+				return true;
+			},
+
+			ownKeys(target) {
+				get$1(version);
+
+				var own_keys = Reflect.ownKeys(target).filter((key) => {
+					var source = sources.get(key);
+					return source === undefined || source.v !== UNINITIALIZED;
+				});
+
+				for (var [key, source] of sources) {
+					if (source.v !== UNINITIALIZED && !(key in target)) {
+						own_keys.push(key);
+					}
+				}
+
+				return own_keys;
+			},
+
+			setPrototypeOf() {
+				state_prototype_fixed();
+			}
+		});
+	}
+
+	/**
+	 * @param {Source<number>} signal
+	 * @param {1 | -1} [d]
+	 */
+	function update_version(signal, d = 1) {
+		set(signal, signal.v + d);
+	}
+
+	/**
+	 * @param {any} value
+	 */
+	function get_proxied_value(value) {
+		if (value !== null && typeof value === 'object' && STATE_SYMBOL in value) {
+			return value[STATE_SYMBOL];
+		}
+
+		return value;
+	}
+
+	/**
+	 * @param {any} a
+	 * @param {any} b
+	 */
+	function is(a, b) {
+		return Object.is(get_proxied_value(a), get_proxied_value(b));
+	}
+
+	function init_array_prototype_warnings() {
+		const array_prototype = Array.prototype;
+		// The REPL ends up here over and over, and this prevents it from adding more and more patches
+		// of the same kind to the prototype, which would slow down everything over time.
+		// @ts-expect-error
+		const cleanup = Array.__svelte_cleanup;
+		if (cleanup) {
+			cleanup();
+		}
+
+		const { indexOf, lastIndexOf, includes } = array_prototype;
+
+		array_prototype.indexOf = function (item, from_index) {
+			const index = indexOf.call(this, item, from_index);
+
+			if (index === -1) {
+				for (let i = from_index ?? 0; i < this.length; i += 1) {
+					if (get_proxied_value(this[i]) === item) {
+						state_proxy_equality_mismatch('array.indexOf(...)');
+						break;
+					}
+				}
+			}
+
+			return index;
+		};
+
+		array_prototype.lastIndexOf = function (item, from_index) {
+			// we need to specify this.length - 1 because it's probably using something like
+			// `arguments` inside so passing undefined is different from not passing anything
+			const index = lastIndexOf.call(this, item, from_index ?? this.length - 1);
+
+			if (index === -1) {
+				for (let i = 0; i <= (from_index ?? this.length - 1); i += 1) {
+					if (get_proxied_value(this[i]) === item) {
+						state_proxy_equality_mismatch('array.lastIndexOf(...)');
+						break;
+					}
+				}
+			}
+
+			return index;
+		};
+
+		array_prototype.includes = function (item, from_index) {
+			const has = includes.call(this, item, from_index);
+
+			if (!has) {
+				for (let i = 0; i < this.length; i += 1) {
+					if (get_proxied_value(this[i]) === item) {
+						state_proxy_equality_mismatch('array.includes(...)');
+						break;
+					}
+				}
+			}
+
+			return has;
+		};
+
+		// @ts-expect-error
+		Array.__svelte_cleanup = () => {
+			array_prototype.indexOf = indexOf;
+			array_prototype.lastIndexOf = lastIndexOf;
+			array_prototype.includes = includes;
+		};
+	}
+
+	/**
+	 * @param {any} a
+	 * @param {any} b
+	 * @param {boolean} equal
+	 * @returns {boolean}
+	 */
+	function strict_equals(a, b, equal = true) {
+		// try-catch needed because this tries to read properties of `a` and `b`,
+		// which could be disallowed for example in a secure context
+		try {
+			if ((a === b) !== (get_proxied_value(a) === get_proxied_value(b))) {
+				state_proxy_equality_mismatch(equal ? '===' : '!==');
+			}
+		} catch {}
+
+		return (a === b) === equal;
+	}
+
+	/**
+	 * @param {any} a
+	 * @param {any} b
+	 * @param {boolean} equal
+	 * @returns {boolean}
+	 */
+	function equals(a, b, equal = true) {
+		if ((a == b) !== (get_proxied_value(a) == get_proxied_value(b))) {
+			state_proxy_equality_mismatch(equal ? '==' : '!=');
+		}
+
+		return (a == b) === equal;
+	}
+
+	/** @import { TemplateNode } from '#client' */
+
+	// export these for reference in the compiled code, making global name deduplication unnecessary
+	/** @type {Window} */
+	var $window;
+
+	/** @type {() => Node | null} */
+	var first_child_getter;
+	/** @type {() => Node | null} */
+	var next_sibling_getter;
+
+	/**
+	 * Initialize these lazily to avoid issues when using the runtime in a server context
+	 * where these globals are not available while avoiding a separate server entry point
+	 */
+	function init_operations() {
+		if ($window !== undefined) {
+			return;
+		}
+
+		$window = window;
+
+		var element_prototype = Element.prototype;
+		var node_prototype = Node.prototype;
+
+		// @ts-ignore
+		first_child_getter = get_descriptor(node_prototype, 'firstChild').get;
+		// @ts-ignore
+		next_sibling_getter = get_descriptor(node_prototype, 'nextSibling').get;
+
+		// the following assignments improve perf of lookups on DOM nodes
+		// @ts-expect-error
+		element_prototype.__click = undefined;
+		// @ts-expect-error
+		element_prototype.__className = '';
+		// @ts-expect-error
+		element_prototype.__attributes = null;
+		// @ts-expect-error
+		element_prototype.__styles = null;
+		// @ts-expect-error
+		element_prototype.__e = undefined;
+
+		// @ts-expect-error
+		Text.prototype.__t = undefined;
+
+		if (DEV) {
+			// @ts-expect-error
+			element_prototype.__svelte_meta = null;
+
+			init_array_prototype_warnings();
+		}
+	}
+
+	/**
+	 * @param {string} value
+	 * @returns {Text}
+	 */
+	function create_text(value = '') {
+		return document.createTextNode(value);
+	}
+
+	/**
+	 * @template {Node} N
+	 * @param {N} node
+	 * @returns {Node | null}
+	 */
+	/*@__NO_SIDE_EFFECTS__*/
+	function get_first_child(node) {
+		return first_child_getter.call(node);
+	}
+
+	/**
+	 * @template {Node} N
+	 * @param {N} node
+	 * @returns {Node | null}
+	 */
+	/*@__NO_SIDE_EFFECTS__*/
+	function get_next_sibling(node) {
+		return next_sibling_getter.call(node);
+	}
+
+	/**
+	 * Don't mark this as side-effect-free, hydration needs to walk all nodes
+	 * @template {Node} N
+	 * @param {N} node
+	 * @param {boolean} is_text
+	 * @returns {Node | null}
+	 */
+	function child(node, is_text) {
+		if (!hydrating) {
+			return get_first_child(node);
+		}
+
+		var child = /** @type {TemplateNode} */ (get_first_child(hydrate_node));
+
+		// Child can be null if we have an element with a single child, like `<p>{text}</p>`, where `text` is empty
+		if (child === null) {
+			child = hydrate_node.appendChild(create_text());
+		} else if (is_text && child.nodeType !== 3) {
+			var text = create_text();
+			child?.before(text);
+			set_hydrate_node(text);
+			return text;
+		}
+
+		set_hydrate_node(child);
+		return child;
+	}
+
+	/**
+	 * Don't mark this as side-effect-free, hydration needs to walk all nodes
+	 * @param {DocumentFragment | TemplateNode[]} fragment
+	 * @param {boolean} is_text
+	 * @returns {Node | null}
+	 */
+	function first_child(fragment, is_text) {
+		if (!hydrating) {
+			// when not hydrating, `fragment` is a `DocumentFragment` (the result of calling `open_frag`)
+			var first = /** @type {DocumentFragment} */ (get_first_child(/** @type {Node} */ (fragment)));
+
+			// TODO prevent user comments with the empty string when preserveComments is true
+			if (first instanceof Comment && first.data === '') return get_next_sibling(first);
+
+			return first;
+		}
+
+		// if an {expression} is empty during SSR, there might be no
+		// text node to hydrate — we must therefore create one
+		if (is_text && hydrate_node?.nodeType !== 3) {
+			var text = create_text();
+
+			hydrate_node?.before(text);
+			set_hydrate_node(text);
+			return text;
+		}
+
+		return hydrate_node;
+	}
+
+	/**
+	 * Don't mark this as side-effect-free, hydration needs to walk all nodes
+	 * @param {TemplateNode} node
+	 * @param {number} count
+	 * @param {boolean} is_text
+	 * @returns {Node | null}
+	 */
+	function sibling(node, count = 1, is_text = false) {
+		let next_sibling = hydrating ? hydrate_node : node;
+		var last_sibling;
+
+		while (count--) {
+			last_sibling = next_sibling;
+			next_sibling = /** @type {TemplateNode} */ (get_next_sibling(next_sibling));
+		}
+
+		if (!hydrating) {
+			return next_sibling;
+		}
+
+		var type = next_sibling?.nodeType;
+
+		// if a sibling {expression} is empty during SSR, there might be no
+		// text node to hydrate — we must therefore create one
+		if (is_text && type !== 3) {
+			var text = create_text();
+			// If the next sibling is `null` and we're handling text then it's because
+			// the SSR content was empty for the text, so we need to generate a new text
+			// node and insert it after the last sibling
+			if (next_sibling === null) {
+				last_sibling?.after(text);
+			} else {
+				next_sibling.before(text);
+			}
+			set_hydrate_node(text);
+			return text;
+		}
+
+		set_hydrate_node(next_sibling);
+		return /** @type {TemplateNode} */ (next_sibling);
+	}
+
+	/**
+	 * @template {Node} N
+	 * @param {N} node
+	 * @returns {void}
+	 */
+	function clear_text_content(node) {
+		node.textContent = '';
+	}
+
+	/** @import { ComponentContext, ComponentContextLegacy, Derived, Effect, TemplateNode, TransitionManager } from '#client' */
+
+	/**
+	 * @param {'$effect' | '$effect.pre' | '$inspect'} rune
+	 */
+	function validate_effect(rune) {
+		if (active_effect === null && active_reaction === null) {
+			effect_orphan(rune);
+		}
+
+		if (active_reaction !== null && (active_reaction.f & UNOWNED) !== 0) {
+			effect_in_unowned_derived();
+		}
+
+		if (is_destroying_effect) {
+			effect_in_teardown(rune);
+		}
+	}
+
+	/**
+	 * @param {Effect} effect
+	 * @param {Effect} parent_effect
+	 */
+	function push_effect(effect, parent_effect) {
+		var parent_last = parent_effect.last;
+		if (parent_last === null) {
+			parent_effect.last = parent_effect.first = effect;
+		} else {
+			parent_last.next = effect;
+			effect.prev = parent_last;
+			parent_effect.last = effect;
+		}
+	}
+
+	/**
+	 * @param {number} type
+	 * @param {null | (() => void | (() => void))} fn
+	 * @param {boolean} sync
+	 * @param {boolean} push
+	 * @returns {Effect}
+	 */
+	function create_effect(type, fn, sync, push = true) {
+		var is_root = (type & ROOT_EFFECT) !== 0;
+		var parent_effect = active_effect;
+
+		if (DEV) {
+			// Ensure the parent is never an inspect effect
+			while (parent_effect !== null && (parent_effect.f & INSPECT_EFFECT) !== 0) {
+				parent_effect = parent_effect.parent;
+			}
+		}
+
+		/** @type {Effect} */
+		var effect = {
+			ctx: component_context,
+			deps: null,
+			deriveds: null,
+			nodes_start: null,
+			nodes_end: null,
+			f: type | DIRTY,
+			first: null,
+			fn,
+			last: null,
+			next: null,
+			parent: is_root ? null : parent_effect,
+			prev: null,
+			teardown: null,
+			transitions: null,
+			wv: 0
+		};
+
+		if (DEV) {
+			effect.component_function = dev_current_component_function;
+		}
+
+		if (sync) {
+			var previously_flushing_effect = is_flushing_effect;
+
+			try {
+				set_is_flushing_effect(true);
+				update_effect(effect);
+				effect.f |= EFFECT_RAN;
+			} catch (e) {
+				destroy_effect(effect);
+				throw e;
+			} finally {
+				set_is_flushing_effect(previously_flushing_effect);
+			}
+		} else if (fn !== null) {
+			schedule_effect(effect);
+		}
+
+		// if an effect has no dependencies, no DOM and no teardown function,
+		// don't bother adding it to the effect tree
+		var inert =
+			sync &&
+			effect.deps === null &&
+			effect.first === null &&
+			effect.nodes_start === null &&
+			effect.teardown === null &&
+			(effect.f & (EFFECT_HAS_DERIVED | BOUNDARY_EFFECT)) === 0;
+
+		if (!inert && !is_root && push) {
+			if (parent_effect !== null) {
+				push_effect(effect, parent_effect);
+			}
+
+			// if we're in a derived, add the effect there too
+			if (active_reaction !== null && (active_reaction.f & DERIVED) !== 0) {
+				var derived = /** @type {Derived} */ (active_reaction);
+				(derived.children ??= []).push(effect);
+			}
+		}
+
+		return effect;
+	}
+
+	/**
+	 * @param {() => void} fn
+	 */
+	function teardown(fn) {
+		const effect = create_effect(RENDER_EFFECT, null, false);
+		set_signal_status(effect, CLEAN);
+		effect.teardown = fn;
+		return effect;
+	}
+
+	/**
+	 * Internal representation of `$effect(...)`
+	 * @param {() => void | (() => void)} fn
+	 */
+	function user_effect(fn) {
+		validate_effect('$effect');
+
+		// Non-nested `$effect(...)` in a component should be deferred
+		// until the component is mounted
+		var defer =
+			active_effect !== null &&
+			(active_effect.f & BRANCH_EFFECT) !== 0 &&
+			component_context !== null &&
+			!component_context.m;
+
+		if (DEV) {
+			define_property(fn, 'name', {
+				value: '$effect'
+			});
+		}
+
+		if (defer) {
+			var context = /** @type {ComponentContext} */ (component_context);
+			(context.e ??= []).push({
+				fn,
+				effect: active_effect,
+				reaction: active_reaction
+			});
+		} else {
+			var signal = effect(fn);
+			return signal;
+		}
+	}
+
+	/**
+	 * Internal representation of `$effect.pre(...)`
+	 * @param {() => void | (() => void)} fn
+	 * @returns {Effect}
+	 */
+	function user_pre_effect(fn) {
+		validate_effect('$effect.pre');
+		if (DEV) {
+			define_property(fn, 'name', {
+				value: '$effect.pre'
+			});
+		}
+		return render_effect(fn);
+	}
+
+	/**
+	 * An effect root whose children can transition out
+	 * @param {() => void} fn
+	 * @returns {(options?: { outro?: boolean }) => Promise<void>}
+	 */
+	function component_root(fn) {
+		const effect = create_effect(ROOT_EFFECT, fn, true);
+
+		return (options = {}) => {
+			return new Promise((fulfil) => {
+				if (options.outro) {
+					pause_effect(effect, () => {
+						destroy_effect(effect);
+						fulfil(undefined);
+					});
+				} else {
+					destroy_effect(effect);
+					fulfil(undefined);
+				}
+			});
+		};
+	}
+
+	/**
+	 * @param {() => void | (() => void)} fn
+	 * @returns {Effect}
+	 */
+	function effect(fn) {
+		return create_effect(EFFECT, fn, false);
+	}
+
+	/**
+	 * Internal representation of `$: ..`
+	 * @param {() => any} deps
+	 * @param {() => void | (() => void)} fn
+	 */
+	function legacy_pre_effect(deps, fn) {
+		var context = /** @type {ComponentContextLegacy} */ (component_context);
+
+		/** @type {{ effect: null | Effect, ran: boolean }} */
+		var token = { effect: null, ran: false };
+		context.l.r1.push(token);
+
+		token.effect = render_effect(() => {
+			deps();
+
+			// If this legacy pre effect has already run before the end of the reset, then
+			// bail out to emulate the same behavior.
+			if (token.ran) return;
+
+			token.ran = true;
+			set(context.l.r2, true);
+			untrack(fn);
+		});
+	}
+
+	function legacy_pre_effect_reset() {
+		var context = /** @type {ComponentContextLegacy} */ (component_context);
+
+		render_effect(() => {
+			if (!get$1(context.l.r2)) return;
+
+			// Run dirty `$:` statements
+			for (var token of context.l.r1) {
+				var effect = token.effect;
+
+				// If the effect is CLEAN, then make it MAYBE_DIRTY. This ensures we traverse through
+				// the effects dependencies and correctly ensure each dependency is up-to-date.
+				if ((effect.f & CLEAN) !== 0) {
+					set_signal_status(effect, MAYBE_DIRTY);
+				}
+
+				if (check_dirtiness(effect)) {
+					update_effect(effect);
+				}
+
+				token.ran = false;
+			}
+
+			context.l.r2.v = false; // set directly to avoid rerunning this effect
+		});
+	}
+
+	/**
+	 * @param {() => void | (() => void)} fn
+	 * @returns {Effect}
+	 */
+	function render_effect(fn) {
+		return create_effect(RENDER_EFFECT, fn, true);
+	}
+
+	/**
+	 * @param {(...expressions: any) => void | (() => void)} fn
+	 * @param {Array<() => any>} thunks
+	 * @returns {Effect}
+	 */
+	function template_effect(fn, thunks = [], d = derived) {
+		const deriveds = thunks.map(d);
+		const effect = () => fn(...deriveds.map(get$1));
+
+		if (DEV) {
+			define_property(effect, 'name', {
+				value: '{expression}'
+			});
+		}
+
+		return block(effect);
+	}
+
+	/**
+	 * @param {(() => void)} fn
+	 * @param {number} flags
+	 */
+	function block(fn, flags = 0) {
+		return create_effect(RENDER_EFFECT | BLOCK_EFFECT | flags, fn, true);
+	}
+
+	/**
+	 * @param {(() => void)} fn
+	 * @param {boolean} [push]
+	 */
+	function branch(fn, push = true) {
+		return create_effect(RENDER_EFFECT | BRANCH_EFFECT, fn, true, push);
+	}
+
+	/**
+	 * @param {Effect} effect
+	 */
+	function execute_effect_teardown(effect) {
+		var teardown = effect.teardown;
+		if (teardown !== null) {
+			const previously_destroying_effect = is_destroying_effect;
+			const previous_reaction = active_reaction;
+			set_is_destroying_effect(true);
+			set_active_reaction(null);
+			try {
+				teardown.call(null);
+			} finally {
+				set_is_destroying_effect(previously_destroying_effect);
+				set_active_reaction(previous_reaction);
+			}
+		}
+	}
+
+	/**
+	 * @param {Effect} signal
+	 * @returns {void}
+	 */
+	function destroy_effect_deriveds(signal) {
+		var deriveds = signal.deriveds;
+
+		if (deriveds !== null) {
+			signal.deriveds = null;
+
+			for (var i = 0; i < deriveds.length; i += 1) {
+				destroy_derived(deriveds[i]);
+			}
+		}
+	}
+
+	/**
+	 * @param {Effect} signal
+	 * @param {boolean} remove_dom
+	 * @returns {void}
+	 */
+	function destroy_effect_children(signal, remove_dom = false) {
+		var effect = signal.first;
+		signal.first = signal.last = null;
+
+		while (effect !== null) {
+			var next = effect.next;
+			destroy_effect(effect, remove_dom);
+			effect = next;
+		}
+	}
+
+	/**
+	 * @param {Effect} signal
+	 * @returns {void}
+	 */
+	function destroy_block_effect_children(signal) {
+		var effect = signal.first;
+
+		while (effect !== null) {
+			var next = effect.next;
+			if ((effect.f & BRANCH_EFFECT) === 0) {
+				destroy_effect(effect);
+			}
+			effect = next;
+		}
+	}
+
+	/**
+	 * @param {Effect} effect
+	 * @param {boolean} [remove_dom]
+	 * @returns {void}
+	 */
+	function destroy_effect(effect, remove_dom = true) {
+		var removed = false;
+
+		if ((remove_dom || (effect.f & HEAD_EFFECT) !== 0) && effect.nodes_start !== null) {
+			/** @type {TemplateNode | null} */
+			var node = effect.nodes_start;
+			var end = effect.nodes_end;
+
+			while (node !== null) {
+				/** @type {TemplateNode | null} */
+				var next = node === end ? null : /** @type {TemplateNode} */ (get_next_sibling(node));
+
+				node.remove();
+				node = next;
+			}
+
+			removed = true;
+		}
+
+		destroy_effect_children(effect, remove_dom && !removed);
+		destroy_effect_deriveds(effect);
+		remove_reactions(effect, 0);
+		set_signal_status(effect, DESTROYED);
+
+		var transitions = effect.transitions;
+
+		if (transitions !== null) {
+			for (const transition of transitions) {
+				transition.stop();
+			}
+		}
+
+		execute_effect_teardown(effect);
+
+		var parent = effect.parent;
+
+		// If the parent doesn't have any children, then skip this work altogether
+		if (parent !== null && parent.first !== null) {
+			unlink_effect(effect);
+		}
+
+		if (DEV) {
+			effect.component_function = null;
+		}
+
+		// `first` and `child` are nulled out in destroy_effect_children
+		// we don't null out `parent` so that error propagation can work correctly
+		effect.next =
+			effect.prev =
+			effect.teardown =
+			effect.ctx =
+			effect.deps =
+			effect.fn =
+			effect.nodes_start =
+			effect.nodes_end =
+				null;
+	}
+
+	/**
+	 * Detach an effect from the effect tree, freeing up memory and
+	 * reducing the amount of work that happens on subsequent traversals
+	 * @param {Effect} effect
+	 */
+	function unlink_effect(effect) {
+		var parent = effect.parent;
+		var prev = effect.prev;
+		var next = effect.next;
+
+		if (prev !== null) prev.next = next;
+		if (next !== null) next.prev = prev;
+
+		if (parent !== null) {
+			if (parent.first === effect) parent.first = next;
+			if (parent.last === effect) parent.last = prev;
+		}
+	}
+
+	/**
+	 * When a block effect is removed, we don't immediately destroy it or yank it
+	 * out of the DOM, because it might have transitions. Instead, we 'pause' it.
+	 * It stays around (in memory, and in the DOM) until outro transitions have
+	 * completed, and if the state change is reversed then we _resume_ it.
+	 * A paused effect does not update, and the DOM subtree becomes inert.
+	 * @param {Effect} effect
+	 * @param {() => void} [callback]
+	 */
+	function pause_effect(effect, callback) {
+		/** @type {TransitionManager[]} */
+		var transitions = [];
+
+		pause_children(effect, transitions, true);
+
+		run_out_transitions(transitions, () => {
+			destroy_effect(effect);
+			if (callback) callback();
+		});
+	}
+
+	/**
+	 * @param {TransitionManager[]} transitions
+	 * @param {() => void} fn
+	 */
+	function run_out_transitions(transitions, fn) {
+		var remaining = transitions.length;
+		if (remaining > 0) {
+			var check = () => --remaining || fn();
+			for (var transition of transitions) {
+				transition.out(check);
+			}
+		} else {
+			fn();
+		}
+	}
+
+	/**
+	 * @param {Effect} effect
+	 * @param {TransitionManager[]} transitions
+	 * @param {boolean} local
+	 */
+	function pause_children(effect, transitions, local) {
+		if ((effect.f & INERT) !== 0) return;
+		effect.f ^= INERT;
+
+		if (effect.transitions !== null) {
+			for (const transition of effect.transitions) {
+				if (transition.is_global || local) {
+					transitions.push(transition);
+				}
+			}
+		}
+
+		var child = effect.first;
+
+		while (child !== null) {
+			var sibling = child.next;
+			var transparent = (child.f & EFFECT_TRANSPARENT) !== 0 || (child.f & BRANCH_EFFECT) !== 0;
+			// TODO we don't need to call pause_children recursively with a linked list in place
+			// it's slightly more involved though as we have to account for `transparent` changing
+			// through the tree.
+			pause_children(child, transitions, transparent ? local : false);
+			child = sibling;
+		}
+	}
+
+	/**
+	 * The opposite of `pause_effect`. We call this if (for example)
+	 * `x` becomes falsy then truthy: `{#if x}...{/if}`
+	 * @param {Effect} effect
+	 */
+	function resume_effect(effect) {
+		resume_children(effect, true);
+	}
+
+	/**
+	 * @param {Effect} effect
+	 * @param {boolean} local
+	 */
+	function resume_children(effect, local) {
+		if ((effect.f & INERT) === 0) return;
+		effect.f ^= INERT;
+
+		// Ensure the effect is marked as clean again so that any dirty child
+		// effects can schedule themselves for execution
+		if ((effect.f & CLEAN) === 0) {
+			effect.f ^= CLEAN;
+		}
+
+		// If a dependency of this effect changed while it was paused,
+		// schedule the effect to update
+		if (check_dirtiness(effect)) {
+			set_signal_status(effect, DIRTY);
+			schedule_effect(effect);
+		}
+
+		var child = effect.first;
+
+		while (child !== null) {
+			var sibling = child.next;
+			var transparent = (child.f & EFFECT_TRANSPARENT) !== 0 || (child.f & BRANCH_EFFECT) !== 0;
+			// TODO we don't need to call resume_children recursively with a linked list in place
+			// it's slightly more involved though as we have to account for `transparent` changing
+			// through the tree.
+			resume_children(child, transparent ? local : false);
+			child = sibling;
+		}
+
+		if (effect.transitions !== null) {
+			for (const transition of effect.transitions) {
+				if (transition.is_global || local) {
+					transition.in();
+				}
+			}
+		}
+	}
+
+	let listening_to_form_reset = false;
+
+	function add_form_reset_listener() {
+		if (!listening_to_form_reset) {
+			listening_to_form_reset = true;
+			document.addEventListener(
+				'reset',
+				(evt) => {
+					// Needs to happen one tick later or else the dom properties of the form
+					// elements have not updated to their reset values yet
+					Promise.resolve().then(() => {
+						if (!evt.defaultPrevented) {
+							for (const e of /**@type {HTMLFormElement} */ (evt.target).elements) {
+								// @ts-expect-error
+								e.__on_r?.();
+							}
+						}
+					});
+				},
+				// In the capture phase to guarantee we get noticed of it (no possiblity of stopPropagation)
+				{ capture: true }
+			);
+		}
+	}
+
+	/**
+	 * @template T
+	 * @param {() => T} fn
+	 */
+	function without_reactive_context(fn) {
+		var previous_reaction = active_reaction;
+		var previous_effect = active_effect;
+		set_active_reaction(null);
+		set_active_effect(null);
+		try {
+			return fn();
+		} finally {
+			set_active_reaction(previous_reaction);
+			set_active_effect(previous_effect);
+		}
+	}
+
+	/**
+	 * Listen to the given event, and then instantiate a global form reset listener if not already done,
+	 * to notify all bindings when the form is reset
+	 * @param {HTMLElement} element
+	 * @param {string} event
+	 * @param {(is_reset?: true) => void} handler
+	 * @param {(is_reset?: true) => void} [on_reset]
+	 */
+	function listen_to_event_and_reset_event(element, event, handler, on_reset = handler) {
+		element.addEventListener(event, () => without_reactive_context(handler));
+		// @ts-expect-error
+		const prev = element.__on_r;
+		if (prev) {
+			// special case for checkbox that can have multiple binds (group & checked)
+			// @ts-expect-error
+			element.__on_r = () => {
+				prev();
+				on_reset(true);
+			};
+		} else {
+			// @ts-expect-error
+			element.__on_r = () => on_reset(true);
+		}
+
+		add_form_reset_listener();
+	}
+
+	/** @import { Location } from 'locate-character' */
+
+	/** @type {Set<string>} */
+	const all_registered_events = new Set();
+
+	/** @type {Set<(events: Array<string>) => void>} */
+	const root_event_handles = new Set();
+
+	/**
+	 * @param {string} event_name
+	 * @param {EventTarget} dom
+	 * @param {EventListener} handler
+	 * @param {AddEventListenerOptions} options
+	 */
+	function create_event(event_name, dom, handler, options) {
+		/**
+		 * @this {EventTarget}
+		 */
+		function target_handler(/** @type {Event} */ event) {
+			if (!options.capture) {
+				// Only call in the bubble phase, else delegated events would be called before the capturing events
+				handle_event_propagation.call(dom, event);
+			}
+			if (!event.cancelBubble) {
+				return without_reactive_context(() => {
+					return handler.call(this, event);
+				});
+			}
+		}
+
+		// Chrome has a bug where pointer events don't work when attached to a DOM element that has been cloned
+		// with cloneNode() and the DOM element is disconnected from the document. To ensure the event works, we
+		// defer the attachment till after it's been appended to the document. TODO: remove this once Chrome fixes
+		// this bug. The same applies to wheel events and touch events.
+		if (
+			event_name.startsWith('pointer') ||
+			event_name.startsWith('touch') ||
+			event_name === 'wheel'
+		) {
+			queue_micro_task(() => {
+				dom.addEventListener(event_name, target_handler, options);
+			});
+		} else {
+			dom.addEventListener(event_name, target_handler, options);
+		}
+
+		return target_handler;
+	}
+
+	/**
+	 * @param {string} event_name
+	 * @param {Element} dom
+	 * @param {EventListener} handler
+	 * @param {boolean} capture
+	 * @param {boolean} [passive]
+	 * @returns {void}
+	 */
+	function event(event_name, dom, handler, capture, passive) {
+		var options = { capture, passive };
+		var target_handler = create_event(event_name, dom, handler, options);
+
+		// @ts-ignore
+		if (dom === document.body || dom === window || dom === document) {
+			teardown(() => {
+				dom.removeEventListener(event_name, target_handler, options);
+			});
+		}
+	}
+
+	/**
+	 * @this {EventTarget}
+	 * @param {Event} event
+	 * @returns {void}
+	 */
+	function handle_event_propagation(event) {
+		var handler_element = this;
+		var owner_document = /** @type {Node} */ (handler_element).ownerDocument;
+		var event_name = event.type;
+		var path = event.composedPath?.() || [];
+		var current_target = /** @type {null | Element} */ (path[0] || event.target);
+
+		// composedPath contains list of nodes the event has propagated through.
+		// We check __root to skip all nodes below it in case this is a
+		// parent of the __root node, which indicates that there's nested
+		// mounted apps. In this case we don't want to trigger events multiple times.
+		var path_idx = 0;
+
+		// @ts-expect-error is added below
+		var handled_at = event.__root;
+
+		if (handled_at) {
+			var at_idx = path.indexOf(handled_at);
+			if (
+				at_idx !== -1 &&
+				(handler_element === document || handler_element === /** @type {any} */ (window))
+			) {
+				// This is the fallback document listener or a window listener, but the event was already handled
+				// -> ignore, but set handle_at to document/window so that we're resetting the event
+				// chain in case someone manually dispatches the same event object again.
+				// @ts-expect-error
+				event.__root = handler_element;
+				return;
+			}
+
+			// We're deliberately not skipping if the index is higher, because
+			// someone could create an event programmatically and emit it multiple times,
+			// in which case we want to handle the whole propagation chain properly each time.
+			// (this will only be a false negative if the event is dispatched multiple times and
+			// the fallback document listener isn't reached in between, but that's super rare)
+			var handler_idx = path.indexOf(handler_element);
+			if (handler_idx === -1) {
+				// handle_idx can theoretically be -1 (happened in some JSDOM testing scenarios with an event listener on the window object)
+				// so guard against that, too, and assume that everything was handled at this point.
+				return;
+			}
+
+			if (at_idx <= handler_idx) {
+				path_idx = at_idx;
+			}
+		}
+
+		current_target = /** @type {Element} */ (path[path_idx] || event.target);
+		// there can only be one delegated event per element, and we either already handled the current target,
+		// or this is the very first target in the chain which has a non-delegated listener, in which case it's safe
+		// to handle a possible delegated event on it later (through the root delegation listener for example).
+		if (current_target === handler_element) return;
+
+		// Proxy currentTarget to correct target
+		define_property(event, 'currentTarget', {
+			configurable: true,
+			get() {
+				return current_target || owner_document;
+			}
+		});
+
+		// This started because of Chromium issue https://chromestatus.com/feature/5128696823545856,
+		// where removal or moving of of the DOM can cause sync `blur` events to fire, which can cause logic
+		// to run inside the current `active_reaction`, which isn't what we want at all. However, on reflection,
+		// it's probably best that all event handled by Svelte have this behaviour, as we don't really want
+		// an event handler to run in the context of another reaction or effect.
+		var previous_reaction = active_reaction;
+		var previous_effect = active_effect;
+		set_active_reaction(null);
+		set_active_effect(null);
+
+		try {
+			/**
+			 * @type {unknown}
+			 */
+			var throw_error;
+			/**
+			 * @type {unknown[]}
+			 */
+			var other_errors = [];
+
+			while (current_target !== null) {
+				/** @type {null | Element} */
+				var parent_element =
+					current_target.assignedSlot ||
+					current_target.parentNode ||
+					/** @type {any} */ (current_target).host ||
+					null;
+
+				try {
+					// @ts-expect-error
+					var delegated = current_target['__' + event_name];
+
+					if (delegated !== undefined && !(/** @type {any} */ (current_target).disabled)) {
+						if (is_array(delegated)) {
+							var [fn, ...data] = delegated;
+							fn.apply(current_target, [event, ...data]);
+						} else {
+							delegated.call(current_target, event);
+						}
+					}
+				} catch (error) {
+					if (throw_error) {
+						other_errors.push(error);
+					} else {
+						throw_error = error;
+					}
+				}
+				if (event.cancelBubble || parent_element === handler_element || parent_element === null) {
+					break;
+				}
+				current_target = parent_element;
+			}
+
+			if (throw_error) {
+				for (let error of other_errors) {
+					// Throw the rest of the errors, one-by-one on a microtask
+					queueMicrotask(() => {
+						throw error;
+					});
+				}
+				throw throw_error;
+			}
+		} finally {
+			// @ts-expect-error is used above
+			event.__root = handler_element;
+			// @ts-ignore remove proxy on currentTarget
+			delete event.currentTarget;
+			set_active_reaction(previous_reaction);
+			set_active_effect(previous_effect);
+		}
+	}
+
+	/** @param {string} html */
+	function create_fragment_from_html(html) {
+		var elem = document.createElement('template');
+		elem.innerHTML = html;
+		return elem.content;
+	}
+
+	/** @import { Effect, TemplateNode } from '#client' */
+
+	/**
+	 * @param {TemplateNode} start
+	 * @param {TemplateNode | null} end
+	 */
+	function assign_nodes(start, end) {
+		var effect = /** @type {Effect} */ (active_effect);
+		if (effect.nodes_start === null) {
+			effect.nodes_start = start;
+			effect.nodes_end = end;
+		}
+	}
+
+	/**
+	 * @param {string} content
+	 * @param {number} flags
+	 * @returns {() => Node | Node[]}
+	 */
+	/*#__NO_SIDE_EFFECTS__*/
+	function template(content, flags) {
+		var is_fragment = (flags & TEMPLATE_FRAGMENT) !== 0;
+		var use_import_node = (flags & TEMPLATE_USE_IMPORT_NODE) !== 0;
+
+		/** @type {Node} */
+		var node;
+
+		/**
+		 * Whether or not the first item is a text/element node. If not, we need to
+		 * create an additional comment node to act as `effect.nodes.start`
+		 */
+		var has_start = !content.startsWith('<!>');
+
+		return () => {
+			if (hydrating) {
+				assign_nodes(hydrate_node, null);
+				return hydrate_node;
+			}
+
+			if (node === undefined) {
+				node = create_fragment_from_html(has_start ? content : '<!>' + content);
+				if (!is_fragment) node = /** @type {Node} */ (get_first_child(node));
+			}
+
+			var clone = /** @type {TemplateNode} */ (
+				use_import_node ? document.importNode(node, true) : node.cloneNode(true)
+			);
+
+			if (is_fragment) {
+				var start = /** @type {TemplateNode} */ (get_first_child(clone));
+				var end = /** @type {TemplateNode} */ (clone.lastChild);
+
+				assign_nodes(start, end);
+			} else {
+				assign_nodes(clone, clone);
+			}
+
+			return clone;
+		};
+	}
+
+	function comment() {
+		// we're not delegating to `template` here for performance reasons
+		if (hydrating) {
+			assign_nodes(hydrate_node, null);
+			return hydrate_node;
+		}
+
+		var frag = document.createDocumentFragment();
+		var start = document.createComment('');
+		var anchor = create_text();
+		frag.append(start, anchor);
+
+		assign_nodes(start, anchor);
+
+		return frag;
+	}
+
+	/**
+	 * Assign the created (or in hydration mode, traversed) dom elements to the current block
+	 * and insert the elements into the dom (in client mode).
+	 * @param {Text | Comment | Element} anchor
+	 * @param {DocumentFragment | Element} dom
+	 */
+	function append(anchor, dom) {
+		if (hydrating) {
+			/** @type {Effect} */ (active_effect).nodes_end = hydrate_node;
+			hydrate_next();
+			return;
+		}
+
+		if (anchor === null) {
+			// edge case — void `<svelte:element>` with content
+			return;
+		}
+
+		anchor.before(/** @type {Node} */ (dom));
+	}
+
+	const regex_return_characters = /\r/g;
+
+	/**
+	 * @param {string} str
+	 * @returns {string}
+	 */
+	function hash(str) {
+		str = str.replace(regex_return_characters, '');
+		let hash = 5381;
+		let i = str.length;
+
+		while (i--) hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+		return (hash >>> 0).toString(36);
+	}
+
+	/**
+	 * Subset of delegated events which should be passive by default.
+	 * These two are already passive via browser defaults on window, document and body.
+	 * But since
+	 * - we're delegating them
+	 * - they happen often
+	 * - they apply to mobile which is generally less performant
+	 * we're marking them as passive by default for other elements, too.
+	 */
+	const PASSIVE_EVENTS = ['touchstart', 'touchmove'];
+
+	/**
+	 * Returns `true` if `name` is a passive event
+	 * @param {string} name
+	 */
+	function is_passive_event(name) {
+		return PASSIVE_EVENTS.includes(name);
+	}
+
+	/**
+	 * Prevent devtools trying to make `location` a clickable link by inserting a zero-width space
+	 * @param {string | undefined} location
+	 */
+	function sanitize_location(location) {
+		return location?.replace(/\//g, '/\u200b');
+	}
+
+	/** @import { ComponentContext, Effect, TemplateNode } from '#client' */
+	/** @import { Component, ComponentType, SvelteComponent, MountOptions } from '../../index.js' */
+
+	/**
+	 * @param {Element} text
+	 * @param {string} value
+	 * @returns {void}
+	 */
+	function set_text(text, value) {
+		// For objects, we apply string coercion (which might make things like $state array references in the template reactive) before diffing
+		var str = value == null ? '' : typeof value === 'object' ? value + '' : value;
+		// @ts-expect-error
+		if (str !== (text.__t ??= text.nodeValue)) {
+			// @ts-expect-error
+			text.__t = str;
+			text.nodeValue = str == null ? '' : str + '';
+		}
+	}
+
+	/**
+	 * Mounts a component to the given target and returns the exports and potentially the props (if compiled with `accessors: true`) of the component.
+	 * Transitions will play during the initial render unless the `intro` option is set to `false`.
+	 *
+	 * @template {Record<string, any>} Props
+	 * @template {Record<string, any>} Exports
+	 * @param {ComponentType<SvelteComponent<Props>> | Component<Props, Exports, any>} component
+	 * @param {MountOptions<Props>} options
+	 * @returns {Exports}
+	 */
+	function mount(component, options) {
+		return _mount(component, options);
+	}
+
+	/**
+	 * Hydrates a component on the given target and returns the exports and potentially the props (if compiled with `accessors: true`) of the component
+	 *
+	 * @template {Record<string, any>} Props
+	 * @template {Record<string, any>} Exports
+	 * @param {ComponentType<SvelteComponent<Props>> | Component<Props, Exports, any>} component
+	 * @param {{} extends Props ? {
+	 * 		target: Document | Element | ShadowRoot;
+	 * 		props?: Props;
+	 * 		events?: Record<string, (e: any) => any>;
+	 *  	context?: Map<any, any>;
+	 * 		intro?: boolean;
+	 * 		recover?: boolean;
+	 * 	} : {
+	 * 		target: Document | Element | ShadowRoot;
+	 * 		props: Props;
+	 * 		events?: Record<string, (e: any) => any>;
+	 *  	context?: Map<any, any>;
+	 * 		intro?: boolean;
+	 * 		recover?: boolean;
+	 * 	}} options
+	 * @returns {Exports}
+	 */
+	function hydrate(component, options) {
+		init_operations();
+		options.intro = options.intro ?? false;
+		const target = options.target;
+		const was_hydrating = hydrating;
+		const previous_hydrate_node = hydrate_node;
+
+		try {
+			var anchor = /** @type {TemplateNode} */ (get_first_child(target));
+			while (
+				anchor &&
+				(anchor.nodeType !== 8 || /** @type {Comment} */ (anchor).data !== HYDRATION_START)
+			) {
+				anchor = /** @type {TemplateNode} */ (get_next_sibling(anchor));
+			}
+
+			if (!anchor) {
+				throw HYDRATION_ERROR;
+			}
+
+			set_hydrating(true);
+			set_hydrate_node(/** @type {Comment} */ (anchor));
+			hydrate_next();
+
+			const instance = _mount(component, { ...options, anchor });
+
+			if (
+				hydrate_node === null ||
+				hydrate_node.nodeType !== 8 ||
+				/** @type {Comment} */ (hydrate_node).data !== HYDRATION_END
+			) {
+				hydration_mismatch();
+				throw HYDRATION_ERROR;
+			}
+
+			set_hydrating(false);
+
+			return /**  @type {Exports} */ (instance);
+		} catch (error) {
+			if (error === HYDRATION_ERROR) {
+				if (options.recover === false) {
+					hydration_failed();
+				}
+
+				// If an error occured above, the operations might not yet have been initialised.
+				init_operations();
+				clear_text_content(target);
+
+				set_hydrating(false);
+				return mount(component, options);
+			}
+
+			throw error;
+		} finally {
+			set_hydrating(was_hydrating);
+			set_hydrate_node(previous_hydrate_node);
+		}
+	}
+
+	/** @type {Map<string, number>} */
+	const document_listeners = new Map();
+
+	/**
+	 * @template {Record<string, any>} Exports
+	 * @param {ComponentType<SvelteComponent<any>> | Component<any>} Component
+	 * @param {MountOptions} options
+	 * @returns {Exports}
+	 */
+	function _mount(Component, { target, anchor, props = {}, events, context, intro = true }) {
+		init_operations();
+
+		var registered_events = new Set();
+
+		/** @param {Array<string>} events */
+		var event_handle = (events) => {
+			for (var i = 0; i < events.length; i++) {
+				var event_name = events[i];
+
+				if (registered_events.has(event_name)) continue;
+				registered_events.add(event_name);
+
+				var passive = is_passive_event(event_name);
+
+				// Add the event listener to both the container and the document.
+				// The container listener ensures we catch events from within in case
+				// the outer content stops propagation of the event.
+				target.addEventListener(event_name, handle_event_propagation, { passive });
+
+				var n = document_listeners.get(event_name);
+
+				if (n === undefined) {
+					// The document listener ensures we catch events that originate from elements that were
+					// manually moved outside of the container (e.g. via manual portals).
+					document.addEventListener(event_name, handle_event_propagation, { passive });
+					document_listeners.set(event_name, 1);
+				} else {
+					document_listeners.set(event_name, n + 1);
+				}
+			}
+		};
+
+		event_handle(array_from(all_registered_events));
+		root_event_handles.add(event_handle);
+
+		/** @type {Exports} */
+		// @ts-expect-error will be defined because the render effect runs synchronously
+		var component = undefined;
+
+		var unmount = component_root(() => {
+			var anchor_node = anchor ?? target.appendChild(create_text());
+
+			branch(() => {
+				if (context) {
+					push({});
+					var ctx = /** @type {ComponentContext} */ (component_context);
+					ctx.c = context;
+				}
+
+				if (events) {
+					// We can't spread the object or else we'd lose the state proxy stuff, if it is one
+					/** @type {any} */ (props).$$events = events;
+				}
+
+				if (hydrating) {
+					assign_nodes(/** @type {TemplateNode} */ (anchor_node), null);
+				}
+				// @ts-expect-error the public typings are not what the actual function looks like
+				component = Component(anchor_node, props) || {};
+
+				if (hydrating) {
+					/** @type {Effect} */ (active_effect).nodes_end = hydrate_node;
+				}
+
+				if (context) {
+					pop();
+				}
+			});
+
+			return () => {
+				for (var event_name of registered_events) {
+					target.removeEventListener(event_name, handle_event_propagation);
+
+					var n = /** @type {number} */ (document_listeners.get(event_name));
+
+					if (--n === 0) {
+						document.removeEventListener(event_name, handle_event_propagation);
+						document_listeners.delete(event_name);
+					} else {
+						document_listeners.set(event_name, n);
+					}
+				}
+
+				root_event_handles.delete(event_handle);
+
+				if (anchor_node !== anchor) {
+					anchor_node.parentNode?.removeChild(anchor_node);
+				}
+			};
+		});
+
+		mounted_components.set(component, unmount);
+		return component;
+	}
+
+	/**
+	 * References of the components that were mounted or hydrated.
+	 * Uses a `WeakMap` to avoid memory leaks.
+	 */
+	let mounted_components = new WeakMap();
+
+	/**
+	 * Unmounts a component that was previously mounted using `mount` or `hydrate`.
+	 *
+	 * Since 5.13.0, if `options.outro` is `true`, [transitions](https://svelte.dev/docs/svelte/transition) will play before the component is removed from the DOM.
+	 *
+	 * Returns a `Promise` that resolves after transitions have completed if `options.outro` is true, or immediately otherwise (prior to 5.13.0, returns `void`).
+	 *
+	 * ```js
+	 * import { mount, unmount } from 'svelte';
+	 * import App from './App.svelte';
+	 *
+	 * const app = mount(App, { target: document.body });
+	 *
+	 * // later...
+	 * unmount(app, { outro: true });
+	 * ```
+	 * @param {Record<string, any>} component
+	 * @param {{ outro?: boolean }} [options]
+	 * @returns {Promise<void>}
+	 */
+	function unmount(component, options) {
+		const fn = mounted_components.get(component);
+
+		if (fn) {
+			mounted_components.delete(component);
+			return fn(options);
+		}
+
+		if (DEV) {
+			lifecycle_double_unmount();
+		}
+
+		return Promise.resolve();
+	}
+
+	/** @import { ComponentConstructorOptions, ComponentType, SvelteComponent, Component } from 'svelte' */
+
+	/**
+	 * Takes the same options as a Svelte 4 component and the component function and returns a Svelte 4 compatible component.
+	 *
+	 * @deprecated Use this only as a temporary solution to migrate your imperative component code to Svelte 5.
+	 *
+	 * @template {Record<string, any>} Props
+	 * @template {Record<string, any>} Exports
+	 * @template {Record<string, any>} Events
+	 * @template {Record<string, any>} Slots
+	 *
+	 * @param {ComponentConstructorOptions<Props> & {
+	 * 	component: ComponentType<SvelteComponent<Props, Events, Slots>> | Component<Props>;
+	 * }} options
+	 * @returns {SvelteComponent<Props, Events, Slots> & Exports}
+	 */
+	function createClassComponent(options) {
+		// @ts-expect-error $$prop_def etc are not actually defined
+		return new Svelte4Component(options);
+	}
+
+	/**
+	 * Support using the component as both a class and function during the transition period
+	 * @typedef  {{new (o: ComponentConstructorOptions): SvelteComponent;(...args: Parameters<Component<Record<string, any>>>): ReturnType<Component<Record<string, any>, Record<string, any>>>;}} LegacyComponentType
+	 */
+
+	class Svelte4Component {
+		/** @type {any} */
+		#events;
+
+		/** @type {Record<string, any>} */
+		#instance;
+
+		/**
+		 * @param {ComponentConstructorOptions & {
+		 *  component: any;
+		 * }} options
+		 */
+		constructor(options) {
+			var sources = new Map();
+
+			/**
+			 * @param {string | symbol} key
+			 * @param {unknown} value
+			 */
+			var add_source = (key, value) => {
+				var s = mutable_source(value);
+				sources.set(key, s);
+				return s;
+			};
+
+			// Replicate coarse-grained props through a proxy that has a version source for
+			// each property, which is incremented on updates to the property itself. Do not
+			// use our $state proxy because that one has fine-grained reactivity.
+			const props = new Proxy(
+				{ ...(options.props || {}), $$events: {} },
+				{
+					get(target, prop) {
+						return get$1(sources.get(prop) ?? add_source(prop, Reflect.get(target, prop)));
+					},
+					has(target, prop) {
+						// Necessary to not throw "invalid binding" validation errors on the component side
+						if (prop === LEGACY_PROPS) return true;
+
+						get$1(sources.get(prop) ?? add_source(prop, Reflect.get(target, prop)));
+						return Reflect.has(target, prop);
+					},
+					set(target, prop, value) {
+						set(sources.get(prop) ?? add_source(prop, value), value);
+						return Reflect.set(target, prop, value);
+					}
+				}
+			);
+
+			this.#instance = (options.hydrate ? hydrate : mount)(options.component, {
+				target: options.target,
+				anchor: options.anchor,
+				props,
+				context: options.context,
+				intro: options.intro ?? false,
+				recover: options.recover
+			});
+
+			// We don't flush_sync for custom element wrappers or if the user doesn't want it
+			if (!options?.props?.$$host || options.sync === false) {
+				flush_sync();
+			}
+
+			this.#events = props.$$events;
+
+			for (const key of Object.keys(this.#instance)) {
+				if (key === '$set' || key === '$destroy' || key === '$on') continue;
+				define_property(this, key, {
+					get() {
+						return this.#instance[key];
+					},
+					/** @param {any} value */
+					set(value) {
+						this.#instance[key] = value;
+					},
+					enumerable: true
+				});
+			}
+
+			this.#instance.$set = /** @param {Record<string, any>} next */ (next) => {
+				Object.assign(props, next);
+			};
+
+			this.#instance.$destroy = () => {
+				unmount(this.#instance);
+			};
+		}
+
+		/** @param {Record<string, any>} props */
+		$set(props) {
+			this.#instance.$set(props);
+		}
+
+		/**
+		 * @param {string} event
+		 * @param {(...args: any[]) => any} callback
+		 * @returns {any}
+		 */
+		$on(event, callback) {
+			this.#events[event] = this.#events[event] || [];
+
+			/** @param {any[]} args */
+			const cb = (...args) => callback.call(this, ...args);
+			this.#events[event].push(cb);
+			return () => {
+				this.#events[event] = this.#events[event].filter(/** @param {any} fn */ (fn) => fn !== cb);
+			};
+		}
+
+		$destroy() {
+			this.#instance.$destroy();
+		}
+	}
+
+	// generated during release, do not modify
+
+	const PUBLIC_VERSION = '5';
+
+	if (typeof window !== 'undefined')
+		// @ts-ignore
+		(window.__svelte ||= { v: new Set() }).v.add(PUBLIC_VERSION);
+
+	enable_legacy_mode_flag();
+
+	/** @import { SourceLocation } from '#shared' */
+
+	/**
+	 * @param {any} fn
+	 * @param {string} filename
+	 * @param {SourceLocation[]} locations
+	 * @returns {any}
+	 */
+	function add_locations(fn, filename, locations) {
+		return (/** @type {any[]} */ ...args) => {
+			const dom = fn(...args);
+
+			var node = hydrating ? dom : dom.nodeType === 11 ? dom.firstChild : dom;
+			assign_locations(node, filename, locations);
+
+			return dom;
+		};
+	}
+
+	/**
+	 * @param {Element} element
+	 * @param {string} filename
+	 * @param {SourceLocation} location
+	 */
+	function assign_location(element, filename, location) {
+		// @ts-expect-error
+		element.__svelte_meta = {
+			loc: { file: filename, line: location[0], column: location[1] }
+		};
+
+		if (location[2]) {
+			assign_locations(element.firstChild, filename, location[2]);
+		}
+	}
+
+	/**
+	 * @param {Node | null} node
+	 * @param {string} filename
+	 * @param {SourceLocation[]} locations
+	 */
+	function assign_locations(node, filename, locations) {
+		var i = 0;
+		var depth = 0;
+
+		while (node && i < locations.length) {
+			if (hydrating && node.nodeType === 8) {
+				var comment = /** @type {Comment} */ (node);
+				if (comment.data === HYDRATION_START || comment.data === HYDRATION_START_ELSE) depth += 1;
+				else if (comment.data[0] === HYDRATION_END) depth -= 1;
+			}
+
+			if (depth === 0 && node.nodeType === 1) {
+				assign_location(/** @type {Element} */ (node), filename, locations[i++]);
+			}
+
+			node = node.nextSibling;
+		}
+	}
+
+	/** @import { Effect, TemplateNode } from '#client' */
+
+	/**
+	 * @param {TemplateNode} node
+	 * @param {(branch: (fn: (anchor: Node) => void, flag?: boolean) => void) => void} fn
+	 * @param {boolean} [elseif] True if this is an `{:else if ...}` block rather than an `{#if ...}`, as that affects which transitions are considered 'local'
+	 * @returns {void}
+	 */
+	function if_block(node, fn, elseif = false) {
+		if (hydrating) {
+			hydrate_next();
+		}
+
+		var anchor = node;
+
+		/** @type {Effect | null} */
+		var consequent_effect = null;
+
+		/** @type {Effect | null} */
+		var alternate_effect = null;
+
+		/** @type {UNINITIALIZED | boolean | null} */
+		var condition = UNINITIALIZED;
+
+		var flags = elseif ? EFFECT_TRANSPARENT : 0;
+
+		var has_branch = false;
+
+		const set_branch = (/** @type {(anchor: Node) => void} */ fn, flag = true) => {
+			has_branch = true;
+			update_branch(flag, fn);
+		};
+
+		const update_branch = (
+			/** @type {boolean | null} */ new_condition,
+			/** @type {null | ((anchor: Node) => void)} */ fn
+		) => {
+			if (condition === (condition = new_condition)) return;
+
+			/** Whether or not there was a hydration mismatch. Needs to be a `let` or else it isn't treeshaken out */
+			let mismatch = false;
+
+			if (hydrating) {
+				const is_else = /** @type {Comment} */ (anchor).data === HYDRATION_START_ELSE;
+
+				if (!!condition === is_else) {
+					// Hydration mismatch: remove everything inside the anchor and start fresh.
+					// This could happen with `{#if browser}...{/if}`, for example
+					anchor = remove_nodes();
+
+					set_hydrate_node(anchor);
+					set_hydrating(false);
+					mismatch = true;
+				}
+			}
+
+			if (condition) {
+				if (consequent_effect) {
+					resume_effect(consequent_effect);
+				} else if (fn) {
+					consequent_effect = branch(() => fn(anchor));
+				}
+
+				if (alternate_effect) {
+					pause_effect(alternate_effect, () => {
+						alternate_effect = null;
+					});
+				}
+			} else {
+				if (alternate_effect) {
+					resume_effect(alternate_effect);
+				} else if (fn) {
+					alternate_effect = branch(() => fn(anchor));
+				}
+
+				if (consequent_effect) {
+					pause_effect(consequent_effect, () => {
+						consequent_effect = null;
+					});
+				}
+			}
+
+			if (mismatch) {
+				// continue in hydration mode
+				set_hydrating(true);
+			}
+		};
+
+		block(() => {
+			has_branch = false;
+			fn(set_branch);
+			if (!has_branch) {
+				update_branch(null, null);
+			}
+		}, flags);
+
+		if (hydrating) {
+			anchor = hydrate_node;
+		}
+	}
+
+	/** @import { EachItem, EachState, Effect, MaybeSource, Source, TemplateNode, TransitionManager, Value } from '#client' */
+
+	/**
+	 * @param {any} _
+	 * @param {number} i
+	 */
+	function index(_, i) {
+		return i;
+	}
+
+	/**
+	 * Pause multiple effects simultaneously, and coordinate their
+	 * subsequent destruction. Used in each blocks
+	 * @param {EachState} state
+	 * @param {EachItem[]} items
+	 * @param {null | Node} controlled_anchor
+	 * @param {Map<any, EachItem>} items_map
+	 */
+	function pause_effects(state, items, controlled_anchor, items_map) {
+		/** @type {TransitionManager[]} */
+		var transitions = [];
+		var length = items.length;
+
+		for (var i = 0; i < length; i++) {
+			pause_children(items[i].e, transitions, true);
+		}
+
+		var is_controlled = length > 0 && transitions.length === 0 && controlled_anchor !== null;
+		// If we have a controlled anchor, it means that the each block is inside a single
+		// DOM element, so we can apply a fast-path for clearing the contents of the element.
+		if (is_controlled) {
+			var parent_node = /** @type {Element} */ (
+				/** @type {Element} */ (controlled_anchor).parentNode
+			);
+			clear_text_content(parent_node);
+			parent_node.append(/** @type {Element} */ (controlled_anchor));
+			items_map.clear();
+			link(state, items[0].prev, items[length - 1].next);
+		}
+
+		run_out_transitions(transitions, () => {
+			for (var i = 0; i < length; i++) {
+				var item = items[i];
+				if (!is_controlled) {
+					items_map.delete(item.k);
+					link(state, item.prev, item.next);
+				}
+				destroy_effect(item.e, !is_controlled);
+			}
+		});
+	}
+
+	/**
+	 * @template V
+	 * @param {Element | Comment} node The next sibling node, or the parent node if this is a 'controlled' block
+	 * @param {number} flags
+	 * @param {() => V[]} get_collection
+	 * @param {(value: V, index: number) => any} get_key
+	 * @param {(anchor: Node, item: MaybeSource<V>, index: MaybeSource<number>) => void} render_fn
+	 * @param {null | ((anchor: Node) => void)} fallback_fn
+	 * @returns {void}
+	 */
+	function each(node, flags, get_collection, get_key, render_fn, fallback_fn = null) {
+		var anchor = node;
+
+		/** @type {EachState} */
+		var state = { flags, items: new Map(), first: null };
+
+		var is_controlled = (flags & EACH_IS_CONTROLLED) !== 0;
+
+		if (is_controlled) {
+			var parent_node = /** @type {Element} */ (node);
+
+			anchor = hydrating
+				? set_hydrate_node(/** @type {Comment | Text} */ (get_first_child(parent_node)))
+				: parent_node.appendChild(create_text());
+		}
+
+		if (hydrating) {
+			hydrate_next();
+		}
+
+		/** @type {Effect | null} */
+		var fallback = null;
+
+		var was_empty = false;
+
+		// TODO: ideally we could use derived for runes mode but because of the ability
+		// to use a store which can be mutated, we can't do that here as mutating a store
+		// will still result in the collection array being the same from the store
+		var each_array = derived_safe_equal(() => {
+			var collection = get_collection();
+
+			return is_array(collection) ? collection : collection == null ? [] : array_from(collection);
+		});
+
+		block(() => {
+			var array = get$1(each_array);
+			var length = array.length;
+
+			if (was_empty && length === 0) {
+				// ignore updates if the array is empty,
+				// and it already was empty on previous run
+				return;
+			}
+			was_empty = length === 0;
+
+			/** `true` if there was a hydration mismatch. Needs to be a `let` or else it isn't treeshaken out */
+			let mismatch = false;
+
+			if (hydrating) {
+				var is_else = /** @type {Comment} */ (anchor).data === HYDRATION_START_ELSE;
+
+				if (is_else !== (length === 0)) {
+					// hydration mismatch — remove the server-rendered DOM and start over
+					anchor = remove_nodes();
+
+					set_hydrate_node(anchor);
+					set_hydrating(false);
+					mismatch = true;
+				}
+			}
+
+			// this is separate to the previous block because `hydrating` might change
+			if (hydrating) {
+				/** @type {EachItem | null} */
+				var prev = null;
+
+				/** @type {EachItem} */
+				var item;
+
+				for (var i = 0; i < length; i++) {
+					if (
+						hydrate_node.nodeType === 8 &&
+						/** @type {Comment} */ (hydrate_node).data === HYDRATION_END
+					) {
+						// The server rendered fewer items than expected,
+						// so break out and continue appending non-hydrated items
+						anchor = /** @type {Comment} */ (hydrate_node);
+						mismatch = true;
+						set_hydrating(false);
+						break;
+					}
+
+					var value = array[i];
+					var key = get_key(value, i);
+					item = create_item(
+						hydrate_node,
+						state,
+						prev,
+						null,
+						value,
+						key,
+						i,
+						render_fn,
+						flags,
+						get_collection
+					);
+					state.items.set(key, item);
+
+					prev = item;
+				}
+
+				// remove excess nodes
+				if (length > 0) {
+					set_hydrate_node(remove_nodes());
+				}
+			}
+
+			if (!hydrating) {
+				var effect = /** @type {Effect} */ (active_reaction);
+				reconcile(
+					array,
+					state,
+					anchor,
+					render_fn,
+					flags,
+					(effect.f & INERT) !== 0,
+					get_key,
+					get_collection
+				);
+			}
+
+			if (fallback_fn !== null) {
+				if (length === 0) {
+					if (fallback) {
+						resume_effect(fallback);
+					} else {
+						fallback = branch(() => fallback_fn(anchor));
+					}
+				} else if (fallback !== null) {
+					pause_effect(fallback, () => {
+						fallback = null;
+					});
+				}
+			}
+
+			if (mismatch) {
+				// continue in hydration mode
+				set_hydrating(true);
+			}
+
+			// When we mount the each block for the first time, the collection won't be
+			// connected to this effect as the effect hasn't finished running yet and its deps
+			// won't be assigned. However, it's possible that when reconciling the each block
+			// that a mutation occurred and it's made the collection MAYBE_DIRTY, so reading the
+			// collection again can provide consistency to the reactive graph again as the deriveds
+			// will now be `CLEAN`.
+			get$1(each_array);
+		});
+
+		if (hydrating) {
+			anchor = hydrate_node;
+		}
+	}
+
+	/**
+	 * Add, remove, or reorder items output by an each block as its input changes
+	 * @template V
+	 * @param {Array<V>} array
+	 * @param {EachState} state
+	 * @param {Element | Comment | Text} anchor
+	 * @param {(anchor: Node, item: MaybeSource<V>, index: number | Source<number>) => void} render_fn
+	 * @param {number} flags
+	 * @param {boolean} is_inert
+	 * @param {(value: V, index: number) => any} get_key
+	 * @param {() => V[]} get_collection
+	 * @returns {void}
+	 */
+	function reconcile(array, state, anchor, render_fn, flags, is_inert, get_key, get_collection) {
+		var is_animated = (flags & EACH_IS_ANIMATED) !== 0;
+		var should_update = (flags & (EACH_ITEM_REACTIVE | EACH_INDEX_REACTIVE)) !== 0;
+
+		var length = array.length;
+		var items = state.items;
+		var first = state.first;
+		var current = first;
+
+		/** @type {undefined | Set<EachItem>} */
+		var seen;
+
+		/** @type {EachItem | null} */
+		var prev = null;
+
+		/** @type {undefined | Set<EachItem>} */
+		var to_animate;
+
+		/** @type {EachItem[]} */
+		var matched = [];
+
+		/** @type {EachItem[]} */
+		var stashed = [];
+
+		/** @type {V} */
+		var value;
+
+		/** @type {any} */
+		var key;
+
+		/** @type {EachItem | undefined} */
+		var item;
+
+		/** @type {number} */
+		var i;
+
+		if (is_animated) {
+			for (i = 0; i < length; i += 1) {
+				value = array[i];
+				key = get_key(value, i);
+				item = items.get(key);
+
+				if (item !== undefined) {
+					item.a?.measure();
+					(to_animate ??= new Set()).add(item);
+				}
+			}
+		}
+
+		for (i = 0; i < length; i += 1) {
+			value = array[i];
+			key = get_key(value, i);
+			item = items.get(key);
+
+			if (item === undefined) {
+				var child_anchor = current ? /** @type {TemplateNode} */ (current.e.nodes_start) : anchor;
+
+				prev = create_item(
+					child_anchor,
+					state,
+					prev,
+					prev === null ? state.first : prev.next,
+					value,
+					key,
+					i,
+					render_fn,
+					flags,
+					get_collection
+				);
+
+				items.set(key, prev);
+
+				matched = [];
+				stashed = [];
+
+				current = prev.next;
+				continue;
+			}
+
+			if (should_update) {
+				update_item(item, value, i, flags);
+			}
+
+			if ((item.e.f & INERT) !== 0) {
+				resume_effect(item.e);
+				if (is_animated) {
+					item.a?.unfix();
+					(to_animate ??= new Set()).delete(item);
+				}
+			}
+
+			if (item !== current) {
+				if (seen !== undefined && seen.has(item)) {
+					if (matched.length < stashed.length) {
+						// more efficient to move later items to the front
+						var start = stashed[0];
+						var j;
+
+						prev = start.prev;
+
+						var a = matched[0];
+						var b = matched[matched.length - 1];
+
+						for (j = 0; j < matched.length; j += 1) {
+							move(matched[j], start, anchor);
+						}
+
+						for (j = 0; j < stashed.length; j += 1) {
+							seen.delete(stashed[j]);
+						}
+
+						link(state, a.prev, b.next);
+						link(state, prev, a);
+						link(state, b, start);
+
+						current = start;
+						prev = b;
+						i -= 1;
+
+						matched = [];
+						stashed = [];
+					} else {
+						// more efficient to move earlier items to the back
+						seen.delete(item);
+						move(item, current, anchor);
+
+						link(state, item.prev, item.next);
+						link(state, item, prev === null ? state.first : prev.next);
+						link(state, prev, item);
+
+						prev = item;
+					}
+
+					continue;
+				}
+
+				matched = [];
+				stashed = [];
+
+				while (current !== null && current.k !== key) {
+					// If the each block isn't inert and an item has an effect that is already inert,
+					// skip over adding it to our seen Set as the item is already being handled
+					if (is_inert || (current.e.f & INERT) === 0) {
+						(seen ??= new Set()).add(current);
+					}
+					stashed.push(current);
+					current = current.next;
+				}
+
+				if (current === null) {
+					continue;
+				}
+
+				item = current;
+			}
+
+			matched.push(item);
+			prev = item;
+			current = item.next;
+		}
+
+		if (current !== null || seen !== undefined) {
+			var to_destroy = seen === undefined ? [] : array_from(seen);
+
+			while (current !== null) {
+				// If the each block isn't inert, then inert effects are currently outroing and will be removed once the transition is finished
+				if (is_inert || (current.e.f & INERT) === 0) {
+					to_destroy.push(current);
+				}
+				current = current.next;
+			}
+
+			var destroy_length = to_destroy.length;
+
+			if (destroy_length > 0) {
+				var controlled_anchor = (flags & EACH_IS_CONTROLLED) !== 0 && length === 0 ? anchor : null;
+
+				if (is_animated) {
+					for (i = 0; i < destroy_length; i += 1) {
+						to_destroy[i].a?.measure();
+					}
+
+					for (i = 0; i < destroy_length; i += 1) {
+						to_destroy[i].a?.fix();
+					}
+				}
+
+				pause_effects(state, to_destroy, controlled_anchor, items);
+			}
+		}
+
+		if (is_animated) {
+			queue_micro_task(() => {
+				if (to_animate === undefined) return;
+				for (item of to_animate) {
+					item.a?.apply();
+				}
+			});
+		}
+
+		/** @type {Effect} */ (active_effect).first = state.first && state.first.e;
+		/** @type {Effect} */ (active_effect).last = prev && prev.e;
+	}
+
+	/**
+	 * @param {EachItem} item
+	 * @param {any} value
+	 * @param {number} index
+	 * @param {number} type
+	 * @returns {void}
+	 */
+	function update_item(item, value, index, type) {
+		if ((type & EACH_ITEM_REACTIVE) !== 0) {
+			internal_set(item.v, value);
+		}
+
+		if ((type & EACH_INDEX_REACTIVE) !== 0) {
+			internal_set(/** @type {Value<number>} */ (item.i), index);
+		} else {
+			item.i = index;
+		}
+	}
+
+	/**
+	 * @template V
+	 * @param {Node} anchor
+	 * @param {EachState} state
+	 * @param {EachItem | null} prev
+	 * @param {EachItem | null} next
+	 * @param {V} value
+	 * @param {unknown} key
+	 * @param {number} index
+	 * @param {(anchor: Node, item: V | Source<V>, index: number | Value<number>) => void} render_fn
+	 * @param {number} flags
+	 * @param {() => V[]} get_collection
+	 * @returns {EachItem}
+	 */
+	function create_item(
+		anchor,
+		state,
+		prev,
+		next,
+		value,
+		key,
+		index,
+		render_fn,
+		flags,
+		get_collection
+	) {
+		var reactive = (flags & EACH_ITEM_REACTIVE) !== 0;
+		var mutable = (flags & EACH_ITEM_IMMUTABLE) === 0;
+
+		var v = reactive ? (mutable ? mutable_source(value) : source(value)) : value;
+		var i = (flags & EACH_INDEX_REACTIVE) === 0 ? index : source(index);
+
+		if (DEV && reactive) {
+			// For tracing purposes, we need to link the source signal we create with the
+			// collection + index so that tracing works as intended
+			/** @type {Value} */ (v).debug = () => {
+				var collection_index = typeof i === 'number' ? index : i.v;
+				// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+				get_collection()[collection_index];
+			};
+		}
+
+		/** @type {EachItem} */
+		var item = {
+			i,
+			v,
+			k: key,
+			a: null,
+			// @ts-expect-error
+			e: null,
+			prev,
+			next
+		};
+
+		try {
+			item.e = branch(() => render_fn(anchor, v, i), hydrating);
+
+			item.e.prev = prev && prev.e;
+			item.e.next = next && next.e;
+
+			if (prev === null) {
+				state.first = item;
+			} else {
+				prev.next = item;
+				prev.e.next = item.e;
+			}
+
+			if (next !== null) {
+				next.prev = item;
+				next.e.prev = item.e;
+			}
+
+			return item;
+		} finally {
+		}
+	}
+
+	/**
+	 * @param {EachItem} item
+	 * @param {EachItem | null} next
+	 * @param {Text | Element | Comment} anchor
+	 */
+	function move(item, next, anchor) {
+		var end = item.next ? /** @type {TemplateNode} */ (item.next.e.nodes_start) : anchor;
+
+		var dest = next ? /** @type {TemplateNode} */ (next.e.nodes_start) : anchor;
+		var node = /** @type {TemplateNode} */ (item.e.nodes_start);
+
+		while (node !== end) {
+			var next_node = /** @type {TemplateNode} */ (get_next_sibling(node));
+			dest.before(node);
+			node = next_node;
+		}
+	}
+
+	/**
+	 * @param {EachState} state
+	 * @param {EachItem | null} prev
+	 * @param {EachItem | null} next
+	 */
+	function link(state, prev, next) {
+		if (prev === null) {
+			state.first = next;
+		} else {
+			prev.next = next;
+			prev.e.next = next && next.e;
+		}
+
+		if (next !== null) {
+			next.prev = prev;
+			next.e.prev = prev && prev.e;
+		}
+	}
+
+	/** @import { Effect, TemplateNode } from '#client' */
+
+	/**
+	 * @param {Element} element
+	 * @param {string | null} server_hash
+	 * @param {string} value
+	 */
+	function check_hash(element, server_hash, value) {
+		if (!server_hash || server_hash === hash(String(value ?? ''))) return;
+
+		let location;
+
+		// @ts-expect-error
+		const loc = element.__svelte_meta?.loc;
+		if (loc) {
+			location = `near ${loc.file}:${loc.line}:${loc.column}`;
+		} else if (dev_current_component_function?.[FILENAME]) {
+			location = `in ${dev_current_component_function[FILENAME]}`;
+		}
+
+		hydration_html_changed(sanitize_location(location));
+	}
+
+	/**
+	 * @param {Element | Text | Comment} node
+	 * @param {() => string} get_value
+	 * @param {boolean} svg
+	 * @param {boolean} mathml
+	 * @param {boolean} [skip_warning]
+	 * @returns {void}
+	 */
+	function html(node, get_value, svg, mathml, skip_warning) {
+		var anchor = node;
+
+		var value = '';
+
+		/** @type {Effect | undefined} */
+		var effect;
+
+		block(() => {
+			if (value === (value = get_value() ?? '')) {
+				if (hydrating) {
+					hydrate_next();
+				}
+				return;
+			}
+
+			if (effect !== undefined) {
+				destroy_effect(effect);
+				effect = undefined;
+			}
+
+			if (value === '') return;
+
+			effect = branch(() => {
+				if (hydrating) {
+					// We're deliberately not trying to repair mismatches between server and client,
+					// as it's costly and error-prone (and it's an edge case to have a mismatch anyway)
+					var hash = /** @type {Comment} */ (hydrate_node).data;
+					var next = hydrate_next();
+					var last = next;
+
+					while (
+						next !== null &&
+						(next.nodeType !== 8 || /** @type {Comment} */ (next).data !== '')
+					) {
+						last = next;
+						next = /** @type {TemplateNode} */ (get_next_sibling(next));
+					}
+
+					if (next === null) {
+						hydration_mismatch();
+						throw HYDRATION_ERROR;
+					}
+
+					if (DEV && !skip_warning) {
+						check_hash(/** @type {Element} */ (next.parentNode), hash, value);
+					}
+
+					assign_nodes(hydrate_node, last);
+					anchor = set_hydrate_node(next);
+					return;
+				}
+
+				var html = value + '';
+				if (svg) html = `<svg>${html}</svg>`;
+				else if (mathml) html = `<math>${html}</math>`;
+
+				// Don't use create_fragment_with_script_from_html here because that would mean script tags are executed.
+				// @html is basically `.innerHTML = ...` and that doesn't execute scripts either due to security reasons.
+				/** @type {DocumentFragment | Element} */
+				var node = create_fragment_from_html(html);
+
+				if (svg || mathml) {
+					node = /** @type {Element} */ (get_first_child(node));
+				}
+
+				assign_nodes(
+					/** @type {TemplateNode} */ (get_first_child(node)),
+					/** @type {TemplateNode} */ (node.lastChild)
+				);
+
+				if (svg || mathml) {
+					while (get_first_child(node)) {
+						anchor.before(/** @type {Node} */ (get_first_child(node)));
+					}
+				} else {
+					anchor.before(node);
+				}
+			});
+		});
+	}
+
+	/**
+	 * The value/checked attribute in the template actually corresponds to the defaultValue property, so we need
+	 * to remove it upon hydration to avoid a bug when someone resets the form value.
+	 * @param {HTMLInputElement} input
+	 * @returns {void}
+	 */
+	function remove_input_defaults(input) {
+		if (!hydrating) return;
+
+		var already_removed = false;
+
+		// We try and remove the default attributes later, rather than sync during hydration.
+		// Doing it sync during hydration has a negative impact on performance, but deferring the
+		// work in an idle task alleviates this greatly. If a form reset event comes in before
+		// the idle callback, then we ensure the input defaults are cleared just before.
+		var remove_defaults = () => {
+			if (already_removed) return;
+			already_removed = true;
+
+			// Remove the attributes but preserve the values
+			if (input.hasAttribute('value')) {
+				var value = input.value;
+				set_attribute(input, 'value', null);
+				input.value = value;
+			}
+
+			if (input.hasAttribute('checked')) {
+				var checked = input.checked;
+				set_attribute(input, 'checked', null);
+				input.checked = checked;
+			}
+		};
+
+		// @ts-expect-error
+		input.__on_r = remove_defaults;
+		queue_idle_task(remove_defaults);
+		add_form_reset_listener();
+	}
+
+	/**
+	 * @param {Element} element
+	 * @param {string} attribute
+	 * @param {string | null} value
+	 * @param {boolean} [skip_warning]
+	 */
+	function set_attribute(element, attribute, value, skip_warning) {
+		// @ts-expect-error
+		var attributes = (element.__attributes ??= {});
+
+		if (hydrating) {
+			attributes[attribute] = element.getAttribute(attribute);
+
+			if (
+				attribute === 'src' ||
+				attribute === 'srcset' ||
+				(attribute === 'href' && element.nodeName === 'LINK')
+			) {
+				if (!skip_warning) {
+					check_src_in_dev_hydration(element, attribute, value ?? '');
+				}
+
+				// If we reset these attributes, they would result in another network request, which we want to avoid.
+				// We assume they are the same between client and server as checking if they are equal is expensive
+				// (we can't just compare the strings as they can be different between client and server but result in the
+				// same url, so we would need to create hidden anchor elements to compare them)
+				return;
+			}
+		}
+
+		if (attributes[attribute] === (attributes[attribute] = value)) return;
+
+		if (attribute === 'style' && '__styles' in element) {
+			// reset styles to force style: directive to update
+			element.__styles = {};
+		}
+
+		if (attribute === 'loading') {
+			// @ts-expect-error
+			element[LOADING_ATTR_SYMBOL] = value;
+		}
+
+		if (value == null) {
+			element.removeAttribute(attribute);
+		} else if (typeof value !== 'string' && get_setters(element).includes(attribute)) {
+			// @ts-ignore
+			element[attribute] = value;
+		} else {
+			element.setAttribute(attribute, value);
+		}
+	}
+
+	/** @type {Map<string, string[]>} */
+	var setters_cache = new Map();
+
+	/** @param {Element} element */
+	function get_setters(element) {
+		var setters = setters_cache.get(element.nodeName);
+		if (setters) return setters;
+		setters_cache.set(element.nodeName, (setters = []));
+
+		var descriptors;
+		var proto = element; // In the case of custom elements there might be setters on the instance
+		var element_proto = Element.prototype;
+
+		// Stop at Element, from there on there's only unnecessary setters we're not interested in
+		// Do not use contructor.name here as that's unreliable in some browser environments
+		while (element_proto !== proto) {
+			descriptors = get_descriptors(proto);
+
+			for (var key in descriptors) {
+				if (descriptors[key].set) {
+					setters.push(key);
+				}
+			}
+
+			proto = get_prototype_of(proto);
+		}
+
+		return setters;
+	}
+
+	/**
+	 * @param {any} element
+	 * @param {string} attribute
+	 * @param {string} value
+	 */
+	function check_src_in_dev_hydration(element, attribute, value) {
+		if (!DEV) return;
+		if (attribute === 'srcset' && srcset_url_equal(element, value)) return;
+		if (src_url_equal(element.getAttribute(attribute) ?? '', value)) return;
+
+		hydration_attribute_changed(
+			attribute,
+			element.outerHTML.replace(element.innerHTML, element.innerHTML && '...'),
+			String(value)
+		);
+	}
+
+	/**
+	 * @param {string} element_src
+	 * @param {string} url
+	 * @returns {boolean}
+	 */
+	function src_url_equal(element_src, url) {
+		if (element_src === url) return true;
+		return new URL(element_src, document.baseURI).href === new URL(url, document.baseURI).href;
+	}
+
+	/** @param {string} srcset */
+	function split_srcset(srcset) {
+		return srcset.split(',').map((src) => src.trim().split(' ').filter(Boolean));
+	}
+
+	/**
+	 * @param {HTMLSourceElement | HTMLImageElement} element
+	 * @param {string} srcset
+	 * @returns {boolean}
+	 */
+	function srcset_url_equal(element, srcset) {
+		var element_urls = split_srcset(element.srcset);
+		var urls = split_srcset(srcset);
+
+		return (
+			urls.length === element_urls.length &&
+			urls.every(
+				([url, width], i) =>
+					width === element_urls[i][1] &&
+					// We need to test both ways because Vite will create an a full URL with
+					// `new URL(asset, import.meta.url).href` for the client when `base: './'`, and the
+					// relative URLs inside srcset are not automatically resolved to absolute URLs by
+					// browsers (in contrast to img.src). This means both SSR and DOM code could
+					// contain relative or absolute URLs.
+					(src_url_equal(element_urls[i][0], url) || src_url_equal(url, element_urls[i][0]))
+			)
+		);
+	}
+
+	/**
+	 * @param {HTMLElement} dom
+	 * @param {string} value
+	 * @param {string} [hash]
+	 * @returns {void}
+	 */
+	function set_class(dom, value, hash) {
+		// @ts-expect-error need to add __className to patched prototype
+		var prev_class_name = dom.__className;
+		var next_class_name = to_class(value, hash);
+
+		if (hydrating && dom.className === next_class_name) {
+			// In case of hydration don't reset the class as it's already correct.
+			// @ts-expect-error need to add __className to patched prototype
+			dom.__className = next_class_name;
+		} else if (
+			prev_class_name !== next_class_name ||
+			(hydrating && dom.className !== next_class_name)
+		) {
+			// Removing the attribute when the value is only an empty string causes
+			// peformance issues vs simply making the className an empty string. So
+			// we should only remove the class if the the value is nullish.
+			if (value == null && !hash) {
+				dom.removeAttribute('class');
+			} else {
+				dom.className = next_class_name;
+			}
+
+			// @ts-expect-error need to add __className to patched prototype
+			dom.__className = next_class_name;
+		}
+	}
+
+	/**
+	 * @template V
+	 * @param {V} value
+	 * @param {string} [hash]
+	 * @returns {string | V}
+	 */
+	function to_class(value, hash) {
+		return (value == null ? '' : value) + (hash ? ' ' + hash : '');
+	}
+
+	/**
+	 * @param {HTMLInputElement} input
+	 * @param {() => unknown} get
+	 * @param {(value: unknown) => void} set
+	 * @returns {void}
+	 */
+	function bind_value(input, get, set = get) {
+		var runes = is_runes();
+
+		listen_to_event_and_reset_event(input, 'input', (is_reset) => {
+			if (DEV && input.type === 'checkbox') {
+				// TODO should this happen in prod too?
+				bind_invalid_checkbox_value();
+			}
+
+			/** @type {any} */
+			var value = is_reset ? input.defaultValue : input.value;
+			value = is_numberlike_input(input) ? to_number(value) : value;
+			set(value);
+
+			// In runes mode, respect any validation in accessors (doesn't apply in legacy mode,
+			// because we use mutable state which ensures the render effect always runs)
+			if (runes && value !== (value = get())) {
+				var start = input.selectionStart;
+				var end = input.selectionEnd;
+
+				// the value is coerced on assignment
+				input.value = value ?? '';
+
+				// Restore selection
+				if (end !== null) {
+					input.selectionStart = start;
+					input.selectionEnd = Math.min(end, input.value.length);
+				}
+			}
+		});
+
+		if (
+			// If we are hydrating and the value has since changed,
+			// then use the updated value from the input instead.
+			(hydrating && input.defaultValue !== input.value) ||
+			// If defaultValue is set, then value == defaultValue
+			// TODO Svelte 6: remove input.value check and set to empty string?
+			(untrack(get) == null && input.value)
+		) {
+			set(is_numberlike_input(input) ? to_number(input.value) : input.value);
+		}
+
+		render_effect(() => {
+			if (DEV && input.type === 'checkbox') {
+				// TODO should this happen in prod too?
+				bind_invalid_checkbox_value();
+			}
+
+			var value = get();
+
+			if (is_numberlike_input(input) && value === to_number(input.value)) {
+				// handles 0 vs 00 case (see https://github.com/sveltejs/svelte/issues/9959)
+				return;
+			}
+
+			if (input.type === 'date' && !value && !input.value) {
+				// Handles the case where a temporarily invalid date is set (while typing, for example with a leading 0 for the day)
+				// and prevents this state from clearing the other parts of the date input (see https://github.com/sveltejs/svelte/issues/7897)
+				return;
+			}
+
+			// don't set the value of the input if it's the same to allow
+			// minlength to work properly
+			if (value !== input.value) {
+				// @ts-expect-error the value is coerced on assignment
+				input.value = value ?? '';
+			}
+		});
+	}
+
+	/** @type {Set<HTMLInputElement[]>} */
+	const pending = new Set();
+
+	/**
+	 * @param {HTMLInputElement[]} inputs
+	 * @param {null | [number]} group_index
+	 * @param {HTMLInputElement} input
+	 * @param {() => unknown} get
+	 * @param {(value: unknown) => void} set
+	 * @returns {void}
+	 */
+	function bind_group(inputs, group_index, input, get, set = get) {
+		var is_checkbox = input.getAttribute('type') === 'checkbox';
+		var binding_group = inputs;
+
+		// needs to be let or related code isn't treeshaken out if it's always false
+		let hydration_mismatch = false;
+
+		if (group_index !== null) {
+			for (var index of group_index) {
+				// @ts-expect-error
+				binding_group = binding_group[index] ??= [];
+			}
+		}
+
+		binding_group.push(input);
+
+		listen_to_event_and_reset_event(
+			input,
+			'change',
+			() => {
+				// @ts-ignore
+				var value = input.__value;
+
+				if (is_checkbox) {
+					value = get_binding_group_value(binding_group, value, input.checked);
+				}
+
+				set(value);
+			},
+			// TODO better default value handling
+			() => set(is_checkbox ? [] : null)
+		);
+
+		render_effect(() => {
+			var value = get();
+
+			// If we are hydrating and the value has since changed, then use the update value
+			// from the input instead.
+			if (hydrating && input.defaultChecked !== input.checked) {
+				hydration_mismatch = true;
+				return;
+			}
+
+			if (is_checkbox) {
+				value = value || [];
+				// @ts-ignore
+				input.checked = value.includes(input.__value);
+			} else {
+				// @ts-ignore
+				input.checked = is(input.__value, value);
+			}
+		});
+
+		teardown(() => {
+			var index = binding_group.indexOf(input);
+
+			if (index !== -1) {
+				binding_group.splice(index, 1);
+			}
+		});
+
+		if (!pending.has(binding_group)) {
+			pending.add(binding_group);
+
+			queue_micro_task(() => {
+				// necessary to maintain binding group order in all insertion scenarios
+				binding_group.sort((a, b) => (a.compareDocumentPosition(b) === 4 ? -1 : 1));
+				pending.delete(binding_group);
+			});
+		}
+
+		queue_micro_task(() => {
+			if (hydration_mismatch) {
+				var value;
+
+				if (is_checkbox) {
+					value = get_binding_group_value(binding_group, value, input.checked);
+				} else {
+					var hydration_input = binding_group.find((input) => input.checked);
+					// @ts-ignore
+					value = hydration_input?.__value;
+				}
+
+				set(value);
+			}
+		});
+	}
+
+	/**
+	 * @param {HTMLInputElement} input
+	 * @param {() => unknown} get
+	 * @param {(value: unknown) => void} set
+	 * @returns {void}
+	 */
+	function bind_checked(input, get, set = get) {
+		listen_to_event_and_reset_event(input, 'change', (is_reset) => {
+			var value = is_reset ? input.defaultChecked : input.checked;
+			set(value);
+		});
+
+		if (
+			// If we are hydrating and the value has since changed,
+			// then use the update value from the input instead.
+			(hydrating && input.defaultChecked !== input.checked) ||
+			// If defaultChecked is set, then checked == defaultChecked
+			untrack(get) == null
+		) {
+			set(input.checked);
+		}
+
+		render_effect(() => {
+			var value = get();
+			input.checked = Boolean(value);
+		});
+	}
+
+	/**
+	 * @template V
+	 * @param {Array<HTMLInputElement>} group
+	 * @param {V} __value
+	 * @param {boolean} checked
+	 * @returns {V[]}
+	 */
+	function get_binding_group_value(group, __value, checked) {
+		var value = new Set();
+
+		for (var i = 0; i < group.length; i += 1) {
+			if (group[i].checked) {
+				// @ts-ignore
+				value.add(group[i].__value);
+			}
+		}
+
+		if (!checked) {
+			value.delete(__value);
+		}
+
+		return Array.from(value);
+	}
+
+	/**
+	 * @param {HTMLInputElement} input
+	 */
+	function is_numberlike_input(input) {
+		var type = input.type;
+		return type === 'number' || type === 'range';
+	}
+
+	/**
+	 * @param {string} value
+	 */
+	function to_number(value) {
+		return value === '' ? null : +value;
+	}
+
+	/** @import { ComponentContextLegacy } from '#client' */
+
+	/**
+	 * Legacy-mode only: Call `onMount` callbacks and set up `beforeUpdate`/`afterUpdate` effects
+	 * @param {boolean} [immutable]
+	 */
+	function init(immutable = false) {
+		const context = /** @type {ComponentContextLegacy} */ (component_context);
+
+		const callbacks = context.l.u;
+		if (!callbacks) return;
+
+		let props = () => deep_read_state(context.s);
+
+		if (immutable) {
+			let version = 0;
+			let prev = /** @type {Record<string, any>} */ ({});
+
+			// In legacy immutable mode, before/afterUpdate only fire if the object identity of a prop changes
+			const d = derived(() => {
+				let changed = false;
+				const props = context.s;
+				for (const key in props) {
+					if (props[key] !== prev[key]) {
+						prev[key] = props[key];
+						changed = true;
+					}
+				}
+				if (changed) version++;
+				return version;
+			});
+
+			props = () => get$1(d);
+		}
+
+		// beforeUpdate
+		if (callbacks.b.length) {
+			user_pre_effect(() => {
+				observe_all(context, props);
+				run_all(callbacks.b);
+			});
+		}
+
+		// onMount (must run before afterUpdate)
+		user_effect(() => {
+			const fns = untrack(() => callbacks.m.map(run));
+			return () => {
+				for (const fn of fns) {
+					if (typeof fn === 'function') {
+						fn();
+					}
+				}
+			};
+		});
+
+		// afterUpdate
+		if (callbacks.a.length) {
+			user_effect(() => {
+				observe_all(context, props);
+				run_all(callbacks.a);
+			});
+		}
+	}
+
+	/**
+	 * Invoke the getter of all signals associated with a component
+	 * so they can be registered to the effect this function is called in.
+	 * @param {ComponentContextLegacy} context
+	 * @param {(() => void)} props
+	 */
+	function observe_all(context, props) {
+		if (context.l.s) {
+			for (const signal of context.l.s) get$1(signal);
+		}
+
+		props();
+	}
+
+	/**
+	 * Used to simulate `$on` on a component instance when `compatibility.componentApi === 4`
+	 * @param {Record<string, any>} $$props
+	 * @param {string} event_name
+	 * @param {Function} event_callback
+	 */
+	function add_legacy_event_listener($$props, event_name, event_callback) {
+		$$props.$$events ||= {};
+		$$props.$$events[event_name] ||= [];
+		$$props.$$events[event_name].push(event_callback);
+	}
+
+	/**
+	 * Used to simulate `$set` on a component instance when `compatibility.componentApi === 4`.
+	 * Needs component accessors so that it can call the setter of the prop. Therefore doesn't
+	 * work for updating props in `$$props` or `$$restProps`.
+	 * @this {Record<string, any>}
+	 * @param {Record<string, any>} $$new_props
+	 */
+	function update_legacy_props($$new_props) {
+		for (var key in $$new_props) {
+			if (key in this) {
+				this[key] = $$new_props[key];
+			}
+		}
+	}
+
+	/** @import { ComponentContext, ComponentContextLegacy } from '#client' */
+	/** @import { EventDispatcher } from './index.js' */
+	/** @import { NotFunction } from './internal/types.js' */
+
+	/**
+	 * The `onMount` function schedules a callback to run as soon as the component has been mounted to the DOM.
+	 * It must be called during the component's initialisation (but doesn't need to live *inside* the component;
+	 * it can be called from an external module).
+	 *
+	 * If a function is returned _synchronously_ from `onMount`, it will be called when the component is unmounted.
+	 *
+	 * `onMount` does not run inside [server-side components](https://svelte.dev/docs/svelte/svelte-server#render).
+	 *
+	 * @template T
+	 * @param {() => NotFunction<T> | Promise<NotFunction<T>> | (() => any)} fn
+	 * @returns {void}
+	 */
+	function onMount(fn) {
+		if (component_context === null) {
+			lifecycle_outside_component('onMount');
+		}
+
+		if (legacy_mode_flag && component_context.l !== null) {
+			init_update_callbacks(component_context).m.push(fn);
+		} else {
+			user_effect(() => {
+				const cleanup = untrack(fn);
+				if (typeof cleanup === 'function') return /** @type {() => void} */ (cleanup);
+			});
+		}
+	}
+
+	/**
+	 * @template [T=any]
+	 * @param {string} type
+	 * @param {T} [detail]
+	 * @param {any}params_0
+	 * @returns {CustomEvent<T>}
+	 */
+	function create_custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
+		return new CustomEvent(type, { detail, bubbles, cancelable });
+	}
+
+	/**
+	 * Creates an event dispatcher that can be used to dispatch [component events](https://svelte.dev/docs/svelte/legacy-on#Component-events).
+	 * Event dispatchers are functions that can take two arguments: `name` and `detail`.
+	 *
+	 * Component events created with `createEventDispatcher` create a
+	 * [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent).
+	 * These events do not [bubble](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture).
+	 * The `detail` argument corresponds to the [CustomEvent.detail](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail)
+	 * property and can contain any type of data.
+	 *
+	 * The event dispatcher can be typed to narrow the allowed event names and the type of the `detail` argument:
+	 * ```ts
+	 * const dispatch = createEventDispatcher<{
+	 *  loaded: never; // does not take a detail argument
+	 *  change: string; // takes a detail argument of type string, which is required
+	 *  optional: number | null; // takes an optional detail argument of type number
+	 * }>();
+	 * ```
+	 *
+	 * @deprecated Use callback props and/or the `$host()` rune instead — see [migration guide](https://svelte.dev/docs/svelte/v5-migration-guide#Event-changes-Component-events)
+	 * @template {Record<string, any>} [EventMap = any]
+	 * @returns {EventDispatcher<EventMap>}
+	 */
+	function createEventDispatcher() {
+		const active_component_context = component_context;
+		if (active_component_context === null) {
+			lifecycle_outside_component('createEventDispatcher');
+		}
+
+		return (type, detail, options) => {
+			const events = /** @type {Record<string, Function | Function[]>} */ (
+				active_component_context.s.$$events
+			)?.[/** @type {any} */ (type)];
+
+			if (events) {
+				const callbacks = is_array(events) ? events.slice() : [events];
+				// TODO are there situations where events could be dispatched
+				// in a server (non-DOM) environment?
+				const event = create_custom_event(/** @type {string} */ (type), detail, options);
+				for (const fn of callbacks) {
+					fn.call(active_component_context.x, event);
+				}
+				return !event.defaultPrevented;
+			}
+
+			return true;
+		};
+	}
+
+	/**
+	 * Legacy-mode: Init callbacks object for onMount/beforeUpdate/afterUpdate
+	 * @param {ComponentContext} context
+	 */
+	function init_update_callbacks(context) {
+		var l = /** @type {ComponentContextLegacy} */ (context).l;
+		return (l.u ??= { a: [], b: [], m: [] });
+	}
+
+	/** @import { Readable } from './public' */
+
+	/**
+	 * @template T
+	 * @param {Readable<T> | null | undefined} store
+	 * @param {(value: T) => void} run
+	 * @param {(value: T) => void} [invalidate]
+	 * @returns {() => void}
+	 */
+	function subscribe_to_store(store, run, invalidate) {
+		if (store == null) {
+			// @ts-expect-error
+			run(undefined);
+
+			// @ts-expect-error
+			if (invalidate) invalidate(undefined);
+
+			return noop;
+		}
+
+		// Svelte store takes a private second argument
+		// StartStopNotifier could mutate state, and we want to silence the corresponding validation error
+		const unsub = untrack(() =>
+			store.subscribe(
+				run,
+				// @ts-expect-error
+				invalidate
+			)
+		);
+
+		// Also support RxJS
+		// @ts-expect-error TODO fix this in the types?
+		return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+	}
+
+	/** @import { Readable, StartStopNotifier, Subscriber, Unsubscriber, Updater, Writable } from '../public.js' */
+	/** @import { Stores, StoresValues, SubscribeInvalidateTuple } from '../private.js' */
+
+	/**
+	 * @type {Array<SubscribeInvalidateTuple<any> | any>}
+	 */
+	const subscriber_queue = [];
+
+	/**
+	 * Create a `Writable` store that allows both updating and reading by subscription.
+	 *
+	 * @template T
+	 * @param {T} [value] initial value
+	 * @param {StartStopNotifier<T>} [start]
+	 * @returns {Writable<T>}
+	 */
+	function writable(value, start = noop) {
+		/** @type {Unsubscriber | null} */
+		let stop = null;
+
+		/** @type {Set<SubscribeInvalidateTuple<T>>} */
+		const subscribers = new Set();
+
+		/**
+		 * @param {T} new_value
+		 * @returns {void}
+		 */
+		function set(new_value) {
+			if (safe_not_equal(value, new_value)) {
+				value = new_value;
+				if (stop) {
+					// store is ready
+					const run_queue = !subscriber_queue.length;
+					for (const subscriber of subscribers) {
+						subscriber[1]();
+						subscriber_queue.push(subscriber, value);
+					}
+					if (run_queue) {
+						for (let i = 0; i < subscriber_queue.length; i += 2) {
+							subscriber_queue[i][0](subscriber_queue[i + 1]);
+						}
+						subscriber_queue.length = 0;
+					}
+				}
+			}
+		}
+
+		/**
+		 * @param {Updater<T>} fn
+		 * @returns {void}
+		 */
+		function update(fn) {
+			set(fn(/** @type {T} */ (value)));
+		}
+
+		/**
+		 * @param {Subscriber<T>} run
+		 * @param {() => void} [invalidate]
+		 * @returns {Unsubscriber}
+		 */
+		function subscribe(run, invalidate = noop) {
+			/** @type {SubscribeInvalidateTuple<T>} */
+			const subscriber = [run, invalidate];
+			subscribers.add(subscriber);
+			if (subscribers.size === 1) {
+				stop = start(set, update) || noop;
+			}
+			run(/** @type {T} */ (value));
+			return () => {
+				subscribers.delete(subscriber);
+				if (subscribers.size === 0 && stop) {
+					stop();
+					stop = null;
+				}
+			};
+		}
+		return { set, update, subscribe };
+	}
+
+	/**
+	 * Get the current value from a store by subscribing and immediately unsubscribing.
+	 *
+	 * @template T
+	 * @param {Readable<T>} store
+	 * @returns {T}
+	 */
+	function get(store) {
+		let value;
+		subscribe_to_store(store, (_) => (value = _))();
+		// @ts-expect-error
+		return value;
+	}
+
+	/** @import { StoreReferencesContainer } from '#client' */
+	/** @import { Store } from '#shared' */
+
+	/**
+	 * Whether or not the prop currently being read is a store binding, as in
+	 * `<Child bind:x={$y} />`. If it is, we treat the prop as mutable even in
+	 * runes mode, and skip `binding_property_non_reactive` validation
+	 */
+	let is_store_binding = false;
+
+	/**
+	 * Returns a tuple that indicates whether `fn()` reads a prop that is a store binding.
+	 * Used to prevent `binding_property_non_reactive` validation false positives and
+	 * ensure that these props are treated as mutable even in runes mode
+	 * @template T
+	 * @param {() => T} fn
+	 * @returns {[T, boolean]}
+	 */
+	function capture_store_binding(fn) {
+		var previous_is_store_binding = is_store_binding;
+
+		try {
+			is_store_binding = false;
+			return [fn(), is_store_binding];
+		} finally {
+			is_store_binding = previous_is_store_binding;
+		}
+	}
+
+	/** @import { Source } from './types.js' */
+
+	/**
+	 * @template T
+	 * @param {() => T} fn
+	 * @returns {T}
+	 */
+	function with_parent_branch(fn) {
+		var effect = active_effect;
+		var previous_effect = active_effect;
+
+		while (effect !== null && (effect.f & (BRANCH_EFFECT | ROOT_EFFECT)) === 0) {
+			effect = effect.parent;
+		}
+		try {
+			set_active_effect(effect);
+			return fn();
+		} finally {
+			set_active_effect(previous_effect);
+		}
+	}
+
+	/**
+	 * This function is responsible for synchronizing a possibly bound prop with the inner component state.
+	 * It is used whenever the compiler sees that the component writes to the prop, or when it has a default prop_value.
+	 * @template V
+	 * @param {Record<string, unknown>} props
+	 * @param {string} key
+	 * @param {number} flags
+	 * @param {V | (() => V)} [fallback]
+	 * @returns {(() => V | ((arg: V) => V) | ((arg: V, mutation: boolean) => V))}
+	 */
+	function prop(props, key, flags, fallback) {
+		var immutable = (flags & PROPS_IS_IMMUTABLE) !== 0;
+		var runes = !legacy_mode_flag || (flags & PROPS_IS_RUNES) !== 0;
+		var bindable = (flags & PROPS_IS_BINDABLE) !== 0;
+		var lazy = (flags & PROPS_IS_LAZY_INITIAL) !== 0;
+		var is_store_sub = false;
+		var prop_value;
+
+		if (bindable) {
+			[prop_value, is_store_sub] = capture_store_binding(() => /** @type {V} */ (props[key]));
+		} else {
+			prop_value = /** @type {V} */ (props[key]);
+		}
+
+		// Can be the case when someone does `mount(Component, props)` with `let props = $state({...})`
+		// or `createClassComponent(Component, props)`
+		var is_entry_props = STATE_SYMBOL in props || LEGACY_PROPS in props;
+
+		var setter =
+			(bindable &&
+				(get_descriptor(props, key)?.set ??
+					(is_entry_props && key in props && ((v) => (props[key] = v))))) ||
+			undefined;
+
+		var fallback_value = /** @type {V} */ (fallback);
+		var fallback_dirty = true;
+		var fallback_used = false;
+
+		var get_fallback = () => {
+			fallback_used = true;
+			if (fallback_dirty) {
+				fallback_dirty = false;
+				if (lazy) {
+					fallback_value = untrack(/** @type {() => V} */ (fallback));
+				} else {
+					fallback_value = /** @type {V} */ (fallback);
+				}
+			}
+
+			return fallback_value;
+		};
+
+		if (prop_value === undefined && fallback !== undefined) {
+			if (setter && runes) {
+				props_invalid_value(key);
+			}
+
+			prop_value = get_fallback();
+			if (setter) setter(prop_value);
+		}
+
+		/** @type {() => V} */
+		var getter;
+		if (runes) {
+			getter = () => {
+				var value = /** @type {V} */ (props[key]);
+				if (value === undefined) return get_fallback();
+				fallback_dirty = true;
+				fallback_used = false;
+				return value;
+			};
+		} else {
+			// Svelte 4 did not trigger updates when a primitive value was updated to the same value.
+			// Replicate that behavior through using a derived
+			var derived_getter = with_parent_branch(() =>
+				(immutable ? derived : derived_safe_equal)(() => /** @type {V} */ (props[key]))
+			);
+			derived_getter.f |= LEGACY_DERIVED_PROP;
+			getter = () => {
+				var value = get$1(derived_getter);
+				if (value !== undefined) fallback_value = /** @type {V} */ (undefined);
+				return value === undefined ? fallback_value : value;
+			};
+		}
+
+		// easy mode — prop is never written to
+		if ((flags & PROPS_IS_UPDATED) === 0) {
+			return getter;
+		}
+
+		// intermediate mode — prop is written to, but the parent component had
+		// `bind:foo` which means we can just call `$$props.foo = value` directly
+		if (setter) {
+			var legacy_parent = props.$$legacy;
+			return function (/** @type {any} */ value, /** @type {boolean} */ mutation) {
+				if (arguments.length > 0) {
+					// We don't want to notify if the value was mutated and the parent is in runes mode.
+					// In that case the state proxy (if it exists) should take care of the notification.
+					// If the parent is not in runes mode, we need to notify on mutation, too, that the prop
+					// has changed because the parent will not be able to detect the change otherwise.
+					if (!runes || !mutation || legacy_parent || is_store_sub) {
+						/** @type {Function} */ (setter)(mutation ? getter() : value);
+					}
+					return value;
+				} else {
+					return getter();
+				}
+			};
+		}
+
+		// hard mode. this is where it gets ugly — the value in the child should
+		// synchronize with the parent, but it should also be possible to temporarily
+		// set the value to something else locally.
+		var from_child = false;
+		var was_from_child = false;
+
+		// The derived returns the current value. The underlying mutable
+		// source is written to from various places to persist this value.
+		var inner_current_value = mutable_source(prop_value);
+		var current_value = with_parent_branch(() =>
+			derived(() => {
+				var parent_value = getter();
+				var child_value = get$1(inner_current_value);
+
+				if (from_child) {
+					from_child = false;
+					was_from_child = true;
+					return child_value;
+				}
+
+				was_from_child = false;
+				return (inner_current_value.v = parent_value);
+			})
+		);
+
+		if (!immutable) current_value.equals = safe_equals;
+
+		return function (/** @type {any} */ value, /** @type {boolean} */ mutation) {
+
+			if (arguments.length > 0) {
+				const new_value = mutation ? get$1(current_value) : runes && bindable ? proxy(value) : value;
+
+				if (!current_value.equals(new_value)) {
+					from_child = true;
+					set(inner_current_value, new_value);
+					// To ensure the fallback value is consistent when used with proxies, we
+					// update the local fallback_value, but only if the fallback is actively used
+					if (fallback_used && fallback_value !== undefined) {
+						fallback_value = new_value;
+					}
+					untrack(() => get$1(current_value)); // force a synchronisation immediately
+				}
+
+				return value;
+			}
+			return get$1(current_value);
+		};
+	}
+
+	/**
+	 * @param {string} method
+	 * @param  {...any} objects
+	 */
+	function log_if_contains_state(method, ...objects) {
+		untrack(() => {
+			try {
+				let has_state = false;
+				const transformed = [];
+
+				for (const obj of objects) {
+					if (obj && typeof obj === 'object' && STATE_SYMBOL in obj) {
+						transformed.push(snapshot(obj, true));
+						has_state = true;
+					} else {
+						transformed.push(obj);
+					}
+				}
+
+				if (has_state) {
+					console_log_state(method);
+
+					// eslint-disable-next-line no-console
+					console.log('%c[snapshot]', 'color: grey', ...transformed);
+				}
+			} catch {}
+		});
+
+		return objects;
+	}
+
+	const defaultSettings = {
+	  section: "puppets",
+	  showPuppetmasters: true,
+	  showCTE: true,
+	  showRelativeDate: false,
+	  redEpics: true,
+	  rainbowLegs: true,
+	};
+
+	const storedSettings = JSON.parse(localStorage.getItem("unsmurfSettings")) || defaultSettings;
+
+	const settingsStore = writable(storedSettings);
+
+	settingsStore.subscribe((value) => {
+	  try {
+	    localStorage.setItem("unsmurfSettings", JSON.stringify(value));
+	  } catch (error) {
+	    console.error("Error saving to localStorage:", error);
+	  }
+	});
+
+	function useSettings() {
+	  const settings = get(settingsStore); // Retrieve the entire settings object
+	  return settings;    // Return the specific property
+	}
+
+	mark_module_start();
+	Config[FILENAME] = 'src/Config.svelte';
+
+	var root$2 = add_locations(template(`<div class="settings-modal bg-white rounded-lg shadow-lg p-6 max-w-2xl w-[80%] md:w-[50%] relative"><h2 class="text-xl font-bold mb-2.5">Settings</h2> <div class="mb-4"><h3 class="text-lg font-semibold">Tally Record Options</h3> <label class="flex items-center gap-2"><input type="radio" name="section"> Tally record by known puppets</label> <label class="flex items-center gap-2 transition-opacity duration-300 ease-in-out"><label class="flex items-center gap-2"><input type="radio" name="section"> Tally record by similar name</label></label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Nation Display Options</h3> <label class="flex items-center gap-2 transition-opacity duration-300 ease-in-out"><input type="checkbox"> Append puppetmasters in detailed records</label> <label class="flex items-center gap-2 transition-opacity duration-300 ease-in-out"><input type="checkbox"> Mark CTE nations</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Date Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Show relative date by default</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Colour Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Red epics</label> <label class="flex items-center gap-2"><input type="checkbox"> Rainbow legendaries</label></div> <div class="flex justify-end mt-4"><button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Confirm</button></div></div>`), Config[FILENAME], [
+		[
+			20,
+			0,
+			[
+				[21, 2],
+				[
+					24,
+					2,
+					[
+						[25, 4],
+						[26, 4, [[27, 6]]],
+						[31, 4, [[34, 4, [[35, 6]]]]]
+					]
+				],
+				[
+					41,
+					2,
+					[
+						[42, 4],
+						[43, 4, [[44, 4]]],
+						[47, 2, [[48, 4]]]
+					]
+				],
+				[
+					54,
+					2,
+					[[55, 4], [56, 4, [[57, 6]]]]
+				],
+				[
+					63,
+					2,
+					[
+						[64, 4],
+						[65, 4, [[66, 6]]],
+						[69, 4, [[70, 6]]]
+					]
+				],
+				[76, 2, [[77, 4]]]
+			]
+		]
+	]);
+
+	function Config($$anchor, $$props) {
+		if (new.target) return createClassComponent({ component: Config, ...$$anchor });
+		push($$props, false, Config);
+
+		const binding_group = [];
+		const dispatch = createEventDispatcher();
+		let settings = mutable_state();
+
+		// Subscribe to settingsStore
+		settingsStore.subscribe((value) => {
+			set(settings, value);
+		});
+
+		function saveSettings() {
+			console.log(...log_if_contains_state('log', '[Config] Saving Settings:', get$1(settings)));
+			settingsStore.set(get$1(settings)); // Save changes to the store
+			dispatch('close'); // Notify parent to close the modal
+		}
+
+		init();
+
+		var div = root$2();
+		var div_1 = sibling(child(div), 2);
+		var label = sibling(child(div_1), 2);
+		var input = child(label);
+
+		remove_input_defaults(input);
+		input.value = null == (input.__value = 'puppets') ? '' : 'puppets';
+		next();
+		reset(label);
+
+		var label_1 = sibling(label, 2);
+		var label_2 = child(label_1);
+		var input_1 = child(label_2);
+
+		remove_input_defaults(input_1);
+		input_1.value = null == (input_1.__value = 'similar-name') ? '' : 'similar-name';
+		next();
+		reset(label_2);
+		reset(label_1);
+		reset(div_1);
+
+		var div_2 = sibling(div_1, 2);
+		var label_3 = sibling(child(div_2), 2);
+		var input_2 = child(label_3);
+
+		remove_input_defaults(input_2);
+		next();
+		reset(label_3);
+
+		var label_4 = sibling(label_3, 2);
+		var input_3 = child(label_4);
+
+		remove_input_defaults(input_3);
+		next();
+		reset(label_4);
+		reset(div_2);
+
+		var div_3 = sibling(div_2, 2);
+		var label_5 = sibling(child(div_3), 2);
+		var input_4 = child(label_5);
+
+		remove_input_defaults(input_4);
+		next();
+		reset(label_5);
+		reset(div_3);
+
+		var div_4 = sibling(div_3, 2);
+		var label_6 = sibling(child(div_4), 2);
+		var input_5 = child(label_6);
+
+		remove_input_defaults(input_5);
+		next();
+		reset(label_6);
+
+		var label_7 = sibling(label_6, 2);
+		var input_6 = child(label_7);
+
+		remove_input_defaults(input_6);
+		next();
+		reset(label_7);
+		reset(div_4);
+
+		var div_5 = sibling(div_4, 2);
+		var button = child(div_5);
+
+		reset(div_5);
+		reset(div);
+		bind_group(binding_group, [], input, () => get$1(settings).section, ($$value) => mutate(settings, get$1(settings).section = $$value));
+		bind_group(binding_group, [], input_1, () => get$1(settings).section, ($$value) => mutate(settings, get$1(settings).section = $$value));
+		bind_checked(input_2, () => get$1(settings).showPuppetmasters, ($$value) => mutate(settings, get$1(settings).showPuppetmasters = $$value));
+		bind_checked(input_3, () => get$1(settings).showCTE, ($$value) => mutate(settings, get$1(settings).showCTE = $$value));
+		bind_checked(input_4, () => get$1(settings).showRelativeDate, ($$value) => mutate(settings, get$1(settings).showRelativeDate = $$value));
+		bind_checked(input_5, () => get$1(settings).redEpics, ($$value) => mutate(settings, get$1(settings).redEpics = $$value));
+		bind_checked(input_6, () => get$1(settings).rainbowLegs, ($$value) => mutate(settings, get$1(settings).rainbowLegs = $$value));
+		event('click', button, saveSettings);
+		append($$anchor, div);
+
+		return pop({
+			$set: update_legacy_props,
+			$on: ($$event_name, $$event_cb) => add_legacy_event_listener($$props, $$event_name, $$event_cb)
+		});
+	}
+
+	mark_module_end(Config);
+
+	//sheetFetch.js
+
+
+	let puppetMasterCache = null; // Cache for puppet-master mappings
+	let s4Cache = null; // Cache for S4 data mappings
+	let currentNationsCache = null; // Cache for current nations list
+	let currentNationSet = null; // Set for fast current nation lookups
+
+	const puppetDataUrl = "./static/puppetData.tsv"; // URL to your preprocessed Puppet TSV file
+	const s4DataUrl = "./static/s4.tsv"; // URL to your preprocessed S4 TSV file
+	const currentNationsUrl = "./static/currentNations.txt"; // URL to your current nations file
+
+	/**
+	 * Preprocesses the current nations cache into a Set for fast lookups.
+	 */
+	function preprocessCurrentNationSet() {
+	  if (!currentNationsCache) {
+	    console.warn("Current nations cache is not initialized.");
+	    return;
+	  }
+
+	  console.log("Preprocessing current nations cache into a Set...");
+	  currentNationSet = new Set(currentNationsCache); // Convert to Set
+	  console.log("Current nation Set created.");
+	}
+
+	/**
+	 * Fetches and caches puppet data, S4 data, and current nations from their respective files.
+	 */
+	async function fetchSheets() {
+	  console.log("Fetching puppet data, S4 data, and current nations...");
+
+	  // Reset all caches
+	  puppetMasterCache = {};
+	  s4Cache = {};
+	  currentNationsCache = [];
+	  currentNationSet = null;
+
+	  try {
+	    // Fetch and parse the Puppet Data TSV
+	    const puppetResponse = await fetch(puppetDataUrl);
+	    if (!puppetResponse.ok) {
+	      throw new Error(`Failed to fetch puppet data: ${puppetResponse.statusText}`);
+	    }
+
+	    const puppetData = await puppetResponse.text();
+	    const puppetLines = puppetData.split("\n").slice(1); // Skip header row
+	    puppetLines.forEach((line) => {
+	      const [puppet, master, sheet] = line.split("\t").map((col) =>
+	        col.trim().toLowerCase().replace(/\s+/g, "_")
+	      );
+	      if (puppet && master) {
+	        puppetMasterCache[puppet] = { master, sheet }; // Store puppet-master mappings
+	      }
+	    });
+	    console.log("Puppet data loaded and cached.");
+
+	    // Fetch and parse the S4 Data TSV
+	    const s4Response = await fetch(s4DataUrl);
+	    if (!s4Response.ok) {
+	      throw new Error(`Failed to fetch S4 data: ${s4Response.statusText}`);
+	    }
+
+	    const s4Data = await s4Response.text();
+	    const s4Lines = s4Data.split("\n").slice(1); // Skip header row
+	    s4Lines.forEach((line) => {
+	      const [cardId, cardName] = line.split("\t").map((col) =>
+	        col.trim().toLowerCase().replace(/\s+/g, "_")
+	      );
+	      if (cardId && cardName) {
+	        s4Cache[cardId] = cardName; // Store card ID-to-name mappings
+	      }
+	    });
+	    console.log("S4 data loaded and cached.");
+
+	    // Fetch and parse the Current Nations file
+	    const currentNationsResponse = await fetch(currentNationsUrl);
+	    if (!currentNationsResponse.ok) {
+	      throw new Error(`Failed to fetch current nations data: ${currentNationsResponse.statusText}`);
+	    }
+
+	    const currentNationsData = await currentNationsResponse.text();
+	    currentNationsCache = currentNationsData
+	      .split("\n")
+	      .map((nation) => nation.trim().toLowerCase().replace(/\s+/g, "_")); // Normalize nation names
+	    console.log("Current nations data loaded and cached.");
+
+	    // Preprocess the current nations into a Set for fast lookups
+	    preprocessCurrentNationSet();
+	  } catch (error) {
+	    console.error("Error fetching sheet data:", error);
+	  }
+
+	  // Update the settings store to indicate data has been fetched
+	  settingsStore.update((s) => ({
+	    ...s,
+	    dataFetched: true,
+	  }));
+
+	  console.log("All sheet data fetched and processed.");
+	}
+
+
+	/**
+	 * Find the master of a given puppet name.
+	 * @param {string} name - The puppet's name to look up.
+	 * @returns {object} - An object with the master name and the source sheet name.
+	 */
+	function findPuppetmaster(name) {
+	  if (!puppetMasterCache) {
+	    console.warn("Puppet cache is not initialized. Returning the original name.");
+	    return { master: name, sheet: null };
+	  }
+
+	  const entry = puppetMasterCache[name.toLowerCase()];
+	  if (entry) {
+	    return { master: entry.master, sheet: entry.sheet }; // Return master and sheet name
+	  }
+
+	  return { master: name, sheet: null }; // Default to original name if not found
+	}
+
+	/**
+	 * Query the S4 cache for a given key.
+	 * @param {string} key - The key to look up in the S4 cache.
+	 * @returns {string|null} - The corresponding value from the S4 cache, or null if not found.
+	 */
+	function queryS4(key) {
+	  if (!s4Cache) {
+	    console.warn("S4 cache is not initialized.");
+	    return null;
+	  }
+
+	  const value = s4Cache[key];
+	  if (value) {
+	    return value;
+	  }
+
+	  return null; // Default to null if not found
+	}
+
+	/**
+	 * Check if a given nation is in the current nations cache.
+	 * @param {string} nation - The nation name to check.
+	 * @returns {boolean} - True if the nation is found, false otherwise.
+	 */
+	function isNationCurrent(nation) {
+	  if (!currentNationSet) {
+	    console.warn("Current nation Set is not initialized.");
+	    return false;
+	  }
+
+	  const normalizedNation = nation.trim().toLowerCase().replace(/\s+/g, "_");
+	  return currentNationSet.has(normalizedNation);
+	}
+
+	function getDefaultExportFromCjs (x) {
+		return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+	}
+
+	/**
+	 * @constructor
+	 * @param {!{patterns: !Object, leftmin: !number, rightmin: !number}} language The language pattern file. Compatible with Hyphenator.js.
+	 */
+
+	function Hypher(language) {
+	    var exceptions = [],
+	        i = 0;
+	    /**
+	     * @type {!Hypher.TrieNode}
+	     */
+	    this.trie = this.createTrie(language['patterns']);
+
+	    /**
+	     * @type {!number}
+	     * @const
+	     */
+	    this.leftMin = language['leftmin'];
+
+	    /**
+	     * @type {!number}
+	     * @const
+	     */
+	    this.rightMin = language['rightmin'];
+
+	    /**
+	     * @type {!Object.<string, !Array.<string>>}
+	     */
+	    this.exceptions = {};
+
+	    if (language['exceptions']) {
+	        exceptions = language['exceptions'].split(/,\s?/g);
+
+	        for (; i < exceptions.length; i += 1) {
+	            this.exceptions[exceptions[i].replace(/\u2027/g, '').toLowerCase()] = new RegExp('(' + exceptions[i].split('\u2027').join(')(') + ')', 'i');
+	        }
+	    }
+	}
+
+	/**
+	 * @typedef {{_points: !Array.<number>}}
+	 */
+	Hypher.TrieNode;
+
+	/**
+	 * Creates a trie from a language pattern.
+	 * @private
+	 * @param {!Object} patternObject An object with language patterns.
+	 * @return {!Hypher.TrieNode} An object trie.
+	 */
+	Hypher.prototype.createTrie = function (patternObject) {
+	    var size = 0,
+	        i = 0,
+	        c = 0,
+	        p = 0,
+	        chars = null,
+	        points = null,
+	        codePoint = null,
+	        t = null,
+	        tree = {
+	            _points: []
+	        },
+	        patterns;
+
+	    for (size in patternObject) {
+	        if (patternObject.hasOwnProperty(size)) {
+	            patterns = patternObject[size].match(new RegExp('.{1,' + (+size) + '}', 'g'));
+
+	            for (i = 0; i < patterns.length; i += 1) {
+	                chars = patterns[i].replace(/[0-9]/g, '').split('');
+	                points = patterns[i].split(/\D/);
+	                t = tree;
+
+	                for (c = 0; c < chars.length; c += 1) {
+	                    codePoint = chars[c].charCodeAt(0);
+
+	                    if (!t[codePoint]) {
+	                        t[codePoint] = {};
+	                    }
+	                    t = t[codePoint];
+	                }
+
+	                t._points = [];
+
+	                for (p = 0; p < points.length; p += 1) {
+	                    t._points[p] = points[p] || 0;
+	                }
+	            }
+	        }
+	    }
+	    return tree;
+	};
+
+	/**
+	 * Hyphenates a text.
+	 *
+	 * @param {!string} str The text to hyphenate.
+	 * @return {!string} The same text with soft hyphens inserted in the right positions.
+	 */
+	Hypher.prototype.hyphenateText = function (str, minLength) {
+	    minLength = minLength || 4;
+
+	    // Regexp("\b", "g") splits on word boundaries,
+	    // compound separators and ZWNJ so we don't need
+	    // any special cases for those characters. Unfortunately
+	    // it does not support unicode word boundaries, so
+	    // we implement it manually.
+	    var words = str.split(/([a-zA-Z0-9_\u0027\u00AD\u00DF-\u00EA\u00EB\u00EC-\u00EF\u00F1-\u00F6\u00F8-\u00FD\u0101\u0103\u0105\u0107\u0109\u010D\u010F\u0111\u0113\u0117\u0119\u011B\u011D\u011F\u0123\u0125\u012B\u012F\u0131\u0135\u0137\u013C\u013E\u0142\u0144\u0146\u0148\u0151\u0153\u0155\u0159\u015B\u015D\u015F\u0161\u0165\u016B\u016D\u016F\u0171\u0173\u017A\u017C\u017E\u017F\u0219\u021B\u02BC\u0390\u03AC-\u03CE\u03F2\u0401\u0410-\u044F\u0451\u0454\u0456\u0457\u045E\u0491\u0531-\u0556\u0561-\u0587\u0902\u0903\u0905-\u090B\u090E-\u0910\u0912\u0914-\u0928\u092A-\u0939\u093E-\u0943\u0946-\u0948\u094A-\u094D\u0982\u0983\u0985-\u098B\u098F\u0990\u0994-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BE-\u09C3\u09C7\u09C8\u09CB-\u09CD\u09D7\u0A02\u0A03\u0A05-\u0A0A\u0A0F\u0A10\u0A14-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A3E-\u0A42\u0A47\u0A48\u0A4B-\u0A4D\u0A82\u0A83\u0A85-\u0A8B\u0A8F\u0A90\u0A94-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABE-\u0AC3\u0AC7\u0AC8\u0ACB-\u0ACD\u0B02\u0B03\u0B05-\u0B0B\u0B0F\u0B10\u0B14-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3E-\u0B43\u0B47\u0B48\u0B4B-\u0B4D\u0B57\u0B82\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB5\u0BB7-\u0BB9\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCD\u0BD7\u0C02\u0C03\u0C05-\u0C0B\u0C0E-\u0C10\u0C12\u0C14-\u0C28\u0C2A-\u0C33\u0C35-\u0C39\u0C3E-\u0C43\u0C46-\u0C48\u0C4A-\u0C4D\u0C82\u0C83\u0C85-\u0C8B\u0C8E-\u0C90\u0C92\u0C94-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBE-\u0CC3\u0CC6-\u0CC8\u0CCA-\u0CCD\u0D02\u0D03\u0D05-\u0D0C\u0D0E-\u0D10\u0D12-\u0D28\u0D2A-\u0D39\u0D3E-\u0D43\u0D46-\u0D48\u0D4A-\u0D4D\u0D57\u0D60\u0D61\u0D7A-\u0D7F\u1F00-\u1F07\u1F10-\u1F15\u1F20-\u1F27\u1F30-\u1F37\u1F40-\u1F45\u1F50-\u1F57\u1F60-\u1F67\u1F70-\u1F7D\u1F80-\u1F87\u1F90-\u1F97\u1FA0-\u1FA7\u1FB2-\u1FB4\u1FB6\u1FB7\u1FBD\u1FBF\u1FC2-\u1FC4\u1FC6\u1FC7\u1FD2\u1FD3\u1FD6\u1FD7\u1FE2-\u1FE7\u1FF2-\u1FF4\u1FF6\u1FF7\u200D\u2019]+)/gi);
+
+	    for (var i = 0; i < words.length; i += 1) {
+	        if (words[i].indexOf('/') !== -1) {
+	            // Don't insert a zero width space if the slash is at the beginning or end
+	            // of the text, or right after or before a space.
+	            if (i !== 0 && i !== words.length - 1 && !(/\s+\/|\/\s+/.test(words[i]))) {
+	                words[i] += '\u200B';
+	            }
+	        } else if (words[i].length > minLength) {
+	            words[i] = this.hyphenate(words[i]).join('\u00AD');
+	        }
+	    }
+	    return words.join('');
+	};
+
+	/**
+	 * Hyphenates a word.
+	 *
+	 * @param {!string} word The word to hyphenate
+	 * @return {!Array.<!string>} An array of word fragments indicating valid hyphenation points.
+	 */
+	Hypher.prototype.hyphenate = function (word) {
+	    var characters,
+	        characterPoints = [],
+	        originalCharacters,
+	        i,
+	        j,
+	        k,
+	        node,
+	        points = [],
+	        wordLength,
+	        lowerCaseWord = word.toLowerCase(),
+	        nodePoints,
+	        nodePointsLength,
+	        m = Math.max,
+	        trie = this.trie,
+	        result = [''];
+
+	    if (this.exceptions.hasOwnProperty(lowerCaseWord)) {
+	        return word.match(this.exceptions[lowerCaseWord]).slice(1);
+	    }
+
+	    if (word.indexOf('\u00AD') !== -1) {
+	        return [word];
+	    }
+
+	    word = '_' + word + '_';
+
+	    characters = word.toLowerCase().split('');
+	    originalCharacters = word.split('');
+	    wordLength = characters.length;
+
+	    for (i = 0; i < wordLength; i += 1) {
+	        points[i] = 0;
+	        characterPoints[i] = characters[i].charCodeAt(0);
+	    }
+
+	    for (i = 0; i < wordLength; i += 1) {
+	        node = trie;
+	        for (j = i; j < wordLength; j += 1) {
+	            node = node[characterPoints[j]];
+
+	            if (node) {
+	                nodePoints = node._points;
+	                if (nodePoints) {
+	                    for (k = 0, nodePointsLength = nodePoints.length; k < nodePointsLength; k += 1) {
+	                        points[i + k] = m(points[i + k], nodePoints[k]);
+	                    }
+	                }
+	            } else {
+	                break;
+	            }
+	        }
+	    }
+
+	    for (i = 1; i < wordLength - 1; i += 1) {
+	        if (i > this.leftMin && i < (wordLength - this.rightMin) && points[i] % 2) {
+	            result.push(originalCharacters[i]);
+	        } else {
+	            result[result.length - 1] += originalCharacters[i];
+	        }
+	    }
+
+	    return result;
+	};
+
+	var hypher = Hypher;
+
+	var Hypher$1 = /*@__PURE__*/getDefaultExportFromCjs(hypher);
+
+	// The en-US hyphenation patterns are retrieved from
+	// http://tug_org/svn/texhyphen/trunk/collaboration/repository/hyphenator/
+	var enUs = {
+		'id': ['en-us', 'en'],
+		'leftmin': 2,
+		'rightmin': 3,
+		'patterns': {
+			3 : "x1qei2e1je1f1to2tlou2w3c1tue1q4tvtw41tyo1q4tz4tcd2yd1wd1v1du1ta4eu1pas4y1droo2d1psw24sv1dod1m1fad1j1su4fdo2n4fh1fi4fm4fn1fopd42ft3fu1fy1ga2sss1ru5jd5cd1bg3bgd44uk2ok1cyo5jgl2g1m4pf4pg1gog3p1gr1soc1qgs2oi2g3w1gysk21coc5nh1bck1h1fh1h4hk1zo1ci4zms2hh1w2ch5zl2idc3c2us2igi3hi3j4ik1cab1vsa22btr1w4bp2io2ipu3u4irbk4b1j1va2ze2bf4oar1p4nz4zbi1u2iv4iy5ja1jeza1y1wk1bk3fkh4k1ikk4k1lk1mk5tk1w2ldr1mn1t2lfr1lr3j4ljl1l2lm2lp4ltn1rrh4v4yn1q1ly1maw1brg2r1fwi24ao2mhw4kr1cw5p4mkm1m1mo4wtwy4x1ar1ba2nn5mx1ex1h4mtx3i1muqu2p3wx3o4mwa1jx3p1naai2x1ua2fxx4y1ba2dn1jy1cn3fpr2y1dy1i",
+			4 : "4dryn2itni4on1inn1im_up3nik4ni4dy5giye4tyes4_ye44ab_nhe4nha4abe2n2gyn1guy1ery5eep2pe4abry3lay3lone4wne4v1nesy3chn1erne2q3neo1nenp2seps4hy2cey5lu2nedne2cyme44nk2y5at2adine2b2ne_y5ac2p1tp2ten1den1cun1cryn5dp2th4adup4twpub3ae4rxu3ayn5gaff4pue4n2au4p1ppuf4n2atag1ipu4mag1na2gon4asx3tix1t2pu2na4gya3haa3heah4la3ho_ti2a5ian2an5puspu2tnak4_th2n1kl_te4_ta4mu4u4mupmun23mum2alex4ob_sy25ynxal1i_st4y1o4xi5cxi5a4alm_si2_sh2m5sixhu4m4sh4m3r4amam2py2rabm2pixhi2yo5dr2ai4m1pmo2vmos2x2edmo2r4n1la2mor2asx3c2xas5yom4x4apxam3nme44mokrbi2nne44andy4osp4ot3noemn4omn4a4m1n4nog4m1l2angws4l1posw3shwri4wra4yp3iwom11wo2m2izrb4ow4nopo4pr2cem2isrd2iano4mig4y3pomi3awiz55mi_no4n4m1fme4v2re_wir42mes1menme2mme2gre1o2med4me_4nop4m5c4m1bwil21noureu2whi4w3ev4maprev2w1era2plpo4crfu4r4fyy5pu2maha3pu2mab2a2rn1p4npi44lyb4lya2p3nwam42l1w1lut4luplu3or1glluf4lu5a2wacltu2y3rol1tr4vv4r3guyr4rl1te4rh_nru4ar1il2sel4sc4l1rl5prl4plys4c4lovri3ar4ib4lof3lo_ar2par3q_os3ll4oll2i4as_ri1o3vokl2levoi44p1mlka35vo_ns4cas4ll1izr4iqr2is3vivl1it3lika2tan2sen2slrle42l3hlgo3l5gal5frns3mvi4p3ley_od2r2meles24athr4myle2al3drv1inldi4l2de2vilnt2il3civik4lce42l1b4lavv3ifrno4r3nua1trr2ocnt4sy4sok4syks4la2tuk4sck3ouko5ryss4a2tyau4b4klyys1tnu1akis4au3rki4pro4ek4ima2va5ki_nu4dn4umn3uokes4k1erav1irok2ke4g1keek2ed_me2aw3ikal4aws4k5agk3ab3ka_aye4ays4veg3jo4p5ba_4vedjew3n1v24ve_ja4pzar23vatizi4n1w41batba4z2b1bb2beix4o4i5w4b1d4be_rox5nym4nyp4n3za4ittr3por1r4i1ti1bel2ith2itei2su4rs2r1sars4cr2seis1p3betvag4i2sor1shbe3wr1sioad34b3hbi2bbi4d3bie3isf4ise2is_1bilr1sp5va_r5sw_le2uz4eir1ibi2tuxu3r1tiu1v2i1raze4nze4pb2l2uu4mo1biip3iz1eripe4b4louts44b1m4b3no3br3bodi4osbo4eru3aio4mi1ol4io_3booo1ce4inyin1u2insru2n2inn4inl4inkrv4e2inioch42iner3vo4indpi2np4idbt4lb4tob3trry4cry3t2in_o4elbu4ni2muim1i5saiil3v4ilnil1iil5fs1apo3er4b5w5by_bys4_in1sau4i1lazet4u2suo3ev2z1ii2go4igius1p5saw4s5bo2fi4ifti3fl4if_i3etsch2usc22ie4i2dui4dri2diid5dpi3au3ruz4ils1cuz4is4s5d4se_se4a2ce_2ici4ich3ceii1bri5bo1ceni1blse2g5seiibe43cepi2aniam4ur2li2al2i1acet4hy2scew41phy4ch_5phuhu4thu4gche2h4tyh4shur1durc44hr44h5p5sev5sexu1ra4s3fup3p2s3gph3t2sh_ho4g2h1n_he23ciau3pl4h1mci5ch2lozo4m4ciihi2vhi4p2cim2cin4phsu1peu1ouo1geu5osheu4sho4he4th1es4shwun5zun5ysi1bunu45cizo4glck3ihep5he2nh4ed1sioph2l5hazsi2rcly4zte4_ge21siscoe22cog5siu1siv5siz_ga24skes1l2s2leha4m2s1ms3ma1ogyo1h2u1ni3gus3gun2guegu4acov1gth3_eu3g4ros1n4_es3u2nez4zyum2pu1mi3som_ev2oig4cri2gov15goos4opgon2ul5v5goeu3lugob53go_2c1t4ph_g1nog1nic2te4sov4ulsgn4ag4myc4twcud5c4ufc4uipe2t3glo1gleul2igla4_eg23giz3cun5givgi4u3gir5gio1cusul4e2spagil4g1ic5gi__eb4cze41d2a5da_u1laggo44daf2dagg2gege4v1geo1gen2ged3dato1la2ge_ol2dol2i5daypek4p4eed1d42de_4gazol2tuiv3ol2vo2lys1sa2gamgaf4o2meui4n2ui2pe2cd4em4fugi4jku3fl3ufaf2tyf4to1denu4du4pe_2f3sfri2de1ps1si4f5pfos5d3eqs4sls4snfo2rss2tdes25fon4p1b_ci23payss5w2st_de1tf4l2de1v2fin4dey4d1fd4gast2idg1id2gyd1h25di_ud5dfi3au4cy_ch4pav43didu3cud1iff2fyu3crd1inst4r4f1ffev4fer11dio2fedfe4bdir2s2ty4fe_dis1on1au3ca4f5bon1c2ondd5k25far4fagpa1peys45eyc1exps4ul2dlyp4ale3whon3s3do_e1wa5doee5vud4oge1visu2msu2nub4euav4su2rp4ai6rk_d4or3dosu1atdo4v3doxp4adoo4k4swoo2padre4eus4e3upe5un2ophet5z4syc3syl4y3hoy1ads4pd4swd4syd2tho4wo3ta_du2c4etn2tabta2luac4es4wdu4g2ess4uabdu4n4duptav4st5bow1io1pr5dyn2tawe1sp2t1bop1uead1tz4et4chopy5ea4l4t1d4te_2tyle1si4esh1tee4tyat1cr4twoteg4es2c4eru1teoer1s2eroea2tte4po1rat1wh3tusea2v3teu3texer1i2e1ber1h4tey2t1f4t1ge3br2th_th2e4thle1ce3tumec2i2ths2erb1tia4tueer1aou5vtud2tif22tige1potu1aou4lttu41timt5toos4le1cre2pat4swe5owe1cue4ottsh4eos4e1ort4sce3ol4edieo2ge5of1tio4eno4enn5tiq4edoti4u1tive3my1tiz4othee2ct5laee2ft5lo4t1mee2mtme4e1meem5bcoi4to3be5exo1ry2tof1effel2iel2ftos24t1pe1la1traos2ceig2ei5de5ico2soe1h45egyeg5n",
+			5 : "_ach4e4go_e4goseg1ule5gurtre5feg4iceher4eg5ibeger44egaltre4mei5gle3imbe3infe1ingtra3beir4deit3eei3the5ity5triae4jud3efiteki4nek4la2trime4la_e4lactri4v4toute4law5toure3leaefil45elece4ledto2rae5len4tonye1lestro3ve4fic4tonoto3mytom4bto2mato5ice5limto2gre3lioe2listru5i4todo4ellaee4tyello4e5locel5ogeest4el2shel4tae5ludel5uge4mace4mage5man2t1n2ee2s4ee4p1e2mele4metee4naemi4eee4lyeel3i3tled3tle_e4mistlan4eed3iem3iztrus4emo4gti3zaem3pie4mule4dulemu3ne4dritiv4aedon2e4dolti3tle5neae5neeen3emtis4pti5sotis4m3tisee3newti3sae5niee5nile3nioedi5zen3ite5niu5enized1ited3imeno4ge4nosen3oven4swti5oc4t1s2en3uaen5ufe3ny_4en3zed3ibe3diae4oi4ede4s3tini4ed3deo3ret2ina2e2dae4culeo4toe5outec4te4t3t2t4tes2t1ine5pel4timpe2corephe4e4plie2col5tigutu3arti5fytu4bie3pro3tienep4sh5tidie4putt4icoeci4t4tick2ti2bec3imera4bti4aber3ar4tuf45tu3ier4bler3che4cib2ere_4thooecca54thil3thet4thea3turethan4e4cade4bitere4qe4ben5turieret4tur5oeav5oeav5itu5ry4tess4tes_ter5ve1rio4eriter4iueri4v1terier3m4ter3cte5pe4t1waer3noeast3er5obe5rocero4rer1oue3assea5sp1tent4ertler3twtwis4eru4t3tende1s4a3tenc5telsear2te2scateli4e3scres5cue1s2ee2sec3tel_te5giear5kear4cte5diear3ae3sha2t1ede5ande2sice2sid5tecttece44teattype3ty5phesi4uea4gees4mie2sole3acte2sone1a4bdys5pdy4sedu4petaun4d3uleta5sytas4e4tare4tarctar4ata5pl2estrta5mo4talke2surtal3idu5eleta4bta5lae3teoua5naet1ic4taf4etin4ta5doe5tir4taciuan4id1ucad1u1ae3trae3tre2d1s2syn5ouar2d4drowet3uaet5ymdro4pdril4dri4b5dreneu3rouar3ieute44draieu5truar3te2vasdop4pe5veadoo3ddoni4u4belsum3iev1erdoli4do4laev3idevi4le4vinevi4ve5voc2d5ofdo5dee4wage5wee4d1n4ewil54d5lue3wit2d3lou3ber5eye_u1b4i3dledfa3blfab3rfa4ce3dle_fain4suit3su5issu2g34d5lasu4b3fa3tasu1al4fato1di1vd2iti5disiuci4bfeas4di1redi4pl4feca5fectdio5gfe3life4mofen2d4st3wuc4it5ferr5diniucle3f4fesf4fie4stry1dinaf4flydi3ge3dictd4icedia5bs4tops1tle5stirs3tifs4ties1ticfic4is5tias4ti_4ficsfi3cuud3ers3thefil5iste2w4filyudev45finas4tedfi2nes2talfin4ns2tagde2tode4suflin4u1dicf2ly5ud5isu5ditde1scd2es_der5sfon4tu4don5dermss4lid4erhfor4is4siede2pudepi4fra4tf5reade3pade3nufril4frol5ud4side3nou4eneuens4ug5infu5el5dem_s5setfu5nefu3rifusi4fus4s4futade5lode5if4dee_5gal_3galiga3lo2d1eds3selg5amos2s5cssas3u1ing4ganouir4mgass4gath3uita4deaf5dav5e5dav44dato4darygeez44spotspor4s4pon4gelydark5s4ply4spio4geno4genydard5ge3omg4ery5gesigeth54getoge4tydan3g4g1g2da2m2g3gergglu5dach4gh3inspil4gh4to4cutr1gi4agia5rula5bspho5g4icogien5s2pheulch42sperspa4n5spai3c4utu1lenul4gigir4lg3islcu5pycu3picu4mic3umecu2maso5vi5glasu5liagli4bg3lig5culiglo3r4ul3mctu4ru1l4og4na_c3terul1tig2ning4nio4ultug4noncta4b4c3s2cru4dul5ulsor5dgo3isum5absor5ccris4go3nic4rinson4gsona45gos_cri5fcre4vum4bi5credg4raigran25solvsoft3so4ceunat44graygre4nco5zi4gritcoz5egruf4cow5ag5stecove4cos4es5menun4ersmel44corbco4pl4gu4tco3pacon5tsman3gy5racon3ghach4hae4mhae4th5aguha3lac4onecon4aun4ims3latu2ninhan4gs3ket5colocol5ihan4kuni3vhap3lhap5ttras4co4grhar2dco5agsir5aclim45sionhas5shaun44clichaz3acle4m1head3hearun3s4s3ingun4sws2ina2s1in4silysil4eh5elohem4p4clarhena45sidiheo5r1c4l4h4eras5icc2c1itu4orsh3ernshor4h3eryci3phshon34cipecion45cinoc1ingc4inahi5anhi4cohigh5h4il2shiv5h4ina3ship3cilihir4lhi3rohir4phir4rsh3iohis4ssh1inci4lau5pia4h1l4hlan44cier5shevcia5rhmet4ch4tish1erh5ods3cho2hoge4chi2z3chitho4mahome3hon4aho5ny3hoodhoon45chiouptu44ura_ho5ruhos4esew4ihos1p1housu4ragses5tu4rasur4behree5se5shs1e4s4h1s24chedh4tarht1enht5esur4fru3rifser4os4erlhun4tsen5gur1inu3riosen4dhy3pehy3phu1ritces5tur3iz4cesa4sencur4no4iancian3i4semeia5peiass45selv5selfi4atu3centse1le4ceniib5iaib3inseg3ruros43cencib3li3cell5cel_s5edli5bun4icam5icap4icar4s4ed3secticas5i4cayiccu44iceour4pe4ced_i5cidsea5wi2cipseas4i4clyur4pi4i1cr5icrai4cryic4teictu2ccon4urti4ic4umic5uoi3curcci4ai4daiccha5ca4thscof4ide4s4casys4cliscle5i5dieid3ios4choid1itid5iui3dlei4domid3owu5sadu5sanid5uous4apied4ecany4ield3s4cesien4ei5enn4sceii1er_i3esci1estus3ciuse5as4cedscav5if4frsca4pi3fieu5siau3siccan4eiga5bcan5d4calous5sli3gibig3ilig3inig3iti4g4lus1trig3orig5oti5greigu5iig1ur2c5ah4i5i44cag4cach4ca1blusur4sat3usa5tab5utoi3legil1erilev4uta4b4butail3iail2ibil3io3sanc2ilitil2izsal4t5bustil3oqil4tyil5uru3tati4magsa5losal4m4ute_4imetbu3res3act5sack2s1ab4imitim4nii3mon4utelbumi4bu3libu4ga4inav4utenbsor42b5s2u4tis4briti3neervi4vr3vic4inga4inger3vey4ingir3ven4ingo4inguu4t1li5ni_i4niain3ioin1isbo4tor5uscrunk5both5b5ota5bos42i1no5boriino4si4not5borein3seru3in2int_ru4glbor5di5nusut5of5bor_uto5gioge4io2grbon4au5tonru3enu4touion3iio5phior3ibod3iio5thi5otiio4toi4ourbne5gb3lisrt4shblen4ip4icr3triip3uli3quar4tivr3tigrti4db4le_b5itzira4bi4racird5ert5ibi4refbi3tri4resir5gibi5ourte5oir4isr3tebr4tagbin4diro4gvac3uir5ul2b3ifis5agis3arisas52is1cis3chbi4eris3erbi5enrson3be5yor5shais3ibisi4di5sisbe3tw4is4krs3es4ismsbe5trr3secva4geis2piis4py4is1sbe3sp4bes4be5nuval5ois1teis1tirrys4rros44be5mis5us4ita_rron4i4tagrri4vi3tani3tatbe3lorri4or4reoit4esbe1libe5gu4itiarre4frre4cbe3giit3igbe3dii2tim2itio4itisrp4h4r3pet4itonr4peait5rybe3debe3dai5tudit3ul4itz_4be2dbeat3beak4ro4varo4tyros4sro5roiv5ioiv1itror3i5root1roomval1ub3berva5mo4izarva5piron4eban3ijac4qban4ebal1ajer5srom4prom4iba4geazz5i5judgay5alax4idax4ickais4aw4ly3awaya1vorav5ocav3igke5liv3el_ve4lov4elyro1feke4tyv4erdv4e2sa5vanav3ag5k2ick4illkilo5au1thk4in_4ves_ro3crkin4gve4teaun5dk5ishau4l2au3gu4kleyaugh3ve4tyk5nes1k2noat3ulkosh4at5uekro5n4k1s2at5uaat4that5te5vianat4sk5vidil4abolaci4l4adela3dylag4nlam3o3landrob3la4tosr4noular4glar3ilas4ea4topr3nivr3nita2tomr5nica4toglbin44l1c2vi5gnat3ifat1ica5tiar3neyr5net4ati_ld5isat4hol4driv2incle4bileft55leg_5leggr4nerr3nel4len_3lencr4nar1lentle3phle4prvin5dler4e3lergr3mitl4eroat5evr4mio5lesq3lessr3menl3eva4vingrma5cvio3lvi1ou4leyevi5rovi3so4l1g4vi3sulgar3l4gesate5cat5apli4agli2amr3lo4li4asr4lisli5bir4ligr2led4lics4vitil4icul3icyl3idaat5ac3lidirk4lel4iffli4flr3ket3lighvit3r4vityriv3iri2tulim3ili4moris4pl4inar3ishris4clin3ir4is_li5og4l4iqlis4pas1trl2it_as4shas5phri2pla4socask3ia3sicl3kallka4ta3sibl4lawashi4l5leal3lecl3legl3lel5riphas4abar2shrin4grin4ear4sarin4dr2inal5lowarre4l5met3rimol4modlmon42l1n2a3roorim5ilo4civo4la5rigil5ogo3loguri5et5longlon4iri1erlood5r4icolop3il3opmlora44ricir4icerib3a5los_v5oleri4agria4blos4tlo4taar2mi2loutar2izar3iolpa5bl3phal5phi4rhall3pit5voltar4im3volv2l1s2vom5ivori4l4siear4fllt5agar4fivo4rylten4vo4talth3ia3reeltis4ar4drw5ablrgo4naraw4lu3brluch4lu3cilu3enwag5olu5idlu4ma5lumia5raur5gitwait5luo3rw5al_luss4r5gisar4atl5venrgi4nara3pwar4tar3alwas4tly5mely3no2lys4l5ysewa1teaque5ma2car3gicma4clr3get5magnwed4nmaid54maldrg3erweet3wee5vwel4lapoc5re4whwest3ap3in4aphires2tr4es_mar3vre5rumas4emas1t5matemath3rero4r4eriap5atr1er4m5bilre1pumbi4vapar4a5nuran3ul4med_an3uare5lure1lian4twre5itmel4tan2trre4fy4antomen4are3fire2fe4menemen4imens4re1de3ment2r2edme5onre4awwin4g5reavme4tare3anme1tere1alm4etr3wiserdin4rdi4aan4stwith3an2span4snan2samid4amid4gan5otwl4esr4dalm4illmin4a3mindrcum3rc4itr3charcen4min4tm4inumiot4wl3ina3niumis5lan3ita3nip4mithan3ioan1gla3neuws4per2bina3nena5neem4ninw5s4tan1dl4mocrrbi4fmo2d1mo4gomois2xac5ex4agor4bagmo3mer4baba3narrau4ta5monrare4rar5cra5nor4aniam1inr2amiam5ifra4lomo3spmoth3m5ouf3mousam3icxer4ixe5roraf4tr5aclm3petra3bixhil5mpi4aam3ag3quetm5pirmp5is3quer2que_qua5vmpov5mp4tram5ab3alyz4m1s25alyt4alysa4ly_ali4exi5di5multx4ime4aldia4laral3adal5abak1enain5opu3trn4abu4nac_na4can5act5putexpe3dna4lia4i4n4naltai5lya3ic_pur4rag5ulnank4nar3c4narenar3inar4ln5arm3agognas4c4ag4l4ageupul3cage4oaga4na4gab3nautnav4e4n1b4ncar5ad5umn3chaa3ducptu4rpti3mnc1innc4itad4suad3owad4len4dain5dana5diua3ditndi4ba3dion1ditn3dizn5ducndu4rnd2we3yar4n3eara3dianeb3uac4um5neckac3ulp4siba3cio5negene4laac1inne5mine4moa3cie4nene4a2cine4poyc5erac1er2p1s2pro1tn2erepro3lner4rych4e2nes_4nesp2nest4neswpri4sycom4n5evea4carab3uln4gabn3gelpre3vpre3rycot4ng5han3gibng1inn5gitn4glangov4ng5shabi5an4gumy4erf4n1h4a5bannhab3a5bal3n4iani3anni4apni3bani4bl_us5ani5dini4erni2fip3petn5igr_ure3_un3up3per_un5op3pennin4g_un5k5nis_p5pel_un1en4ithp4ped_un1ani3tr_to4pympa3_til4n3ketnk3inyn5ic_se2ny4o5gy4onsnmet44n1n2_ru4d5pounnni4vnob4lpo4tan5ocly4ped_ro4qyper5noge4pos1s_ri4gpo4ry1p4or_res2no4mono3my_ree2po4ninon5ipoin2y4poc5po4gpo5em5pod_4noscnos4enos5tno5tayp2ta3noun_ra4cnowl3_pi2tyra5m_pi4eyr5ia_out3_oth32n1s2ns5ab_or3t_or1d_or3cplu4mnsid1nsig4y3s2eys3ion4socns4pen5spiploi4_odd5nta4bpli4n_ni4cn5tib4plignti2fpli3a3plannti4p1p2l23ysis2p3k2ys3ta_mis1nu5enpi2tun3uinp3ithysur4nu1men5umi3nu4nyt3icnu3trz5a2b_li4t_li3o_li2n_li4g_lev1_lep5_len4pion4oard3oas4e3pi1ooat5ip4inoo5barobe4l_la4mo2binpind4_ju3rob3ul_is4i_ir5rp4in_ocif3o4cil_in3so4codpi3lopi3enocre33piec5pidipi3dep5ida_in2kod3icodi3oo2do4odor3pi4cypian4_ine2o5engze3rooe4ta_im3m_id4l_hov5_hi3b_het3_hes3_go4r_gi4bpho4ro5geoo4gero3gie3phobog3it_gi5azo5ol3phizo4groogu5i4z1z22ogyn_fes3ohab5_eye55phieph1icoiff4_en3sph4ero3ing_en3go5ism_to2qans3v_el5d_eer4bbi4to3kenok5iebio5mo4lanper1v4chs_old1eol3erpe5ruo3letol4fi_du4co3liaper3op4ernp4erio5lilpe5ono5liop4encpe4la_do4tpee4do5livcin2q3pediolo4rol5pld3tabol3ub3pedeol3uno5lusedg1le1loaom5ahoma5l2p2edom2beom4bl_de3o3fich3pe4ao4met_co4ro3mia_co3ek3shao5midom1inll1fll3teapa2teo4monom3pi3pare_ca4tlue1pon4aco3nanm2an_pa4pum2en_on5doo3nenng1hoon4guon1ico3nioon1iso5niupa3nypan4ao3nou_bri2pain4ra1oronsu4rk1hopac4tpa4ceon5umonva5_ber4ood5eood5i6rks_oop3io3ordoost5rz1scope5dop1erpa4ca_ba4g_awn4_av4i_au1down5io3pito5pon1sync_as1s_as1p_as3ctch1c_ar5so5ra_ow3elo3visov4enore5auea1mor3eioun2d_ant4orew4or4guou5etou3blo5rilor1ino1rio_ang4o3riuor2miorn2eo5rofoto5sor5pe3orrhor4seo3tisorst4o3tif_an5cor4tyo5rum_al3tos3al_af1tos4ceo4teso4tano5scros2taos4poos4paz2z3wosi4ue3pai",
+			6 : "os3ityos3itoz3ian_os4i4ey1stroos5tilos5titxquis3_am5atot3er_ot5erso3scopor3thyweek1noth3i4ot3ic_ot5icao3ticeor3thiors5enor3ougor3ityor3icaouch5i4o5ria_ani5mv1ativore5sho5realus2er__an3teover3sov4erttot3icoviti4o5v4olow3dero4r3agow5esto4posiop3ingo5phero5phanthy3sc3operaontif5on3t4ionten45paganp3agattele2gonspi4on3omyon4odipan3elpan4tyon3keyon5est3oncil_ar4tyswimm6par5diompro5par5elp4a4ripar4isomo4gepa5terst5scrpa5thy_atom5sta1tio5miniom3icaom3ic_ss3hatsky1scpear4lom3ena_ba5naol3umer1veilpedia4ped4icolli4er1treuo5liteol3ishpeli4epe4nano5lis_pen4thol3ingp4era_r1thoup4erago3li4f_bas4er1krauperme5ol5id_o3liceper3tio3lescolass4oi3terpe5tenpe5tiz_be5raoi5son_be3smphar5iphe3nooi5letph4es_oi3deroic3esph5ingr3ial_3ognizo5g2ly1o1gis3phone5phonio5geneo4gatora3mour2amenofit4tof5itera3chupi4ciepoly1eod5dedo5cureoc3ula1pole_5ocritpee2v1param4oc3raco4clamo3chetob5ingob3a3boast5eoke1st3nu3itpi5thanuf4fentu3meoerst2o3chasplas5tn3tinepli5ernti4ernter3sntre1pn4s3esplum4bnsati4npre4cns4moonon1eqnor5abpo3et5n5lessn5oniz5pointpoly5tnon4agnk3rup3nomicng1sprno5l4inois5i4n3o2dno3blenni3aln5keroppa5ran3itor3nitionis4ta5nine_ni3miznd3thrmu2dron3geripray4e5precipre5copre3emm3ma1bpre4lan5gerep3rese3press_can5cmedi2c5pri4e_ce4la3neticpris3op3rocal3chain4er5ipros3en4erarnera5bnel5iz_cit5rne4gatn5d2ifpt5a4bjanu3aign4itn3chisn5chiln5cheon4ces_nau3seid4iosna3talnas5tinan4itnanci4na5mitna5liahnau3zput3er2n1a2bhex2a3hatch1multi3hair1sm4pousg1utanmpo3rim4p1inmp5iesmphas4rach4empar5iraf5figriev1mpara5mo5seyram3et4mora_rane5oran4gemo3ny_monol4rap3er3raphymo3nizgno5morar5ef4raril1g2nacg1leadmoni3ara5vairav3elra5ziemon5gemon5etght1wemoi5sege3o1dmma5ryr5bine3fluoren1dixmis4ti_de3ra_de3rie3chasrch4err4ci4bm4inglm5ineedu2al_3miliame3tryrdi4er_des4crd3ingdi2rerme5thimet3alre5arr3mestim5ersadi2rende2ticdes3icre4cremen4temensu5re3disred5itre4facmen4dede2mosmen5acmem1o3reg3ismel5onm5e5dyme3died2d5ibren4te5mediare5pindd5a5bdata1bmba4t5cle4arma3tisma5scemar4lyre4spichs3huma5riz_dumb5re3strre4terbrus4qre3tribio1rhre5utiman3izre4valrev3elbi1orbbe2vie_eas3ire5vilba1thyman5is5maniamal4tymal4lima5linma3ligmag5inav3ioul5vet4rg3inglus3teanti1dl5umn_ltur3a_el3emltera4ltane5lp5ingloun5dans5gra2cabllos5etlor5ouric5aslo5rie_enam35ricidri4cie5lope_rid5erri3encri3ent_semi5lom3errig5an3logicril3iz5rimanlob5allm3ingrim4pell5out5rina__er4ril5linal2lin4l3le4tl3le4nriph5eliv3er_ge5og_han5k_hi3er_hon3olin3ea1l4inel4im4p_idol3_in3ci_la4cy_lath5rit3iclim4blrit5urriv5elriv3et4l4i4lli4gra_leg5elif3errk4linlid5er4lict_li4cor5licioli4atorl5ish_lig5a_mal5o_man5a_mer3c5less_rm5ersrm3ingy3thinle5sco3l4erilera5b5lene__mon3ele4matld4erild4erela4v4ar1nis44lativ_mo3rola5tanlan4telan5etlan4dllab3ic_mu5takin4dek3est_ro5filk3en4dro5ker5role__of5te4jestyys3icaron4al5izont_os4tlron4tai4v3ot_pe5tero3pelrop3ici5voreiv5il__pio5n_pre3mro4the_ran4tiv3en_rov5eliv3ellit3uati4tramr5pentrp5er__rit5ui4tismrp3ingit5ill_ros5tit3ica4i2tici5terirre4stit3era4ita5mita4bi_row5dist4lyis4ta_is4sesrsa5tiissen4is4sal_sci3erse4crrs5er_islan4rse5v2yo5netish5opis3honr4si4bis5han5iron_ir4minrtach4_self5iri3turten4diri5dei4rel4ire4de_sell5r4tieriq3uidrtil3irtil4lr4tilyr4tistiq5uefip4re4_sing4_ting4yn3chrru3e4lion3at2in4th_tin5krum3pli4no4cin3ityrun4ty_ton4aruti5nymbol5rvel4i_top5irv5er_r5vestin5geni5ness_tou5s_un3cein3cerincel45ryngei4n3auim3ulai5miniimi5lesac3riim5ida_ve5rasalar4ima5ryim3ageill5abil4istsan4deila5rai2l5am_wil5ii4ladeil3a4bsa5voright3iig3eraab5erd4ific_iff5enif5eroi3entiien5a45ie5gaidi5ou3s4cieab5latidi4arid5ianide3al4scopyab5rogid5ancic3ulaac5ardi2c5ocic3ipaic5inase2c3oi4carai4car_se4d4ei2b5riib5iteib5it_ib5ertib3eraac5aroi4ativ4ian4tse4molsen5ata5ceouh4warts5enedhus3t4s5enin4sentd4sentlsep3a34s1er_hun5kehu4min4servohro3poa5chethov5el5se5umhouse3sev3enho5senhort3eho5rishor5at3hol4ehol5arh5odizhlo3riac5robhis3elhion4ehimer4het4edsh5oldhe2s5ph5eroushort5here5aher4bahera3p3side_5sideshen5atsi5diz4signahel4lyact5ifhe3l4ihe5do55sine_h5ecathe4canad4dinsion5aad5er_har4lehard3e3sitioha5rasha3ranhan4tead3icahang5oadi4ersk5inesk5ing5hand_han4cyhan4cislith5hala3mh3ab4lsmall32g5y3n5gui5t3guard5smithad5ranaeri4eag5ellag3onia5guerso4labsol3d2so3licain5in4grada3s4on_gor5ougo5rizgondo5xpan4dait5ens5ophyal3end3g4o4ggnet4tglad5i5g4insgin5ge3g4in_spen4d2s5peog3imen5gies_3spher5giciagh5outsp5ingge5nizge4natge5lizge5lisgel4inxi5miz4gativgar5n4a5le5oga3nizgan5isga5mets5sengs4ses_fu4minfres5cfort5assi4erss5ilyfore5tfor5ayfo5ratal4ia_fon4dessur5aflo3ref5lessfis4tif1in3gstam4i5stands4ta4p5stat_fin2d5al5levs5tero4allicstew5afight5fi5del5ficie5ficiafi3cer5stickf3icena5log_st3ingf3icanama5ra5stockstom3a5stone2f3ic_3storef2f5iss4tradam5ascs4trays4tridf5fin_fend5efeath3fault5fa3thefar5thfam5is4fa4mafall5eew3inge5verbeven4ie5vengevel3oev3ellev5asteva2p5euti5let5roset3roget5rifsy5rinet3ricet5onaam5eraam5ilyami4noamor5ieti4noe5tidetai5loethod3eten4dtal5enes5urramp5enan3ageta5loge5strotan4detanta3ta5pere3ston4es2toes5times3tigta3rizestan43analy4taticta4tures4prean3arces3pertax4ises5onaes3olue5skintch5etanar4ies4i4ntead4ie2s5ima3natiande4sesh5enan3disan4dowang5iete5geres5ences5ecres5cana4n1icte2ma2tem3at3tenanwrita45erwau4tenesert3era3nieser3set5erniz4erniter4nis5ter3de4rivaan3i3fter3isan4imewo5vener3ineeri4ere3rient3ess_teth5e5ericke1ria4er3ester5esser3ent4erenea5nimier5enaer3emoth3easthe5atthe3iser5el_th5ic_th5icaere3in5thinkere5coth5odea5ninee3realan3ishan4klier4che5anniz4erandti4atoanoth5equi3lep5utat4ic1uan4scoe4probep3rehe4predans3poe4precan4surantal4e3penttim5ulep5anceo5rol3tine_eop3aran4tiewin4deap5eroen3ishen5icsen3etren5esten5esien5eroa3pheren3dicap3itae4nanten5amoem5ulaa3pituti3zen5emnize5missem5ishap5olaem5ine3tles_t5let_em1in2apor5iem3icaem5anael3op_el4labapos3te3liv3el5ishaps5esweath3e3lierel3icaar3actwa5verto3nate3libee4l1erel3egato3rietor5iza5radeelaxa4aran4gto3warelan4dej5udie5insttra5chtraci4ar5av4wa5gere5git5arbal4ar5easeg5ing4voteetrem5iar3enta5ressar5ial4tricsvor5abe3finetro5mitron5i4tronyar3iantro3sp5eficia3rieted5uloed3icae4d1erec3ulaec4tane4cremeco5roec3orae4concar5o5de4comme4cluse4clame5citeec5ifya5ronias3anta5sia_tu4nis2t3up_ecan5ce4belstur3ise4bel_eav3ene4a3tue5atifeath3ieat5eneart3eear4ilear4icear5eseam3ereal3oueal5erea5geread5iedum4be4ducts4duct_duc5eras3tenasur5adrea5rat3abl4d5outdo3natdom5izdo5lor4dlessu4bero3dles_at3alou3ble_d4is3tdirt5idi5niz3dine_at5ech5di3endi4cam1d4i3ad3ge4tud5estdev3ilde3strud3iedud3iesdes3tide2s5oat3egovis3itde4nardemor5at3en_uen4teuer4ilde5milat3eraugh3en3demicater5nuil5izdeli4ede5comde4cildecan4de4bonv3io4rdeb5it4dativ2d3a4bat3estu5laticu4tie5ulcheul3dercuss4icu5riaath5em3cultua5thenul3ingul5ishul4lar4vi4naul4liscu5ityctim3ic4ticuuls5esc5tantultra3ct5angcros4ecrop5ocro4pl5critiath5omum4blycre3at5vilitumor5oat5i5b5crat_cras5tcoro3ncop3iccom5ercol3orun5ishco3inc5clareat3ituunt3abat5ropun4tescit3iz4cisti4cista4cipicc5ing_cin3em3cinatuper5s5videsup3ingci2a5b5chini5videdupt5ib5vide_at4tag4ch1inch3ersch3er_ch5ene3chemiche5loure5atur4fercheap3vi5aliat3uravet3er4ch3abc5e4taau5sib3cessives4tece5ram2cen4e4cedenccou3turs5erur5tesur3theaut5enur4tiecav5al4cativave4nover3thcar5omca5percan4tycan3izcan5iscan4icus4lin3versecal4laver3ieca3latca5dencab3in3butiobuss4ebus5iebunt4iv4eresuten4i4u1t2iv3erenu3tineut3ingv4erelbroth35u5tizbound34b1orabon5at5vere_bom4bibol3icblun4t5blespblath5av3erav5enuebi3ogrbi5netven3om2v1a4bvac5ilbi3lizbet5izbe5strva5liebe5nigbbi4nabas4siva5nizbari4aav5ernbarbi5av5eryvel3liazi4eravi4er",
+			7 : "_dri5v4ban5dagvar5iedbina5r43bi3tio3bit5ua_ad4derution5auti5lizver5encbuf4ferus5terevermi4ncall5incast5ercas5tigccompa5z3o1phros5itiv5chanicuri4fico5stati5chine_y5che3dupport54v3iden5cific_un4ter_at5omiz4oscopiotele4g5craticu4m3ingv3i3liz4c3retaul4li4bcul4tiscur5a4b4c5utiva5ternauiv4er_del5i5qdem5ic_de4monsdenti5fdern5izdi4latou4b5ingdrag5on5drupliuar5ant5a5si4tec5essawo4k1enec5ifiee4compear5inate4f3eretro5phewide5sp5triciatri5cesefor5ese4fuse_oth5esiar5dinear4chantra5ventrac4tetrac4itar5ativa5ratioel5ativor5est_ar5adisel5ebraton4alie4l5ic_wea5rieel5igibe4l3ingto5cratem5igraem3i3niemoni5oench4erwave1g4a4pillavoice1ption5eewill5inent5age4enthesvaude3vtill5inep5recaep5ti5bva6guer4erati_tho5rizthor5it5thodicer5ence5ternitteri5zater5iesten4tage4sage_e4sagese4sert_an5est_e4sertse4servaes5idenes5ignaesis4tees5piraes4si4btal4lisestruc5e5titioounc5erxe4cutota5bleset5itiva4m5atoa4matis5stratu4f3ical5a5lyst4ficatefill5instern5isspend4gani5zasqual4la4lenti4g3o3nas5ophiz5sophicxpecto55graph_or5angeuri4al_4graphy4gress_smol5d4hang5erh5a5nizharp5enhar5terhel4lishith5erhro5niziam5eteia4tricic4t3uascour5au2r1al_5scin4dover4nescan4t55sa3tiou5do3ny_ven4de_under5ty2p5al_anti5sylla5bliner4arturn3ari5nite_5initioinsur5aion4eryiphras4_tim5o5_ten5an_sta5blrtroph4_se5rieiq3ui3t5i5r2izis5itiviso5mer4istral5i5ticki2t5o5mtsch3ie_re5mittro3fiti4v3er_i4vers_ros5per_pe5titiv3o3ro_ped5alro5n4is_or5ato4jestierom5ete_muta5bk5iness4latelitr4ial__mist5i_me5terr4ming_lev4er__mar5tilev4eralev4ers_mag5a5liar5iz5ligaterit5ers_lat5errit5er_r5ited__im5pinri3ta3blink5er_hon5ey5litica_hero5ior5aliz_hand5irip5lic_gen3t4tolo2gylloqui5_con5grt1li2erbad5ger4operag_eu4lertho3donter2ic__ar4tie_ge4ome_ge5ot1_he3mo1_he3p6a_he3roe_in5u2tpara5bl5tar2rht1a1mintalk1a5ta3gon_par5age_aster5_ne6o3f_noe1thstyl1is_poly1s5pathic_pre1ampa4tricl3o3niz_sem4ic_semid6_semip4_semir45ommend_semiv4lea4s1a_spin1oom5etryspher1o_to6poglo4ratospe3cio3s2paceso2lute_we2b1l_re1e4ca5bolicom5erseaf6fishside5swanal6ysano5a2cside5stl5ties_5lumniasid2ed_anti1reshoe1stscy4th1s4chitzsales5wsales3cat6tes_augh4tlau5li5fom5atizol5ogizo5litiorev5olure5vertre5versbi5d2ifbil2lab_earth5pera5blro1tronro3meshblan2d1blin2d1blon2d2bor1no5ro1bot1re4ti4zr5le5quperi5stper4malbut2ed_but4tedcad5e1moist5enre5stalress5ibchie5vocig3a3roint5er4matizariv1o1lcous2ticri3tie5phisti_be5stoog5ativo2g5a5rr3a3digm4b3ingre4posir4en4tade4als_od5uctsquasis6quasir6re5fer_p5trol3rec5olldic1aiddif5fra3pseu2dr5ebrat5metric2d1lead2d1li2epro2g1epre1neuod5uct_octor5apoin3came5triem5i5liepli5narpara3memin5glim5inglypi4grappal6matmis4er_m5istryeo3graporth1riop1ism__but4tio3normaonom1icfeb1ruafermi1o_de4moio5a5lesodit1icodel3lirb5ing_gen2cy_n4t3ingmo5lestration4get2ic_4g1lishobli2g1mon4ismnsta5blmon4istg2n1or_nov3el3ns5ceivno1vembmpa5rabno4rarymula5r4nom1a6lput4tinput4tedn5o5miz_cam4penag5er_nge5nesh2t1eoun1dieck2ne1skiifac1etncour5ane3backmono1s6mono3chmol1e5cpref5ac3militapre5tenith5i2lnge4n4end5est__capa5bje1re1mma1la1ply5styr1kovian_car5olprin4t3lo2ges_l2l3ishprof5it1s2tamp",
+			8 : "lead6er_url5ing_ces5si5bch5a5nis1le1noidlith1o5g_chill5ilar5ce1nym5e5trych5inessation5arload4ed_load6er_la4c3i5elth5i2lyneg5ativ1lunk3erwrit6er_wrap3arotrav5es51ke6linga5rameteman3u1scmar1gin1ap5illar5tisticamedio6c1me3gran3i1tesima3mi3da5bves1titemil2l1agv1er1eigmi6n3is_1verely_e4q3ui3s5tabolizg5rapher5graphicmo5e2lasinfra1s2mon4ey1lim3ped3amo4no1enab5o5liz_cor5nermoth4et2m1ou3sinm5shack2ppo5sitemul2ti5uab5it5abimenta5rignit1ernato5mizhypo1thani5ficatuad1ratu4n5i4an_ho6r1ic_ua3drati5nologishite3sidin5dling_trib5utin5glingnom5e1non1o1mistmpos5itenon1i4so_re5stattro1p2istrof4ic_g2norespgnet1ism5glo5binlem5aticflow2er_fla1g6elntrol5lifit5ted_treach1etra1versl5i5ticso3mecha6_for5mer_de5rivati2n3o1me3spac6i2t3i4an_thy4l1antho1k2er_eq5ui5to4s3phertha4l1amt3ess2es3ter1geiou3ba3dotele1r6ooxi6d1iceli2t1isonspir5apar4a1leed1ulingea4n3iesoc5ratiztch3i1er_kil2n3ipi2c1a3dpli2c1abt6ap6athdrom3e5d_le6icesdrif2t1a_me4ga1l1prema3cdren1a5lpres2plipro2cess_met4ala3do5word1syth3i2_non1e2m_post1ampto3mat4rec5ompepu5bes5cstrib5utqu6a3si31stor1ab_sem6is4star3tliqui3v4arr1abolic_sph6in1de5clar12d3aloneradi1o6gs3qui3tosports3wsports3cra5n2hascro5e2cor3bin1gespokes5wspi2c1il_te3legrcroc1o1d_un3at5t_dictio5cat1a1s2buss4ingbus6i2esbus6i2erbo2t1u1lro5e2las1s2pacinb1i3tivema5rine_r3pau5li_un5err5r5ev5er__vi2c3arback2er_ma5chinesi5resid5losophyan3ti1n2sca6p1ersca2t1olar2rangesep3temb1sci2uttse3mes1tar3che5tsem1a1ph",
+			9 : "re4t1ribuuto5maticl3chil6d1a4pe5able1lec3ta6bas5ymptotyes5ter1yl5mo3nell5losophizlo1bot1o1c5laratioba6r1onierse1rad1iro5epide1co6ph1o3nscrap4er_rec5t6angre2c3i1prlai6n3ess1lum5bia_3lyg1a1miec5ificatef5i5nites2s3i4an_1ki5neticjapan1e2smed3i3cinirre6v3ocde2c5linao3les3termil5li5listrat1a1gquain2t1eep5etitiostu1pi4d1v1oir5du1su2per1e6_mi1s4ers3di1methy_mim5i2c1i5nitely_5maph1ro15moc1ra1tmoro6n5isdu1op1o1l_ko6r1te1n3ar4chs_phi2l3ant_ga4s1om1teach4er_parag6ra4o6v3i4an_oth3e1o1sn3ch2es1to5tes3toro5test1eror5tively5nop5o5liha2p3ar5rttrib1ut1_eth1y6l1e2r3i4an_5nop1oly_graph5er_5eu2clid1o1lo3n4omtrai3tor1_ratio5na5mocratiz_rav5en1o",
+			10 : "se1mi6t5ic3tro1le1um5sa3par5iloli3gop1o1am1en3ta5bath3er1o1s3slova1kia3s2og1a1myo3no2t1o3nc2tro3me6c1cu2r1ance5noc3er1osth1o5gen1ih3i5pel1a4nfi6n3ites_ever5si5bs2s1a3chu1d1ri3pleg5_ta5pes1trproc3i3ty_s5sign5a3b3rab1o1loiitin5er5arwaste3w6a2mi1n2ut1erde3fin3itiquin5tes5svi1vip3a3r",
+			11 : "pseu3d6o3f2s2t1ant5shimi1n2ut1estpseu3d6o3d25tab1o1lismpo3lyph1onophi5lat1e3ltravers3a3bschro1ding12g1o4n3i1zat1ro1pol3it3trop1o5lis3trop1o5lesle3g6en2dreeth1y6l1eneor4tho3ni4t",
+			12 : "3ra4m5e1triz1e6p3i3neph1"
+		}
+	};
+
+	var english = /*@__PURE__*/getDefaultExportFromCjs(enUs);
+
+	// The french hyphenation patterns are retrieved from
+	// http://tug_org/svn/texhyphen/trunk/collaboration/repository/hyphenator/
+	var fr = {
+		'id': 'fr',
+		'leftmin': 2,
+		'rightmin': 3,
+		'patterns': {
+			2 : "1ç1j1q",
+			3 : "1gè’â41zu1zo1zi1zè1zé1ze1za’y4_y41wu1wo1wi1we1wa1vy1vû1vu1vô1vo1vî1vi1vê1vè1vé1ve1vâ1va’û4_û4’u4_u41ba1bâ1ty1be1bé1bè1bê1tû1tu1tô1bi1bî1to1tî1ti1tê1tè1té1te1tà1tâ1ta1bo1bô1sy1sû1su1sœ1bu1bû1by2’21ca1câ1sô1ce1cé1cè1cê1so1sî1si1sê1sè1sé1se1sâ1sa1ry1rû1ru1rô1ro1rî1ri1rê1rè1ré1re1râ1ra’a41py1pû1pu1pô1po1pî1pi1pê1pè1pé1pe1pâ1pa_ô41ci1cî’ô4’o4_o41nyn1x1nû1nu1nœ1nô1no1nî1ni1nê1nè1né1ne1nâ1co1cô1na1my1mû1mu1mœ1mô1mo1mî1mi1cœ1mê1mè1mé1me1mâ1ma1ly1lû1lu1lô1lo1lî1li1lê1lè1cu1cû1cy1lé1d’1da1dâ1le1là1de1dé1dè1dê1lâ1la1ky1kû1ku1kô1ko1kî1ki1kê1kè1ké1ke1kâ1ka2jk_a4’î4_î4’i4_i41hy1hû1hu1hô1ho1hî1hi1hê1hè1hé1he1hâ1ha1gy1gû1gu1gô1go1gî1gi1gê_â41gé1ge1gâ1ga1fy1di1dî1fû1fu1fô1fo’e41fî1fi1fê1fè1do1dô1fé1fe1fâ1fa’è41du1dû1dy_è4’é4_é4’ê4_ê4_e41zy",
+			4 : "1f2lab2h2ckg2ckp2cksd1s22ckb4ck_1c2k2chw4ze_4ne_2ckt1c2lad2hm1s22cht2chsch2r2chp4pe_1t2r1p2h_ph44ph_ph2l2phnph2r2phs1d2r2pht2chn4fe_2chm1p2l1p2r4me_1w2rch2l2chg1c2r2chb4ch_1f2r4le_4re_4de_f1s21k2r4we_1r2h_kh44kh_1k2h4ke_1c2h_ch44ge_4je_4se_1v2r_sh41s2h4ve_4sh_2shm2shr2shs4ce_il2l1b2r4be_1b2l4he_4te__th41t2h4th_g1s21g2r2thl1g2l2thm2thnth2r1g2n2ths2ckf",
+			5 : "2ck3h4rhe_4kes_4wes_4res_4cke_éd2hi4vre_4jes_4tre_4zes_4ges_4des_i1oxy4gle_d1d2h_cul44gne_4fre_o1d2l_sch44nes_4les_4gre_1s2ch_réu24sch_4the_1g2hy4gue_2schs4cle_1g2ho1g2hi1g2he4ses_4tes_1g2ha4ves_4she_4che_4cre_4ces_t1t2l4hes_l1s2t4bes_4ble__con4xil3lco1ap4que_vil3l4fle_co1arco1exco1enco1auco1axco1ef4pes_co1é2per3h4mes__pe4r4bre_4pre_4phe_1p2né4ple__dé2smil3llil3lhil3l4dre_cil3lgil3l4fes_",
+			6 : "’in1o2rcil4l4phre_4dres_l3lioni1algi2fent_émil4l4phle_rmil4l4ples_4phes_1p2neuextra14pres_y1asthpé2nul2xent__mé2sa2pent_y1algi4chre_1m2nès4bres_1p2tèr1p2tér4chle_’en1o24fles_oxy1a2avil4l_en1o24ques_uvil4lco1a2d4bles__in1a2’in1a21s2por_cons4_bi1u2’as2ta_in1e2’in1e2_in1é2’in1é21s2lov1s2lavco1acq2cent__as2ta_co1o24ches_hémi1é_in2er’in2er2s3homo1ioni_in1i2’in1i22went_4shes__ré1a2_ré1é2_ré1e2_ré2el_in1o2ucil4lco1accu2s3tr_ré2er_ré2èr4cles_2vent__ré1i22sent_2tent_2gent__ré1o24gues__re1s24sche_4thes_’en1a2e2s3ch4gres_1s2cop2lent__en1a22nent__in1u2’in1u24gnes_4cres_wa2g3n4fres_4tres_4gles_1octet_dé1o2_dé1io4thre__bi1au2jent__dé1a22zent_4vres_2dent_4ckes_4rhes__dy2s3sub1s22kent_2rent_2bent_3d2hal",
+			7 : "a2g3nos3d2houdé3rent__dé3s2t_dé3s2pé3dent_2r3heur2r3hydri1s2tat2frent_io1a2ctla2w3re’in2u3l_in2u3l2crent_’in2uit_in2uit1s2caph1s2clér_ré2ussi2s3ché_re2s3t_re2s3s4sches_é3cent__seu2le’in2ond_in2ond’in2i3t_in2i3t’in2i3q_ré2aux_in2i3q2shent__di1alduni1a2x’in2ept2flent__in2eptuni1o2v2brent_co2nurb2chent_2quent_1s2perm1s2phèr_ma2c3kuevil4l1s2phér1s2piel1s2tein1s2tigm4chles_1s2tock1s2tyle1p2sych_pro1é2_ma2r1x_stil3lpusil3libril3lcyril3l_pré1s2thril3l_mé3san_pré1u2_mé2s1i_pré1o2_pré1i2piril3lpupil3lâ2ment__pré1e2_pré1é2_pré2au_pré1a22prent_2vrent_supero2_di1e2npoly1u2è2ment_poly1s2poly1o2poly1i2poly1è2poly1é2poly1e2poly1a2supe4r1capil3l2plent_armil5lsemil4lmil4letvacil4l_di2s3h3ph2tis2dlent_a2s3tro4phres_l2ment_i1è2drei1arthr2drent_4phles_supers2ô2ment_extra2i2phent_su3r2ah_su2r3hextra2chypo1u21alcool_per1u2_per1o2_per1i2_per1é2hypo1s2_per1a2hypo1o2hypo1i2hypo1é2_pen2tahypo1e2hypo1a2y1s2tome2s3cophyperu2hype4r1hypers2hypero21m2némohyperi21m2nési4chres_a1è2drehyperé2hypere2hypera2’oua1ou_oua1ouo1s2tomo1s2timo1s2tato1s2tasomni1s2tung2s3_dé3s2c2blent__bio1a2télé1e2télé1i22clent_télé1s22guent_1é2nerg2grent_2trent__dé2s1œ2t3heuro1è2dre2gnent_2glent_4thres__bi1a2t1é2drie_bi1a2c_i2g3nin3s2at_’i2g3ni2ckent__i2g3né’ab3réa’i2g3né_ab3réa_per1e2",
+			8 : "_ma2l1ap_dy2s1u2_dy2s1o2_dy2s1i2n3s2ats__dy2s1a2distil3l1é2lectrinstil3l1s2trophe2n1i2vro2b3long1s2tomos_ae3s4ch’ae3s4ch_eu2r1a2ombud2s3’eu2r1a2_mono1s2_mono1u2o1s2téro_mono1o2eu1s2tato1s2tradfritil3la2l1algi_mono1i2_mono1é2_ovi1s2c’ovi1s2c_mono1e2_mono1a2co1assocpaléo1é2boutil3l1s2piros_ré2i3fi_pa2n1ischevil4l1s2patiaca3ou3t2_di1a2cé_para1s2_pa2r3héco1assur_su2b1é2tu2ment_su2ment__su2b1in_su2b3lupapil3lire3pent_’inte4r3_su2b1urab3sent__su2b1a2di2s3cophu2ment_fu2ment__intera2au2ment_as2ment_or2ment_’intera2_intere2pé1r2é2q_péri1os_péri1s2ja3cent__anti1a2_péri1u2’anti1a2er2ment__anti1e2ac3cent_ar2ment_to2ment_’intere2ré3gent_papil3leom2ment_’anti1e2photo1s2_anti1é2_interé2’anti1é2_anti1s2’anti1s23ph2talé’interé2ri2ment__interi2’interi2mi2ment_apo2s3tri2s3chio_pluri1ai2s3chia_intero2’intero2_inte4r3po1astre_interu2’interu2_inters2ai2ment_’inters2papil3la_tri1o2n_su2r1a2_pon2tet_pos2t3h_dés2a3mes3cent__pos2t3r_post1s2_tri1a2tta2ment__tri1a2nra2ment_is3cent__su2r1e2_tri1a2cfa2ment_da2ment__su3r2et_su2r1é2_mé2s1es_mé2g1oh_su2r1of_su2r1ox_re3s4ty_re3s4tu_ma2l1oc’a2g3nat_dé2s1é2_ma2l1entachy1a2_pud1d2ltchin3t2_re3s4trtran2s3p_bi2s1a2tran2s3hhémo1p2té3quent__a2g3nat_dé2s1i2télé1o2bo2g3nosiradio1a2télé1o2ppu2g3nacru3lent__sta2g3nre3lent__ré2a3le_di1a2mi",
+			9 : "_ré2a3lit_dé3s2o3lthermo1s2_dé3s2ist_dé3s2i3rmit3tent_éni3tent__do3lent__ré2a3lisopu3lent__pa3tent__re2s3cap_la3tent__co2o3lie_re2s3cou_re2s3cri_ma2g3num_re2s3pir_dé3s2i3dco2g3nititran2s1a2tran2s1o2_dé3s2exu_re3s4tab_re3s4tag_dé3s2ert_re3s4tat_re3s4tén_re3s4tér_re3s4tim_re3s4tip_re3s4toc_re3s4toptran2s1u2_no2n1obs_ma2l1a2v_ma2l1int_prou3d2hpro2s3tativa3lent__ta3lent__rétro1a2_pro1s2cé_ma2l1o2dcci3dent__pa3rent__su2r1int_su2r1inf_su2r1i2mtor3rent_cur3rent__mé2s1u2stri3dent__dé3s2orm_su3r2ell_ar3dent__su3r2eaupru3dent__pré2a3lacla2ment__su3r2a3t_pos2t1o2_pos2t1inqua2ment_ter3gent_ser3gent_rai3ment_abî2ment_éci2ment_’ar3gent__ar3gent_rin3gent_tan3gent_éli2ment_ani2ment_’apo2s3ta_apo2s3tavélo1s2kivol2t1amp_dé3s2orp_dé2s1u2n_péri2s3ssesqui1a2’ana3s4trfir2ment_écu2ment_ser3pent_pré3sent_’ar3pent__ar3pent_’in1s2tab_in1s2tab’in2o3cul_in2o3culplu2ment_bou2ment_’in2exora_in2exora_su2b3linbru2ment__su3b2é3r_milli1am’in2effab_in2effab’in2augur_di1a2cid_in2augur_pa2n1opt’in2a3nit_in2a3nit1informat_ana3s4trvanil3lis_di1a2tom_su3b2altvanil3linstéréo1s2_pa2n1a2fo1s2tratuépi2s3cop_ci2s1alp1s2tructu1é2lément1é2driquepapil3lomllu2ment_",
+			10 : "1s2tandardimmi3nent__émi3nent_imma3nent_réma3nent_épi3s4cope_in2i3miti’in2i3miti_res3sent_moye2n1â2gréti3cent__dé3s2a3crmon2t3réalinno3cent__mono1ï2dé_pa2n1a2méimpu3dent__pa2n1a2ra_amino1a2c’amino1a2c_pa2n1o2phinci3dent__ser3ment_appa3rent_déca3dent__dacryo1a2_dé3s2astr_re4s5trin_dé3s2é3gr_péri2s3ta_sar3ment__dé3s2oufr_re3s4tandchro2ment__com3ment__re2s3quil_re2s3pons_gem2ment__re2s3pect_re2s3ciso_dé3s2i3gn_dé3s2i3ligram2ment__dé3s2invo_re2s3cisitran3s2act’anti2enneindo3lent__sou3vent_indi3gent_dili3gent_flam2ment_impo3tent_inso3lent_esti2ment_’on3guent__on3guent_inti2ment__dé3s2o3défécu3lent_veni2ment_reli2ment_vidi2ment_chlo2r3é2tpu2g3nablechlo2r3a2cryth2ment_o2g3nomonicarê2ment__méta1s2ta_ma2l1aisé_macro1s2célo3quent_tran3s2ats_anti2enne",
+			11 : "_contre1s2cperti3nent_conti3nent__ma2l1a2dro_in2é3lucta_psycho1a2n_dé3s2o3pil’in2é3luctaperma3nent__in2é3narratesta3ment__su2b3liminrésur3gent_’in2é3narraimmis4cent__pro2g3nathchien3dent_sporu4lent_dissi3dent_corpu3lent_archi1é2pissubli2ment_indul3gent_confi3dent__syn2g3nathtrucu3lent_détri3ment_nutri3ment_succu3lent_turbu3lent__pa2r1a2che_pa2r1a2chèfichu3ment_entre3gent_conni3vent_mécon3tent_compé3tent__re4s5trict_dé3s2i3nen_re2s3plend1a2nesthésislalo2ment__dé3s2ensib_re4s5trein_phalan3s2tabsti3nent_",
+			12 : "polyva3lent_équiva4lent_monova3lent_amalga2ment_omnipo3tent__ma2l1a2dreséquipo3tent__dé3s2a3tellproémi3nent_contin3gent_munifi3cent__ma2g3nicideo1s2trictionsurémi3nent_préémi3nent__bai2se3main",
+			13 : "acquies4cent_intelli3gent_tempéra3ment_transpa3rent__ma2g3nificatantifer3ment_",
+			14 : "privatdo3cent_diaphrag2ment_privatdo3zent_ventripo3tent__contre3maître",
+			15 : "grandilo3quent_",
+			16 : "_chè2vre3feuille"
+		}
+	};
+
+	var french = /*@__PURE__*/getDefaultExportFromCjs(fr);
+
+	var de = {
+		'id': 'de',
+		'leftmin': 2,
+		'rightmin': 2,
+		'patterns': {
+			3 : "2aaa1äa1ba1da1ga1j2aoa1öa1p2aqa1ßa2ua1xä1aä1bä1dä1gä1jä1k1äqä1ß1äxä1z1bibl21cacä3c1dc4h1cic1jc4k3co2cp2cs3cu1cy1de1did1ö1due1be1d4eee1fe1ge1ke1m2eoe1pe1qe1ße1te3üe1wey1e1z1fa1fä1fe1fi1fo1fö1fu1fü1fy2gd1geg1n1guh1j2hl2hnh1q2hr4hsh2ü2hwh1zi1a2iä2ici1d2ifi1ji1ßi1üj2u1ka1käkl21ko1kök1q2ks1kü1le1li4ln1lo1lö1ly1ma3mä1me1mi1mo1mö1mu1mü1my1na1nä1ne1nin1j1noo1b2oco1d2oi2ol2omo1qo2uo1vo1xö1bö1dö1e1öf2önöo1ö1ßö1vö1wö1zp2a1päp2e1php1j1puqu42rc1re1ri4rnr1q1ru1rü1ry1sa1sä1sc1se1si1so1sös1t1su1sü1ße1ßiß1j1ßu1ta1tä1tet1h1ti1to2tö2ts1tu2tü2ua2ucu1h2uiu1ju1lun12uou1q2usu1w1üb2üc2üdü1gü1k2ünü1ß2ütü1vü1zve2v2r2vsw2aw2ä2wnw2rw2ux1a1xe1xix1jx1q1xu2xyx1zy1by1ey1gy1hy1jy1ly1py1ry1vy1wy1yzä2zu1zw2",
+			4 : "_ax4_äm3_ch2_en1_eu1_fs4_gd2_gs4_he2_ia4_in1_ks2_oa3_öd2_pf4_ph4_ps2_st4_th4_ts2_um3_ur1_xe3a1abaa1ca3au2abaab1ä1abd1abf1abg1abh2abi1abkab1l1abnab3r1abs2abu2abü1abw2aby1abz2aca2acc2acu1add2adf2adh5adj2ado2adp2adq2adu2a1eae2bae2cae2da2ekae2pa2eta2ewae2xaf1a2afe2afia2fö2agaag2n2agt2ah_2ahsa1huah1wa1hyaif2a2il2aisaje22ak_2akb2akc2akd4ako2aks1akza1laa1lä2ale2ali2aloa1lu4aly2am_2amä2amf2amk2amla2mö2amu1anb2ane1anf1anh2anj1anl2anna1nö1anra1nü1anwao1ia1opa1or2ap_2apa2apea2pfap2n2apr2ar_a1raa1rä1arb2are2arf2arh2ari2arr2arua2rü2arv2ary4asha2söa2süaße22a1tata1at2cat2eat2h3atmat1ö4atra3tü2au_2aub4auc2aue2aug2auj4aum4aunau1o2auu2auw2aux2auz2a1ü2a1v4avia2vr2a1wax2eays4ay3t2a1zaz2aaz2oaz2uäb2sä1ckä2daä2dräd2s2ä1eäf3läf3räf2säg2näh1aä3hi2ähm2ähsä1huäh1wä1imä1la2äleä1lu2ämläm2s2än_2äne2änsä1onä1paär1äär1c4äreä1röä2rü1ärzä3suä3teät2häu1cä2uf1äug4äul2äumä2un2äur1äuß4ä1v3bah3basb2ärb2äs4b1bb3bebb2sbbu12b1c3be_3bea3beb3bek3bel1bembe1o3bet1bezbge3bib23bilbiz24b1j2bl_b2leb2lo3blü2b1mbni2bo4abo2cboe1b1op2böfb1öl2b1qb2r42br_3brä3brü4b1sb3säb3scb4slb2söbss2bs2t4b3tb5teb4thbt4rbtü1bu2fbü1c2b1v2b1w3by1by3pbys2ca1h3camc4an3carcäs22c1ccch22cec2cefce1i2cek1cen1cer1cetce1u2c1f4ch_2chb2chc2chd2chf2chg2chh2chj2chk2chp4chs2cht4chü2chv4chw1chy2chzci1cci2s4ck_ck1ack1ä2ckb2ckc2ckd1cke2ckf2ckg2ckh1cki2ckk2ckm2ckp4cks2ckt1cku2ckv2ckw1cky2ckzclo1co2ccoi22c1qcre2cry2cs2ac2si4c1tcti22c1z3da_da1ad1afd1agda1sdä2u2d1cd3dhd5dodeg2d1eides1det2dga2d3gl3di_3dicdi2edi1p2d1j4d1ld3ladni2d1obdo2o2d1qd2r4d3rid3rö2d1s4dsb4dsld2södss4dst42d1td2thdto2d3tödt3rd3tüdu2fdu1idu1odur22düb3düf3dün2d1wdwa2dy2s2d1z2e1aea2ceak1eam3e2ase1ä22eba2ebl2ebre3bue1ce2ecle3cr2ected2eed2öee1eeeg2e1eie1en2ef_2efa2efe2efi2eflefs22efu2efüegd4e3gee2gn2egue1hee1hi2ehme1hoehs22ehte1hue1hüeh1we1hy4eibe2idei1ee4ilei1p2eire2it2eiu2e1jek2a1ekdek4nek2oek4r2ektek2ue1la2eli2eln2eloe1lü2elz2ema2emm2emüen3fe4nre4nten1ue1nüe1nye1ofe1ohe4ole1ore1ove1ö2e3pae3puer1ae1räer1cer3h2erie1roer1ö2eru2esbes2c2esf4eshes3l2esmes2ö2esp2esres3we3syes3ze3teet2he3tie3tö2etre3tü2etz2euf1euke1um2euneu1p2eut2eux2e1ve3vo2ewae3wä2eweew2s2ex_3exp2exuey4neys4e3ziez2wfab43facf4ahf2alf2arf3atfä1cf1äu2f1cfe2c3fewf1ex3fez2f1fff2efff4ff3lff2s3fi_fid2fi2ofi2r3fis3fiz2f1jf2l22fl_1fläf3löf4lü2föf2f1qf2r2f3ruf3rü4f1sf3scf3sifs2tf2süf3sy4f1tf2thf3töf3tü3fugf1umf2ur3fut2fübfü2r2f1v2f1w2f1zfz2afz2öfzu33ga_ga1c5gaiga1kgäs5gä4ugbi22g1cg1dag1dog1dögdt4gd1uge1cged4gef4g2el4g1gg3gegg4r2g1h4gh_gh2egh1lg2hugh1w2g1j4gl_2gls3glüg2ly2gn_gn2e2gng2gnp2gns2gnt2gnug2nüg2ny2gnzgo4a2goggo1igo1y2g1qg2r4gse2g4slgso2gsp4g4swg3sy2g1tg3tegt2sg3tügu1cgu2egu2t2gübgür1güs32g1v2g1w3haah1ahh1aph2as2h1c2heahe3x2hi_2hiahi2ehi2n2hio2hiuhlb4hld4hlg4hll2hlm2h2lo2h1mh2moh3möhm2sh2muh2nah2nähn2eh1nu2hodhoe42hoih2on2hoo2hop3hov1h2öhö2ch4örhr1chr3dhrf2hrg2h2rihrr4h3rüh2ryhrz2hss24h1th2thhto2h4tshtt4h3tühu1chu2n2hurhüs32h1vhvi23hyg3hyphz2o2ia_i4aai2ab2iaci2afi2ahi3aii2aji2ak2iali2am2iani2apia1q2iasi3au2iavi1ämiär22i1bib2oi2böice1idt4i2dyie1ci1eii1exif3lif3rif2s2i1gi2gli3go4i1hi3heih3mih3nih3rihs2ih1wi3i2ii4s2i1k4ikei2kni1la6ilbil2cilf22iloilv42im_2ime2imo2imt2imu2inein3f2inoi1nö2inp2inrin1ui1ny2i1oio1cio2dion2i2ori2oui2ovio2xi3ön2ip_i1pai1peiph2ip4li1pr2ips2ipu2i1qi1räir1cir2eir2i2irki1roi1rö2isb2iseis3ti2sü4itäi6tli3töi3tü2itzium12i1v2i1w2i1xi2xai3xi2i1zi2zöja1c2jatje2aje1cje2gje2pje3wji2ajit3ji2vjoa3jo2iju2kjus32j1v3ka_ka1ck2adk2agka2o3kask1ähk1änkär2kby42k3cki1c3kir2kiz2k3j4kl_k2lek1lu2kly2k1mk2n2k3nek3nu3knü3komk2onk2os3kowkö2fk1ölk2r4kst44k1tk2thktt2k3tükt3zku1ckuh12kübkü1c2k1v2k1w3la_1lad2laf1lai3lao1lawlay1lä1c1läd2läf4lät2l1blb2slb2u2l1c4l1dld3rldt43le_2lec3ledle2e3lehl2ek2leple2u3levl2ey2l1flf4u2l1glgd4l3go3li_3liali1cl2ie3ligli3l2limli2o3liu4l1j2l1klk2l4l1lllb4llg4llk4ll5mlln22l1mlm3plm3tlnd2l3nil1nul1nü3loklo2o2lox2löd4lög4löß2l1plp2fl3pu2l1q4l1s4l1tl2thl6tsltt2l3tü1luf4luo2lur3lux2lüb5lüd2l1v2l3wly3c3lynly1oly3u2l1zl2zölz1wm1abmae2ma1f3mas3maßm4aymb4lmby42m3c2m1dmd1ameb43mehme1o2meö3mesmeu13mi_mi1c3mig3mil3mit2m1jm3ka4m1lm3li4m1mmmd2mmm2mm3pmm2smoa33moh3mom3mos3motmo1ymö2c4mökm1öl2m1pm2pfm3pim3pu2m1q4m1sm3säm3scm3sem2süm3sy4m1tm2thm3tömtt2m3tümt3zmu1a3munm4us2müb3mün3müt2m1vmwa2my4s2m1z3na_n1af3nain1ar3nas3natn1au3näe3näs2näunby42n1cn2ck2n1dn2döndy33ne_2nec3nedn1efneg4ne2l3nenne2un2ew3nez2n1fnf2änff4n3finf4lnf2onf4rnf3s4n1gng3mn2gnn3hän3hen3hu3nian1idn4ie3niknin1n2ip2nitni3v3nix2n1k4n1nnn3fnng4n3ni3no_no1cn1of3nov3now3noz2nödn2ör2n1q6n1snsp4n3sy2n1tn3ton3tön4tsn3tun3tü1nu_1nud3nuenuf21nug1nuinu2n1nuo2nup2nur1nut1nuu1nux1nuz3nü_3nüs1nüt4n1w1ny_1nyhn1yo1nyr1nys1nyw2n1znz3so4aco4ado4aho2aro2aso4ato5au2obbob2e1objob1lo3cao1ceo1ck2odrodt4o2ecoen12ofa2ofiof3l2ofo2oft2o1go3ghogs2o1hao1häo1heo1hio1hooh1soh3to1huoh1wo3ieo1imo1inoi2r2o1j2o1kok4n4okrokt4o1lao1läol2io3loo1lu3olyoms2omy12ona2onä2onc2oneono1o1nuon3v1onyon3zoof2o1opo1oro1pao1pi2or_or1ao3räor1c4ore2orf2orh2orm2orq2orro3ru2osh2osio3sk2oso2o1to3tüoub4oug2o3uho3um2our2ouv2o1ü2ovi2ovo2o1wo3wiox2aox2eo2xu1oxyo1yo2o1zoz2eo3ziöb2l2ö1cödi3öf3lög3lög3rö1heö1huö1keök3r3öl_öls2öm2sön2eö3niön2sö1nuö1peör1cöru4ö2saö2spö2stö3su2ö1töt2höts2öze31pa_1paa1pacpag41pak1pap2paß1pat1pau3päd3pär3päs2p1b2p3cpda41pe_pe2a1pedpef4pei13pel1pem1pep3pet4pf_1pfäpff4pf3r2p1g4ph_ph2a2phä2phb4phd2phf4phg4phkph2l2phm2phn2phöph4r2phs2phz3pik1pilpi2o3pip3pispku22pl_3pläp4lo2p1n1p2opo1c3podpo2i3pokpo2wpo3xpö2c2p1ppp3lppt2p2r2p4rä2p1s4ps_p3sep2söp2st2p1tpt1ap3tep2thptt2ptü4pt3zpu1apub42puc2pur3put1püf2pülpün22p1v2p1w3py1pys4py3t2p1z1ra_r1abr2ad1raer2afr2air2alr2apr1arr2as2raß1rat1raür2ax4räf4räg2räh2rämrä2u2r1brbb2rb2orb2srb2ur1ce2r1dr2dördt43re_2reä3reg3rekre2u2reür1ew3rez2r1frf2u4r1gr1h42rh_2rha2rhä2rhö2rhsrid2r2ie3rigr2isr2itrix12r1j2r1krk4n4r1lrl2erl3t4r1mrm2urnd4r3nern3frng2r3nirn1ör1nur1nür1nyro1c2rof3roir2onr1or4roß2rox2röf4rögr1ök4röpr1örrp4erpf4r3porp3tr3pu2r1rrrb2rr1crr2or3ru4r1sr3sirs3lr3sor3sy4r1tr3tör4tsrtt4r3türt3zru1a3ruf4rug2rum3rut4ruz2rüb2r1v2r1w4r1xry2c2r1zrz2ö3sa_3saa3sams1an3sat3säl2sc_s2ci2scj4scl2scos2cr2scs2scusd4r3see3seh3seq3set2s1hsh2as3häsh3ns3hösh4rsib43sio2s1j4sk_4skbsk4lsk4n4skö4skss3läsl3bs3les3li4sna4snö3so_so4aso1c3sog3sol3somso3o3sos3sov3sow3sozsö2csö2fs1ös1sp22sp_s2pä2spls3pn4spy2s1q6s1sss3l6st_s2ta2stb2stdst2e2stf2stg4sth2stj2stk4stl4stm2stns2to1stö2stp2stqs2trst2u1stü2stv2stwsu2n3suv3süc3sün4s3v2s1ws3was3we1s4ysyl12s1zsz2os3zü2ß1c2ß1d2ß1f2ß1h2ß1l2ß1mß1o2ßos2ßst22ß1t2ß1ü2ß1v2ß1w2ß1z3ta_4taatah2t2ai2tam3tas3tav3tax4täbtä1c4täd3täe3täg2täh4tämt1äptä2st2ät2täx4t1ct4ckt3cr3te_2teh3ten3tes4th_th2e1thi2thk2thp2ths2thü2thvt2hy3tig3tik3tio3tip3tis3tiv2t1j4t3ltl4e3to_to1c3tod3tok3ton3too4toß3tow4töftö4l3tön4töß3töttpf42t1q2tr_3tritry14ts_ts1ot2söt3sy4t1tt3tit3tot3töttt4t3tut3tü2tub3tuc2tud3tue4tuf2tuh2tuk4tüb3tüf3tüm4t3v4t3wtwa21ty13typtys44t1ztz1ätz2öu1amu3auu1ayu1ämu1äu2u1bub2lub1ru1ce2u1d2u1eu2edu2eguen1u2ep2uffuf3luf3r2u1gugo3u2göu2gü2uh_uh1wu1ieu3iguk2au1keu1kiuk4nuk2öu1kuulb4ulg4u2lü1umf1umg1umk1uml4umm1umr1umz4un_u3ne2unk1unruns21unt1unw2unzu3ofuos2u1pau3piu1pr2ur_u1raurd22ure2urfu1röur3purt2u3ruurü2u2sü2u1ß2u1tu3teuto1u3töu3tüu1ü22u1xux2eux2oux3tu1ya2u1z2übc2übdübe2üb3lüb3rüd3rüf3lü2gnüg3süh1aü1heüh1iüh1süh3tü1huüh1wül1aül2cül4eü1luün2sünt2ü1nuü1peü1piür1aürr2ür2süs2aü2stva1cva1sv4at2v1b2v1dve3bve3cve3dve3gve3hve4ive3over1ves12veüve3v2v1g2v1hvi2cvig22v1k2v1m2v1n3vol3voyvö2c2v1pv3revs2e2v3t2v1v2v1w2v1z1waa1wag1wah1walwa2p1was1wäh1wäl1wäswbu22w1c2w1dwe2a1weg1wehwe2i1wet2w1g2w3h1widwi2ewik21wil2w1k2w1l2w1mwn3s1wohwot21wöc2w1pw3ro2w1sws2t2w1twti21wucwul2wus21wühwül2wün32w1w1xa_1xae2x1b2x1c4x1d2xekxe2lx1emx2en3xes2x1f2x1g2x1hxib4xi1cxi3gxil12x1l2x1m2x1nx1or4x1p2x1r4x1txt1äxt1uxu1axu2s2x1v2x1w3xy_3xys1yacy1äty1c2y1d4y2efy1f2ygi2yg2lyhr2y1i4y1k2yl3cynt2y1nuy1ofyom2y1osy1ouypa2ype2y2pfy3phypo3y3riyrr2yse1y1t2yu2ry1z2za1c3zahz1anz1as2z3czdä1ze1e2z1h2z1j3zolzo2oz1orz1öl2zön2z1qz3saz3shz3skz3sz2z1tz3töz3tüzu3azub4zud4zu3kzuz22züb2z1v4z1zzz2ö",
+			5 : "_ab1a_abi4_ab3l_abo2_ack2_ag4n_ag4r_ag2u_ai2s_ang2_an3s_apo1_aps2_as3t_at4h_au3d_ät2s_by4t_dab4_de1i_de1s_dü1b_dys1_ei3k_eke2_enn2_er1e_erf4_er1i_es1p_et2s_eu3t_ext4_fe2i_fi2s_ga4t_ge3u_hi2s_im2a_im5m_in3e_ink4_inu1_ire3_is2a_jor3_ka2i_ki4e_kus2_li2f_ma3d_ma2i_me2e_ne4s_ni4e_nob4_nus2_ob1a_obe2_or2a_ort2_ozo4_pro1_ro4a_ro3m_rü1b_sch4_sha2_te2e_te2f_te2s_ti2a_tid1_ti2s_to2w_umo2_un3d_un3e_un3g_un3s_ur2i_ut2a_ut3r_übe4_vo4r_wa2s_wi4e_wor2_ya4l_za2s_zi2e_zwe2aa2beaa2gr4a2araart2aas5tab2äuab1ebabe1eabei12abela3ber2abet2abew3abfiab1irab1it2ableab3liab4loa2blua2bo_ab2of2abora3braa4brä2abrü2abs_abs2aab5scab3spabst4ab3szab1uraby4ta1cem2ach_ach1a2achba1che4achfa1chiach3lach3mach3na1choach3öach3ra4chta1chuach3ü2achvac1in2ada_ad2agada2m4adav1a2dä2ade_2aden4a3diad2obad3ru2ads2ad3stad3szad2t1ad4tead4tra2elaa2eleae2o3aes5ta2faka2fana3faraf4ata2faua2fexaf2fl2af3lafo1saf3raaf3räaf3reaf3röaf2spag1abag1arag1auag2diag2drag2duage1iag2er2agesag3gl1aggr2a2glag4laa4glöag4nuag4roagsa2ags3pag2th2a1haah4at2a1heahe1sa1h2iahin3ah2löahnt21ahorah1osa2h3öahr1aah3riaht3saian3aid2sai1e2aien3ai3g4a3ik_ai3keai3kuai2loa1indain4ea1ingai2saaiso2a3iv_aive3a3ivla3ivs2akal2akarak4at4a1kea2kefa2keu2a1ki2ak3lak4li2a1kr4akra3akroak3sh2akta2aktb2a1kua2kun4a3kü2ala_al1abal1afala2ga3lalal1ama2larala4s2alatal1aual1ämal2bralb3sal2däal2dral3dualen1ale2pale4talf4r3algi3almba2l1öal3öfal2ös1alphal2ufa2lumal1ural2zw2am2aamab4amad2ama3g2am4e4ame_a2meba3meta2mewa3miea3mis2ammlammu2am3pr2am2sam3sa1amt_am4töam2tu2ana_2anabana3ca3nak2anam2ananan1äs2anbuan3ch2and_2andua3nee2anfi4ang_2angf2anghang1l2angoang1r2a3ni2ank_an3klank1rankt42anmu3annäan1oda3nola3nos2anpr1ansä1ansc2ansk2ant_2anto1antr1antw2a1nuanu3s2anzb2anzg2anzs1anzü2anzwa1os3ao3t2a3ot_a2pefap2faa3pfla3phäa2pht2ap3la2pot3applap3pu2a3pua3ra_ar2ab2arb_4arba2arbiar2bl2arbr2arbt2arbu1ar1ca2reaa4rega2reha4reka3renare3uar2ewarf1rar2glar2gnar2iaar1ima3riuarm2äarn2e2a1roar1oba2rorar2rh2arsaarse32arsiar2st2arto2artsar1ufar1uhar1umarwa2ar2zä2arze1arztas3aua2s1äa2sca4as2ea2seba3ses2asisas1ora2s1pas2phas2pias2poa3spuas2stas3teas3tias3to2astraßen3at1abat2afat4agata3la3tama2tatat1aua2t1ä4ate_a2teb4atena2tep4atesat3ha3athl4a3ti4atorat3räat3reat2saat2seat2siat2soat3taatt3sa3tubatu2nat2zoau2draue2baue2sau2faauff43aufn4au1iau2isau3lüaun2eau1nua4unz2aup22ausc1ausd3ausf1ausg1auslau2so1ausr1ausü1ausz2aut_2aute1autoauz2wa3v4aawi3eax4am2a1yaa1yeuaysi1ä2b3lä1cheä1chiäch3lä2chrä1chuäck2eäf2fläge1iäge3sä2g3lä2g3räg4ra1ä2gy2ä3heähl1aähl2eäh3neäh3riä1is_ä1iskä2k3lä2k3rälbe2äl2bläl2p3ämt2eän5deän2dräne1sän2f52ängeän2glän2gr2ä3niänk2eän2kränk2säp2pläp2präp4stär4afäre2när2grärk2särm2sär1o2ärse2är4siär2stärt4eär2thär2zwä5s4eäse3tä2s1päss2eäs2stäs4träte2nät1obä2t3rät2saät2sääts3lät4trät2zwäu2bräude3äu3eläuf2eäug3läu2maäun2eäu1nuäu3seä3usgä3uskä3usnäu2späu2trba2bl2babs2b1afbais2ba2kabak1lbak1rbal2a2b1amban2ab1ang2banlban3tb1anzbar3bbar3nba2scba2stbau3gbau1sba1yobben3bbe4pbb2lö2b3d4bde1sbe3anbe3arbe3asb2ebe1be1cbedi4be1eh3bef4be3g2beil2b2einbe3li1ben_ben3nbe1ra3be1sbes2abe1ur3b2ew2b1ex2b5f4bfal22b1g2bges42b5h2bhut2bi3akbibe2bie2sbik2abil2abi2lubin2ebi2o1bio3dbi3onbiri1bi3seb1isobi2spb2it_b2itebi2tu2b1k4b3lad3blatb3leb3blemb4letb3leub2lie2bligb4lisb2litb4locb3los2blun3blut4b3n2bnis1bo5asb1ob3bo2blbo2brbo3d22b1ofbo3febo1is3bon_bond1bo2ne3bonsbo4räbor2sb1ortbo2scbo3thbo2xibö2b32b1p2bpa2gb4ra_b4rahbrä4u2bre_3brea2breg3bremb4rer2brigb4riob3rohb4ronb4rucbru4sbs3arbsat2b4särbs2äubs2cabs4cub3se_bse2bbsi4tbs2kubso2rbs2plb3stob3stöb3stübtal3btil4b4ts2bu2e3bu3libung4b2urgbu2sa2b3z22c1abca2chca2e3ca3g4cal3tca2pecar3ncas3tca1y2ceco4ce2drcen3gcere3ce3sh2ceta2chab2chaf1chaoch1äs1chef4chei2chic2chl2ch2lech2lu4ch2m2chn42chobcho2fch1ohch2r44chrech3rh2chuf2chuh2chum1cka_2ckac1ckag2ckalcka4r2ckau2ckeh2ckexck1imck1in3ckis2ck3l2ck3nck1o22ck3rckt2e3c4l2clet4co3chco2d2co3dicoff4co1itco2keco2lecol2oco2peco1racor3dco3recos3tco4te1c4r2cte3ecti4octur6cu2p32d1ab2d1acd2ac_dagi2dah3lda1ho3d4aida1inda1isdal2ada3löd1altdamo3d4ampd2an_d1ang2danw2d1apd2aph4dapp3darlda2rod3arrdar3sd1artda2rudas4tdat2a4datmdau3e2dauk2d1äh2d1äp2därzdä3us2d1b4dbu2cdco4r2d1d2ddar2de2adde3asde3b43de1cde1e4de3gldehe2de3hod2eicde2löd2en_dend2den3gd2enhde2nide1nude1ondepi2d4er_de3rude2sade2spde2sude1unde3us2dexp2d1f42d1g2dga3gd2ge_2d1h2d2hisdi4abdi2addi4amdi1cediet3dik2adin2adi2obdi2spdist2di2tadi2thdit3sdi2tu3di5vdi3z22d1k4d3l2edli2f2d3m24d5n2dnis1d2obadob4ld2obrdole4doll22doped2opp2dorc2dordd2orp2dortd2os_dos3sdost1dot6hdo3undö2l13d2ör2d3p2drag4d3rai2drädd4räh4dre_2dreg4drem2d3rhd4ri_d4ridd4ried4rifd4rikd4rild3robd3rocd4roid3roud5rubdrü1bd2sands1änd3seidse4td3shodso2rd2späds2pods2pud2steds2tids2tud2sundta2dd5teadt3hodt5s2du1ardub3l2d1uh2dumd2dumf2dumg2dumld2ump2dumrd1umsdung42dunrdun2s2duntdus3t2d1v2e3a2beab3lea2drea2g4ea3gaea3gleakt2ea2laeam1oea2nae2anoe3ar_ea2rae3arre3arveas3se3athea5tre3aug2ebedebe2i2ebeleb2en2ebeteb3loeb2lö2eb2oebot2ebö2seb4rueb2s1ebse22e3caech1äe1chiech3lech3mech3ne1chuech1weci6a2eckteco3dec1s4e3d2aed2dre3deiede2re3d2oeds2äed2suedu2se3dy3ee3a2eeb2lee2ceee1chee2ckeede3e1effeef4leef3see1imeel2ee1empeena2e2enäe2encee3nie2enoeen3see1rae1erde1erkee1röeert2e1erzee3s2ees3kee3taee2thee1u2e1e2xef1are2fate2fäue3fe_ef1emef2er2eff_1effief2flefi2s1efkue3fraef4rüef3soef3spe2fumege1ue2gloeg3nieg2thegus32e1ha2e1häeh2eceh2ele3hereh1läehle2eh3loeh3mue3holehr1äeh3rieh3sheh3übei2blei3de2eidn1eifrei3gl2eigt2eigu2eil_2eilbeil3d2eilne1impei4näein3kei3o2eip2fei3ree1irre2is_2eitäei3teei2theitt4e3ke_e3kene3kese3keye3k2lekt2oe3k2wela2cel1afela2h2elaoela4s2e1läel2da2ele_elea2ele2c2eleh2elei1eleke3lepel2ete3leu2elevele2x1elf_el3feelf4l1elfm1elfte3lieel3klel3leelm2ael5nae2lofe2lolelon2elö2selto22e1luel1ure2lyaelz2eema2keme2se2mop3empfem2saem2stem3t21emule2n1a4ena_2enace3nade4naf4enahe4nak4enam4enaten1äu2ene_2enem2enen2enesenf2aenf2uen3geen2gl1engpe3ni_e3nice2nide3niee3nio2enise3nit2enive2nofen1ohe3nolen1one3noteno2w2e1nöen3sp1entd1entn2entü1entw1entz2enut4enwüeo2fee1on_e1onde1onfe1onhe1onle1onre1onse1opee1opfeop4te3or_e3orbe3orse3orweo1s2e3os_eo3ulepa2gep3leep2paep4plep2prept2aepu2se3ra_era2ge1raie2rake1rale1rape2rare1rasera2ße1rawe1razer1äher1ämerb2eer3brer3da1erdber3de4ere_er1ebere2l2erer2ereserf2eerf4rerg3s2erhüe3ribe3rio2erk_erk3te3ro_er3oaer1ofer1ohe3rone3rose3rowerö2d2eröker3p4er3rä2errüers2aer3seers2ier3sker3sner3sper3sz4ertier3uzerü4bes3abes3ake3sceesch2es2eles2hues2ide2siles2ire4skees3kles3kue4skye3sote3spies3sces3se2essoe1stre1stues4tüeße2setab4et1am3etapet4atet1ähet2enete2oet3hüeti2m2e3toeto2bets2pet3suett1aet2thet2zäet2zweu1a2eu2gaeugs4euil4eu1ineu2käe3um_e3umbe3umleun2eeu1o2eur2eeu3speust4eut2heu2zw4everewä2se2we_e3wirewi2se3witex3atex1er1exis2ext_ex2tu2e3xye3z2aezi2sf1abefab5sfa2drfaib4fa2ke2fanb2fanf2fanlf1anp2fanrfan3s2fanw2f1ap3farifa3shf3aug3f4avfa2xa2f1b22f3d4fdie2f2echfe2drfe2eife1emfef4lf4eief1eisfel3tf2em_fem4m2fempfe2näfen3gfe2nof1entf2er_fe1raf2eref2ertf1erwfe2st3fete2fexpff3arff1auffe2eff3eiffe2mff4enf2fexff4laff4läff4lof3fluf3flüff3roff3röffs3t4f3g2fge3s2f1h2fi3atfien3fi3klfi2krfil3dfilg4fi3lif2inafi3nifin2sfi3olfi3rafis2afis2pfi3tu4f1k4f3ladf3lapf3länf4leef3lerflo2wf4luc2f3m2fma2d2f3n2fni2sfob2l2f1offoli3fo2nafon2efo2nu2f1opfo1ra3form2f1ök2f1ölför2s4f1p2f4racf5radfra4mf5rap2fre_f3recf3red2fregf3repf4reufri3dfri2e2frig1frisf3rocfro2sf3rotf2sanfs3arf4scefs4cofse4tf2sphfs1prfs3s4fs3thf4ta_f2tabft1afft1anft1arf3tatft3hoft1opft2s1ftsa2ftse4ft3stf2tumftwa4ft3z23f2uhfung42funt2gabfgab4r2gabz2gadlga1flga2kagal2ag4amo2ganbgan3d2ganh2ganl2ganwga1ny2garb2garc3gardg2arsga3ruga2saga2siga3spgas3sgat2a2gatmgat4rgau1cg2aukg1aus2g1äp2gärz2g1b2gber2gby4tgd1ing1d3rgd3s2ge3a2geb2ageb4rge1e2ge3ecge2esge1imge1irge2isge3lege3lügelz2ge3migem2uge3nagen3ggen3ngeo2rge1ouge3p4ge1ragerm4ge3sigest2ge5trge1ulge1ur2g1ex2g1f4gga4tg2g3lgg4log2g3n3gh2rgie3ggi2elgi2gugi3negi3tugi4us4g3k2g1labg1lac3glad3glätg2l4e2gle_3gleag3lecg3leg2glehg3len2glesg4lia2glib2glif2gligg2lik4gling2lio2glisg2lizglo3gg2lom2g1luglu2t2g1m2g2n2ag4na_2gnacg4nat3g2näg3neh2gneug2nieg2nifg4nin3g2nogno1r2g1of2g1ohgol2a2gord2gorggo2s1go3stgo3th2g1p2g4rebg4remg4rerg3retg3revgri2e3grif2grig2groc2grohgron4g4rosgro4ug4ruf2grut4g2s1gsa2gg3salgs3angs3arg3s2cg4scagsch4g4scogs2ehgsen1gs3ergse4tgsi2dg3silg3spigs3plgsrü2gs5s4gs3tag3stog3stögs3trg3stugs3tügti2mg5t4rgu3amgu1as2guedguet42g1uhgu1is3gummgu4stgut1agut3h2g3z2hab2ahab2eh2absha1kl2haleh1alph1amth2an_h2andh4ann2hanr2hantha2plha2pr2harbh2ardhasi1h1äff2h3b22h3d4hdan2he2adhe3behe2blhe3brhed2ghee4she2fä2heffhe2frhe2fuhe3guh1eieh1eifh1eighe2im4heioh1eiwhe3lihe3lohe2lö3hemdhe3mi3hemmh2en_he2näheng22henihe2nohen3z4he2ohe3onhe3ophe3phherg22hermhe3roh1eröhert2he3thhet2ih2e2uheu3ghe1y22h3f4hfi2s2h3g2hget42h1h2hi2achi1ce2hi3dh2idehi2krh1infh1inhhi3nohi4onhi3or2hip1hi2phhi2pih2i2rhi3rahi3rihirn1hi3rohir2shis2ahi2sehi2sthi1thhi3ti2h1k4h4lachla2nh1lash1lath3lädh1läsh1läuh3lebhle3eh3lerh3lesh3lexh2lieh2lifh2liph2lish2lith3lochl1ofhl1oph4lorh3löch2löshl3t2h3lufh3lukh1lüfh2mabh3magh3manh3marh4mäch4mähh4mälh4mäuh3me_hme1eh3menh4monhm3p4hm3sahms1phn1adh3namhn1anhn3d4h2nelhn3exh2nich2nidh2niehn1imhn1inh2niphn3k4h2norhnts2h2nuch2nulho2blho2efho4fa3hole4holo3holzhom2ehono3ho1rahor3dh1orgho3slho2spho4st2hot_ho3thh1o2xho1y2hö3ckhö2s1h3öst2h3p2hr1achr3adh1raih3räuh2rech3redh3refh3relh3rephre2th3revh3richri4eh3rinh2robh3rohh3rolh4ronh2rorh3rouhrs3khr2suhr4swhr2thh3ruhh4rübh2sanh2sauh2späh2sphh1stah1stoh2s1uh2t1ahta4nht2ash2tärht1ehhte2sh4thohtod1h3töpht4riht3röht2soht2sphtti2ht3z2hu2buhuko3hu2lähu2loh1umsh1unah1up_h1upshurg2hu3sahu2sohu2tihut2th4übsh3übuhvil4hwe1c2hy2thzug4iab4liaf4li3ak_i3akti5al_ia2läial3bial3dialk2i3allia2lui3am_i4amoian2ei3anni2anoi3anti3anzi3ar_ia2rai2ascia3shi2asiias3siast4i3at_i4ate1iatri3atsia3uni1är_i1ärsi1ät_i1ätaib1eiibe4nibi2ki3blai3blei4bräich1aich1äi1chei1chiich3lich3mi1choi1chuich1wi3damid2ani2deiidni3i2dol2i2drie3a2ie2bäie2blie2ckie2drie1e2iel3di1ell2i1eni3en_i3enai3endi2enei3enfi3enhi3enji3enki3enmi3enni3enöi3enpi3enrien2sie1nui3envi3enwi3enzie1o2i2erei4erii1ernie2röie3sui1ettieu2eie1unif1arif4atif1aui2fecife2iif2enif2flif4läi1flüif4rai1freif3seif3spif2taiga3iig1läig4nai4gnäig4noig4raig3säig4seig3soi2harihe1eihe4ni4is_i4i3ti2käri3ki_ik1ini2k3lik3noiko3si2kölik3räik3reik1s2ik3soik3szikt2eikt3ri2kuni3kusi1lä1il2daild1oil2drile2hil1el2ill_2illsil3öfi1lu2i2lumi3lusim4ati2megi2meji2meki2mew1immo1impoimp4s1impuim2stin2afin3ami3napina4sin1äsin3do2indrin3eii3nelin1euine2x2ingain2gl4inhei3nie2inigin2ir2inis2inn_2innlin1odin1orino3tin3suint2hin3zwi2odaio3e4iof4li2o3hio3k4i3ol_i3om_i3omsi3on_ion3di2onyi2o1pio4pfi3opsi3opti3or_i3orci3orpi3orsi3ortio3s2i2osti3ot_i3otsi3oz_i1ö2ki1ös_ipen3i3perip3fa2i1piipi2sip2plip3pui1r2ai3radirat2ir2bli3ree2irekir2glirg4sir2he2irigir4mäir2no1ironiro2sirr2hir3seir3shir2sti3sacis2api2saui2scaise3eisi2ais1opis1pais1peis3sais2stis4töis4tüit1amit1ani3tatit1auit2ärität22itelite4ni2texi5thr1itiii5tocit3rei3truit2sait2soit1uhitut4it2zä2i3u2i2vebive4niwur2ix2emiz1apiz1auize2niz4erizo2bi2z1wja3nejani1ja1stje3najet3tjo2b1job3rjoni1jo1rajord2jo2scjou4lju2blju3nijur2ok3a2aka3ar2kabh2kabska1frka1inka3kak1allkalo5k3amakand4kan2ekank42kanlk1anska3nu2kanw3kara2karbk2ardk2argk2arkk2arskar3tkaru2k2arwka3sekasi1kas3s2kattk1auskäse32k3b4kbo4nkbu2s2k3d2k1effkefi4kege2ke2glk1einkei1skeit2ke2lake2läkel1ek4eltk2en_ke2no2keo2ke2plk2er_k2erck2erlkerz2k6es_ket3ske1up2k3f42k1g22k1h4kho3mki3a4ki3drki2elki3k4ki3liki3lok2imik2in_k2ing2kinhk2inik2innkin3ski3orkio4skis2pkist2ki3zi2k1k44kla_k4lar4kle_4kleh2klic2kligk2link3lipk2lir4klizk4lopklö2sk2lötkluf23knabk4neiko2al2kobjkoff4ko1i2kol4ako3leko4muko3nu2kop_ko1pe2kops2kopzko3riko2spko2stko3ta2k1ouko2wek1o2x2k1p2k4rawk4raz2kre_2kreg2k3rh2krib2krip3kris2krufkrü1bk2sanks3ark2sauks2änksch4ks3hak3sofks1pak3speks2puks3s2k1stak1stek1stok1strk1stuk2s1uk3talkt1amkt1anktä3skte3ekt1eik2texkt3hokt1imk3topkt4rokt3s4kul2a4kulpkung42kuntku2roku2spkus3tku2sukür4s2k3z2kze3lla3ba2labb2labf2labg2labhlab2ol2abrl1abt3labu2labwla1celad2il1adl2ladm3ladul1advla2falaf3slaf3tla2gala2gnlago2l2akk2l1al4lall4lalpl2amil2amp2lanb2lanf2lanll1anp2lanslar3sla2ru4lasdla3se2lash2lasila2so2laspla2stlat2ala3telat2s1lauglawa41länd2läub2läuc2läue1läufl3bacl3blälb3lel2blil3blolb3salb3selb4sklb3splbs6tl3chel3chilch3llch3rlch3ülch1wlda2gld1all3daml3dasl3datld1auld1ärl2deil2dexldo2rld2osld2ö2l2dreld4rüld3sald3stld3thle2adle2bl4leddle3dele3eilef2ale2gäle2glleg4r4lehs4lehtl2eicl2eidl2eitlel3s4lemplem3sl2en_le2näl2enfle3nil2enkle1os3lepa3lepf3leprl2er_lerb4lerk2ler3tl1erzles2ele3shlesi1le3skles2t4lesw2lesy2leto4leud3leut2lexe2lexzl3fahlfe1elf3lolf2trlfur1lga3tlg3rel3gro2l1h23lhi_li3acli3akli3amli3arlia1sli3b4libi34lickli4ds3lie_lig4nli3keli2krlil2a3limol1inv2linzli4om3lis_li2spliss2lit2ali3telit2hli3tu2lixili2zalk3lolk4nelk4ralk2s1lk3sälks3tl3k2ülla2nl3lapll1aullch4ll3d4ll2emll2esl2lexll3l2ll1obl3lowll3shll5t4llu2fll1urll3z2lme2el2möllmpf4lms2tlna4rl3n4e2lobjl2obrlo1fllof4rloi4rlol2a2lopf2loptlo1ralo4rä2lorcl1ordlo3ro3lorq3los_lo4sa3loselo2talot4h2l1ovlo2velö2b3l2ö2fl1öhrlpi4plp3t42l3r2lre1slrut4lrü1bl3sacl2saul3sexl4shalsho2ls2pols3s2lst2al2stels4trls2tuls1uml2sunlsu3sl2tabltag4lt1aklt1ehlt2enlt3hol3thul2toblt1oplto2wlt1öll3törlt1ösl3trält3relt3sclt2solt1uhlu1anluba2lubs2lu2drlu2es2lufflu2golu2gu2l1uhlume22lumf2lumll2umpl1umsl1umw1lu2n2lunt2lunwl1urnl1urt2luselu2splu4stlu2tälüh1lly1ar2lymply3nolzo2flz3t2m2abe2mabk2mabs2mabtma2cima3damal3dmalu4mam3m2manbm2anfm2anh2manlm4ann2manzma2orm2app2marb4marrm1arzmat4cma3unma1yom1ähnmä1i2m1ärg2m1b2mbe2em3b4rm2d1äm2deimds2em2e1cmedi32medyme1efmega1m2eil3meldmell2m2en_m2ens2meou3mer_me1rame2ro3mersmes1ame4sä4mesume3th2m1ex2m1f4mfi4l4m1g22m1h4mi2admi3akmibi1mi3damie3lmi2ermi4etmi2kimi2ku4milzmi3nimi1nu3mir_mi3ra3miri3mirs3mirwmi2samise1mi2tami2th4mitz4m1k4m2mabmm1eimm3simm3spm2mummm2unmmül22m3n22mobj3m2odmo2dr4mog_mo2i32mol_mom2e3m2onmo3ne3mo2o2moptmo1ramork4m1o2xmp2flm3ponmp3ta2m3r2m2sanm4sapms1asm2saumsch2m4scom4sexmso2rm2späms2poms2pums3s2m3stoms4trms4tüms1ummt1abmt1akm3tammt1armt3homti2smt1ösm4ts1mt2samt2semt1um2m3uhmu3la2mulsmu3nim4unkmunt24munzmu3ra3musimu2spmus3tmu2sumuts32m1w2mwa4rmwel42n1abna2bä4nabg4nabhna2bln2abona2br4nabt3n2ac4naddn2ade3n2ag3n2ahn3ahnnai2en1aig2n1akna2ka3nakon2al_na2län4alena2lu2nalyn4am_3name3namon1an_4nanb2nanh2nani4nank2nanl3nannna3non1anp2nanr2nanw5nar_2narcn2ard4narg3narin2ark2narmn2arpn2as_4naspn4ata4natmnats14natt4naufn3aug5naui3n2äcn1ähn2n1ännä2scn2äss2n3b4nbe3nnbes4nbu2snch3mnd2agndat2nd1aun2dein2dobndo1cnd1opnd1orn2drönd3thndt4rn2dü4ne2apne3asne3atne2bl3necane1ckne2de2nee33nehm2n1ein2eid4neifne2ke3nelanel3bne3lin2em_n4en_n2enbn2encn2enhne2nin2enjnen3kne2non2ensn2envn2enwne2obne1os2nepfn2er_ne1ranere2n1erfn1erh3nerin1erkne2ron2erpn2erv3n2esn4es_nes4cnes1one2thneu1cneu3gneur22n1exnf1aknfo1snft2on2f1ung1adng3d4n3gefn3gerng3g4ng3hun2glon2glöng3neng1orngs3cng3tsn2gum2n1h4n3hann3harn3haunhe2rnib4lni2deni3drnie3bni1elnig2anig3rni3klni2kr3n2ilnim2o2ninfni2obni3okni3olni3ra3n2isni2tinit4sni3tunk2amn2kähnke2cnk2lonk2lunk4nan2knenk2öfn2köl2n3l22n1m4n2naunne2snn2exn2nofnn3scnn3senn2thnn1ur3nobl2no2dno3drn3olen2on_3nor_nor2a2norc3norh3norm3norsn1ortno3shno2täno2tr2nö2f2n3p4npa2gnpro1npsy32n3r2n3savns2cans1ebnse2tn3sexn3siln4sphn2sponsrü2ns3s2ns2tins2tunst2ün2styns2umnta3mnt4atnt1ämnte2bnte1ent1ehnt2enn3ternteu3nte3vn3thrnti3cntmo2nt3sants2onts2pnts2tntum4nt3z21nu1anu3arnubi11nu1cnu2esnu2fe2n1uhnu3k4n2um_2numf2numg3numm2numr2nuna2nunt3nu2snu3scnu3senu3slnu2ta2nü4bnür1c2n1v2n3ver2nymun2zadn2zann2zärnz1ecn2zornz2öln2zwö2o3a2o4abioa3deo4a3ioa3ke2obano3bar2obe_2obea2obewobi4t2o3boo3briob3skobs2pob3sz2o3buobu2s2o3bü2oby4och1ao1cheoch3loch3moch1ooch3roch1socht2o1chuoch1wo3ckeo3ckio2ckoo3d2aod2dro3debo3dexo3diro2donodo4so2dre2o3du2o1e2o4e3so2e3to3et_o3etsof1amof1auof2eno3feroffs2of2fuof1laof4läof4löof3raof3räof4rüofs1aof3thoga3dog2loo3g4nog3spohl1aoh3looh2lu3ohngoh2ni1ohnmo2h3öohr1aoh1ro2o1hyo1i2do2isco1ismoiss2oi1thoki2ook1läo2labol2arol4drole3eoler2ole3sol1exol2faol2flolf1rol2glol2grol2klolk3rol2of1olymol2zwo2mabo2mebome3co2melo2mepom2esom3maom3pfomtu3ona2bo2naeo3nalon1apon2auonbe3one2ion3f2ong4rong3s4o3nion3k2onli4o3nodono3sons1aonsi2ons3lons1pont2hont3s2onukoor3foo4skoo2tr2o1ö2opab4o3panopa5so1peco1pei2opf_op2fäo2pfeopf1l4oph2o3pheopin2op3li2o3poop4plop2pr2o1pr1opsiop3szo1rad2orak2oral3oramo1rasor1ätorb2l2orcaor2ce4orda1ordnor2do2ordr2ords2ordwore2hor1eror3gaor2glor2gn4oril2oritork2aork2s2o1ro2o1röorr4aor3rh2ors2or3shor3szor4töor2ufo2r3üo2ryaos3ados4anosa1sos4co2o3seose3eose2no3shoo4skaos3keo4skios2lo2os1pos2peos2saos4säos3to2osu42o3syo2tebote2s4ot2hot4heo2throt2inotli2ot4olot2oroto1so3traot2saot3scots1pot2thou2ceou2geou3glouri4outu4ove3so3wecoy1s4o3z2aozon1ö2bleö2b3röb2s3öch1lö2chröch2söcht4öd2stöf2flöh3riö3ig_ö2ko3öl1a2öl1eiöl1emöl4enöl1imöl1inöl3laöl1o2öl3saöl3szö2l1uölz2wönn2eön3scön3spöpf3lör3a2ör2drör2glör2klör1o2örs2eört2eör2trös2stös3teös2thös3trö2t3aöt2scöt2trözes4pa3dapa2drpa3ghpa1ho3pala1paläpa3li2paltpank42panl2pannpant2panz4papi23para1parc2parg1paro2parppa4stpat4cp3auf3pä2cpä2to2p1d2pea4rpech1pe2en2peicpe1im2pekupel3dpena41pennpe1rapere21perl3pero5perspe3sape2stp2fabp2fadp2fafpf1aip2feipf3lopf3lup2forpf1ra2pfs2pf3slpf3sz2pf3tpgra2p3hopph3t2phu4s2p1hüpi2a3pias4p4id2pi2el3pierpi3lepin2epi3oipi2pepi3ri4pisopi1thpit2s2pitz2p1k2pkur11p2l43p4lap5la_p5lad2ple_ple1cp4legp4lem2pligp4likp4liz2p3lu2p1m2po3b42p3ohpo3id3poin3p4olpo3li2pondpo1pepo2plpo3pt2pornpor3spos2epo3ta3potepö2blp2p1hpp1läp2plep2pripp3sa1prak1prax1präd1präg3präm3präs2pre_2prec1pred1preipri4e2prig1p4ro3prob2proc3prod3prog3proj3prot1prüf2prünps4anp3s2hps1idps2pop3staps2tup3stü3p2syps2zept2abpt3atpte4lp4tospto2wp2t3rpt3s2pt1um3p2typu2dr2p1uh2pundpun2s2puntput2spwa4r1queura2abr3aalra3ar2rabd2rabf2rabgra2br2rabs2rabt1rabyra1cer2ackr4ad_3radf3radlrad5tra2gn4raht2raic1rake3rakür4al_ral3bra3le2ralgr4aliralk2r4alsra2lu3ralyr2ammr2an_4ranc2ranf2ranl2ranr2rapfr2ara2rarbr2arkr2arpr4as_ras2ar4at_r3atlrat4r4rau_4raud2rauf2raug3raum3r2äd3rän_3räni3räns2r1ärr2är_rä3raräu2s4räutr2bakr3blärb2lörb4rirb3serbs1orb3sprby4tr1chirch3lrch3mrch3rrch1wr2ck1r2dafrd2amr4dapr2deir3denrd1itr2dobr3donrd1osrd4rird3tard3thrdwa4re2amre3asreb1rre2bür2ech3red_4reddre1elre1er3refe4reff3refl3refo5reg_rehl4r2ei_r2eie2reigr1einre3larel2ere3lorelu2r4em_r2emi4remur4en_r2enare2näre2nir2enzre3or3repe3repo4reppr1erfr1ergr1erkr1erlrer2nr2eror1erör1ertre2sa3rese3reso2ress3rest3resu2reulre2wi4rezirf2äurf2esrf4lör3flür3forrf4rurf4rürf2sarf2targ2abrg2anr2gnorg3spr2ha_r3herr2hoe2rholrhu2sri3amria1sri3atri1ceri1elri1euri2frrif3s5rig_5rigjrig1l4rigrrik1lr2imb2rimprim2s2rink3rinn2rint4r1irris2ari3so3rissri2strit4r5riturk2amr2kährk4lork2lur3krirk2sprk1strk2tark1uhrk2umrku2nr3l2arle2ar3lecrle2ir3letr3l2irli2sr3l2orm2ärrm3d2r3me_r2meorm2esrmo1srm3sarmt2arna2brna4nr2naurn3drr4nefrn2eirne2nr5nesrn2etr4nexr3nodr1nötrn1ur2robj2robsro3e4roh1lro1irro3lerol3s2roly4rom_4romm4romt3ronnrons2ro1pero3phr2oraro3shro2ßu3routrö2du1r2öh1r2öl3römir2ös_r2öse2r1p2r3p4ar2plirpro1rps3trr2abrr2arrr1ämr3r2er4rewrr2herrik2rro3mrr2strr2thr3r2ürrü1brs3abrs2anrs3arr3shors2klr4skor4skrr4skurs4nor4sobrs2p4rs3s2rs2thrs2tir3stor3störs2tur3swirtal2rt1amrt1ärrten1r2thirto1prt1orr5trirt2sorube2ru2drru2fa3ruinru1is4rumfru2mi4ruml4rumz2rund4runn2runwru3pr4r3urru2ra5ruroru2siru2strut3hru2zwrü1ch4rümmrz2anr2zarr2zasrz1idrz1oprz3terz2thr3zwä2s1absa2besa2blsa2br4sabss1adm3safasa2fe3safi3sagasag4nsa2gr3s2aisail22s1aksa2ka3saki3sakr4sakt3salo5samms1amps2an_s3anbs2and3sani2s1apsa2po3sapr2s1ar3saris3arrs1aspsat2a4satmsa2trsa3tss1a4u3sau_3sauc3saue3saum3saur2s3avsa2vos3ähns1ält2s1äm2s1är3s2ät3säul2säuß4s3b4sba4n2scams2cans2cap2scar2s1ce4sch_s4chä4schb4schc2schd2schf2schg2schh2schks4chls4chö2schp2schq4schss4chu3schü2schv2schz4s3d2sde1sseb4rse1ecse2glseg4rse3heseh1lseh1sseh3ts1ein3s2eks2el_s2elsse2nä3senkse2noseo2rs4er_3seraser3gs1erh3seriseru25ses_se3su2s1exse2xe4sexpsex3t4s3f4sflo44s3g2sha2k1shass3h2e3shi_3shidshi4rs3hoc4shof3shop3showsi2ad2siat5si1cs2ido3s4iesien3sie2ssi1f43s4igsig4nsi2kisik1lsi2krsik3ssi2ku3silosin1ision43s2issi2sasis3s3s2itsit3rsi3tusiv1asive3si2vr2s1k24skams3kar4skasskel1s4keps2kifs2kig4skirski1s3skiz4skom4skor4skow4sk3t2s1l23slal4slans2laws3lo_s3loe2s3m22s3n4snab4so3baso3et3softso3la3s2onsone22sopf3sor_s1orc3sorsso4rus4os_2s1ox2s1ök2spaa4spak4spap3spaß4spaus2paz3späh2spärs3pe_2spel4spet4s3pf2sphas4phäs3phespi2k4spil3spio4spis4spla4splä4sple2spod2spogs2poi2spok4spol4spr_3spru2s3ps2s4pt2spun2spup3spur4sput4s3r4sret3srü2ds5safs3sagss1ajs3sals3s2äs4sces4scoss1ecssoi4ss2poss3s4sst2ass2thss2tis3stü4sta_3staast2ac2stag3stah2stak2stax3s2tä4stäg2st3c2steas2ted4stee2stem4stens2tep2ster4stes2stetst3ev4stexs4thäs4this2thu2stia2stibs2ticsti2e2stig2stiks2til2stio2stis2stiv2sto_s3tob1stof4ston4stoo1stoß4stou2stow2stoz2stöt1stru1stub4stuc2stue3stuf3stuhstu2n3stüt4st3zsu1ansuba24subi3su1c2s1uhsu1issul2asul2isult23summ3sun_su4nes1unf4sunt3s2upsup3psu2ras1urtsu2s1su3sasu3shsu3sisus3s2sü4bsü2d1sweh24swie4swilsy4n34s3zas2zess2zis4s3zu4s3zw2ß1a22ß1b22ß1ec2ß1eißen3gße2niße2noße2roßer3t2ß3g2ßig4s2ß1in2ß1k4ßler32ß1n22ß1p22ß3r22ß1s22ß1um5taan4tab_2tabf2tabg2tabh2tabkta2br4tabsta2bü2tabw2tabz2t1ac3tacut1adatadi33taf_4tafft1afg3t2agt3agotai2ltai4r2takzta2latal3d3talo2talt3tameta2mit1amt3tan_2tanbta3ne4tanf2tang3tanit2ank4tanlt2anot1ansta2nuta3or2tapfta2pl2tarb4tark2taro2tartta2ruta3sata2tht3atlt4atmt1auk3taum4tägyt1ämt3tänzt2är_tä2ru4tätt2täuß4t3b2t3chat3chetch2itch3lt2chutch1w4t3d4tdun2te2a22teakte3alte3an3tebat2ech2teckte1emte2es2teff3teha3tehä3tei_teik43teiltekt25tel_3telatelb43telg3telk5teln3telp5tels3tem_tem3st6en_ten3ate2nät4enbten3gt4enhte2nit4enjt4enmten3n3terct4erit4erot3erötert2teru2t2estte2su3tet2t2et_4teth4tetl3teuf3teumte1unte2vite1xa4texp3text4t1f4tfi2l4t1g2tger22th4at2hagt3hait2hak2t3hä3thea2thebt2hect2hekt2hem1then3theot2hest2heut2hik4th3l4th3m2th3n1t2hot3hoft3horthou24t3hö2thub4thunti2ad3tib4ti1cetieg42tiehti1elti1etti1eu3tif_ti1fr4tift3tilgti2lötil3stilt4ti2lut2imiti3nat1inbt1infti1nuti3orti3plti1rhti2sptium2tive3ti2za4t3k45tlem6t5li4t3m24t5n4tnes2to4asto5at4tobjtob2ltode2toi4rto3la3tole4tolz2tomg3topo2topt3tor_to1ra4torct1ord3toret1orgto2rö3torsto2rut2orwto3sc3toseto4sktos2p4toss3totrtots23t4outo3un3töch4t1ökt1öst4t3p21t2r45tra_3trac3trag3trak3tral4traß5träc3träg4träs4träß4treb4trec3tref4treg2trekt4remt4rert4rett4reut3rev2trez2t3rh4trict4riptri2x3tro_3troe3tront4rop3troyt3röc2tröh3trös3trua4truktrum2t4rübt4rügts1adts1alt2sants1ast2sauts1emts3krtso2rt3sout2spät2spht2spots3s4t1st4ts2tut2s1u1tsubtt1abtt2actt1aktt2altta1st3telttes1tto1st3trott3rutt3rütts1ptt2untu3antuf2etuff3tu2istul2at2um_3tun_3tune3tungt1up_tu2rätur1c3turntu2rotu4rutu2satu2sotu3ta3tüch3tür_tür1c3türe3türg4tütztwi4ety2pat2za2tz1agtz1altz1artz1aut3ze_t2zortz2thtz1wätz1witz1wuu1a2bu1a2cuad4ru1al_u1albu1alfu1alru1alsu1altua2luu1ansu3ar_u1arsua3saua2thuat2iubau1u3b4iu2bopub3räu2bübuch1auch1äu1cheu1chiuch3luch3much3nu1chuuch3üuch1wu2ckiu3d2au2donud3rau3druue2ckue2enu2elaue2leueli4ue2miue2näue2niue2nou2ereu3errue2tau3fahuf1akuf3aru3fasuf1au2ufe_uff4luffs4u2fobufo2ruf3säuf4sou2fumug1afug1akuga4sug1auug3d2ug3huu2g1lug3lou4gluu2g3nug1orug3roug3seug3siuh1lauh1läuh2liuhme4uhr1auh3riuhrt4uh2ruuh4rüui2chui1emu4igeu1in_u1is_u3käuu1k2lu1k4ruk2tauku2sul1abul1amula2sul1ämul2drule4nule2tu2lexul3f4uli2kul3kaul2knull2aull3sulo2iul1orul2sauls3z2ultaul3thult3sul2vrulz2wuma4rum2enum1irumm2aum2suum3t2um2un2una_1unabun3acun4alun3at1unda1undd1undf2undg1undn1undv1undzune2bune2hung5hun2idunik4un2imuni2r2unisunks23unkuunna2uno4run2os2uns_un3se1unsiun3skun3spun3taun3trunt3s2untuu1o2bu3or_u3orsu1os_uote2u1pe2uper1up2faup2plup2prupt1oup4tru2rabu2rar2u1räur1änurch1ur3diure4nurf3turi2cur1imurk2s4u1rou3roluro1sur4swur2zaur2zäur2ziur2zou4safu3sepus3klu4skous3ocu3sohus1ouus1peu2spou2spuus2thus3tru1stuus2uru2tärut1egute2lut2esut2etu4tevutfi4ut2heu2thiu2thuuto3cut4orutos4ut3rüut3teutts2ut2zo2u1u2uufe22u1v4u2ve_uz1weuz3z4übe3cüber3ü1cheüch3lüd3a4üd1o4üd3s2üdsa1üd3t4ü2f1aüfer2üf2flü2f1iüf2toü2g3lüg4stühla2ühl2eüh3moüh3neühn2süh1roühs2püh4thül2laül2loül2löü2n1aün2daün2dründ3sünen3ün2faün2frünn2sün3scün3seün3spün2zaüp2plür2flür2frür3scür3seür3spürt2hüse3hüse3lüse1süss2eüs2stü2t3rüt2s1üt2tr2v1abval2s2vang2varb2v1auve3arveit4ve3lave3leve3live3love3maven2cve3neve3nive3növer3averd2vere2verf4verg4ve3river3kvert2ver3uve3tavete1ve3trve3x22v1f4vi3arvi2elvi2ervima2vi4navin2svi3savise4vi2spvis2u2v1l22v1obvo3gavo2gu2v1opvo2r1vor3avor3dvor3evor3gvo3ri2v3rav4ree2v3rov1stav3s2zvu2et2vumfwa5gewa3gowai2b2walb2walmwa3nawa3sawa3sewa3sh2wängwäs2c2w1b2we2bawe2blweb3swe2e4weed3we2fl2weiewe3niwerd2we2röwer2s1wesewe4stwet2s2w1eywie3lwin2e2wing1wi4rwi2sp1wisswi3th1wo1c1wolfwor3aw3s2kwun2s4wur_wur2s2xa2b1x2adxa1fl1x2agx3a2mx2anz1x2asx1e4gx2er_x2erexers22x3euxich2xide2xie3lxil2axi2loxi2lux2is1xis2cxi2sexis3sxi2su2x1k22x3s2x2t1axt2asx2tänxtfi4xt3s2x3turx1u2n2y1aby1al_y1a2myan2gy1anky2chiych3nyen4ny2erey2es_yes2pye2thygie5yke3nyk3s2y4le_yli4nyl3s2y2l1uyma4tym3p4ympi1y2n1oyno4dyon4iy1ontyp3any4p3sy3r2eyri2ayri1ey3r4oys2any3s2cy3s2hy4s3lysme3ys2poys1prys3t4y3s2zy2te_y2tesy3to1yure3zab3lz1a2dza3de2z1afza3grzale32z1amza2na3zani2zarb2zarcz1arm3zaubz3aug3zaun2z1äc3z2äh2z1ämz1ärgz1ärm4z3b4zbü1b2z3d2zdan2zeik4zelu25zen_zen3nze2no3zentz2er_zerk2z2ernzers2ze2säze3sczes1ezes1ize2spze2tr2z1ex2z1f42z1g2z2henzhir3zi3arzid3rzil2ezin2ezi2o3zi3opzirk22z3k42z1l22z1m2zme2e2z3n42z1ob2z1ofzo2gl2z1oh2zopezo2ri2z3ot2zö2f2z3p42z3r24z1s2zt3hozt3s2zu4chzudi4zu2elzu3f4zu3gl2zumf2zumg2zumlzun2ezung42zuntz1urkzu3s4zu5t2zür1cz1wac4zwahz1war2zwas4zwäl2zweg2zwet4zwirz2wit2z1woz1wörz1wur2z1wüz3z4az3z2o",
+			6 : "_ab3ol_ab1or_akt2a_al3br_alt3s_ampe4_an3d2_angs4_ans2p_ans2t_an3th_ari1e_ark2a_ar2sc_as4ta_au2f3_au4s3_be3ra_boge2_da2r1_darm1_de2al_de1o2_des2e_de3sk_des2t_do2mo_do1pe_dorf1_ehe1i_ei3e2_ei4na_ei2sp_ei4st_ei4tr_el2bi_elb3s_em3m2_end3s_enns3_en2t3_en4tr_er2da_ere3c_es3ta_est2h_es3to_es5tr_eu3g4_eve4r_flug1_for2t_fu2sc_ge3ne_guss1_he3fe_he3ri_inn2e_kamp2_kle2i_kni4e_kopf1_le4ar_li4tu_ma3la_ma2st_mel2a_mi4t1_näs1c_no4th_oper4_oste2_ost3r_poka2_ram3s_reli1_ri2as_rom2a_rö2s1_se3ck_sen3s_ser2u_se2t1_si4te_ski1e_tal2e_ta2to_te3no_te4st_ti5ta_tite4_to4pl_tro2s_tu3ri_uf2e2_ufer1_un3a2_uni4t_uns4t_uro2p_ur3s2_wah4l4a1a2naa2r1aaar3f4aat4s3ab1aufab1eilabe2laab1erkab1erzab1ins1a2blaab5lag1a2bläab4le_3a2blö1a2bon2absarab3s2i2abst_ab3ste1abteia1chalach3auach1eia3cho_ach1orach3su4ach1wa1ckarack2ena2ckinack2seack3slacon4na3d2abad3amaa2d1an3a4dapade2aladefi4a2deina2deri4ade1sades4sadi3enad4resa2f1eca2fentaf1erlaf4fluaf3s2aaf3s2haf2t1aaf2teiaf2t3raf2tura2f3urag1a2da3gen_age4naage2saage4si3a2gitag4ne_a2g3rea2g3riag4samag4setag4spoag3staag3stea2gundahl3a2ahl3szah4n1aah3r2eahrta2ain3spai3s2e2a3kam1a2kazaken2nak3rauak5tan2aktikak2t3r2aktstal1ageal3amealami5al3ampal1anaal1ansal1anza3lar_a3lareal2armal3arral1asial1assal3augal2b1lalb3lial2bohalb3rualds2ta4l1eha2l1eia2l1ela2lengal1epoal1erl3alermal1etaal1etha2l1eua4leur3a2lexal2glial1insa2linvalk1ar1alkohalk3s2alks4tal2labal2laual3les1allgäal2lobalo2gaal1opeal1orc3alpe_al3sklal3sunal4takal3tamal2treal2trial2troalt2seal1umbame2n1amer2aa2meriame3rua4mesh2a3mirami3taami3ti2ammalam2meiam2minam3stram2t1aam2t1äam4tel2amtemam2t3ram4treanadi3an1algan3dacande2san2dexand2suand1uran3e2can2ei_an3eifan1e4kan1ethanft5san3f2uang1ar3angeb2angiean2gla4angs_an2i3d3a4nima4ninsan2keian4klöank3ra3an3naann2aban3n2ea2n1orans2enan2seuan3skrans1pa1anspran3s2z1antei1anthran2tro2anwet1anzeian2zwiar3abtara3d2a2r3al2a2rara2r1auar2bauar2bec2arbenar2bre2arbs2ar2droar1effar1ehra2reinar2erfa2reria2rerlar1intar2kalar2knear2korar4kriark1s4ark3saark3shar2lesar2nana2r1oparr3hear3s2har3staar3t2ear2thear3t2iartin2art3rear2z1was1alaa3schea3schia2schma3schua3s2hiasin2gaska3sa3skopas3s2aas3s2eas3s2ias2s1pass3tias3stras3stu2as3taas4tauas4tofast3räaswa2s3a2sylat1apfa2tausat3eiga2teliate2ru4athe1atil4sati2st4atmusatra4tat3romat4setat2s1pat4takat4tauat2teiatz1eratz3t2at2z1w2au1a2au2bliau2bloauf1an2aufe_2aufehauf1er2aufs_2auft_4augehaule2sau2malau2m1oaum3p2aum3s6au3n4aau2nio2au3r2au2sauau2spraus3s22auts4ava3t4äche1eäch2späch4stä2d1iaäft4s3äg3str2äh3t4äl2l1aämi3enäne2n1äng3seän2k3län2s1cänse3häp2s1cä2r3a2ä2r1eiär1intär2k3lärt2s3äse3g2äser2iäskop2ä3s2kräs6s1cä4s3t2äß1erkä4t1a2ät2e1iätein2ät2s1iät2s1pät2s3täum4s52ä3us_backs4b1a2drbah2nuba2k1iba2krabal3th3b2andban2drba3n2eban4klban2kr2b1ansbar3deba2reibar2enbar3zwba3s2abau3sp3b2ä1cbbens2bb3lerbbru2cbe2delbe2erkbe1erlbe1etabei1f4bei3k4bei3labe1indbei3scbeis2ebei1stbeit2sbe3lasbe3lecbe3leibe2letbel3label3szbel3t4ben3arbe3nei3ben3gbe3n2iben2sebenst4ben2su2bentbb2entib1ents2bentwben3unben3z2ber3ambe2ranbere4sber3nab1erntbe2robbe3ropbe3rumbe3slobes2pobess4ebes3szbe2tapbe3thabien3sbi2ke_bi2kes2b1inb2b1infbin3gl2b1intbi2solbi2s5tb2it2abla3b4b2lancb2latt2b3law3ble2a2b3legb3lein3ble4nb3leseble3sz2blich3blickbling43blitzbo3ch2bo2e3ibon2debo1r2abo2reibo4rigbo4s3pbot2st2b3radb4ra3k2b3refb3reif2b3repbri2er2b3rolbrust3bru2thb2s1adb3sandb3sel_bse2n1b3s2esb2s1ofb3s2pubst3acbst1akbs3tätbst3erb2stipb4stodbs4trib4stübb2s1unbu2chibul2la2b3umkbu3r4ibus1erbu2sinbu2s1pbu2s1ubzeit1carri1ca3t4hcha2ck2ch1akch2anb3chancch1ang4chanz4char_1characha2sc3chato4chatuch1ärm3chef_3chefi3chefsch1eimcher3ach1ess2cheta1ch1iachi3na4chind2chinf2chinhch1insch1int1chiruch1offch1orcchre3s1chron2chunt2ck3an4ckeffck1ehe4ck1eick1entcke2rack2ereck1erhck2ern2ckero2ck1id2ckunt2ck1upcon2nec1s4trcussi43d2abäda2ben3d2ablda2bredab4rüdach3ada2chodach1sdal3b2d1amma2d1amt2d1ana2dangedan4kldan2kr2d1ans2dantwd2anz_4danzida2r3a2darb2dar2mada3s2hdat4e2da3teidate4n4d3atl4daush2d1ämt2d1änd2d1ängde3a2tde4ca_de2cka2d1eff2d1ehrdein2ddein2sdel1ändel1ec2delek2delem2delfmdelle2de2lopde3lordel5scdel2sodel3t4dem2ar2d1empden3th2dentwdera2bde1radde2rapder2bl2derdbderer33derieder3m2de4ruhde4rumde3sacdesa2gde4samdes2äcde2sebde4sehde2seide4setde2sinde2sordes3s2de2sto2d1etwde1urlde2xisdha1s4di3e2ddi3enidie2thdige4sdil2s52d1imb2d1ind2d1inf2d1inh2d1ins2d1intdion3sdi4re_di2rendi2ris2d1irl2d1isrdi4t3rdle2ra2d1o2fdo2mardo5n4adoni1e2d1opfdor2fädor2fldor2fr2d1orgdo2riedor2tadö2s1c3d4ra_2d3rad2drahm3d4ramd3rand2d3rät2d3räud4rea_d4reas3d4rehd4reiv4d3ren2d3rep4d3rer4dres_d4resc3d4ria2d5ricd5riegd4rin_3d4rit4dritu2d3rod2d3rot2d3rovdrö2s13d4ruc2d3ruh2d5rutd2sau2d2s1efds2eigd2serhds1errd3s2had2s1imds2infd3skuld2s1opds1orids1pasd2sprods3tabd4stagd4stead3steid4stemds4tilds4tipds1umsds2zend4theidtran2du1alvdu2bli2d1ufe2d1umb2d3umkd2ums_2d1umvdund2a2d1unfdun3kedun2kl2d1url2dursadwest3ea3dereadli4e3aleiealti2eat4e2eater1eat3s2e3au2feau1ste3b2akebert4eb3lereb4leue3blieeb3reiebs3paeb3staeb3strebu2t12e3cheech1eie2cho_e2ch3rech3taech1uheck3seede2aledens1edi4aled2s1oed2s1pee2choeed3s2ee2lekee3lenee4nage1e2pie1erbtee3r2eeere2see4reteer2öse1ertree3r2uee4tateewa4re2f1adef1anae2fente3f4lu2e3f2oef3reaef3rolef3romef2tanege2raeg4saleg4stoegung4eh1ache3h2aleh2auseh1eff1e2hepehe1raeh1inteh1lameh2linehl2seehr1a2eh2reiehre3seh1ro2ehr1obehr1ofeh1stee2hunt2ei3a2ei2bareibu4tei2choei2d1aei3danei3dra4eien33eifrüeig2er2eigew2eigrueik2arei3kauei2lareilen1eil3f41eilzuei2moreim2plei2n1aei4nasein3dr2einduei4nelei2neu2einfoein3g2e1initein4szei2sa4eis2peeis4thei1stoei2sumei2tabei2tanei2tarei2troeit3umek1s4tek5triel3abiel2abte2l1akel4amiel4ampel1ansel1anze2l1apel3ariel1asiel1aspel2ast3elbiseld3s22e3lebe2l1el1e2leme3lem_el1empel1erdel1erfel1erkel1erl2eles2el1esse2l1ideli2neel1itael3lanel5le_el3linell3spel1opee2l1orelo2riel2sumelte2kel2t3re2l1umel3useel2zwae2m1ad3emanze3m2ene2m1imemi5naem1intemi3tiemma3uem2meiem3pflem2spren4amee4nanden3angen3areen2ascen3atte3nauee2n1ären4ce_en2dalend3siend3szend2umen1e2ce2neffe4neine2n1elene4lee2nerfe4nerhe4nerk4enerne4nerz1engad3engagen3g2ien3gloeng3see2n1inen3k2üeno2mae2n1openost3en1ö2den3sacen2sauen2sebens2el1ensemensen1en3skaens2po2enstoent4agen2teb1entfa3entgaen2thi3entlaenü1ste1o2b1e3p2f41episo1e2pocep2tale3rad_er3admeraf4aera1frer3aicer3alleran3de3raneer3anfe2ranher3anmer3apfe3rarie2rathe3ratie2ratme1rauber3aueerau2fer3augerb4sper3chl2erdece3recher1effer1eige2reiner1ele2e3reme3renae3renz4erer_e4rerl4ererne3reroer1errer1erse2rerter1erwer1esser1eul4erfür1ergolergs4t1erhabe2riat4e3ric4e3rieer1inber1inker1inter1ita1erklä2erkreern1oser1o2ber3onye4ro2rer3smoert2aker2thoerts2eeruf4ser1u4mer1underung4er1unses2aches3anze3s2ases3cape3schaes3evaes2haresi1eres3intes2kates4loges2ortes2sau4essemessi2aes2sofes2spues3stres3stuest1ake1stare1state3stele1stile2stipes4trie2s1umes3umse4teinet3haleti2tae4t1ofetons4e2treset4riget2tabet2teiet2t3ret4troett3szetwa4retze4seu2esceu4glae3um2seum4sceums1peum3steu4neie3un2geu2nioeun3ka3eu3roeu1staeu1stoeu1stre2velae2vent1e2xeme2x1inex2tinfa2benfa2chof1aderfa3l2afal2klfal3tefalt2sfan2gr2f1ankf1an3zfar2br2f3arcfarr3s3f4art2f3arzfa3s4afa2to32f1auff1ausb2f1ärmfä2ßerfeatu42f1eckfe1inifek2tafe2l1afel2drfe2lesfe2l1ofen3safer2anfe2rauferde3fer2erf1erfaf2erl_f4erpaf2ers_fest1afest3r2f1etafe4tagfeu4ruf2f3efffe1inf3f4räff3shoffs4trfi2kinfik1o2fi2kobfi2lesfi4linfil2ipfin3sp2f1intfi2s5tfit1o2fi2tor3f4läc2f5läd2f3läu2f3leb3f6limfli4ne2f5lon1f4lop1f4lot1f4lug4f3orgfo3rinfor4stfor2thfor3tu2f1o2xf3rand1f4ränfreik2frein42f3ricf4risc1f4ronfro2nafs1allfs4ammf2s1asf2sauff2sausf2sautfs1e2bf2s1emf2s1erf2si2df2s1o2f3spanfs1penf3s2plf2sprefs2prif2sprofs2pruf2stasf3steif2stipf3st4rf2s1unf2t1alft1e2hft1eigft1eisf4theif2t3rof2t3röf3t4ruft4samft3s2cft4sehfts3elfts2tift1url2f1unffun2klfun2ko2f1unmfu4re_fus2safus2stfzu4gaga2b5l2ga2dr2g1amtgan2gagan2grg3anla3g2ano2g1armga3r2og1arti2g1arzgas3eiga2sorga4spega4sprgas4taga4ste2g1auf2g1autg2d1aug2d1erge3g2l2g1eifge2in_gein2sge2intgein2vgei3shgelb1rge5lehgell2age3lorgels2tgel3szge3lumge4namge4nargen1ebge3necgen3szgen3th2gentwge2rabger2erger3noge1r2öge3r2ug1erwag2e1s23ge3scges4pige3steges3thge3t2a2getapge3t4ugge2ne3g2het3g2hiegi3alogi2e1igie1stgi2me_gi4mesgi2met2g1indgin2ga2g1insgi3t2ag2lade2g1lag3glanz2gläuf2g3leb4g5lerg3lese3g2lid3g2lie3g2lit3g2loa3g2lobg3loch3g4lok3g2lop3g2lotgne2tr4g3notgoa3li2gonis2g1ope2g1opfg2o1ragra2bigra2bl2gradl2g3rah2g3rak2g3räu2g5re_2g3recg4re2eg3reit2g3ric2g3röh2g3rui2g3rum3g4rup2g3rüc3g4rüng3s2ahg4saltgs3amags3augg4s3cegs4chig4s3crg3sel_gs3elig3selngs5erkg4setags4pieg4spingsrat4g3stang3starg4s3täg5stämg3stelg1steugst2heg3stirgs3tocg4stolgs3topgst4rig4sturgs4tücgu1an_gu1antgu4d3r2g1u2fgu1ins2g1unfg2ung_gunge2g2un4s2gunt22g1urlgurt3sgu2s3agus2spgus2stha2choha2delha4dinh1adle2h2al_ha2lauhal2bahalb3rhal2lahal2sthand3shan2krh4a3rah1arm_h2armehar2thh1arti2ha3sahat5t2h1aukthau2sahau2sc2hautohau2trhä3usphe1choh1echthe3ckehe2e3lhe2fanhe2f3lhe3friheim3phei4muheine2h1einkhe1ismhe1isthel1eche3lenhe4lof4h1emphend2she2nethenst2hen5trh1entshe2ral2heraphe3rasherb4she2relh1erfüh1erkeher3thher2zwhe1stahe2tapheter2he3t4she1x4ahfell1hi2angh1i4dihi3enshier1ihiers2hil2frh1induhin2enhi3n2ihin3n2hin3s22hi3rehl1anzh1lauth5len_hlen3ghl2ennhle2rahl1erghl1erwh4lerzh4lesihl1indh3listhlo2reh3losihl2sanhl2serhl3skuhl3slohme1inhmen2shme2rahn3eighn3einhne4n1hne4pfh3nerlh3nerzhn3s2khn1unfho2ch3ho2ckahock3tho2f3rhol1au4holdyhol3g4ho4lor3hol3sh1o2lyho2mecho2medho4seihotli42ho2w1h1raneh3rechh4rei_h3reich3r2enhr2erghr2erkhr2ermhr2erzh4rickh4rineh4rinhh4risth4romeh4romihr2sauhr2serhr4sethr2tabhr2tanhr2torhrt3rihr2trohrt2sahrt2sehr1umsh2s1ech3s2exh2s1ofhs2porh2spräh2sprohst2anh1stechst2heh1s2tih2storh1s4trhst3rih1stunhs2ungh3t2alht3aneh3tankh4tasyht3a2tht1e2ch2t1efhte2heh2teifh2temph2t1euh2t1exh4theihthe3uh2t1inh2tolyh2torgh4trefh2t3ruh2t3rühts2tihu2b1ahu2b3lhu4b3rhu2h1ahu2h1ihuk3t4hu2l3ahu2lerhu2lethu3m2ahung4shu3ni1hus4sahus2sphu2tabhu3t2hhühne4h2wallh1weibhy2pe_i4a3g2ia2l1ai3aleiial3laia2lorial3t4ial3z2ia2nali3and2ia3p2fi2a3spi3a4tai3at4hib2blii2beigi2beisibela2iben3aib3renib4stei2bunki2buntibu2s1ich1eii2chini3chloi2ch3ri3ck2eid2ab4i2d1au1i2deeidel2äide3soide3sp1i2dio1idol_i3d2scid2s1pie2breie2choie2fauief3f4ie2f3lie2froie4g5lie3g4nie2g3riegs3cie3lasiel3auiel1ecielo4biel3sziel3taiena2bi3e2näien1ebie3neri3en3gi3e2noien3scien3siiens2kien3szier3a2ie2rapie3resi3ereuierin3ier3k2i3ern_iers2tier3teies2spie1staie2t1aie4t1oie2triiet2seiet3zwifens2if1ergif1erhi1f4lai1frauif4reii1f4rüif2topift3szig2absig1artiga1s4ige4naig1erzi2g1imig3reiig4salig3sprig4stoig4stöig3strig3stüigung4i2h1ami2h1umi4i3a4ik1amtik1anzik1artik3atti2k1aui2k1eiike2l1ik1erfi2kindi3k4läi2k3raik2trei2l3abi2l1acil1a2di2l1akil1ansil1aspi2l1auil3ausild2eril2doril1e2cil1eheil1einil2f3lilf4s3ilie4ni2l1ipi3lip_i3lipsil3l2ail3l2iil2makil2mauil2mini2l1oril3t2hilung4i2manwima2tri2melei2melfi4meshi2metiim2meiim1orgim3pseim3staimt3s2in3a2ci4nacki2n1adin2arain2arsin4arti2n3auin2dalin2dan1indexind4riin3drü1indusin1ehein2erhi4neskine3un1info_1infosing1af1inhab2inhar2inhauin2i3dini3krini3sei3nitzin2nor1inntain3olsino1s4in1ö2dins2aminsch2in2seb2insenin3skr1insta1insufin3s2z1integin3t4rin5trii3n2umin3unzinvil4io2i3dio2naui3ons3ion4stiore4nipi3elipi3en1i2rakir2k3lirli4nir2makir2mauir2mumir2narirpla4irt2stiru2s1isage2is3arei2s1äni2schmi2s3crise3haise3hiise2n1is2endisen3si2serhiser2uis2hasi2s1idi2s1of3i2soti2sparis1picis2pitis2pori2sprois4sauis3stais3stoiss3tris3stuis2sumis4tabis4tamist2anis4teliste4nistes3is4tocis5törist4raist3reisum3piß1ersit1ab_ital1ait1altit2an_it1arti3tauci4t1axi2t1äsi2t1eii4teigit2eili4teinite2lai4tepoi2t1idit2innitmen2i2t1ofit3rafit3rasit3rauit3räuit3ricit3romit4ronit3runit2stoit2tebit4triitt2spi2t1umi2tunsit1urgitzes4it2z1wi2v1akiv1angi2v1eiiv1elti2v1urizei3ci2z1irjahr4sja3l2ajean2sjek2trje4s3tje2t1aje2t3hje2t3rjet3s2jugen2jut2e1kab2blka2ben2kabla2kabläka3b4r2k1abt2k3adaka1f4lkaf3t2kaken42kala_ka2lanka3leikal2kakal2krkal4trkan2alka2nau2kanda2k1angk2ans_k2anz_2k1apfka3r2i2k1armk2arp3kar2pfk2artaka2s3tka3tanka3t4hka4t3r4kaufrkau3t22kautok1ä2mikä2s1ckdamp22k1e1cke2he_kehr2s2k1eic2k1eig2keinhkel1acke3lagkel3b4ke2lenke2lerkell4e2k1empken3au2kenläkens2kken3szk2enteken3thk2entrk2entu2kentwke1radk2erkok1e2rok2ers_ke2selke4t1ake2t3h2k1e2xki1f4lki1f4r2k1intkis4to4k1lack4leidk3lem_2k3lerkle2ra2k3leukle3usk2lisc2klistklit2s2k3locklo2i3klost4klung42k1lüc2k5nerkno4bl2k5norkoh3lukol2k5ko3n2ekon3s4ko1r2a2k1orckot3s22k3radk3rats2kraum2k3rät2k3rec2kred_2k3refk3reick3reih2k3rick3ries3k4ronks1e2bk2s1emk2sentks1erlk2s1idk2s1ink2s1o2ks2pork1s2tik2stork2sträk2stumks2zenk2t1adkt1aktkta4rek2t1auk2tempk2tentkte3ruk2t1idkt1insk2t1ofkt1opekt4rankt3rask4trefktro1skt3runk2tuns2k1uhrku3l2eku3l2i2k3umlkum2s1kun4s4kunst32k1up_kur2blku2reikuri2ekur2spkur2stlab4ralab4ri2l3absla2ce_la2gio2la1hola2kesla2k1ila1k4lla3min1lammf2l1amtlamt4sla4munl1analla2nau3l2andlan2gl2lanhäl2anhe4lanli2l3ann4lansä2lantrlan2zwlap4pll3artila2saulast1ola4tel2l3athl2auf_lau2fol2aufz2lausl2lausr2lauto2l1ähnlä2s1cl4betal2b1idlb2latl4bre_lb3ritlbst3elb4stol2b3uflbzei2l3d2acl2d1akld1amml2da2rld3arild1arml2delel3der_ld1erpl2d1idl2d1iml2dranl3d4rul2d1umle2chile2gau3l2ei_lei2br4l1eigl2ein_l2eindl2eine2leinkl2eintl4eistlei2talekt2a2lektr3l2ela3lemesle4nad2lendul2e2nolen3szl1ents4lentzlen2zil2e1rale2ragle2raul1erfol2erfrl2erfül2erkal2erkol2erlel4ers_lers2klers2tl2ert_l2ertel2erzales2amle3serleste3le1stole2tat2le3thlet4tule3u2f2leurole2xislfang3l2f1ecl4feisl3f4läl3f4lulf3ramlgen2alge3ral2getilian2gli3chili2ckali3d2ali2deo2l1idolid3scli3enelien3slie2stli2grelik2spli3m2ali3n2alin3alli2nefli2nehli2nepli2nes2l1inflings52l1inh2l1injlink2sli2noll2ins_l2insal2insc2linsp2linst2l1intli3os_li2p3ali3s2a2l1islli2tallit1s2lit3szlizei3lk1alpl3k2anl3kar_lken3tl3k4lul2k3rol2k3rulk4ställ1abbl2labtll1affll1aktl3l2alll3amall2anwll1anzll1armll3augl2lausl2l1ämll1echlle3enl2l1efll1eiml3len_llen3gl3ler_lle2ral2lerzll1imbll1impll1insl2lobel2l1ofll1opfl3lor_l3lorel2l1oul2l3öfll3s2kll2sprllti2mllt5s2l2marclm1auslm1indlm1inslm3stelm3s2zln3are3l2ob_lo2berlob4ril1o2felo2gaulo3h2e2l1ohrlo2k3rl1o2lylo2minlo2n1olo3renlo4skelo2speloss2elo4stelo3thalo3thiloti4o2l3öfelpe2n3l2p1holrat4sl3s2all2sannl3sarel2s1ecl2s1emls1erels1ergl2serhls1erlls2logl3s2pil2sprol3s2pulstab6ls4tafl3stecl3steil3stell4stemls2tiel2stitls2zenlt1a2mlt3andlt1angl3tarblt1artl2t1aultbau1lt3elil5ten_lter3alt2erglt4erölte2thl2t1eul4theiltimo4l2t1ofl4t3ötltra3llt3räult4rielt3roclt3rosl2t3röl2t1umltu2ri4lu4b32l1ufelu2g1alu4g3llu2g3rlug3salug3splu1id_2l1una2l1unf2l1unilu2s1ulu2t1alu4teglu2toplu4t3rl2z3acl3z2anlz2erklz1indlz2wecm2ab4rma2d4rma4d2sma2ge_ma2gebma2gefma2gegma2gekma2gepma2getma2gevma2gew2m1aggma3g4n2m1agomai4se2m1aktmal1akma2lanma2lauma3lermali1emal3lo2malltma2nauman3d2ma2net2mansa2mansä2mansc2mantwmar3g2maro3dma3r2uma2tanma2telma5trimat3semat3sp2mausg4m1ändmä3t4rm2d1ummedie4mee2n12m1eif2m1eig3meistme3lamme2laume2lekme2lermelet42melf_mel2semel5t4mena2bme3nalmen3armen3aumen3glme3normen4skmen2somen3ta2mentnmer2er3merinme2sal4meser2me3shmes2stmeste2me1stome3t2amie3drmi2e1imien3smie2romie4timi2karmi3l2amilch1mild4s2m1impmin2enmin2eumin2ga3min2omi2t1rmit3s2mit5sami5tsumi2t1umk5re_m2m1akm2m1almm1angmm1anzm2m1aumme4namme2samm1inbmm1infmm1inhmm1insmm1intmmi3scmm3stamm3strmmüll1m4nesimode3smo2galmo2k1lmon2s3mon3su2m1opemo2rar2m1orcmor2drmo2rermos4tampf3limpf1ormp3strms3andm4s1efms1erwms1inims1orim2spedm2spotm2sprom4stagm3stelm3s2tims5träm3s2tumt3aremt1eltm2t1eum2t1immtmen2m2t3romt2sprmt1urtmu3cke4m3unfmu4s1amu2s1omut1aumut2stmvoll14n3absna2ch1nach3s4na2drna1f4rna2gemna2h1a3n2aldna2letnal3lanalmo2na2lopnal2phn2als_nal3t4n4amenna3m4n2n1amtnamt4sn1and24n1ang2n1ans2nantrnap2sina2r1an2arle4n3artna3r2unasyl2na3t4hnat4sanat4sc3n2aul4nausb4nausgn2auso4nauss4nausw2n1ä2mnär4s53nä1umnbe2inn2d1akn2danlnd1annnde2sendi2a3ndo2ben2d3ren2drobnd3rolnd3rosn2druind2sornd2spr2n1ebnne3ein4n1ehr3neigtnek3t42n1ele5neleb4nelek4nelemne3lennel4la3ne3lu2n1embn1e2mi2n3emp2n1emsnen3a2n1endgnen3einenen14nengb4nengs4nengtnens4enen3skn1entb4nentn5nentrn1ents4nentzne2n3u2n1epone2posne2ranne2rapne2raun1erbine2reb2nerfü3nergrn2erlin1ermän2ern_ne1rösn2ert_n1ertrne2rup2n1erzne3sanne3skane2s1pne1stanes3tine2tadne2tapn1etatne2taunet3han1e2tunet2zi2n1eupnfalt4nf5linnft4s3ng2absn2g1acn2g1akng2anfng1anzn2g1äln3g2enngen2an3gläsn2glicngrab6ng3ratng3rocngs3panich1s3n2id_nie4n3ni3eneni1eronifes3ni2grenig4spni2kalni2karni3ker4n1imp3n2in_n2in4a4n3ind4n1inhni2nor2n1insn2ins_4ninse4n1int2n1invni2s1eni3se_ni2s1pni3spinis3s4ni2s1uni3t4rni3tscnitts1n2k3adn2k1akn3k2aln2kansn2kausn2k1ärnk4ergnk1inhnk3lennk3lesn2klienk3lunn2k3ronks2eink3s2znk2taknk2tannkt1itnk4topnk2trunmen2snna2ben2nadan2n1annnen3gnn2erhnn2erknne2rönner2znnes1enne4stnn1o2rnn3s2pn2n1ufno2blano2leu3n2opano2radno1rakno3ral3n2os_no2s3pn2ostenost1r2nostvno3tabno2telno3t3hno4thano4thi2n1o2x4n1ö4lnräu3snre3sznrö2s1n2sangn2santn2sausn2s1änns1e2dns1entn2s1epns1erfns1ergn2serhns1ersnsfi4lnsho2fn2simpnsi4tensi2trns2kaln2s1opn4spatn3s2pins4piens3ponn4sprän4spronst1akn3starn3statns4tornstü1bn2s1unns2ungns4unrns4unsn4s3zint3absn3t2alnt1angnt2arbnt1arknt2armn2t1äunte3aunt1ebente3g6n2teignt4enent4ernnt4ersnt4ertnt2hern2t3hon3t4hunti3kln2tinfntini1nt2insn3ti1tnt4lemntmen2nto3ment3recn5trepnt4rign5tropn2t3rünt4saunt2sto3n4tu_ntu2ra2n3umb2n1ums2n3umz3nung_n3ungl2n1uninu4t3rn2z1aun2z1ännzdi1snzi2ganzig4snz1inin2zurkn2z1wan2z1wän2z1wuoa3cheoa3chioa4k1lo4a3lao4a3mi3oa3seo3b2al2o3b2äob3ein2o3b2iob3iteo2b3li2o3bloo2b3reob3s2hob2staocha2boche4boch1eioch3ö2och3teochu2fo2ckarock2erock3szodein3ode2n1odene4ode3sp2o3diaof1a2co2f1eiof2f1a1offizof2f5lof2f3r2o1f1rof4samof2speof2sprof2s1uof2teio2g1abog1alaog1ango2g1eiogi2erog1steohen3sohl3auoh3lecohl1eioh3lemoh3lenoh3lepohls2eoh2n1ooho2laoh1o2poh4rinoimmu4oka2laokale43o2kelok2s1po2l1akolars2ol1aufol4damol1eieol1eisol2fraoli3k4ol2kreol2lakol2lelolo3p2ol1ortol2strol2z1aol2zinom2anwom1arto2m1auo2m1eio3men_o2meruom1erzomiet1om1ingom1orgo4munto2narbon3ausone2n3onens2on1erbon1ergon1eröo3netton3g2lon2i3do4nikro4n1imon3ingonlo2con3n2eo2nokeon1orconsa2gon4samon2sebonse2lonst2hon3t2aoo2k3lo2p3adop3aktopa2leo1pe4nop2f3aop3fahopf3laop1flüopi5a4op5lago2p3le1op3t4or3a2bor4altor2ando2ranhor3arbor3attor1ändor2baror2dauor2deuor2ditor2dumore4aso2r1efor1eigo2reino2rerfor1ethor2fleorf3s42orgetor3g2h2orgiaorgi1eor3gle2o3ric4orie_o3rier4orin1or5ne_or3s4aor2täror2tefor2theor2torort3reo4r3un2o3s2ao3scheo2s1eio3s2hi2os2kl2os2koos3peco3s2poos2seios2s3oos4sonos2s3pos2s3tost1auos4teios2t3hos3tilost3räost3reost3ufo3s2zeo2ß1elota2goo5tarko3tarto2t1auot3augotei4not4em3otemp2ot5helo2t3hiot3hosot1opfoto2rao2t3reot3rinot4spaots2peot2sprot2t3rot4triou1f4lou4le_o3undsou3s2ioviso3owe2r11o2xidöbe2laöbe4liöh3l2eöl2k3löl2naröl2ungönizi1öp4s3tö2r3ecö2r1eiör2ergö2rerlör2f3lö2r1imörner2ör3s2kö2schaö2schlö2schwö2s1eiös2s1cöte4n3pa1f4rpa1k4lpak2topala3tpa2narpa3neipa2neu1pa2nopan3slpa5regpa5rek1park_par2klpar2kr1partn1partypar3z2pa3s2ppat4e2pa5t4rpa3unipä3ckepä2t3hpät3s4pekt4spe2letpe2lexpell2apell4epen3dape4nenpe2n1o3pensi1pensupen3z2per2anper4nape2robperwa4pes3s2p2f1akpf1ansp2fa4rpf3arepf3armp2f1au4p3fe_pf1eimpf1einp3fen_p2fentp3fer_pf2erwp3f2esp2f3läpf3leipf3lie2p1heiphen3dphen3sphi2ka2phthepi3as_pi3chlpiela2ping3s3pinsepi3onupi4pel3pirinpi3t2aplan3gpo2laupo4lorpo1o2bpo1ralpo1raupo4stapo4stäpo2stopos6trpo2t1upp3anlppe2n1p2p1f4p3p2hopp5lanp2p3rap2p3repre2e13preis2p3rer3p4res1prinz2prosspro1stp3steap3stelp3s2tipt3albp4t3ecp4t1eip4telept1in1pto3mept1urspul2sppu2s3t2r3aacra2barrab2blr2aber1r4abi2r3abwra2chura2dam2radapraf3arra2ferra3gle3r2ahmrail4l2r3airra2krera2kro2raktira2la2ral3abr3alar3r4aldral3larall2e2rallgr3alp_2ralper3al3trama3srambi2ra2mer1r2ami2r1amtramt4sr4andar4anderand3sr4aner1rangirani1eran2kr2r1anm2r1anpr2ans_r2ansp2rantr2r3anw3rareirar3f42r3arz2rato_rat2st3raub_rau2mi3rausc2rausgrau2spraut5srä2s1c3rätser2b1abrbal3arba3rerb1artrb1aufrb1echr4belärb1entr3b2larbla2dr2ble_rb3lerrb2linrb4seirb3skarb4stärb3strr1che_r1chenrch1s2rch3sprch3tar3d2acr2d1akr2d1alrdani1rd1antrd1anzrd2ei_rden3drde3rerde3sprdi3a2rdia4lrdo2berd3ratre2altre3at_re3atsre2b1are2b1lreb3ra4rechs2reck_2recki2reditre2hacre2h1ire2h1orei4bl4reifrrei3gareim2p4reingr3eink4reinr4re2ke2r1elbre3lei2r1elf2r1elt4rempfrena2bre3nal3rendiren3drren4gl2rengp2rengsr1ense2rentw3r4er_2r1erbr2erbr2r1erdr2erenr2erki2rerlö2r1ermre2robr2erse2rerspr2erte2rertr2r1erzrer5zer2erzy3r4es_ress2ere1stare2thyreu3g2re3uni2r1eurrewa4rrf1ältr2fentrf3licrf3linrf2s1ärf2s3trf3t4rr2g1ahr2g1akrge4anrge2blr2getor2glanr2gleur2g1obr2gregr2gresr2gretrg3rinrgs4tr3r4he_3r4henrho2i3rib2blri1cha2ridolrie2frriene4rien3srie2nuri1er_ri4ereri2f1ari2ferri2f1orim4scr2i3na2r1indri3n4erine1i2r1infrin2foring3lrin2gr2r1inh2rinitr1innu2r1insrin4sorin2sp2r1inv3risikri4s1pri3t2irit2trr3klaur2klisrk5nebr2k5nurk3räurk3rinrk2s1erk3shirk2tinrk2t3rrk3trark4trirk1unirlös3srl2s1prl3ster3m2agrma2larm1ansrm1anzrm1a2pr2maphr2m1efr2mider2m1imrm3starm3umsrn2andrn3anirn2a2rrn3arern3arirn3eifr4nerfr4nerkr4n1inr2n1opr2n1orrn3s2ärn3s2prn3s2zrn3t2ero2bei3rock_r2o3deroh3na3r2ohrro2madro2mer4ro1nyror3alro2ratro2reiro2r1oror3thro3s2iro3smoro3starost1rro4tagrote3iro2thoro4trirots2orot2taro3t2uro3untrö2b3lrpe2rerrer4srre2strr2n3ar2r3obrr3stur4samprs3anprs3antrsch2lr3schur3schwr2seinrse2n1rs2endrse4ners1erers1erörs1ersrs1erzrs1etars2kalrs2kanrs2kiers2kisr4s1opr4sordr2s3phrs2tecr3stier2stinr2stiprs4tobr4stotr3s4trr3s4türtals1rt1angrt1annrt1antrt1anzr2t1arrte1e2rt4eifr2telfr2temort1ersrt3holrt2humr2t1idr2tinfrto2rirt3recrt3rosrtrü2crt2spart2sprru2ckurude2aruf2s32r1uhrru1insru2m3ar2ums_2r1unar2unde2r1unf2runglrun2kr2r1unl2r1unm4r3untru2r1erus4stru3staru4teiru2t3rrü1benrwun3srz1a2cr5zenerz1engr3z2ofrzug2u3sabetsa3blesach3t2s1ada2s3affsa1f4r3s2al_sal2se2s1alt3s2alz4s1amnsam2tos2an2cs4and_3sang_2s3anh2s3anl2s3anssan4sk2s3anw3s4ar_3s2ara4s3arb3s2ard3s2ars4sartisa4ru24s3ath4s3atlsauri1s3ausw2s1änd3sänge2schak2schao3sche_2schefsch2en3sches4schexschi4es4chim3schis2schmö2schn_2schoxschs2e4sch3tscht2ascht4rsch2up3s4cop3sco4rsda3mese3at_s1echtsee3igseein2se1er_se1erö2s1effse2galse4helse2hinseh3rese2hüb2s1ei_2s1eie2s1eig2seinb4seing2seinh4seink2seinl2seinn4seinr2seinw4s1eis3s2eitse2l1ase3ladsela2gse3lamsel1ec4selem2self_s3elixse2l3ösel3szsel3trs4e3ma2s1emp3s2en_se4nagsen3gl3s2enise4nob3s2enss2ent_s2enti2sentw2sentzse2n3use5refser2ers2erfrs3erfüs2ergr2serhöse2robs2ers_2sersas4ert_s2ertase3rum3s4ervse2selse1stase2tatse1u2n3s2ha_4s3hansho4resi2achsi3enesi1errsi3gnusi2g3rsig4stsi2k1äsik3t42s1immsi3n4a2s1ind2s1infsing1asin3ghsin2gr4s1inhsini1e2s1inq2s1ins2s1int4s1invsi2s1esi2s1osi2s1psi2tausi2tra3skala4skanz3s2ki_3s2kik3skulpsla2vesler3s3s4lipsli4tuslo3be4s5not2s1o2bs1o2he4sohng2s1ohr4so2lyson3auson3säso1ral2s3ordso2rei4s1ostso3unt2s1ö2l2spala2spara4sparo3sparuspe3p4s1peri2sperl2speros2perr4spers3s2pez4spi4p3s2plis3p4lu4s3poss2potts2pracs2pran4sprax2spräm4spräs2spred2spres2sprob4sprüfsrat2ssrö2s1ssa3bos2sanos4sansss2antss3attsse3hass1erös3s2essse3tass1offs2s1opss1oris2spros3stelss4tipss2turss1ums2stabb3s4tad3staff2stale2stalkst1almst1alpst1ami4stan_sta4na3stand2stani2stans2stanws4tar_4staris4tarsst1asis3tat_2stauf2staum3staur2staus4stälts4tänd5stätts3täus4s5te_3s2tegste2gr3s4tehs2te2i3steig4steil1s2tel2stel_2steln2stels4stem_s5ten_st4ens4stermste4sts4teti3s2teu1steue4steufs2t3ho2stie_s2tiegs2tiel2stien3s2tif3s4tims4tinfs3tinnst1ins1stitu2sto3d4stod_s4toffs4t3om2stopo2stor_2store2storg2storis3tort2stose4stote2stöch2strad2strag4strai4strak2stral5straß2strua2strug3struk2strup2st3t43s4tud2stumt2stun_4stunn2stuntstu3rest3url2sturn2s3tus2stüch2stür_2stüre2stürg2stürs3s2tyl3su2b3su2cha2s1u2fsu1it_su2marsu2mau3s2umesu2mels3umfesum1o2su2mors3umsas3umst2s1uni2s1urlsüden24s3zeis2zena4szent4s3zet2ß1e2gße2l1aß2ers_2ßerseßge2bl2t1abb3tabel2taben3table2t3abn2t3abtta3d2s3taf2et1af4rta2ga24ta3gltag4sttah3leta3i2kta1insta1ir_t1a2kata2krotak6ta3taktb3t2al_ta3lagta3lakt1alb_t1albk3t4aletal2löta2mert1amplt1a2na4t2andt3ankl2tanwa2tanwät2anz_t1anzat1anzuta2pe_ta2pes2t1armt1artitar2to2t1arz4t1aspta2tanta2tautat3eita2temtat3heta2tom4tatue2t1auf4taufg4taufnt1ausb3tausct2auset1ausk4tausltaxi1s2t1ältt1ängs3t4ebbte3cha3technteck2ete2ckite2en3te1erwteg3ret3eifr2t1ein4teinf4teinnt3eis_t3eisb3te3letel1eb2telemtel1ente4leute2littell2ete2l1ö3telt4tel3tatel3thte2min2temme2tempfte4m1utena2bte4naste4nauten3dat6endit6endote2nefte2nettens2et4entat3entb4tentdt4ente4tentnten3zwt3e2pi3t4er_tera2bte1rafter3am4terbs4terbtte2relt4erfrte3ria3termi2ternct4ers_terst4ter3zatesa2cte2santesä2cte2selte2sprtes3s2te2tat3teur_2t1exz3t4ha_3thal_4t3hau1t2he_2t3heit4heint4henet4heni2therr3these2t3hil2t3himth4mag2t3hoc2t3hoht4hol_2t3hot1th2r2ti3a2mtiden2ti2deo3tief_3ti2erti2kamti2karti2kinti2kräti2larti2leiti2lel4t1imp3t2in_4t1indti3n2eting3lting3s2t1inj2t1int4t1invti2seiti1sta2ti3tuti2vanti2velti2v1oti2v3rtlung4tnes4s3tochtto4d1utom1e2to2mento2nauto2nehto2pakto2patto2rauto4ränto2relt3orga3torint1ort_3tost4to1sta3to3teto2thotouil44tractt3rad_6trahm5t4rai2trand3trankt3rann3transt3raset3rasi3träne4t5re_tre2brt3recht4reck6t3red5t4ree4trefe4trefot4rei_4treic2treift3reigt3reint3reis6treitt3reiz6t3relt4ren_3trendt3rent2trepe2trepot4reprt4res_3treuh5trieb2triegtri4er5triggt3rind4tringtri3ni4trinn4tripttrizi13t4roitro2ke4trom_tro2mi4troml2t3roo3tropf2t3röttrums15t4ruptru2thtrü1betrü1bu2t3rüct4sa4bt3s2act2s1aht4s3art2s1änts4cort3seiltse2n1t2s1erts1init2s1irt1slalt3spalts1parts2pedt3spekt3s2pit4stagts3takts4talt2stipt4stitts3tocts3tort2strits3türtta2bet2t1adtt2anttt1arttt1ebett1eiftt1eistte2lattel1otte2satte2sätt2häut2t3hott4roctt2sentt2sortt2spett2sprtt2stitu1almtu2chitu3fent3u2kr3t2ume2t3umf2t3umg2t3umk2t3umrtum2situm2so2t3umt2t3umz2t1una2t1und2t3unft3unga2tunif2t3unttu2re_tu2reitu2resturin1tück2s3tür3s3tütentze4n1tz2enetz1erltze2rotz2erst3ze2stzgel2tz1indtz1inttz2tinua2lauu3aletual2mau3a2louara2bu2be2cub3licu2b3luub2sanub2s1oub2spau1cha_uch1eiu3chesuch1iluch1inu2ch3ruch2souchst4u2ckemuder2eudert4udi3enuditi4ue2neruenge4uen2zuue2r3aue2r1äu3erehu3ereru3erexuer3g2uer2neue2r3ouer3scuer3t2u3erumue4teku2f1äsu2f1eiu2f1emu3fen_u2fentuf2ernuf2frouf1oriuf4sinuf2spouft3s2u2g1apu2g1eiug3ladu3g2löug4serug3spaug4sprug4spuug5stäug3strug3stüuhe3s6uh2reruh4rinuisi4nui4s5tukle1iuk2t3ruld2seu2l1elul1erful1erhul1erwule2saul1etaul1insul2lesul2p1hul4samuls2thul4trium1allum1anzu2maut1um3d2umer2aum1ins3umsatum4serum2simu2m1uru3n2amu2n3an2un2asun4dabun4deiun2didun2dorun2d3r4unds_und3spund3stun2ei_un3einunen2tun4es41unget1ungew1unglüun2g1rung3raung3riung4saun3ide1u2nifun3islu3n2it3u2nivun2keiun3n2eunvol2u1or3cu2pf2eu2pf1iu3rabaura2beur2anbur2anhu2r1auur3b2aur1effu2releu4r1epur1erhur1erwur2griurg3s4ur1iniur3insur1int1urlauur3sacur2sanur2sauur2serur4sinurst4rur2z1wus4annu2s1ecu2s1eiu3seiduse1rau2serpu2s1opu2spatus1picus2porus4sezus2sofu1stalus3tauust2inu2stunu2sturut1altut3a2mu2t1apu2t1arute4geut1ei_ut1eieutel1eute2n1u2tentu4t1exu2t3hout1opfu2topsut3reaut3s2aut2s1äut2spaut5t4lutu4reutu5ruut2z1wuve3räüb2s3tücht4eü3ckenück1erü3den_üden4güdwes2ü2f1eiü2h1eiühl1acüh3r2eühr3taü2mentün2fliün2g3lün3strü2r1eiü3r2o1ü2schlüs2s1cü2t1alva2teiva2t3hvatik2va2t3rvat3s4va2t1uveits32ve3muve3nalve3radve3rasver3b2ve4rekve4rinver3stver5te2ve3scves3tivi4a3tvie2w1vi2l1avi4leh2v1i2m2v1intvi3s2ovoll1avol2livo5rigv1steuwab2blwa3chewaffe2wa2g3nwah2liwal4dawal2tawal2towang4s1war2eware1iwart4ewass4e4webebwe2g1awe2g3lwe2g3rweg3s4wei4blwei2gawei3k4wei4trwel2t1wel4trwen3a4we2r3awer2bl1werbu1werduwerer2wer2fl1werk_wer2ka1werkewer2klwer2kuwer2tawer2to1wertswe2s1pwest1awes2thwest3rwes4tuwett3swi3ckawien2ewie2stwim2mawin2drwi3s2e1witzlwo2chawoche4woh2lewo2r3iwo4r3uwört2hwul3sewur2fa1wurstwus3te1wu4t1xe3lei3x2em_xen3s2x1i2doxin3s2xi2so2xis4täx1i2tuxtblo4x2t1eix4tentx2t3evy3chisyloni1y2p1iny1s4tyy2s1u22z3a2b2z3a2k2z1all2z3anf2z3anlz1artizar2tr2z1arzza1st42z3at3z1au2fzbübe32zecho2z1eck2z1effzei3lazeile42z1einzei3s4zeist4zei2trze2lenzell2azel3sz2z1empzens2ezent3sze2r3a2zerhöz2erl_2zerlö2z1erq2z1erzze3skuzes2spzes2stze2s3tze3sta2zettszger2azi3alozi1erhziers1zi1es_2z1impzin4er2z1inf2z1inhzin1itzin2sa2z1invzirk6szi3s2zzi1t2hzor4ne2z1oszz2t1auz4tehezt1inszt3reczu3ckezug1un2z1uhr2z1um_zumen22z1umszup2fizu3r2a2z1url2z1urs2z1urtz2wangz2weigz1weis2z1wel2z1wen2z1werz2werg2z1weszzi1s4",
+			7 : "_al4tei_amt4s3_and4ri_an3gli_angst3_an4si__an4tag_ausch3_be3erb_be3r2e_berg3a_bo4s3k_bu4ser_da4rin_da4te__da4tes_de4in__dien4e_ebe2r1_en2d3r_en4tei_er4dan_er4dar_er4dei_er4der_es5t4e_fer4no_fi3est_fi4le__fi4len_ge5nar_ge3r2a_ge3r2e_ger4in_hau2t1_her3an_ho4met_ima4ge_ka2b5l_li4ve__lo3ver_lus4tr_men3t4_orts3e_pa4r1e_reb3s2_re3cha_rein4t_reli3e_res6tr_sali3e_sim3p4_sto4re_tage4s_ti4me__ti4mes_to4nin_tri3es_ul4mei_urin4s_ur3o2m_ve5n2e_wei4ta_wor4tu_zin4stab1er2raber4ziaber4zoab3essea4cherfa4cherka4cheröach1o2bach2t1oach1u2fa3d2ar3ade1r2aade3s2pade5str2ad3recaf4t5reage4neba4gentuage4ralage4selage2s3pag3esseags4toca2h1erhah4l1eiahner4eahre4s3ahr6tria3isch_ajekt4o1a2k4adak5t4riala5ch2a2l1angalb3einalb3eisal4berh3a2l1efa4l3einal3endsa2l1erfa2l1erha2l1ert3a2lerza2l1eskali4eneali4nalal3lenda2l1o2balt3eigalt3ricalt4stüalzer4zamen4seamp2fa2am4schlana4lin2ana1s4and4artandel4san2d3rüand4sasand3stean2f5laan2g1eian4gerwan2g3raan2k1anan2k3noan2k3rä3antennan3t4heant3rina3ra3lia2r1anga2r1ansa2r1anza2r3appar2b3unaren4seare3r2aa2r1erhar2f3raari3e4nari3erdari3ergarin3itark3amtar2k1arark3aueark3lagark4trear4merkar3m2ora2r1o2dar2r3adarre4n3ar4schla4schecasch3laa2s3e2ma2s1o2fas4s3eia1s4tasas6t3rea2t1aktater3s2ato4mana2t1ortat4schnatt3angat3t4häat2t3räat4zerkat4zerwat2z1inau2b1alauch3taau4ferkaup4terau2s1ahau4schmau4schoaus3erp3aussagaus4se_aus5triau2t1äuä3isch_äl4schlän3n4e2ä2r1eneär4mentäser4eiäse4renäskopf3ät4schlät4schräu4schmäus2s1cba2k1erban2k1aba2r1ambau3s2k2b1eierbei4ge_2b1eimebe1in2hbe2l1enben3dorben4spaben4sprben5t4rber4ei_be4rerkber4in_ber3issbe2s1erb3esst_be3s4ze4b1illubis2s1cb2i3tusbjek4to2b3leidbo2l1anbor2d1ibor2d3rbor2t3rbra1st42b3rat_2b3riemb4schanb6schefb4s1erfb4s1ersbst1a2bb2s3träbs3treubtast3rbu4schlbu4schmbu4schwbügel3eca3s2a3ch3a2bich3anst3chartache4fer4chelemche4ler4chents4chentwche3rei2ch1e4x3chines2ch1invch3leinch4sper2ch1unf4ckense4ckentw4ckerhö4ckerke2ck1err4ckerze2ck1eseck4stro2ck1um3com4te_comtes4cre4mes2d1alar2d1ammädan4ce_dan5kladan2k1odar2m1i2d1au2f2d1aus3delei4gde3leindel4lebdel4leide2l1obdel4sandel2s5edel2s1p4denergden4sende2re2bde4reckder3ediderer4tderin4f4derklä4derneuder3taudert4rades3eltde2sen1de4stredes4tumdeten4tdge4t1edie4nebdi3ens_die2s3cdi2s5tedi4tengd2o3r4ador2f1a2d3rast2d3rauc3d4reck2d3reic3d4riscdrunge3drü5cked4s1amtds3assid4schind2s1e2bd4seinsd2s1engd2s1entd2s1erfd2s1erkd2s1erzd4s1etad3s2kand2s1pard3stell2d1un3ddu4schndu4schrdu4schwe4aler_e3at5t4ebens3eebet2s3eb4scheeb4stätebs3temebs3t2hech1o2bede3n2eeden4seeden4speder3t2ed2s1esed2s3treein4see2f1e2be2f1i2de2f1insege4strehen6t3ehe3strehl3eineh4lenteh5l2erehr1e2cehr3erleienge44eigeno1ei2g3nei3k4laei4leineil3inseim3allei4nengein4fo_ein4fosein4hab3einkomei2n1o23einsate4inverekt4antekt3erfekt3ergela4bene2l3a2me2l1a2re2l1eine3leinee4leing2e3len_e4lensee2l1ente2l1erge2l1errell3ebeell3eiseller4nelt3eng3elternelt3s2kelt3s2pe2m3anfe2m1ansem2d3a2e2m1erw1e2metiem2p3leena3l2ien3d2acend4ortend3romend3s2pene4bene4n1enten4entr4e3ner_e2n1erd1e2nerge2n1erle2n1erre2n1erse2n1erte2n3erue2n1erwe4n3essenge3raeni3er_e2n1i4me2n1o2benob4lee2n1o2ren4terb3entspr4entwetenz3erte4ratemerd3erwer3echser1e2ckere4dite2r1e2h4e3rei_4e3ren_e4rensee4rentne2r3erfe2r1erher3e4tiere4vid3ergebn4ergehäe3ri3k44e3rin_e2r1ini3erlebnermen4serm3erse2r1o2pers4toder4tersert3ins3erweck6erweise4s3atoe2s3einese4lere3s2peke3s2pore3s4praess3erges2s1paestab4be4starb1e2stase1s2tecest3ories3tropeße3r2eeten3d2eter4höeter4tre4traume6t3recetsch3wet2t3auette4n1et4t1umeu3ereieu3g2ereve5r2iewinde3e2z1ennfa4chebfa2ch1ifäh2r1ufeh4lei2f1eing4f1einh2f1einw2fe2lekfe2l1erfel4sohfe4rangfer3erz4ferneufest3eifet2t3afeuer3effel2d1f2f3emifi1er2ffi2l1anfisch3o2f3leinflu4gerfor4teifor2t3r2f5raucf4schanf4scheff4s1ehrf2s1entf4s1etaf3s2kief2s1pasf3s2porf4stechf3s4telf3sternft1a2bef4t1entft4scheft4s3täft4stri2f1u2nifun2k3rfus2s1pfu2ß1er4gangeb2g3ankugas5tangebe4amge4lanzge4lessgel3stegel3t2agen4auggen2d1rgen3eidgen3erngen4samgen4ta_2g1entfge4renggerin4fgerin4tger4satger4stoges3aufges3eltge2s3erges3s2tgien2e12g3isel3g2laub2g1lauf4g3lein4g3lisc2gni2s13g2num_2g3rede2g3reic2g3rein2g3renng3riese2g3ringg4s3a2kg4schefg3s2eilg3s2pekg3s2porgst3entgst3errg4s3torgs4trat4gungew2g1unglguschi5gus4serhaf3f4lhalan4chal4beihal4t3rhar4mes2h1aufmhau4spahäu2s1chba2r3ahe4b1eihe5ch2ehe2f1eihef3ermheiler4heit4s3he2l3auh3e2lekhel3ershel4meihe4n3a2hen3endhen3erg2h3entwher3a2bhe4reck4hereighe4rerwh1er2foherin4fherin4sh3erlauhe2s5trhie4rinhif3f4rhi2l3a4hin4t1ahir4nerhlags4ohle3runhner3eih3nungeho2l1ei2hot3s2hrei4bah4r3eigh3re2s1h2r1etah3rieslhr2s1achr2s3anhr3schlhr2s1enhr4s1inhr4s1ofh2s1achh4schanhse4lerh2s1erlh2s1ingh2s1parhst3alth2s3tauh3steinh5stellhst3ranh3taktsh4t3alth4t3a2mh4t3assh2t1eimh2t1eish4tentfht3erfoht3erfüh2t1erhh4terklht3erscht3ersth2t1erzh4t1eseh4t1esshte3stah4t3rakht3randh2t3rath4t5rinh2t3rolh2t3rosh4t1rösht3spriht4stabhts4tieht4stürh2t1urshu2b3eihu2b1enhu2l3eihu4lenthu2l1inhut4zeni3alenti3alerfi3alerhi3a2leti3a4liai1ät3s4i2b1aufich4speich2t3rieb4stoieb4strie2f1akie2f1anie3g4rai2e2l1aien4erfienge4fien3s2eie3r2erie4rerfi2er5niier4sehier3staier3steies2s3tie2t3hoie4t1ö4i2f3armift3erkif4t3riift3s2pi2g1angi4gefari3g4neuig3steiig4strei2k1a4ki2k1anoi4kanzei2k1erhi2ker2li2k1etaik4leriik2o3p4ikt3erki2l3a2mi4lentsi2l1erfi2l1ergi2l1erril2f3reilig1a2ili4gabi2l1indil3l2eril4mangil2m3atil2z1arilz3erki2m1armimat5scima4turi2m1erfi2m1erzi2m1infi2m1insindes4ii2n1engin3erbei4nerbiiner4löing4sam3inkarninma4leinn4stains3ertin3skanin3stelin4s3umional3aion4spiir2m1eii4s1amtisch3ari3s2chei4schefi4schini2sch1lisch3leisch3obisch3reisch3rui4schwai4schwoisch3wuise3infi4seinti2s1ermi2s1essis4s1aci1s4tati1s4teui1s4tilit3a4reiten3s2iti4kaniti3k2ei2t1in1i2t3ranits1a2git2s1e4its3er1it2s1peit4stafi2v1enei2v1enti2z1enejek4terjektor4je2t1u2jugend3jung3s42k1a2bo2k3a2drka3len_ka4lenskal3eri2k1annakari3es2k1artikau2f1okauf4spke1in2d2k1eiseke4leim2ke2lek2ke3letkel3s2kk3enten2k1ents4kerfahk4erfamk3ergebk3er4hökerin4tker4kenker4neuker4zeu2k1i2dekie2l3o2ki3l2aki3n4o32k1inse4k1lastkle3ari4k3leit2k1o2fekop4fenkot4tak2k3räum2k3redekreier4k4s1amtk2s1ersk2s1erwk3stat4k2t3a2rk2t1erhk2t1ingkti4terk4torgakt3oriek2u3n2akuri4erku4schl4l3aben4l1a2bl2l1a2drla2g1oblan2d3rlang3s4l1a2po2la2r1anla2r1eila4rene3l2ar3glar3ini2l1ar3t3lasserla2t3ralat4tanlat2t3rlau2b3rlaub4se2l1ausslär2m1al2b1edel2b1insld3a2b1ld3a2ckl2d1a2dl2d3a2nld4arm_lecht4ele2g1asleh3r2elein4dulei4ßerleit3s22le2lekle2m1o24lendet4lenerg2l1ennilen4sem2l3entwlent4wäle2r3asler3engle4rers3lergehl3ergen2l1ergilerin4s2l1er2ö3l2erra2l1esellgeräu33lichem3licherliebe4slie2s3clik4ter2l1indulingst4lin2k1ali4schu2l1i4solkor2b1ll1a2bel2l1a2mlle4n3all3endul4lentsl4lerfol4lergoll3erntll3ertrl2l1indl2l1o2rll1ö4sellus5t6l2m3a2blm3einsl2m1e2pl2m1erz2l1o2bllos3t4r2l1ö4l3l2s1a2dl4s1ambl4schinl4schmül2s1e2bl2s1ersl2s1erwl2s1impls3ohnel4t3amel2t3atol2t1eislt4stablt4stocltu4ranluf2t1aluf2t1eluf2t5rlung4sclus4s3alus2s1cluss3erlus2s1olus2s1plus2s3tlus4stälus4t1alust3relut1o2fmach4trma4ges_ma4laktma4l3atma2l3ut2m1analman4ce_man3ers2m1angr4ma3r2oma3s2pa4m1aspemassen3mas4telma1s4trma2ta2b2m1au2fmäu2s1cmbast3emedien3mein4dame1i4so2m1e2miment4spme2r3apme4rensmerin4dmerin4tmerz4en4m1essames2s1omes2s1pme4t3römierer4mil4cheminde4sming3s4mi4schami4schnmi4schwmis2s1cmi2s5tem2m1ansmme4linm4mentwmme2ra2mme4recmmi1s4tmo4n1ermor2d3amoster4mpf3erpmpf3errms5trenm2t1erfm4t1ergm2t1erlm2t1ersm2t1ertm4t1etam2t1insmt3s2kamun2d1amül4lenmütter3na3chenna2l1a2na4lent4n1a2nana4schw4n1a2synauf4frn4austenbe3r2en3ce2n3n2d1anznde4al_nde4lännde4robn2d3ratn4d3runnd4stabnds3taune2e2i22ne2he_2nehen44n3eing4n3eink3ne3l2o4n1endb4n1endd4n1endf4n1endh4n1endk4n1endp4n1endt4n1endwne4nenenen4ge_nen4gen4n1entl4n3entwne2ra2bne3r4alne2r3am4nerbe_4nerben4n5erfonerfor42n3erhö2n1erlöner4mit4n1ernt3n2ers_2n3ersa4n3essine2t1akne2t1annett4scnfi4le_n2g3a2mn2g1andn2g1einnge4ramnge4zänn2g1i2dn3g2locngs5trinie3l2a3n2ing4ni4schwnitt4san4k3algn2k1insn2k1ortnk2s1aln4n1alln4nentsn2n1unfn2o3ble2n1ob2s2n3o2fenor2d5rno4t3eino2t3inno2t1opn2s1a2dn2s1alln2s1äusn6schefn4schronsen4spn2s1erkn2s1erön2s1erwn2s1erzn4s1etan2s1inin4sperin4stat_nst3eifn3stemmns4tentnst4erön4stracn4strien3t2a3cn4tanzan2t1eisn4t1essn2t1inhnton2s1nt3reifnt3riegntu4re_ntu4res1n2ung4n2z1a2gn4zensen4zentwn4zentznz3erwe2o3b4enoben3d4oben3seobe4riso2ch1ecocher4ko3d2e1iof2f1inoge2l1io2h1eiso2h1erto2h1erzoh4lergoh4lerwo3isch_ol2l3auoll1e2col2l1eiol4lerkoma4nero3m2eiso2m1indo2m1into2n1erdon3n2anont3antont3erwon4t3riop4ferdopi3er_o2r3almor2d3amor2d1irord3s2to4rientor2k3aror4mansor4mentor3n2o1oro3n2aor2t1akor4t1anor2t1auort3eigort3erfor2t3evort3insor4trauort3ricor2t1umo4sentsoss3andost1a2bos4t3amost3angos3tarros4ta4soster3eos4t1obost3ranost3roto2ß1enzo2ß1ereo2ß1erfo3t2e1iote2l1aote4leio2t1erwo2t1i2mot4terkoun4ge_our4ne_ozen4taöchs4tuögen2s1öl2f1eiö2r1e2lö3r2erzö2r1uneö2sch3mpa2r3afpar3akt2par2erpar4kampar4kaupe2l1a2pe3li4npe3n2alper2r1a2ph1erspil4zerpingen4pi2z1in3ple5n4po2p3akpo2p3arpor4tinpor4trepor6tripo2s3tepost3eipost3rap2p3a2bppe4lerp4t1entpt3ereip4t1erwp4t1erz2r1acetra4chebra4chinracht3rr3a2d3r3ra1k4l2r3alm_r4alt2hram4manram4m3uram2p3lran4dep4r3aneiran4spara2r1inra4schl2r3asph2r3attarau3e2nrau4man2raus5srbe3r2erchst4rr2d1elbrden4glrder4err2d1innre3alerrech3ar3reigewrei3l2arei3l2irei3necre1in2v2re2lek2r1entl2r1ents4r3entzr4ergen2r1ernä4r3erns4r3ernt3r2ers_2r1ersare2s2tu2r3evid2r3e2x1rfi4le_rfolg4srf4s1idrf2s3prr2g1a2drge4ralrge4taprgi4selr2g3ralrg5s2turi2d3anri3ers_ri3estiri2f1eirif4terri4generin4dexrin4diz4rinnta3r4ins_r4inspirin4tegrin4t5rri4schori4schwr3i2talr2k3reark4stecrkt3ersrk2t1o2rl2s3tor2m1aldr2n1anzr4n3eisr4n1enern3enser4n1ergrn4erhir4n1ertrol4lanro4nerbron4tanros2s1crre4aler2s1a2dr4s1amtr2s3angr3sch2er4stantrs4temprs4terbrst3ingrst3ranr2t1almrt3a4rer2t3attrtei3lartei1s4rten3s2rt3ereir4terfar4terfor4t3erhr2t1erkrter4rerte3s2kr2t1imar4t3rakr4treisrt4s1ehr2t1urtru3a2r3ruch3strun2d1arund3er2r1u2ni4r3uniorus2s1pru2t1o2rve4n1er2z1erfr2z1ergr2z1erkr2z1erwrz2t3ror3z2wecsa2cho22s1a2drsa4gentsa3i2k1sa2l1ids3ameri6s1amma2s3a2nasan4dri4s3antr4s3a2sy2s3aufb2s3ausb3s2ausesbe3r2es4ch2al4schanc4schangsch3ei_4schemp4schess4schiru4schle_sch6lit4schre_4schrinsch3rom4schrousch3s2k4schunt4schwetsch4wilsdien4e2s1echo2s1e2ckse2e1i4se2h1a2se4h1eise4herk5s4ein_sein4dusei3n2esein4fos4eins_4seinsp4seinstsel3ers2s1endl4s1entf2s3entg2s1entsser3a2dse2r3als3erbe_s3ereig2s1erfo4serfül4serken2s3ernt4s3eröf4sersehse4r1ufse3rund4se4tap4s1e2thsi3ach_siege4ssi2g1a2si2k1absik3erlsin3g4lsing3sasi4schuska4te_4skategska4tes4s3klassni3er_sni3ersso4l3eisol4lerson2s1o2s1orga5s2orgeso2r1o24s1o2ve4spensi3s2pi4e4spier43s4prec3sprosssrat4scss1a2cks4s1alas4s1albs4s3amts4s3angs4s3anzs3sa1s2s2s1egasse3infss3ersessquet4s3ta3li4s3tann3staus_st3a2ve4stechn3steilhstei4naste4mar6s5ter_3sterncs4t3ese3s4tett1s2ti2rst1i4sosto3s2t1s4trah4strans3s4tras4straum4s5träg4sträne4s5tref4streibst3renn2s4trig2s5trisst3rollstro4ma4st3run2s4t3s42stum2sstum4sc3s4tunds2t3uni2s3tuns2st3urtsuch4st3s4zene2ß1estrßi2g1a2ta2b1anta4bend2t1a2drta2g1eitahl3sk3t2aktuta4lensta2l1optan4gar2t1anme4t1anna3t2ans_4t3ansi4t3anspta4rens3t4a3rita2ta2bta2t3erta2t1um4t3ausg4t3auss4t1auswtbauer4tbe3r2e4teilhet3einget3einlate2l3abte2l1acte2l1autele4bete4l1ecte4l1ehte4leinte4lerd4t3elf_te2l1inte4losttel3s2kte2m1ei3temperte4na2dte4na2g4t3endf4t1endl4t3endpten3d4rten3eidten3ens4tenerg4t1eng_ten4glate4n3in4tensem4t3entw4t3entzte3ran_te2re2bter3endte4rengte4rerkterer4z4terfol4terfül3ter3g2t6ergru4terklä2t1erlöter4mert3erneuter4re_ter4sert4erst_t4erstit4erstute4r1ufter4wäh2t3erzbtes3tantest3eitestes4teu3ereteu3eriteu2r3a2t3e2xe2t1e2xi4thrin_4thrinsti4dendti3e4n3tie4recti4gerzti2ma2gtim2m1atin2g1at1in1ittin2k1l3t2ins_4t1inseti4que_ti4schatisch3w3ti3t2etle2r3atmen6t3tmo4desto2d1ertor3inttra3chatra4demtra4far2t3rams3t4ran_tre4ale3t4reib2t3reih4trenditre2t3r2t3rund3t4runkt3s2chat4schart3sch2et4schefts4chemtsch4lit4schrot2s1e2bt4seindt2s1engt2s1entt2s1i2dts4paret3s2pont3s2port4spreits3tätit2s3tepts3tradt4strants3traut2s3trät4streut4stropt2s3trütte4lebtte4lent3u2fertums5trtung4s5tu2r1ertu4schlt2z1e2ct2z1eiet2z1eistz3entsubal3l2ubi3os_u2b3rituch4spruch4toruch2t3ru4ckentu3ck2eruden3s2ue3reigue4rergue4rerku4erinnuer4neru3erunfu3eruntu2f1ä2ßu2f1erhu4ferleufs3temuf2t1ebu4gabteu2g1erfu2g1erlugge4stu2g3rüsu3isch_u3ischsuk2t1inulm3einu2m3a2ku2m1artu2m1ausument4su2m1ergu2m1erlu2m1erwumpf4lium2p3leum2s1peun2d1umun2k1a2unk4titunk2t3run2n3aduns4t1runte4riunvoll3up4t3a2upt3ergu2r3a2mu2r1anau2r1angurgros4ur3s2zeu2s1eseusi3er_us3partu2s1pasu3s2peku5s4pizust3abeu5strasus6trisute4leiuter4eruto4berut4schlut4schmut4schöutz3engut2z1inüch2s1cück3eriü4ckersück4speü3d2ensü2f1ergü2h1engü2h1erkü2h1erzühr3ei_ül2l1eiün2f1eiü2r1entüste3neva2t3a4va4t1inve4l1auvenen4dve3rand2ve3s2evid3s2tvie2h3avie4recvi2l1invollen4vormen4waffel3wah4lerwalt4stwar3stewa4schawä3schewe3cke_we3ckeswei3strwer4gelwe4r3iowest3eiwest1o2wim4m3uwolf4s3wol4lerwor2t3rxi2d1emx2t1e2dxtra3b4x2t3rany2l3a2myl4antezei2t1aze2l1a2ze2l1erze2l1inzel3t2hze4n3aczen4semzen4zerze2re2b2z1ergäz3erhalzerin4tzer4neb2z1ersazert1a2zert4anzer4tin4zerwei3z2erzazessen4zger4s1zin4ser4zinsufzon4terz3t2herzu2g1arzu4gentzwan2d1",
+			8 : "_al1e2r1_al5l4en_anden6k_ar4m3ac_ar4t3ei_ber6gab_ber4g3r_de3r4en_einen6g_en4d3er_en5der__er4zen4_ka4t3io_lo4g3in_mode6ra_ost5end_oste6re_par3t4h_richt6e_sucher6_tan4k3la2ch1e2ca4ch3erwacht5ergach6tritack3sta43a2er2o1af4t3erlage4s3tiah4l3erhal4b3erw3a2l1e2bal2l3a4rall5erfaalli5er_al4t3erfam4t3ernand6spas3a4n1erban4g3erfan4g3erlan4g3erzang4s3poani5ers_an2t3a4ran2z1i4nar4t3ramau5ereinau4s3erwauster6mau4ten4gau4t3erhäs4s3erkbach7t4ebal4l3ehbe4r3eiwber6gan_ber3st4abe6steinbe4s3tolbote3n4ebst5einbbu4s3chach3e4ben6chergebcher6zie6ckergeb4d3achse2d1an3d22d1e4ben3d2e1i2mde2l1a2gde4l3augdel5sterde4n3endden4k3li4den4semde4r3eisde3r4erbde3r4erfde4r3ero4d3erhöh4d3ersatdest5altdest5ratdienst5r2d1in1it4d3innerdi4t3erldi4t3ermdi4t3ersd4s3tätid3s4tern2d1u2m1edu4sch3le3a4reneech3t4eiege4n3a2eg4se4r1ehr6erleei4b3uteei4d3errei2m1a2gein6karnein6stalei6schwuei4s3erwek4t3erzeld5erstel4d3erwe4ler4fae4ler4lae4l3ernäe4l3e4taelgi5er_elgi5ersel4l3einemen4t3he6mentspen4d3esse4n3ermoeni5ers_en5sch4eenst5alten4s3täten4t3rolen4z3erfen4z3ergen4z3erke2r3a4sie4r3eis_e4r3entferi3e4n3er6tereier4t3erfess4e3rees4t3enges4t3erhes4t3essestmo6deet4z3enteue6reifeut6schnfacher5ffal6schafal6schmfe4r3anzfrach6trf4s3tätif4s3tresf4s3tütef4t1e4tift4s3tanfzeiten6gas4t3el2g1eise2gel4b3ragel4b3rogel6dersge4l3ers4g3ereigge4ren4sge4r3entge4s3terglei4t5rgrammen6gros6selg3s4tatigs4t3rosgu4t3erhhaft4s3phal6lerfhau3f4lihau5steihau6terkhe4f3inghel4l3auhe2n1e2bhe4r3eishe4r3o4bhfel6lerhich6terho6ckerlhol6zeneh6rerlebh3s4terbh3t4akt_h4teil4zh4t3elith4t3entsht5erkenh6terneuh4t3erreh6terstaht6ersteht6raumeht4s3turhu4l3enghut4z3eria4l3ermie4n3a2gie4n3ergienst5räie4r3erziesen3s4ie4t3erhie4t3ertiker6fahi3l4aufbim4m3enti2n1e2bei4ner4trin2g1a2gin4n3ermin4s3tätir4m3untir4sch3wi4sch3eii5schingi6schwiri4s3etatiso6nendis4s3cheit4z3ergjah4r3eika4n1a4s6kantennkehr4s3o4ken4gagken5steiker6gebnkerin6stk3er4lauk3er4lebk6erlebe2k1er2zikeu6schlkor6dergkre1i2e4k4s3tanzk4t3erfolan2d3a22lat2t1alat4t3inl2d1e2seleben4s3lei6nerble4n3end5lentwet4l3ereigle4r3eim3l4ergew6lerwerbli4g3ers2l1in1itl6lergebl6lergen2l1or3g2l4s3ort_l4s3tätils6ternels6ternsl4te4leml4t1e4skl2t1o2rilu2g1e2blus6serflus6serklus6serslu4t3ergl2z1u4femagi5er_magi5ersmar6schmmar6schrma4t3erdmen6tanz4m3entwi4m3ergänmes6sergmp4f3ergmp4f3erz4m3ungebmu4r1u2fnacht6ra4n3a2mernavi5er_navi5ersn4d3entsnder5stene2n1e2bn4g3erseng4s3e4h2n3i2gelni4k3ingn4k3erfanseh5eren4s3ort_n4s3prien4s3tatens6terbenst5opfenten6te_nt4s3parober3in4ode6rat_ode6rateoh4l3erholl5endsoll5erweol4z3ernonderer5on4t3endopf5erdeopi5ers_or4d3engo2r1e2ckorsch5lior4t3entor4t3ereor4t3offor4t3räuos4s3enzo2ß1en2kö4sch3eipargel6dpä4t1e2hpä4t3entpe4l3inkp2f1in3spos4t3agrach6trärali5er_rali5ersran4d3errau4m3agräu5scher2b1a2der4b3lastrch6terwrderin6sr4d3erntrege4l3äre4h3entreister6re4n3end4r3erken4r3erlaurge4l3errgen4z3w4r3innerrkstati6rk4t3engrk4t3erfrk6terscrk4t3erwr2m1o2rirn3e4benrol3l4enrpe4r3inr6scherlr4s3ort_r6strangr4t3erler4t3ernäru6ckerlrun6derlrun6dersrun6derwr4z3entssa4l3erbsat4z3en6schlein2s1e2bense4l3erl4s1e2pos6sereignse4r3eimse4r3enk2s1i2deoson5ende2s1o2riesrücker6sse3in4tstel4l3äs4t3endss4t3engls4t3entfste6rersstes6se_5st4reif1s4tri2ksun6derhtan6zerhta4r3eretau3f4litau6schrtau6schwtblock5e4t1e2bentein3e4cte2m1o2rte2n1e2bte3n4ei_ten4t3riten6zerh4t3erde_te4r3eif6tergreiter4n3art6erscha6terwerbtes6terkti4v3erlto6ckenttrücker6t4s1amt4t4s3esset3s4terotta6gess2t1u2niotu2r1a2gtu2r1e4tu2ch1e4cu3erin4tuern3s4tu4g3reisun4d3erfund5erhau2r1an5sur3a4renu6schentusch5werusi5ers_u4t3ersaüge6leiswach6stuwach4t4rwahl5entwandels6we5cken_wein4s3aweis4s3pwel6schlwel6schrwel4t3a2wen4k3ri5werdensxpor6terx2t1er2fx2t1il2l2z1e2benzeit5endzei4t3er4z3ergebzer4n3ei4z3erstezer4t3agzer6terezer6trau",
+			9 : "_char8me__er8stein_he6r5inn_men8schl_men8schw_os5t6alg_rü6cker6_wort5en6_wor8tendach8traumalli7ers_allkon8tral5s6terbausan8ne_äh4l3e4be6b5rechtebs3e4r3inchner8ei_dampf8erfden6s5taue6ch5erziee4r3en4ge6l5eier_erg3el4s3fal6l5erk6fel6ternfor4m3a4gforni7er_fzei8tendgot6t5erggrab8schegren6z5eihä6s5chenhe6rin6nuherin8terh6l3er4näh6t5erspaieler8gebi2k1e2r2eil4d3en4ti4sch3e4hkamp8ferfke6rin6nulan6d5erwlan6d5erzleis6s5erlepositi86mel6ternmorgen5s65n2en3t2aner8schlenich8tersn4n3er4wano6t5entrnsch7werdn5s6ternen5s6ternsos4s3en4kpapieren8ram6m5ersr8blasserres6s5erw6r5innenmris6t5ersr6st5eingrs4t3er4wr4t3er4lasfal6l5erspani7er_sse6r5atts4s3e4strsu6m5ents4t3a4genttblocken8tes6ter6gür4g3en4gvati8ons_vol6l5endwer6t5ermwin4d3e4czes6s5end",
+			10 : "_er8brecht_os8ten8deder6t5en6deren8z7endgram8m7endhrei6b5e6cos6t5er6werein8s7trewel6t5en6dwin8n7ersczge8rin8nu",
+			11 : "_er8stritt__spiege8leiach8träume_lei8t7er8scpapie8r7endpiegelei8en",
+			12 : "ach8träumen_7sprechende_",
+			13 : "_er8stritten_"
+		},
+		charSubstitution : {
+			'ſ' : 's'
+		}
+	};
+
+	var german = /*@__PURE__*/getDefaultExportFromCjs(de);
+
+	// settingsUtils.js
+
+
+
+	// Normalize names using constant time patterns
+	function normalizeName(name) {
+	  if (!name) return name;
+
+	  const decimalPattern = /\d(?:[\d_-]*\d)?/g;
+	  const hexPattern = /^[0-9A-Fa-f]+$/;
+	  const romanPattern = /^[IVXLCDM]+$/i;
+
+	  const decimalMatches = [...name.matchAll(decimalPattern)];
+	  const decimalMatch = decimalMatches.reduce((l, m) => (m[0].length > (l?.length || 0) ? m[0] : l), null);
+
+	  const tokens = name.split(/[_\s-]/);
+	  let selectedMatch = null;
+
+	  tokens.forEach((token) => {
+	    if (hexPattern.test(token)) {
+	      if (!selectedMatch || (selectedMatch.type !== "decimal" && token.length > selectedMatch.value.length)) {
+	        selectedMatch = { type: "hex", value: token };
+	      }
+	    }
+	    if (romanPattern.test(token) && isValidRoman(token)) {
+	      if (!selectedMatch || (selectedMatch.type !== "decimal" && selectedMatch.type !== "hex")) {
+	        selectedMatch = { type: "roman", value: token };
+	      }
+	    }
+	  });
+
+	  if (decimalMatch && (!selectedMatch || decimalMatch.length >= selectedMatch.value.length)) {
+	    selectedMatch = { type: "decimal", value: decimalMatch };
+	  }
+
+	  if (selectedMatch) {
+	    const { type, value } = selectedMatch;
+	    if (type === "decimal") {
+	      return name.replace(value, value.replace(/\d/g, "@"));
+	    } else if (type === "hex") {
+	      return name.replace(value, value.replace(/[0-9A-Fa-f]/g, "@"));
+	    } else if (type === "roman") {
+	      return name.replace(value, "#");
+	    }
+	  }
+
+	  return name;
+	}
+
+	//Canonicalize the nation name
+	function canonicalizeName(name) {
+	  return name.toLowerCase().trim().replace(/\s+/g, "_");
+	}
+
+	// Helper to validate Roman numerals
+	function isValidRoman(roman) {
+	  const romanRegex = /^(M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3}))$/i;
+	  return romanRegex.test(roman);
+	}
+
+	// Initialize Hypher instances for different languages
+	const hyphenators = {
+	  en: new Hypher$1(english),
+	  fr: new Hypher$1(french),
+	  de: new Hypher$1(german),
+	  // Add more languages as needed
+	};
+
+	/**
+	 * Format a nation name with optional language selection.
+	 * @param {string} name - The name to format.
+	 * @param {string} [language='en'] - The language for hyphenation ('en', 'fr', 'de', etc.).
+	 * @returns {string} - The formatted name.
+	 */
+	function formatNationName(name, language = "en") {
+	  if (!name) return name;
+
+	  // Default to English if the specified language is not available
+	  const hyphenator = hyphenators[language] || hyphenators.en;
+
+	  // Helper to insert zero-width space between alpha and numeric boundaries
+	  function insertZeroWidthSpace(input) {
+	    return input.replace(/([a-zA-Z])(?=\d)|(\d)(?=[a-zA-Z])/g, '$1\u200B$2');
+	  }
+
+	  // Helper to insert soft hyphens
+	  function insertShy(word) {
+	    // Try using the hyphenator for the specified language
+	    const hyphenated = hyphenator.hyphenate(word).join("&shy;");
+	    // If no hyphenation occurred, use a fallback to insert every 3 characters
+	    return hyphenated === word ? word.match(/.{1,3}/g).join("&shy;") : hyphenated;
+	  }
+
+	  // Helper to capitalize the first letter of a segment
+	  function capitalizeSegment(segment) {
+	    return segment.charAt(0).toUpperCase() + segment.slice(1);
+	  }
+
+	  // Process the name
+	  return name
+	    .replace(/_/g, " ") // Replace underscores with spaces
+	    .split(/(?=[-\s])|(?<=[-\s])/g) // Split by spaces or hyphens, retaining the delimiters
+	    .map((segment) => {
+	      if (segment === "-" || segment.trim() === "") {
+	        // Retain hyphens and spaces as-is
+	        return segment;
+	      }
+
+	      const withZeroWidthSpace = insertZeroWidthSpace(segment); // Add zero-width space
+	      const hyphenated = withZeroWidthSpace.length > 8 ? insertShy(withZeroWidthSpace) : withZeroWidthSpace; // Insert soft hyphens for long segments
+	      return capitalizeSegment(hyphenated); // Capitalize each segment
+	    })
+	    .join(""); // Rejoin without adding extra spaces
+	}
+
+	// Utility to format dates
+	function formatDate(ts) {
+	  if (!ts) return { formatted: "", relative: "" };
+
+	  const now = new Date();
+	  const date = new Date(ts * 1000);
+
+	  const dd = String(date.getDate()).padStart(2, "0");
+	  const mm = String(date.getMonth() + 1).padStart(2, "0");
+	  const yy = String(date.getFullYear()).slice(-2);
+	  const formatted = `${dd}/${mm}/${yy}`;
+
+	  const diffMs = now - date;
+	  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+	  const diffYears = Math.floor(diffDays / 365);
+	  const remainingDays = diffDays % 365;
+
+	  const relative = diffYears > 0 ? `${diffYears}y ${remainingDays}d ago` : `${diffDays}d ago`;
+
+	  return { formatted, relative };
+	}
+
+	// Utility to format prices
+	function formatPrice(price) {
+	  if (typeof price !== 'number') return 'N/A';
+	  const [integer, decimal] = price.toFixed(2).split('.');
+	  if (decimal === '00') {
+	    return `<span class="whitespace-nowrap">${integer}-</span>`;
+	  }
+	  return `<span class="whitespace-nowrap">${integer}<span class="text-sm font-medium underline relative top-[-0.4em]">${decimal}</span></span>`;
+	}
+
+	// Format large numbers into human-readable forms
+	function formatLargeNumber(value) {
+	  if (value > 10000) {
+	    return `${Math.floor(value / 1000)}K`;
+	  } else if (value > 1000) {
+	    return `${(value / 1000).toFixed(1)}K`;
+	  }
+	  return value;
+	}
+
+	// dataUtil.js
+
+
+	function tallyCounts(trades, roleKey, isTrade) {
+	  const tally = {};
+	  const rawToNormalizedMap = {};
+
+	  trades
+	    .filter((t) => (isTrade ? t.price !== 0 : t.price === 0))
+	    .forEach((t) => {
+	      const rawName = t[roleKey];
+	      if (!rawName) return; // Skip invalid entries
+
+	      let tallyName;
+
+	      if (useSettings().section === "puppets") {
+	        tallyName = findPuppetmaster(
+	          rawName.toLowerCase().replace(/\s+/g, "_")
+	        ).master; // Normalize and find puppet master
+	      } else {
+	        tallyName = normalizeName(rawName); // Normalize the name
+	      }
+
+	      // Track raw names associated with the normalized name
+	      if (!rawToNormalizedMap[tallyName]) {
+	        rawToNormalizedMap[tallyName] = new Set();
+	      }
+	      rawToNormalizedMap[tallyName].add(rawName);
+
+	      // Tally counts using the normalized name
+	      tally[tallyName] = (tally[tallyName] || 0) + 1;
+	    });
+
+	  // Format and return the tally
+	  return buildTallyContent(tally, rawToNormalizedMap);
+	}
+
+	function buildTallyContent(tally, rawToNormalizedMap) {
+	  return Object.entries(tally)
+	    .map(([normalizedName, count]) => {
+	      let rawNames = Array.from(rawToNormalizedMap[normalizedName]).sort();
+	      let aggregatedName;
+
+	      if (useSettings().section === "puppets") {
+	        aggregatedName = normalizedName;
+	      } else {
+	        aggregatedName = rawNames[0];
+	      }
+
+	      let cte = "";
+	      if (useSettings().showCTE) {
+	      cte = isNationCurrent(aggregatedName)  ? '' : `<svg xmlns="http://www.w3.org/2000/svg" class="fill-black h-3.5 inline -translate-y-[2px] pr-[3px]" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 19 24">
+      <path d="m16.317 21.569h.091c.645 0 1.263.256 1.718.712.456.456.712 1.074.712 1.718v.001h-18.838s0 0 0-.001c0-.644.256-1.262.712-1.718.455-.456 1.074-.712 1.718-.712h.091v-.175c0-2.069 1.677-3.746 3.746-3.746h.001v-14.076l3.16-3.572 3.142 3.572v14.076h.001c2.069 0 3.746 1.677 3.746 3.746z"></path>
+    </svg>`;
+	  }
+
+	      const displayName = `<a href="https://www.nationstates.net/nation=${encodeURIComponent(
+        aggregatedName
+      )}/page=deck/show_trades" target="_blank" rel="noopener noreferrer">${cte}${formatNationName(
+        aggregatedName
+      )}</a>`;
+
+	      // Only add tally info if there are multiple nations grouped
+	      let puppetTally = "";
+	      if (rawNames.length > 1) {
+	        puppetTally = `<div class="tally-info ml-0.25 inline text-gray-500">
+          <span>[${rawNames.length}]</span>
+        </div>`;
+	      }
+
+	      const wrappedDisplay = `${displayName}${puppetTally}`;
+
+	      console.debug({
+	        aggregatedName,
+	        rawNames,
+	        count,
+	      });
+
+	      return [wrappedDisplay, count];
+	    })
+	    .sort((a, b) => b[1] - a[1]); // Sort by count in descending order
+	}
+
+	// Utility function to manage URL parameters
+	function getQueryParam(name) {
+	  const params = new URLSearchParams(window.location.search);
+	  return params.get(name);
+	}
+
+	function setQueryParam(name, value) {
+	  const params = new URLSearchParams(window.location.search);
+	  if (value) {
+	    params.set(name, value);
+	  } else {
+	    params.delete(name);
+	  }
+	  const newUrl = `${window.location.pathname}?${params.toString()}`;
+	  history.replaceState({}, '', newUrl);
+	}
+
+	// Fetch data from the API
+	async function fetchData(role, nationId) {
+	  const url = `https://maki.kractero.com/api/trades?limit=-1&${role}=${nationId}&category=All&sortval=Timestamp&sortorder=Desc`;
+	  try {
+	    const response = await fetch(url);
+	    if (!response.ok) {
+	      console.error(`Failed to fetch ${role} data:`, response.status);
+	      return [];
+	    }
+	    const data = await response.json();
+	    return data.trades || [];
+	  } catch (err) {
+	    console.error(`Error fetching ${role} data:`, err);
+	    return [];
+	  }
+	}
+
+	// Build columns and rows
+	function makeTallyColumns(tally) {
+	  const totalCount = tally.reduce((sum, [_n, c]) => sum + c, 0);
+	  return [
+	    { label: "Nation", alignment: "left" },
+	    { label: formatLargeNumber(totalCount), alignment: "right" },
+	  ];
+	}
+
+	function makeTallyRows(tally) {
+	  return tally.map(([n, c]) => {
+
+	    // Format the count using the formatLargeNumber function
+	    const formattedCount = formatLargeNumber(c);
+	    
+
+	    // Return the formatted row
+	    return [n, formattedCount];
+	  });
+	}
+
+	function makeTradeColumns(role) {
+	  return [
+	    { label: role === 'buyer' ? "Buyer" : "Seller", alignment: "left", styles: ["min-w-[8ch]", "max-w-[18ch]"] },
+	    { label: "Card", alignment: "left", styles: ["min-w-[8ch]", "max-w-[18ch]"] },
+	    { label: "Price", alignment: "center", styles: ["min-w-[3ch]"] },
+	    { label: "Date", alignment: "center", styles: ["min-w-[7ch]"] },
+	  ];
+	}
+
+	function makeGiftColumns(role) {
+	  return [
+	    { label: role === 'buyer' ? "Buyer" : "Seller", alignment: "left", styles: ["min-w-[8ch]", "max-w-[18ch]"] },
+	    { label: "Card", alignment: "left", styles: ["min-w-[8ch]", "max-w-[18ch]"] },
+	    { label: "Date", alignment: "center", styles: ["min-w-[7ch]"] },
+	  ];
+	}
+
+
+	/**
+	 * Builds data rows for trades or gifts.
+	 * @param {Array} records - The array of records (trades or gifts).
+	 * @param {string} role - The role key ('buyer' or 'seller').
+	 * @param {function} filterCondition - A function to filter records (e.g., price !== 0 for trades, price === 0 for gifts).
+	 * @param {boolean} includePrice - Whether to include the price column (only applies to trades).
+	 * @param {boolean} showRelativeDate - Whether to show relative date by default.
+	 * @returns {Array} - An array of processed rows for the table.
+	 */
+	function makeRows(records, role, filterCondition, includePrice, showRelativeDate) {
+	  return records
+	    .filter(filterCondition)
+	    .map((r) => {
+	      let cte = "";
+	      if (useSettings().showCTE) {
+	      cte = isNationCurrent(r[role])  ? '' : `<svg xmlns="http://www.w3.org/2000/svg" class="fill-black h-3.5 inline -translate-y-[2px] pr-[3px]" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 19 24">
+      <path d="m16.317 21.569h.091c.645 0 1.263.256 1.718.712.456.456.712 1.074.712 1.718v.001h-18.838s0 0 0-.001c0-.644.256-1.262.712-1.718.455-.456 1.074-.712 1.718-.712h.091v-.175c0-2.069 1.677-3.746 3.746-3.746h.001v-14.076l3.16-3.572 3.142 3.572v14.076h.001c2.069 0 3.746 1.677 3.746 3.746z"></path>
+    </svg>`;
+	      }
+	      let nationDisplay = cte + formatNationName(r[role] || "N/A");
+	      const nationLink = `<a href="https://www.nationstates.net/nation=${encodeURIComponent(r[role] || "N/A")}"
+        target="_blank" rel="noopener noreferrer">${nationDisplay}</a>`;
+	      const cardLink = `<a href="https://www.nationstates.net/page=deck/card=${r.card_id}/season=${r.season}"
+        target="_blank" rel="noopener noreferrer">S${r.season} ${formatNationName(r.card_name || queryS4(r.card_id))}</a>`;
+	      const settings = useSettings();
+	      const rarityCategory = r.category || "C";
+
+	      // Conditionally cast "E" to "E1" based on the `redEpics` setting
+	      // Conditionally cast "L" to "L1" based on the `rainbowLegs` setting
+	      const normalizedRarity = settings.redEpics && rarityCategory.toUpperCase() === "E"
+	        ? "E1"
+	        : settings.rainbowLegs && rarityCategory.toUpperCase() === "L"
+	          ? "L1"
+	          : rarityCategory.toUpperCase();
+
+	      const rarityClass = `bg-rarity-${normalizedRarity}`;
+	      const { formatted, relative } = formatDate(r.timestamp);
+
+	      // Get puppet master information if the setting is enabled
+	      let puppetMasterText = '';
+	      if (settings.showPuppetmasters) {
+	        const puppetMaster = findPuppetmaster(r[role] || "N/A"); // Resolve puppet master
+	        if (puppetMaster.master !== r[role]) { // Only show if the puppet master is different
+	          let cte = "";
+	          if (useSettings().showCTE) {
+	          cte = isNationCurrent(puppetMaster.master) ? '' : `<svg xmlns="http://www.w3.org/2000/svg" class="fill-gray-500 h-[0.65rem] inline -translate-y-[1.5px] pr-[2.5px]" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 19 24">
+       <path d="m16.317 21.569h.091c.645 0 1.263.256 1.718.712.456.456.712 1.074.712 1.718v.001h-18.838s0 0 0-.001c0-.644.256-1.262.712-1.718.455-.456 1.074-.712 1.718-.712h.091v-.175c0-2.069 1.677-3.746 3.746-3.746h.001v-14.076l3.16-3.572 3.142 3.572v14.076h.001c2.069 0 3.746 1.677 3.746 3.746z"></path>
+     </svg>`;
+	        }
+	          puppetMasterText += `<span class="text-gray-500 text-sm"><a href="https://www.nationstates.net/nation=${puppetMaster.master}"
+        target="_blank" rel="noopener noreferrer">${cte}${formatNationName(puppetMaster.master)}</a></span>`;
+	        }
+	      }
+
+
+
+	      // Build the base row with nation, puppet master (if enabled), and card links
+	      const row = [
+	        `${nationLink}${puppetMasterText ? `<br>${puppetMasterText}` : ''}`, // Add puppet master info below nation name
+	        { value: cardLink, class: rarityClass },
+	      ];
+
+	      // Conditionally add the price column only if `includePrice` is true
+	      if (includePrice) {
+	        row.push({ value: formatPrice(r.price), class: "" });
+	      }
+
+	      // Add the date column
+	      row.push({
+	        value: `<span class="date-formatted ${showRelativeDate ? 'hidden' : 'block'}">${formatted}</span>
+                <span class="date-relative ${showRelativeDate ? 'block' : 'hidden'}">${relative}</span>`,
+	        class: "date-cell",
+	        onClick: toggleDateFormat, // Attach click handler for toggling
+	      });
+
+	      return row;
+	    });
+	}
+
+	/**
+	 * Builds rows for trades (price !== 0).
+	 * @param {Array} records - The array of trade records.
+	 * @param {string} role - The role key ('buyer' or 'seller').
+	 * @returns {Array} - The processed rows for the trade table.
+	 */
+	function makeTradeRows(records, role) {
+	  return makeRows(records, role, (r) => r.price !== 0, true, useSettings().showRelativeDate); // Include price
+	}
+
+	/**
+	 * Builds rows for gifts (price === 0).
+	 * @param {Array} records - The array of gift records.
+	 * @param {string} role - The role key ('buyer' or 'seller').
+	 * @returns {Array} - The processed rows for the gift table.
+	 */
+	function makeGiftRows(records, role) {
+	  return makeRows(records, role, (r) => r.price === 0, false, useSettings().showRelativeDate); // Exclude price
+	}
+
+
+	/**
+	* Toggles the visibility of all formatted and relative date spans in the table.
+	*/
+	function toggleDateFormat() {
+	  // Select all date cells
+	  const dateCells = document.querySelectorAll('.date-cell');
+
+	  dateCells.forEach((cell) => {
+	    const formatted = cell.querySelector('.date-formatted');
+	    const relative = cell.querySelector('.date-relative');
+
+	    if (formatted && relative) {
+	      // Toggle visibility for all date cells
+	      formatted.classList.toggle('hidden');
+	      relative.classList.toggle('hidden');
+	    }
+	  });
+	}
+
+	mark_module_start();
+	CollapsibleTable[FILENAME] = 'src/CollapsibleTable.svelte';
+
+	var root_1$2 = add_locations(template(`<h2 class="text-xl font-semibold font-inter mt-2 mb-2"> </h2>`), CollapsibleTable[FILENAME], [[29, 4]]);
+	var root_2 = add_locations(template(`<th> </th>`), CollapsibleTable[FILENAME], [[40, 4]]);
+	var root_5 = add_locations(template(`<td><!></td>`), CollapsibleTable[FILENAME], [[57, 10]]);
+	var root_6 = add_locations(template(`<td><!></td>`), CollapsibleTable[FILENAME], [[70, 10]]);
+	var root_3 = add_locations(template(`<tr class="bg-white hover:bg-gray-100 transition"></tr>`), CollapsibleTable[FILENAME], [[53, 4]]);
+
+	var root_8 = add_locations(
+		template(`<button aria-label="Show More" class="bg-blue-500 text-white size-6
+            rounded-full hover:bg-blue-600 focus:outline-none
+            focus:ring focus:ring-blue-300 transition flex items-center justify-center"><img src="./icons/arrow_down.svg" alt="Show More" class="size-5"></button>`),
+		CollapsibleTable[FILENAME],
+		[[100, 4, [[107, 6]]]]
+	);
+
+	var root_9 = add_locations(
+		template(`<button aria-label="Show All" class="bg-blue-500 text-white size-6
+            rounded-full hover:bg-blue-600 focus:outline-none
+            focus:ring focus:ring-blue-300 transition flex items-center justify-center"><img src="./icons/arrows_down.svg" alt="Show More" class="size-5"></button>`),
+		CollapsibleTable[FILENAME],
+		[[112, 4, [[119, 6]]]]
+	);
+
+	var root_10 = add_locations(
+		template(`<button aria-label="Collapse" class="bg-blue-500 text-white size-6
+            rounded-full hover:bg-blue-600 focus:outline-none
+            focus:ring focus:ring-blue-300 transition flex items-center justify-center"><img src="./icons/arrows_down.svg" alt="Collapse" class="size-5 transform rotate-180"></button>`),
+		CollapsibleTable[FILENAME],
+		[[124, 4, [[131, 6]]]]
+	);
+
+	var root_7 = add_locations(template(`<!> <!> <!>`, 1), CollapsibleTable[FILENAME], []);
+
+	var root$1 = add_locations(template(`<!> <table class="w-full border-separate mb-3 text-left tabular-nums border-spacing-0"><thead><tr></tr></thead><tbody></tbody></table> <div class="flex justify-end items-center gap-1"><span class="text-sm text-gray-600"> </span> <!></div>`, 1), CollapsibleTable[FILENAME], [
+		[
+			35,
+			0,
+			[[37, 0, [[38, 2]]], [51, 0]]
+		],
+		[90, 2, [[92, 4]]]
+	]);
+
+	function CollapsibleTable($$anchor, $$props) {
+		if (new.target) return createClassComponent({ component: CollapsibleTable, ...$$anchor });
+		push($$props, false, CollapsibleTable);
+
+		let title = prop($$props, 'title', 12, '');
+		let columns = prop($$props, 'columns', 28, () => []);
+		let rows = prop($$props, 'rows', 28, () => []);
+		let defaultRows = prop($$props, 'defaultRows', 12, 25);
+		let increment = prop($$props, 'increment', 12, 25);
+		// how many rows are currently visible
+		let visibleCount = mutable_state(defaultRows());
+
+		function showMore() {
+			set(visibleCount, Math.min(get$1(visibleCount) + increment(), rows().length));
+		}
+
+		function showAll() {
+			set(visibleCount, rows().length);
+		}
+
+		function collapse() {
+			set(visibleCount, defaultRows());
+		}
+
+		legacy_pre_effect(
+			() => (
+				get$1(visibleCount),
+				deep_read_state(rows())
+			),
+			() => {
+				set(visibleCount, Math.min(get$1(visibleCount), rows().length));
+			}
+		);
+
+		legacy_pre_effect_reset();
+		init();
+
+		var fragment = root$1();
+		var node = first_child(fragment);
+
+		{
+			var consequent = ($$anchor) => {
+				var h2 = root_1$2();
+				var text = child(h2, true);
+
+				reset(h2);
+				template_effect(() => set_text(text, title()));
+				append($$anchor, h2);
+			};
+
+			if_block(node, ($$render) => {
+				if (title()) $$render(consequent);
+			});
+		}
+
+		var table = sibling(node, 2);
+		var thead = child(table);
+		var tr = child(thead);
+
+		each(tr, 5, columns, index, ($$anchor, col, index) => {
+			var th = root_2();
+			var text_1 = child(th, true);
+
+			reset(th);
+
+			template_effect(() => {
+				set_class(th, `px-1.5 py-2 bg-black text-white font-medium align-top ${strict_equals(index, 0) ? 'rounded-tl-md rounded-bl-md' : ''} 
+      ${strict_equals(index, columns().length - 1) ? 'rounded-tr-md rounded-br-md' : ''} text-${get$1(col).alignment || 'left'}`);
+
+				set_text(text_1, get$1(col).label);
+			});
+
+			append($$anchor, th);
+		});
+
+		reset(tr);
+		reset(thead);
+
+		var tbody = sibling(thead);
+
+		each(tbody, 5, () => rows().slice(0, get$1(visibleCount)), index, ($$anchor, row) => {
+			var tr_1 = root_3();
+
+			each(tr_1, 5, () => get$1(row), index, ($$anchor, cell, cellIndex) => {
+				var fragment_1 = comment();
+				var node_1 = first_child(fragment_1);
+
+				{
+					var consequent_1 = ($$anchor) => {
+						var td = root_5();
+						var node_2 = child(td);
+
+						html(node_2, () => strict_equals(typeof get$1(cell), 'object') ? get$1(cell).value : get$1(cell), false, false);
+						reset(td);
+
+						template_effect(
+							($0) => set_class(td, $0),
+							[
+								() => `px-1.5 py-1 align-top border-b border-gray-300 
+              ${strict_equals(columns()[cellIndex]?.alignment, 'left') ? 'text-left' : ''} 
+              ${strict_equals(columns()[cellIndex]?.alignment, 'center') ? 'text-center' : ''} 
+              ${strict_equals(columns()[cellIndex]?.alignment, 'right') ? 'text-right' : ''} 
+              ${columns()[cellIndex]?.styles?.join(' ') || ''} 
+              ${strict_equals(typeof get$1(cell), 'object') ? get$1(cell).class : ''}`
+							],
+							derived_safe_equal
+						);
+
+						event('click', td, (e) => get$1(cell).onClick(e));
+						append($$anchor, td);
+					};
+
+					var alternate = ($$anchor) => {
+						var td_1 = root_6();
+						var node_3 = child(td_1);
+
+						html(node_3, () => strict_equals(typeof get$1(cell), 'object') ? get$1(cell).value : get$1(cell), false, false);
+						reset(td_1);
+
+						template_effect(
+							($0) => set_class(td_1, $0),
+							[
+								() => `px-1.5 py-1 align-top border-b border-gray-300 
+              ${strict_equals(columns()[cellIndex]?.alignment, 'left') ? 'text-left' : ''} 
+              ${strict_equals(columns()[cellIndex]?.alignment, 'center') ? 'text-center' : ''} 
+              ${strict_equals(columns()[cellIndex]?.alignment, 'right') ? 'text-right' : ''} 
+              ${columns()[cellIndex]?.styles?.join(' ') || ''} 
+              ${strict_equals(typeof get$1(cell), 'object') ? get$1(cell).class : ''}`
+							],
+							derived_safe_equal
+						);
+
+						append($$anchor, td_1);
+					};
+
+					if_block(node_1, ($$render) => {
+						if (get$1(cell).onClick) $$render(consequent_1); else $$render(alternate, false);
+					});
+				}
+
+				append($$anchor, fragment_1);
+			});
+
+			reset(tr_1);
+			append($$anchor, tr_1);
+		});
+
+		reset(tbody);
+		reset(table);
+
+		var div = sibling(table, 2);
+		var span = child(div);
+		var text_2 = child(span);
+
+		reset(span);
+
+		var node_4 = sibling(span, 2);
+
+		{
+			var consequent_5 = ($$anchor) => {
+				var fragment_2 = root_7();
+				var node_5 = first_child(fragment_2);
+
+				{
+					var consequent_2 = ($$anchor) => {
+						var button = root_8();
+
+						event('click', button, showMore);
+						append($$anchor, button);
+					};
+
+					if_block(node_5, ($$render) => {
+						if (get$1(visibleCount) < rows().length) $$render(consequent_2);
+					});
+				}
+
+				var node_6 = sibling(node_5, 2);
+
+				{
+					var consequent_3 = ($$anchor) => {
+						var button_1 = root_9();
+
+						event('click', button_1, showAll);
+						append($$anchor, button_1);
+					};
+
+					if_block(node_6, ($$render) => {
+						if (get$1(visibleCount) + defaultRows() < rows().length) $$render(consequent_3);
+					});
+				}
+
+				var node_7 = sibling(node_6, 2);
+
+				{
+					var consequent_4 = ($$anchor) => {
+						var button_2 = root_10();
+
+						event('click', button_2, collapse);
+						append($$anchor, button_2);
+					};
+
+					if_block(node_7, ($$render) => {
+						if (get$1(visibleCount) > defaultRows()) $$render(consequent_4);
+					});
+				}
+
+				append($$anchor, fragment_2);
+			};
+
+			if_block(node_4, ($$render) => {
+				if (rows().length > defaultRows()) $$render(consequent_5);
+			});
+		}
+
+		reset(div);
+		template_effect(() => set_text(text_2, `showing ${get$1(visibleCount) ?? ''}/${rows().length ?? ''} rows`));
+		append($$anchor, fragment);
+
+		return pop({
+			get title() {
+				return title();
+			},
+			set title($$value) {
+				title($$value);
+				flush_sync();
+			},
+			get columns() {
+				return columns();
+			},
+			set columns($$value) {
+				columns($$value);
+				flush_sync();
+			},
+			get rows() {
+				return rows();
+			},
+			set rows($$value) {
+				rows($$value);
+				flush_sync();
+			},
+			get defaultRows() {
+				return defaultRows();
+			},
+			set defaultRows($$value) {
+				defaultRows($$value);
+				flush_sync();
+			},
+			get increment() {
+				return increment();
+			},
+			set increment($$value) {
+				increment($$value);
+				flush_sync();
+			},
+			$set: update_legacy_props,
+			$on: ($$event_name, $$event_cb) => add_legacy_event_listener($$props, $$event_name, $$event_cb)
+		});
+	}
+
+	mark_module_end(CollapsibleTable);
+
+	mark_module_start();
+	LoadingTable[FILENAME] = 'src/LoadingTable.svelte';
+
+	var root_1$1 = add_locations(template(`<h2 class="text-xl font-semibold font-inter mt-2 mb-2"> </h2> <p> </p>`, 1), LoadingTable[FILENAME], [[9, 2], [12, 2]]);
+
+	function LoadingTable($$anchor, $$props) {
+		if (new.target) return createClassComponent({ component: LoadingTable, ...$$anchor });
+		push($$props, false, LoadingTable);
+
+		let title = prop($$props, 'title', 12, '');
+		let content = prop($$props, 'content', 12, '');
+		var fragment = comment();
+		var node = first_child(fragment);
+
+		{
+			var consequent = ($$anchor) => {
+				var fragment_1 = root_1$1();
+				var h2 = first_child(fragment_1);
+				var text = child(h2, true);
+
+				reset(h2);
+
+				var p = sibling(h2, 2);
+				var text_1 = child(p, true);
+
+				reset(p);
+
+				template_effect(() => {
+					set_text(text, title());
+					set_text(text_1, content());
+				});
+
+				append($$anchor, fragment_1);
+			};
+
+			if_block(node, ($$render) => {
+				if (title()) $$render(consequent);
+			});
+		}
+
+		append($$anchor, fragment);
+
+		return pop({
+			get title() {
+				return title();
+			},
+			set title($$value) {
+				title($$value);
+				flush_sync();
+			},
+			get content() {
+				return content();
+			},
+			set content($$value) {
+				content($$value);
+				flush_sync();
+			},
+			$set: update_legacy_props,
+			$on: ($$event_name, $$event_cb) => add_legacy_event_listener($$props, $$event_name, $$event_cb)
+		});
+	}
+
+	mark_module_end(LoadingTable);
+
+	mark_module_start();
+	App[FILENAME] = 'src/App.svelte';
+
+	var root_1 = add_locations(template(`<div class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center"><!></div>`), App[FILENAME], [[218, 2]]);
+
+	var root = add_locations(
+		template(`<div class="px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-16"><div class="relative text-center mb-4"><h1 class="text-2xl font-bold font-inter">Unsmurf thru Card Trades</h1> <p class="text-gray-600">An alternative UI for <a href="https://bazaar.kractero.com/" class="text-blue-500 hover:underline">Kractero's Bazaar</a> to make identifying puppets easier.</p> <div class="flex items-center justify-between mt-4 w-full"><div class="flex-1"></div> <div class="flex-3 flex items-center justify-center gap-2"><input id="nationId" type="text" placeholder="Testlandia" class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"> <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Lookup</button></div> <div class="flex-1 flex justify-end"><button aria-label="Config" class="bg-black text-white font-bold p-2 size-10
+					   rounded-full hover:bg-gray-600 focus:outline-none
+					   focus:ring focus:ring-gray-300 transition"><img src="https://ns-rot.github.io/unsmurf/icons/config.svg" alt="Config" class="w-6 h-6"></button></div></div></div> <!> <div class="alert"></div> <div id="tally-row" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 :gap-4"><div><!></div> <div><!></div> <div><!></div> <div><!></div></div> <div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-2.5 md:gap-4 mt-6"><div><!></div> <div><!></div> <div><!></div> <div><!></div></div></div>`),
+		App[FILENAME],
+		[
+			[
+				172,
+				0,
+				[
+					[
+						174,
+						1,
+						[
+							[176, 2],
+							[177, 2, [[179, 3]]],
+							[
+								184,
+								2,
+								[
+									[185, 3],
+									[186, 3, [[187, 4], [195, 4]]],
+									[
+										202,
+										3,
+										[[203, 4, [[210, 4]]]]
+									]
+								]
+							]
+						]
+					],
+					[224, 1],
+					[
+						228,
+						1,
+						[
+							[230, 3],
+							[244, 3],
+							[258, 3],
+							[272, 3]
+						]
+					],
+					[
+						288,
+						1,
+						[
+							[290, 2],
+							[304, 3],
+							[318, 3],
+							[332, 3]
+						]
+					]
+				]
+			]
+		]
+	);
+
+	function App($$anchor, $$props) {
+		if (new.target) return createClassComponent({ component: App, ...$$anchor });
+		push($$props, false, App);
+
+		const settings = mutable_state();
+		let nationId = mutable_state('');
+		let loading = mutable_state(false);
+		let buys = mutable_state([]);
+		let sells = mutable_state([]);
+		let buyTallyTrades = mutable_state([]);
+		let buyTallyGifts = mutable_state([]);
+		let sellTallyTrades = mutable_state([]);
+		let sellTallyGifts = mutable_state([]);
+		let showConfig = mutable_state(false);
+
+		function redirectToPage() {
+			if (!get$1(nationId).trim()) {
+				alert('Please enter a nation name.');
+				return;
+			}
+
+			const safeNation = get$1(nationId).trim().replace(/[^A-Za-z0-9_\-\s]/g, '').replace(/\s+/g, '_');
+			const targetURL = `./?q=${encodeURIComponent(safeNation)}`;
+
+			window.location.href = targetURL; // Navigate to the target page
+		}
+
+		async function loadTradeData() {
+			if (!get$1(nationId).trim()) {
+				alert('Please enter a nation name.');
+				return;
+			}
+
+			set(loading, true);
+
+			const safeNation = get$1(nationId).trim();
+
+			setQueryParam('q', safeNation);
+			document.title = `Unsmurf | ${safeNation}`;
+			set(buys, []);
+			set(sells, []);
+			set(buyTallyTrades, []);
+			set(buyTallyGifts, []);
+			set(sellTallyTrades, []);
+			set(sellTallyGifts, []);
+
+			const [fetchedBuys, fetchedSells] = await Promise.all([
+				fetchData('buyer', safeNation),
+				fetchData('seller', safeNation)
+			]);
+
+			set(buys, fetchedBuys);
+			set(sells, fetchedSells);
+			set(buyTallyTrades, await tallyCounts(get$1(buys), 'seller', true));
+			set(buyTallyGifts, await tallyCounts(get$1(buys), 'seller', false));
+			set(sellTallyTrades, await tallyCounts(get$1(sells), 'buyer', true));
+			set(sellTallyGifts, await tallyCounts(get$1(sells), 'buyer', false));
+
+			if (equals(safeNation, null, false)) {
+				const canonicalizedName = canonicalizeName(safeNation);
+				const isCTE = !isNationCurrent(canonicalizedName);
+				const puppetOf = findPuppetmaster(canonicalizedName).master;
+				let formattedName = formatNationName(canonicalizedName);
+				let formattedMasterName;
+				let isPuppet;
+
+				if (equals(puppetOf, null, false)) {
+					if (equals(puppetOf, canonicalizedName, false)) {
+						isPuppet = true;
+						formattedMasterName = formatNationName(puppetOf);
+					}
+				}
+
+				let alertMessage = '';
+
+				if (isCTE && isPuppet) {
+					alertMessage = `<strong>${formattedName}</strong>, a puppet of <strong>${formattedMasterName}</strong>, is not an active nation`;
+				} else if (isCTE) {
+					alertMessage = `<strong>${formattedName}</strong> is not an active nation`;
+				} else if (isPuppet) {
+					alertMessage = `<strong>${formattedName}</strong> is a puppet of <strong>${formattedMasterName}</strong>`;
+				}
+
+				// Show alert if nation is not current
+				if (isCTE) {
+					document.querySelector('.alert').innerHTML = `
+	<div class="w-[120%] mx-[-10%] bg-black text-white text-center font-inter py-3 mt-7.5 mb-4.5" role="alert">
+  		<div class="w-[75%] mx-auto">${alertMessage}</div>
+  	</div>
+		`;
+				} else if (isPuppet) {
+					document.querySelector('.alert').innerHTML = `
+	<div class="rounded-full bg-black text-white text-center font-inter py-3 mt-7.5 mb-4.5" role="alert">
+		<div class="w-[90%] mx-auto">${alertMessage}</div>
+	</div>
+		`;
+				}
+			}
+
+			set(loading, false);
+		}
+
+		onMount(async () => {
+			console.log(...log_if_contains_state('log', "onMount triggered."));
+			await fetchSheets();
+			console.log(...log_if_contains_state('log', "Sheets fetched."));
+
+			const fromURL = getQueryParam('q');
+
+			if (fromURL) {
+				console.log(...log_if_contains_state('log', "Redirecting to page:", fromURL));
+				set(nationId, fromURL);
+				loadTradeData();
+			}
+		});
+
+		function handleEnter(e) {
+			if (strict_equals(e.key, 'Enter')) {
+				redirectToPage();
+			}
+		}
+
+		function openConfig() {
+			set(showConfig, true);
+		}
+
+		function closeConfig() {
+			set(showConfig, false);
+		}
+
+		legacy_pre_effect(() => (settingsStore), () => {
+			set(settings, get(settingsStore));
+		});
+
+		legacy_pre_effect_reset();
+		init();
+
+		var div = root();
+		var div_1 = child(div);
+		var div_2 = sibling(child(div_1), 4);
+		var div_3 = sibling(child(div_2), 2);
+		var input = child(div_3);
+
+		remove_input_defaults(input);
+
+		var button = sibling(input, 2);
+
+		reset(div_3);
+
+		var div_4 = sibling(div_3, 2);
+		var button_1 = child(div_4);
+
+		reset(div_4);
+		reset(div_2);
+		reset(div_1);
+
+		var node = sibling(div_1, 2);
+
+		{
+			var consequent = ($$anchor) => {
+				var div_5 = root_1();
+				var node_1 = child(div_5);
+
+				Config(node_1, {
+					settingsStore,
+					$$events: { close: closeConfig }
+				});
+
+				reset(div_5);
+				append($$anchor, div_5);
+			};
+
+			if_block(node, ($$render) => {
+				if (get$1(showConfig)) $$render(consequent);
+			});
+		}
+
+		var div_6 = sibling(node, 4);
+		var div_7 = child(div_6);
+		var node_2 = child(div_7);
+
+		{
+			var consequent_1 = ($$anchor) => {
+				LoadingTable($$anchor, {
+					title: 'Gifts Sent',
+					content: 'Loading data...'
+				});
+			};
+
+			var alternate = ($$anchor) => {
+				const expression = derived_safe_equal(() => makeTallyColumns(get$1(sellTallyGifts)));
+				var columns = derived_safe_equal(() => get$1(expression));
+				const expression_1 = derived_safe_equal(() => makeTallyRows(get$1(sellTallyGifts)));
+				var rows = derived_safe_equal(() => get$1(expression_1));
+
+				CollapsibleTable($$anchor, {
+					title: 'Gifts Sent',
+					defaultRows: 10,
+					increment: 10,
+					get columns() {
+						return get$1(columns);
+					},
+					get rows() {
+						return get$1(rows);
+					}
+				});
+			};
+
+			if_block(node_2, ($$render) => {
+				if (get$1(loading)) $$render(consequent_1); else $$render(alternate, false);
+			});
+		}
+
+		reset(div_7);
+
+		var div_8 = sibling(div_7, 2);
+		var node_3 = child(div_8);
+
+		{
+			var consequent_2 = ($$anchor) => {
+				LoadingTable($$anchor, {
+					title: 'Gifts Received',
+					content: 'Loading data...'
+				});
+			};
+
+			var alternate_1 = ($$anchor) => {
+				const expression_2 = derived_safe_equal(() => makeTallyColumns(get$1(buyTallyGifts)));
+				var columns_1 = derived_safe_equal(() => get$1(expression_2));
+				const expression_3 = derived_safe_equal(() => makeTallyRows(get$1(buyTallyGifts)));
+				var rows_1 = derived_safe_equal(() => get$1(expression_3));
+
+				CollapsibleTable($$anchor, {
+					title: 'Gifts Received',
+					defaultRows: 10,
+					increment: 10,
+					get columns() {
+						return get$1(columns_1);
+					},
+					get rows() {
+						return get$1(rows_1);
+					}
+				});
+			};
+
+			if_block(node_3, ($$render) => {
+				if (get$1(loading)) $$render(consequent_2); else $$render(alternate_1, false);
+			});
+		}
+
+		reset(div_8);
+
+		var div_9 = sibling(div_8, 2);
+		var node_4 = child(div_9);
+
+		{
+			var consequent_3 = ($$anchor) => {
+				LoadingTable($$anchor, {
+					title: 'Cards Sold',
+					content: 'Loading data...'
+				});
+			};
+
+			var alternate_2 = ($$anchor) => {
+				const expression_4 = derived_safe_equal(() => makeTallyColumns(get$1(sellTallyTrades)));
+				var columns_2 = derived_safe_equal(() => get$1(expression_4));
+				const expression_5 = derived_safe_equal(() => makeTallyRows(get$1(sellTallyTrades)));
+				var rows_2 = derived_safe_equal(() => get$1(expression_5));
+
+				CollapsibleTable($$anchor, {
+					title: 'Cards Sold',
+					defaultRows: 10,
+					increment: 10,
+					get columns() {
+						return get$1(columns_2);
+					},
+					get rows() {
+						return get$1(rows_2);
+					}
+				});
+			};
+
+			if_block(node_4, ($$render) => {
+				if (get$1(loading)) $$render(consequent_3); else $$render(alternate_2, false);
+			});
+		}
+
+		reset(div_9);
+
+		var div_10 = sibling(div_9, 2);
+		var node_5 = child(div_10);
+
+		{
+			var consequent_4 = ($$anchor) => {
+				LoadingTable($$anchor, {
+					title: 'Cards Purchased',
+					content: 'Loading data...'
+				});
+			};
+
+			var alternate_3 = ($$anchor) => {
+				const expression_6 = derived_safe_equal(() => makeTallyColumns(get$1(buyTallyTrades)));
+				var columns_3 = derived_safe_equal(() => get$1(expression_6));
+				const expression_7 = derived_safe_equal(() => makeTallyRows(get$1(buyTallyTrades)));
+				var rows_3 = derived_safe_equal(() => get$1(expression_7));
+
+				CollapsibleTable($$anchor, {
+					title: 'Cards Purchased',
+					defaultRows: 10,
+					increment: 10,
+					get columns() {
+						return get$1(columns_3);
+					},
+					get rows() {
+						return get$1(rows_3);
+					}
+				});
+			};
+
+			if_block(node_5, ($$render) => {
+				if (get$1(loading)) $$render(consequent_4); else $$render(alternate_3, false);
+			});
+		}
+
+		reset(div_10);
+		reset(div_6);
+
+		var div_11 = sibling(div_6, 2);
+		var div_12 = child(div_11);
+		var node_6 = child(div_12);
+
+		{
+			var consequent_5 = ($$anchor) => {
+				LoadingTable($$anchor, {
+					title: 'Detailed Gifts Sent',
+					content: 'Loading data...'
+				});
+			};
+
+			var alternate_4 = ($$anchor) => {
+				const expression_8 = derived_safe_equal(() => makeGiftColumns('buyer'));
+				var columns_4 = derived_safe_equal(() => get$1(expression_8));
+				const expression_9 = derived_safe_equal(() => makeGiftRows(get$1(sells), 'buyer'));
+				var rows_4 = derived_safe_equal(() => get$1(expression_9));
+
+				CollapsibleTable($$anchor, {
+					title: 'Detailed Gifts Sent',
+					get columns() {
+						return get$1(columns_4);
+					},
+					get rows() {
+						return get$1(rows_4);
+					},
+					defaultRows: 25,
+					increment: 25
+				});
+			};
+
+			if_block(node_6, ($$render) => {
+				if (get$1(loading)) $$render(consequent_5); else $$render(alternate_4, false);
+			});
+		}
+
+		reset(div_12);
+
+		var div_13 = sibling(div_12, 2);
+		var node_7 = child(div_13);
+
+		{
+			var consequent_6 = ($$anchor) => {
+				LoadingTable($$anchor, {
+					title: 'Detailed Gifts Received',
+					content: 'Loading data...'
+				});
+			};
+
+			var alternate_5 = ($$anchor) => {
+				const expression_10 = derived_safe_equal(() => makeGiftColumns('seller'));
+				var columns_5 = derived_safe_equal(() => get$1(expression_10));
+				const expression_11 = derived_safe_equal(() => makeGiftRows(get$1(buys), 'seller'));
+				var rows_5 = derived_safe_equal(() => get$1(expression_11));
+
+				CollapsibleTable($$anchor, {
+					title: 'Detailed Gifts Received',
+					get columns() {
+						return get$1(columns_5);
+					},
+					get rows() {
+						return get$1(rows_5);
+					},
+					defaultRows: 25,
+					increment: 25
+				});
+			};
+
+			if_block(node_7, ($$render) => {
+				if (get$1(loading)) $$render(consequent_6); else $$render(alternate_5, false);
+			});
+		}
+
+		reset(div_13);
+
+		var div_14 = sibling(div_13, 2);
+		var node_8 = child(div_14);
+
+		{
+			var consequent_7 = ($$anchor) => {
+				LoadingTable($$anchor, {
+					title: 'Detailed Cards Sold',
+					content: 'Loading data...'
+				});
+			};
+
+			var alternate_6 = ($$anchor) => {
+				const expression_12 = derived_safe_equal(() => makeTradeColumns('buyer'));
+				var columns_6 = derived_safe_equal(() => get$1(expression_12));
+				const expression_13 = derived_safe_equal(() => makeTradeRows(get$1(sells), 'buyer'));
+				var rows_6 = derived_safe_equal(() => get$1(expression_13));
+
+				CollapsibleTable($$anchor, {
+					title: 'Detailed Cards Sold',
+					get columns() {
+						return get$1(columns_6);
+					},
+					get rows() {
+						return get$1(rows_6);
+					},
+					defaultRows: 25,
+					increment: 25
+				});
+			};
+
+			if_block(node_8, ($$render) => {
+				if (get$1(loading)) $$render(consequent_7); else $$render(alternate_6, false);
+			});
+		}
+
+		reset(div_14);
+
+		var div_15 = sibling(div_14, 2);
+		var node_9 = child(div_15);
+
+		{
+			var consequent_8 = ($$anchor) => {
+				LoadingTable($$anchor, {
+					title: 'Detailed Cards Purchased',
+					content: 'Loading data...'
+				});
+			};
+
+			var alternate_7 = ($$anchor) => {
+				const expression_14 = derived_safe_equal(() => makeTradeColumns('seller'));
+				var columns_7 = derived_safe_equal(() => get$1(expression_14));
+				const expression_15 = derived_safe_equal(() => makeTradeRows(get$1(buys), 'seller'));
+				var rows_7 = derived_safe_equal(() => get$1(expression_15));
+
+				CollapsibleTable($$anchor, {
+					title: 'Detailed Cards Purchased',
+					get columns() {
+						return get$1(columns_7);
+					},
+					get rows() {
+						return get$1(rows_7);
+					},
+					defaultRows: 25,
+					increment: 25
+				});
+			};
+
+			if_block(node_9, ($$render) => {
+				if (get$1(loading)) $$render(consequent_8); else $$render(alternate_7, false);
+			});
+		}
+
+		reset(div_15);
+		reset(div_11);
+		reset(div);
+		bind_value(input, () => get$1(nationId), ($$value) => set(nationId, $$value));
+		event('keypress', input, handleEnter);
+		event('click', button, redirectToPage);
+		event('click', button_1, openConfig);
+		append($$anchor, div);
+
+		return pop({
+			$set: update_legacy_props,
+			$on: ($$event_name, $$event_cb) => add_legacy_event_listener($$props, $$event_name, $$event_cb)
+		});
+	}
+
+	mark_module_end(App);
+
+	const app = new App({
+		target: document.body,
+		props: {
+			name: 'world'
+		}
+	});
+
+	return app;
+
+})();
 //# sourceMappingURL=bundle.js.map
