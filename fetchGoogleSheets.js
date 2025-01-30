@@ -47,6 +47,17 @@ async function runGitCommand(command) {
   });
 }
 
+async function initGitConfig() {
+  try {
+    console.log('Setting Git user identity...');
+    await runGitCommand(`git config --global user.name "GitHub Actions Bot"`);
+    await runGitCommand(`git config --global user.email "actions@github.com"`);
+    console.log('Git identity set successfully.');
+  } catch (error) {
+    console.error('Error setting Git identity:', error);
+  }
+}
+
 // Ensure the gh-pages worktree is clean before adding it
 async function setupWorktree() {
   try {
@@ -92,6 +103,9 @@ async function fetchData(sheet) {
 }
 
 async function processGoogleSheets() {
+
+  await initGitConfig();
+
   const tsvLines = ['puppet\tmaster\tsheet']; // Header row
 
   try {
@@ -103,6 +117,7 @@ async function processGoogleSheets() {
     }
 
     const tsvContent = tsvLines.join('\n');
+    
 
     // Step 1: Write TSV to main/public/static
     await fs.writeFile(mainFilePath, tsvContent, 'utf8');
