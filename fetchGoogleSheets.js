@@ -117,8 +117,9 @@ async function processGoogleSheets() {
     await runGitCommand(`
       git add ${mainFilePath} &&
       git diff --cached --quiet || git commit -m "Update Google Sheets data in main branch" &&
-      git push origin main
+      git push --force origin main
     `);
+    
 
     // Step 3: Set up gh-pages worktree
     await setupWorktree();
