@@ -20,17 +20,13 @@ function preprocessCurrentNationSet() {
     return;
   }
 
-  console.log("Preprocessing current nations cache into a Set...");
   currentNationSet = new Set(currentNationsCache); // Convert to Set
-  console.log("Current nation Set created.");
 }
 
 /**
  * Fetches and caches puppet data, S4 data, and current nations from their respective files.
  */
 export async function fetchSheets() {
-  console.log("Fetching puppet data, S4 data, and current nations...");
-
   // Reset all caches
   puppetMasterCache = {};
   s4Cache = {};
@@ -54,7 +50,6 @@ export async function fetchSheets() {
         puppetMasterCache[puppet] = { master, sheet }; // Store puppet-master mappings
       }
     });
-    console.log("Puppet data loaded and cached.");
 
     // Fetch and parse the S4 Data TSV
     const s4Response = await fetch(s4DataUrl);
@@ -72,7 +67,6 @@ export async function fetchSheets() {
         s4Cache[cardId] = cardName; // Store card ID-to-name mappings
       }
     });
-    console.log("S4 data loaded and cached.");
 
     // Fetch and parse the Current Nations file
     const currentNationsResponse = await fetch(currentNationsUrl);
@@ -84,7 +78,6 @@ export async function fetchSheets() {
     currentNationsCache = currentNationsData
       .split("\n")
       .map((nation) => nation.trim().toLowerCase().replace(/\s+/g, "_")); // Normalize nation names
-    console.log("Current nations data loaded and cached.");
 
     // Preprocess the current nations into a Set for fast lookups
     preprocessCurrentNationSet();
@@ -97,8 +90,6 @@ export async function fetchSheets() {
     ...s,
     dataFetched: true,
   }));
-
-  console.log("All sheet data fetched and processed.");
 }
 
 

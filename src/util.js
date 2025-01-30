@@ -263,7 +263,7 @@ export function formatNationName(name) {
     .replace(/_/g, " ") // Replace underscores with spaces
     .split(/[-\s]/) // Split by spaces or hyphens
     .map((segment) => {
-      const hyphenated = segment.length > 8 ? insertShy(segment) : segment; // Insert &shy; into long segments
+      const hyphenated = segment.length > 6 ? insertShy(segment) : segment; // Insert &shy; into long segments
       return capitalizeSegment(hyphenated); // Capitalize each segment
     })
     .join(" "); // Rejoin with spaces

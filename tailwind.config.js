@@ -5,6 +5,8 @@ export default {
     './public/index.html',           // Include your HTML entry file
   ],
   safelist: [
+    'max-w-[12ch]',
+    'min-w-[3ch]', 'min-w-[6ch]', 'min-w-[7ch]',
     'bg-rarity-L1',
     'bg-rarity-L',
     'bg-rarity-E1',

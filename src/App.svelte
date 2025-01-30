@@ -1,40 +1,23 @@
 <script>
-	import './output.css'; // Tailwind CSS
 	import { onMount } from 'svelte';
-	import { settingsStore, useSettings } from './settingsStore.js';
+	import { settingsStore } from './settingsStore.js';
 	import Config from './Config.svelte';
-	import { isNationCurrent, findPuppetmaster } from './sheetFetch';
+	import { fetchSheets } from './sheetFetch';
+	import { getQueryParam, setQueryParam } from './dataUtils';
   
-	
+	import TallyTables from './TallyTables.svelte';
+	import DetailedTables from './DetailedTables.svelte';
+  
 	import {
-	canonicalizeName,   // Canonicalizes names
-	normalizeName,      // Handles normalization of names
-	formatNationName,   // Formats nation names
-	formatPrice,        // Formats prices
-	formatLargeNumber,  // Formats large numbers
-	formatDate          // Formats dates
-	} from './settingsUtils';
-
-	import {
-	fetchData,          // Fetch data from API
-	tallyCounts,        // Tally counts from trades/gifts
-	makeTallyColumns,   // Generate columns for tally tables
-	makeTallyRows,      // Generate rows for tally tables
-	makeTradeColumns,   // Generate columns for trade tables
-	makeGiftColumns,    // Generate columns for gift tables
-	makeTradeRows,      // Generate rows for trade tables
-	makeGiftRows,        // Generate rows for gift tables
-	getQueryParam,
-	setQueryParam,
+	  fetchData,
+	  tallyCounts,
+	  makeTallyColumns,
+	  makeTallyRows,
+	  makeTradeColumns,
+	  makeGiftColumns,
+	  makeTradeRows,
+	  makeGiftRows
 	} from './dataUtils';
-
-
-	import {
-		fetchSheets,
-	} from './sheetFetch';
-  
-	import CollapsibleTable from './CollapsibleTable.svelte';
-	import LoadingTable from './LoadingTable.svelte';
   
 	let nationId = '';
 	let loading = false;
@@ -46,116 +29,19 @@
 	let sellTallyGifts = [];
 	let showConfig = false;
   
-	// Reactive settings from the store
-	import { get } from 'svelte/store';
-	$: settings = get(settingsStore);
-  
-	function redirectToPage() {
-		if (!nationId.trim()) {
-			alert('Please enter a nation name.');
-			return;
-		}
-		const safeNation = nationId.trim().replace(/[^A-Za-z0-9_\-\s]/g, '').replace(/\s+/g, '_');
-		const targetURL = `./?q=${encodeURIComponent(safeNation)}`;
-		window.location.href = targetURL; // Navigate to the target page
-	}
-
-	async function loadTradeData() {
+	function lookupNation() {
 	  if (!nationId.trim()) {
 		alert('Please enter a nation name.');
 		return;
 	  }
   
-	  loading = true;
-	  const safeNation = nationId.trim();
-	  setQueryParam('q', safeNation);
-  
-	  document.title = `Unsmurf | ${safeNation}`;
-
-	  buys = [];
-	  sells = [];
-	  buyTallyTrades = [];
-	  buyTallyGifts = [];
-	  sellTallyTrades = [];
-	  sellTallyGifts = [];
-  
-	  const [fetchedBuys, fetchedSells] = await Promise.all([
-		fetchData('buyer', safeNation),
-		fetchData('seller', safeNation),
-	  ]);
-  
-	  buys = fetchedBuys;
-	  sells = fetchedSells;
-  
-	  buyTallyTrades = await tallyCounts(buys, 'seller', true);
-	  buyTallyGifts = await tallyCounts(buys, 'seller', false);
-	  sellTallyTrades = await tallyCounts(sells, 'buyer', true);
-	  sellTallyGifts = await tallyCounts(sells, 'buyer', false);
-  
-
-	  if (safeNation != null) {
-	  const canonicalizedName = canonicalizeName(safeNation);
-	  const isCTE = !isNationCurrent(canonicalizedName);
-	  const puppetOf = findPuppetmaster(canonicalizedName).master;
-	  let formattedName = formatNationName(canonicalizedName);
-	  let formattedMasterName;
-	  let isPuppet;
-	  if (puppetOf != null) {
-		if (puppetOf != canonicalizedName){
-			isPuppet = true;
-			formattedMasterName = formatNationName(puppetOf);
-
-		}
-	  }
-
-	  let alertMessage = '';
-	  if (isCTE && isPuppet) {
-		alertMessage = `<strong>${formattedName}</strong>, a puppet of <strong>${formattedMasterName}</strong>, is not an active nation`;
-		} else if (isCTE) {
-		alertMessage = `<strong>${formattedName}</strong> is not an active nation`;
-		} else if (isPuppet) {
-		alertMessage = `<strong>${formattedName}</strong> is a puppet of <strong>${formattedMasterName}</strong>`;
-		}
-
-
-	  // Show alert if nation is not current
-	  if (isCTE) {
-		document.querySelector('.alert').innerHTML = `
-	<div class="w-[120%] mx-[-10%] bg-black text-white text-center font-inter py-3 mt-7.5 mb-4.5" role="alert">
-  		<div class="w-[75%] mx-auto">${alertMessage}</div>
-  	</div>
-		`;
-	  } else if (isPuppet){
-		document.querySelector('.alert').innerHTML = `
-	<div class="rounded-full bg-black text-white text-center font-inter py-3 mt-7.5 mb-4.5" role="alert">
-		<div class="w-[90%] mx-auto">${alertMessage}</div>
-	</div>
-		`;
-	  }
-
-
+	  const safeNation = nationId.trim().replace(/[^A-Za-z0-9_\-\s]/g, "").replace(/\s+/g, "_");
+	  window.location.href = `./?q=${encodeURIComponent(safeNation)}`;
 	}
-	  loading = false;
-	}
-	
-  
-	onMount(async () => {
-  console.log("onMount triggered.");
-  await fetchSheets();
-  console.log("Sheets fetched.");
-
-  const fromURL = getQueryParam('q');
-  if (fromURL) {
-    console.log("Redirecting to page:", fromURL);
-    nationId = fromURL;
-    loadTradeData();
-  }
-});
-
   
 	function handleEnter(e) {
 	  if (e.key === 'Enter') {
-		redirectToPage();
+		lookupNation();
 	  }
 	}
   
@@ -166,181 +52,114 @@
 	function closeConfig() {
 	  showConfig = false;
 	}
+  
+	async function loadTradeData() {
+	  if (!nationId.trim()) {
+		alert('Please enter a nation name.');
+		return;
+	  }
+  
+	  loading = true;
+	  const safeNation = nationId.trim();
+	  setQueryParam('q', safeNation);
+	  document.title = `Unsmurf | ${safeNation}`;
+  
+	  // Fetch Data
+	  const [fetchedBuys, fetchedSells] = await Promise.all([
+		fetchData('buyer', safeNation),
+		fetchData('seller', safeNation),
+	  ]);
+  
+	  // Assign fetched values
+	  buys = fetchedBuys;
+	  sells = fetchedSells;
+  
+	  // Calculate tallies
+	  buyTallyTrades = tallyCounts(buys, 'seller', true);
+	  buyTallyGifts = tallyCounts(buys, 'seller', false);
+	  sellTallyTrades = tallyCounts(sells, 'buyer', true);
+	  sellTallyGifts = tallyCounts(sells, 'buyer', false);
+  
+	  loading = false;
+	}
+  
+	onMount(async () => {
+	  await fetchSheets();
+	  const fromURL = getQueryParam("q");
+	  if (fromURL) {
+		nationId = fromURL;
+		await loadTradeData();
+	  }
+	});
+  
   </script>
-
-<!-- Page Layout Wrapper -->
-<div class="px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-16">
+  
+  <!-- Page Layout Wrapper -->
+  <div class="px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-16">
 	<!-- Header / Input Section -->
 	<div class="relative text-center mb-4">
-		<!-- Header Title -->
-		<h1 class="text-2xl font-bold font-inter">Unsmurf thru Card Trades</h1>
-		<p class="text-gray-600">
-			An alternative UI for
-			<a href="https://bazaar.kractero.com/" class="text-blue-500 hover:underline">Kractero's Bazaar</a>
-			to make identifying puppets easier.
-		</p>
-
-		<!-- Input Section -->
-		<div class="flex items-center justify-between mt-4 w-full">
-			<div class="flex-1"></div>
-			<div class="flex-3 flex items-center justify-center gap-2">
-				<input
-					id="nationId"
-					type="text"
-					bind:value={nationId}
-					on:keypress={handleEnter}
-					placeholder="Testlandia"
-					class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
-				/>
-				<button
-					on:click={redirectToPage}
-					class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition"
-				>
-					Lookup
-				</button>
-			</div>
-			<div class="flex-1 flex justify-end">
-				<button
-				on:click={openConfig}
-				aria-label="Config"
-				class="bg-black text-white font-bold p-2 size-10
-					   rounded-full hover:bg-gray-600 focus:outline-none
-					   focus:ring focus:ring-gray-300 transition"
-			  >
-				<img src="https://ns-rot.github.io/unsmurf/icons/config.svg" alt="Config" class="w-6 h-6" />
-			  </button>
-			</div>
+	  <h1 class="text-2xl font-bold font-inter">Unsmurf thru Card Trades</h1>
+	  <p class="text-gray-600">
+		An alternative UI for
+		<a href="https://bazaar.kractero.com/" class="text-blue-500 hover:underline">Kractero's Bazaar</a>
+		to make identifying puppets easier.
+	  </p>
+  
+	  <div class="flex items-center justify-between mt-4 w-full">
+		<div class="flex-1"></div>
+		<div class="flex-3 flex items-center justify-center gap-2">
+		  <input
+			id="nationId"
+			type="text"
+			bind:value={nationId}
+			on:keypress={handleEnter}
+			placeholder="Testlandia"
+			class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
+		  />
+		  <button
+			on:click={lookupNation}
+			class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition"
+		  >
+			Lookup
+		  </button>
 		</div>
+		<div class="flex-1 flex justify-end">
+		  <button
+			on:click={openConfig}
+			aria-label="Config"
+			class="bg-black text-white font-bold p-2 size-10 rounded-full hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300 transition"
+		  >
+			<img src="https://ns-rot.github.io/unsmurf/icons/config.svg" alt="Config" class="w-6 h-6" />
+		  </button>
+		</div>
+	  </div>
 	</div>
-
+  
 	<!-- Config Overlay -->
-	{#if showConfig}
-		<div class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center">
-		<Config {settingsStore} on:close={closeConfig} />
-		</div>
-	{/if}
+	<Config {showConfig} {closeConfig} />
 
 	<!-- Alert Banner -->
 	<div class="alert"></div>
-
-
-	<!-- TALLY ROWS -->
-	<div id="tally-row" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 :gap-4"> <!-- Cards Sold -->
-	  <!-- Gifts Sent -->
-	  <div>
-			{#if loading}
-			  <LoadingTable title="Gifts Sent" content="Loading data..." />
-			{:else}
-			  <CollapsibleTable
-				title="Gifts Sent"
-				defaultRows={10}
-				increment={10}
-				columns={makeTallyColumns(sellTallyGifts)}
-				rows={makeTallyRows(sellTallyGifts)}
-			  />
-			{/if}
-	  </div>
-	  <!-- Gifts Received -->
-	  <div>
-			{#if loading}
-			  <LoadingTable title="Gifts Received" content="Loading data..." />
-			{:else}
-			  <CollapsibleTable
-				title="Gifts Received"
-				defaultRows={10}
-				increment={10}
-				columns={makeTallyColumns(buyTallyGifts)}
-				rows={makeTallyRows(buyTallyGifts)}
-			  />
-			{/if}
-	  </div>
-	  <!-- Cards Sold -->
-	  <div>
-		{#if loading}
-		  <LoadingTable title="Cards Sold" content="Loading data..." />
-		{:else}
-		  <CollapsibleTable
-			title="Cards Sold"
-			defaultRows={10}
-			increment={10}
-			columns={makeTallyColumns(sellTallyTrades)}
-			rows={makeTallyRows(sellTallyTrades)}
-		  />
-		{/if}
-	  </div>
-	  <!-- Cards Purchased -->
-	  <div>
-			{#if loading}
-			  <LoadingTable title="Cards Purchased" content="Loading data..." />
-			{:else}
-			  <CollapsibleTable
-				title="Cards Purchased"
-				defaultRows={10}
-				increment={10}
-				columns={makeTallyColumns(buyTallyTrades)}
-				rows={makeTallyRows(buyTallyTrades)}
-			  />
-			{/if}
-	  </div>
-	</div>
-
-	<!-- DETAILED GRIDS -->
-	<div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-2.5 md:gap-4 mt-6">
-	   <!-- Detailed Gifts Sent -->
-		<div>
-				{#if loading}
-				  <LoadingTable title="Detailed Gifts Sent" content="Loading data..." />
-				{:else}
-				  <CollapsibleTable
-					title="Detailed Gifts Sent"
-					columns={makeGiftColumns('buyer')}
-					rows={makeGiftRows(sells, 'buyer')}
-					defaultRows={25}
-					increment={25}
-				  />
-				{/if}
-		</div>
-		  <!-- Detailed Gifts Received -->
-		 <div>
-				{#if loading}
-				  <LoadingTable title="Detailed Gifts Received" content="Loading data..." />
-				{:else}
-				  <CollapsibleTable
-					title="Detailed Gifts Received"
-					columns={makeGiftColumns('seller')}
-					rows={makeGiftRows(buys, 'seller')}
-					defaultRows={25}
-					increment={25}
-				  />
-				{/if}
-		</div>
-		<!-- Detailed Cards Sold -->
-	  <div>
-		{#if loading}
-		  <LoadingTable title="Detailed Cards Sold" content="Loading data..." />
-		{:else}
-		  <CollapsibleTable
-			title="Detailed Cards Sold"
-			columns={makeTradeColumns('buyer')}
-			rows={makeTradeRows(sells, 'buyer')}
-			defaultRows={25}
-			increment={25}
-		  />
-		{/if}
-	  </div>
-	  <!-- Detailed Cards Purchased -->
-	  <div>
-		{#if loading}
-		  <LoadingTable title="Detailed Cards Purchased" content="Loading data..." />
-		{:else}
-		  <CollapsibleTable
-			title="Detailed Cards Purchased"
-			columns={makeTradeColumns('seller')}
-			rows={makeTradeRows(buys, 'seller')}
-			defaultRows={25}
-			increment={25}
-		  />
-		{/if}
-	  </div>
-	</div>
+  
+	<!-- TALLY TABLES COMPONENT -->
+	<TallyTables
+	  {loading}
+	  {sellTallyGifts}
+	  {buyTallyGifts}
+	  {sellTallyTrades}
+	  {buyTallyTrades}
+	  {makeTallyColumns}
+	  {makeTallyRows}
+	/>
+  
+	<!-- DETAILED TABLES COMPONENT -->
+	<DetailedTables
+	  {loading}
+	  {buys}
+	  {sells}
+	  {makeTradeColumns}
+	  {makeTradeRows}
+	  {makeGiftColumns}
+	  {makeGiftRows}
+	/>
   </div>

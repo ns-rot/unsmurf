@@ -141,8 +141,8 @@ export function makeTallyRows(tally) {
 
 export function makeTradeColumns(role) {
   return [
-    { label: role === 'buyer' ? "Buyer" : "Seller", alignment: "left", styles: ["min-w-[8ch]", "max-w-[18ch]"] },
-    { label: "Card", alignment: "left", styles: ["min-w-[8ch]", "max-w-[18ch]"] },
+    { label: role === 'buyer' ? "Buyer" : "Seller", alignment: "left", styles: ["min-w-[6ch]", "max-w-[12ch]"] },
+    { label: "Card", alignment: "left", styles: ["min-w-[6ch]", "max-w-[12ch]"] },
     { label: "Price", alignment: "center", styles: ["min-w-[3ch]"] },
     { label: "Date", alignment: "center", styles: ["min-w-[7ch]"] },
   ];
@@ -150,8 +150,8 @@ export function makeTradeColumns(role) {
 
 export function makeGiftColumns(role) {
   return [
-    { label: role === 'buyer' ? "Buyer" : "Seller", alignment: "left", styles: ["min-w-[8ch]", "max-w-[18ch]"] },
-    { label: "Card", alignment: "left", styles: ["min-w-[8ch]", "max-w-[18ch]"] },
+    { label: role === 'buyer' ? "Buyer" : "Seller", alignment: "left", styles: ["min-w-[6ch]", "max-w-[12ch]"] },
+    { label: "Card", alignment: "left", styles: ["min-w-[6ch]", "max-w-[12ch]"] },
     { label: "Date", alignment: "center", styles: ["min-w-[7ch]"] },
   ];
 }

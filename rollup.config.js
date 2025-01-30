@@ -52,29 +52,30 @@ export default {
             }),
             compilerOptions: {
                 dev: !production,
-				compatibility: {
-					componentApi: 4,
-				  }
-			},
+                compatibility: {
+                    componentApi: 4,
+                },
+            },
         }),
-        serve({
-            open: true,                // Open the browser
-            contentBase: ['public', 'static'], // Serve both public/ and static/
+    
+        // Run the development server in dev mode
+        !production && serve({
+            open: true, // Open browser
+            contentBase: ['public', 'static'],
             host: 'localhost',
             port: 8080,
-          }),
-
+        }),
+    
         // Process TailwindCSS and PostCSS plugins
-		postcss({
-			extract: true,
-			minimize: production,
-			plugins: [
-			  tailwindcss(),
-			  autoprefixer(),
-			],
-		  }),
-          
-
+        postcss({
+            extract: 'public/build/bundle.css',
+            minimize: production,
+            plugins: [
+                tailwindcss('./tailwind.config.js'),
+                autoprefixer(),
+            ],
+        }),
+    
         // Resolve dependencies
         resolve({
             browser: true,
@@ -82,21 +83,23 @@ export default {
             exportConditions: ['svelte'],
         }),
         commonjs(),
-
+    
         copy({
             targets: [
-                { src: 'static/*', dest: 'public/static' }, // Copy all files from static/ to public/static
+                { src: 'static/*', dest: 'public/static' }, // Copy static files
             ],
         }),
-
-        // Run the development server in dev mode
-        !production && serve(),
-
+    
         // Watch the `public` directory for changes and reload
         !production && livereload('public'),
-
-        // Minify in production
-        production && terser(),
+    
+        // Minify in production with compatibility fixes
+        production && terser({
+            ecma: 2015,
+            compress: {
+                drop_console: true,
+            },
+        }),
     ],
     watch: {
         clearScreen: false,
