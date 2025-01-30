@@ -116,10 +116,12 @@ async function processGoogleSheets() {
     console.log('Committing and pushing changes to main...');
     await runGitCommand(`
       git add ${mainFilePath} &&
-      git diff --cached --quiet || git commit -m "Update Google Sheets data in main branch" &&
-      git push --force origin main
+      git diff --cached --quiet || git commit -m "Update Google Sheets data in main branch"
     `);
     
+    await runGitCommand("git fetch origin main");  // Ensure we have the latest refs
+    await runGitCommand("git reset --hard origin/main");  // Reset local state to remote
+    await runGitCommand("git push --force origin main");  // Force push to overwrite
 
     // Step 3: Set up gh-pages worktree
     await setupWorktree();
