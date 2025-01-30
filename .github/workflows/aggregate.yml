@@ -24,11 +24,31 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Run Google Sheets script
+      # 🛠 Step 4: Check GitHub Authentication (BEFORE running scripts)
+      - name: Check GitHub Authentication
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🔍 Checking GitHub Authentication..."
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+
+          echo "📝 Current Git Config:"
+          git config --list
+
+          echo "🔗 Testing GitHub authentication..."
+          if git ls-remote https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ns-rot/unsmurf.git HEAD; then
+            echo "✅ GitHub authentication successful."
+          else
+            echo "❌ GitHub authentication failed. Stopping workflow."
+            exit 1
+          fi
+
+      # Step 5-1: Run Google Sheets script
       - name: Fetch Google Sheets Data
         run: node fetchGoogleSheets.js
 
-      # Step 5: Run NationStates script
+      # Step 5-2: Run NationStates script
       - name: Fetch NationStates Data
         run: node fetchNationStates.js
 
