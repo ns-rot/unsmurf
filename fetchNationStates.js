@@ -77,14 +77,29 @@ async function fetchNationStatesData() {
     });
 
     // Step 1: Write NationStates data to main/public/static
-    await fs.writeFile(mainFilePath, nations.join('\n'), 'utf8');
-    console.log(`NationStates data saved to ${mainFilePath}`);
+    // Compute hash BEFORE writing
+    const hashBefore = await computeFileHash(mainFilePath);
+    console.log(`🔹 Hash before writing: ${hashBefore || "File does not exist"}`);
+
+    // Write the updated data
+    await fs.writeFile(mainFilePath, nations.join('\n'), { encoding: 'utf8', flag: 'w' });
+
+    // Compute hash AFTER writing
+    const hashAfter = await computeFileHash(mainFilePath);
+    console.log(`🔹 Hash after writing: ${hashAfter}`);
+
+    // Log if file changed
+    if (hashBefore === hashAfter) {
+      console.log("⚠️ File content is the same as before.");
+    } else {
+      console.log("✅ File content has changed, proceeding with commit.");
+    }
 
     // Step 2: Commit & push to main branch
     console.log('Committing and pushing changes to main...');
     await runGitCommand(`
       git fetch origin main --quiet &&
-      git reset --hard origin/main &&
+      git pull --ff-only origin main &&
       git add ${mainFilePath} &&
       git commit -m "Force update NationStates data in main branch" --allow-empty &&
       git push --force origin main
@@ -114,6 +129,18 @@ async function fetchNationStatesData() {
   } catch (error) {
     console.error('Error processing NationStates API data:', error);
     return [];
+  }
+}
+
+import crypto from 'crypto'; // Import crypto for hashing
+
+// Function to compute file hash
+async function computeFileHash(filePath) {
+  try {
+    const data = await fs.readFile(filePath, 'utf8');
+    return crypto.createHash('sha256').update(data).digest('hex');
+  } catch (error) {
+    return null; // Return null if file does not exist
   }
 }
 

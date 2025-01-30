@@ -116,7 +116,7 @@ async function processGoogleSheets() {
     console.log('Committing and pushing changes to main...');
     await runGitCommand(`
       git fetch origin main --quiet &&
-      git reset --hard origin/main &&
+      git pull --ff-only origin main &&
       git add ${mainFilePath} &&
       git commit -m "Force update Google Sheets data in main branch" --allow-empty &&
       git push --force origin main
