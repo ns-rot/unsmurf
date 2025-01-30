@@ -20,8 +20,10 @@ export function tallyCounts(trades, roleKey, isTrade) {
         tallyName = findPuppetmaster(
           rawName.toLowerCase().replace(/\s+/g, "_")
         ).master; // Normalize and find puppet master
-      } else {
+      } else if (useSettings().section === "similar-name") {
         tallyName = normalizeName(rawName); // Normalize the name
+      } else {
+        tallyName = rawName;
       }
 
       // Track raw names associated with the normalized name

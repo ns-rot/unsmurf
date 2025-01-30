@@ -6319,7 +6319,7 @@ var app = (function () {
 	mark_module_start();
 	Config[FILENAME] = 'src/Config.svelte';
 
-	var root_1$4 = add_locations(template(`<div class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center"><div class="settings-modal bg-white rounded-lg shadow-lg p-6 max-w-2xl w-[80%] md:w-[50%] relative"><h2 class="text-xl font-bold mb-2.5">Settings</h2> <div class="mb-4"><h3 class="text-lg font-semibold">Tally Record Options</h3> <label class="flex items-center gap-2"><input type="radio" name="section"> Tally record by known puppets</label> <label class="flex items-center gap-2"><input type="radio" name="section"> Tally record by similar name</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Nation Display Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Append puppetmasters in detailed records</label> <label class="flex items-center gap-2"><input type="checkbox"> Mark CTE nations</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Date Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Show relative date by default</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Colour Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Red epics</label> <label class="flex items-center gap-2"><input type="checkbox"> Rainbow legendaries</label></div> <div class="flex justify-end mt-4"><button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Confirm</button></div></div></div>`), Config[FILENAME], [
+	var root_1$4 = add_locations(template(`<div class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center"><div class="settings-modal bg-white rounded-lg shadow-lg p-6 max-w-2xl w-[80%] md:w-[50%] relative"><h2 class="text-xl font-bold mb-2.5">Settings</h2> <div class="mb-4"><h3 class="text-lg font-semibold">Tally Record Options</h3> <label class="flex items-center gap-2"><input type="radio" name="section"> Group records by known puppets</label> <label class="flex items-center gap-2"><input type="radio" name="section"> Group records by similar name</label> <label class="flex items-center gap-2"><input type="radio" name="section"> Do not group records</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Nation Display Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Append puppetmasters in detailed records</label> <label class="flex items-center gap-2"><input type="checkbox"> Mark CTE nations</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Date Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Show relative date by default</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Colour Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Red epics</label> <label class="flex items-center gap-2"><input type="checkbox"> Rainbow legendaries</label></div> <div class="flex justify-end mt-4"><button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Confirm</button></div></div></div>`), Config[FILENAME], [
 		[
 			17,
 			2,
@@ -6335,33 +6335,34 @@ var app = (function () {
 							[
 								[23, 8],
 								[24, 8, [[25, 10]]],
-								[28, 8, [[29, 10]]]
+								[28, 8, [[29, 10]]],
+								[32, 8, [[33, 10]]]
 							]
 						],
 						[
-							35,
+							39,
 							6,
 							[
-								[36, 8],
-								[37, 8, [[38, 10]]],
-								[41, 8, [[42, 10]]]
+								[40, 8],
+								[41, 8, [[42, 10]]],
+								[45, 8, [[46, 10]]]
 							]
 						],
 						[
-							48,
+							52,
 							6,
-							[[49, 8], [50, 8, [[51, 10]]]]
+							[[53, 8], [54, 8, [[55, 10]]]]
 						],
 						[
-							57,
+							61,
 							6,
 							[
-								[58, 8],
-								[59, 8, [[60, 10]]],
-								[63, 8, [[64, 10]]]
+								[62, 8],
+								[63, 8, [[64, 10]]],
+								[67, 8, [[68, 10]]]
 							]
 						],
-						[70, 6, [[71, 8]]]
+						[74, 6, [[75, 8]]]
 					]
 				]
 			]
@@ -6414,47 +6415,55 @@ var app = (function () {
 				input_1.value = null == (input_1.__value = 'similar-name') ? '' : 'similar-name';
 				next();
 				reset(label_1);
-				reset(div_2);
 
-				var div_3 = sibling(div_2, 2);
-				var label_2 = sibling(child(div_3), 2);
+				var label_2 = sibling(label_1, 2);
 				var input_2 = child(label_2);
 
 				remove_input_defaults(input_2);
+				input_2.value = null == (input_2.__value = 'none') ? '' : 'none';
 				next();
 				reset(label_2);
+				reset(div_2);
 
-				var label_3 = sibling(label_2, 2);
+				var div_3 = sibling(div_2, 2);
+				var label_3 = sibling(child(div_3), 2);
 				var input_3 = child(label_3);
 
 				remove_input_defaults(input_3);
 				next();
 				reset(label_3);
-				reset(div_3);
 
-				var div_4 = sibling(div_3, 2);
-				var label_4 = sibling(child(div_4), 2);
+				var label_4 = sibling(label_3, 2);
 				var input_4 = child(label_4);
 
 				remove_input_defaults(input_4);
 				next();
 				reset(label_4);
-				reset(div_4);
+				reset(div_3);
 
-				var div_5 = sibling(div_4, 2);
-				var label_5 = sibling(child(div_5), 2);
+				var div_4 = sibling(div_3, 2);
+				var label_5 = sibling(child(div_4), 2);
 				var input_5 = child(label_5);
 
 				remove_input_defaults(input_5);
 				next();
 				reset(label_5);
+				reset(div_4);
 
-				var label_6 = sibling(label_5, 2);
+				var div_5 = sibling(div_4, 2);
+				var label_6 = sibling(child(div_5), 2);
 				var input_6 = child(label_6);
 
 				remove_input_defaults(input_6);
 				next();
 				reset(label_6);
+
+				var label_7 = sibling(label_6, 2);
+				var input_7 = child(label_7);
+
+				remove_input_defaults(input_7);
+				next();
+				reset(label_7);
 				reset(div_5);
 
 				var div_6 = sibling(div_5, 2);
@@ -6465,11 +6474,12 @@ var app = (function () {
 				reset(div);
 				bind_group(binding_group, [], input, () => $settingsStore().section, ($$value) => store_mutate(settingsStore, untrack($settingsStore).section = $$value, untrack($settingsStore)));
 				bind_group(binding_group, [], input_1, () => $settingsStore().section, ($$value) => store_mutate(settingsStore, untrack($settingsStore).section = $$value, untrack($settingsStore)));
-				bind_checked(input_2, () => $settingsStore().showPuppetmasters, ($$value) => store_mutate(settingsStore, untrack($settingsStore).showPuppetmasters = $$value, untrack($settingsStore)));
-				bind_checked(input_3, () => $settingsStore().showCTE, ($$value) => store_mutate(settingsStore, untrack($settingsStore).showCTE = $$value, untrack($settingsStore)));
-				bind_checked(input_4, () => $settingsStore().showRelativeDate, ($$value) => store_mutate(settingsStore, untrack($settingsStore).showRelativeDate = $$value, untrack($settingsStore)));
-				bind_checked(input_5, () => $settingsStore().redEpics, ($$value) => store_mutate(settingsStore, untrack($settingsStore).redEpics = $$value, untrack($settingsStore)));
-				bind_checked(input_6, () => $settingsStore().rainbowLegs, ($$value) => store_mutate(settingsStore, untrack($settingsStore).rainbowLegs = $$value, untrack($settingsStore)));
+				bind_group(binding_group, [], input_2, () => $settingsStore().section, ($$value) => store_mutate(settingsStore, untrack($settingsStore).section = $$value, untrack($settingsStore)));
+				bind_checked(input_3, () => $settingsStore().showPuppetmasters, ($$value) => store_mutate(settingsStore, untrack($settingsStore).showPuppetmasters = $$value, untrack($settingsStore)));
+				bind_checked(input_4, () => $settingsStore().showCTE, ($$value) => store_mutate(settingsStore, untrack($settingsStore).showCTE = $$value, untrack($settingsStore)));
+				bind_checked(input_5, () => $settingsStore().showRelativeDate, ($$value) => store_mutate(settingsStore, untrack($settingsStore).showRelativeDate = $$value, untrack($settingsStore)));
+				bind_checked(input_6, () => $settingsStore().redEpics, ($$value) => store_mutate(settingsStore, untrack($settingsStore).redEpics = $$value, untrack($settingsStore)));
+				bind_checked(input_7, () => $settingsStore().rainbowLegs, ($$value) => store_mutate(settingsStore, untrack($settingsStore).rainbowLegs = $$value, untrack($settingsStore)));
 				event('click', button, saveSettings);
 				append($$anchor, div);
 			};
@@ -7099,8 +7109,10 @@ var app = (function () {
 	        tallyName = findPuppetmaster(
 	          rawName.toLowerCase().replace(/\s+/g, "_")
 	        ).master; // Normalize and find puppet master
-	      } else {
+	      } else if (useSettings().section === "similar-name") {
 	        tallyName = normalizeName(rawName); // Normalize the name
+	      } else {
+	        tallyName = rawName;
 	      }
 
 	      // Track raw names associated with the normalized name
@@ -8049,7 +8061,7 @@ var app = (function () {
 	mark_module_start();
 	App[FILENAME] = 'src/app.svelte';
 
-	var root = add_locations(template(`<div class="px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-16"><div class="relative text-center mb-4"><h1 class="text-2xl font-bold font-inter">Unsmurf thru Card Trades</h1> <p class="text-gray-600">An alternative UI for <a href="https://bazaar.kractero.com/" class="text-blue-500 hover:underline">Kractero's Bazaar</a> to make identifying puppets easier.</p> <div class="flex items-center justify-between mt-4 w-full"><div class="flex-1"></div> <div class="flex-3 flex items-center justify-center gap-2"><input id="nationId" type="text" placeholder="Testlandia" class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"> <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Lookup</button></div> <div class="flex-1 flex justify-end"><button aria-label="Config" class="bg-black text-white font-bold p-2 size-10 rounded-full hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300 transition"><img src="https://ns-rot.github.io/unsmurf/icons/config.svg" alt="Config" class="w-6 h-6"></button></div></div></div> <!> <div class="alert"></div> <!> <!></div>`), App[FILENAME], [
+	var root = add_locations(template(`<div class="px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-16"><div class="relative text-center mb-4"><h1 class="text-2xl font-bold "><span class="font-unsmurf">Unsmurf</span><span class="font-inter">thru Card Trades</span></h1> <p class="text-gray-600">An alternative UI for <a href="https://bazaar.kractero.com/" class="text-blue-500 hover:underline">Kractero's Bazaar</a> to make identifying puppets easier.</p> <div class="flex items-center justify-between mt-4 w-full"><div class="flex-1"></div> <div class="flex-3 flex items-center justify-center gap-2"><input id="nationId" type="text" placeholder="Testlandia" class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"> <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Lookup</button></div> <div class="flex-1 flex justify-end"><button aria-label="Config" class="bg-black text-white font-bold p-2 size-10 rounded-full hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300 transition"><img src="https://ns-rot.github.io/unsmurf/icons/config.svg" alt="Config" class="w-6 h-6"></button></div></div></div> <!> <div class="alert"></div> <!> <!></div>`), App[FILENAME], [
 		[
 			98,
 			2,
@@ -8058,7 +8070,7 @@ var app = (function () {
 					100,
 					1,
 					[
-						[101, 3],
+						[101, 3, [[101, 35], [101, 74]]],
 						[102, 3, [[104, 2]]],
 						[
 							108,

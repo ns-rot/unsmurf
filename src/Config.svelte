@@ -23,11 +23,15 @@
         <h3 class="text-lg font-semibold">Tally Record Options</h3>
         <label class="flex items-center gap-2">
           <input type="radio" name="section" value="puppets" bind:group={$settingsStore.section} />
-          Tally record by known puppets
+          Group records by known puppets
         </label>
         <label class="flex items-center gap-2">
           <input type="radio" name="section" value="similar-name" bind:group={$settingsStore.section} />
-          Tally record by similar name
+          Group records by similar name
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="section" value="none" bind:group={$settingsStore.section} />
+          Do not group records
         </label>
       </div>
 
