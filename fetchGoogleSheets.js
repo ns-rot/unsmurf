@@ -47,29 +47,21 @@ async function runGitCommand(command) {
   });
 }
 
-async function initGitConfig() {
-  try {
-    console.log('Setting Git user identity...');
-    await runGitCommand(`git config --global user.name "GitHub Actions Bot"`);
-    await runGitCommand(`git config --global user.email "actions@github.com"`);
-    console.log('Git identity set successfully.');
-  } catch (error) {
-    console.error('Error setting Git identity:', error);
-  }
-}
-
 // Ensure the gh-pages worktree is clean before adding it
 async function setupWorktree() {
   try {
     console.log('Cleaning up worktree...');
     await runGitCommand(`git worktree prune`);
 
-    // Check if the worktree exists
-    const worktreeList = await runGitCommand(`git worktree list`);
-    if (worktreeList.includes(worktreePath)) {
+    // Check if worktree path exists and remove it if needed
+    if (existsSync(worktreePath)) {
       console.log(`Worktree ${worktreePath} exists. Removing it...`);
       await runGitCommand(`git worktree remove ${worktreePath} --force`);
     }
+
+    // Ensure gh-pages branch exists before creating worktree
+    console.log('Fetching gh-pages branch...');
+    await runGitCommand(`git fetch origin gh-pages || git branch gh-pages origin/gh-pages`);
 
     console.log('Adding gh-pages worktree...');
     await runGitCommand(`git worktree add -f ${worktreePath} gh-pages`);
@@ -103,9 +95,6 @@ async function fetchData(sheet) {
 }
 
 async function processGoogleSheets() {
-
-  await initGitConfig();
-
   const tsvLines = ['puppet\tmaster\tsheet']; // Header row
 
   try {
