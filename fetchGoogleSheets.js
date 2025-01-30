@@ -27,21 +27,44 @@ const sheets = [
   },
 ];
 
-// Paths for the data files
+// Paths for data files
 const mainFilePath = `public/static/puppetData.tsv`; // Path in main branch
-const ghPagesPath = `../gh-pages/static/puppetData.tsv`; // Path in gh-pages branch
+const worktreePath = '../gh-pages'; // Worktree directory for gh-pages
+const ghPagesFilePath = `${worktreePath}/static/puppetData.tsv`; // Path in gh-pages
 
 async function runGitCommand(command) {
   return new Promise((resolve, reject) => {
+    console.log(`Running command: ${command}`); // Debugging output
     exec(command, (error, stdout, stderr) => {
       if (error) {
-        console.error(`Error running command "${command}":`, stderr);
+        console.error(`Error running command: ${command}\n`, stderr);
         reject(error);
       } else {
+        console.log(stdout.trim());
         resolve(stdout.trim());
       }
     });
   });
+}
+
+// Ensure the gh-pages worktree is clean before adding it
+async function setupWorktree() {
+  try {
+    console.log('Cleaning up worktree...');
+    await runGitCommand(`git worktree prune`);
+
+    // Check if the worktree exists
+    const worktreeList = await runGitCommand(`git worktree list`);
+    if (worktreeList.includes(worktreePath)) {
+      console.log(`Worktree ${worktreePath} exists. Removing it...`);
+      await runGitCommand(`git worktree remove ${worktreePath} --force`);
+    }
+
+    console.log('Adding gh-pages worktree...');
+    await runGitCommand(`git worktree add -f ${worktreePath} gh-pages`);
+  } catch (error) {
+    console.error('Error setting up worktree:', error);
+  }
 }
 
 async function fetchData(sheet) {
@@ -53,7 +76,7 @@ async function fetchData(sheet) {
     }
     const data = await response.text();
     const lines = data.split('\n').slice(sheet.headerRows);
-    
+
     return lines
       .map((line) => {
         const columns = line.split('\t');
@@ -69,7 +92,6 @@ async function fetchData(sheet) {
 }
 
 async function processGoogleSheets() {
-  const worktreePath = '../gh-pages';
   const tsvLines = ['puppet\tmaster\tsheet']; // Header row
 
   try {
@@ -89,35 +111,31 @@ async function processGoogleSheets() {
     // Step 2: Commit & push to main branch
     console.log('Committing and pushing changes to main...');
     await runGitCommand(`
-      git add ${mainFilePath} || true &&
+      git add ${mainFilePath} &&
       git diff --cached --quiet || git commit -m "Update Google Sheets data in main branch" &&
       git push origin main
-    `);    
+    `);
 
     // Step 3: Set up gh-pages worktree
-    if (existsSync(worktreePath)) {
-      console.log(`Worktree directory ${worktreePath} already exists. Removing it...`);
-      rmSync(worktreePath, { recursive: true, force: true });
-    }
-    console.log('Setting up gh-pages worktree...');
-    await runGitCommand(`git worktree add ${worktreePath} gh-pages`);
+    await setupWorktree();
 
     // Step 4: Copy file from main/public/static to gh-pages/static
-    await fs.copyFile(mainFilePath, ghPagesPath);
-    console.log(`Copied ${mainFilePath} to ${ghPagesPath}`);
+    await fs.copyFile(mainFilePath, ghPagesFilePath);
+    console.log(`Copied ${mainFilePath} to ${ghPagesFilePath}`);
 
     // Step 5: Commit & push to gh-pages
     console.log('Committing and pushing changes to gh-pages...');
     await runGitCommand(`
       cd ${worktreePath} &&
       git add static/puppetData.tsv &&
-      git commit -m "Sync Google Sheets data from main to gh-pages" &&
-      git push origin gh-pages
+      git commit -m "Sync Google Sheets data from main to gh-pages" || true &&
+      git push --force origin gh-pages
     `);
+    
 
-    // Step 6: Remove the worktree
+    // Step 6: Clean up worktree
     console.log('Removing gh-pages worktree...');
-    await runGitCommand(`git worktree remove ${worktreePath}`);
+    await runGitCommand(`git worktree remove ${worktreePath} --force`);
 
   } catch (error) {
     console.error('Error processing Google Sheets:', error);
