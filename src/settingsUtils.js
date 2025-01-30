@@ -113,7 +113,7 @@ export function formatNationName(name, language = "en") {
       }
 
       const withZeroWidthSpace = insertZeroWidthSpace(segment); // Add zero-width space
-      const hyphenated = withZeroWidthSpace.length > 8 ? insertShy(withZeroWidthSpace) : withZeroWidthSpace; // Insert soft hyphens for long segments
+      const hyphenated = withZeroWidthSpace.length > 12 ? insertShy(withZeroWidthSpace) : withZeroWidthSpace; // Insert soft hyphens for long segments
       return capitalizeSegment(hyphenated); // Capitalize each segment
     })
     .join(""); // Rejoin without adding extra spaces
