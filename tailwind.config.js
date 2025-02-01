@@ -17,6 +17,9 @@ export default {
     'bg-rarity-C',
     'text-center',
     'text-right',
+    'font-inter',
+    'font-sans',
+    'font-unsmurf',
   ],
   theme: {
     extend: {
@@ -24,8 +27,9 @@ export default {
         ...theme('colors.rarity'), // Automatically generate bg-rarity-[key] utilities
       }),
       fontFamily: {
-        sans: ['"Inter Tight"', 'sans-serif'], // Default for all text
-        inter: ['"Inter"', 'sans-serif'],      // For headings
+        sans: ['"Inter Tight"', '"UnsmurfIcons"', 'sans-serif'], // Default for all text
+        inter: ['"Inter"', '"UnsmurfIcons"', 'sans-serif'],      // For headings
+        unsmurf: ["UnsmurfIcons", "sans-serif"], // Ensure it has a dedicated class  
       },
       colors: {
         rarity: {

@@ -1,14 +1,14 @@
-import { spawn } from 'child_process';
-import svelte from 'rollup-plugin-svelte';
-import commonjs from '@rollup/plugin-commonjs';
-import terser from '@rollup/plugin-terser';
-import resolve from '@rollup/plugin-node-resolve';
-import livereload from 'rollup-plugin-livereload';
-import postcss from 'rollup-plugin-postcss';
-import sveltePreprocess from 'svelte-preprocess';
-import tailwindcss from 'tailwindcss';
-import autoprefixer from 'autoprefixer';
-import copy from 'rollup-plugin-copy';
+const { spawn } = require('child_process');
+const svelte = require('rollup-plugin-svelte');
+const commonjs = require('@rollup/plugin-commonjs');
+const terser = require('@rollup/plugin-terser');
+const resolve = require('@rollup/plugin-node-resolve');
+const livereload = require('rollup-plugin-livereload');
+const postcss = require('rollup-plugin-postcss');
+const sveltePreprocess = require('svelte-preprocess');
+const autoprefixer = require('autoprefixer');
+const tailwindcss = require('tailwindcss');
+const copy = require('rollup-plugin-copy');
 
 const production = !process.env.ROLLUP_WATCH;
 const repoName = "unsmurf";
@@ -34,7 +34,7 @@ function serve() {
     };
 }
 
-export default {
+module.exports = {
     input: 'src/main.js',
     output: {
         sourcemap: true,
@@ -43,7 +43,7 @@ export default {
         file: 'public/build/bundle.js',
         globals: {
             base: production ? `/${repoName}` : ""
-        },  
+        },
     },
     plugins: [
         svelte({
@@ -57,43 +57,38 @@ export default {
                 },
             },
         }),
-    
-        // Run the development server in dev mode
-        !production && serve({
-            open: true, // Open browser
-            contentBase: ['public', 'static'],
-            host: 'localhost',
-            port: 8080,
-        }),
-    
-        // Process TailwindCSS and PostCSS plugins
+
+        // PostCSS with TailwindCSS
         postcss({
             extract: 'public/build/bundle.css',
             minimize: production,
             plugins: [
-                tailwindcss('./tailwind.config.js'),
+                tailwindcss('./tailwind.config.js'), // Ensure Tailwind is loaded properly
                 autoprefixer(),
             ],
         }),
-    
-        // Resolve dependencies
+
+        // Copy static assets
+        copy({
+            targets: [
+                { src: 'static/*', dest: 'public/static' }, // Copy all files from static/ to public/static
+            ],
+        }),
+
         resolve({
             browser: true,
             dedupe: ['svelte'],
             exportConditions: ['svelte'],
         }),
         commonjs(),
-    
-        copy({
-            targets: [
-                { src: 'static/*', dest: 'public/static' }, // Copy static files
-            ],
-        }),
-    
-        // Watch the `public` directory for changes and reload
+
+        // Start development server
+        !production && serve(),
+
+        // Watch and reload in dev mode
         !production && livereload('public'),
-    
-        // Minify in production with compatibility fixes
+
+        // Minify for production
         production && terser({
             ecma: 2015,
             compress: {

@@ -2,6 +2,22 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+@font-face {
+  font-family: "UnsmurfIcons";
+
+  src: url("/static/unsmurficons-Regular.otf") format("opentype");
+
+  font-weight: normal;
+
+  /* Forces no bolding */
+
+  font-style: normal;
+
+  font-synthesis: none;
+
+  /* Prevents synthetic bolding */
+}
+
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -110,9 +126,7 @@
   --tw-contain-style:  ;
 }
 
-/*
-! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
-*/
+/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -153,10 +167,12 @@ html,
   /* 1 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
+  -moz-tab-size: 4;
   /* 3 */
-  tab-size: 4;
+  -o-tab-size: 4;
+     tab-size: 4;
   /* 3 */
-  font-family: "Inter Tight", sans-serif;
+  font-family: "Inter Tight", "UnsmurfIcons", sans-serif;
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
@@ -198,7 +214,8 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
 abbr:where([title]) {
-  text-decoration: underline dotted;
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
 }
 
 /*
@@ -487,6 +504,13 @@ textarea {
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
 
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1;
+  /* 1 */
+  color: #9ca3af;
+  /* 2 */
+}
+
 input::placeholder,
 textarea::placeholder {
   opacity: 1;
@@ -658,16 +682,12 @@ video {
   height: 1.5rem;
 }
 
-.h-3\.5{
-  height: 0.875rem;
-}
-
 .h-6{
   height: 1.5rem;
 }
 
-.h-\[0\.65rem\]{
-  height: 0.65rem;
+.min-h-\[3rem\]{
+  min-height: 3rem;
 }
 
 .w-6{
@@ -678,16 +698,8 @@ video {
   width: 120%;
 }
 
-.w-\[75\%\]{
-  width: 75%;
-}
-
 .w-\[80\%\]{
   width: 80%;
-}
-
-.w-\[90\%\]{
-  width: 90%;
 }
 
 .w-full{
@@ -698,12 +710,12 @@ video {
   min-width: 3ch;
 }
 
-.min-w-\[7ch\]{
-  min-width: 7ch;
+.min-w-\[6ch\]{
+  min-width: 6ch;
 }
 
-.min-w-\[8ch\]{
-  min-width: 8ch;
+.min-w-\[7ch\]{
+  min-width: 7ch;
 }
 
 .max-w-2xl{
@@ -726,16 +738,6 @@ video {
   --tw-border-spacing-x: 0px;
   --tw-border-spacing-y: 0px;
   border-spacing: var(--tw-border-spacing-x) var(--tw-border-spacing-y);
-}
-
-.-translate-y-\[1\.5px\]{
-  --tw-translate-y: -1.5px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.-translate-y-\[2px\]{
-  --tw-translate-y: -2px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .rotate-180{
@@ -785,6 +787,14 @@ video {
 
 .gap-4{
   gap: 1rem;
+}
+
+.overflow-hidden{
+  overflow: hidden;
+}
+
+.overflow-x-hidden{
+  overflow-x: hidden;
 }
 
 .whitespace-nowrap{
@@ -891,14 +901,6 @@ video {
   background-image: linear-gradient(120deg, #FCA5A5, #FDBA74, #FDE68A, #A7F3D0, #93C5FD, #C4B5FD, #F9A8D4);
 }
 
-.fill-black{
-  fill: #000;
-}
-
-.fill-gray-500{
-  fill: #6b7280;
-}
-
 .p-2{
   padding: 0.5rem;
 }
@@ -937,14 +939,6 @@ video {
   padding-bottom: 0.75rem;
 }
 
-.pr-\[2\.5px\]{
-  padding-right: 2.5px;
-}
-
-.pr-\[3px\]{
-  padding-right: 3px;
-}
-
 .text-left{
   text-align: left;
 }
@@ -962,7 +956,15 @@ video {
 }
 
 .font-inter{
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", "UnsmurfIcons", sans-serif;
+}
+
+.font-sans{
+  font-family: "Inter Tight", "UnsmurfIcons", sans-serif;
+}
+
+.font-unsmurf{
+  font-family: UnsmurfIcons, sans-serif;
 }
 
 .text-2xl{
@@ -1041,23 +1043,21 @@ video {
 }
 
 .transition{
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
 
-.transition-opacity{
-  transition-property: opacity;
+.transition-all{
+  transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
 
-.duration-300{
-  transition-duration: 300ms;
-}
-
-.ease-in-out{
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+.duration-200{
+  transition-duration: 200ms;
 }
 
 .hover\:bg-blue-600:hover{

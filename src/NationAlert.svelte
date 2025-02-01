@@ -8,8 +8,8 @@
 
   // Check visibility condition
   $: isVisible = (isCTE || isPuppet) && canonicalizedName.length > 2;
-  $: formattedName = uncanonicalizeName(canonicalizedName);
-  $: formattedMasterName = uncanonicalizeName(canonicalizedMasterName);
+  $: formattedName = isCTE ? "&#xe000;&#x2009;" + uncanonicalizeName(canonicalizedName) : uncanonicalizeName(canonicalizedName);
+  $: formattedMasterName = isCTE ? "&#xe000;&#x2009;" + uncanonicalizeName(canonicalizedMasterName) : uncanonicalizeName(canonicalizedMasterName);
 
   // If the nation is its own master, it is not a puppet
   $: if (canonicalizedName === canonicalizedMasterName) {
@@ -47,7 +47,6 @@
 </script>
 
 <!-- Ensures text is fully visible within 120% width -->
-<div class="overflow-x-hidden">
   <div
     class="w-[120%] mx-[-10%] font-inter text-xl py-3 mt-6 mb-4 transition-all duration-200 min-h-[3rem]"
     role="alert"
@@ -57,4 +56,3 @@
       {@html alertMessage}
     </div>
   </div>
-</div>

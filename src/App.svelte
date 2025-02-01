@@ -38,11 +38,13 @@
   let canonicalizedMasterName = "";
   let isCTE = false;
   let isPuppet = false;
+  let isMasterCte = false;
 
   $: canonicalizedName = canonicalizeName(nationId);
   $: canonicalizedMasterName = canonicalizeName(findPuppetmaster(canonicalizedName)?.master) || "";
   $: isCTE = !isNationCurrent(canonicalizedName);
   $: isPuppet = canonicalizedMasterName && canonicalizedName !== canonicalizedMasterName;
+  $: isMasterCte = !isNationCurrent(canonicalizedMasterName);
 
   function lookupNation() {
     if (!nationId.trim()) {
