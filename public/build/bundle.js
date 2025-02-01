@@ -6987,6 +6987,19 @@ var app = (function () {
 	  return name;
 	}
 
+	//Canonicalize the nation name
+	function canonicalizeName(name) {
+	  return name.toLowerCase().trim()
+	    .replace(/\s+/g, "_")   // Collapse multiple spaces into a single underscore
+	    .replace(/_+/g, "_")   // Collapse multiple underscores into a single underscore
+	    .replace(/[^a-z0-9_-]/g, ""); // Remove any character not in A-Z, a-z, 0-9, _, or -
+	}
+
+	//Uncanonicalize the nation name
+	function uncanonicalizeName(name) {
+	  return name.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+	}
+
 	// Helper to validate Roman numerals
 	function isValidRoman(roman) {
 	  const romanRegex = /^(M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3}))$/i;
@@ -7402,7 +7415,7 @@ var app = (function () {
 
 	var root_7 = add_locations(template(`<!> <!> <!>`, 1), CollapsibleTable[FILENAME], []);
 
-	var root$3 = add_locations(template(`<div class="w-full overflow-hidden"><!> <table class="w-full border-separate mb-3 text-left tabular-nums border-spacing-0"><thead><tr></tr></thead><tbody></tbody></table> <div class="flex justify-end items-center gap-1"><span class="text-sm text-gray-600"> </span> <!></div></div>`), CollapsibleTable[FILENAME], [
+	var root$4 = add_locations(template(`<div class="w-full overflow-hidden"><!> <table class="w-full border-separate mb-3 text-left tabular-nums border-spacing-0"><thead><tr></tr></thead><tbody></tbody></table> <div class="flex justify-end items-center gap-1"><span class="text-sm text-gray-600"> </span> <!></div></div>`), CollapsibleTable[FILENAME], [
 		[
 			27,
 			0,
@@ -7454,7 +7467,7 @@ var app = (function () {
 		legacy_pre_effect_reset();
 		init();
 
-		var div = root$3();
+		var div = root$4();
 		var node = child(div);
 
 		{
@@ -7747,7 +7760,7 @@ var app = (function () {
 	TallyTables[FILENAME] = 'src/TallyTables.svelte';
 
 	var root_1$1 = add_locations(template(`<div><!></div>`), TallyTables[FILENAME], [[21, 2]]);
-	var root$2 = add_locations(template(`<div id="tally-row" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 :gap-4"></div>`), TallyTables[FILENAME], [[14, 0]]);
+	var root$3 = add_locations(template(`<div id="tally-row" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 :gap-4"></div>`), TallyTables[FILENAME], [[14, 0]]);
 
 	function TallyTables($$anchor, $$props) {
 		if (new.target) return createClassComponent({ component: TallyTables, ...$$anchor });
@@ -7763,7 +7776,7 @@ var app = (function () {
 
 		init();
 
-		var div = root$2();
+		var div = root$3();
 
 		each(
 			div,
@@ -7902,7 +7915,7 @@ var app = (function () {
 	DetailedTables[FILENAME] = 'src/DetailedTables.svelte';
 
 	var root_1 = add_locations(template(`<div><!></div>`), DetailedTables[FILENAME], [[21, 4]]);
-	var root$1 = add_locations(template(`<div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-2.5 md:gap-4 mt-6"></div>`), DetailedTables[FILENAME], [[14, 0]]);
+	var root$2 = add_locations(template(`<div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-2.5 md:gap-4 mt-6"></div>`), DetailedTables[FILENAME], [[14, 0]]);
 
 	function DetailedTables($$anchor, $$props) {
 		if (new.target) return createClassComponent({ component: DetailedTables, ...$$anchor });
@@ -7918,7 +7931,7 @@ var app = (function () {
 
 		init();
 
-		var div = root$1();
+		var div = root$2();
 
 		each(
 			div,
@@ -8059,35 +8072,183 @@ var app = (function () {
 	mark_module_end(DetailedTables);
 
 	mark_module_start();
+	NationAlert[FILENAME] = 'src/NationAlert.svelte';
+
+	var root$1 = add_locations(template(`<div class="overflow-x-hidden"><div class="w-[120%] mx-[-10%] font-inter text-xl py-3 mt-6 mb-4 transition-all duration-200 min-h-[3rem]" role="alert"><div class="w-[80%] mx-auto text-center"><!></div></div></div>`), NationAlert[FILENAME], [
+		[50, 0, [[51, 2, [[56, 4]]]]]
+	]);
+
+	function NationAlert($$anchor, $$props) {
+		if (new.target) return createClassComponent({ component: NationAlert, ...$$anchor });
+		push($$props, false, NationAlert);
+
+		const isVisible = mutable_state();
+		const formattedName = mutable_state();
+		const formattedMasterName = mutable_state();
+		const bgColor = mutable_state();
+		const textColor = mutable_state();
+		const alertMessage = mutable_state();
+		let canonicalizedName = prop($$props, 'canonicalizedName', 12, "");
+		let canonicalizedMasterName = prop($$props, 'canonicalizedMasterName', 12, "");
+		let isCTE = prop($$props, 'isCTE', 12, false);
+		let isPuppet = prop($$props, 'isPuppet', 12, false);
+
+		legacy_pre_effect(
+			() => (
+				deep_read_state(canonicalizedName()),
+				deep_read_state(canonicalizedMasterName())
+			),
+			() => {
+				if (strict_equals(canonicalizedName(), canonicalizedMasterName())) {
+					isPuppet(false);
+				}
+			}
+		);
+
+		legacy_pre_effect(
+			() => (
+				deep_read_state(isCTE()),
+				deep_read_state(isPuppet()),
+				deep_read_state(canonicalizedName())
+			),
+			() => {
+				set(isVisible, (isCTE() || isPuppet()) && canonicalizedName().length > 2);
+			}
+		);
+
+		legacy_pre_effect(
+			() => (
+				deep_read_state(canonicalizedName())
+			),
+			() => {
+				set(formattedName, uncanonicalizeName(canonicalizedName()));
+			}
+		);
+
+		legacy_pre_effect(
+			() => (
+				deep_read_state(canonicalizedMasterName())
+			),
+			() => {
+				set(formattedMasterName, uncanonicalizeName(canonicalizedMasterName()));
+			}
+		);
+
+		legacy_pre_effect(
+			() => (
+				deep_read_state(canonicalizedName()),
+				deep_read_state(isCTE())
+			),
+			() => {
+				set(bgColor, canonicalizedName().length <= 2 ? "#00000000" : isCTE() ? "#000000FF" : "#00000000");
+			}
+		);
+
+		legacy_pre_effect(
+			() => (
+				deep_read_state(canonicalizedName()),
+				deep_read_state(isCTE()),
+				deep_read_state(isPuppet())
+			),
+			() => {
+				set(textColor, canonicalizedName().length <= 2 ? "#00000000" : isCTE() ? "#FFFFFF" : isPuppet() ? "#000000" : "transparent");
+			}
+		);
+
+		legacy_pre_effect(
+			() => (
+				deep_read_state(canonicalizedName()),
+				deep_read_state(canonicalizedMasterName()),
+				deep_read_state(isCTE()),
+				deep_read_state(isPuppet()),
+				get$1(formattedName),
+				get$1(formattedMasterName)
+			),
+			() => {
+				set(alertMessage, canonicalizedName().length <= 2 ? "　" : strict_equals(canonicalizedName(), canonicalizedMasterName()) && !isCTE() && !isPuppet() ? "　" : isCTE() && isPuppet() ? `<strong>${get$1(formattedName)}</strong>, a puppet of <strong>${get$1(formattedMasterName)}</strong>, is not an active nation` : isCTE() ? `<strong>${get$1(formattedName)}</strong> is not an active nation` : `<strong>${get$1(formattedName)}</strong> is a puppet of <strong>${get$1(formattedMasterName)}</strong>`);
+			}
+		);
+
+		legacy_pre_effect_reset();
+		init();
+
+		var div = root$1();
+		var div_1 = child(div);
+		var div_2 = child(div_1);
+		var node = child(div_2);
+
+		html(node, () => get$1(alertMessage), false, false);
+		reset(div_2);
+		reset(div_1);
+		reset(div);
+		template_effect(() => set_attribute(div_1, 'style', `background-color: ${get$1(bgColor) ?? ''}; color: ${get$1(textColor) ?? ''}; transition: background-color 0.5s, color 0.5s;`));
+		append($$anchor, div);
+
+		return pop({
+			get canonicalizedName() {
+				return canonicalizedName();
+			},
+			set canonicalizedName($$value) {
+				canonicalizedName($$value);
+				flush_sync();
+			},
+			get canonicalizedMasterName() {
+				return canonicalizedMasterName();
+			},
+			set canonicalizedMasterName($$value) {
+				canonicalizedMasterName($$value);
+				flush_sync();
+			},
+			get isCTE() {
+				return isCTE();
+			},
+			set isCTE($$value) {
+				isCTE($$value);
+				flush_sync();
+			},
+			get isPuppet() {
+				return isPuppet();
+			},
+			set isPuppet($$value) {
+				isPuppet($$value);
+				flush_sync();
+			},
+			$set: update_legacy_props,
+			$on: ($$event_name, $$event_cb) => add_legacy_event_listener($$props, $$event_name, $$event_cb)
+		});
+	}
+
+	mark_module_end(NationAlert);
+
+	mark_module_start();
 	App[FILENAME] = 'src/app.svelte';
 
-	var root = add_locations(template(`<div class="px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-16"><div class="relative text-center mb-4"><h1 class="text-2xl font-bold "><span class="font-unsmurf">Unsmurf</span><span class="font-inter">thru Card Trades</span></h1> <p class="text-gray-600">An alternative UI for <a href="https://bazaar.kractero.com/" class="text-blue-500 hover:underline">Kractero's Bazaar</a> to make identifying puppets easier.</p> <div class="flex items-center justify-between mt-4 w-full"><div class="flex-1"></div> <div class="flex-3 flex items-center justify-center gap-2"><input id="nationId" type="text" placeholder="Testlandia" class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"> <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Lookup</button></div> <div class="flex-1 flex justify-end"><button aria-label="Config" class="bg-black text-white font-bold p-2 size-10 rounded-full hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300 transition"><img src="https://ns-rot.github.io/unsmurf/icons/config.svg" alt="Config" class="w-6 h-6"></button></div></div></div> <!> <div class="alert"></div> <!> <!></div>`), App[FILENAME], [
+	var root = add_locations(template(`<div class="px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-16"><div class="relative text-center mb-4"><h1 class="text-2xl font-bold font-inter">Unsmurf thru Card Trades</h1> <p class="text-gray-600">An alternative UI for <a href="https://bazaar.kractero.com/" class="text-blue-500 hover:underline">Kractero's Bazaar</a> to make identifying puppets easier.</p> <div class="flex items-center justify-between mt-4 w-full"><div class="flex-1"></div> <div class="flex-3 flex items-center justify-center gap-2"><input id="nationId" type="text" placeholder="Testlandia" class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"> <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Lookup</button></div> <div class="flex-1 flex justify-end"><button aria-label="Config" class="bg-black text-white font-bold p-2 size-10 rounded-full hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300 transition"><img src="https://ns-rot.github.io/unsmurf/icons/config.svg" alt="Config" class="w-6 h-6"></button></div></div></div> <!> <!> <!> <!></div>`), App[FILENAME], [
 		[
-			98,
-			2,
+			112,
+			0,
 			[
 				[
-					100,
-					1,
+					114,
+					2,
 					[
-						[101, 3, [[101, 35], [101, 74]]],
-						[102, 3, [[104, 2]]],
+						[115, 4],
+						[116, 4, [[118, 6]]],
 						[
-							108,
-							3,
+							125,
+							4,
 							[
-								[109, 2],
-								[110, 2, [[111, 4], [119, 4]]],
+								[126, 6],
+								[127, 6, [[128, 8], [136, 8]]],
 								[
-									126,
-									2,
-									[[127, 4, [[132, 3]]]]
+									143,
+									6,
+									[[144, 8, [[149, 10]]]]
 								]
 							]
 						]
 					]
-				],
-				[142, 1]
+				]
 			]
 		]
 	]);
@@ -8096,7 +8257,7 @@ var app = (function () {
 		if (new.target) return createClassComponent({ component: App, ...$$anchor });
 		push($$props, false, App);
 
-		let nationId = mutable_state('');
+		let nationId = mutable_state("");
 		let loading = mutable_state(false);
 		let buys = mutable_state([]);
 		let sells = mutable_state([]);
@@ -8105,20 +8266,24 @@ var app = (function () {
 		let sellTallyTrades = mutable_state([]);
 		let sellTallyGifts = mutable_state([]);
 		let showConfig = mutable_state(false);
+		let canonicalizedName = mutable_state("");
+		let canonicalizedMasterName = mutable_state("");
+		let isCTE = mutable_state(false);
+		let isPuppet = mutable_state(false);
 
 		function lookupNation() {
 			if (!get$1(nationId).trim()) {
-				alert('Please enter a nation name.');
+				alert("Please enter a nation name.");
 				return;
 			}
 
-			const safeNation = get$1(nationId).trim().replace(/[^A-Za-z0-9_\-\s]/g, "").replace(/\s+/g, "_");
+			const safeNation = canonicalizeName(get$1(nationId).trim());
 
 			window.location.href = `./?q=${encodeURIComponent(safeNation)}`;
 		}
 
 		function handleEnter(e) {
-			if (strict_equals(e.key, 'Enter')) {
+			if (strict_equals(e.key, "Enter")) {
 				lookupNation();
 			}
 		}
@@ -8133,7 +8298,7 @@ var app = (function () {
 
 		async function loadTradeData() {
 			if (!get$1(nationId).trim()) {
-				alert('Please enter a nation name.');
+				alert("Please enter a nation name.");
 				return;
 			}
 
@@ -8141,37 +8306,65 @@ var app = (function () {
 
 			const safeNation = get$1(nationId).trim();
 
-			setQueryParam('q', safeNation);
-			document.title = `Unsmurf | ${safeNation}`;
+			setQueryParam("q", safeNation);
+			document.title = `Unsmurf | ${uncanonicalizeName(safeNation)}`;
 
 			// Fetch Data
 			const [fetchedBuys, fetchedSells] = await Promise.all([
-				fetchData('buyer', safeNation),
-				fetchData('seller', safeNation)
+				fetchData("buyer", safeNation),
+				fetchData("seller", safeNation)
 			]);
 
 			// Assign fetched values
 			set(buys, fetchedBuys);
 			set(sells, fetchedSells);
 			// Calculate tallies
-			set(buyTallyTrades, tallyCounts(get$1(buys), 'seller', true));
-			set(buyTallyGifts, tallyCounts(get$1(buys), 'seller', false));
-			set(sellTallyTrades, tallyCounts(get$1(sells), 'buyer', true));
-			set(sellTallyGifts, tallyCounts(get$1(sells), 'buyer', false));
+			set(buyTallyTrades, tallyCounts(get$1(buys), "seller", true));
+			set(buyTallyGifts, tallyCounts(get$1(buys), "seller", false));
+			set(sellTallyTrades, tallyCounts(get$1(sells), "buyer", true));
+			set(sellTallyGifts, tallyCounts(get$1(sells), "buyer", false));
 			set(loading, false);
 		}
 
 		onMount(async () => {
-			await fetchSheets();
-
 			const fromURL = getQueryParam("q");
 
+			await fetchSheets();
+
 			if (fromURL) {
-				set(nationId, fromURL);
+				set(nationId, uncanonicalizeName(fromURL));
 				await loadTradeData();
 			}
 		});
 
+		legacy_pre_effect(() => (get$1(nationId)), () => {
+			set(canonicalizedName, canonicalizeName(get$1(nationId)));
+		});
+
+		legacy_pre_effect(
+			() => (
+				get$1(canonicalizedName)
+			),
+			() => {
+				set(canonicalizedMasterName, canonicalizeName(findPuppetmaster(get$1(canonicalizedName))?.master) || "");
+			}
+		);
+
+		legacy_pre_effect(() => (get$1(canonicalizedName)), () => {
+			set(isCTE, !isNationCurrent(get$1(canonicalizedName)));
+		});
+
+		legacy_pre_effect(
+			() => (
+				get$1(canonicalizedMasterName),
+				get$1(canonicalizedName)
+			),
+			() => {
+				set(isPuppet, get$1(canonicalizedMasterName) && strict_equals(get$1(canonicalizedName), get$1(canonicalizedMasterName), false));
+			}
+		);
+
+		legacy_pre_effect_reset();
 		init();
 
 		var div = root();
@@ -8202,9 +8395,26 @@ var app = (function () {
 			closeConfig
 		});
 
-		var node_1 = sibling(node, 4);
+		var node_1 = sibling(node, 2);
 
-		TallyTables(node_1, {
+		NationAlert(node_1, {
+			get canonicalizedName() {
+				return get$1(canonicalizedName);
+			},
+			get canonicalizedMasterName() {
+				return get$1(canonicalizedMasterName);
+			},
+			get isCTE() {
+				return get$1(isCTE);
+			},
+			get isPuppet() {
+				return get$1(isPuppet);
+			}
+		});
+
+		var node_2 = sibling(node_1, 2);
+
+		TallyTables(node_2, {
 			get loading() {
 				return get$1(loading);
 			},
@@ -8224,9 +8434,9 @@ var app = (function () {
 			makeTallyRows
 		});
 
-		var node_2 = sibling(node_1, 2);
+		var node_3 = sibling(node_2, 2);
 
-		DetailedTables(node_2, {
+		DetailedTables(node_3, {
 			get loading() {
 				return get$1(loading);
 			},

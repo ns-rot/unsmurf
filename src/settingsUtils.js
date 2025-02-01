@@ -55,7 +55,15 @@ export function normalizeName(name) {
 
 //Canonicalize the nation name
 export function canonicalizeName(name) {
-  return name.toLowerCase().trim().replace(/\s+/g, "_");
+  return name.toLowerCase().trim()
+    .replace(/\s+/g, "_")   // Collapse multiple spaces into a single underscore
+    .replace(/_+/g, "_")   // Collapse multiple underscores into a single underscore
+    .replace(/[^a-z0-9_-]/g, ""); // Remove any character not in A-Z, a-z, 0-9, _, or -
+}
+
+//Uncanonicalize the nation name
+export function uncanonicalizeName(name) {
+  return name.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 // Helper to validate Roman numerals
