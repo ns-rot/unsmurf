@@ -3,7 +3,7 @@
 
 @font-face {
     font-family: "UnsmurfIcons";
-    src: url("/static/unsmurficons-Regular.otf") format("opentype");
+    src: url("../static/unsmurficons-Regular.otf") format("opentype");
     font-weight: normal; /* Forces no bolding */
     font-style: normal;
     font-synthesis: none; /* Prevents synthetic bolding */

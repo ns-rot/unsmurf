@@ -46,9 +46,8 @@
     : `<strong>${formattedName}</strong> is a puppet of <strong>${formattedMasterName}</strong>`;
 </script>
 
-<!-- Ensures text is fully visible within 120% width -->
   <div
-    class="w-[120%] mx-[-10%] font-inter text-xl py-3 mt-6 mb-4 transition-all duration-200 min-h-[3rem]"
+    class="mx-[-0.375rem] sm:mx-[-1rem] md:mx-[-1.5rem] lg:mx-[-2rem] xl:mx-[-6%] font-inter text-xl py-4 mt-4 mb-2 transition-all duration-200 min-h-[3rem]"
     role="alert"
     style="background-color: {bgColor}; color: {textColor}; transition: background-color 0.5s, color 0.5s;"
   >
