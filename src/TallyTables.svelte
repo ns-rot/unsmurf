@@ -11,7 +11,7 @@
   export let makeTallyRows;
 </script>
 
-<div id="tally-row" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 :gap-4">
+<div id="tally-row" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 md:gap-4 mt-6">
 {#each [
   { title: 'Gifts Sent', data: sellTallyGifts },
   { title: 'Gifts Received', data: buyTallyGifts },
