@@ -20,6 +20,7 @@ export default {
     'font-inter',
     'font-sans',
     'font-unsmurf',
+    'animate-spin',
   ],
   theme: {
     extend: {
