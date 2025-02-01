@@ -102,7 +102,7 @@
     const fromURL = getQueryParam("q");
     await fetchSheets();
     if (fromURL) {
-      nationId = uncanonicalizeName(fromURL);
+      nationId = canonicalizeName(fromURL);
       await loadTradeData();
     }
   });

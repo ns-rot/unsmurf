@@ -8332,7 +8332,7 @@ var app = (function () {
 			await fetchSheets();
 
 			if (fromURL) {
-				set(nationId, uncanonicalizeName(fromURL));
+				set(nationId, canonicalizeName(fromURL));
 				await loadTradeData();
 			}
 		});
