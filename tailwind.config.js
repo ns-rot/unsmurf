@@ -29,8 +29,8 @@ export default {
       }),
       fontFamily: {
         sans: ['"Inter Tight"', '"UnsmurfIcons"', 'sans-serif'], // Default for all text
-        inter: ['"Inter"', '"UnsmurfIcons"', 'sans-serif'],      // For headings
-        unsmurf: ["UnsmurfIcons", "sans-serif"], // Ensure it has a dedicated class  
+        inter: ['"Inter"', '"UnsmurfIcons"', 'sans-serif'],      // For large text
+        head: ['"Fredoka"', '"UnsmurfIcons"', 'sans-serif'],      // For headings
       },
       colors: {
         rarity: {
@@ -75,5 +75,17 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        '.font-inter': {
+          fontFeatureSettings: '"liga" 1, "dlig" 1, "ss03" 1, "cv01" 1, "cv05" 1',
+        },
+        '.font-sans': {
+          fontFeatureSettings: '"liga" 1, "dlig" 1, "ss03" 1, "cv01" 1, "cv05" 1',
+        },
+        // Doesn't work yet
+      });
+    },
+  ],
 };

@@ -1,5 +1,7 @@
 <script>
   import { onMount } from "svelte";
+  import Header from "./Header.svelte";
+  import UnsmurfTrades from "./UnsmurfTrades.svelte";
   import { settingsStore } from "./settingsStore.js";
   import Config from "./Config.svelte";
   import { fetchSheets } from "./sheetFetch";
@@ -24,6 +26,8 @@
 
   import NationAlert from "./NationAlert.svelte";
 
+  let mode = "cards";
+
   let nationId = "";
   let loading = false;
   let buys = [];
@@ -45,30 +49,6 @@
   $: isCTE = !isNationCurrent(canonicalizedName);
   $: isPuppet = canonicalizedMasterName && canonicalizedName !== canonicalizedMasterName;
   $: isMasterCte = !isNationCurrent(canonicalizedMasterName);
-
-  function lookupNation() {
-    if (!nationId.trim()) {
-      alert("Please enter a nation name.");
-      return;
-    }
-
-    const safeNation = canonicalizeName(nationId.trim());
-    window.location.href = `./?q=${encodeURIComponent(safeNation)}`;
-  }
-
-  function handleEnter(e) {
-    if (e.key === "Enter") {
-      lookupNation();
-    }
-  }
-
-  function openConfig() {
-    showConfig = true;
-  }
-
-  function closeConfig() {
-    showConfig = false;
-  }
 
   async function loadTradeData() {
     if (!nationId.trim()) {
@@ -100,6 +80,14 @@
     loading = false;
   }
 
+  function openConfig() {
+    showConfig = true;
+  }
+
+  function closeConfig() {
+    showConfig = false;
+  }
+
   onMount(async () => {
     const fromURL = getQueryParam("q");
     await fetchSheets();
@@ -108,55 +96,17 @@
       await loadTradeData();
     }
   });
+
+
 </script>
 
 <!-- Page Layout Wrapper -->
 <div class="px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-16">
-  <!-- Header / Input Section -->
-  <div class="relative text-center mb-4">
-    <h1 class="text-2xl font-bold font-inter">Unsmurf thru Card Trades</h1>
-    <p class="text-gray-600">
-      An alternative UI for
-      <a
-        href="https://bazaar.kractero.com/"
-        class="text-blue-500 hover:underline">Kractero's Bazaar</a
-      >
-      to make identifying puppets easier.
-    </p>
+  <!-- Header -->
+  <Header {mode} />
 
-    <div class="flex items-center justify-between mt-4 w-full">
-      <div class="flex-1"></div>
-      <div class="flex-3 flex items-center justify-center gap-2">
-        <input
-          id="nationId"
-          type="text"
-          bind:value={nationId}
-          on:keypress={handleEnter}
-          placeholder="Testlandia"
-          class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
-        />
-        <button
-          on:click={lookupNation}
-          class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition"
-        >
-          Lookup
-        </button>
-      </div>
-      <div class="flex-1 flex justify-end">
-        <button
-          on:click={openConfig}
-          aria-label="Config"
-          class="bg-black text-white font-bold p-2 size-10 rounded-full hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300 transition"
-        >
-          <img
-            src="https://ns-rot.github.io/unsmurf/icons/config.svg"
-            alt="Config"
-            class="w-6 h-6"
-          />
-        </button>
-      </div>
-    </div>
-  </div>
+  <!-- UnsmurfTrades Input Component -->
+  <UnsmurfTrades {nationId} {loadTradeData} {showConfig} {openConfig} />
 
   <!-- Config Overlay -->
   <Config {showConfig} {closeConfig} />
