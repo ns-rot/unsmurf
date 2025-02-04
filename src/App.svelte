@@ -106,13 +106,12 @@
   <Header {mode} />
 
   <!-- UnsmurfTrades Input Component -->
-  <UnsmurfTrades {nationId} {loadTradeData} {showConfig} {openConfig} />
-
+  <UnsmurfTrades bind:nationId {loadTradeData} {showConfig} {openConfig} />
   <!-- Config Overlay -->
   <Config {showConfig} {closeConfig} />
 
   <!-- Alert Banner -->
-  <NationAlert {canonicalizedName} canonicalizedMasterName={canonicalizedMasterName} {isCTE} {isPuppet} />
+  <NationAlert {nationId} />
 
   <!-- TALLY TABLES COMPONENT -->
   <TallyTables

@@ -1,6 +1,5 @@
 <script>
     export let nationId;
-    export let redirectToPage;
     export let openConfig
     import { canonicalizeName } from "./settingsUtils.js";
 
@@ -38,7 +37,7 @@
           class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
         />
         <button
-          on:click={redirectToPage}
+          on:click={lookupNation}
           class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition"
         >
           Lookup

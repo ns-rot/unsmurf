@@ -1,8 +1,9 @@
-//sheetFetch.js
+// sheetFetch.js
 
 import { settingsStore } from "./settingsStore";
 
 export let puppetMasterCache = null; // Cache for puppet-master mappings
+export let masterToPuppetsCache = null; // Reverse cache for master-to-puppet mappings
 export let s4Cache = null; // Cache for S4 data mappings
 export let currentNationsCache = null; // Cache for current nations list
 export let currentNationSet = null; // Set for fast current nation lookups
@@ -29,6 +30,7 @@ function preprocessCurrentNationSet() {
 export async function fetchSheets() {
   // Reset all caches
   puppetMasterCache = {};
+  masterToPuppetsCache = {}; // Initialize reverse lookup map
   s4Cache = {};
   currentNationsCache = [];
   currentNationSet = null;
@@ -46,11 +48,24 @@ export async function fetchSheets() {
       const [puppet, master, sheet] = line.split("\t").map((col) =>
         col.trim().toLowerCase().replace(/\s+/g, "_")
       );
+
       if (puppet && master) {
-        puppetMasterCache[puppet] = { master, sheet }; // Store puppet-master mappings
+        // Store puppet-to-master mapping
+        puppetMasterCache[puppet] = { master, sheet };
+
+        // Ignore self-mapping (master === puppet)
+        if (puppet !== master) {
+          if (!masterToPuppetsCache[master]) {
+            masterToPuppetsCache[master] = [];
+          }
+          masterToPuppetsCache[master].push(puppet);
+        }
       }
     });
 
+    console.log(`Loaded ${Object.keys(puppetMasterCache).length} puppets.`);
+    console.log(`Loaded ${Object.keys(masterToPuppetsCache).length} masters with puppets.`);
+    
     // Fetch and parse the S4 Data TSV
     const s4Response = await fetch(s4DataUrl);
     if (!s4Response.ok) {
@@ -92,7 +107,6 @@ export async function fetchSheets() {
   }));
 }
 
-
 /**
  * Find the master of a given puppet name.
  * @param {string} name - The puppet's name to look up.
@@ -113,6 +127,36 @@ export function findPuppetmaster(name) {
 }
 
 /**
+ * Returns a list of puppets belonging to a given master.
+ * @param {string} masterName - The master nation's name.
+ * @returns {Array<string>} - List of puppet nations under this master.
+ */
+export function listPuppets(masterName) {
+  if (!masterToPuppetsCache) {
+    console.warn("Puppet cache is not initialized.");
+    return [];
+  }
+
+  const normalizedMaster = masterName.trim().toLowerCase().replace(/\s+/g, "_");
+  return masterToPuppetsCache[normalizedMaster] || [];
+}
+
+/**
+ * Returns the number of puppets under a given master.
+ * @param {string} masterName - The master nation's name.
+ * @returns {number} - The count of puppets under this master.
+ */
+export function tallyPuppets(masterName) {
+  if (!masterToPuppetsCache) {
+    console.warn("Puppet cache is not initialized.");
+    return 0;
+  }
+
+  const normalizedMaster = masterName.trim().toLowerCase().replace(/\s+/g, "_");
+  return masterToPuppetsCache[normalizedMaster]?.length || 0;
+}
+
+/**
  * Query the S4 cache for a given key.
  * @param {string} key - The key to look up in the S4 cache.
  * @returns {string|null} - The corresponding value from the S4 cache, or null if not found.
@@ -123,12 +167,7 @@ export function queryS4(key) {
     return null;
   }
 
-  const value = s4Cache[key];
-  if (value) {
-    return value;
-  }
-
-  return null; // Default to null if not found
+  return s4Cache[key] || null; // Default to null if not found
 }
 
 /**
