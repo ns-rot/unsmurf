@@ -1,0 +1,24 @@
+
+  /* (unused) .header-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 1rem;
+  }*/
+
+  /* (unused) .sticky-logo {
+    position: fixed;
+    top: 0px;
+    left: 50%;
+    z-index: 50;
+    width: 8rem;
+    --tw-translate-x: -50%;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}*/
+
+.wordmark.svelte-w67tva {
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+}
