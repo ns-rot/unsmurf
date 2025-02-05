@@ -38,7 +38,7 @@
     ? "&#xe000;&#x2009;" + uncanonicalizeName(canonicalizedName)
     : uncanonicalizeName(canonicalizedName);
 
-  $: formattedMasterName = isCTE
+  $: formattedMasterName = isMasterCte
     ? "&#xe000;&#x2009;" + uncanonicalizeName(canonicalizedMasterName)
     : uncanonicalizeName(canonicalizedMasterName);
 
