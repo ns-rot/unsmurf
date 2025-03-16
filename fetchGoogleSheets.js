@@ -96,13 +96,22 @@ async function fetchData(sheet) {
 
 async function processGoogleSheets() {
   const tsvLines = ['puppet\tmaster\tsheet']; // Header row
+  const seenPuppets = new Set(); // Track unique puppet names
 
   try {
     // Fetch and process each sheet
     for (const sheet of sheets) {
       console.log(`Fetching data from ${sheet.name}...`);
       const sheetData = await fetchData(sheet);
-      tsvLines.push(...sheetData);
+      
+      // Only add entries with unseen puppet names
+      for (const line of sheetData) {
+        const [puppet] = line.split('\t');
+        if (!seenPuppets.has(puppet)) {
+          seenPuppets.add(puppet);
+          tsvLines.push(line);
+        }
+      }
     }
 
     const tsvContent = tsvLines.join('\n');
