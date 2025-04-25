@@ -1,4 +1,5 @@
-import App from './app.svelte'; // Change import from App to NewApp
+import App from './App.svelte';
+import './input.css';
 
 const app = new App({
 	target: document.body,

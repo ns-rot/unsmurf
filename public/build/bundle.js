@@ -6726,7 +6726,7 @@ ${properties}`
 	mark_module_start();
 	Header[FILENAME] = 'src/Header.svelte';
 
-	var root$8 = add_locations(template(`<div class="relative text-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="unsmurf-logo w-48 m-auto" viewBox="0 0 2640 970"><g transform="matrix(.87919536 0 0 .87919763125 -870.9628 -660.76390887631)"><path d="m2496.11 1645.87 156.82-187.1c3.2-3.38 6.34-5.9 9.41-7.59 3.08-1.69 6.83-2.9 11.25-3.63s10.09-1.1 17-1.1c11.9 0 20.53 1.82 25.91 5.47 5.37 3.65 8.78 8.42 10.24 14.33s2.19 12.28 2.19 19.11v325.17c0 6.45-.73 12.59-2.19 18.42-1.46 5.84-4.91 10.52-10.36 14.05s-14.24 5.3-26.37 5.3c-11.74 0-20.3-1.82-25.67-5.47s-8.79-8.48-10.25-14.51-2.19-12.34-2.19-18.94v-237.33l-122.97 148.56c-1.62 1.83-3.71 4.11-6.28 6.84s-5.95 5.13-10.14 7.2c-4.18 2.08-9.63 3.11-16.34 3.11-6.76 0-12.21-1.02-16.36-3.06s-7.48-4.41-9.99-7.11c-2.51-2.71-4.79-5.19-6.86-7.45l-122.41-147.85v238.24c0 6.45-.72 12.59-2.18 18.42-1.46 5.84-4.87 10.52-10.25 14.05-5.37 3.53-14.12 5.3-26.25 5.3-11.52 0-19.96-1.77-25.34-5.3-5.37-3.53-8.79-8.25-10.24-14.16-1.46-5.91-2.19-12.4-2.19-19.46v-325.17c0-6.6.73-12.72 2.19-18.36 1.45-5.64 4.91-10.28 10.36-13.93s14.24-5.47 26.37-5.47c7.99 0 14.15.5 18.49 1.51 4.34 1 7.82 2.42 10.44 4.27 2.62 1.84 5.26 4.21 7.91 7.11z"></path><path d="m3449.15 1721.41h-127.43v88.54c0 6.76-.69 13.05-2.08 18.89-1.38 5.83-4.76 10.53-10.13 14.1s-14.2 5.36-26.48 5.36c-12.05 0-20.76-1.79-26.14-5.36-5.37-3.57-8.71-8.37-10.01-14.39-1.31-6.02-1.96-12.42-1.96-19.17v-325.17c0-6.6.73-12.78 2.19-18.54 1.46-5.75 4.87-10.46 10.24-14.1 5.38-3.65 14.13-5.47 26.25-5.47h167.99c16.89 0 33.71 2.86 50.46 8.58s32.06 14.34 45.92 25.85c13.87 11.52 24.99 25.91 33.37 43.18s12.57 37.58 12.57 60.91c0 15.35-2.6 30.48-7.79 45.37-5.2 14.89-12.83 28.61-22.89 41.16-9.34 11.65-20.59 21.72-33.75 30.19l59.6 82.48c5.89 8.16 9.54 15.18 10.96 21.04 1.42 5.87.43 11.37-2.97 16.51-3.41 5.13-9.41 10.8-18.01 17.02-12.36 8.91-22.34 12.25-29.94 10.04-7.59-2.22-15.38-8.82-23.37-19.82zm-127.43-76h136.79c6.21 0 12.77-1.17 19.65-3.51 6.89-2.34 13.23-6.02 19.04-11.05 5.8-5.03 10.57-11.38 14.31-19.05 3.74-7.68 5.61-16.93 5.61-27.75 0-12.67-2.96-23.55-8.87-32.65s-13.87-16.08-23.89-20.96c-10.02-4.87-21.32-7.31-33.92-7.31h-128.72z"></path><path d="m1383.39 1501.94v159.13c0 26.76-4.11 51.69-12.34 74.82-8.23 23.12-20.62 43.41-37.15 60.88s-37.11 31.12-61.74 40.94c-24.62 9.82-53.33 14.73-86.12 14.73-32.46 0-60.9-4.97-85.31-14.94-24.41-9.96-44.8-23.74-61.16-41.34-16.37-17.61-28.62-38.05-36.74-61.33-8.128-23.28-12.191-48.25-12.191-74.91v-245.17c0 48.64 35.461 85.05 77.601 92.14v153.03c0 21.05 4.1 40.31 12.3 57.78s21.08 31.45 38.65 41.93c17.57 10.49 40.43 15.73 68.58 15.73 26.21 0 48.1-4.78 65.65-14.36 17.57-9.57 30.78-23.06 39.64-40.45 8.87-17.39 13.3-37.79 13.3-61.2v-153.62c25.5 5.32 52.03 4.05 77.03-3.79z"></path><path d="m2049.85 1854.1c-21.97 0-41.57-2.11-58.79-6.35-17.22-4.23-32.23-9.62-45.01-16.17s-23.45-13.37-32.01-20.46c-8.56-7.1-15.1-13.45-19.61-19.06-5.86-7.23-9.54-13.72-11.03-19.48-1.49-5.75-.83-11.52 1.98-17.31 2.8-5.78 7.77-12.01 14.92-18.69 7.06-6.56 13.72-10.03 19.99-10.43 6.26-.39 12.45 1.35 18.55 5.23 6.11 3.88 12.34 9.21 18.7 16.01 10.77 11.62 23.79 20.16 39.06 25.62 15.26 5.46 32.93 8.19 53.01 8.19 18.91 0 34.94-1.75 48.1-5.26s23.18-8.94 30.06-16.28 10.32-16.81 10.32-28.39c0-9.53-3.43-17.38-10.28-23.55-6.86-6.17-16.06-11.42-27.6-15.76s-24.5-8.33-38.89-11.98c-14.38-3.64-29.07-7.65-44.07-12.01-12.33-3.15-24.6-6.87-36.82-11.16s-23.75-9.32-34.6-15.07-20.44-12.67-28.77-20.75-14.85-17.6-19.57-28.53c-4.71-10.94-7.07-23.65-7.07-38.13 0-22.8 6.34-42.75 19.01-59.85 12.68-17.09 30.42-30.43 53.22-40.02s49.25-14.39 79.34-14.39c19.6 0 37.03 1.39 52.29 4.17 15.25 2.77 28.44 6.27 39.56 10.49s20.4 8.52 27.86 12.89c7.46 4.38 13.21 8.25 17.24 11.62 10.2 8.45 15.8 16.06 16.81 22.83 1.01 6.76-2.54 15.63-10.66 26.61-8.57 11.67-16.95 18.16-25.13 19.46-8.19 1.3-17.69-1.52-28.5-8.47-6.96-5.6-14.67-10.4-23.12-14.39-8.45-4-18.08-7.09-28.89-9.28s-23.62-3.28-38.45-3.28c-10.86 0-20.82.92-29.87 2.75-9.06 1.83-16.77 4.51-23.13 8.05-6.37 3.53-11.31 7.93-14.82 13.19-3.52 5.27-5.27 11.33-5.27 18.2 0 8.98 3.19 16.36 9.59 22.12 6.39 5.77 15.01 10.53 25.88 14.29 10.86 3.76 23.09 7.22 36.69 10.37 13.6 3.16 27.68 6.54 42.24 10.15 16.17 3.96 32.22 8.75 48.14 14.37 15.93 5.62 30.31 12.78 43.12 21.47 12.82 8.69 23.15 19.66 30.97 32.92 7.82 13.25 11.73 29.56 11.73 48.94 0 21.14-4.48 39.58-13.44 55.32s-21.25 28.7-36.85 38.87c-15.61 10.18-33.38 17.78-53.33 22.82-19.94 5.03-40.88 7.55-62.8 7.55z"></path><path d="m2984.62 1852.44c-32.46 0-60.9-4.97-85.31-14.94-24.41-9.96-44.8-23.74-61.16-41.34-16.37-17.61-28.62-38.05-36.74-61.33-8.13-23.28-12.19-48.25-12.19-74.91v-175.47c0-6.94.7-13.33 2.11-19.16 1.41-5.84 4.79-10.55 10.17-14.15 5.37-3.59 14.18-5.38 26.41-5.38 12.34 0 21.21 1.79 26.61 5.38 5.39 3.6 8.8 8.32 10.2 14.18 1.4 5.85 2.1 12.42 2.1 19.7v174.9c0 21.05 4.1 40.31 12.3 57.78s21.08 31.45 38.65 41.93c17.57 10.49 40.43 15.73 68.58 15.73 26.21 0 48.1-4.78 65.66-14.36 17.56-9.57 30.77-23.06 39.63-40.45 8.87-17.39 13.31-37.79 13.31-61.2v-178.02c0-6.39.75-12.23 2.27-17.52 1.52-5.28 5-9.61 10.45-12.99s14.18-5.06 26.19-5.06c12.23 0 20.97 1.85 26.2 5.56 5.24 3.7 8.53 8.49 9.89 14.34 1.35 5.86 2.02 12.32 2.02 19.36v176.05c0 26.76-4.11 51.69-12.34 74.82-8.23 23.12-20.62 43.41-37.15 60.88s-37.11 31.12-61.74 40.94c-24.62 9.82-53.33 14.73-86.12 14.73z"></path><path d="m3691.62 1848.64c-12.05 0-20.76-1.78-26.13-5.35s-8.71-8.37-10.02-14.4c-1.3-6.02-1.95-12.41-1.95-19.16v-325.28c0-14.59 2.89-24.62 8.69-30.12 5.79-5.49 16.17-8.23 31.14-8.23h262.21c6.98 0 13.3.69 18.94 2.07 5.64 1.39 10.15 4.76 13.53 10.14 3.38 5.37 5.07 14.28 5.07 26.71 0 12.05-1.79 20.76-5.36 26.13-3.57 5.38-8.27 8.72-14.11 10.02-5.83 1.31-12.24 1.96-19.22 1.96h-224.1v99h194.61c6.98 0 13.11.63 18.37 1.9s9.33 4.3 12.2 9.1c2.88 4.8 4.32 12.72 4.32 23.77 0 10.45-1.5 18.01-4.49 22.69-3 4.68-7.12 7.56-12.38 8.63-5.26 1.08-11.45 1.62-18.6 1.62h-194.03v120.46c0 6.75-.69 13.05-2.07 18.88-1.38 5.84-4.76 10.54-10.13 14.11-5.38 3.57-14.21 5.35-26.49 5.35z"></path></g><path d="m400 197.889c-131.035 0-237.26 107.084-237.26 239.178v234.556c0 10.422 11.105 17.009 20.142 11.946l31.943-17.888c41.455-23.217 91.932-22.913 133.107.807l18.435 10.619c20.841 12.007 46.425 12.007 67.266 0l18.435-10.619c41.175-23.72 91.651-24.024 133.107-.807l31.942 17.888c9.04 5.063 20.143-1.524 20.143-11.946v-234.556c0-132.094-106.224-239.178-237.26-239.178zm-305.049 239.178c0-169.836 136.575-307.515 305.049-307.515 168.475 0 305.049 137.679 305.049 307.515v234.556c0 62.525-66.633 102.051-120.85 71.686l-31.946-17.891c-20.726-11.61-45.964-11.457-66.551.403l-18.435 10.62c-41.684 24.01-92.85 24.01-134.534 0l-18.434-10.62c-20.587-11.86-45.826-12.013-66.553-.403l-31.943 17.891c-54.22 30.365-120.852-9.161-120.852-71.686zm254.207-17.084c0 28.305-22.762 51.253-50.841 51.253s-50.842-22.948-50.842-51.253c0-28.306 22.763-51.252 50.842-51.252s50.841 22.946 50.841 51.252zm152.525 51.253c28.078 0 50.842-22.948 50.842-51.253 0-28.306-22.764-51.252-50.842-51.252s-50.841 22.946-50.841 51.252c0 28.305 22.763 51.253 50.841 51.253z" transform="matrix(.9999983475 0 0 1.00000295009 -94.951 -129.54702086312)"></path><path d="m1480.25 1848.41c-11.52 0-19.92-1.82-25.22-5.46-5.29-3.65-8.67-8.43-10.13-14.34-1.46-5.92-2.18-12.29-2.18-19.12v-336.6c10.23-6.26 31.43-7.9 44.61-5.79 27.07 4.35 52.51 20.28 86.9 54.3l181.32 201.23v-239.79c0-6.46.79-12.41 2.36-17.85 1.58-5.45 5.09-9.9 10.54-13.36 5.45-3.45 14.12-5.18 26.02-5.18 11.97 0 20.59 1.82 25.85 5.47s8.58 8.42 9.96 14.33 2.07 12.28 2.07 19.11v324.71c0 6.6-.79 12.82-2.37 18.65-1.57 5.84-5.1 10.58-10.56 14.23-5.46 3.64-14.08 5.46-25.87 5.46-8.81 0-16.02-.89-21.62-2.69s-10.68-5.21-15.23-10.25l-237.53-260.71v235.31c0 6.6-.73 12.82-2.19 18.65-1.46 5.84-4.92 10.58-10.36 14.23-5.45 3.64-14.24 5.46-26.37 5.46z" transform="matrix(.87919536 0 0 .87919763125 -870.9628 -660.76390887631)"></path></svg> <span class="sr-only select-text">Unsmurf</span> <h1 class="text-2xl font-head"></h1> <p class="text-gray-600"><!></p></div>`), Header[FILENAME], [
+	var root$9 = add_locations(template(`<div class="relative text-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" class="unsmurf-logo w-48 m-auto" viewBox="0 0 2640 970"><g transform="matrix(.87919536 0 0 .87919763125 -870.9628 -660.76390887631)"><path d="m2496.11 1645.87 156.82-187.1c3.2-3.38 6.34-5.9 9.41-7.59 3.08-1.69 6.83-2.9 11.25-3.63s10.09-1.1 17-1.1c11.9 0 20.53 1.82 25.91 5.47 5.37 3.65 8.78 8.42 10.24 14.33s2.19 12.28 2.19 19.11v325.17c0 6.45-.73 12.59-2.19 18.42-1.46 5.84-4.91 10.52-10.36 14.05s-14.24 5.3-26.37 5.3c-11.74 0-20.3-1.82-25.67-5.47s-8.79-8.48-10.25-14.51-2.19-12.34-2.19-18.94v-237.33l-122.97 148.56c-1.62 1.83-3.71 4.11-6.28 6.84s-5.95 5.13-10.14 7.2c-4.18 2.08-9.63 3.11-16.34 3.11-6.76 0-12.21-1.02-16.36-3.06s-7.48-4.41-9.99-7.11c-2.51-2.71-4.79-5.19-6.86-7.45l-122.41-147.85v238.24c0 6.45-.72 12.59-2.18 18.42-1.46 5.84-4.87 10.52-10.25 14.05-5.37 3.53-14.12 5.3-26.25 5.3-11.52 0-19.96-1.77-25.34-5.3-5.37-3.53-8.79-8.25-10.24-14.16-1.46-5.91-2.19-12.4-2.19-19.46v-325.17c0-6.6.73-12.72 2.19-18.36 1.45-5.64 4.91-10.28 10.36-13.93s14.24-5.47 26.37-5.47c7.99 0 14.15.5 18.49 1.51 4.34 1 7.82 2.42 10.44 4.27 2.62 1.84 5.26 4.21 7.91 7.11z"></path><path d="m3449.15 1721.41h-127.43v88.54c0 6.76-.69 13.05-2.08 18.89-1.38 5.83-4.76 10.53-10.13 14.1s-14.2 5.36-26.48 5.36c-12.05 0-20.76-1.79-26.14-5.36-5.37-3.57-8.71-8.37-10.01-14.39-1.31-6.02-1.96-12.42-1.96-19.17v-325.17c0-6.6.73-12.78 2.19-18.54 1.46-5.75 4.87-10.46 10.24-14.1 5.38-3.65 14.13-5.47 26.25-5.47h167.99c16.89 0 33.71 2.86 50.46 8.58s32.06 14.34 45.92 25.85c13.87 11.52 24.99 25.91 33.37 43.18s12.57 37.58 12.57 60.91c0 15.35-2.6 30.48-7.79 45.37-5.2 14.89-12.83 28.61-22.89 41.16-9.34 11.65-20.59 21.72-33.75 30.19l59.6 82.48c5.89 8.16 9.54 15.18 10.96 21.04 1.42 5.87.43 11.37-2.97 16.51-3.41 5.13-9.41 10.8-18.01 17.02-12.36 8.91-22.34 12.25-29.94 10.04-7.59-2.22-15.38-8.82-23.37-19.82zm-127.43-76h136.79c6.21 0 12.77-1.17 19.65-3.51 6.89-2.34 13.23-6.02 19.04-11.05 5.8-5.03 10.57-11.38 14.31-19.05 3.74-7.68 5.61-16.93 5.61-27.75 0-12.67-2.96-23.55-8.87-32.65s-13.87-16.08-23.89-20.96c-10.02-4.87-21.32-7.31-33.92-7.31h-128.72z"></path><path d="m1383.39 1501.94v159.13c0 26.76-4.11 51.69-12.34 74.82-8.23 23.12-20.62 43.41-37.15 60.88s-37.11 31.12-61.74 40.94c-24.62 9.82-53.33 14.73-86.12 14.73-32.46 0-60.9-4.97-85.31-14.94-24.41-9.96-44.8-23.74-61.16-41.34-16.37-17.61-28.62-38.05-36.74-61.33-8.128-23.28-12.191-48.25-12.191-74.91v-245.17c0 48.64 35.461 85.05 77.601 92.14v153.03c0 21.05 4.1 40.31 12.3 57.78s21.08 31.45 38.65 41.93c17.57 10.49 40.43 15.73 68.58 15.73 26.21 0 48.1-4.78 65.65-14.36 17.57-9.57 30.78-23.06 39.64-40.45 8.87-17.39 13.3-37.79 13.3-61.2v-153.62c25.5 5.32 52.03 4.05 77.03-3.79z"></path><path d="m2049.85 1854.1c-21.97 0-41.57-2.11-58.79-6.35-17.22-4.23-32.23-9.62-45.01-16.17s-23.45-13.37-32.01-20.46c-8.56-7.1-15.1-13.45-19.61-19.06-5.86-7.23-9.54-13.72-11.03-19.48-1.49-5.75-.83-11.52 1.98-17.31 2.8-5.78 7.77-12.01 14.92-18.69 7.06-6.56 13.72-10.03 19.99-10.43 6.26-.39 12.45 1.35 18.55 5.23 6.11 3.88 12.34 9.21 18.7 16.01 10.77 11.62 23.79 20.16 39.06 25.62 15.26 5.46 32.93 8.19 53.01 8.19 18.91 0 34.94-1.75 48.1-5.26s23.18-8.94 30.06-16.28 10.32-16.81 10.32-28.39c0-9.53-3.43-17.38-10.28-23.55-6.86-6.17-16.06-11.42-27.6-15.76s-24.5-8.33-38.89-11.98c-14.38-3.64-29.07-7.65-44.07-12.01-12.33-3.15-24.6-6.87-36.82-11.16s-23.75-9.32-34.6-15.07-20.44-12.67-28.77-20.75-14.85-17.6-19.57-28.53c-4.71-10.94-7.07-23.65-7.07-38.13 0-22.8 6.34-42.75 19.01-59.85 12.68-17.09 30.42-30.43 53.22-40.02s49.25-14.39 79.34-14.39c19.6 0 37.03 1.39 52.29 4.17 15.25 2.77 28.44 6.27 39.56 10.49s20.4 8.52 27.86 12.89c7.46 4.38 13.21 8.25 17.24 11.62 10.2 8.45 15.8 16.06 16.81 22.83 1.01 6.76-2.54 15.63-10.66 26.61-8.57 11.67-16.95 18.16-25.13 19.46-8.19 1.3-17.69-1.52-28.5-8.47-6.96-5.6-14.67-10.4-23.12-14.39-8.45-4-18.08-7.09-28.89-9.28s-23.62-3.28-38.45-3.28c-10.86 0-20.82.92-29.87 2.75-9.06 1.83-16.77 4.51-23.13 8.05-6.37 3.53-11.31 7.93-14.82 13.19-3.52 5.27-5.27 11.33-5.27 18.2 0 8.98 3.19 16.36 9.59 22.12 6.39 5.77 15.01 10.53 25.88 14.29 10.86 3.76 23.09 7.22 36.69 10.37 13.6 3.16 27.68 6.54 42.24 10.15 16.17 3.96 32.22 8.75 48.14 14.37 15.93 5.62 30.31 12.78 43.12 21.47 12.82 8.69 23.15 19.66 30.97 32.92 7.82 13.25 11.73 29.56 11.73 48.94 0 21.14-4.48 39.58-13.44 55.32s-21.25 28.7-36.85 38.87c-15.61 10.18-33.38 17.78-53.33 22.82-19.94 5.03-40.88 7.55-62.8 7.55z"></path><path d="m2984.62 1852.44c-32.46 0-60.9-4.97-85.31-14.94-24.41-9.96-44.8-23.74-61.16-41.34-16.37-17.61-28.62-38.05-36.74-61.33-8.13-23.28-12.19-48.25-12.19-74.91v-175.47c0-6.94.7-13.33 2.11-19.16 1.41-5.84 4.79-10.55 10.17-14.15 5.37-3.59 14.18-5.38 26.41-5.38 12.34 0 21.21 1.79 26.61 5.38 5.39 3.6 8.8 8.32 10.2 14.18 1.4 5.85 2.1 12.42 2.1 19.7v174.9c0 21.05 4.1 40.31 12.3 57.78s21.08 31.45 38.65 41.93c17.57 10.49 40.43 15.73 68.58 15.73 26.21 0 48.1-4.78 65.66-14.36 17.56-9.57 30.77-23.06 39.63-40.45 8.87-17.39 13.31-37.79 13.31-61.2v-178.02c0-6.39.75-12.23 2.27-17.52 1.52-5.28 5-9.61 10.45-12.99s14.18-5.06 26.19-5.06c12.23 0 20.97 1.85 26.2 5.56 5.24 3.7 8.53 8.49 9.89 14.34 1.35 5.86 2.02 12.32 2.02 19.36v176.05c0 26.76-4.11 51.69-12.34 74.82-8.23 23.12-20.62 43.41-37.15 60.88s-37.11 31.12-61.74 40.94c-24.62 9.82-53.33 14.73-86.12 14.73z"></path><path d="m3691.62 1848.64c-12.05 0-20.76-1.78-26.13-5.35s-8.71-8.37-10.02-14.4c-1.3-6.02-1.95-12.41-1.95-19.16v-325.28c0-14.59 2.89-24.62 8.69-30.12 5.79-5.49 16.17-8.23 31.14-8.23h262.21c6.98 0 13.3.69 18.94 2.07 5.64 1.39 10.15 4.76 13.53 10.14 3.38 5.37 5.07 14.28 5.07 26.71 0 12.05-1.79 20.76-5.36 26.13-3.57 5.38-8.27 8.72-14.11 10.02-5.83 1.31-12.24 1.96-19.22 1.96h-224.1v99h194.61c6.98 0 13.11.63 18.37 1.9s9.33 4.3 12.2 9.1c2.88 4.8 4.32 12.72 4.32 23.77 0 10.45-1.5 18.01-4.49 22.69-3 4.68-7.12 7.56-12.38 8.63-5.26 1.08-11.45 1.62-18.6 1.62h-194.03v120.46c0 6.75-.69 13.05-2.07 18.88-1.38 5.84-4.76 10.54-10.13 14.11-5.38 3.57-14.21 5.35-26.49 5.35z"></path></g><path d="m400 197.889c-131.035 0-237.26 107.084-237.26 239.178v234.556c0 10.422 11.105 17.009 20.142 11.946l31.943-17.888c41.455-23.217 91.932-22.913 133.107.807l18.435 10.619c20.841 12.007 46.425 12.007 67.266 0l18.435-10.619c41.175-23.72 91.651-24.024 133.107-.807l31.942 17.888c9.04 5.063 20.143-1.524 20.143-11.946v-234.556c0-132.094-106.224-239.178-237.26-239.178zm-305.049 239.178c0-169.836 136.575-307.515 305.049-307.515 168.475 0 305.049 137.679 305.049 307.515v234.556c0 62.525-66.633 102.051-120.85 71.686l-31.946-17.891c-20.726-11.61-45.964-11.457-66.551.403l-18.435 10.62c-41.684 24.01-92.85 24.01-134.534 0l-18.434-10.62c-20.587-11.86-45.826-12.013-66.553-.403l-31.943 17.891c-54.22 30.365-120.852-9.161-120.852-71.686zm254.207-17.084c0 28.305-22.762 51.253-50.841 51.253s-50.842-22.948-50.842-51.253c0-28.306 22.763-51.252 50.842-51.252s50.841 22.946 50.841 51.252zm152.525 51.253c28.078 0 50.842-22.948 50.842-51.253 0-28.306-22.764-51.252-50.842-51.252s-50.841 22.946-50.841 51.252c0 28.305 22.763 51.253 50.841 51.253z" transform="matrix(.9999983475 0 0 1.00000295009 -94.951 -129.54702086312)"></path><path d="m1480.25 1848.41c-11.52 0-19.92-1.82-25.22-5.46-5.29-3.65-8.67-8.43-10.13-14.34-1.46-5.92-2.18-12.29-2.18-19.12v-336.6c10.23-6.26 31.43-7.9 44.61-5.79 27.07 4.35 52.51 20.28 86.9 54.3l181.32 201.23v-239.79c0-6.46.79-12.41 2.36-17.85 1.58-5.45 5.09-9.9 10.54-13.36 5.45-3.45 14.12-5.18 26.02-5.18 11.97 0 20.59 1.82 25.85 5.47s8.58 8.42 9.96 14.33 2.07 12.28 2.07 19.11v324.71c0 6.6-.79 12.82-2.37 18.65-1.57 5.84-5.1 10.58-10.56 14.23-5.46 3.64-14.08 5.46-25.87 5.46-8.81 0-16.02-.89-21.62-2.69s-10.68-5.21-15.23-10.25l-237.53-260.71v235.31c0 6.6-.73 12.82-2.19 18.65-1.46 5.84-4.92 10.58-10.36 14.23-5.45 3.64-14.24 5.46-26.37 5.46z" transform="matrix(.87919536 0 0 .87919763125 -870.9628 -660.76390887631)"></path></svg> <span class="sr-only select-text">Unsmurf</span> <h1 class="text-2xl font-head"></h1> <p class="text-gray-600"><!></p></div>`), Header[FILENAME], [
 		[
 			22,
 			0,
@@ -6780,7 +6780,7 @@ ${properties}`
 
 		// Get the current mode's text, fallback to default
 		const { subtitle, description } = headerTexts[mode()] || headerTexts.default;
-		var div = root$8();
+		var div = root$9();
 		var h1 = sibling(child(div), 4);
 
 		h1.textContent = subtitle;
@@ -7277,7 +7277,7 @@ ${properties}`
 	mark_module_start();
 	UnsmurfTrades[FILENAME] = 'src/UnsmurfTrades.svelte';
 
-	var root$7 = add_locations(template(`<div class="relative text-center mb-4"><div class="flex items-center justify-between mt-4 w-full"><div class="flex-1"></div> <div class="flex-3 flex items-center justify-center gap-2"><input type="text" placeholder="Testlandia" class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"> <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Lookup</button></div> <div class="flex-1 flex justify-end"><button aria-label="Config" class="bg-black text-white font-bold p-2 size-10 rounded-full hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300 transition"><img src="https://ns-rot.github.io/unsmurf/icons/config.svg" alt="Config" class="w-6 h-6"></button></div></div></div>`), UnsmurfTrades[FILENAME], [
+	var root$8 = add_locations(template(`<div class="relative text-center mb-4"><div class="flex items-center justify-between mt-4 w-full"><div class="flex-1"></div> <div class="flex-3 flex items-center justify-center gap-2"><input type="text" placeholder="Testlandia" class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"> <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Lookup</button></div> <div class="flex-1 flex justify-end"><button aria-label="Config" class="bg-black text-white font-bold p-2 size-10 rounded-full hover:bg-gray-600 focus:outline-none focus:ring focus:ring-gray-300 transition"><img src="https://ns-rot.github.io/unsmurf/icons/config.svg" alt="Config" class="w-6 h-6"></button></div></div></div>`), UnsmurfTrades[FILENAME], [
 		[
 			28,
 			2,
@@ -7321,7 +7321,7 @@ ${properties}`
 
 		init();
 
-		var div = root$7();
+		var div = root$8();
 		var div_1 = child(div);
 		var div_2 = sibling(child(div_1), 2);
 		var input = child(div_2);
@@ -7377,7 +7377,7 @@ ${properties}`
 	mark_module_start();
 	Config[FILENAME] = 'src/Config.svelte';
 
-	var root_1$3 = add_locations(template(`<div class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center"><div class="settings-modal bg-white rounded-lg shadow-lg p-6 max-w-2xl w-[80%] md:w-[50%] relative"><h2 class="text-xl font-bold mb-2.5">Settings</h2> <div class="mb-4"><h3 class="text-lg font-semibold">Tally Record Options</h3> <label class="flex items-center gap-2"><input type="radio" name="section"> Group records by known puppets</label> <label class="flex items-center gap-2"><input type="radio" name="section"> Group records by similar name</label> <label class="flex items-center gap-2"><input type="radio" name="section"> Do not group records</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Nation Display Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Append puppetmasters in detailed records</label> <label class="flex items-center gap-2"><input type="checkbox"> Mark CTE nations</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Date Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Show relative date by default</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Colour Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Red epics</label> <label class="flex items-center gap-2"><input type="checkbox"> Rainbow legendaries</label></div> <div class="flex justify-end mt-4"><button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Confirm</button></div></div></div>`), Config[FILENAME], [
+	var root_1$5 = add_locations(template(`<div class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center"><div class="settings-modal bg-white rounded-lg shadow-lg p-6 max-w-2xl w-[80%] md:w-[50%] relative"><h2 class="text-xl font-bold mb-2.5">Settings</h2> <div class="mb-4"><h3 class="text-lg font-semibold">Tally Record Options</h3> <label class="flex items-center gap-2"><input type="radio" name="section"> Group records by known puppets</label> <label class="flex items-center gap-2"><input type="radio" name="section"> Group records by similar name</label> <label class="flex items-center gap-2"><input type="radio" name="section"> Do not group records</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Nation Display Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Append puppetmasters in detailed records</label> <label class="flex items-center gap-2"><input type="checkbox"> Mark CTE nations</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Date Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Show relative date by default</label></div> <div class="mb-4"><h3 class="text-lg font-semibold">Colour Options</h3> <label class="flex items-center gap-2"><input type="checkbox"> Red epics</label> <label class="flex items-center gap-2"><input type="checkbox"> Rainbow legendaries</label></div> <div class="flex justify-end mt-4"><button class="bg-blue-500 text-white font-bold py-2 px-4 rounded-full hover:bg-blue-600 focus:ring focus:ring-blue-300 transition">Confirm</button></div></div></div>`), Config[FILENAME], [
 		[
 			17,
 			2,
@@ -7455,7 +7455,7 @@ ${properties}`
 
 		{
 			var consequent = ($$anchor) => {
-				var div = root_1$3();
+				var div = root_1$5();
 				var div_1 = child(div);
 				var div_2 = sibling(child(div_1), 2);
 				var label = sibling(child(div_2), 2);
@@ -7699,6 +7699,21 @@ ${properties}`
 	  }
 
 	  return { master: name, sheet: null }; // Default to original name if not found
+	}
+
+	/**
+	 * Returns a list of puppets belonging to a given master.
+	 * @param {string} masterName - The master nation's name.
+	 * @returns {Array<string>} - List of puppet nations under this master.
+	 */
+	function listPuppets(masterName) {
+	  if (!masterToPuppetsCache) {
+	    console.warn("Puppet cache is not initialized.");
+	    return [];
+	  }
+
+	  const normalizedMaster = masterName.trim().toLowerCase().replace(/\s+/g, "_");
+	  return masterToPuppetsCache[normalizedMaster] || [];
 	}
 
 	/**
@@ -8061,11 +8076,11 @@ ${properties}`
 	mark_module_start();
 	CollapsibleTable[FILENAME] = 'src/CollapsibleTable.svelte';
 
-	var root_1$2 = add_locations(template(`<h2 class="text-xl font-semibold font-inter mt-2 mb-2"> </h2>`), CollapsibleTable[FILENAME], [[30, 4]]);
-	var root_2 = add_locations(template(`<th> </th>`), CollapsibleTable[FILENAME], [[43, 10]]);
+	var root_1$4 = add_locations(template(`<h2 class="text-xl font-semibold font-inter mt-2 mb-2"> </h2>`), CollapsibleTable[FILENAME], [[30, 4]]);
+	var root_2$1 = add_locations(template(`<th> </th>`), CollapsibleTable[FILENAME], [[43, 10]]);
 	var root_5 = add_locations(template(`<td><!></td>`), CollapsibleTable[FILENAME], [[60, 14]]);
 	var root_6 = add_locations(template(`<td><!></td>`), CollapsibleTable[FILENAME], [[73, 14]]);
-	var root_3 = add_locations(template(`<tr class="bg-white hover:bg-gray-100 transition"></tr>`), CollapsibleTable[FILENAME], [[56, 8]]);
+	var root_3$1 = add_locations(template(`<tr class="bg-white hover:bg-gray-100 transition"></tr>`), CollapsibleTable[FILENAME], [[56, 8]]);
 
 	var root_8 = add_locations(
 		template(`<button aria-label="Show More" class="bg-blue-500 text-white size-6
@@ -8093,7 +8108,7 @@ ${properties}`
 
 	var root_7 = add_locations(template(`<!> <!> <!>`, 1), CollapsibleTable[FILENAME], []);
 
-	var root$6 = add_locations(template(`<div class="w-full overflow-hidden"><!> <table class="w-full border-separate mb-3 text-left tabular-nums border-spacing-0"><thead><tr></tr></thead><tbody></tbody></table> <div class="flex justify-end items-center gap-1"><span class="text-sm text-gray-600"> </span> <!></div></div>`), CollapsibleTable[FILENAME], [
+	var root$7 = add_locations(template(`<div class="w-full overflow-hidden"><!> <table class="w-full border-separate mb-3 text-left tabular-nums border-spacing-0"><thead><tr></tr></thead><tbody></tbody></table> <div class="flex justify-end items-center gap-1"><span class="text-sm text-gray-600"> </span> <!></div></div>`), CollapsibleTable[FILENAME], [
 		[
 			27,
 			0,
@@ -8145,12 +8160,12 @@ ${properties}`
 		legacy_pre_effect_reset();
 		init();
 
-		var div = root$6();
+		var div = root$7();
 		var node = child(div);
 
 		{
 			var consequent = ($$anchor) => {
-				var h2 = root_1$2();
+				var h2 = root_1$4();
 				var text = child(h2, true);
 
 				reset(h2);
@@ -8168,7 +8183,7 @@ ${properties}`
 		var tr = child(thead);
 
 		each(tr, 5, columns, index, ($$anchor, col, index) => {
-			var th = root_2();
+			var th = root_2$1();
 			var text_1 = child(th, true);
 
 			reset(th);
@@ -8189,7 +8204,7 @@ ${properties}`
 		var tbody = sibling(thead);
 
 		each(tbody, 5, () => rows().slice(0, get$1(visibleCount)), index, ($$anchor, row) => {
-			var tr_1 = root_3();
+			var tr_1 = root_3$1();
 
 			each(tr_1, 5, () => get$1(row), index, ($$anchor, cell, cellIndex) => {
 				var fragment = comment();
@@ -8373,7 +8388,7 @@ ${properties}`
 	mark_module_start();
 	Spinner[FILENAME] = 'src/Spinner.svelte';
 
-	var root$5 = add_locations(ns_template(`<svg aria-hidden="true" class="inline w-6 h-6 animate-spin" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 119 119" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><linearGradient id="a" gradientTransform="matrix(-227.325 -227.326 -227.326 227.325 277.325 236.998)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color: var(--tw-gradient-from);"></stop><stop offset="1" style="stop-color: var(--tw-gradient-to);"></stop></linearGradient></defs><path d="m1394.27 1733.6c-17.37.02-33.83 10.32-40.89 27.36-9.36 22.6 1.37 48.51 23.97 57.87s48.51-1.37 57.87-23.97c1.56-3.77 5.88-5.56 9.65-4 3.76 1.56 5.55 5.88 3.99 9.65v.01c-8.88 21.38-29.96 36.44-54.56 36.44-32.62 0-59.05-26.44-59.05-59.05s26.42-59.04 59.02-59.06z" transform="translate(-1335.24 -1718.85)"></path><path d="m50 9.672c125.548 0 227.325 101.777 227.325 227.326 0 15.694-12.722 28.416-28.415 28.416-15.694 0-28.416-12.722-28.416-28.416 0-80.351-76.333-145.489-170.494-145.489-22.599 0-40.919-18.32-40.919-40.918 0-22.599 18.32-40.919 40.919-40.919z" fill="url(#a)" transform="matrix(0 -.259782 -.259782 0 120.63 72.05)"></path></svg>`), Spinner[FILENAME], [
+	var root$6 = add_locations(ns_template(`<svg aria-hidden="true" class="inline w-6 h-6 animate-spin" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 119 119" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><linearGradient id="a" gradientTransform="matrix(-227.325 -227.326 -227.326 227.325 277.325 236.998)" gradientUnits="userSpaceOnUse" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color: var(--tw-gradient-from);"></stop><stop offset="1" style="stop-color: var(--tw-gradient-to);"></stop></linearGradient></defs><path d="m1394.27 1733.6c-17.37.02-33.83 10.32-40.89 27.36-9.36 22.6 1.37 48.51 23.97 57.87s48.51-1.37 57.87-23.97c1.56-3.77 5.88-5.56 9.65-4 3.76 1.56 5.55 5.88 3.99 9.65v.01c-8.88 21.38-29.96 36.44-54.56 36.44-32.62 0-59.05-26.44-59.05-59.05s26.42-59.04 59.02-59.06z" transform="translate(-1335.24 -1718.85)"></path><path d="m50 9.672c125.548 0 227.325 101.777 227.325 227.326 0 15.694-12.722 28.416-28.415 28.416-15.694 0-28.416-12.722-28.416-28.416 0-80.351-76.333-145.489-170.494-145.489-22.599 0-40.919-18.32-40.919-40.918 0-22.599 18.32-40.919 40.919-40.919z" fill="url(#a)" transform="matrix(0 -.259782 -.259782 0 120.63 72.05)"></path></svg>`), Spinner[FILENAME], [
 		[
 			11,
 			2,
@@ -8398,7 +8413,7 @@ ${properties}`
 		let spinnerTailColor = prop($$props, 'spinnerTailColor', 12, "#606060");
 		// Generate a random animation delay between 0s and 2s
 		let animationDelay = `${Math.random() * 0.2}s`;
-		var svg = root$5();
+		var svg = root$6();
 		var path = sibling(child(svg));
 
 		next();
@@ -8443,7 +8458,7 @@ ${properties}`
 	mark_module_start();
 	LoadingTable[FILENAME] = 'src/LoadingTable.svelte';
 
-	var root$4 = add_locations(template(`<h2 class="text-xl font-semibold font-inter mt-2 mb-2"> </h2> <p class="flex items-center space-x-2"><!> <span> </span></p>`, 1), LoadingTable[FILENAME], [[8, 2], [11, 2, [[14, 4]]]]);
+	var root$5 = add_locations(template(`<h2 class="text-xl font-semibold font-inter mt-2 mb-2"> </h2> <p class="flex items-center space-x-2"><!> <span> </span></p>`, 1), LoadingTable[FILENAME], [[8, 2], [11, 2, [[14, 4]]]]);
 
 	function LoadingTable($$anchor, $$props) {
 		if (new.target) return createClassComponent({ component: LoadingTable, ...$$anchor });
@@ -8451,7 +8466,7 @@ ${properties}`
 
 		let title = prop($$props, 'title', 12, "");
 		let content = prop($$props, 'content', 12, "");
-		var fragment = root$4();
+		var fragment = root$5();
 		var h2 = first_child(fragment);
 		var text = child(h2, true);
 
@@ -8500,8 +8515,8 @@ ${properties}`
 	mark_module_start();
 	TallyTables[FILENAME] = 'src/TallyTables.svelte';
 
-	var root_1$1 = add_locations(template(`<div><!></div>`), TallyTables[FILENAME], [[21, 2]]);
-	var root$3 = add_locations(template(`<div id="tally-row" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 md:gap-4 mt-6"></div>`), TallyTables[FILENAME], [[14, 0]]);
+	var root_1$3 = add_locations(template(`<div><!></div>`), TallyTables[FILENAME], [[21, 2]]);
+	var root$4 = add_locations(template(`<div id="tally-row" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 md:gap-4 mt-6"></div>`), TallyTables[FILENAME], [[14, 0]]);
 
 	function TallyTables($$anchor, $$props) {
 		if (new.target) return createClassComponent({ component: TallyTables, ...$$anchor });
@@ -8517,7 +8532,7 @@ ${properties}`
 
 		init();
 
-		var div = root$3();
+		var div = root$4();
 
 		each(
 			div,
@@ -8550,7 +8565,7 @@ ${properties}`
 
 				data();
 
-				var div_1 = root_1$1();
+				var div_1 = root_1$3();
 				var node = child(div_1);
 
 				{
@@ -8655,8 +8670,8 @@ ${properties}`
 	mark_module_start();
 	DetailedTables[FILENAME] = 'src/DetailedTables.svelte';
 
-	var root_1 = add_locations(template(`<div><!></div>`), DetailedTables[FILENAME], [[21, 4]]);
-	var root$2 = add_locations(template(`<div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-2.5 md:gap-4 mt-6"></div>`), DetailedTables[FILENAME], [[14, 0]]);
+	var root_1$2 = add_locations(template(`<div><!></div>`), DetailedTables[FILENAME], [[21, 4]]);
+	var root$3 = add_locations(template(`<div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-2.5 md:gap-4 mt-6"></div>`), DetailedTables[FILENAME], [[14, 0]]);
 
 	function DetailedTables($$anchor, $$props) {
 		if (new.target) return createClassComponent({ component: DetailedTables, ...$$anchor });
@@ -8672,7 +8687,7 @@ ${properties}`
 
 		init();
 
-		var div = root$2();
+		var div = root$3();
 
 		each(
 			div,
@@ -8713,7 +8728,7 @@ ${properties}`
 
 				rows();
 
-				var div_1 = root_1();
+				var div_1 = root_1$2();
 				var node = child(div_1);
 
 				{
@@ -8813,13 +8828,212 @@ ${properties}`
 	mark_module_end(DetailedTables);
 
 	mark_module_start();
+	PuppetPopup[FILENAME] = 'src/PuppetPopup.svelte';
+
+	var root_2 = add_locations(template(`<span class="font-inter">&#xe000;&#x2009;</span> <a target="_blank" rel="noopener noreferrer" class="text-black hover:text-gray-500 no-underline"> </a>`, 1), PuppetPopup[FILENAME], [[49, 16], [50, 16]]);
+	var root_3 = add_locations(template(`<a target="_blank" rel="noopener noreferrer" class="text-black hover:text-gray-500 no-underline"> </a>`), PuppetPopup[FILENAME], [[54, 16]]);
+	var root_1$1 = add_locations(template(`<div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 pb-2 pr-2 text-left transition-colors whitespace-normal break-words overflow-hidden"><span class="block w-full"><!></span></div>`), PuppetPopup[FILENAME], [[46, 10, [[47, 12]]]]);
+
+	var root$2 = add_locations(template(`<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"><div class="h-3/4 w-1/2 xs:w-4/5 sm:w-3/4 bg-white rounded-lg shadow-lg flex flex-col overflow-hidden"><div class="flex justify-between items-center p-4 border-b"><div class="flex flex-col"><h2 class="text-xl font-semibold font-inter"> </h2> <h3> </h3></div> <button class="text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Close popup"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div> <div class="flex-grow p-4 overflow-auto"><div class="flex flex-wrap rounded-lg"></div> <div class="mt-4 text-sm text-gray-500 border-t pt-2"><p>This list may be incomplete. Data is sourced from community sheets.</p> <p>Contribute to <a href="https://docs.google.com/spreadsheets/d/1MZ-4GLWAZDgB1TDvwtssEcVKHKunOKi3l90Jof1pBB4/edit?gid=733627866#gid=733627866" target="_blank" rel="noopener noreferrer" class="underline">9003's sheet</a> through <a href="https://docs.google.com/forms/d/16t4mlYuSU5p0U9hVkvzKMqP1GRnpdDV7nLNLA9WdFTs/viewform?chromeless=1&amp;edit_requested=trues" target="_blank" rel="noopener noreferrer" class="underline">this form</a>, or to <a href="https://docs.google.com/spreadsheets/d/1osIbavh59GHFqQCO909jFRDX5XerSvZ7sWFfgMHLFs4/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer" class="underline">Rot's sheet</a> by contacting @rotenaple on Discord.</p> <p>For any inaccuracies, please contact the respective sheet owner.</p></div></div></div></div>`), PuppetPopup[FILENAME], [
+		[
+			16,
+			0,
+			[
+				[
+					18,
+					2,
+					[
+						[
+							20,
+							4,
+							[
+								[21, 6, [[22, 8], [25, 8]]],
+								[31, 6, [[36, 8, [[37, 10]]]]]
+							]
+						],
+						[
+							43,
+							4,
+							[
+								[44, 6],
+								[
+									64,
+									6,
+									[
+										[65, 8],
+										[
+											66,
+											8,
+											[[66, 25], [66, 237], [66, 448]]
+										],
+										[67, 8]
+									]
+								]
+							]
+						]
+					]
+				]
+			]
+		]
+	]);
+
+	function PuppetPopup($$anchor, $$props) {
+		if (new.target) return createClassComponent({ component: PuppetPopup, ...$$anchor });
+		push($$props, false, PuppetPopup);
+
+		const sortedPuppetList = mutable_state();
+		let nationName = prop($$props, 'nationName', 12, "");
+		let puppetCount = prop($$props, 'puppetCount', 12, 0);
+		let puppetList = prop($$props, 'puppetList', 28, () => []);
+		let onClose = prop($$props, 'onClose', 12, () => {});
+
+		legacy_pre_effect(() => (deep_read_state(puppetList())), () => {
+			set(sortedPuppetList, [...puppetList()].sort((a, b) => a.localeCompare(b)));
+		});
+
+		legacy_pre_effect_reset();
+		init();
+
+		var div = root$2();
+		var div_1 = child(div);
+		var div_2 = child(div_1);
+		var div_3 = child(div_2);
+		var h2 = child(div_3);
+		var text = child(h2, true);
+
+		reset(h2);
+
+		var h3 = sibling(h2, 2);
+		var text_1 = child(h3);
+
+		reset(h3);
+		reset(div_3);
+
+		var button = sibling(div_3, 2);
+
+		reset(div_2);
+
+		var div_4 = sibling(div_2, 2);
+		var div_5 = child(div_4);
+
+		each(div_5, 5, () => get$1(sortedPuppetList), index, ($$anchor, puppet) => {
+			var div_6 = root_1$1();
+			var span = child(div_6);
+			var node = child(span);
+
+			{
+				var consequent = ($$anchor) => {
+					var fragment = root_2();
+					var a_1 = sibling(first_child(fragment), 2);
+					var text_2 = child(a_1, true);
+
+					reset(a_1);
+
+					template_effect(
+						($0) => {
+							set_attribute(a_1, 'href', `https://www.nationstates.net/page=boneyard?nation=${$0 ?? ''}`);
+							set_text(text_2, get$1(puppet));
+						},
+						[
+							() => get$1(puppet).toLowerCase().replace('cte', '').trim()
+						],
+						derived_safe_equal
+					);
+
+					append($$anchor, fragment);
+				};
+
+				var alternate = ($$anchor) => {
+					var a_2 = root_3();
+					var text_3 = child(a_2, true);
+
+					reset(a_2);
+
+					template_effect(
+						($0) => {
+							set_attribute(a_2, 'href', `https://www.nationstates.net/${$0 ?? ''}`);
+							set_text(text_3, get$1(puppet));
+						},
+						[() => get$1(puppet).toLowerCase()],
+						derived_safe_equal
+					);
+
+					append($$anchor, a_2);
+				};
+
+				if_block(node, ($$render) => {
+					if (!isNationCurrent(canonicalizeName(get$1(puppet)))) $$render(consequent); else $$render(alternate, false);
+				});
+			}
+
+			reset(span);
+			reset(div_6);
+			append($$anchor, div_6);
+		});
+
+		reset(div_5);
+		next(2);
+		reset(div_4);
+		reset(div_1);
+		reset(div);
+
+		template_effect(() => {
+			set_text(text, nationName());
+			set_text(text_1, `${puppetCount() ?? ''} known puppets`);
+		});
+
+		event('click', button, function (...$$args) {
+			apply(onClose, this, $$args, PuppetPopup, [32, 18]);
+		});
+
+		append($$anchor, div);
+
+		return pop({
+			get nationName() {
+				return nationName();
+			},
+			set nationName($$value) {
+				nationName($$value);
+				flush_sync();
+			},
+			get puppetCount() {
+				return puppetCount();
+			},
+			set puppetCount($$value) {
+				puppetCount($$value);
+				flush_sync();
+			},
+			get puppetList() {
+				return puppetList();
+			},
+			set puppetList($$value) {
+				puppetList($$value);
+				flush_sync();
+			},
+			get onClose() {
+				return onClose();
+			},
+			set onClose($$value) {
+				onClose($$value);
+				flush_sync();
+			},
+			$set: update_legacy_props,
+			$on: ($$event_name, $$event_cb) => add_legacy_event_listener($$props, $$event_name, $$event_cb)
+		});
+	}
+
+	mark_module_end(PuppetPopup);
+
+	mark_module_start();
 	NationAlert[FILENAME] = 'src/NationAlert.svelte';
 
-	var root$1 = add_locations(template(`<div class="mx-[-0.375rem] sm:mx-[-1rem] md:mx-[-1.5rem] lg:mx-[-2rem] xl:mx-[-6%] font-inter py-4 mt-4 mb-2 transition-all duration-200 min-h-[3rem]" role="alert"><div class="w-[80%] mx-auto text-center"><span class="text-xl"><!></span> <span class="text-lg"><!></span></div></div>`), NationAlert[FILENAME], [
+	var root_1 = add_locations(template(`<button class="ml-2 inline-flex items-center justify-center h-5 w-5 rounded-full border border-current text-xs font-semibold cursor-pointer" aria-label="More information about puppets">i</button>`), NationAlert[FILENAME], [[115, 8]]);
+
+	var root$1 = add_locations(template(`<div class="mx-[-0.375rem] sm:mx-[-1rem] md:mx-[-1.5rem] lg:mx-[-2rem] xl:mx-[-6%] font-inter py-4 mt-4 mb-2 transition-all duration-200 min-h-[3rem]" role="alert"><div class="w-[80%] mx-auto text-center"><span class="text-xl"><!></span> <span class="text-lg inline-flex items-center"><!> <!></span></div></div> <!>`, 1), NationAlert[FILENAME], [
 		[
-			77,
+			103,
 			0,
-			[[82, 2, [[83, 4], [86, 4]]]]
+			[[108, 2, [[109, 4], [112, 4]]]]
 		]
 	]);
 
@@ -8841,7 +9055,22 @@ ${properties}`
 		const textColor = mutable_state();
 		const alertMessage = mutable_state();
 		const alertMessagePuppetCount = mutable_state();
+		const showInfoButton = mutable_state();
+		const popupNationName = mutable_state();
+		const puppetList = mutable_state();
 		let nationId = prop($$props, 'nationId', 12, "");
+		// State for popup visibility
+		let isPopupVisible = mutable_state(false);
+
+		// Toggle popup visibility
+		function togglePopup() {
+			set(isPopupVisible, !get$1(isPopupVisible));
+		}
+
+		// Close popup
+		function closePopup() {
+			set(isPopupVisible, false);
+		}
 
 		legacy_pre_effect(() => (deep_read_state(nationId())), () => {
 			console.log(...log_if_contains_state('log', "nationId updated in NationAlert:", nationId()));
@@ -8979,10 +9208,42 @@ ${properties}`
 			set(alertMessagePuppetCount, get$1(puppetTally) > 0 ? `<br>${get$1(puppetTally)} known puppets` : "<br>No known puppets");
 		});
 
+		legacy_pre_effect(() => (get$1(puppetTally)), () => {
+			set(showInfoButton, get$1(puppetTally) > 0);
+		});
+
+		legacy_pre_effect(
+			() => (
+				get$1(isPuppet),
+				get$1(canonicalizedMasterName),
+				get$1(canonicalizedName)
+			),
+			() => {
+				set(popupNationName, get$1(isPuppet) ? uncanonicalizeName(get$1(canonicalizedMasterName)) : uncanonicalizeName(get$1(canonicalizedName)));
+			}
+		);
+
+		legacy_pre_effect(
+			() => (
+				get$1(isPuppet),
+				get$1(canonicalizedMasterName),
+				get$1(canonicalizedName),
+				uncanonicalizeName
+			),
+			() => {
+				set(puppetList, (() => {
+					const nameToCheck = get$1(isPuppet) ? get$1(canonicalizedMasterName) : get$1(canonicalizedName);
+
+					return listPuppets(nameToCheck).map((puppet) => uncanonicalizeName(puppet));
+				})());
+			}
+		);
+
 		legacy_pre_effect_reset();
 		init();
 
-		var div = root$1();
+		var fragment = root$1();
+		var div = first_child(fragment);
 		var div_1 = child(div);
 		var span = child(div_1);
 		var node = child(span);
@@ -8994,11 +9255,51 @@ ${properties}`
 		var node_1 = child(span_1);
 
 		html(node_1, () => get$1(alertMessagePuppetCount), false, false);
+
+		var node_2 = sibling(node_1, 2);
+
+		{
+			var consequent = ($$anchor) => {
+				var button = root_1();
+
+				event('click', button, togglePopup);
+				append($$anchor, button);
+			};
+
+			if_block(node_2, ($$render) => {
+				if (get$1(showInfoButton)) $$render(consequent);
+			});
+		}
+
 		reset(span_1);
 		reset(div_1);
 		reset(div);
+
+		var node_3 = sibling(div, 2);
+
+		{
+			var consequent_1 = ($$anchor) => {
+				PuppetPopup($$anchor, {
+					get nationName() {
+						return get$1(popupNationName);
+					},
+					get puppetCount() {
+						return get$1(puppetTally);
+					},
+					get puppetList() {
+						return get$1(puppetList);
+					},
+					onClose: closePopup
+				});
+			};
+
+			if_block(node_3, ($$render) => {
+				if (get$1(isPopupVisible) && get$1(showInfoButton)) $$render(consequent_1);
+			});
+		}
+
 		template_effect(() => set_attribute(div, 'style', `background-color: ${get$1(bgColor) ?? ''}; color: ${get$1(textColor) ?? ''}; transition: background-color 0.5s, color 0.5s;`));
-		append($$anchor, div);
+		append($$anchor, fragment);
 
 		return pop({
 			get nationId() {
@@ -9016,7 +9317,7 @@ ${properties}`
 	mark_module_end(NationAlert);
 
 	mark_module_start();
-	App[FILENAME] = 'src/app.svelte';
+	App[FILENAME] = 'src/App.svelte';
 
 	var root = add_locations(template(`<div class="px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-16"><!> <!> <!> <!> <!> <!></div>`), App[FILENAME], [[104, 0]]);
 

@@ -60,7 +60,7 @@ module.exports = {
 
         // PostCSS with TailwindCSS
         postcss({
-            extract: 'public/build/bundle.css',
+            extract: true, // This will extract to bundle.css in the same directory as the JS output
             minimize: production,
             plugins: [
                 tailwindcss('./tailwind.config.js'), // Ensure Tailwind is loaded properly

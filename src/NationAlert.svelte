@@ -6,6 +6,7 @@
     listPuppets,
     tallyPuppets,
   } from "./sheetFetch.js";
+  import PuppetPopup from "./PuppetPopup.svelte";
 
   export let nationId = "";
 
@@ -71,6 +72,31 @@
 
   $: alertMessagePuppetCount =
     puppetTally > 0 ? `<br>${puppetTally} known puppets` : "<br>No known puppets";
+    
+  // Whether to show the info button (only when there are puppets)
+  $: showInfoButton = puppetTally > 0;
+  
+  // State for popup visibility
+  let isPopupVisible = false;
+  
+  // Toggle popup visibility
+  function togglePopup() {
+    isPopupVisible = !isPopupVisible;
+  }
+  
+  // Close popup
+  function closePopup() {
+    isPopupVisible = false;
+  }
+  
+  // Get the display name for the popup title
+  $: popupNationName = isPuppet ? uncanonicalizeName(canonicalizedMasterName) : uncanonicalizeName(canonicalizedName);
+  
+  // Get the list of puppets to display in the popup
+  $: puppetList = (() => {
+    const nameToCheck = isPuppet ? canonicalizedMasterName : canonicalizedName;
+    return listPuppets(nameToCheck).map(puppet => uncanonicalizeName(puppet));
+  })();
 </script>
 
 <!-- Alert Banner -->
@@ -83,8 +109,27 @@
     <span class="text-xl">
       {@html alertMessage}
     </span>
-    <span class="text-lg">
+    <span class="text-lg inline-flex items-center">
       {@html alertMessagePuppetCount}
+      {#if showInfoButton}
+        <button
+          on:click={togglePopup}
+          class="ml-2 inline-flex items-center justify-center h-5 w-5 rounded-full border border-current text-xs font-semibold cursor-pointer"
+          aria-label="More information about puppets"
+        >
+          i
+        </button>
+      {/if}
     </span>
   </div>
 </div>
+
+<!-- Puppet Popup -->
+{#if isPopupVisible && showInfoButton}
+  <PuppetPopup
+    nationName={popupNationName}
+    puppetCount={puppetTally}
+    puppetList={puppetList}
+    onClose={closePopup}
+  />
+{/if}
