@@ -695,7 +695,6 @@ kemia
 azaratopia
 sakobell
 23rd_traveling_farmer
-malvvekar
 ashoksthan
 fairy_hunter_10000_islands
 win_dans
@@ -879,6 +878,7 @@ ruthenian_federation
 plungaria
 glealian
 assyla
+cartalma
 japanese_schoolgirls
 vivien
 catakistan
@@ -968,7 +968,6 @@ ulsteruk
 samasbhi
 tikkun_olam
 bible_common
-kurnugia
 the_zaku_ii
 roavin_meerman
 maladantium
@@ -1207,10 +1206,8 @@ rengakure
 kabala_peleis
 rho_ophiuchi
 geortina
-fizimes
 noize_the_rockstar
 irionisca
-parvid
 the_cookie_flavoured_milkshake
 vanitacon_republic
 ihwea
@@ -1263,7 +1260,6 @@ northern_norkelia
 solismosion
 husen-kurl
 lesser_yu
-norimosistan
 biot-savart
 dolba
 pasybfic
@@ -1417,7 +1413,6 @@ trans-landia
 rei_evangelion
 mordhaus
 zasbard2
-bobeina
 ns_israel
 greater_ang_ling
 laborvillea
@@ -1600,7 +1595,6 @@ indopotamia
 jadeite_cove
 nordaviaa
 proserpinaca
-the_timber_rattlesnake
 guns_and_bullets
 serdaryaristan
 gnosikanth
@@ -2162,7 +2156,6 @@ lower_fer_mouthme
 yugoslavida
 coustasia_lund
 cyperia
-nation_of_egypt
 von_willkomm
 luso_union
 hobbitown
@@ -2244,7 +2237,6 @@ misharst
 andstoria
 monolith_national_industries
 republic_of_kiwi
-the_national_syndicalist_state_of_spain
 uhgrad
 trep
 hunter_city
@@ -2318,7 +2310,6 @@ singaporo
 srodrzecze
 dionia_libleland
 ervasken_socialist_union
-spencea
 volkat
 lokyon
 kaskare_kingr
@@ -2329,7 +2320,6 @@ seaquistao_sovietico
 spada
 myrvalra
 the_hetmanate
-lunawreck
 meerih
 lestrade
 greater_flanderz
@@ -2341,31 +2331,13 @@ denhuo
 grastoria
 aperolia
 ostslavia
-the_ukraina
 lorenzino2000
-islan_soundmoda
-the_myopolds
-enceseria
 hawan_harordia
 villarbasse
 ayken
 hisuian-zoroark
-the_anclerp_alliance_act
-undi_maryath
-groco_contzscitor
-rumenland
-knang
-narzza
-afghanistan232
-bay_delon
-tourette
-opy_volovern
 indoeuropa
 dravenka
-aeronsland
-guyangonga
-lamaca
-ghevan
 megba
 geoergrs
 bus_ostight
@@ -3642,10 +3614,8 @@ yeezus_seezun
 east_jagdpanzeren
 aries_y
 fatila
-liyathia
 sectonism
 the_republic_of_the_republic_of_t
-katikya
 oroninkziistopolkorsion
 loliano
 esfahan_nesf-e-jahan_ast
@@ -3662,7 +3632,6 @@ wirkus
 skeebidi
 bananaia
 9876545678
-islands_of_uara
 bria_pents
 north_korgermany
 ryarnia
@@ -3674,7 +3643,6 @@ dema_let_bem
 brightscalles
 the_spongy_territories_and_goobersland
 apeiropolis
-the_grand_union_of_continental_provinces
 snowza
 free_theog_the_hurs
 the_prc_communist_republic_of_china
@@ -3683,6 +3651,38 @@ creatures_of_the_night
 left_wing_dystopia
 landelmaria
 milachia
+frenopia
+koshin_teikoku
+ravessia
+roaring_knight_307
+roaring_knight_310
+roaring_knight_317
+roaring_knight_339
+roaring_knight_341
+roaring_knight_348
+roaring_knight_355
+roaring_knight_363
+roaring_knight_367
+lionsport
+roaring_knight_377
+cat601
+roaring_knight_386
+roaring_knight_387
+roaring_knight_388
+roaring_knight_391
+roaring_knight_394
+sjorpen
+prelonfaj
+kaoland
+capitalgainsland
+rome_tome
+cyrodillic
+angevi
+sun03
+cat607
+cat608
+fioptopia
+new_futch
 the_grendels
 the_captain
 laurarcor
@@ -6234,7 +6234,6 @@ rotterdam_terror_corps
 leave_britney_alone
 sodl
 amaraca
-tonga-samoa
 thuid
 greater_metropolis
 hashemite_federation
@@ -6478,7 +6477,6 @@ neutrava
 red_shambhalla
 antecentennia
 starship_hemorrhoids_ncc45
-dogetaria
 saint_belat_waberro_republic
 jon_lothston
 new_columba
@@ -6487,7 +6485,6 @@ ilya_muromets
 rhen-land
 nudism_islands
 south-greece
-metrothayne
 green_river
 arjaya
 meijack
@@ -6586,7 +6583,6 @@ the_city_of_gotham
 -vtuber_work_camp_i-
 northern_slatavia_stat_race
 pacific_oblasts
-la_ciudad_de_flores
 elephan
 fougueux
 delivia
@@ -6613,35 +6609,13 @@ kaladahar
 lealtad
 kraplakistan
 goodandbad
-point_nameson
-jamalint
 siratama
 lorentino
-ruanis
 vahyr
-nie_replibshiken_dowienweny_turniscki_yu
 red_flag_brotherhood
 loocoland
 estados_pardonicistas
-walpurgie
-of_the_north_americas
-the_pendulum_pact
-w_a_l_e_s
-kamurar
 whynn
-sohrnia
-kaerlund
-markeestan
-san-jorge
-woodmay
-nazario_sauro
-rn_eritrea
-bourrasque
-shadow_company_x
-shroudser
-germdn
-yagobon
-gabyalmar
 cand_kolans
 hongkuong
 sal_hum_islands
@@ -7021,7 +6995,6 @@ uniadarria
 zariqe_federation
 uniao_gaucha
 oberst
-earexplodian_xi_cavalry_corps
 lilyak
 buwalia
 prudentia_2
@@ -8169,6 +8142,32 @@ thalrionn
 far_dutefar_humwakartan
 venastiasia
 greater_asters
+lubis
+new_danube
+the_sounniandalki
+felix_land123
+south_landaria
+roaring_knight_306
+roaring_knight_340
+roaring_knight_356
+roaring_knight_371
+roaring_knight_383
+roaring_knight_385
+roaring_knight_389
+roaring_knight_396
+roaring_knight_398
+maya_pur
+sikesland
+the_great_capitalism
+promanos
+castortugal
+the_sorellian_national_state
+cat605
+foepseao
+biscuts
+endaia
+satanazes
+the_antaito
 ananke
 zemnaya_svoboda
 blue_wolf_ii
@@ -8479,7 +8478,6 @@ vexilia
 etanur
 siwale
 ozstan
-alsatian_island
 unionem_la_union
 cj
 north_bratislava
@@ -9127,7 +9125,6 @@ vorlaimatji
 deco27
 creniciapla
 charbonn
-banyxrily
 zadith
 aryavrt_jambukhand
 the_confederation_of_earth
@@ -9652,6 +9649,7 @@ eiygland
 boltannia
 ufrusa
 south-brazilian_east_india_company
+do_not_redeem
 pings
 ba-alat
 klanny
@@ -10497,7 +10495,6 @@ please_remove_blue_recapchas414
 please_remove_blue_recapchas418
 please_remove_blue_recapchas446
 slaca
-federatio_civitatum_europaea
 gyllennasjon
 anechester
 isla_matador
@@ -10528,7 +10525,6 @@ common_storage_31
 project_omniscience
 woof_county
 southeast_westland
-shi_cohong
 the_world_tomorrow
 toya
 united_des_colous
@@ -10629,7 +10625,6 @@ nostraman_empire
 red_bull_for_all
 caelum_dominica
 hfhy
-shereko
 lan-lor
 bespich
 zuidveen
@@ -11089,7 +11084,6 @@ semelon
 eastern_judea
 solvarra
 thoyana
-noxiz
 marteni
 iron_pitt
 navbrovka
@@ -11305,7 +11299,6 @@ the_austro-hungarian_monarchy
 socialist_indian_republic
 daiseku
 deliormanlilar
-the_humble_cashew
 macadangdang
 bortarod
 nuevo_pacifico
@@ -11482,7 +11475,6 @@ kuesler
 noctophobia
 area_1
 clayhanger
-telkople
 islas_malvinas_y_antartida_argentina
 mancora_del_centro
 atawa
@@ -11497,7 +11489,6 @@ krevgaelar
 vulkana
 -russian_storage-
 weisgrad
-desomilia
 piccolores
 lipscomb
 deaf_smith
@@ -11517,32 +11508,9 @@ milarian
 noole_allasia
 haurenia
 the_kingdom_of_pontus
-kakashkani
-anti_agenda-schedule
-walcosk
 lorenitao
-wardlaws
-united_states_of_italy_and_un
-bosasok
-theisouthe
-mydogistan
-kreolia
-thye
 ionithe_lesland
-stalveria
-jiikl
-kkkli
 tupi_isthmus
-singaporyan
-stravenlia
-wom_lavarkast
-rn_leone
-yutotakhaxiag
-rn_giuseppe_verdi
-francesco_ferruccio
-zithifri
-the_euphrates_and_tigris
-moi_lanz_matinberst
 bronha_livre
 letan_wonly
 kenedy
@@ -11986,7 +11954,6 @@ lalalandbutmoresilly
 silikolzoo
 zakaling
 staka_med
-earexplodian_vii_reserve_corps
 buwai
 pylla
 united_municiplaties_partens
@@ -12062,7 +12029,6 @@ titanic_world_trade_center
 gangnamstan
 monty_652
 earexplodian_xii_reserve_corps
-earexplodian_i_special_command
 monty_669
 aracel
 joanne_of_arc
@@ -12108,6 +12074,7 @@ aythozia
 namati
 alldredge
 synorn_ching
+lambersauce
 limosina
 new_order_of_change
 rutha-lycia
@@ -12904,7 +12871,6 @@ roaring_knight_112
 roaring_knight_128
 roaring_knight_130
 roaring_knight_131
-ifa_wartburgia
 roaring_knight_157
 roaring_knight_169
 imarran
@@ -12994,7 +12960,6 @@ roaring_knight_272
 roaring_knight_274
 roaring_knight_286
 greater_cra_pipsovillonity
-mussi3
 dialyn
 akhanda_svatantra
 yknowwhatimeanland
@@ -13057,7 +13022,6 @@ kozzunation
 appalachia_republics
 countryspeedrun
 sixsevenrizz
-the_many_deer
 magye
 shyriands
 taxevasionia
@@ -13101,6 +13065,36 @@ clamorande
 pironaju
 stachy
 lunansomandgernaland
+azkavia
+let_it_simmer
+jfhdjf
+the_beherge
+morianica
+german_communist_federation
+roaring_knight_311
+roaring_knight_313
+roaring_knight_316
+roaring_knight_324
+roaring_knight_329
+roaring_knight_336
+roaring_knight_347
+karali_johaan
+roaring_knight_351
+roaring_knight_361
+roaring_knight_365
+roaring_knight_368
+roaring_knight_390
+roaring_knight_395
+geigy
+island_of_echirolles
+twetopia
+linuslad
+kal_mazal
+great_nation_of_philippines
+lebalta
+the_talmat
+pird55
+cat603
 lands_of_headington
 tropical_isles
 yy4u
@@ -13572,8 +13566,10 @@ capitalist_heaven
 porta_caeli
 le_kartoffel
 musa
+super_typhoon_haiyan
 burton
 lep_frounda
+super_typhoon_goni
 taylor_allison_swift
 rotvania
 west_deapol_laulandingedk
@@ -13651,7 +13647,6 @@ ulinzistan
 andolian_freedom_fighters
 herna_fage
 hellraiser
-vocluna
 mikoto_chigiku
 riverlock
 hyperias
@@ -14063,6 +14058,7 @@ the_silly_land
 kolizizstan
 koninkrijk_der_nederlanden
 kalyn
+pala_empire
 empolaystum
 terra_superior
 kineta
@@ -14239,7 +14235,6 @@ gavroche_thenadier
 brooke_candy
 pastafariland
 pigsasus
-mulentriago
 ther_yamer
 united_states_of_jackson
 conners
@@ -14265,7 +14260,6 @@ dirkland
 las_islas_para_el_pueblo
 shady_land
 amanationathe
-brandabium
 possum_lakes
 asonna_pets
 new_harad
@@ -14460,7 +14454,6 @@ bede_bd-5_micro
 blokerin
 republic_of_sankaria
 great_star_republic
-crycuxs
 yutchamia
 -heavensgate-
 p30better
@@ -14513,7 +14506,6 @@ fion
 casino_lisboa
 gustunia
 claypool
-russian_authority
 -kemono_storage-
 wynafrei_whent
 logan_2
@@ -14564,7 +14556,6 @@ imperium_romanum_pars_occidentale
 norristan
 karafuto-chishima
 pax_viridis
-qanali
 korthar
 sidgwick
 prioritaria
@@ -14573,44 +14564,18 @@ manii
 capriccornia
 guj_andordia
 shyroke
-sarigami
-sotrus
 groton
-atomatic_republic
-celitu
 relicor
 podolonda
-anarchoanarchistan
 la_soltrana
-kimmertopia
-meero-meero
-margarita_borinina
 theraaseldevai
 neo-babylon
-hebermalan
-fosteria
-dustin_frisella
-maghrib34
-jimbus
-prosmark
-the_holy_soviet_enpire
-revvia
 gran_bisonte
 saluta_dereviah
-aviere
-rn_fr25
-rn_lepanto
-ferrante_gonzaga
-rn_varese
-mnf_jaguar
-friant
 arakazmeh
-ordennstaat_burgund
 free_union_proletarians
-car_badram_spaxtria
 lusizia
 georing
-zanliba
 anglom
 hololive_nation
 alliswelle
@@ -15007,7 +14972,6 @@ fire_bolt
 rutherengia
 aipo
 buwa
-hyima
 earexplodian_parks_and_forestry_service
 pentauria
 free_economic_zone_of_the_mojave
@@ -15043,8 +15007,6 @@ vanstana
 canary_bay
 greater_ethiopia
 sonkadan
-earexplodian_ix_reserve_corps
-earexplodian_x_reserve_corps
 6767676767676767
 united_kingdom_of_arpenla
 tototopia
@@ -15989,6 +15951,7 @@ lionese_kin
 liberadade
 dulkar
 jermarcus
+moons_at_the_roche_limit
 new_new_drank
 sablliin
 bad_boy_records
@@ -16060,6 +16023,30 @@ colonyn
 lativan
 freedomflagland
 terror_grind
+imperial_asian_empire
+snow_bunny_heaven
+juanyils_islands
+boliwershinwid
+beachbum
+roaring_knight_321
+the_sylcerion_celestial_union
+roaring_knight_362
+roaring_knight_373
+roaring_knight_374
+roaring_knight_378
+the_latin_nations
+i_dont_know_a_good_name
+primitivania
+anarchinismland
+philipinking
+maxods
+rehokratland
+verveld
+the_most_strictest_country_ever
+alpha_caeli
+icinod
+akingdomland
+faroe_lslands
 goobergunchia
 warzone_codger
 page
@@ -16202,6 +16189,7 @@ asshatland
 jingois
 no_matter_where_you_go
 the_eternal_goddess
+hem
 clamation
 house_targaryen_the_first_of_her_name
 x8
@@ -16348,6 +16336,7 @@ kratatoa
 pre-war_america
 humbledonia
 zilpower
+teenage_anarchist_i
 rutokia
 the_doom_of_valyria
 ubiquistania
@@ -16550,6 +16539,7 @@ bowzin
 altasund
 arinteriswith
 visionary_union
+the_hinterplace
 agalaesia
 rejected_amerion
 the_tyrannical_state_of_wine
@@ -19085,7 +19075,6 @@ clan_moo
 ousha
 polietzmark
 wildthyme_on_top_xlviii
-air_force_duck
 basso_20
 prairiehold
 inlan_faearandena
@@ -19197,7 +19186,6 @@ comunyan_farm_113
 comunyan_farm_119
 comunyan_farm_121
 comunyan_farm_128
--akakor-
 comunyan_farm_144
 comunyan_farm_148
 comunyan_farm_174
@@ -19224,6 +19212,7 @@ comunyan_farm_348
 comunyan_farm_361
 comunyan_farm_364
 the_grand_kingdom_of_amosta
+jovian-ix
 corrective_measure
 comunyan_farm_379
 comunyan_farm_382
@@ -19361,7 +19350,6 @@ the_buykler
 slovenian_republic
 mrrp_mew_meow
 lupestan
-188
 republic-of-athena
 north_synnia
 bingbong15
@@ -19380,6 +19368,7 @@ throwaurc22
 throwaurc30
 sensible_talking_room_puppet
 nellis
+black_flag_army_7
 terhawk20
 terhawk39
 kms_otto_bismarck
@@ -19439,14 +19428,8 @@ thee_eastern_empire
 guandapla
 turkmen_uzbekistan
 lorenzino
-thi_russia
 terhawk49
 langkasokan_telegram_nation_1
-duduland
-rn_turbine
-rn_luca_tarigo
-rn_francesco_ferruccio
-rn_alberto_di_giussano
 the_last_bureau
 sa1tburn
 idealsera
@@ -19526,7 +19509,6 @@ uvhhi_xhhis
 boleskine_aeon
 roma-nia
 chiropterran_commonwealth
-earexplodian_v_reserve_corps
 rrbc_2
 nueva_america_latina
 andebu_berserkers
@@ -19556,9 +19538,7 @@ natomandaterussia-
 checkoslavia
 garden_of_eeshol
 monty_654
-earexplodian_xi_reserve_corps
 earexplodian_xx_reserve_corps
-earexplodian_iii_special_command
 askusek
 monty_677
 i_am_a_furry
@@ -19737,7 +19717,8 @@ roaring_knight_303
 test_22_pachillialand
 jaernita
 the_greater_hel_reich
-diddytopia67
+roaring_knight_381
+roaring_knight_384
 useful_daveia
 itinerate_tree_dweller
 ikonja
@@ -19850,6 +19831,7 @@ palivarth
 felderburg
 berlitria
 inyourfaceistan
+githa
 hickssylvania
 blackhelm_confederacy
 isola_island
@@ -20083,6 +20065,7 @@ karukta
 lucifuge_rofocale
 kazejin
 zigamorph
+the_skipper
 talishep
 boggslandistan
 the_jvp
@@ -20175,7 +20158,6 @@ delfaire
 the_rising_sun_of_doom
 dom_maximov
 nascent
-jorjia_solus_major
 caladraxia
 emera
 mitheldalond
@@ -20255,6 +20237,7 @@ crimson_typhoon
 coyote_tango
 striker_eureka
 carsodonia
+captain_hindsight
 enescopinge
 avinaa
 communist_nation_state
@@ -20265,6 +20248,7 @@ vienne
 ns_miami_shores
 armador
 flavo
+blaaty
 santa_cruz_land
 queersland
 thory
@@ -20313,7 +20297,6 @@ cyleia
 dreillad
 al-qawwam
 tribadia
-senator_obama
 olvern
 die_maschinenmensch
 mack_dirt_diver_gerhardt
@@ -20368,6 +20351,7 @@ ravanian
 mandelbrot
 dikaria
 khalsa02
+dragonsah
 kingdom_of_nelrok
 isla_de_pinos
 schwertland
@@ -20396,6 +20380,7 @@ a_nation_of_a_nation
 uica
 vastarda
 samuraiz
+bostonius
 the_thade
 kaziuki
 dacicia
@@ -20489,6 +20474,7 @@ st_adricsburg
 the_republic_of_the_shining_kingdom
 yndhrog
 latte
+teslico
 moderate_republican
 conservative_league2
 conservative_league4
@@ -20570,7 +20556,6 @@ unified_springfield
 neo_neopolitan
 katosima
 randompunkt
-the_nascent_self_of_the_blue_amun-ra
 woon_rocket
 cularya
 new_rnclave
@@ -20773,6 +20758,7 @@ gran_zulia
 mountains_and_volcanoes
 south_wellywood
 walsh_isles
+aachland
 southerlands
 minecraftiana
 haute-vienne
@@ -20844,7 +20830,6 @@ the_turkish_socialist_republic
 nilrahrarfan
 founding-san56
 swona
-valirria
 islamislam
 the_lords_of_deth
 wwrestling
@@ -20950,7 +20935,6 @@ bollesiatan
 hells_bells_74
 hells_bells_76
 hells_bells_77
-makenzie_and_athabaska
 gaeslan_314
 gaeslan_317
 gaeslan_318
@@ -21060,7 +21044,6 @@ technovore
 weluz
 the_batavia
 ambient_whimsy
-ibontack
 restartall
 filippines
 socialist_state_of_brazil
@@ -21170,6 +21153,7 @@ blue_shell
 tariganrd
 gryphonian_alliance_deux
 jpsp
+puppet_of_zastarda
 blightun
 gard
 meritocia
@@ -21186,7 +21170,6 @@ res_publica_nova
 eureka_autous
 oostfalea
 turbeaux
-vinslavia
 kampfler
 ostian_imperium
 jeffsylvania
@@ -21221,7 +21204,6 @@ victorious_friesland
 kozmo-town
 british_falkland_islands
 british_pitcairn_islands
-new_agora
 old_agora
 ilmecith
 benggawi
@@ -21496,7 +21478,6 @@ lukatonia
 retricoal
 waldflachen
 amyx
-japerlasa
 tysti
 sri_thailand
 new_gadsdenland
@@ -21861,7 +21842,6 @@ you_just_got_dropped
 tropicana_field
 veram
 aestro
-slothlandia
 noxura
 forcarol2
 hykko
@@ -22031,6 +22011,7 @@ flower_dance_17
 flower_dance_20
 flower_dance_21
 irish_trader_206
+irish_trader_208
 irish_traders_019
 davids_island
 davids_island2
@@ -22246,7 +22227,6 @@ oppression_island
 angamando
 gnc_vitamins
 kaczynskia
-aintelligence
 richane
 zomb15
 sopranos_cards
@@ -22273,7 +22253,6 @@ quevilis
 troximac
 poland_dominium
 portsville_card_storage
-aelendil
 whats_new_pussycat
 fear_prone_nation
 hilbert_dimension
@@ -22378,6 +22357,7 @@ central_coordinating_system
 danish-nordic_empire
 protectional
 sauvir
+the_endless_eventide
 euthenia
 yharrnem
 izard
@@ -23234,7 +23214,6 @@ cartagriem_016
 the_131_atuain_islands
 spelmanistan
 spelmania
-kalliefornia
 cartagriem_023
 cartagriem_026
 cartagriem_027
@@ -23746,7 +23725,6 @@ an_orc
 fammm
 yugoslavia_v2
 union_of_socialist_council_republics
-abhail
 aquarii_051
 aquarii_056
 aquarii_059
@@ -23888,13 +23866,6 @@ northern_seleyah
 np_13
 np_5
 np_4
-crown_40
-crown_42
-crown_43
-crown_44
-crown_46
-crown_48
-crown_50
 herani
 exl
 rimi_province
@@ -23961,26 +23932,6 @@ aquarii_193
 aquarii_195
 aquarii_198
 stargod55
-ioke_2
-ioke_8
-ioke_10
-ioke_12
-ioke_15
-ioke_17
-ioke_18
-ioke_19
-ioke_20
-ioke_22
-ioke_23
-ioke_25
-ioke_32
-ioke_34
-ioke_36
-ioke_37
-ioke_39
-ioke_41
-ioke_44
-ioke_46
 j8cubes
 tirnua
 factory_g7s23
@@ -24031,8 +23982,21 @@ oof_15
 oof_16
 oof_17
 oof_25
+hat065
+hat067
+hat071
+hat073
+hat075
+hat076
+hat079
 daenlandia
 pizza_dough_kepler
+hat083
+hat084
+hat088
+hat091
+hat093
+hat097
 atalanta_bc
 new_taiwen
 newars
@@ -24071,29 +24035,14 @@ maztetrua9
 onegai_muscle_4
 onegai_muscle_5
 vex_aternus
-ioke_54
-ioke_63
-ioke_65
 lockka_2
 lockka_3
 lockka_5
 lockka_7
 lockka_10
-ioke_66
-ioke_67
-ioke_68
-ioke_69
-ioke_71
 krasizem
 leusstadt
 united_federation_of_liberty
-ioke_89
-ioke_90
-ioke_91
-ioke_94
-ioke_95
-ioke_97
-ioke_100
 gorasnaya_republic
 golden_gateway
 niphiles
@@ -24121,8 +24070,6 @@ pisces_145
 pisces_149
 5908765iuy
 dordogne_and_acadia
-enyo_3
-enyo_6
 ironhead
 the_storage_nation_9
 eticia
@@ -24252,6 +24199,7 @@ afc_ajax
 aeronsia
 bargage
 the_storage_nation_10
+lievue
 federated_provinces_of_china
 new_zealandic_south_west_saint_martin
 williamsnation2
@@ -24273,7 +24221,6 @@ east_liberand
 utopian_farmer_3
 utopian_farmer_5
 agathallalong
-hallow_hope
 brookstation
 dojopo
 cessabit
@@ -24472,6 +24419,7 @@ iglesia_catolica
 legumlandia
 baja_calivada
 ulrykk_von_guelderlaand
+stoowie_vermont
 the_rosemason_society
 agsaricum
 isviban
@@ -24524,7 +24472,6 @@ velle_bene
 serikos
 rubinania
 chination
-renatusia
 prue_glaund
 mimzyin
 arbitraritania
@@ -24625,7 +24572,6 @@ imalaians
 nocookies276
 abyssina
 anaerx
-fairy_wind
 the_imperial_bestellen
 mythimera
 tubbles
@@ -24645,7 +24591,6 @@ chakravarti
 ichigo_republic
 dtf
 risen_yeast
-west_falvate
 garbidandia
 pedagogia
 crdia
@@ -24665,7 +24610,6 @@ soran-kateth
 killhuntpray
 feudal_spain
 nordensveldet
-new_german_kingdom
 tre_elver
 grand_ishtar
 trahoa
@@ -24705,7 +24649,6 @@ feelixburg
 junbiok
 the_spanish_civil_war
 chad_manki
-atlacelesia
 clementine_valley
 holy_jaleaca
 friuli_v_g
@@ -24737,7 +24680,6 @@ stratoslava
 great_natuna
 karimata
 qocho
-shirosandia
 east_gude_demen
 maggie_smith
 farmea22
@@ -24769,6 +24711,7 @@ aumest
 majanken
 gangou
 itsark
+lowobo
 atteni
 droelandia
 antonowen
@@ -24832,6 +24775,7 @@ vec_respublic
 golderbergs
 hoegartenstein
 steckinal
+minnima
 euro_lesotho
 ioua-sile
 great_britain_eke_northern_ireland
@@ -25004,7 +24948,6 @@ its_china
 guiyi
 danobia
 dollar_america
-4tgt6
 the_earth_confederation
 filecoin
 i_zinzia
@@ -25256,7 +25199,6 @@ elharrar
 nocookies301
 nocookies302
 cult_farms1
-tegaspura
 hieroglyphs
 crontinallia
 corgi
@@ -25373,7 +25315,6 @@ lesotho_matheo
 mosotho_matheo
 basotho_matheo
 palestine-iraq
-dseliruxia
 heydonia
 helplessness
 la_card_2
@@ -25408,6 +25349,7 @@ northern_matheo
 southern_matheo
 israeli_matheo
 carlofil
+new_qinq
 odycia
 imperiox_empherial
 borskiy
@@ -25492,7 +25434,6 @@ kl
 s6
 dobsonville
 plascon-evans
-the_neutral_milk_hotel
 lupacchini
 eloff
 van_der_horst
@@ -25978,6 +25919,7 @@ landboudienste
 sequestration
 engelbrecht
 the_chief_executive_officer
+oksikoko
 kamaldien
 nieuwoudt
 mguye
@@ -27098,6 +27040,7 @@ kanyoriko
 capitalist_arstotzka
 of_a_bunch_of_tribes
 repest
+kolanda
 carles
 fenterry
 ka78a
@@ -27110,6 +27053,7 @@ vainds
 of_waifu_universalis_profiles
 qingball
 the_sieghard_clique
+naastia
 new_taet_ska
 deep_cool
 nord-vesterland
@@ -27227,6 +27171,7 @@ roman_state_of_skylandia
 supreme_french_federations
 psarokostaina
 pimsistan
+fish_fish_fish_fish_fish
 cat012
 cat021
 42_tons_of_pasta
@@ -27250,7 +27195,6 @@ duraka
 isla_de_providencia
 cartagriem_005
 direwolf
-infinite_sovereignty
 forcarol18
 portsville_66
 portsville_69
@@ -27564,6 +27508,7 @@ south_karimata
 edbundo
 canum
 thorn1001
+the_baldy_barbarians
 ns_nation_states
 malankara
 scania-vabis
@@ -28470,7 +28415,6 @@ vahltara
 lahvatra
 boris_karloff
 crackerish_miner_12
-intown
 crackerish_miner_13
 hms_commonwealth
 kreiger
@@ -28492,7 +28436,6 @@ jon_watson
 jaden1234
 sibinia
 tyllaria
-monghun
 greater_manchukuo
 ran_univi
 hasty
@@ -28640,14 +28583,14 @@ norway-australia
 montagnaterra
 telluride_mining_company_016
 telluride_mining_company_018
+arcane_government
 telluride_mining_company_023
 telluride_mining_company_025
 xystert
 neo_africa
 paxton
 unexplodian_v_corps
-unexplodian_1st_gendarmerie_legion
-earexplodian_3rd_gendarmerie_legion
+unexplodian_logistical_corps
 the_storage_nation_53
 averfall
 autonomous_city_of_buenos_aires
@@ -28658,6 +28601,7 @@ cf_019
 mrlayne
 triangle_of_religious_tolerance
 illypia
+sariling_katinuan
 capital_city_of_warsaw
 aweentitante22
 aweentitante23
@@ -28833,6 +28777,7 @@ venom_11
 venom_12
 venom_16
 farmilia
+ilhas_serenas
 alexandria_elbakyan
 cm_51
 cm_54
@@ -28943,6 +28888,7 @@ serial_designation_e
 -urzikstan
 sharks_united
 51_pegasi_b
+communistic_states_of_ruhland
 venom_81
 venom_88
 santo_matthew
@@ -28988,7 +28934,6 @@ a_cantina_spider
 hic_sunt_araneae
 the_carinthia_spider
 venom_99
-do_not_redeem
 detek_lunesta_qok
 game_of_spiders
 iking
@@ -29048,7 +28993,6 @@ liberum_patria
 deas_gamongoliree
 edrena
 zoomerthrtv4
-pago
 trifecta
 venom_117
 the_storage_nation_114
@@ -29059,6 +29003,8 @@ wc_6
 wc_7
 wc_8
 wc_10
+wc_12
+wc_13
 gred_zarchwynntionts
 army_of_descent
 army_of_pleasant
@@ -29394,7 +29340,6 @@ firendia
 the_inbetween
 dahrnim
 the_storage_nation_184
-whigham
 greater_verdonia
 athinya
 aggames
@@ -29432,6 +29377,7 @@ irlylikepotatoes
 the_queendom_of_lust
 the_northern_water_republic
 the_fire_nation_republic
+loizv
 eloxia
 northern_qi
 macon_dooodland
@@ -29465,6 +29411,7 @@ macrosoft_compact_telemetry
 hanzee_dent
 the_eastern_balkan_federation
 rethrace_fisoos
+the_couch
 nur_sultan
 antimonks
 alfavit
@@ -29551,7 +29498,6 @@ opossumby
 iagndwos
 yefzai
 vaticanistan
-democratic_ursus
 agrarus
 kingdom_of_loadout
 rus_gringataa
@@ -29582,6 +29528,7 @@ calvainiaia
 ashtonerb
 the_zodiatic_rebublic
 south_brasilistan
+kyrkbyn
 the_falangist_republic_of_spain
 zananco
 braze
@@ -29622,7 +29569,6 @@ celtor_autorithy
 nurult
 hermenia
 al-mudun
-nationalist_europe
 kerralharrens
 disputed-territories
 farawaywille
@@ -29660,7 +29606,6 @@ sekoria
 wc_54
 wc_58
 portugal_ulterior
-united_urathian_states
 schildpaden
 dennissee
 tronmarke
@@ -29698,6 +29643,7 @@ stims
 jennings
 greater_aalten
 arabia_hashemite
+adritry
 louisebourg
 drowsychief54
 new_lesboa
@@ -29706,6 +29652,7 @@ the_god_of_death_hades
 boulangeries-patisseries
 cahadonian_wiki
 the_nationalist_republic_of_spain
+naprana
 the_united_socialist_republics
 sroverein
 ansoy
@@ -29738,6 +29685,7 @@ united-greenville
 chaositis
 hanan_sadiq
 pilkia
+kaisarian
 the_holy_british_isles
 eastern_trimea
 kazotzka
@@ -29838,7 +29786,6 @@ bean_territory
 collier
 branieland
 huloima_tillikum
-dens_inn
 the_keeper_of_the_plains
 the_land_of_free_markets
 tyrese_maxey
@@ -29857,12 +29804,12 @@ young_griff
 dasnick
 magakinth
 draco_salvia
-3077
 confederacion_paisana
 new_gre_milotramia
 ward_6th
 ser_jorah_mormont
 nymoaia
+santo_pedro_do_rio_grande_do_sul
 boloniestchias
 saint-valentine
 5th_panzerdivision
@@ -29916,6 +29863,7 @@ something_or_nothing
 provincium
 walter_white_nation
 laadrigma
+the_agrarian_republic_of_galicia
 puppet_state_300
 the_borealis
 verdekrieg
@@ -29989,7 +29937,6 @@ fear_reamhar
 svt_cobra_r
 xin_de_han
 eni_spa
-granred
 kuromorimine_high_school
 portugese_indoip
 maineshire
@@ -30009,11 +29956,6 @@ amherst_and_wolfe
 serbovsokov
 teliruse
 komatsu
-littlecaesars
-papajohns
-dominospizza
-enchilada
-dairyqueen
 veridium_terra
 alma_danada
 -supev-
@@ -30082,7 +30024,6 @@ hwazhong
 istados_unidos_de_sa_noa_cartago
 manibus
 evilgooberstanian
-calviac
 zulthar
 swigart_petrochem
 maddosia
@@ -30133,7 +30074,6 @@ luirens
 anton_korobov
 kingdom_algaris
 wisterlandia
-earexplodian_ii_cavalry_corps
 alaskic
 dreams_never_end
 fine_time
@@ -30159,8 +30099,8 @@ south_ranistan
 bankert_oil_company
 union_of_independent_unitist_republics
 crocker_corporations
-earexplodian_vi_cavalry_corps
 elizna
+ottofriesland
 featured_wanderer
 ascendance_sat
 lnec
@@ -30304,6 +30244,7 @@ willland
 toblerone_chocolate
 national_republic_of_nuts
 servus_fidelis
+103
 alexander_grischuk
 yasnorazumsk
 maggotopia
@@ -30676,7 +30617,6 @@ anuvet
 tridos
 cho_sainai
 iragaelia
-bobbybobtownville
 de_baca
 germany-1914
 nationuraniume_missile_silo_2
@@ -30763,6 +30703,7 @@ khuzaits
 shantis
 dunjimeiji
 lebron_glazers
+preussensschweizerische
 gearh4ven
 pot_smoking_hippies_are_us
 itf
@@ -30833,7 +30774,6 @@ volks_reich
 the_dead_country
 sangrin
 iainia
-the_citymetrounion
 united_states_of_the_free_world
 dinga_16
 genesis_prime
@@ -30896,6 +30836,7 @@ money_or_die
 lobsterfestia
 the_long_quiet
 synaterninsopia
+quizium
 belgium2
 sanarchy
 rollout
@@ -30903,7 +30844,6 @@ tyrannicaldictatorship
 republic_of_reque
 neo_miahia
 tartaria_x
-demonicium
 hillenstein
 greater_bicester
 valiumx
@@ -31134,6 +31074,7 @@ sacc598
 sacc599
 jenson-7
 cardreader
+ratogan
 camvile
 selvoluvir
 the_new_hague
@@ -31399,7 +31340,6 @@ halbertville
 imperial_federation_of_gb
 tomlinity
 societist_communes_of_entantha
-borealisland
 sirstanyalors
 mega_owo
 me_at_the_zoo
@@ -31514,7 +31454,6 @@ central_ravensky
 wolveristan_xxii
 wolveristan_xxiii
 isla_de_coralia
-nova_finis_terrae
 z1412
 -v1-
 moonglasses
@@ -31524,7 +31463,6 @@ lohan_baleia
 osiran_urcea
 bald_nami
 kitsfeld
-vril_agartha
 east_outpostia_company
 coriolis_force
 viktora
@@ -31580,6 +31518,7 @@ yamitt_11th_infantry_regiment
 kurdistan_cumhuriyeti
 summer_companies
 christianda
+fodo_nation
 greater_bergland
 please_remove_blue_recapchas451
 please_remove_blue_recapchas452
@@ -31620,6 +31559,7 @@ sol_plateado
 connolly_cards
 fries_14
 iron_man_sparta
+new_nation101
 spinjitsu
 virelius
 glerlan
@@ -31728,6 +31668,7 @@ beroman
 jacobian_islands
 nerd_armin
 byod2014
+byodpoe
 glorious_chimera
 city_of_guarulhos
 ceffgdghfjsdd
@@ -31736,6 +31677,7 @@ dourpre
 thehell
 moolhcilik
 hutchinia
+chixhuria
 wolveristan_lxxvi
 noobian_people
 jeapang
@@ -31785,6 +31727,7 @@ cal_1010101
 cal_1011000
 cal_1011011
 cal_1100010
+xheron
 lycendonia
 duelogik
 twelve_path_empire
@@ -31838,7 +31781,21 @@ the_miner_viii
 the_auric_dominion
 kroger_reserve_2
 corgival3
+rado6
+rado7
+rado8
+rado11
+rado13
 rado18
+rado22
+rado24
+rado31
+rado36
+rado41
+rado44
+rado47
+rado49
+rado50
 the_miner_17
 the_miner_23
 the_miner_26
@@ -31888,6 +31845,7 @@ monsieur_thenardier
 hamm3r
 kostania
 brasania
+the_miner_111
 imperial_compliance_assembly_propaganda
 tsvestnov
 dolvier
@@ -31983,6 +31941,7 @@ valor_icelon
 lensonia
 saint_pier
 povisia
+ruska4
 the_riemann_hypothesis
 sobieska
 malioki
@@ -32088,6 +32047,7 @@ warpfire_9
 siineria
 sheoss
 wolfhawk
+jotunland
 patrua
 aeristogo
 pek_choo
@@ -32130,6 +32090,7 @@ tagete
 bacino
 russistan
 pleasures_island
+germanic_templars
 d0000000000000000m
 thama
 velkya
@@ -32180,7 +32141,6 @@ sigdomian_empire
 konsernova
 kentuckyland
 the_dommy_nation
-boomkin
 fooooooooo
 alak-kazanistahn
 ninive
@@ -32532,7 +32492,6 @@ meuse
 somme
 creuse
 trawo
-saturns_edge
 deadcatistan
 onder_kelkia
 grandevendee
@@ -32810,6 +32769,7 @@ the_unites_steaks_of_hamsandwiches
 northern_quba
 your_own_private_floridaho
 okapiville
+uzibekistan
 the_arch_knight_ascendancy
 great_umbu
 arondyte
@@ -33099,6 +33059,7 @@ vichyfrance
 liberty_realms
 sectors_11-20
 haw_par_villa
+parck
 world_assembly_improvement_foundation
 nogensile
 nugensil
@@ -33131,6 +33092,7 @@ the_united_arab_emirates
 dogracopidosan
 konstantyne
 the_all-father
+north_islandiansia
 lundria
 neo_centrosia
 countryoftrump
@@ -33188,7 +33150,6 @@ this_message
 aulita
 jinpalawa
 dogfarm_tremendous
-lochlamakia
 tarendoor
 nitros
 grim_and_frostbitten_blasphemy
@@ -33232,7 +33193,6 @@ hells_bells_59
 the_capitalist_economic_organization
 old_capitalists
 st_lou
-pluripotence
 pawntucky
 sozkana
 snow_bird-worldism_crash
@@ -33499,6 +33459,7 @@ teagantopio
 matonis
 socialist_test
 socialist_test_9
+puppet_of_ucancallmequeenbee
 gaeslan_493
 the_book_publishing_industry
 adanus
@@ -33687,6 +33648,7 @@ zendonia
 mustafaar
 jhosepe
 dark_dawn_empire
+visburgh
 ausztria-hungary
 neo_anarchy_togekiss
 ephamathia
@@ -33718,6 +33680,7 @@ underwater_sovereignties
 alexander
 walrusville
 victopic
+russ-ostland
 kojima_productions
 edwy
 the_norden_utopia
@@ -34183,6 +34146,7 @@ xeryi_provinces
 gipra
 raelsa
 laric
+the_adirondacks
 macklamland
 byzkorda
 tarity_mat
@@ -34228,6 +34192,7 @@ aubrey-plaza
 hill_gootheny
 kendell
 the_only_nolan
+north_bikarsani
 anrian_empire
 ukia_atoll
 portsville_2
@@ -34360,6 +34325,7 @@ duchia_alantanine
 flower_dance_14
 flower_dance_19
 irish_trader_204
+irish_traders_106
 davids_island5
 davids_island7
 larrys_island2
@@ -34803,7 +34769,6 @@ inconspicuous_anarchists
 southern_tormerog
 the_capitola_wharf
 alano
-4884478585885858hhdhdh
 884878
 8854322i
 yuridan
@@ -35183,6 +35148,7 @@ guinea_pig_horde_28
 guinea_pig_horde_29
 escavilla
 kolanica
+canbhu
 jayernoland
 askianti
 pelgiccoistan
@@ -36357,9 +36323,6 @@ karnozia
 poravor
 new_zombiland
 crown_37
-crown_41
-crown_45
-crown_49
 shaggenheim
 giapan
 mcga_eco303_5
@@ -36436,22 +36399,6 @@ aquarii_197
 aquarii_200
 entionkziaopia
 velitka
-ioke_3
-ioke_5
-ioke_6
-ioke_7
-ioke_11
-ioke_16
-ioke_21
-ioke_26
-ioke_28
-ioke_29
-ioke_30
-ioke_31
-ioke_45
-ioke_47
-ioke_48
-ioke_49
 fatski_land
 hat044
 hat045
@@ -36459,6 +36406,8 @@ hat046
 hat049
 hat050
 hat055
+hat056
+hat057
 disciplined_trade
 madrinpoor
 cygnus_103
@@ -36530,10 +36479,26 @@ oof_24
 zpuppet20
 zpuppet21
 crystaloria
+hat060
+hat061
+hat063
+hat064
+hat066
+hat068
+hat069
+hat072
+hat077
+hat078
+hat081
 crown_lands
 clarkember
 dekia_ala_fres
 sergia1
+hat086
+hat087
+hat095
+hat098
+hat100
 zpuppet22
 beikan_state
 joes_portfolio
@@ -36601,31 +36566,14 @@ onegai_muscle_10
 dont_eject_this_fenda_sleeper_47
 lestian
 lyland
-ioke_53
-ioke_55
-ioke_56
-ioke_57
-ioke_58
-ioke_61
 faraby
 lockka_1
 lockka_4
 lockka_6
 lockka_8
 lockka_9
-ioke_70
-ioke_74
-ioke_75
-ioke_77
-ioke_80
 dauwab
 norttland
-ioke_81
-ioke_84
-ioke_88
-ioke_92
-ioke_93
-ioke_99
 ur_angola
 eternal_tao
 lower_bayf_cho
@@ -36659,10 +36607,6 @@ the_mormon_experience
 hentai_heart
 wamica
 punic-carthage
-enyo_1
-enyo_2
-enyo_4
-enyo_5
 inner_dosereniuman
 cygnus_155
 cygnus_156
@@ -36842,7 +36786,6 @@ mirlodi
 vallemont
 the_union_of_bellum
 cold_bernie_sanders
-akanabia
 cuneese
 unitegone_13
 unitegone_14
@@ -37027,7 +36970,6 @@ bet_jemot
 doezdotsbutlillame8mahzees
 oklanania
 romeoism
-tovrik
 jeorgie
 seyaslovakia
 aventor
@@ -37066,6 +37008,7 @@ nocookies267
 nocookies268
 nocookies269
 nocookies272
+dragoniya
 cothidal
 author
 bazkovia
@@ -37182,6 +37125,7 @@ move_me_like_you_do_34
 ysteria
 evilonians
 venille
+texanisches_kaiserreich
 derelland
 stargod10
 nocookies278
@@ -37243,7 +37187,6 @@ kingdom_of_ongland
 mushitsta
 tor-fontaine
 antarum
-gemolken
 mineste
 marcleys
 breadfruit
@@ -37257,7 +37200,6 @@ the_totalitarian_state_of_spain
 the_nation_of_nathan
 palakkad
 laruslandia
-baetand
 the_free_peoples_of_quadrant_8652
 radicalized_shawarma
 the_united_states_of_america_u_s_a
@@ -37363,6 +37305,7 @@ xontetoi
 iterstiteria
 the_balder_world_assembly_office
 vanollia
+maxxima
 irthu
 slevaria
 frenchfur
@@ -37374,7 +37317,6 @@ goudenzia
 tank_industrial_complex_xvi
 ddong
 awf_dispatch_office_ii
-auflist
 hari-topia
 euro_blomberbergs
 euro_blombesbergs
@@ -37570,7 +37512,6 @@ the_west_coast
 l-agulhas
 mandalero
 bulwick
-quirguio
 osi_2
 osi_4
 osi_9
@@ -37642,7 +37583,6 @@ shohun
 nocookies298
 nocookies299
 sismite
-xiang_dynasty
 cape_point
 citrusdal
 doringbaai
@@ -37952,6 +37892,7 @@ caribbean_matheo
 cayman_matheo
 risenfall
 otto
+ophir_ii
 united_iels_of_oilania
 eastaricordia
 the_thg
@@ -39166,7 +39107,6 @@ two_polish_cows
 the_baron
 marchioness
 csar
-los_kukis
 the_ns_confederate_states_of_america
 slethar
 sasan3
@@ -39542,7 +39482,6 @@ the_news_stand
 communist_vietnam
 william_shamspeare
 barok_van_zieks
-varnese
 south_west_abia
 kazan_ara
 astatosia
@@ -39561,8 +39500,6 @@ lucentum
 hexapolis
 medona
 arnhes
-penghtmarota
-fre_stedstan
 stanley_i
 dinotopian_commune
 cron_ukra
@@ -39719,7 +39656,6 @@ slavo-spain
 house_loewenstein
 lower_hexplanes
 chuck_shurley
-krtv-hv7
 shahtograd
 sorveb
 lionroarians_people
@@ -40000,6 +39936,7 @@ hendricksons_48
 dzaar
 greater_westfalen
 sovetskij_sojuz
+pellucidar
 korynthen
 bavaria-regensburg
 ejim_chukwudi_victor
@@ -40128,6 +40065,7 @@ cat491
 cat493
 cat495
 cat496
+sampedroxis
 holy_paradiso
 aquilae_terra
 fre_rhissey
@@ -40525,7 +40463,6 @@ brasilia-
 iskasul
 united_states_of_income_inequality
 konigreich_mittelafrika
-strealla
 the_phoenix_consortium
 sketaria
 new-kush
@@ -40549,11 +40486,9 @@ shinseina_tasogare
 british_protectorate_of_bloxburg
 union_miniere
 tultartiedia
-merangue
 aphrodite_xl
 abrahamgrad
 white_mourning
-antimonium
 decipano
 -flower-
 ventro_18
@@ -40713,7 +40648,6 @@ milownland
 wilozogie_torthe
 dudjusland
 west_deeriels_gorduany
-project_messiah
 the_storage_nation_20
 united_north_american_territories
 nuka-world_raider_gangs
@@ -41003,6 +40937,7 @@ cat589
 cat590
 cat591
 cat596
+cat600
 athakerace
 dapant
 astor_farms_5
@@ -41028,6 +40963,7 @@ cordya
 democratic_peoples_republic_of_monolesia
 test_population_11
 unexplodian_ducal_guard
+unexplodian_first_airwing
 the_last_unicorn
 ville-marie
 cf_018
@@ -41378,6 +41314,7 @@ honor_guard_giovanniland
 litblue
 comunismo_xdddd
 nueva_pomerania
+japet
 spider_history
 united_anti-furry_states_of_america
 suwaticsongiarrown
@@ -41385,7 +41322,10 @@ coco_crab
 venom_113
 venom_115
 venom_116
+wc_1
 wc_2
+wc_4
+wc_5
 the_storage_nation_113
 tecnol
 here_we_stand_11
@@ -41438,7 +41378,6 @@ cf_027
 cf_029
 orion_avi
 greggreg
-euthea
 the_storage_nation_126
 the_scandic_confederacy
 kingdom_of_makao
@@ -41622,7 +41561,6 @@ unitria13
 unitria15
 unitria20
 unitria22
-kells_place
 purse_first
 griponia
 fofosito
@@ -41866,7 +41804,6 @@ eighth_leopard_guard
 south_tuvalia_and_nomita
 allied_states_of_the_south
 the_autobot_republic
-good_murder
 marbast
 general_assembly_resolution_author
 united_terran_assembly
@@ -41876,7 +41813,6 @@ betty_rubble
 old_leeds
 toyota
 cals_cat
-the_ursagrad_new_red_army
 itarana
 aperial
 happytania
@@ -41888,7 +41824,6 @@ wissenschaft
 inner_niddlyste
 libertarian_georgia1
 rus_grigataai
-serjivograd
 ares_zamor
 of_the_new_california_republic
 rilliane
@@ -41901,6 +41836,7 @@ mathra
 dyascosmos
 narwhal_beached_on_the_plutonian_surface
 lenoresland
+strulca_antiga
 famockadia_jel
 monstand
 peoples_security_and_defense_alliance
@@ -42011,7 +41947,6 @@ graseland
 dispiritedness
 norka_hypotis
 valniakia
-neo-eroland
 stupid_ca
 mornamaa
 the_ottoman_empire_2
@@ -42200,6 +42135,7 @@ kemtekawa
 western_calicakkaveet
 magandang
 neo_dome_aseoplison
+cheshirea
 stargod67
 gyanza
 trivit
@@ -42208,7 +42144,6 @@ wistys_band_name_repository
 batchworth
 muyangaland
 ceyama
-zarplogavia
 the_netherlaands
 ackonte
 nvatia
@@ -42242,7 +42177,6 @@ silent_heart
 pacificana_overlord
 asituras
 great_american_republik
-chezstan
 the_gojo_clan
 metarlusiom
 n4atsulol
@@ -42286,7 +42220,6 @@ lunchly_skibidi
 pater_filiae
 rtr_forums
 ketoniaa
-lubys
 majapahit_union
 black_souls_2
 tsareich
@@ -42430,6 +42363,7 @@ lesoniay
 mr_green
 breadstore
 little_acrimonia
+intihuana
 blriahignus
 blackrock_reborn
 apathy_sat
@@ -42468,12 +42402,11 @@ cal_cu_la_tor_18
 trusnia
 mc_lovin
 blixion
+cordaposi
 n0vember
 thyssenkrupp_ag
 zerazganeta
 missnostan
-earexplodian_ix_cavalry_corps
-earexplodian_x_cavalry_corps
 tarcanistan
 north_ranistan
 good_new_brasil
@@ -43185,9 +43118,11 @@ columbious
 the_west_roman_republic
 copio
 hofgardr
+teamfortress_2
 destructionalia_2
 surinamor
 fsea
+ossetia_do_sul
 monkey_nation
 new_imperial_romana
 feawild
@@ -43198,7 +43133,6 @@ freakmerica
 appalachian_youth
 wolveristan_x
 apolod_war_car_27
-litrino
 the_disnited_lands_of_lysiatkopoopia
 the_garden_coast
 -eevee-
@@ -43242,6 +43176,7 @@ richpeopleistan
 the_holy_tarnished
 east_lietenting_shangri-la
 niedersendling
+caliopia
 straeya
 huzzaronis
 dety
@@ -43255,7 +43190,6 @@ prime_ministers_of_sambuca
 waljistan
 stakovia
 ducky_and_shad
-stahburg
 drackthar
 west-canada
 sydney_parramatta_light_rail
@@ -43772,6 +43706,7 @@ balooga
 nanananana7767
 phur
 chaykostan
+catholic_syndicalists
 che_barin_harish
 qantaslink
 jetstar_airways
@@ -43952,7 +43887,6 @@ death_and_death
 dogania
 the_vatican_of_jd_vance
 kaiserreich_of_germany
-piratininga
 cuirass
 kaykausia
 fries_12
@@ -44073,6 +44007,7 @@ kaahuix
 mequova
 karon_province
 european_democratic_states
+byod
 united_north_provinces
 borbon_frans
 bokoth
@@ -44118,6 +44053,7 @@ cal_10110
 rajaticknia_lamandom
 apeshits
 marinthea
+king_byod
 ijn_unryuu
 tl_stockpile
 northern_krovograd
@@ -44165,12 +44101,14 @@ ioan444
 kingdom_of_zhonghua
 bleb_nation
 eshya
+new_trumpland
 ma3
 ma4
 deutsche_sozialistische_republiken
 waryik
 asssssssssssss
 saint_volcan
+the_pannian_airfront
 thalassian_islands
 verkon
 chivis
@@ -44186,7 +44124,6 @@ erstvaal
 mx_research_facility_central_block
 brazil_and_cisplatina
 gardere_dogerradisealand
-brep_vingstan
 natt_ves_abore
 lheryia
 boditcalonhamaydaycondi
@@ -44196,6 +44133,21 @@ the_miner_iii
 the_miner_iv
 the_miner_vi
 the_miner_ix
+rado5
+rado9
+rado12
+rado15
+rado25
+rado27
+rado29
+rado30
+rado32
+rado34
+rado35
+rado37
+rado39
+rado40
+rado46
 iran_under_ayatollah
 the_miner_24
 the_miner_25
@@ -44260,6 +44212,7 @@ khimerina
 redstar_cities
 repubblica_del_sole
 the_miner_102
+the_miner_114
 letheral
 ndikwa
 wolveristan_lxxxi
@@ -44289,6 +44242,7 @@ nice_femboys
 tynen
 shahoop_bliclia
 the_westwood
+ving_pon
 astory
 apstagnum
 khinasthan
@@ -44685,7 +44639,6 @@ eumaeus
 azaelai
 thorn
 nabashar
-zizou
 tiger_shark_northern_territory
 bjourn
 new_nova_helgan
@@ -44827,6 +44780,7 @@ azurelo
 nexuss
 taconi
 spardaska
+theritz
 kein_uberleben
 tiki_tui_tonga
 malice_raider
@@ -45298,7 +45252,6 @@ dryano
 valua
 istaf
 jokery
-the_soviet_union
 trachae
 the_dutch_democratic_republic
 shadow_colonies
@@ -45347,7 +45300,6 @@ tennai
 johnoria
 02
 pseudonesia
-jessica
 de_vara
 rubyfang
 leeward_islands
@@ -45358,6 +45310,7 @@ raviolistan
 corbin_fisher
 catuskoti
 katulgon
+noone
 viserya
 delay_rain
 gorfol
@@ -45422,8 +45375,10 @@ telfa
 undeh
 devout_capers
 charente-maritime
+general_you
 jitse
 kinda
+marx_barry
 koana_islands
 nationalsozialistische_grammatikpartei
 meurthe-et-moselle
@@ -45481,7 +45436,6 @@ faramir
 the-republic-
 trainsland
 jenee_country
-recheve
 simonovia
 low_bloods
 erclusia
@@ -45738,7 +45692,6 @@ haute-loire
 caldariat
 united_nation_of_romnia
 ahzura
-procrastinative_hiccoughia
 crow_omen
 haute-marne
 pyrenees-orientales
@@ -45871,7 +45824,6 @@ genzou
 the_isle_of_grossmania
 ardensterra
 aurandol
-crywiel
 comune
 snowbeech_archipelago
 zeko
@@ -45898,7 +45850,6 @@ sacred_butterfinger
 nekojima
 arkadian_nations
 cydronia
-the_land_of_alextopia
 wildestone
 armed_citizens
 panthros
@@ -45939,7 +45890,6 @@ lightkeep
 rubber_ducky_defender
 hindarsfall
 fivme
-republic_of_fans
 karstoz
 cool_country_for_cool_guys
 nyanworld
@@ -46005,6 +45955,7 @@ sciency_advancement
 the_united_swendish
 lazarene_roavin
 mercian_anarchies
+factbook_storage
 zarynceion
 hand_krings
 calgasia
@@ -46037,6 +45988,7 @@ north_santatio_ant
 dictatorial_escapists
 goldsberg
 wagswag
+puppet_of_axixic
 agaracia
 snailland
 the_scandinavian_unions
@@ -46074,7 +46026,6 @@ wakadadoo
 iron_wolf_lithuania
 marvenia
 serlanda
-lochingrad
 lisi_krej
 almancia
 alex_the_sheep
@@ -46160,7 +46111,6 @@ indre
 seczpact
 mortand
 teh_2nd_soviet_union
-shrive
 amalea
 the_adeex_galactic_cartel
 nord
@@ -46292,7 +46242,6 @@ qinnishland
 ns_la_paz_bolivia
 king_alan
 mambiwe
-mister_jackpot
 litalor
 wireanland
 pluvi
@@ -46344,6 +46293,7 @@ aoceania
 conservative_frank
 new_lower_canada
 mozorov
+novo_octarvian
 communist_region_founder
 glittervoid
 grettana
@@ -46363,7 +46313,6 @@ voinic
 burn_this_moment_into_retina_of_my_eye
 novaritsk
 nuvalkyr
-martlesson
 galtova
 public-education
 -welfare-
@@ -46973,6 +46922,7 @@ molies49
 molies50
 wasi_state
 wymondham5
+california_but_worse
 tenelia
 the_steephills
 war_dogs_xvi
@@ -47058,6 +47008,7 @@ debussy
 wang_yao
 zon_island
 the_royal_american_commonwealth
+aulola
 south_americanastan
 grossdingen
 april_ludgate
@@ -47091,7 +47042,6 @@ secta_luporum
 kikkori
 politicallyincorrectheaven
 new_sovyetska
-ceazsh
 zachaina
 tisriu
 qhevak
@@ -47587,6 +47537,7 @@ holor_8
 retcon_4
 holor_12
 holor_25
+hardlingun
 retcon_12
 retcon_13
 retcon_15
@@ -47696,6 +47647,7 @@ united_andalusia
 holy_goo_phlanopia
 nuliv
 zeneslav_en
+power_of_fault_city
 state_of_texas
 irondom
 imperial_saber
@@ -48857,7 +48809,6 @@ cygnus_092
 cygnus_095
 cygnus_096
 cygnus_098
-kelsenreich
 trek_nation
 bluiegamer
 tubulerion
@@ -49126,8 +49077,6 @@ halloweenville
 kilatjaya2
 crown_36
 crown_38
-crown_39
-crown_47
 lower_ther
 haymarketland
 new_scorpiland
@@ -49206,19 +49155,6 @@ aquarii_196
 aquarii_199
 the_blanikan_union
 astaenia
-ioke_4
-ioke_9
-ioke_13
-ioke_14
-ioke_24
-ioke_27
-ioke_33
-ioke_35
-ioke_38
-ioke_40
-ioke_42
-ioke_43
-ioke_50
 card_farm_ene_22
 card_farm_ene_23
 card_farm_ene_24
@@ -49230,6 +49166,7 @@ hat047
 hat051
 hat052
 hat054
+hat058
 ibero_america_nation_state
 cygnus_102
 cygnus_104
@@ -49293,10 +49230,21 @@ oof_10
 oof_18
 oof_21
 oof_23
+hat059
+hat062
+hat070
+hat074
+hat080
+hat082
 weitfortistan
 austrian-switzerland
+hat085
+hat089
+hat090
+hat094
+hat096
+hat099
 n4hydroxyphenylacetamide
-steel_hold_bunker
 traustadottirland
 i_am_not_crazy
 yeetus_ze_feetus_land
@@ -49356,25 +49304,7 @@ dont_eject_this_fenda_sleeper_43
 dont_eject_this_fenda_sleeper_46
 argentinaias
 debero
-ioke_51
-ioke_52
-ioke_59
-ioke_60
-ioke_62
-ioke_64
-ioke_72
-ioke_73
-ioke_76
-ioke_78
-ioke_79
 af_trial_judge
-ioke_82
-ioke_83
-ioke_85
-ioke_86
-ioke_87
-ioke_96
-ioke_98
 brainsen
 cronistfatopia
 franco-british_borders
@@ -49770,7 +49700,6 @@ zentya
 achyetia
 dycciu
 altramuz
-snootin_boopin
 perilous_journey
 crolia
 snestar
@@ -49784,6 +49713,7 @@ experans
 arlear
 jade_carey
 haywardia
+stoowie
 jupitera
 industries
 bloomwealth
@@ -49997,7 +49927,6 @@ principado_blake
 natlanham
 nationalist_belia_west
 arlaska
-totalitarian_spain
 reutslinger
 santenael
 the_soviet_southern_isles
@@ -50035,7 +49964,6 @@ east_catto
 quenstof
 the_little_guy
 esterhill
-da_bean_club
 the_galician_republic
 mokina
 tandoris
@@ -50227,6 +50155,7 @@ silverbanks
 copperbanks
 the_supreme_bank_of_matheo
 aquarius_kingdom
+vurunzil
 good_faith
 euro_nations
 euro_provinces
@@ -50620,7 +50549,6 @@ the_indian_subcontinet
 donkey_kong_country_sr
 iberan
 zettul
-cherry
 saint_phoebe
 austro-german_commonwealth
 jewish_poland
@@ -50651,7 +50579,6 @@ liburnia
 pogcrazy
 san_fransokio
 donsalia
-neones
 the_republic_of_everleigh
 azuarat
 theria_faa_mis
@@ -50670,7 +50597,6 @@ the_hellion
 the_greatestish_nation
 nationstates_auto-generated_name
 floridas
-beyaz_toros
 im_the_first_with_this_name
 dekronia
 founder_thorn_3
@@ -51408,6 +51334,7 @@ yajna
 cliche
 the_empires
 krakoyea
+purple_guild
 jewish_algeria
 jewish_pretoria
 jewish_bolivia
@@ -51595,6 +51522,7 @@ economical_matheo
 bank_fraud
 caradio7
 west_fachorvater
+the_united_english_commonwealth
 ly
 ceska_republika
 hd
@@ -51904,7 +51832,6 @@ sorrow
 ultra_rich
 mauna_kea_marnrio
 haute-volta
-grafield_the_cat
 ahhaa
 four_spinning_rats
 marquess
@@ -52269,7 +52196,6 @@ byrat
 sombatkhey
 petroli
 britain_and_france
-relanta
 eichanstein
 neeedmoretreees
 communist_laos
@@ -52387,7 +52313,6 @@ thaecian_air_support53
 thaecian_air_support55
 thaecian_air_support57
 new_ival
-freegypsy
 the_sinners_and_revenants_company
 luxden
 dragomirescu
@@ -52560,6 +52485,7 @@ wernoshrommv
 zompaboodaland
 colandrica
 pulau_dewata
+pelican_lands
 petaling_jaya
 aarman_liberators
 foshfish
@@ -52792,7 +52718,6 @@ minchossope
 flopfarm_39
 old_korparius
 bananasgeorg
-azbuff
 thy_nation
 amogias
 toggled
@@ -53000,6 +52925,7 @@ lion_matheo
 leyntheris
 double-vision
 empoplia
+dictatoriumterra
 olandio
 evans_nott
 angradas
@@ -53257,6 +53183,7 @@ csbs_colour-0000fc
 csbs_colour-0000fe
 fort_nassau
 outstandia
+eisenbansk
 matteo_sisti
 nerd_gloria
 time_klanatinophooma
@@ -53284,6 +53211,7 @@ cope-opolis
 rapandia_demplanis
 taroballen
 forseti
+darktopia
 albaclutha
 ozagott
 hausia
@@ -53445,7 +53373,6 @@ komesterra
 sunflower
 the_storage_nation_21
 haerbernd
-rubrum_flamman
 northern_kingdom_of_galicia
 aldar_kose
 wake_up_callista
@@ -53732,6 +53659,7 @@ cat584
 cat586
 cat593
 cat595
+hat092
 eastern_mercantile_conglomerate
 galactic_independent_systems
 astor_farms_3
@@ -53744,6 +53672,7 @@ astor_farms_18
 astor_farms_19
 socialist_workers_commonwealth
 misty_moose
+ouswich
 tes_cubsur
 iyoo_cartel
 danny_kaye
@@ -53774,7 +53703,8 @@ christchurchon
 kresgaria-hertellan
 diutiscla
 asianeurope
-earexplodian_2nd_gendarmerie_legion
+unexplodian_second_airwing
+unexplodian_third_airwing
 gepamo
 tcgs_morgen_opv
 cocoa_isles
@@ -53855,7 +53785,6 @@ hethatles
 norgesrike
 donutville2
 dutch_republic
-katazu_no_aidea
 sudae
 nyasa
 unisterras
@@ -53989,7 +53918,6 @@ aweentitante76
 aweentitante77
 east_odlanski
 strathonia
-oropia_liber
 ultio_divina
 aweentitante83
 aweentitante86
@@ -54152,6 +54080,7 @@ zixtrix
 gukentoryat
 loon_brim
 wc_9
+wc_11
 owiniman_nationalist
 kivu_xxxii
 hikari_university
@@ -54204,7 +54133,6 @@ cf_033
 conan_meriadoc
 paucimens
 agnovania
-rse
 junaluska
 malheur_mauler
 plundering_booty
@@ -54446,7 +54374,6 @@ european_lawn
 the_storage_nation_185
 viviente
 carolian_empire
-metrospecter
 karlsland_koenigreich
 madrastan
 eralan
@@ -54622,12 +54549,10 @@ letgo_land
 almighty_bureaucracy
 notra_sha
 daisytopia
-arepathea
 germania_minoria
 liberty_en_kwanda
 rus_gringata
 kurkinburg
-dillia
 k3ii
 security_council_resolution_author
 stade_rennais_fc
@@ -54704,7 +54629,6 @@ wc_62
 croddopelelulana
 east_seaxe
 wc_66
-tearrinse
 united_englia
 tungaru
 dublin_heights
@@ -54750,6 +54674,7 @@ regency_de_mauritania
 lower_cuba
 senftland
 girthland
+ditadura_de_uganda
 freidonia_empire
 the_dancing_tides
 hapsburg_monarchy
@@ -54875,6 +54800,7 @@ stargod39
 stargod40
 the_great_imperial_empire_of_russia
 stargod43
+arenya
 stargod45
 stargod47
 stargod51
@@ -54889,6 +54815,7 @@ shikaolen
 imperialist_berlin
 south_dolanei
 master_eiji
+corvusian_social_republic
 synthetic_sovereign_state
 andracs
 great_muhland
@@ -54981,6 +54908,7 @@ co-operatives
 puppet_state_180
 eysa
 pope_lick_monster
+jaakarasarka
 junta_verde
 federation_of_worker-peasant_councils
 coca_cola_zombies
@@ -55092,7 +55020,6 @@ astro_toilet_nation
 shell_plc
 bp_plc
 almighty_vance
-langkasokan_3rd_infantry_regiment
 minalanland
 vinland-markland
 high_table
@@ -55107,7 +55034,6 @@ superieurland
 the_aztec_crusaders
 komatsu_ltd
 komatsu_limited
-pizzahut
 neo-cralt
 jakkemcfiskeman
 svetzia
@@ -55145,7 +55071,6 @@ velo48
 velo49
 velo50
 verris
-zaxbys
 lon_land
 oropeak
 yaso
@@ -55206,7 +55131,6 @@ piswasser
 richmond_and_greater_islands
 shanghuaxia
 nopestan
-verdanbrautia
 heightsire
 almighty_marx
 least_fier
@@ -55238,8 +55162,6 @@ cousar
 furan
 middle_dimpevwoo
 celloque
-earexplodian_iii_cavalry_corps
-earexplodian_iv_cavalry_corps
 nora_citadel
 north_samets
 kel-morian_kombine
@@ -55258,11 +55180,8 @@ cal_cu_la_tor_19
 duck_party
 sintalla
 rukadia
-earexplodian_v_cavalry_corps
 enkidia
 phalaronds
-earexplodian_vii_cavalry_corps
-earexplodian_viii_cavalry_corps
 kubalaban
 the_kronenberg_reich
 the_legionnaires_of_saint_micheal
@@ -55289,7 +55208,6 @@ lockheed_martin_aerospace
 nystjarna
 super_sillyness
 the_united_fufu_empire
-northern_enalbistan
 heaven_of_glory
 war_command
 terratopia
@@ -55435,6 +55353,7 @@ video_game
 the_3rd_pavlov
 scherazard
 we_will_help
+sorala
 biafrica
 arctic_skies
 sovereign_order_of_arms
@@ -55502,7 +55421,6 @@ tufterholm
 vegeayi
 paradise_of_dante
 arghentia
-markardand
 papalis_magna
 nuhadaka
 shirakami
@@ -55823,7 +55741,6 @@ ns_australia_and_new_zealand
 trenton_vernon
 ns_curacao
 ns_bonaire
-glorious_conclave
 the_executive_branch
 second_han_dynasty
 monroy
@@ -55887,7 +55804,6 @@ tgv152
 tgv153
 tgv154
 san_jose_de_cucuta
-saint_abastivillomarund
 hispanic_hopping_pintos
 tymanlinn
 liqiania
@@ -56007,7 +55923,6 @@ aratope
 impreo4
 samistanland
 ussonia
-militancycentral
 thylkiopia
 valdris
 olympus_empirical
@@ -56061,7 +55976,6 @@ kingdom_of_pantala
 rajinia
 greater_highteimoennia
 ankora_freakbobland
-jordyina
 cosmopolitia
 hrazdanova
 sacc1
@@ -56535,13 +56449,13 @@ carjackers7
 secret_drafting_board
 andalyar
 chebel
+microplastics_overdose
 bektandi
 poqeto
 turiandanistan
 jaervien
 manadaro
 lyxoria
-ankhenia
 joyous_dignified_propriety
 warkase
 corvuns
@@ -56577,6 +56491,7 @@ city_of_sand
 city_of_sticks
 cold_hard_reality
 condemned_by_the_space_pope
+rizzantina
 could_have_happened_to_anyone
 dumped
 eggcellent_detective_work
@@ -56643,11 +56558,11 @@ eastan_hardome
 shs
 notranshere
 alyiratei
-half_sword
 south_wyczmaer
 the_yellow_turban_rebels
 bas-canada_libre
 the_united_territories_of_indiana
+gristoniostistan
 cadencee
 romans_and_germans
 the_underbread_market
@@ -56729,7 +56644,6 @@ nhothis
 fatuvalu
 free_state_of_eunionisia
 tyviria
-new_jiggerville_land
 fries_11
 fries_13
 thrag_skria
@@ -56758,6 +56672,7 @@ frpr8
 frpr0
 kadzherom
 fries_17
+fonasimers
 gaywadtopia
 code_americana
 lundien
@@ -56799,6 +56714,7 @@ fries_36
 fries_37
 fries_44
 fries_45
+valentone
 nawka
 slundrana
 veilm
@@ -56834,11 +56750,11 @@ abzurdisztan
 cameronstrange
 ukrainiya
 cannabinoids
-bela_gille
 hazmira
 reraloa
 caligoella
 zemnie
+byod2012
 the_black_and_white_abraham
 nasak
 karachiland
@@ -56950,6 +56866,7 @@ lothall
 pavani_island
 3rd_traveling_farmer
 verdune
+fix
 elderar
 pootis_birds
 the_strait
@@ -56985,6 +56902,22 @@ wolveristan_lxxviii
 libertas_the_free
 mainya
 vokraina
+rado10
+rado14
+rado16
+rado17
+rado19
+rado20
+rado21
+rado23
+rado26
+rado28
+rado33
+rado38
+rado42
+rado43
+rado45
+rado48
 the_miner_16
 the_miner_18
 the_miner_22
@@ -57030,6 +56963,7 @@ st_ember
 ukhtistan
 the_miner_101
 the_miner_103
+the_miner_112
 the_sectors
 wolveristan_lxxxii
 wolveristan_lxxxiii
@@ -57092,6 +57026,7 @@ tempestan
 kunigsrrock
 the_draft
 cat_kingdom_of_cats_in_cats
+thessiana
 monday_starts_on_saturday
 plinky_plonk
 isalandiaaaaa
@@ -57139,6 +57074,7 @@ dr_pepper_diet
 axiotarian_directorate
 polish_provisional_government
 the_state_of_the_poles
+newmerica2
 0
 fantrum
 dlax
@@ -57347,7 +57283,6 @@ anacomia
 republic_of_yucatan
 syndic_australia
 osreton
-lasvalre
 grunyev
 montecrux
 aarkhytra
@@ -57463,7 +57398,6 @@ wes_bation
 united_san_magnolia
 catineri
 austrograd
-socialist_federal_britain
 holy_momefria
 democratic_socialist_sovranate
 mantino
@@ -57953,7 +57887,6 @@ futhe_clanialand
 livetia
 rellenia
 pr_korea
-iznjiha
 darsavia
 potatonia
 communist_catboys
@@ -58238,7 +58171,6 @@ united_kommunburg
 tearn
 united_britanica
 loralivas
-solviaro
 dominion_of_jd_vance
 lyoti
 the_ocheti_sakowin
@@ -58269,10 +58201,7 @@ uovu
 communist_manchuria
 preussen_sfsr
 weihua
-saigonese_cochinchina
 sulonterre
-dathuua
-lesser_madrid
 heltivia
 dura_vendetta
 zaram
@@ -58318,6 +58247,7 @@ i_am_human
 zelvesapuba
 demena
 russaqs
+andtaria
 renatumoria
 high_castle
 communo-anarchist_republic
@@ -58359,6 +58289,7 @@ socialist_blocs
 republic_of_the_common_good
 societyv2
 the_workers_citadel
+ifa_wartburgia
 nahulu
 the_asian_continent
 the_shah_malacca
@@ -58373,6 +58304,7 @@ soviet_union_356
 the_national_ordocommunist_union
 pontaguar
 adris
+the_cresint
 ploq
 smallest_huts
 far_wor_the_lovingstan
@@ -59028,7 +58960,6 @@ the_republic_of_norwyn
 priyall
 sun_conjunct_sun
 moon_conjunct_mercury
-borgar
 sardo-corsica
 vaccancy
 saturn_opposite_jupiter
@@ -59079,7 +59010,6 @@ far_eastern_union
 ekua
 patrek_mallister
 segmentum_ultramar
-delvana
 veltraxus
 flambergandia-oklahoma
 eopone
@@ -59125,7 +59055,6 @@ degan_new_pergerlden
 dingras
 varidi
 southern_territory
-vishia
 probing_space
 grumium
 bellerive
@@ -59156,10 +59085,7 @@ zamaan
 arstitzka
 bolsonaro_world
 ularsk
-gorstudia
 crusoach
-rn_adriatico
-middle_new_trunz
 estalcia
 idawis
 original_african_republic
@@ -59645,7 +59571,6 @@ confedaration
 seikanryu
 freacories
 lubnan_al-jadeed
-markon_a
 vasco69
 maluku_utara
 fersom
@@ -59674,7 +59599,16 @@ vila_maringa
 nariye_cumhuriyeti
 drazilian
 cynavia
+the_united_furry_femboys
 quansa
+kassa_and_harsigena
+freedom_grind
+floppy_land
+new_hampsire
+erateia
+kennot
+bopolonia
+cvbnmc_vb
 todd_mccloud
 goodnamesarerare
 cenos
@@ -61093,7 +61027,6 @@ ziya
 inflorescence_of_narcissus
 inflorescence_of_xylobium
 ouisconsin
-delaware_xiv
 lunitian
 korrigan
 archum
@@ -61749,7 +61682,6 @@ arcaneus
 eamonus
 regnum_theutonicorum
 united_britain_and_the_state_of_ireland
-grimzar
 rauf_mamedov
 kriilatia
 nord_merica
@@ -61836,7 +61768,6 @@ kamigakari
 whitearmor
 king_jte
 lingua_ignota
-kengikuni
 dawu
 imperial_prothean_empire
 new_inanis_ninomae
@@ -62108,7 +62039,6 @@ piggly_jiggly
 piggly_oiggly
 piggly_viggly
 aerd
-evangalos
 rhyde
 substance_1987
 comunyan_farm_461
@@ -62284,7 +62214,6 @@ fine_tand
 rmangti
 appaloosia
 angiouthe
-honestia
 zharechnia
 grenno
 nimbuum
@@ -62367,7 +62296,6 @@ pueblo_obrero
 koo_nezervere
 the_fortunate_isles
 new_lopon
-weiji
 tengger_desert_solar_park
 afro_macedonia
 milly_bago
@@ -62375,7 +62303,6 @@ swabian_air_command
 new_alvingdon
 rankapur
 archerrlanialand
-puerto_rubi
 trmonla
 365_party-girl
 limiteds
@@ -62399,7 +62326,6 @@ haha-grape
 zorlookopia
 the_prussian_soviet_socialist_republic
 the_plateau_rangers
-neo_zhongguo
 shifeka
 vleflain
 thufan
@@ -62501,48 +62427,21 @@ imerria
 neouru_timan
 novyy_rossiya
 din_tureion
-zhaoxin
 aive
 jairolandia
-dorcol
-oovnea
-blembly
-prarnion
-despartia
-sarleka
 penen_papas
 the_slothman
-emptisalia
 federation_of_planets
-ftqp
 united_amarrian_peoples
 salsat_corp
 tritar
-bitter_malice
-uno_cousfedshe
 isizwethia
-cananien
 paxemou
 huntwood
-islant_bam
-republic_of_great_capability
-yll
-darth_vader_25
-carapad
 nuugalat
-oppen_thos
-alcon_and_and
-calinin
-nino_bixio
-rn_ravenna
-enseigne_gabolde
-briteshou
 holland_republiek
-yumai-kasha
 kornfeld
 the_united_states_of_greater_columbia
-verzinan
-jjjjjjjijjnyukmhjnbgkjkli
 sartanaz
 fannin
 sverspol
@@ -62923,8 +62822,6 @@ new_northdo
 grandenburg
 winoland
 kloki
-earexplodian_iii_reserve_corps
-earexplodian_iv_reserve_corps
 owei
 4th_cbt
 daymap
@@ -62961,7 +62858,6 @@ wiscon_sin
 gashipplesonita
 south_floptropikal
 south_srvatska
-earexplodian_viii_reserve_corps
 cappiest_difuio
 buwe
 rasagrad
@@ -63563,7 +63459,6 @@ librei
 stonemanland
 valundium
 bysha
-theritz
 bachium
 los_castores
 obliviane
@@ -63974,6 +63869,38 @@ union_of_eastern_communist_republics
 vret
 sephe
 earth_and_terra
+riverutopia
+auguries
+yonwu
+woral_ter
+eutopia_savoy
+mileulia
+roaring_knight_309
+southern_caucasus
+roaring_knight_331
+lower_wole_reger
+roaring_knight_337
+califorina
+roaring_knight_342
+aldamar
+roaring_knight_360
+roaring_knight_382
+socionis
+segimeria
+beauque
+stitiran
+ube
+jammu_depp
+evaleorep
+virulian_punch
+zraskin
+duke_suke
+united_final
+middle_staew_thrusilkons
+newyorkdemocracy
+beonation
+cat604
+green_crest
 sunset
 treznor
 northrop_grumman
@@ -64153,7 +64080,6 @@ wulfenspeer
 heroica
 hajirah
 sordica
-speculine
 mikoyansk
 keskinen
 al_hubish
@@ -65169,7 +65095,6 @@ nesseke
 wawrztopia
 aum_shinrikyo
 vorahw
-rampdea_empire
 otitty
 democratic_states_of_zokshia
 super_prosperia
@@ -65198,7 +65123,6 @@ radicalos
 humanitary
 thenix
 thirian
-frannstan
 sanavail
 our_blessed_lord
 etiopian
@@ -65336,6 +65260,7 @@ suloni
 nizonia
 kwainoshis
 united_states_of_northca
+the_democratic_russian_federal_state
 united_states_of_minecraftia
 crumstain
 mammo
@@ -65458,6 +65383,7 @@ hanz_get_ze_gun
 tiraque
 nuva_york
 brautria
+varnese
 europatale
 fraenkischen_lande
 rockitao
@@ -65518,7 +65444,6 @@ keserrech
 arkary
 decker_liberty
 libensburg
-the_new_holland_states
 the_altrian_empire
 republic_of_argo
 low_germany
@@ -65535,7 +65460,6 @@ was_taria
 void_apostasy
 arnaqi
 socialist_republic_loh
-rubiconia
 gorneos
 juilus
 golden_free_states
@@ -66347,6 +66271,7 @@ ndr-xlviii-wv
 ndr-xlix-wi
 hefenland
 misty_brightdawn
+valles_stellarum
 apocalypse_borg
 ndr-14
 ndr-15
@@ -66542,7 +66467,6 @@ orsik
 severna_makedonija
 andorra_de_la_vella
 ang_worspar
-southern_song_dynasty
 soeder-oear
 hymnlied
 larefo
@@ -66560,7 +66484,6 @@ sax
 the_europians
 sorocamirim
 convilla
-branzia
 velenar
 the_western_european_commonwealth
 kjjnafjnresf
@@ -66572,7 +66495,6 @@ lombardia-venetia
 bavaria_republic
 svedria
 stand_usa
-deathia
 tikonia
 flejan
 the_fra_epitadozland
@@ -67146,7 +67068,6 @@ arakee
 arvidt
 ogomia
 nova_moldavia
-stalinist_congo
 annitor
 karvan
 red_shambhala
@@ -67230,15 +67151,12 @@ liebherria
 disneylandia
 alrida
 korshenia
-arpia
 the_haddams
 elisiu
-cymridh
 maltija
 invion_invia
 vascovie
 splendorland
-great_brittanica
 yngollund
 lilianan
 zakaros
@@ -67363,6 +67281,8 @@ the_great_latveria
 of_canada_and_australasia
 valderonien
 the_georgia_isles
+socialist_republic_bisieasia
+nekotalia
 bari
 the_united_empire_of_exucular
 republic_defense_army
@@ -67378,7 +67298,6 @@ anti_winxian_linphea
 knightfallia
 luwiya
 americanfederation
-nova_rechia
 segmentia
 dracos_-_haven
 grimm_trouble
@@ -67671,7 +67590,6 @@ terintin
 yunogaku
 altiorem
 kravashka
-bitaros
 yaraquem
 abhaystans
 ona
@@ -67691,6 +67609,7 @@ watao
 the_helenas_archipelago
 bara_theone
 cordavela
+godo_islands
 nabaland
 nixnay
 the_big_bad_boo
@@ -67746,6 +67665,7 @@ hubdova
 the_psittacines
 hockeyyekcoh
 novo_reslas
+heskurik
 mangoville
 israel_and_eastern_jordan
 austria_swiss_germania
@@ -68081,7 +68001,6 @@ politiania
 omniabstracta
 dolphiland
 barrelene
-ostreich1
 the_serrian_archipelago
 toonu_empire
 tungusta
@@ -68362,7 +68281,6 @@ thorn179
 most_authoritarian
 red_star_award
 rtr1
-hovering_elanine
 cyrod
 hadian
 ameriganastan
@@ -68909,7 +68827,6 @@ eax
 roless
 the_outer_milky_way
 hue_manatee
-feline_masters
 arzibe
 elfrard
 paplia
@@ -70342,7 +70259,6 @@ gout_anglais
 karmi_sangh
 wing_and_a_prayer
 ellis_park
-dejeuner_anglais
 gandoor
 aikoland
 freedenea
@@ -70474,13 +70390,11 @@ arenumberg
 taledonia
 zarathoft
 interstellar_planets
-nyte
 remulia
 kylantha
 mutrami
 united_earth_collective
 anueme
-sojal
 posthumanism
 terrakonoha
 kor_initiative
@@ -71032,7 +70946,6 @@ invictii
 great_vallencia
 southern_trizavid
 neo_makhnovia
-northern_social_republics
 falceverdi
 orara
 slimeria
@@ -71120,7 +71033,6 @@ demcratic_sofilliens
 new_zambery
 corgilanda
 ialtagan_dubha
-splitschie
 gile
 spartacusbund
 jaeke
@@ -71150,7 +71062,6 @@ reborn_earth
 east_goringa
 estados_unidos_pela_africa
 metra_nova
-socialist_caldera
 havenssile
 the_great_german_enpire_on_the_island
 camarolienna
@@ -71378,7 +71289,6 @@ erusiaerasia
 ladderdiesel
 bsn43
 german_prussia
-langkasuka
 achaemene_persia
 asyrein
 regnum_britannorum
@@ -72610,6 +72520,7 @@ convaria
 god_fearing_devoted
 duce_fascismo
 vortissa
+nova_nohanua
 tobosarsk
 white_anashia
 zordennox
@@ -72646,6 +72557,7 @@ mightoniego
 scottish_unionist_state
 your_rich_uncle_from_nigeria
 ausleria
+at-m6
 anti-fruitcake_brigade
 the_great_nevada_overlord
 drachen
@@ -72737,6 +72649,7 @@ euruse
 sil3ntearth
 steyrein
 rizzman_empire
+nova_finis_terrae
 nova-rolanda
 amerikanisches_schutzgeschwader
 new_arbuckle
@@ -73081,6 +72994,7 @@ flandria
 blaat
 nationstates_gendarmen
 nationname
+pelgrim
 gaius_iulius_caesar
 kingdom_of_belgium
 gilbert_islands
@@ -73683,9 +73597,15 @@ syinastan
 mila_ii
 slavel
 -watching-and_dreaming-
+ris_saturn_51-xt
+the_raxulan_horde
 takkaviita_cclxxiv
 oprah
+featured_forest
+air_force_duck
+wandering_alta-saxony
 little_eltopie
+an_featured_region
 roslov
 y-psylone
 tandarus
@@ -74722,6 +74642,7 @@ the_pigeon_cult
 trepcia2
 dom_queesom
 orc_wizard
+commie_nation_of_love
 one_true-pairing-
 sobferiot
 sensorship
@@ -74741,6 +74662,7 @@ new_capper_des
 swell
 newquay_pier
 sgland
+lion_prides
 melqarton
 king_waldorff
 bruh_were_kinda_evil
@@ -74834,7 +74756,6 @@ portisbone
 cardiff_and_glamorgan
 mini_ossulu
 a_cheeky_nandos
-ulsta
 baby_bonnie_hood
 limetown
 mijhu_republic
@@ -74917,7 +74838,6 @@ vishizzia
 madigon
 moughts_itand
 pittsburgh_stillers
-moses_federation
 dsn55
 the_eras_tour_international_tour
 enfield
@@ -74955,7 +74875,6 @@ the_house_of_hanover
 catpatriae
 volkapsini_co
 republic_of_moses
-citadel_ali
 jaktoko_alt
 trialnadia
 eastern_polish
@@ -75023,7 +74942,6 @@ intiss
 debora
 devorah
 judit
-great_lanzarote
 farmo
 benria
 greater_belfast
@@ -75127,6 +75045,7 @@ fat_phrog
 british_racing_greenland
 nova_ulisse
 ateryo
+radicalisland
 colonino
 arkayn_stretenby
 bright_angel
@@ -75440,7 +75359,6 @@ camp_mennihackatorso
 trash_heap
 velhkaiddia
 tyrannej
-thelastoption
 the_absolute_worst
 -watching_and-dreaming
 great_bulkaran
@@ -75558,7 +75476,6 @@ immiseration
 darbler
 nsla_card_mine_iv
 terthick
-kakaushiy_bober
 caskees
 neo_pittsburgh
 ironholden
@@ -76774,7 +76691,6 @@ khavvkhnsjnjiekh
 kilrah
 poopsancagizal
 vienna_eliot
-the_garbandan_isles
 the_tomania
 taumin
 gsn28
@@ -77446,7 +77362,6 @@ cattaraugus_county
 libertcity
 united_states_of_anglos
 dupek
-antidorea
 holy_nueva_union_of_america
 pro_bird_rights
 hohon
@@ -78542,7 +78457,6 @@ guiana-brasileira
 nova_guiana_brasileira
 bean-firia
 card_technician_2
-prtogal
 the_federal_republic_of_portugal
 sanvito_rep
 controverso
@@ -78684,7 +78598,6 @@ the_45th_podrian_coastal_defence_battery
 takkaviita_ccxcvi
 maraith
 25th_ghillemearan_marine_brigade
-phosphorus_cycle
 rainbow_sherbet_59
 smurthwaite_ii
 ernest_n_cross
@@ -79143,7 +79056,6 @@ the_clade
 upper_lorsbutahrinkinn
 hangextan
 ziphion
-bleeding_sun_18
 galenche
 dhawazetxwyakracusrabillan
 al-aranib
@@ -79241,36 +79153,15 @@ st_a6
 st_a5
 kcccp_7
 kosovo_island
-reseda_island
-reseda_island_ii
-sky_bison
-t-rex_valley
 hyannis_port
-reseda_island_viii
 frozeric
-universe_island
 castiel
-reseda_island_iv
-sky_paramour_islands
-the_god_clock
-reseda_island_vi
 crisis_control
-zod
-reseda_island_v
-volcanus_island
-reseda_island_vii
-reseda_island_iii
 the_symbiote_paladin
-resedietnam
-the_sky_dragon
-the_phoenix_of_ra
-obelisk_the_tormentor
 digital_atlantis
 brooklyn_island
 the_iron_rebel
-nova_saigon
 keumdo
-phantom_thunder_raven
 savoma
 free_amazons
 ilconia
@@ -80106,7 +79997,6 @@ para
 parana
 rondonia
 federal_brazil
-maranhao
 dilma_vana_rousseff
 luiz_inacio_lula_da_silva
 fernando_henrique_cardoso
@@ -80333,6 +80223,7 @@ south_wor_tijeliontainarim
 frostedestownion
 holy_papal_byzantine_empire
 maekeria
+cadors
 chestertonland
 americae_nova_roma
 clavis_caeli
@@ -80353,6 +80244,7 @@ pedra_alta
 viottori
 maltese_queensland
 lamblands
+argysia
 tfe33
 scc
 the_austrian_pacific_ocean
@@ -83350,7 +83242,6 @@ whippingham
 porchfield
 thorncross
 bonchurch
-binstead
 bouldnor
 shorwell
 totland
@@ -84141,6 +84032,7 @@ ye_sect
 kamza
 moradiah
 ilarias-confik
+intado_cara
 gers_auss
 drakemoria
 the_germanic
@@ -87346,6 +87238,7 @@ dunnar_republic
 the_ward_sulan
 new_australia_mk2
 trisola
+folk_bulgarians
 middle_brightonburg
 rick_blaine
 communism
@@ -87692,6 +87585,7 @@ islamically_resistant_palestine
 mohamed_rayan
 aridhabia
 mohathabits
+united_arabian_emirate
 korsou
 hr33
 german_brotherhood33
@@ -87739,7 +87633,6 @@ my_neck
 epsilon_delta
 moth_legionary_5
 jade38
-silicate_weathering
 rainbow_sherbet_71
 mister_pouche_billiarde_trois
 taa33
@@ -87957,6 +87850,7 @@ black_hawk_down
 d3m0n5lay3r
 darque
 forostar
+euleos
 xirya
 sari_iv
 west_runkirr_ocean_territory
@@ -88614,16 +88508,11 @@ tunja
 valledupar
 atlantico
 caldas
-san_andres_providencia_y_santa_catalina
 arauca
 san_andres
 tamalameque
 calderon
 soacha
-vichada
-norte_de_santander
-guainia
-putumayo
 zulankan_outpost_17
 vannin_ellan
 sir_feirionnydd
@@ -88878,6 +88767,7 @@ beammernia
 uni_indonesian_empire
 dire_straits_settlements
 intermalaya
+rengeng
 ionian_islander
 orthanc-1
 urapii33
@@ -89084,19 +88974,9 @@ tepaneca
 -azteca_mexico
 texacoco
 azteca_mexico
-hidalgo
-michoacan_de_ocampo
-sinaloa
-zacatecas
-guanajuato
-campeche
-durango
 valverde
-jalisco
-sonora
 xochitl_gomez
 la_bufadora_inn
-veracruz_de_ignacio_de_la_llave
 nuevo_leon
 chapultepec
 colotlan
@@ -89142,6 +89022,7 @@ begawan
 onsdag
 maned
 castle_hughes
+rahalandia_2
 internationalnations
 hand_of_nibu
 sword_art_online_n00b
@@ -89622,7 +89503,6 @@ georgy_lvov
 mertvets_volna
 comrade_271
 objectivist_chimpz
-south_brightonburg
 weller_centennial
 dirty_dan
 imperial_france-1
@@ -89743,7 +89623,6 @@ southeast_asian_doctors_without_borders
 soloinsnalman
 takkaviita_clxi
 wa_states
-swarnamitra
 ariana_montanez
 oceans_12
 southernd33
@@ -89876,11 +89755,7 @@ guard_19
 the_79th_revolutionary_worker_council
 united-states_of_america
 missibama
-usarmy
 usairforce
-usnavy
-usmarinecorps
-uscoastguard
 3_reix12
 dr_peper
 dixie_islands
@@ -90559,7 +90434,6 @@ cunnickia
 s2p1729
 milwaukee_and_wisconsin
 jdjdjd
-san_jaria
 flavi
 graforta
 spanitannia
@@ -90600,6 +90474,7 @@ lazy_bones
 drask
 cute_wallabies
 the_cerulean_nation
+vertias
 octopodus
 caerin
 dsn16
@@ -90639,7 +90514,6 @@ grande_chenyu_archipelago
 losian_islands
 the_federalist_empire
 brimm
-cokerstonia
 federation_of_the_kabari_republics
 kelleher
 french-indochina
@@ -91639,6 +91513,7 @@ zany_zanes
 arcticfoxxo
 labrador_retrievers
 youtube_inc
+the_grimm_reaper
 of_blocistan
 jinea
 aaaaaaaaaaaaaaaaaaaaaaaaaa_aaaaa
@@ -91985,7 +91860,6 @@ kaldrin
 graved
 alzerbaijan
 theionesia
-flays
 mumbastate
 rei_cebolinha
 veryevil
@@ -93029,6 +92903,7 @@ the_amaranthine_sound_armor_division
 ahyes
 xki_flying_eagles
 evonath
+cherry
 kopolin
 the_cascadian_antarctic
 ft
@@ -93112,8 +92987,6 @@ the_purples
 the_aryans_and_expansive_realms_of_arya
 the_united_colonies_of_paragon
 south_tomoguza
-aculamdia
-marjai
 enda_han
 szklawonia
 falstria
@@ -94083,8 +93956,6 @@ socialistic_manchester
 america_the_horrible
 lecavia
 socilsiatstic_briaintain
-last_thursday
-next_tuesdae
 unyielding_and_lingering_intestinal_pain
 northern_arba_fir
 western_arbio_fir
@@ -94156,7 +94027,6 @@ kommander_exo
 rio_grande_states
 piavolias
 ridinger_fist
-at-m6
 wirye
 corgium
 ksn26
@@ -95095,9 +94965,7 @@ vanthablack
 rocketfuel3
 ewetowpia
 blazamut_ryu
-warrior_of_utopia_45
 princess_xxi
-anaerobic_ammonium_oxidation
 moon_says_bonjour
 rainbow_sherbet_60
 terhawk63
@@ -95274,6 +95142,7 @@ wehrystaska
 guh_county
 norrlannde
 frouu
+the_wintercrest_founder
 the_sons_of_liberty
 sezyu
 bongo_the_adorable
@@ -95334,6 +95203,7 @@ holy_empire_of_loaf
 zergadnkastan
 pekares
 kigwari
+itheria
 lisistan
 lekandia
 -toomany_options
@@ -95915,6 +95785,7 @@ yunaopia
 rilker
 fyrizia
 kediya
+outer_uranium
 kritin
 aoshima_island
 cpusa-2
@@ -96167,7 +96038,6 @@ the_adjudicator
 the_baba_yaga
 monaco_2015
 north_dogland
-imperium_der_veltorii
 wetbergs
 fordow
 axoluna
@@ -96199,7 +96069,6 @@ jamesylvania
 abundant_fruitland
 new_riverton
 thuringar
-arlechia
 anarchist_algeria
 anarchist_czech_republic
 aa_131
@@ -96234,6 +96103,7 @@ frieren_151
 frieren_169
 nexatech_core
 cosmic_uncertainty
+starset_sons
 flying_pig_75
 st_marc_and_pierre
 horlava
@@ -96330,25 +96200,16 @@ caesarist_hispania
 appelion
 coblivervicedberonistan
 kittemyrth
-radical_brazillistan
 schchleiiebland
 monarchist_brazilistan
 0st1and
 rosethrone
-united_brazillistan
 buckfastshire
 kivaluk
 swinge_meanity
 antuin
-southern_air_temples
-estados_unidos_omadenses
-ublarr
-kddovmiev
-les_cookies_sont_vraiment-nuls
 sneath
 grooming
-saladze
-empuradia
 dyloholic
 araris
 peos_jadarty
@@ -96492,7 +96353,6 @@ cabo_de_vela
 leibnizia
 pelivere
 ighrona
-earexplodian_xv_cavalry_corps
 beetlia_setsoko
 hitalo_santos
 hajan_empire
@@ -96525,7 +96385,6 @@ canzatia
 mex_nuls
 sait_elenor
 midadille_chagin
-earexplodian_ii_special_command
 enulgrozedde
 slaugen
 sveet
@@ -96842,6 +96701,17 @@ suiccal_and
 gregmania
 checoslovak
 terlistun
+roaring_knight_312
+roaring_knight_328
+roaring_knight_346
+mald_aaguter
+aukunado
+thankam
+riginjohn
+yir
+nordenreich
+north_ribeiro
+liam_bistis
 tcos33
 incola
 guard_155
@@ -98062,7 +97932,6 @@ din_933
 belgium_waffle
 orthlandia
 tempest_bluffs
-yoichi
 reve-sur-le-mer
 lehpuhrta
 night_forge
@@ -98247,7 +98116,6 @@ moon_capital
 femboys_and_femboylovers
 crapitalistan
 egairo
-methandpropane
 lituum
 pentalista
 new_maximalist
@@ -98324,6 +98192,7 @@ arkkas
 naktica
 judea2
 cantuckee
+what_is_left
 cae-1
 kpop-1
 tamp33
@@ -98676,8 +98545,6 @@ penguin_gypsies
 team_hawkeye
 voxija
 jack2850
-mendgremar
-zamend
 tohru_kobayashi
 kaya_irimi
 gypsy_lovers
@@ -98685,7 +98552,6 @@ afghan_stan
 black_hawk_raider_refugees
 cantors_paradise
 gypsy_rover
-greater_cavonia
 black_raven_movement
 iyum
 upper_lower_inner_outer_north_south_east
@@ -98856,6 +98722,7 @@ souneia
 cats_federetion
 novelleau
 panamerica_0
+polarian_dev
 dogetopian_mars
 teufelfrau
 sir_fynwy
@@ -99385,6 +99252,7 @@ t-34
 bedetopian_capture_team_c2
 tyrnica
 rythene
+tyrnica_ii
 saint-baptiste
 perilous_and_looming
 sabarine_barcia
@@ -99443,7 +99311,6 @@ unified_korrodia
 pangaea
 candensia
 rumanian_states
-kuriko
 etc_database
 thatcher_whitehall
 redpeppers
@@ -99474,7 +99341,6 @@ aglais_io
 nauvis
 the_outer_union_scouting_squadron
 vusaronia
-heckington
 caeruleum_aquilarum
 nationville
 armurasia
@@ -101524,7 +101390,6 @@ magi_of_ansburg
 magi_of_hasmal
 magi_of_markham
 magi_of_tevinter
-novus_ontariae
 quonkoland
 capital_north
 upper_michigania
@@ -101639,18 +101504,6 @@ lower_frostfangs
 syduria
 discount_grey_wardens
 typisk_norsk
-starship_bravo
-starship_charlie
-starship_delta
-starship_echo
-starship_foxtrot
-starship_golf
-starship_hotel
-starship_india
-starship_juliet
-starship_kilo
-starship_lima
-starship_mike
 friendship_and_bravery
 1st_tolfaerian_army
 spew
@@ -101683,9 +101536,6 @@ starship_tango
 starship_sierra
 starship_romeo
 starship_quebec
-starship_papa
-starship_oscar
-starship_november
 western_new_scotland
 interceptor_i
 interceptor_ii
@@ -101875,21 +101725,7 @@ mtf_omicron_rho
 mtf_pi-1
 big_simping
 big_simpin
-dyapeaches-1
 dyapeaches-2
-dyapeaches-3
-dyapeaches-4
-dyapeaches-5
-dyapeaches-6
-dyapeaches-7
-dyapeaches-8
-dyapeaches-9
-dyapeaches-10
-dyapeaches-11
-dyapeaches-12
-dyapeaches-13
-dyapeaches-14
-dyapeaches-15
 bunnygirl_antics
 unfathomable_power
 hero_in_a_dream
@@ -102300,7 +102136,6 @@ phobos19
 phobos20
 phobos16
 canada_guardian
-ioke_1
 wisch_upon_a_star_7
 wisch_upon_a_star_8
 wisch_upon_a_star_9
@@ -102346,7 +102181,6 @@ subita
 garafraxa
 after_throwing_cheese_at_women_merlin
 ocelera
-malazga
 power_level_9000
 ke_nan
 mitchmcconnell
@@ -102679,7 +102513,6 @@ the_quest_begins
 those_who_killed_the_mercy
 the_reborn_and_the_merciful_angel
 the_mercy
-canopus_wing
 cerulean_flash
 glad_tidings
 knucklebug
@@ -102939,8 +102772,6 @@ zubaan
 doubutsu_sentai_go-busters
 abare-pink
 blink_blink_blink_blink_blink
-reslien
-gemusst
 paleo_11
 paleo_12
 paleo_13
@@ -102949,7 +102780,6 @@ birthright
 meridian_jul5
 twpaf
 todd_howards_suckable_toes
-william
 darth_makasta_dark_lord_of_the_ldf
 libcod
 code001
@@ -103237,7 +103067,6 @@ no_im_not_going_to_sleep
 the_duck_army_squadron_2
 the_duck_army_squadron_3
 the_house-elf_liberation_front
-fruity_fruitcakes
 dylnsk
 february_stars
 berserker_1
@@ -103586,7 +103415,6 @@ coffin_nail
 gigantes_carrier
 halcyon_corvette
 heliotropium
-platinum_osprey
 the_steel_curtain
 gu_67th_fleet
 gu_77th_fleet
@@ -103771,7 +103599,6 @@ tokimeki_runners
 punk_rocknrollia
 carmina_commencing
 buckthorn_approach
-cardinal_one
 cautious_optimism
 crux_unraveled
 dragonquin
@@ -103934,12 +103761,14 @@ warrior_of_utopia_16
 warrior_of_utopia_17
 warrior_of_utopia_18
 warrior_of_utopia_19
+warrior_of_utopia_20
 warrior_of_utopia_21
 warrior_of_utopia_22
 warrior_of_utopia_23
 warrior_of_utopia_24
 warrior_of_utopia_25
 warrior_of_utopia_26
+warrior_of_utopia_27
 warrior_of_utopia_28
 warrior_of_utopia_29
 warrior_of_utopia_30
@@ -103962,14 +103791,12 @@ michele_mouton
 szahavda
 vahaikar
 khabiesti
-golspitta
 south_novorosi
 liitrieda
 outer_kraseby
 khoranath
 yttrio
 transharagvi
-ugroltia
 alimpsia
 babarasia
 soranau
@@ -104008,8 +103835,6 @@ josi_sedai_and_her_warder_xvii
 josi_sedai_and_her_warder_xviii
 josi_sedai_and_her_warder_xix
 josi_sedai_and_her_warder_xx
-ded_laptop
-anarchwii
 josi_sedai_and_her_warder_xxi
 josi_sedai_and_her_warder_xxii
 josi_sedai_and_her_warder_xxiii
@@ -104179,7 +104004,6 @@ ianaianistan
 19_fish
 20_fish
 the_hunk
-laudland
 ddg-003
 the_tortured_poets_department
 the_manuscript
@@ -105216,6 +105040,7 @@ the_airistocractic_state
 warrior_of_utopia_31
 warrior_of_utopia_32
 warrior_of_utopia_33
+warrior_of_utopia_34
 warrior_of_utopia_35
 warrior_of_utopia_36
 warrior_of_utopia_37
@@ -105226,7 +105051,10 @@ warrior_of_utopia_41
 warrior_of_utopia_42
 warrior_of_utopia_43
 warrior_of_utopia_44
+warrior_of_utopia_45
 warrior_of_utopia_46
+warrior_of_utopia_47
+warrior_of_utopia_48
 warrior_of_utopia_49
 warrior_of_utopia_50
 bellite
@@ -105593,16 +105421,6 @@ non_measurable_sets
 zorns_lemma
 pigeonhole_principle
 crystalised_ina
-dyapeaches-16
-dyapeaches-17
-dyapeaches-18
-dyapeaches-19
-dyapeaches-20
-dyapeaches-21
-dyapeaches-22
-dyapeaches-23
-dyapeaches-24
-dyapeaches-25
 crystalised
 the_red_soviet_socialist_republic
 bejeweled
@@ -105935,21 +105753,6 @@ the_nation_of_the_black_army
 the_aigis_accords
 freeport_states
 defending_solar_systems
-dyapeaches-26
-dyapeaches-27
-dyapeaches-28
-dyapeaches-29
-dyapeaches-30
-dyapeaches-31
-dyapeaches-32
-dyapeaches-33
-dyapeaches-34
-dyapeaches-35
-dyapeaches-36
-dyapeaches-37
-dyapeaches-38
-dyapeaches-39
-dyapeaches-40
 homoerotic_undertones
 aurakillamothx
 concrete_moth
@@ -106012,6 +105815,7 @@ noa_ushio
 -yakumo-
 -kurumi-
 ponkotsu
+warrior_of_utopia_51
 warrior_of_utopia_52
 okona86
 okona99
@@ -106057,8 +105861,8 @@ the_4th_light_fleet_brigade
 the_3rd_light_fleet_brigade
 the_cds-sog_one
 empire_of_hot_catboys
+the_2nd_armoured_infantry_brigade
 the_8th_marine_fleet_brigade
-the_1st_marine_fleet_brigade
 the_2nd_light_fleet_brigade
 the_12th_light_fleet_brigade
 the_2nd_assault_fleet_brigade
@@ -106118,7 +105922,6 @@ bipectinate_craft
 blight_or_flight
 cariole_spectacular
 winged_victory
-unforeseen_consequences
 a_soviet_onion
 messier_12
 messier_13
@@ -106200,15 +106003,59 @@ javier_rubio
 dysoxia
 epilimnion
 hypolimnion
+thermocline
+holomictic
+meromictic
+oligomictic
 dimictic
+monomictic
+glacial_lake
+glacial_lakes
+volcanic_crater_lake
+volcanic_crater_lakes
+tectonic_lake
+tectonic_lakes
+fluvial_lake
 fluvial_lakes
+oxbow_lake
+oxbow_lakes
+oligotrophic
+oligotrophic_lake
+oligotrophic_lakes
+eutrophic
+eutrophic_lake
+eutrophic_lakes
+eutrophication
+nitrogen_cycle
+nitrification
 denitrification
+nitrogen_fixation
 mineralization
 ammonification
 haber-bosch_process
+haber_bosch_process
+haber_bosch
+sulfide
+sulfur_cycle
 iron_cycle
+silicon_cycle
+phosphorus_cycle
+ferruginous
+euxinic
+ferric
 oxic
-carbonic_acid
+anoxic
+anaerobic
+anaerobic_respiration
+aerobic_respiration
+oxygen_cycle
+carbonate
+bicarbonate
+carbonate_weathering
+silicate_weathering
+geochem
+geochemistry
+anaerobic_ammonium_oxidation
 yorilia
 dochaulia
 iriliam
@@ -106478,7 +106325,6 @@ pearlescal6
 pearlescal7
 pearlescal8
 pearlescal9
-mila1
 mila2
 code_paxia
 celestial_vengeance_2
@@ -106505,7 +106351,6 @@ celestial_vengeance_22
 celestial_vengeance_23
 celestial_vengeance_24
 the_clantonian_liberation_army
-timothy_walz
 the_starmer_brigade
 celestial_vengeance_26
 celestial_vengeance_27
@@ -106559,7 +106404,6 @@ celestial_vengeance_74
 celestial_vengeance_75
 gem0
 the_red_otter_menace
-socialist_sea_otter
 socialist_sea_otters
 i_think_he_knows
 martin_blackwood
@@ -106914,14 +106758,11 @@ orb_100
 bfb
 blooming_terror
 championship_advantage
-colonels_lament
 cosmic_tune
-extra-terrestrial_vehicle
 extreme_g-force
 fairytale_flight
 filigree_rover
 icechime
-jovian-ix
 nyxpteron
 sacred_barque
 synthowl
@@ -106937,7 +106778,6 @@ cold_denial
 mirror_imago
 afterlight
 wilderflight
-vision_of_confluence
 unvoiced
 eyes_unveiled
 cold_comfort
@@ -106947,7 +106787,6 @@ rising_stars_dance
 barrow-dyad
 network_shell
 commemorative_steed
-slipstream_stinger
 duty_bound
 perpetualis
 the_summoner
@@ -106971,11 +106810,9 @@ exalted_truth
 fatebringer
 frontiers_cry
 igneous_hammer
-kept_confidence
 optative
 pure_poetry
 sightline_survey
-wardens_law
 yesterdays_question
 doomed_petitioner
 fire_and_forget
@@ -107047,12 +106884,10 @@ strawflower_6
 strawflower_7
 black_peregrine
 obdurate_economy
-the_machinoform
 the_platinum_starling
 trussworked_clipper
 unauthorized_departure
 velocimancer
-victorys_herald
 wings_of_the_firebird
 armcoat
 beautiful_gravities
@@ -107074,8 +106909,6 @@ jadewyrm_xliv
 quantum_cartographer
 space-age_lancelot
 talon_blue
-temperance_moon
-the_first_domino
 tickled_catastrophe
 trirang_tox
 turbo_hammer
@@ -107094,7 +106927,6 @@ long_arm
 nature_reclaimed
 warlords_spear
 resounding
-false_promises
 shadebinder
 sunbreaker
 prismatic_warlock
@@ -107313,7 +107145,6 @@ bunny_bunny_8
 bunny_bunny_9
 bunny_bunny_10
 the_mandated_league_of_kazintir
-otter_in_raining
 robber_otter
 urdotter
 kazintirian_legends
@@ -107636,7 +107467,6 @@ lizard_defense_force_20
 im_the_main_character
 haanakh_xv
 leonine_fidelity
-oort_explorer_js-8
 clantonia3rd
 clantonia4th
 clantonia5th
@@ -107654,7 +107484,6 @@ red_veteran
 frostflower
 chemical_burn
 recalcitrant_host
-blistering_slipstream
 pistol_pose
 seventh_seraph_vector
 equinoctial_edge
@@ -107935,7 +107764,6 @@ till_all_are_one
 mand_jesth_heidget
 airstrik3rs
 moth_legionary_14
-eutrophic_lakes
 democratic_liberation_federation
 flying_spaghett_monster
 3141592653589793238
@@ -108381,6 +108209,7 @@ monteclaria
 handerton
 oxum
 oceaniaa
+zenteron
 eothasia
 disia
 langong
@@ -128840,7 +128669,6 @@ womble_18767
 womble_18768
 womble_18769
 womble_18770
-aclecia
 womble_18771
 womble_18772
 womble_18773
@@ -129504,7 +129332,6 @@ daquie
 s-a
 fofilla
 new_rastan_belibais
-rahalandia_2
 rahalandi
 thaelon
 the_theocracy_of_the_theocracy_of_the
@@ -129712,7 +129539,6 @@ greater_brazilistan
 endless_sumer
 auztraalia
 the_twelve_tribes
-the_grimm_reaper
 squadron_commander_lord_flashheart
 zombie_lenin
 hassel_lynch_and_butcher
@@ -129958,7 +129784,6 @@ saint_arsenio
 seleyah
 menorica
 her_majesty_queen_victoria
-the_hinterplace
 middleden
 grand_anglestone
 morgana_le_fey
@@ -131199,7 +131024,6 @@ uerturi
 haltreos
 alvianthia
 domatran_republic
-kruiey_curee
 st_romany
 argolonarvria
 dictatorshipwittopia
@@ -131261,7 +131085,6 @@ chayym
 evil_dark_recruiter_of_doom
 ksn94
 thellskiia
-arguing_in_the_shadows
 loki33
 paper_planes
 shiddguts
@@ -132081,7 +131904,6 @@ ermica
 creckelenney
 poronihia_nui
 xedon
-angypt
 southern_american_federated_states
 flandronia
 muchenberg
@@ -132975,7 +132797,6 @@ the_pirate_king
 doge_garrison_7
 doge_garrison_6
 tfd33
-visby_island
 myth_empire
 green_isle
 the_dark_forest
@@ -133105,7 +132926,6 @@ fakelanda
 gherman_titov
 moth_legionary_13
 ada-1s_lone_wolf
-eutrophication
 tnofp33
 graveyardwatch_42
 if33
@@ -134282,7 +134102,12 @@ risadea
 eastans
 united_dailly_lefmainia
 the_united_nations_of_democracy
+alakmaria
+agroria
 burning_userite_dreams
+mosltain
+legitnation123
+let_mein
 pergaham
 anastasia_romanov
 terrace_h3
@@ -134379,6 +134204,7 @@ donder_en_hete_bliksem
 eden_air_support3
 artemyra
 miriel_rouge
+pretty_sunflower
 aiondia
 npo_shadow_council
 cid_kagenou
@@ -135136,7 +134962,6 @@ nocookies112
 tamtac33
 covington-smythe
 britannic_founder
-the_dragon_of_the_darkness_flame
 eripolis
 eternia_octovia
 ho_chi_minh_ville
@@ -135238,7 +135063,6 @@ talpha
 brax
 develheim
 roundup_anti_lily_founder
-tolbana
 cardinal_system
 kamdet
 yui
@@ -135568,7 +135392,6 @@ nele_iii
 pink_is_best
 angel_hester
 nova_firenze
-sellin
 nova_prague
 falmards
 boylay_donitratons
@@ -136954,7 +136777,6 @@ jaette
 vanthabear
 greg_army
 jade40
-geochemistry
 rainbow_sherbet_73
 terhawk29
 duechland
@@ -138872,7 +138694,6 @@ mustard67
 palmes
 der_sachsischer_stamm
 dolopsis
-osmaniah
 defaultnationstates
 the_replica_of_fiction_heaven
 la_saturna
@@ -141863,7 +141684,6 @@ aquillas
 sen_handland
 lucozia
 the_imperium_of_humankind
-abyssaria
 tazioland
 neurexia
 wubboxs
@@ -142570,7 +142390,6 @@ sol_puppet_10
 pocky_chan
 antifa_neutron_star
 lotharingea
-decaf
 ivan_industries
 alitannia
 spain_au
@@ -146775,7 +146594,6 @@ sad_cat
 vigna
 skuld
 enoshima_junko
-yoichi_saotome
 katou_keiko
 togedemaru
 cecilia_lynne_adlehyde
@@ -149694,6 +149512,7 @@ endo
 poisonous_ivy
 richie_valens
 egros
+teenage_anarchist_x
 thorn1
 thorn2
 thorn3
@@ -149828,7 +149647,6 @@ thorn317
 thorn318
 thorn319
 thorn320
-ache_with_me
 true_trans_soul_raider
 switz_got_lazy_1
 switz_got_lazy_2
@@ -150206,7 +150024,6 @@ sweeze_37
 sweeze_38
 sweeze_39
 sweeze_40
-amazement
 sweeze_42
 sweeze_43
 sweeze_47
@@ -151623,7 +151440,6 @@ alabamistan
 miscelaneous
 et_anything_you_want_at_alices_restauran
 antihero
-an_ideal_for_living
 theatrical_malice
 ameliorate_sat
 zucchabar
@@ -151644,7 +151460,6 @@ all_day_long
 all_this_and_more
 a_means_to_an_end
 skibidi_bebop
-american_pharoah
 california_chrome
 a_p_surprise
 after_midnight
@@ -151818,7 +151633,6 @@ arafo9
 arafo10
 felthela
 grenebrack
-thornrosa
 heart_and_shadow
 ghostkid
 infernus_delta
@@ -151830,15 +151644,6 @@ wolf_gold_standard
 pigwolf
 adventure_wolf
 the_cosmic_wolf_in_your_solar_system
-black_flag_army_1
-black_flag_army_2
-black_flag_army_3
-black_flag_army_4
-black_flag_army_5
-black_flag_army_6
-black_flag_army_7
-black_flag_army_8
-black_flag_army_9
 black_flag_army_10
 acraan
 ghocarcusa
@@ -151849,9 +151654,6 @@ terhawk35
 terhawk36
 natucka
 torkomiri_horde_1
-torkomiri_horde_2
-torkomiri_horde_3
-torkomiri_horde_4
 torkomiri_horde_10
 new_heanland
 gogos_dice_islands
@@ -151958,10 +151760,7 @@ terhawk60
 terhawk61
 terhawk62
 fusako_shigenobu
-wovoka
 anti-jsil
-gets_bombed_anyway
-biblically_accurate_angel
 gerld_asul
 last_survivor_of_miah
 abdomine_islands
@@ -153538,7 +153337,6 @@ callista_dispatches
 lands_of_ann
 tsardom_of_alaska
 munie
-the_greater_western_union
 iship-it-
 soverion_union
 evor_theest
@@ -153561,7 +153359,6 @@ worldofsoccer
 gloucester_city_in_callista
 la_prochaine
 land_o_yan
-leo3
 peoples_union_of_bowern
 mcfoxingten
 timurid_persia
@@ -153632,7 +153429,6 @@ gold_crescent_alistan
 fmm1
 fgwf
 nuugaatsiaq
-gym_class_heroes
 cupids_chokehold
 germano_bundeswehr
 puc
@@ -153669,8 +153465,6 @@ teff_burns
 winter_cultist_15
 ben_kenobi
 kijimi
-pasaana
-vulptex
 grogu
 cardfarm_mu
 jetunia
@@ -155294,7 +155088,6 @@ kanjuura
 spode_humbled_minions
 khoreshis
 advance_guard
-zjaum
 gjorka
 quebecshire
 gagium
@@ -155427,7 +155220,6 @@ ice_vii
 great_empire_of_wyeellyeeahhhhm
 rawa_principality
 qassem
-amem
 the_heavenly_jin
 hiltavia
 leehaylzia
@@ -155538,8 +155330,6 @@ rein_delossinarryomi
 calysta
 bemland
 disast
-of_the_japanese_people
-kirkalstan
 73landia
 betaguelse
 supped
@@ -155660,6 +155450,8 @@ imperium_singapura
 vaka_lua
 calvanium
 walerina
+ecrait
+enithiptois
 roderick
 scabby_pigeon
 princess_clxix
@@ -155869,6 +155661,7 @@ takkaviita_xcii
 frituur
 verchy_keeper_16
 yui_nyanica
+boynn_lep
 testerasia
 archonn_harchtorvero
 kylist_mwels
@@ -166647,7 +166440,6 @@ womens_army_corps
 lb_patrick_willis
 weitarawi_xix
 tystan
-feverland
 fiseru
 grigory_zinoviev
 air_kelios
@@ -166743,12 +166535,10 @@ farmopolis
 asukat
 deufrienummoniestic
 gormaran
-kashgarstan
 warrincecardfarm121
 neues_terratoriul
 remnants_of_the_galactic_republic
 future7
-sbingyia
 ahbdrrrr
 iyakoa
 ommerica
@@ -166808,7 +166598,6 @@ ada_tennant
 lendiack
 massaio
 lolazo
-gasharpoon
 the_koala
 fanatioli
 felixula
@@ -166823,6 +166612,9 @@ catland_new
 mody
 gertrudius25
 united_ballas
+roaring_knight_322
+roaring_knight_379
+hadleigh
 diota
 tuathloch
 patricia_village
@@ -167296,7 +167088,6 @@ west_german_matheo
 waterbergs
 salmonbergs
 kiwirrkurra
-pintharuka
 lsn86
 takla-makan
 neo_killadonia
@@ -167665,7 +167456,6 @@ finkolind
 aguntapoleos
 brenhinfaen
 lagjar
-xenikar
 arkliquelat
 nejire-chan
 arak-tal
@@ -168209,7 +167999,6 @@ liselot
 troddastas_dan
 rocketfuel10
 moth_legionary_10
-oxygen_cycle
 ut33
 ukowan
 right_now
@@ -169442,7 +169231,6 @@ bright_strength
 angel_samandriel
 iron_phoenix_island
 angel_inias
-stykki
 angel_virgil
 ireland_isle
 gsn93
@@ -171236,7 +171024,6 @@ tenno_sho_spring
 victoria_mile
 teio_sho
 kitasan_black_speed_ssr
-your_idol
 berign
 sanctum33
 herveres
@@ -171306,7 +171093,6 @@ sasan12
 sasan15
 -thanks_to_them-
 welcome_to_thaecia
-admiral_sunipi
 altys31
 altys32
 altys33
@@ -172562,7 +172348,6 @@ gokai-silver
 pais_do_mundo
 takkaviita_xcviii
 now_chombly
-warrior_of_utopia_20
 soviet_navy
 cherkecia
 jade8
@@ -173395,17 +173180,14 @@ nova_brno
 zetkinwald
 newpan
 islanda_benya
-south_detroit_island
 nova_opava
 mittorasu
-war_hammer
 pieck_finger
 p_aradis
 marosina
 armin_arlert
 hitch_dreyse
 azumabito-ke
-tyburia
 federated_commonwealth_of_korista
 the_grand_antarctic
 poor_gold_fish
@@ -173722,6 +173504,7 @@ mos_eisley_spaceport
 greg_olsen
 consilium_moscua
 igwania
+bratislava_uzhorod
 j_o_jian_capture_squad_ah1
 sire_ozanna_cure_hardy
 j_o_jian_capture_squad_ah2
@@ -178412,7 +178195,6 @@ dragoe_73rd_army_division
 mungojerrie
 rocketfuel17
 breakfast_skippers_united
-euxinic
 smonark_knern
 muswell_hill
 tico33
@@ -178699,7 +178481,6 @@ lien_iv
 angels_0f_wrath
 -onetrue_pairing-
 pomegranate_molasses
-warrior_of_utopia_27
 takkaviita_ccxxxvi
 the_founder_of_the_founder_of_the_founde
 idf-1
@@ -178737,14 +178518,18 @@ meq
 hiyoko_ueda
 neo_lxiii
 stoofies
+teenage_anarchist_vii
 moneymakestheworldgoround
 exark
+starship_november
 sardavar
 speed_punk
 fremenilia
 woahcrikey
 interdependent_systems
+unforeseen_consequences
 rainbow_sherbet_46
+biblically_accurate_angel
 blackpond
 crimson_vault
 graveyardwatch_133
@@ -178795,7 +178580,12 @@ ivittuut
 milin_spachrederd
 tokelau
 eva_xi
+teenage_anarchist_viii
+starship_oscar
+canopus_wing
+ugroltia
 kingdom_of_new_mali
+gets_bombed_anyway
 this_will_be_the_day
 they_see_you_as_small_and_helpless
 they_see_you_as_just_a_child
@@ -179771,6 +179561,7 @@ bh27
 bh28
 bh29
 bh30
+crimson_sentinel
 mobius_strip
 mobius_strip_i
 mobius_strip_ii
@@ -179936,7 +179727,6 @@ airstrikers16
 jim_pillen
 starlight_orion
 usausausausausausausausaus
-meromictic
 retcon_xxv
 skye_johnson
 lord_stalker
@@ -181963,7 +181753,6 @@ sabaton-
 pen_pen
 noav
 12th_traveling_farmer
-costa_blanco
 amalteia_sleeping_under_a_trees_shade_30
 vuxsolia
 knackland
@@ -181999,7 +181788,6 @@ automatonia
 litwava
 alvarenthia
 the_american-canadian_states
-carvantin
 rud_foodashwazmana
 anarchist_benin
 zalozhnik
@@ -182017,7 +181805,6 @@ simo_hayha
 jefal
 imperial_fel
 dowtoclina
-gamboerdia
 abdeston
 macanese_republic
 arca_noae
@@ -182084,13 +181871,7 @@ hoggleland
 deadwriter
 emplica
 democratic_tr
-heimovike
 new_gal_ovstastadiaopia
-kinlgs
-lioia
-ylll
-canduck
-catalyh
 apathicus
 poquoson
 nueva_santa_r
@@ -182228,7 +182009,6 @@ bigalice
 roku_nana
 millordon_new
 the_emprite_of_the_empire_of_suffering
-earexplodian_vi_reserve_corps
 omevecta
 hispana_nova
 daholu
@@ -182560,8 +182340,17 @@ new_sachsenland
 erebun
 a_d_borodin
 waguri0312
-ecrait
 calambar
+machiavell
+wolanchtica
+celorrables
+roaring_knight_344
+roaring_knight_364
+christinm
+hammergeilhausen
+zome
+turkestan_sfsr
+kleebia
 helanar
 surah
 vanligberg
@@ -185630,6 +185419,7 @@ rusiander
 umayuru
 ukrone
 octavek
+eleuthara
 edgar
 code028
 darth_fel
@@ -187766,7 +187556,6 @@ i_dont_love
 earthmover
 deathconsciousness
 diilaandf
-ds_pacifica
 aetrium
 darthona
 oic_xg
@@ -189542,6 +189331,7 @@ guy_with_readilly_poised_fly_swatter
 anga_desam
 carpazi
 spidey_67
+clavermermivi
 granisle
 salcedo
 spanish_republic_2022_rp
@@ -189706,7 +189496,6 @@ communist_states_protectorate
 maratina
 werriantop
 melaina
-geti
 zamblic
 walkernaria
 mountains_and_islamic_people_of_grozny
@@ -189761,7 +189550,6 @@ umbhar
 lentalonia
 djas18
 ceremony_in_a_lonely_place
-volcanic_crater_lake
 wildthyme_on_top_xli
 demon_expre
 silvony
@@ -190042,7 +189830,6 @@ while_being_investigate_by_the_wa_makast
 amerloq
 emburgragophiribnia
 affordable_care_act
-glacial_lakes
 the_western_romans
 fidelis_43
 emmerin
@@ -190988,8 +190775,12 @@ donnach
 nashaway
 tamenka
 tarnator
+i_was_a_teenage_anarchist
+starship_echo
 noyne
 racoons_and_seals
+cardinal_one
+black_flag_army_9
 ijarfal
 testy_mctestface
 169th_catgirl_division
@@ -191256,7 +191047,6 @@ zixo
 warrincecardfarm140
 hppsland
 tererndt
-northabeurto
 republic_of_muslimistan
 nandaral
 nekrophex
@@ -191543,7 +191333,6 @@ vermillionia
 barbs_nation
 forestacia
 balagimah
-fascist_portugal_and_brazil
 canidna
 alexandriafields
 zezeland
@@ -191558,7 +191347,6 @@ up_and_all_kinds_o_mean_nasty_ugly_thing
 sokhaine
 luccon
 united_nation_states
-juharthin
 idyll
 inner_foriterlagerringerth
 projo
@@ -191876,7 +191664,6 @@ srpska_republika
 ultra-rare
 aeone
 hms_india
-deathcompany
 british_talonia
 bingbong47
 bingbong56
@@ -191941,7 +191728,6 @@ astlevania
 greyartica
 nation_none
 cretiar
-the_kingdom_of_caesar
 alpacus
 maastri
 illuminor
@@ -191951,14 +191737,6 @@ qi_guo_ji
 hardeman
 brayminican_republic
 blantica
-koiriaia
-ursulana
-evoulia
-lavoria
-pro_sace_umanark_islands
-estremora
-srk_bollywod
-rn_dante_alighieri
 estados_unidos_de_valoria
 freep
 orca_menor
@@ -192196,7 +191974,6 @@ western_huns
 new_latina
 capitalist_people_nation
 envio_paradiso
-the_terra_nova_foundation
 the_mob_cob
 damaska
 hygami
@@ -192425,6 +192202,7 @@ stanila
 gonticpland
 ere_floods
 corporaliaa
+nbvcxz
 verchy_keeper_70
 lindion
 houtost_greordia
@@ -192661,14 +192439,19 @@ jgja_23
 jgja_24
 jgja_25
 jgja_26
+teenage_anarchist_vi
 winters_grasp_spell
+starship_lima
 switz_got_lazy_512
 the_bing_republic
 oversized_operativez_66
 unidex
 kwaad
+laudland
 jade9
 rainbow_sherbet_50
+kept_confidence
+black_flag_army_2
 white_society
 shabby_bastet
 jauan_jennings
@@ -194556,7 +194339,6 @@ oikosland
 fois_grasia
 waterload
 new_mericuh
-fllll
 marouli
 hui_hbibhui
 the_democratic_republic_of_transit
@@ -194606,7 +194388,6 @@ illaqu
 socialist_federation_of_central_europe
 vilelistao
 kordat
-meireu
 aquilinia
 marquesan
 anagonia
@@ -194833,7 +194614,6 @@ crystalempire
 tamiel
 prettiest_princess_of_deceit_and_cruelty
 reformed_tunderlan_zod
-angeles_city
 bayan_ng_bacolor
 lubao
 macabebe
@@ -194879,7 +194659,6 @@ we_die_in_the_dark
 supes_mob_jundland
 militech_mnpd
 airstrikers13
-glacial_lake
 bunny_division_2
 terhawk7
 kostin
@@ -194906,8 +194685,13 @@ russian_provisional_state
 volognova
 sakura
 florien
+teenage_anarchist_iv
+starship_juliet
+malazga
 oversized_operativez_55
 eastern_saium_ordencotthessh
+black_flag_army_4
+blistering_slipstream
 shanix
 hunters_for_hire
 nationalist_england
@@ -196803,7 +196587,6 @@ inshallah_you_will_cope_and_seethe
 northolonia
 dark_queen
 rocketfuel16
-ferric
 rainbow_sherbet_63
 mike_deltarune
 swaggiagea
@@ -198197,7 +197980,6 @@ gilbater
 black_cat_command_000
 hevenn
 united_welan_glor
-atherdon
 jabangalanga
 siovale
 browzek
@@ -198678,7 +198460,6 @@ ash-shaam
 lukoal
 walmatt
 comunyan_farm_004
-anga_gre_auss
 crabb
 comunyan_farm_109
 comunyan_farm_125
@@ -198742,7 +198523,6 @@ svweden
 ruzvend
 anarchist_bahamas
 anarchist_cameroon
-new_ceskoslovensko
 aa_109
 aa_123
 aa_130
@@ -198774,7 +198554,6 @@ isutao
 rosengarden
 venus_opposite_jupiter
 jupiter_opposite_mercury
-national_libertarian_spain
 sun_trine_saturn
 battori
 mars_trine_mercury
@@ -198847,9 +198626,7 @@ warrincecardfarm175
 aquiluvia
 warrincecardfarm185
 dipaculao
-distroria
 habenharthosland
-the_totalitarian_state_of_caesar
 sepublizondion
 goodbody
 aeterite
@@ -198859,16 +198636,11 @@ barimsland
 lobofuego
 grestpia
 estado_comunista_do_sergipe
-confederacion_de_la_patria_grande_latina
 anti-loli-stalin
 tyrsbord
 shindenkai
 lesbuccaneers
 beormingaham
-killianovia
-austriad
-rn_raimondo_montecuccoli
-zihanville
 ryekatia
 starnian
 yhfascia
@@ -199330,6 +199102,14 @@ humming_bird_4
 gemido_do_zap
 reformed_immalia_borellines
 maca_vermelha_do_imperio
+roaring_knight_330
+roaring_knight_335
+roaring_knight_400
+khocar
+b0b
+corsalin
+qqqqqqqqqq1234567890
+hsulastanjar
 caraysia
 jachotorne
 seus
@@ -199514,7 +199294,6 @@ ynn470
 wss498
 ikm193
 ikm294
-shallen
 ikm371
 ikm373
 ujn73
@@ -199782,7 +199561,6 @@ northern_empire_of_saint_petersburg
 c00kerstan
 the_austro-german_state
 r333
-kingdom_of_jod
 chilchuck_tims
 naveen
 socialist_malaya
@@ -199819,17 +199597,6 @@ ivyleague
 imperial_hydersdurunct
 tijmostan
 let_wes
-inyatista
-resurrecta_caritas
-huygh
-cooeksdd
-curtatone
-rn_nazario_sauro
-rn_aviere
-rn_taranto
-cummunistworks
-hilordia_heisland
-evidownntosard
 kairkand
 lons_ale
 vylcen
@@ -200047,6 +199814,7 @@ amtegna
 colkorate
 elba_wored_gorth
 atlantissss
+the_terra_nova_foundation
 all-dawn
 jaganigas
 exodus66
@@ -200316,6 +200084,14 @@ evontile
 hurricane_mcclxxxviii
 hurricane_mcclxxxix
 powerful_japan
+zayneladsland
+roaring_knight_320
+roaring_knight_380
+fais
+cat602
+nikikiki
+grecia_2099
+demirhanet
 the_evergreater
 jaworow
 wert
@@ -200586,7 +200362,6 @@ tilastot
 braydeniana
 organometalloid
 grum_goblin
-poland5
 timolander
 bingbong-super_star
 south_amber
@@ -200916,13 +200691,13 @@ rainbow_sherbet_107
 violet38
 the_future_earth
 tentacle_empire
-webbtion
 vesvincia
 albatio
 devavella
 valle_andino
 the_united_confederation_of_states
 baton_garia_lastopia
+tracksia
 greece_lightning
 -for_the-future-
 rumble_of_thundercat
@@ -201160,7 +200935,6 @@ great_antakia
 fluminesedes
 baltic_and_nordic_kingdoms
 neo-colombia
-imperial_dutch
 vittaya
 isle_of_goddess_aqua
 please_remove_blue_recapchas221
@@ -201201,7 +200975,6 @@ angenoel
 bronte_carmichael
 the_illuminated
 compelle
-john_browns_republic
 luneister
 doublebooked73
 aprilnovember7
@@ -201256,7 +201029,6 @@ new_austro_empire
 schittsville
 bloodlustersland
 the_eastern_separate_government_of_japan
-sonsonate
 zbrojnice
 bakowiata
 anarchist_burkina_faso
@@ -201313,17 +201085,10 @@ stuffhappens
 tu_berlin
 pondoro
 multileporia
-alpenix
 majorly_free_people
 zapadni_balkan
 thonux
-dwan_redstan
 lamfang
-estados_brasilicos
-rn_nino_bixio
-rn_marcantonio_colonna
-fusilier
-berakatel
 emirate_of_afghanistan
 nenzok
 sokka
@@ -201384,7 +201149,6 @@ the_lord_and_his_concubines
 the_republic_of_pelmenland
 olymbria
 3rd_cbt
-earexplodian_xii_cavalry_corps
 eastern_maldavina
 viet_cong_quoc
 west_arnea
@@ -201474,6 +201238,8 @@ aapocolyptia
 america_lartina
 the_6_7
 jilley_cruser
+fed_florida
+roaring_knight_352
 fidelis_40
 -for-the_future
 yuuki_asuna
@@ -201605,7 +201371,6 @@ big_man_aj
 ot_john_weidenaar
 the_galactic_armada_of_schreibeis
 the_bannedlands
-egosoc
 peoples_republic_of_lower_saxony
 paulopia
 mystic_metazoa
@@ -205151,6 +204916,13 @@ the_prydwen
 jalily_belau
 repulse
 yuudachi_meta
+ijn_watarase
+sms_seydlitz
+suffren
+princeton_meta
+sheffield_meta
+kms_alvitr
+pran_huan_chang
 hollivin
 crontab_3
 crontab_34
@@ -205198,6 +204970,8 @@ earexplodian_guard_airwing
 earexplodian_third_airwing
 earexplodian_fourth_airwing
 earexplodian_fifth_airwing
+earexplodian_i_engineer_corps
+earexplodian_ii_engineer_corps
 earexplodian_1st_naval_task_force
 earexplodian_2nd_naval_task_force
 earexplodian_3rd_naval_task_force
@@ -205212,6 +204986,7 @@ earexplodian_1st_littoral_force
 earexplodian_2nd_littoral_force
 earexplodian_3rd_littoral_force
 earexplodian_expeditionary_airwing
+earexplodian_iii_engineer_corps
 earexplodian_ii_volunteer_corps
 earexplodian_4th_littoral_force
 earexplodian_6th_naval_task_force
@@ -205230,7 +205005,12 @@ earexplodian_first_interceptor_airwing
 earexplodian_second_interceptor_airwing
 earexplodian_6th_littoral_force
 earexplodian_7th_littoral_force
+earexplodian_iv_engineer_corps
+earexplodian_v_engineer_corps
 earexplodian_1st_gendarmerie_legion
+earexplodian_2nd_gendarmerie_legion
+unexplodian_1st_gendarmerie_legion
+earexplodian_3rd_gendarmerie_legion
 earexplodian_8th_naval_task_force
 earexplodian_8th_littoral_force
 earexplodian_9th_littoral_force
@@ -205240,6 +205020,15 @@ earexplodian_12th_littoral_force
 earexplodian_guard_marine_corps
 earexplodian_guard_cavalry_corps
 earexplodian_i_cavalry_corps
+earexplodian_ii_cavalry_corps
+earexplodian_iii_cavalry_corps
+earexplodian_iv_cavalry_corps
+earexplodian_v_cavalry_corps
+earexplodian_vi_cavalry_corps
+earexplodian_vii_cavalry_corps
+earexplodian_viii_cavalry_corps
+earexplodian_ix_cavalry_corps
+earexplodian_x_cavalry_corps
 earexplodian_i_marine_corps
 earexplodian_ii_marine_corps
 earexplodian_iii_marine_corps
@@ -205249,16 +205038,32 @@ earexplodian_grand_admiralty
 earexplodian_guard_engineer_corps
 earexplodian_i_reserve_corps
 earexplodian_ii_reserve_corps
+earexplodian_iii_reserve_corps
+earexplodian_iv_reserve_corps
+earexplodian_v_reserve_corps
 earexplodian_first_army
 earexplodian_second_army
 earexplodian_third_army
 earexplodian_fourth_army
+earexplodian_xi_cavalry_corps
+earexplodian_xii_cavalry_corps
+earexplodian_xiv_cavalry_corps
+earexplodian_xv_cavalry_corps
 earexplodian_guard_gendarmerie_legion
+earexplodian_vi_reserve_corps
+earexplodian_vii_reserve_corps
+earexplodian_viii_reserve_corps
 earexplodian_xxi_corps
 earexplodian_xxii_corps
 earexplodian_xxiii_corps
+earexplodian_ix_reserve_corps
+earexplodian_x_reserve_corps
 earexplodian_guard_reserve_corps
+earexplodian_xi_reserve_corps
 earexplodian_third_interceptor_airwing
+earexplodian_i_special_command
+earexplodian_ii_special_command
+earexplodian_iii_special_command
 astra_thumara
 unixia_nova
 -workers-
@@ -205631,6 +205436,7 @@ blissia
 zgnilkeew
 afkun_empire
 teunora
+kay_2_kazauxajazzakoquewwm_kkkkkkky13_17
 air_vibonia
 bosnian_cantons
 the_dopemen
@@ -205639,6 +205445,7 @@ evan_engram
 cal_i
 bj_hill
 neutral_laos
+3077
 rigatonia
 otaxinland
 sanctuarianism
@@ -205649,6 +205456,7 @@ ging_around_the_police_officers_station
 el_darado1
 was_to_be_used_as_evidence_against_us_an
 64_reasons
+fluay
 gooberiea
 jaylen_watson
 epico
@@ -205681,6 +205489,7 @@ wss109
 wss179
 brando
 notusia
+kitzer
 bechteria
 republic_of_the_european_union
 eurasika
@@ -206039,7 +205848,6 @@ taytay_princess_land
 bingbong17
 bingbong32
 bingbong88
-caelevaris
 great_new_philippines
 great_arachnea
 barcus_wroot
@@ -206100,7 +205908,6 @@ warrincecardfarm196
 itc
 harbor
 radochilandtopia
-autocracy_kodiak
 north_puddlemouth-on-sea
 rocn
 svidikstan
@@ -206119,14 +205926,7 @@ vay_sovitalan
 karezhira
 promisio_agartha
 rebecca_ferguson
-tibet_1
-the_holy_meganisians
-vicancia
-paolo_emilio
-rn_genova
 southavay
-reixonefisty
-saint_cana
 orca_media
 pick_2nd_option
 max_civil_rights_no_issues
@@ -206586,7 +206386,6 @@ new_carpson
 mutsuki_meta
 juanga
 free_entess
-moons_at_the_roche_limit
 karlistan
 arcosin
 iria_tays
@@ -206599,6 +206398,7 @@ gertrudius7
 gertrudius17
 gertrudius31
 eureka_eurek
+whirlwinds
 arema_indonesia
 fdhtwyhdshdghfhfgjghj
 the_real_florida
@@ -206607,6 +206407,10 @@ dades
 india_123
 maravene
 horncastle_and_louth
+roaring_knight_338
+shadow_abel
+eeeeeeeeee_vuyjg
+holagh
 peoples_slavic_council
 kosan_euas_representative
 i-65_highway
@@ -207328,7 +207132,6 @@ woonrocket
 -echolilia-
 mercenary_squad_14
 wa_klopstock
-winewkui
 zulankan_peoples_militia
 lokeansunited
 rom_weasley
@@ -207393,7 +207196,7 @@ devengrad-helburg
 kipasi
 the_consolidated_yarn
 oops_all_piling
-the_2nd_armoured_infantry_brigade
+the_1st_marine_fleet_brigade
 69th_global_strike_wing
 kayduh
 allied_defense_contractors
@@ -207417,6 +207220,7 @@ margaret_thatcher
 alainian_otters
 garyite_cornfeild
 southsean_armed_forces
+old_lucipia
 cludoston
 komunno
 russian_red_soviets
@@ -207609,7 +207413,6 @@ barracos
 polopoulcar
 palpatinean_order
 prueb
-rn_curtatone
 novgo
 7vuggh
 apricis
@@ -209228,7 +209031,6 @@ vcc031
 vcc084
 vcc091
 lity_rytonia
-smoky_oak
 cult_mechanicus_on_mars
 ynn294
 ynn361
@@ -209447,10 +209249,7 @@ nu_e_treaba_ta
 beautiful_princess_island
 the_soviet_mongolian_republics
 lightningvillian
-kallindale
-channie
 obelia_do_sul
-yoz_haderstaad
 greater_dicstinus_pinizo
 the_frontierland
 okkel
@@ -209622,6 +209421,10 @@ bellasnation14
 the_rizzy_islands
 haozhou
 libero_ac_metus
+aedencrest
+caelun
+west_grew
+vigeland
 verchy_keeper_61
 huami
 the_phantom_delegation
@@ -209925,9 +209728,6 @@ leck
 starship_constipation_ncc_1603b
 hinsdale
 secular_liberalism
-toadrepublic
-udsus
-the_new_thirteen_colonies
 eass_zematoland
 belrusa
 eartherdia
@@ -209982,6 +209782,7 @@ roaring_knight_288
 new_dundee
 e_stonia_x
 druntaina_allenanderia
+roaring_knight_370
 the_burnt_world_of_athas
 the_great_alluvial_sand_wastes
 the_silt_sea
@@ -213258,7 +213059,6 @@ takkaviita_cccxxvii
 doldrums
 moth_legionary_15
 starlight_pollux
-eutrophic_lake
 surprise_wolf_attack
 shiny_eevee
 chamber_door
@@ -213929,7 +213729,6 @@ moth_legionary_16
 starlight_antares
 neo_xxxiv
 pll
-eutrophic
 keldon
 doge_garrison_44
 nota_maintenance_1
@@ -214019,7 +213818,6 @@ stentan
 fanning
 brayden_and_grammy_islands
 west_hardiais
-skaod
 komanaru
 peric
 zootopian_aglomeration
@@ -214887,7 +214685,6 @@ de_tersadris_sud-armavi
 happy_go_fun_time
 zarahemla-deseret
 fairy_hunter_bozarkia
-meranti
 paradigia
 the_finish_military_sector
 anarchist_bhutan
@@ -214921,7 +214718,6 @@ doeveri2
 bingbong3
 bingbong75
 bingbong97
-daisora
 the_nation_of_unova
 fishn_adarthe
 republic_costa-rojas
@@ -214943,9 +214739,7 @@ brownlock
 vinlandiah
 the_world_black_army
 hooli
-united_lee_nee
 nyudinist
-alpsburg
 yeahimfree
 ghavan
 wartymia
@@ -215124,7 +214918,8 @@ holostiobentardorvatis
 eastern_fedrationfrom_the_north
 katyurates
 moureigners
-davamonia
+roaring_knight_375
+proletarian_communes_and_syndicates
 smelly_96
 lesser-amber
 raidastan
@@ -215515,7 +215310,6 @@ yves_saint_laurent
 edir_federal_republic
 gertrudius4
 ostravax
-kassa_and_harsigena
 dauchh_palki
 botom
 kanslan
@@ -215673,21 +215467,18 @@ thanaur
 syse_norackero
 lost_pizza_guy
 streakers
+the_featured_region_express
 estados_de_bizancio
 goikiva
 simonian_dream_islands
 barbaramonialand
-ris_saturn_51-xt
-the_raxulan_horde
 puppet_state_777
 bite_my_biscuits
-featured_forest
+aoleirkawkri
 armatonisdaristani_inanimate_republic
 yes-mann
-wandering_alta-saxony
 blocky_from_bfdi
 dunedins
-an_featured_region
 ifrhnh
 carpathia_newer
 carpathia_newest
@@ -217186,6 +216977,8 @@ doforeia
 reforeia
 miforeia
 ruca
+amazement
+starship_charlie
 denshi_sentai_denziman
 its_showtime
 drago_destroyer_5
@@ -217194,11 +216987,12 @@ ankh_5
 cramers_rule
 moth_legionary_6
 starlight_endor
-carbonate_weathering
 moon_says_namaste
 rainbow_sherbet_32
 leokadia
+thornrosa
 terhawk25
+torkomiri_horde_2
 the_warden_commander
 warden_commander
 rarotonga_islander
@@ -217442,7 +217236,6 @@ cattu
 delta_z
 oversized_operativez_40
 mecha
-volcanic_crater_lakes
 rainbow_sherbet_38
 crash
 byznoreum
@@ -218202,7 +217995,6 @@ alteo27
 julie_ix
 bamboo_bones
 harold_harefoot
-tectonic_lake
 retrement_is_for_fendas
 jolien_i
 takkaviita_ccxlv
@@ -219302,7 +219094,6 @@ bingbong96
 prison_love_i
 emmeline_hallowleaf
 lomax
-garupa
 lizadon_kara
 ewaewaewa
 free_wolrds
@@ -219322,7 +219113,6 @@ yakimoro
 -digimon_storage-
 ochiltree
 motley
-the_waffle_land
 sashillo
 xiros
 makso
@@ -219461,6 +219251,8 @@ new_ishmael
 vaibhavanagaram
 prij_teron
 horizon_of_united_workers
+roaring_knight_376
+skielska
 groses_kameradenland
 kurdish_div
 militia_refounder_puppet_7
@@ -219505,7 +219297,6 @@ pais_occitans
 maiya_kikkawa
 mcsb-005_pi
 pink-cat
-warrior_of_utopia_34
 zarn
 puppet_and_spy_of_dora
 dora_lana
@@ -219680,8 +219471,6 @@ warrincecardfarm051
 south_donith_ald
 the_creedian_archives
 tana_biru
-xerecalandia
-zoroark-hisui
 leronias
 ulonst
 fathi_abuabdoh
@@ -219717,6 +219506,9 @@ nousimia
 sara7
 ababaland
 asdasdsa
+birk
+roaring_knight_334
+well_republic_of_the_rusia
 university_of_delaware
 washington_and_lee_university
 famous_pizza
@@ -219913,6 +219705,7 @@ fvv79
 card_carrying
 malik_beasley
 ujn499
+temperance_moon
 the_duck_that_is_not_lumeris
 k4nd1st4r
 takkaviita_xxvii
@@ -220116,7 +219909,6 @@ lunarite_junimos
 gloucester_clty
 glo
 gloucester_city_without_big_banks
-kaiminoeauloamekaikeoke_fairbairn
 jhoan_duran
 driy
 magma_geode_junimos
@@ -220134,13 +219926,17 @@ thunder_egg_junimos
 armatage_shanks
 rookie_blue
 scp-4310
+teenage_anarchist_v
 barst
+starship_kilo
+reslien
 evilus
+slipstream_stinger
+black_flag_army_3
 commnuist_daughter
 patsy_walker
 radical_salad_anarchy
 incineram
-haber_bosch
 rainbow_sherbet_55
 solar_spinnaker
 rufus_valley
@@ -220999,7 +220795,6 @@ armeropion
 viria_divese
 egymanar
 novaerthys
-halthirriania
 new_nidams
 boom_machine
 werworia
@@ -221838,6 +221633,7 @@ troyius
 zaran
 yrda
 gornar
+caribico
 the_federal_reserve_system
 extravertes
 tidiard
@@ -221850,7 +221646,6 @@ nontin_archives
 colocarolina
 oriental_perla
 nyetoa
-weserlands
 central-asia
 charine
 barnavi-a
@@ -223339,7 +223134,6 @@ bir_safadi
 hamudi
 ervinka
 pea_sectionia
-first_judeans
 i_would_never
 jewish_batman
 jewish_joker
@@ -223777,7 +223571,6 @@ hero_iii
 takkaviita_cclxvi
 gu_29th_marine_battalion
 diesel_maximal
-cool_awesome_the_18th
 rynthiol
 72nd_catgirl_division
 dante_blood_angels
@@ -224441,7 +224234,6 @@ ct-6591-6210
 shin_mak
 airstr1kers
 moth_legionary_12
-nitrogen_cycle
 audrey_32
 in_the_aeroplane_over_the_sea
 pechka
@@ -224544,6 +224336,7 @@ datioch
 runamayu
 charadimhyrion
 jivi_sul
+platinum_osprey
 zach_randolph
 iserlohn_floating_battery_3
 iserlohn_floating_battery_8
@@ -224618,7 +224411,6 @@ austin-reaves
 jitske
 razorbeast
 bunny_bunny_6
-the_d0mini0n
 forge_industries
 open_ocean
 blue_hell
@@ -224879,7 +224671,6 @@ hellfohen
 schwessen-hellfohen
 symoniane
 grand_nationalist_france
-lumukamo_2
 bertserong
 tavernkeeper
 mythik
@@ -225040,7 +224831,6 @@ bad_merlin
 gu_94th_fleet
 angels_of_shadows
 as_you_said
-thermocline
 vonedge
 pdj
 ihr
@@ -225273,7 +225063,6 @@ mr_showtime
 a_phoenix
 uss_suwannee
 uss_chenango
-warrior_of_utopia_48
 rkl
 new_ziedrich
 takkaviita_cxv
@@ -226254,7 +226043,6 @@ archive-6
 dragoe_33rd_army_division
 hammer_of_kneecapping
 dinea
-ekoro
 the_59th_podrian_coastal_defence_battery
 bunny_division_8
 the_midnight_channel
@@ -226428,7 +226216,6 @@ lungcord
 vlanap_bootan
 takkaviita_cclxxvi
 airstrikers17
-holomictic
 little_lights
 i_wish
 hit_or_miss
@@ -226446,7 +226233,6 @@ hurricane_47
 1703
 the_new_storm
 goldenfootie
-aghtendes
 northeast_yami
 the_reminants
 dotharl_tribes
@@ -226573,7 +226359,6 @@ lycanya
 exy
 tera_onlicia
 sorocamirim_4
-minkao
 the_dorthatese_federation
 brightheart
 topgb_2
@@ -226911,7 +226696,6 @@ respublic_of_tver
 imperial_catorianis
 franceandma
 vikarion
-astra_vera
 kansaar
 timot
 ferocious
@@ -227095,12 +226879,15 @@ the_best_queendom
 onegai_muscle_3
 ulissebuerg
 luther_blissett
+starship_alpha
 jilkat
 takkaviita_cclxxvii
 nixivdorus
 red_six
 celaray
+an_ideal_for_living
 keyonte_george
+torkomiri_horde_4
 cards_of_eagles_7
 dt_michael_pierce
 olb_derrick_barnes
@@ -227110,7 +226897,6 @@ takkaviita_cclxxi
 homdaak
 rogue_two
 chciaoci121
-gripthen
 please_remove_blue_recapchas46
 please_remove_blue_recapchas399
 roan_fel
@@ -227479,6 +227265,7 @@ illse
 abstract_sat
 acclaim_sat
 acquiescent
+aghtendes
 arthnold_manercatserman
 a_cheese_empire_run_by_idinist
 the_25th_podrian_infantry_brigade
@@ -228056,7 +227843,6 @@ north_east_china
 von_bon
 west_pomane
 united_federation_of_earland
-chamberlin
 accius
 the_outer_pacific
 the_inner_heaven
@@ -228202,6 +227988,7 @@ sennett
 qaziristan
 kurzbekastan
 newnationia
+the_many_deer
 faf33
 naofn33
 tsbc33
@@ -229127,6 +228914,7 @@ boreas_military_district
 far_eastern_military_district
 zanderian_state
 xnaughtolus
+russo-indian_union
 ibxtoycat
 cor_one_monstone
 the_zanderian_lineage
@@ -229180,7 +228968,6 @@ north-bharat
 anited_utates_of_smerica
 tuseur
 death_korpse_of_andebu
-wait_we_defend_now_ica_puppet
 lower_naphao_miderand
 f_amily_guy
 thonympuble_kosa
@@ -229195,6 +228982,8 @@ epic_peeworld
 norwegar
 lumon
 canadian_confederation
+balakutak
+the_eternal_sun_of_austronesia
 eve_forew
 trthnbb_parliament
 trthnbb_dispatches
@@ -229754,7 +229543,6 @@ comunyan_farm_018
 comunyan_farm_037
 comunyan_farm_046
 comunyan_farm_092
-pigeonland
 jisi02
 comunyan_farm_313
 32nd_traveling_farmer
@@ -229798,10 +229586,6 @@ monasterio
 blackyellowlion
 anbogorica
 ahiania
-tylerisme
-gyear
-srk_bollywood1
-bozkurtlar
 the_unholy_empire_of_rongika
 mohmaed
 ostrichvillar
@@ -229887,6 +229671,9 @@ united_azter_lotopocsraiky
 chesnation
 caribbean-bay
 united_emaliens
+romelious
+roaring_knight_343
+cat606
 kivu_xii
 north_arkland
 opulent_ruin
@@ -230429,6 +230216,7 @@ yuugure_meta
 zuihou_meta
 lewis_gun
 lewis_automatic_rifle
+ijn_shikishima
 yharkal_bhanek
 the_samharic_order
 tir-stiophan
@@ -231000,7 +230788,6 @@ nouvelle_harmonie
 norvania_brasileira
 bingbong12
 dammon
-north_valland
 national_opera_and_ballet_of_minsk
 djinn_storage
 lunicarishi
@@ -231032,7 +230819,6 @@ cartathinia
 republica_dos_dinossauros
 kaurdek
 pardro
-government_of_god
 kleberg
 romaso
 sweet_sweet_sugar
@@ -231221,8 +231007,10 @@ the_kingdom_of_groland
 4moglu
 distributist_east_africa
 capcity
-oxmburg
 the_g-o-a-t_land
+roaring_knight_369
+delimatra
+dark_soul
 the_utopic_tyrant_dreams
 xalunia
 redakadia
@@ -231288,7 +231076,6 @@ socialistic_cobalt_states
 uskusf
 miner
 beloved_tomboyish_girl
-warrior_of_utopia_51
 space_lasers
 chandrila
 ord_mantell
@@ -231688,6 +231475,7 @@ moonglauvia
 4_dollars_and_4_more_dollars
 hurricane_mcclxxv
 gayguyskissingeachother
+demonost_firthe
 luisa_madrigal
 desktop
 kingdom_of_shay
@@ -232721,7 +232509,6 @@ rocketfuel9
 mololuwa
 gamblia
 dragon_age_2
-carbonate
 havandion
 zircodia
 the_ambirs
@@ -233095,6 +232882,7 @@ notcommunist3
 goon_central_munting
 central_centrist
 celtic_london
+coirbhia_ceilteach_in_clec
 the_freaky_baboons
 the_swiftest_warriors
 new_cuba_isles
@@ -233701,7 +233489,6 @@ empires_sometimes
 the_eagle_militia_and_the_empire_party
 ayti
 traffic_village
-dastkavna
 angelucci
 ydleci
 great_oryol
@@ -233854,7 +233641,6 @@ caxada
 republic_artemia
 narodovyan_vault_1
 zadecuya
-picauna
 tavalia
 new_land_of_jess
 northern_yakutia
@@ -233863,13 +233649,7 @@ calands
 golientessed
 populist_spain
 quarterjade
-abnhandul
-russian_soviet_democraty_republic
-contunismation
-fontelle
-aelgsin
 the_tenth_jellian_republic
-the_one_and_only_serious
 astoa
 jim_wells
 desvocati
@@ -233986,7 +233766,6 @@ roei
 empire_drakmetra
 1st_cbt
 5th_cbt
-earexplodian_xiv_cavalry_corps
 aryan_union_of_iran
 logoslavia_and_of_isole_egadi
 nunc_licet
@@ -234284,10 +234063,16 @@ apherios
 communist_francoi
 auvill
 kings_mountain
-khilafat_baghdad
 hawkwatch
 canada_and_the_falklands
 vicilles
+tropical_republic
+ezekistan
+roaring_knight_325
+roaring_knight_345
+roaring_knight_353
+roaring_knight_393
+soviet_norrlandia
 essenora
 hurdy_gurdy_men
 karaoke
@@ -234787,7 +234572,6 @@ ai
 mitsuki_bakugou
 9airstrikers
 moth_legionary_20
-oxbow_lakes
 rainbow_sherbet_39
 paldiski-maardu
 divided_states_of_america
@@ -234809,8 +234593,8 @@ takkaviita_cccxxiv
 vania_wraths
 anarchy_ramen
 jade16
-sulfide
 rainbow_sherbet_57
+vision_of_confluence
 junk_defender
 channo_fernandez
 endsieg
@@ -234902,7 +234686,6 @@ airstrikers10
 moth_legionary_21
 princess_cliii
 obamacarepdf
-oxbow_lake
 the_454th_podrian_infantry_brigade
 the_451st_podrian_infantry_brigade
 the_450th_podrian_infantry_brigade
@@ -234937,9 +234720,12 @@ iserlohn_floating_battery_24
 the_434th_podrian_infantry_brigade
 the_433rd_podrian_infantry_brigade
 the_432nd_podrian_infantry_brigade
+teenage_anarchist_iii
+starship_india
 offoaiiopia
 holland_1945
 dragoe_80th_army_division
+black_flag_army_5
 the_430th_podrian_infantry_brigade
 the_429th_podrian_infantry_brigade
 the_428th_podrian_infantry_brigade
@@ -236785,8 +236571,6 @@ control_unity
 holy_aztec_empire
 novo_valado
 coruscanth
-eurasia_and_siberia
-bezmanistan
 colombria
 shamlo_bozorg
 skibidididdy
@@ -236811,6 +236595,7 @@ mare_byza
 the_sovereign_authority_tsa
 uykalos
 ana_loyal
+davamonia
 north_leichtenberg
 galaxy_kayak
 kurtze
@@ -237152,7 +236937,6 @@ ffnf_conde
 ffnf_republique
 ffnf_bourgogne
 isolde_belle_of_the_underworld
-warrior_of_utopia_47
 winter_cultist_237
 red_shades
 thorn207
@@ -237297,7 +237081,6 @@ paid_time_off
 marcialus
 baltanica
 argin
-quisux
 northern_steakia
 tr1bute_art
 impreo_de_jap
@@ -237466,7 +237249,6 @@ warrincecardfarm023
 warrincecardfarm030
 warrincecardfarm189
 phantomairu
-pevova
 josifa
 polynasia
 red_chaos
@@ -237477,7 +237259,6 @@ yoakum
 the_magistrate
 nicex
 zoatenne
-rn_ferrante_gonzaga
 arzae
 coryell
 belaeg
@@ -237630,6 +237411,7 @@ gertrudius23
 ros_res
 evolving_tyranny
 new_holban_pille
+antichalant
 ghostage
 queen_bulla_kingdom
 dusk_falling
@@ -238321,6 +238103,7 @@ antarctic_britannia
 nile_states
 obrela_scad
 kestrela
+rawajaya
 gcu_standards_have_dropped
 ska_peoples
 utagawa_hiroshige
@@ -239013,9 +238796,6 @@ tannu
 iovn
 bingbong34
 haru_urara_fan_3
-japacunga
-bag2
-fr25
 mirajhan
 supremum_magnum_imperium
 kamerman_islands
@@ -239607,7 +239387,6 @@ gu_16th_air_wing
 wylz
 legionary_hungary
 minnie_mademoiselle2
-queen_of_dragons
 the_plantain_republic
 blobanian
 agbnnj
@@ -240144,7 +239923,6 @@ grand_coalition_senior_officer
 woody_guthrie
 marionet
 sweet_bro_and_hella_jeff
-cha-poor
 gamzee_makara
 jane_crocker
 jack_noir
@@ -241083,7 +240861,6 @@ adelien_ix
 rocketfuel15
 totally_not_puppey
 neo_xxxv
-anoxic
 rainbow_sherbet_64
 united_tinfoil_people
 house_of_pretzels
@@ -241154,6 +240931,7 @@ smelly_9
 pray_to_jesus
 kusunoki_mebuki
 bunny_bunny_18
+starship_bravo
 machiko_nara
 sachojey
 heth_rep_beniounaia
@@ -241161,8 +240939,10 @@ seigemaster
 cishet
 starlight_sirius
 neo_lxxxix
-nitrification
+american_pharoah
+victorys_herald
 rainbow_sherbet_92
+torkomiri_horde_3
 the_continent_of_oceania
 aritwindia
 sakartvelo_republic
@@ -243239,7 +243019,6 @@ patria_sancta
 mbr-200
 corrupted_skibidi
 skibidi_collie
-silverblood
 eatmymeat
 puppytown
 vigilantes_oculus
@@ -244341,7 +244120,6 @@ fateslandia
 moth_legionary_17
 starlight_betelgeuse
 obamacaremp3
-oligotrophic_lakes
 crystal_tree
 the_interstellar_confederacy_1423
 crimson_vylixan
@@ -244381,7 +244159,6 @@ the_gazebo
 artificial_solar_duck
 princess_ccxviii
 staat_im_staate
-starship_alpha
 1st_new_valyrian_army
 unerovara_kophoider
 northern_ryse_the_hajoewerg
@@ -244590,6 +244367,7 @@ jambjis_diva
 zanio_republic
 nationnationnationnationna
 gurme
+corperry
 duomine_leti
 lorros
 doctor_frank-n-furter
@@ -244867,7 +244645,6 @@ crocus_daisyland
 respubludda_sann
 truuslu
 old_waldorff
-lord_cavavon
 imperialand
 msmsmsm
 bipp
@@ -244905,7 +244682,6 @@ new_malleer
 metropolitana
 new_khemet
 the_avenia
-alacrity_sat
 anitrading
 burshasza
 virdjenfort
@@ -244985,8 +244761,6 @@ the_w0rld_new
 the_foss_news
 roman_scandinavia
 the_w0rld_wiki
-chaos_ultraman
-chaos_ultraman_2
 nor_denis
 social-democrat_party
 socialist_europe_united
@@ -245748,7 +245522,6 @@ lazdijai
 rietavas
 pagegiai
 ersialist_latvia
-estonian_satanists_ii
 holy_tolido
 eodor
 mahna
@@ -245882,7 +245655,6 @@ the_great_lakes_federal_republic
 the_lake_superior_republic
 vazokkora
 sparinos
-inferior_ii
 namwenia
 alur_klar
 namwenian_air_force
@@ -247018,7 +246790,6 @@ fort_oyster
 clambake
 lansdowne_train_station
 fort_venus
-turqarn
 yesterdays
 hurricane_40
 hurricane_42
@@ -247182,6 +246953,7 @@ tornado_xxvi
 oes_meopia
 roaring_knight_295
 simplify_high_yield_etf
+outer_heave
 calebs_haven
 caleb_d
 nome_ak
@@ -247535,6 +247307,32 @@ bwazurs
 bxazurs
 byazurs
 bzazurs
+caazurs
+cbazurs
+ccazurs
+cdazurs
+ceazurs
+cfazurs
+cgazurs
+chazurs
+ciazurs
+cjazurs
+ckazurs
+clazurs
+cmazurs
+cnazurs
+coazurs
+cpazurs
+cqazurs
+crazurs
+csazurs
+ctazurs
+cuazurs
+cvazurs
+cwazurs
+cxazurs
+cyazurs
+czazurs
 simonegana
 simonagana
 simikins_valley
@@ -247751,7 +247549,6 @@ byrdlight
 nova_enlasia
 skhiervan
 awesia_fre
-altarax
 milcorp_sa
 the_robottest_place_on_earth
 kellros
@@ -247772,6 +247569,7 @@ domina_lucis
 altruia
 chackotown
 new_ryukyu
+vril_agartha
 resloresia
 spacefaring_elite
 east_toromiro_supercolony
@@ -247806,8 +247604,6 @@ irisrioka
 gondola
 nekostar
 tulkaaj
-ainor
-gemsing_dom
 the_red_gate
 waoen
 shellerivia
@@ -247820,8 +247616,6 @@ europas_cradle
 carroton
 ulm-9a3-ii
 kranabad
-starset_sons
-jellio
 unigmat
 malos
 ulaanta
@@ -247848,7 +247642,6 @@ themis_serne
 phaseolusia
 lunar_view
 sydney_sweeney_todd
-cessarea_but_maths
 satan_islands
 sanvito_republic
 north_uio
@@ -247927,6 +247720,8 @@ cheblan
 endimine
 iron_fist_realm
 japallia
+st0nks
+grey-watch
 general_student_council
 schale
 abydos_high_school
@@ -251496,7 +251291,6 @@ bonthani
 scarlet_veil
 hexatanople
 valtheronesia
-the_crying_river
 swingwrk_evistermy
 stolen_elections
 panaoa
@@ -251579,7 +251373,10 @@ grackle_rock
 zees
 neo_xxvii
 kyces
+starship_papa
+golspitta
 neo_lvii
+false_promises
 phebe_viii
 princess_xxvii
 absy
@@ -252243,7 +252040,6 @@ logger_mut-ashkur
 the_genies_lamp
 -fan4rt
 dsn25
-ursulavia
 vanyr
 vatyr
 vasyr
@@ -259343,6 +259139,7 @@ greater_haltoria
 kizab
 takkaviita_cccxxi
 farki
+oshmit
 merluvlee
 larren
 thenaire
@@ -259428,8 +259225,6 @@ disneyxd
 sri_lanka-eelam
 orbonay
 chickentopialistia
-pugsley_addams
-dennis_dracula-loughran
 fester_addams
 angel_1
 angel_2
@@ -260971,7 +260766,6 @@ the_empire_of_east_asia
 camefuloooreerezica
 of_naplea
 stephencurryisking
-the_united_furry_femboys
 13th_samonian_refounder
 14th_samonian_refounder
 15th_samonian_refounder
@@ -263150,7 +262944,6 @@ tyvia
 magnum_ordi_novis
 veskor
 c00kerson
-iskalli
 jornica
 averne
 jatenggayeng
@@ -263159,7 +262952,6 @@ roskesak
 bundesstaat_eltzmark
 dekart
 moral_superiority
-bers_arberland
 idzrc
 jonjoi
 dzahayra
@@ -263183,7 +262975,6 @@ labeso
 eismarkvi
 canlandias
 skaunders
-cedricstan
 garwield
 the_valden_rouge
 skraya
@@ -263191,7 +262982,6 @@ bassproshops
 western_teutonia
 the_soviet_remnant
 gran_real
-quinn_dynasty
 zinthifri
 sanctus_sicilis
 federal_balcanica_de_altheria
@@ -263257,6 +263047,7 @@ principality_of_the_azores
 god-cezar_caleb_and_mihaela
 deus_imperatoria
 wolffland
+hyima
 the_holy_reclamation
 axumea
 livalittle
@@ -263545,6 +263336,10 @@ progressustan
 gythena
 mwm_company
 land_of_the_biscuts
+impreo50
+bonsia_khencuty
+c_travis
+free_gastonia
 168th_catgirl_division
 junk_anchor
 junk_archer
@@ -263568,11 +263363,15 @@ midhaven
 midnight_train
 minute
 voxnia
+winewkui
+transgender_dysphoria_blues
+starship_foxtrot
 rocketfuel8
 wfaf_2nd_fleet
-bicarbonate
 light_cruiser_noshiro
 rainbow_sherbet_67
+the_machinoform
+black_flag_army_8
 squarelandiaball
 asonaland
 captain_alexander
@@ -264016,10 +263815,6 @@ warrincecardfarm167
 moputia
 vejnshnoria
 iberr
-ublariens
-gragopies
-saint_tuxior_eclis
-sovietic_bears
 ytopialand
 rulny
 united_lawz
@@ -264152,6 +263947,8 @@ gertrudius29
 otonesia
 bestcountryy
 nat_wolupollone
+greater_columbia_and_northern_borealia
+we_are_the_best_at_being_the_worst
 bruce_springsteen
 boruturon
 americanslanda
@@ -264184,6 +263981,7 @@ e1evenll
 the_australian_animals
 imkitropolis
 enians
+teenage_anarchist_ix
 redout
 chipolt_of_le_ix
 tls_3
@@ -264246,7 +264044,6 @@ durm_8
 dont_eject_this_fenda_sleeper_22
 rather_slow
 snake_worship_football_club
-half_caf
 cardichisticstan
 ald_bra
 sexy_ahsoka_tano
@@ -264496,14 +264293,12 @@ greater_angola
 dark_thoughts
 bobby_brown_iii
 kruziikrel_2
-abtruse
 mozilla
 hopefully_decent_country
 russia-belarus
 chalvathe
 supreme_abjurator_of_magic_balthazar
 imperial_great_britain
-zombie_marsupials
 engorge
 blue_monday_88
 bizarre_love_triangle
@@ -265017,7 +264812,6 @@ phoenixknight
 opztan
 sandler
 okhav_league
-nitemary
 farmlandia7
 farmlandia11
 farmlandia22
@@ -265084,8 +264878,6 @@ night_war
 last_virtue
 last_watch
 the_slow_warriors
-ferruginous
-geochem
 scimitarra_borderlands_xxxviv
 world_assembly_overseer
 another_avlantican
@@ -265234,14 +265026,12 @@ comunyan_farm_302
 comunyan_farm_319
 comunyan_farm_345
 comunyan_farm_369
-festive_stag
 kemper_research_model
 comunyan_farm_371
 comunyan_farm_380
 m142_himars
 novum_obscurus
 kuprovet
-republica_revolucionaria_de_pernambuco
 sanmite
 comunyan_farm_406
 comunyan_farm_411
@@ -265476,7 +265266,6 @@ ccfm24
 warrincecardfarm183
 warrincecardfarm188
 parliamentary_emuvia
-tartel
 fnlland
 notrumbya
 islamic_arab_states_league
@@ -265488,13 +265277,6 @@ nova_lustitia
 the_united_states_of_ramerica
 not_cool_my_guy
 free_persian_state
-volina
-rn_paolo_emilio
-rn_cristoforo_colombo
-rn_amalfi
-rn_amerigo_vespucci
-mnf_le_fantasque
-berak
 heaven_1
 avw528
 de_agosto
@@ -265603,12 +265385,12 @@ amricas
 loxx_dale
 new_radaste
 the_jazayer_faro
-holy_terra_of_excer
 macratwix_hq
 ohio_river
 katheleenia
 silburg
 blurdor
+wovoka
 the_stadies_tand
 free_lukana_mashoinstan
 greek_states_of_balkans6
@@ -265765,6 +265547,12 @@ gertrudius18
 cats_cats
 sheebee_deebee_wee
 keatter_farliais
+lebron67
+chickenhound
+roaring_knight_318
+roaring_knight_358
+sunshiasia
+roaring_knight_397
 phantoms_nightmare
 led_zeppelin
 the_usa
@@ -265809,7 +265597,6 @@ uss_merrimack
 iomanip
 british_vor_ang_kiveland
 heavens_reach
-chanku
 the_united_artherian_federation
 vorion
 curious_observations
@@ -265880,7 +265667,6 @@ aine_kohara
 durm_1
 durm_10
 kitten_1
-cup_of_joe
 englandera
 s0phia
 ind_island
@@ -266817,7 +266603,6 @@ lethos
 corndogia
 the_alaska_republic
 days_union
-burgburg
 united_northeast_atlantic
 peoples_commonwealth_of_haisa
 bacein
@@ -266864,7 +266649,6 @@ doublebooked42
 aprilnovember4
 aprilnovember12
 aprilnovember43
-zeinn_1
 aprilnovember50
 aprilnovember66
 aprilnovember75
@@ -267013,7 +266797,6 @@ legio_guide_two
 ia_mission_to_perdition
 vvendetta
 artorious_the_abysswalker
-capitalisma_sol
 my_ratopia
 the_1mperium_0f_man
 bjornifjordaland
@@ -267262,8 +267045,6 @@ jenston
 ilangalethu
 tashkurgan
 hyress-cyprus_province
-conirgevak
-rn_alberico_da_barbiano
 the_dougies
 bookworld
 ladogrusda
@@ -267449,13 +267230,13 @@ lustopings_puppet_nation_3
 gwon
 khomovk
 andoripa
-altherfar
 jomo
 arcuria
 davioof_43
 highdam
 davioof_81
 wallywewo
+wait_we_defend_now_ica_puppet
 amesterdam
 goopistand
 sys_mourn
@@ -267561,12 +267342,23 @@ krakalaka
 scandicreich
 henamy
 amk_nation
+islands_of_uara
 malaykuu
+literio
+nigel_farage_and_his_reform_empire
 freedomship
 aruzar
 reborn_roman
 imp_do_brasil
 kourtneay
+turtle_land_colonia_of_usa
+regnala
+roaring_knight_314
+roaring_knight_323
+roaring_knight_332
+roaring_knight_350
+roaring_knight_357
+creiova
 i_will_never_remember_this_puppet_name
 jolanta
 hydralandia
@@ -268179,7 +267971,6 @@ alteo15
 smelly_26
 pompom
 hurthysseiscopolizentopia
-spaznopilanda
 new_new_foundland_invader_1
 northener
 wortel
@@ -268639,7 +268430,6 @@ eiskasekuchen
 imglishyr
 azbaristan
 nattymylover
-the_pioneer_allegiance
 tyrannicca
 peterus
 kastoordia
@@ -268653,7 +268443,6 @@ altridia
 srj
 united_nation_of_color
 anemoria
-andtaria
 gothalandia
 inner_thernea
 arab_kingom
@@ -269195,6 +268984,7 @@ mozem
 w0lf_nation
 leopard_2a6
 the_dizzards
+ayaansh_rana
 montimper
 episcona
 gerunda
@@ -269494,7 +269284,6 @@ tsiantu
 choice_of_the_pope-ill
 happy_gunny_nunville
 viridi_et_felix_montibus
-nigel_farage_and_his_reform_empire
 zeestaat
 oradnia
 nanshenguo
@@ -270321,11 +270110,9 @@ tearnia
 albentantesallistrus
 mykines
 rakabous
-wafferium
 jarnveggur
 tat_cou
 union_of_slavicness
-american_nation_tpusa
 dominium_sacerdotalium
 burgtoria
 angels_halo
@@ -271591,7 +271378,6 @@ please_remove_blue_recapchas184
 please_remove_blue_recapchas194
 knights_of_evora
 region_preservation_squad_004
-catweena
 doge_garrison_83
 charliston
 areburg
@@ -272773,7 +272559,6 @@ the_interstellar_confederacy_419
 lord_high_steward_of_england
 nas_north_island
 battle_tuna
-oligomictic
 hydro_pump
 impreo1
 impreo7
@@ -272819,6 +272604,10 @@ raw-17
 raw-18
 raw-19
 raw-20
+impreo46
+impreo47
+impreo48
+impreo49
 the_interstellar_confederacy_420
 blue_embassy
 blue_dominion
@@ -273521,6 +273310,8 @@ simplify_aggregate_bond_etf
 isleskov_purkrarchaoiuvvg_islandsuyytfcv
 michael_stanley_dukakis
 patriarch_sergius_i_of_constantinople
+roaring_knight_326
+roaring_knight_354
 tefold
 tetona
 the_bourne_ultimatum
@@ -274732,25 +274523,7 @@ house_cargyll
 house_gower
 house_corbray
 house_farring
-house_myatt
-house_florent_of_brightwater
-house_tallhart
-house_burley
-house_waterman
-house_poole
-house_overton
-house_lorch
-house_prester
-house_peake
-house_mudd_of_oldstones
 house_westerling
-house_redfort_of_red_fort
-house_hunt
-house_sparr
-house_selmy_of_harvest_hall
-house_thorne
-house_karstark_of_kar_hold
-house_hewett
 house_lefford
 house_hawthorne
 house_hetherspoon
@@ -274981,7 +274754,6 @@ freedoms154
 freedoms155
 freedoms156
 les_meridiennes
-the_revolutionary_roman_republic
 freedoms157
 general-greivous
 the_count_of_serenno
@@ -275448,7 +275220,6 @@ hed_gla
 nabari_anju
 athlk_fed
 amurtham
-whirlwinds
 refis_skyl
 oitavo_ano
 a_fully_royal_capital
@@ -276108,6 +275879,7 @@ green_hairy_bald_cats
 simplify_mortgage_backed_securities_etf
 phruler
 centro_storico
+feebia
 ere_callphrwop
 zer_por_matos
 mcbria
@@ -276231,7 +276003,6 @@ alberia-
 tanzakan_titania
 zukic_tritonia
 eucania
-the_lwu_slayer
 black_night_corp
 yassui_corp
 the_rda
@@ -276846,7 +276617,6 @@ kraft_work
 audrey_102
 wedding_crashers
 jade14
-haber_bosch_process
 the_interstellar_confederacy_1088
 the_interstellar_confederacy_1089
 the_interstellar_confederacy_1090
@@ -277153,18 +276923,14 @@ cazador_szarr
 foldes
 fidealis
 cmb_sektor_17
-blajanza
 centro_de_sudamerica
 huo_guo
 iasl_soldier1
 liangpi
 maeklong_railway_market
-new_indian_federal_government
 earth-federation
 shababistan
 imari
-sarkari
-ffnf_jaguar
 untit86
 rilesian
 east_sal_vickistan
@@ -277463,6 +277229,7 @@ the_zapadoslavian_ssr
 balistea
 new_koreapina
 eastern_ramau
+meireu
 tls_12
 sweeze_34
 gu_100th_fleet
@@ -277576,7 +277343,6 @@ rezealo
 move_me_like_you_do_24
 loushians_unity_conference
 nautulis
-nautulis_red
 the_interstellar_confederacy_1146
 lan_sarrafty
 hyole
@@ -277765,6 +277531,7 @@ zbb
 dahlquist_place
 the_new_continent
 walrasia
+renatusia
 cranberry_koranz
 the_realm_of_shadows
 the_realm_of_the_heavens
@@ -278983,7 +278750,6 @@ cloudembourg
 mainflooristan
 smelly_08
 oversized_operativez_48
-the_ridge_of_blue
 basso_70
 totoyomi_4
 totoyomi_5
@@ -279059,7 +278825,6 @@ bubled_99
 greeh
 fallen_angel_lucifer
 waldreichen
-sturmnreich
 kelleik
 177th_catgirl_division
 chatroom
@@ -279259,7 +279024,6 @@ kelmuria
 alvosa
 dack
 xerxias
-axolotls_seas
 max_battery
 cyndanzi
 russo-indian_unionball
@@ -279302,7 +279066,6 @@ palatosia
 the_federated_union_of_southeast_asia
 rossiyskaya_soyuzrepublika
 komintern_europaische_gemeinschaft
-konfedtirasy_lamiakhi
 goetaane
 bosomophia
 leitzboerk
@@ -279396,6 +279159,7 @@ the_ambis_puppet
 laude
 the_independent_states_allied_force
 the_star-made_knight
+fauthur_a1
 nagaramarine
 the_southern_pacific_railroad
 tsukuyomi
@@ -279498,7 +279262,6 @@ yshtola
 kalita_wes
 tracyland
 aszaleya
-karunaria
 hellkatz
 new_england_and_the_great_lakes
 selfish_desires
@@ -279548,7 +279311,6 @@ yosandiania
 tuuofmt1
 blue_blue_blue_blue_blue_blue_blue_and_3
 libertad_y_diplomacia
-guerris
 uniao_unida_de_gotham_city
 dallje
 advanced_micro-fabrication
@@ -279668,8 +279430,6 @@ oldegardian_vinland
 makotikon
 galvanization
 artist_of_npa
-literio
-lebron67
 the_persian_gulf
 new_eggmanland
 beach_boy
@@ -279695,7 +279455,6 @@ agent_ruby
 the_interstellar_confederacy_1181
 the_interstellar_confederacy_1182
 the_interstellar_confederacy_1183
-the_orange_janitor
 the_purple_janitor
 central_xeclounia
 north_xeclounia
@@ -280037,6 +279796,16 @@ republic_of_direland
 drersey
 drosovo
 republic_of_dratvia
+drithuania
+driechtenstein
+druxembourg
+north_dracedonia
+dralta
+droldova
+dronaco
+drontenegro
+dretherlands
+droruega
 gu_76th_fleet
 karzot
 the_illinarc_occupation_zone
@@ -280563,7 +280332,6 @@ j_o_jian_capture_squad_aw4
 j_o_jian_capture_squad_aw5
 sire_bersules
 j_o_jian_capture_squad_aw6
-kaji_union
 altejeristan
 j_o_jian_capture_squad_aw7
 j_o_jian_capture_squad_aw8
@@ -280929,22 +280697,9 @@ the_interstellar_confederacy_1298
 meresed
 defnotmeresed1
 meber_neworn
-macota_and_newhe
-magui_tanerastan
-mariter_iveeland
-mawari_flex
-marthodkantopia
-loson_kazistatic
-magalen_rava
 max_nifty
 mcand_beld
-mastips_piza
 menionly
-mardarf
-malistenoy
-mack_grahao
-malpia_guye
-marshall_carter_and_dark_limited
 ryans_toyz_review
 the_new_dex_reich
 hia_visia
@@ -281068,7 +280823,6 @@ the_sernetian_colonies
 stalliost
 the_sernetian_empire
 elistiria
-dican_darbia
 bukharya
 the_metropolitan_golden_harp
 balberia
@@ -281206,7 +280960,6 @@ the_grey_krunkers
 rocketfuel11
 dragon_age
 moth_legionary_11
-aerobic_respiration
 rainbow_sherbet_66
 oscar_bulloney
 vlad_draculea_ii
@@ -281222,7 +280975,6 @@ byelorussian_soviet_army
 happy_fish
 there_can_only_be_one-breon
 jade19
-silicon_cycle
 agent_freedom
 illyrian_infantry_2
 the_interstellar_confederacy_1308
@@ -281245,7 +280997,6 @@ free_kinghts
 polska_panslowianska
 new_notcommunist8
 eag5
-a_punkrocker
 of_the_golden_arch
 oppressed_alt_of_opressed_humans
 tsw_3
@@ -281759,7 +281510,6 @@ uss_starlight
 uss_little
 omboonga
 northern_ireland_and_western_ireland
-new_yordanian_rebels
 irish_isle_of_man
 king_sam_of_house_of_buca
 tsardom_of_russian_empire
@@ -281886,7 +281636,6 @@ whisper_of_the_heart
 witch_hunter_robin
 yashahime
 yuyu_hakusho
-fluvial_lake
 tuft
 the_interstellar_confederacy_1317
 switz_got_lazy_494
@@ -282323,6 +282072,8 @@ roaring_knight_193
 democratic_sadoshinghter
 tirsia
 aly_draluess
+roaring_knight_359
+mr_rm
 newest_kitania
 gas-house_gorillas
 the_galactic_armada_of_suzuki
@@ -282343,6 +282094,8 @@ edinbvrg
 workers_republic_of_scotland
 bryake
 eastern_citadel
+winduese
+nivalka
 the_interstellar_confederacy_1336
 the_interstellar_confederacy_1337
 grod_restorer_3
@@ -282518,10 +282271,7 @@ absolute_measure
 warrincecardfarm199
 tearlaments_kaleido-heart
 daxlas
-cretree
-umcoa
 kevallon
-rn_francesco_caracciolo
 2nd_brotherhood_of_steel
 south_litrubarch
 immunund
@@ -282646,6 +282396,11 @@ cakepop
 cyprusa
 magical_unicorns
 chongoliax
+roaring_knight_319
+roaring_knight_327
+roaring_knight_333
+roaring_knight_366
+roaring_knight_372
 anarco_argentina
 bolshevik_brazil
 bourgeois_bolivia
@@ -282928,7 +282683,6 @@ norvania_do_norte
 south_romany
 estonmark
 gorazemlja
-bogorodveniya
 0nra
 findhold
 ykhejt
@@ -283029,7 +282783,6 @@ parti_vert
 parti_populaire
 switz_got_lazy_498
 southern_nohon_wadarg
-lysagoria
 transnitstri
 schenectadia
 pink_adkissa
@@ -283928,7 +283681,6 @@ legio_x1
 legio_x11
 tls_56
 rocketfuel14
-anaerobic
 guul
 north_poll
 nanjyamo
@@ -284214,7 +283966,6 @@ ekkorah
 superfunland
 rustard_the_family_dog
 communist_cnada
-communist_franco
 yankee_doodle
 eula_2
 totoyomi_8
@@ -284241,7 +283992,6 @@ mc_ride
 rekoina
 u-t-o-p-i-a-s
 classy42
-southern_telfed_dasty
 aprilnovember19
 1wendymae
 aprilnovember44
@@ -284313,6 +284063,8 @@ kasakit
 segrenzortia
 broogli
 kazaaakhstan
+chia_lillistan
+roaring_knight_308
 schlafender_hund
 freedoms384
 freedoms425
@@ -284532,6 +284284,7 @@ xinjianguyghur
 zuki_state_of_the_north
 oillipheist
 barvarian_union
+the_likoxia_institute
 dan_seavasionine
 nasi_legelvan
 seomis_ii
@@ -284686,7 +284439,6 @@ mexidor
 las_minervas
 f_l_o_r_i_c_a
 semi-sovereign_states
-vygris
 yedhudasia
 chemicala
 natkr
@@ -284868,8 +284620,6 @@ hautsing
 the_interstellar_confederacy_1409
 northwest_rock_n_roll_preservation_socie
 eters
-omzk
-the_anti-imperial_army
 woodsmere_foreign_ambassador
 lergha_garfann
 w0rld_14
@@ -284901,7 +284651,6 @@ economic_machine
 yeetyfishball
 seymore_clevarge
 freaky_taco_man
-realtacomommy
 freaky_crovy
 democracy_of_the_freaks
 mommy_sveniland
@@ -285006,6 +284755,7 @@ yeag
 experimental_taiyostan
 northern_nicartavia
 whodisperson
+shookletopia
 berenice_ii
 doge_garrison_93
 doge_garrison_94
@@ -285635,7 +285385,6 @@ zakhazan
 of_the_republic_27
 cherex
 regaliana
-anti-tomatoes
 the_seal_of_removal
 volro
 scalgater_sova
@@ -287563,6 +287312,7 @@ basaltic_glass
 columnar_basalt
 columnar_basalts
 pillow_basalts
+katikya
 flood_basalt
 flood_basalts
 intergalactic_anti-corruption_police
@@ -288080,7 +287830,6 @@ profitan
 trus_armersion
 united_turanic_states
 medaskia
-united_medici
 estrodinia
 osmotic
 founding_guardian
@@ -288176,7 +287925,6 @@ karamaria
 pierrostan
 guutland
 lisadia
-united_states_of_aidenisclutch
 jaredtown_and_jathanered
 warrincecardfarm059
 warrincecardfarm100
@@ -288185,8 +287933,6 @@ awun
 noliland
 -politician_storage-
 waterbridgee
-barrelem
-karletti
 brogolia
 subrivia
 musfrapids
@@ -288416,6 +288162,10 @@ lallana
 simplify_enhanced_income_etf
 atlantic_workers
 africa_in_america
+veloriac
+roaring_knight_315
+roaring_knight_349
+tangton
 tiporile_city
 spamton_ex
 top_sneaky
@@ -288738,7 +288488,6 @@ derlanunited
 mmmmmmmmmm_burger
 soviets_nations
 dinosaur_hip_teleportation
-ultranisim
 vevovatos
 muhvtoilet
 triceratops_head_deteleportation
@@ -289585,6 +289334,7 @@ atlantis_do_sul
 grande_estado_da_yolanda
 segunda_moldavia
 segunda_coreia_do_sul
+australia-nova
 aor_crimea
 aor_carribean_pirates_union
 sweeze_19
@@ -289753,9 +289503,6 @@ the_texas_state
 switz_got_lazy_565
 jefflandia
 canton_de_geneve
-neu_solomans
-northern_virelia
-tamurak
 echo_hope
 prion-cirus_occupational_force_v
 hunan_china
@@ -289993,7 +289740,6 @@ tls_4
 neo_xiv
 noahlandia
 the_sovereign_nation_of_alexra
-syiano
 rasoff
 lukideria
 new_wichita
@@ -290110,11 +289856,15 @@ othorskyev
 suesvola
 asoifwpehf
 demy_hawesandern
+the_grand_union_of_continental_provinces
 sweeze_27
+novus_ontariae
+starship_mike
 smelly_52
+colonels_lament
+black_flag_army_1
 seventh_avenue
 pensive
-nitrogen_fixation
 new_jersey_order
 kittehs_new_jersey
 thorn295
@@ -291460,7 +291210,6 @@ lonei
 vzz
 odb
 odf
-kroptkin_libertaria
 odh
 odi
 odj
@@ -291647,16 +291396,13 @@ joesuu_kapitalistlik_vabariik
 loadilandia
 mavid
 the_avant_garde_state
-mikaea
 tajik_combarela
 this_is_a_very_long_country_name
 communist_korinissia
 vorinissia
 erdenmerg
-smolt
 greater_barbarian-roman_union
 japaaan
-pais_numero_cinco
 new_korinissia
 mercurian_marxists
 mr_tophat_world_ultimate
@@ -291700,7 +291446,6 @@ artemis_base
 the_oestland_autonomy
 grehjo
 isv_voyager
-the_greater_barbarian-roman_union
 191_andromeda_c
 konigsmark
 translovenia
@@ -291720,7 +291465,6 @@ vaelmaine
 ephemeral_spark
 gatecrasher
 ekk_dorthat
-kuravanivila
 the_interstellar_confederacy_1547
 the_interstellar_confederacy_1548
 the_interstellar_confederacy_1549
@@ -293122,7 +292866,6 @@ grogoostania
 moth_legionary_19
 starlight_andromeda
 obamacarejpg
-oligotrophic
 rainbow_sherbet_40
 mathmech_subtraction
 eon_ticket
@@ -294439,6 +294182,7 @@ polmenania
 lexxon
 the_twelve_rivers
 nikolaias
+teditania
 oklo_and_council_of_ministers
 republic_of_axlotia
 aukria
@@ -294525,7 +294269,6 @@ ashen_towerworks
 xenticarz
 umbarri
 tsitopia
-intado_cara
 altercatagaia
 hesperos_alliance
 council_of_kardia
@@ -295108,7 +294851,6 @@ vorldsan
 fortsoria
 irtant_watocierigle
 the_republic_of_slavia
-my_islands
 authoritariam
 authcol
 vesicular_basalts
@@ -295241,7 +294983,6 @@ fawghouta
 mouroohn
 axixic_prime
 kasane_tetorisu
-sulfur_cycle
 rainbow_sherbet_58
 nodf_legio_vii
 lee_jae-yong
@@ -297632,7 +297373,6 @@ ferrra_mega_card_farm_4
 smelly_67
 wellsus
 sakhitaria
-the_kenvirian_hegemony
 a_u_s_t_r_a_l_i_a
 tiny_armenia
 glyjb
@@ -297741,7 +297481,6 @@ tijian_noodles
 -when_they_cry_storage-
 -vtuber_work_camp_iii-
 robeson
-lucasism
 tegridy
 martanoor
 fathia
@@ -297784,6 +297523,9 @@ andowanab
 wtfia
 smoothie_kingdom
 caseum_officinas
+roaring_knight_399
+upper_ber_silem
+princopiea
 nerdgobragh
 welsh_conservative_union
 apariciones_marianas_de_medjugorje
@@ -297795,7 +297537,12 @@ vrephen
 all-diayil_state
 belamora
 maced0n
+teenage_anarchist_ii
+starship_hotel
+william
 smelly_1
+the_first_domino
+black_flag_army_6
 smelly_4
 beaklandia
 republique_meritocratique_francaise
@@ -298310,7 +298057,6 @@ kraste
 squad_26c
 grand_ronde
 free_suns
-collector_islands_and_isles_and_atolls
 daxaston
 the_great_state_of_protectronistan
 loneranch
@@ -298472,7 +298218,6 @@ vc-uzbekistan
 vc-tajikistan
 vc-far_east_republic
 norway-yugoslavia
-ute_blood_organization
 the_dominion_of_the_asmor_federation
 the_asmor_dominion
 the_embassy_for_the_asmor_federation
@@ -298561,7 +298306,9 @@ zytronia
 nobunaga
 smelly_61
 smelly_46
+pokemon_rp_e
 smelly_45
+pokemon_rp_f
 rainbow_sherbet_99
 smelly_43
 smelly_33
@@ -298786,7 +298533,6 @@ iran-turan
 sudan_kingdom
 the_library_of_the_crimson_crusaders
 smelly_8
-tarnen
 gemland
 greater_blumenia
 abcdee
@@ -298828,7 +298574,6 @@ greergan
 the_gfn
 annonaria
 arkaudia
-norinami
 combine-controlled_earth
 trumpiff
 mamaos
@@ -298950,7 +298695,6 @@ freerunning
 parkour_4
 parcours
 roda
-that_has_no_name
 republic_of_maycock
 lanwophechom
 van_oranje
@@ -299034,7 +298778,6 @@ ea_sports_48
 ea_sports_49
 ea_sports_50
 kalama-tee_islands
-jimmy_beast
 j_o_jian_capture_squad_ba4
 j_o_jian_capture_squad_ba5
 j_o_jian_capture_squad_ba6
@@ -299367,7 +299110,6 @@ britanncia
 lemon_squid
 sancta_prascia
 pacificia_america
-chicks_free_city
 west_african_socialist_union
 psychosrian
 new_sancta_prascia
@@ -299607,9 +299349,6 @@ kingdom_of_fauxby
 luviofna_union
 great_flanders
 the_vauxinova_syndicate
-sovereign_clankers
-the_stan_sovereignty
-hazzan_land
 greater_lebonbon_lakers
 kim_chaewon
 the_golden_honmoon
@@ -299624,7 +299363,6 @@ schweriner
 smolenske
 donegal_eske
 swansea_beach
-veloceria
 freeport_isles
 falkichimalm
 astila2
@@ -299798,7 +299536,6 @@ big_miss_energy
 gashia_2
 running_out_of_puppet_names
 all_the_cops_are_in_rhode_island
-anaerobic_respiration
 rainbow_sherbet_65
 your_goddess
 the_wa_legislative_league
@@ -300070,7 +299807,6 @@ duo_jiao_yo_tou
 odaphaland
 vicalskih_rodastralland
 chukot-ka
-sautos
 binyeroxu
 koopolid
 izganda
@@ -300211,6 +299947,8 @@ zamboanguita
 hippie_stan
 deranne
 welcome_to_heaven
+karali_appu
+roaring_knight_392
 hanudrah
 km_emden_ii
 km_atlantis_ii
@@ -300268,7 +300006,6 @@ dogmara_collective
 nexum_fortis
 voltage_mountain_dew
 m134d_minigun
-pittsburgh_stillers_representative
 fornax
 neorheic
 srpsko_kraljevstvo
@@ -300398,7 +300135,6 @@ nyafia
 fleaon
 domus_communis
 the_state_of_caesar
-dudeshangingout
 westenfaire
 roman_warriors
 javelinas
@@ -300848,8 +300584,11 @@ valtengrad
 theltos
 trican
 regnum_cinderia
-tectonic_lakes
+starship_golf
+ekoro
+carbonic_acid
 the_carrot-eating_wolf
+oort_explorer_js-8
 zigsnaia
 aspinesia
 pechingve
@@ -301739,8 +301478,6 @@ guangzhou_ctf_finance_centre
 global_city_square
 uthad_oblor
 yf-23
-b-21
-x-47b
 vetrain
 cardfarm_eta
 zxanixia
@@ -302284,7 +302021,6 @@ new_old_bajookieland
 vardoran
 a_featured_region
 cetus
-the_featured_region_express
 rote_weide
 north_atlantic_security_organization
 zupfkuchen
@@ -302347,7 +302083,6 @@ hurricane_cccliii
 hurricane_cccliv
 elfilish_foreign_ministry_2
 fwends
-new_cros_birion
 estradiol_cypionate
 polar_growth_chamber
 shaoshan_1
@@ -302616,8 +302351,11 @@ greater_azoria
 the_polish_and_lithuanian_commonwealth
 the_second_grand_duchy_of_lithuania
 the_second_kingdom_of_poland
+ache_with_me
+starship_delta
 afghanistan6
 add_sweet
+wardens_law
 aarizian_anatolia
 bixbitan
 anxys_iv
@@ -303099,7 +302837,6 @@ predecember
 kalska
 anarchist_women4
 jarrah_holdings_corporation
-karri_holdings_corporation
 art_of_peer_pressure
 0lomandia
 isqarra
@@ -303131,7 +302868,6 @@ mike_brown
 battle_arapaima
 airstrikers14
 starlight_sagittarius
-monomictic
 dravon_jakaradron_fol_sardrakal
 the_republic_of_mount_athos
 prompt_engineer
@@ -303186,9 +302922,6 @@ pranassan_general_army
 pranassan_air_force
 pranassan_navy
 the_caribbean_community
-chamaquito
-bryincolor
-sharpventoria
 pokemon_rp_a
 pokemon_rp_c
 pokemon_rp_d
@@ -303226,8 +302959,10 @@ the_sarh_archives_office
 the_republic_of_opole
 oceania_union
 envorcalor
+duckieness
 kaloviax
 hopelgogers
+cyl_news_central
 western_yaseon_and_yerse
 hurricane_101
 west_trenticordia
@@ -303317,11 +303052,9 @@ st_john_island
 st_james_island
 avran
 green_bay_guyana
-great_greek_kingdom
 happy_men
 derenus
 the_costa_rica
-greek_states_of_balkans4
 greek_states_of_balkans5
 free_gulf
 new_khemetball
@@ -303333,6 +303066,7 @@ shinlan
 hyress
 veesatcon
 chagae
+hyress-rp
 new_argoasa
 tabrosa
 ambassador_waldorff
@@ -303518,7 +303252,6 @@ hadentopia
 ladedododoladedododo
 sam_james
 crinklestan
-adriatico
 void_main
 hertania
 nathaniel_w_terrorism
@@ -303557,6 +303290,7 @@ alan_koe_bria
 baracoth0
 the_state_of_airai
 kan_hellist
+tuverya
 the_antifur
 dsn6
 item_shop
@@ -303695,7 +303429,6 @@ the_bepis
 trt_27
 trt_28
 lungutai
-rungutai
 sussinia
 sevonica
 delune
@@ -303854,7 +303587,6 @@ svolandia
 spear_of_the_fore
 queens_university
 shrimplantis
-crablantis
 lobsterlantis
 isopodlantis
 woodlouselantis
@@ -303863,8 +303595,6 @@ napoleon_i
 lysandros
 overlord_caesar_king
 the_sons_of_calydon
-sughtor
-the_gup
 namukaa
 jocek
 rhodina
@@ -303896,7 +303626,6 @@ fleabag
 fluffy_flea
 feetball
 flea_circus
-pecsaetan
 xel_corp_exterior_territories
 seop
 the_republic_of_ruicans
@@ -303939,7 +303668,6 @@ ambiaozhi
 west_moggington
 central_mewing_republic
 northeast_skibidi
-old_nordic
 joyeon
 kembi
 xinshiyu
@@ -303988,6 +303716,7 @@ axixica
 axixican_colonial_command
 greenbanana
 bigplus
+abtruse
 reformative_society
 allied_duckarian_corporations
 ext3rm1nat10n
@@ -304033,7 +303762,6 @@ greifwald
 foventis
 united_state_of_albania
 zanzibarlandia
-villar_nation
 gaysm
 foreverasleep
 la_savoia
@@ -304061,7 +303789,6 @@ grand_warden
 royal_champion
 minion_prince
 doge_garrison_99
-north_xeonia_powestopia
 spirit_of_1776
 peringea
 treyusa
@@ -304564,7 +304291,6 @@ tothernlaustria
 drua_dresh
 asmebbelatecaz
 jewtonia
-ishiski_storage
 druncelae
 sancta_sedes_i
 the_empire_of_sun_rise
@@ -304572,7 +304298,6 @@ celestial_of_china
 wellsyn
 wellsy_neclav
 antic0mmunistestonia
-brazila
 petrolandia
 drussnia
 piezajistan
@@ -304813,7 +304538,6 @@ roshal
 aduraszna
 polemar
 the_white_ajah
-can_prosednaland
 socialist_federal_yugoslavia
 ai_de_liliang
 revolutionary_araseos
@@ -304823,7 +304547,6 @@ battle_flounder
 airstrikers6
 moth_legionary_18
 obamacarepng
-oligotrophic_lake
 estancia
 iketon
 ismstein
@@ -305151,7 +304874,6 @@ piggian_isles
 holy_cadia
 free_new_reez
 redtooth
-russo-indian_union
 ileoc
 valentium
 alt_570
@@ -305234,6 +304956,7 @@ hradzan
 shamakhia
 krjalia
 nogttaakwus
+konfedtirasy_lamiakhi
 london_forest
 ejae
 sunhee_seo
@@ -309245,7 +308968,6 @@ xa-14a
 xa-15b
 xa-24d
 xa-18c
-hem
 josener
 higher_morality
 republic_recon
@@ -310055,7 +309777,6 @@ the_americanlands
 zamzora
 mbali
 westavianmicronation
-lambersauce
 rostrealm
 dodgefox
 novagaming
@@ -310104,6 +309825,7 @@ the_floptropican_confederation
 jiafeia_island
 scovos
 saurice
+tovrik
 optissium
 eilyria
 ovilska
@@ -310147,6 +309869,8 @@ terra_livre_de_montserrat
 planetary_turkic_socialist_federation
 ultraseven
 majicka
+chaos_ultraman
+chaos_ultraman_2
 the_slowest_warriors
 eag2
 the_celtic_diplomats
@@ -310784,8 +310508,7 @@ u_i_r
 jarrahland
 the_evil_land_of_jarrah
 seal_rock
-hyress-rp
-greek_colonial_empire
+greek_states_of_balkans4
 olive-alliance
 hello_islands_please
 derenus-rp
@@ -310958,7 +310681,6 @@ unoria
 the_walt_disney_company
 disneyland_resort
 the_united_nations_of_free_earth
-kingdom_of_canada
 bagel_bread
 big_bagel
 popcake
@@ -311009,6 +310731,7 @@ glubadubadudub
 emmaricas
 jb_utopia
 valceriada
+atherdon
 ahmedddd
 parappa_town
 marcontopia
@@ -311017,12 +310740,14 @@ primlandia
 shrugistan
 the_superior_blackchester
 domus_libertatis
+gasharpoon
 emerozia
 lunark
 floriy
 west_atalslata
 kieranpolis
 scolidiodo
+mussi3
 hana_bahamas
 the_republic_of_ardavan
 serenfreya
@@ -311046,11 +310771,18 @@ sylliru
 tobiase
 the_hana_bahamas
 ngl_we_cooked
+markon_a
 concuerdan
 liverpopiriblevinia
 misgana
 rilxinia
 magnet_is_strong
+liyathia
+sunnlanes
+scoldiodo
+ngs_nation
+utd
+levs_new_land
 south_ronesia
 exonopia
 new_grpska
@@ -311404,10 +311136,12 @@ hurricane_mxlvii
 hurricane_mxlviii
 hurricane_mxlix
 hurricane_ml
+kingdom_of_canada
 oghuz-yabgu_republic
 danskine
 estandarte
 exonesia
+nitemary
 the_cascadian_sttepe
 polaris2
 folanka
@@ -311712,6 +311446,7 @@ cerdenian_states
 the_eastindia_company
 hazmob
 fastrack
+legijohn
 jusanctopiaville
 testing_gameplay_mechanics
 nicoloso
@@ -311809,6 +311544,7 @@ nycticebus_bancanus
 nycticebus_bengalensis
 nycticebus_borneanus
 nycticebus_javanicus
+nycticebus_kayan
 pirzdavorian_dassault_rafales
 noobshell65
 canadian_crown
@@ -311969,6 +311705,7 @@ roteisen
 caladax
 embassy_collector
 the_older_isles
+holy_terra_of_excer
 warhound_exceraea
 anorakia
 commie_people_republic
@@ -312267,3 +312004,34 @@ italan_dutch
 other_italian_dutch
 hucci
 west_indies_federation
+oxmburg
+chicken_lovers
+sentinel_alpha
+american_nation_tpusa
+dejeuner_anglais
+alacrity_sat
+north_baquara
+badplaceistan
+luxenbrag
+communist_franco
+communist_deutcha
+komunista_polska
+context_firefly
+neo_thermal
+calamity_calamus
+stapleshocker
+greater_dreyland
+lesser_dreyland
+true_dreyland
+the_oc_combine
+dreyrim_card_vault
+dreyrim_card_farm
+karak_dreyrim
+oc_whisper
+combat_velocity
+zulani
+khilafat_baghdad
+altherfar
+nymphoanarchism
+the_republic_of_chittagong
+drozdfix
