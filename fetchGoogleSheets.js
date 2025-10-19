@@ -197,9 +197,16 @@ async function processGoogleSheets() {
     if (patternDetails.length > 0) {
         console.log(`Combining ${patternDetails.length} valid regexes into a single pattern...`);
         
-        // Each pattern is wrapped in its own capturing group. The index of this group
-        // will correspond to the index in the `patternDetails` array.
-        const combinedPatternString = patternDetails.map(p => `(${p.pattern})`).join('|');
+        // Before creating the combined pattern, we convert all internal capturing groups `(...)`
+        // into non-capturing groups `(?:...)` for each pattern. This prevents index conflicts.
+        const combinedPatternString = patternDetails
+            .map(p => {
+                // This regex finds all '(' that are NOT preceded by a '\' (to avoid escaped parens)
+                // and NOT followed by a '?' (to avoid breaking special groups like `(?=...)`).
+                const sanitizedPattern = p.pattern.replace(/(?<!\\)\((?!\?)/g, '(?:');
+                return `(${sanitizedPattern})`;
+            })
+            .join('|');
 
         try {
             const combinedRegex = new RegExp(combinedPatternString, 'i');
@@ -229,9 +236,7 @@ async function processGoogleSheets() {
             }
             console.log(`Found ${matchCount} new puppets via regex matching.`);
         } catch (e) {
-            // This catch is a final fallback. Individual regexes are already validated.
-            // An error here might indicate a catastrophic issue with combining patterns.
-            console.error("CRITICAL ERROR: Failed to execute combined regex. This may be due to excessive complexity or a catastrophic backtracking issue.", e.message);
+            console.error("CRITICAL ERROR: Failed to execute combined regex.", e.message);
         }
     }
 
