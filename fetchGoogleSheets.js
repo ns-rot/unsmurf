@@ -153,26 +153,54 @@ async function processGoogleSheets() {
     }
     
     const patternDetails = [];
+    let invalidRegexCount = 0;
+
     for (const sheet of regexSheets) {
-        console.log(`Fetching regexes from ${sheet.name}...`);
+        console.log(`Fetching and validating regexes from ${sheet.name}...`);
         const response = await fetch(sheet.url);
-        if (!response.ok) { console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`); continue; }
+        if (!response.ok) { 
+            console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`); 
+            continue; 
+        }
         const data = await response.text();
         const lines = data.split('\n').slice(sheet.headerRows);
 
+        // Validate each regex line-by-line before adding it
         for (const line of lines) {
             const columns = line.split('\t');
             const regexString = columns[sheet.regexColumn]?.trim();
             const master = columns[sheet.mainColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
-            if (regexString && master) {
+
+            // GRACEFUL HANDLING 1: Skip if data is incomplete
+            if (!regexString || !master) {
+                if (line.trim()) { // Only log if the line wasn't just empty
+                    console.warn(`[WARNING] Skipping row in sheet '${sheet.name}' due to missing regex or master. Line: "${line.trim()}"`);
+                }
+                continue; // Go to the next line
+            }
+
+            // GRACEFUL HANDLING 2: Validate each regex pattern individually
+            try {
+                new RegExp(regexString); // Try to compile the regex
                 patternDetails.push({ pattern: regexString, master, sheetName: sheet.name });
+            } catch (e) {
+                invalidRegexCount++;
+                console.error(`[ERROR] Skipping invalid regex pattern in sheet '${sheet.name}'. Master: '${master}', Pattern: '${regexString}', Error: ${e.message}`);
             }
         }
     }
 
+    if (invalidRegexCount > 0) {
+        console.warn(`\n[SUMMARY] Skipped a total of ${invalidRegexCount} invalid regex patterns. Check logs above for details.\n`);
+    }
+
     if (patternDetails.length > 0) {
-        console.log(`Combining ${patternDetails.length} regexes into a single pattern...`);
+        console.log(`Combining ${patternDetails.length} valid regexes into a single pattern...`);
+        
+        // Each pattern is wrapped in its own capturing group. The index of this group
+        // will correspond to the index in the `patternDetails` array.
         const combinedPatternString = patternDetails.map(p => `(${p.pattern})`).join('|');
+
         try {
             const combinedRegex = new RegExp(combinedPatternString, 'i');
             let matchCount = 0;
@@ -182,18 +210,28 @@ async function processGoogleSheets() {
 
                 const match = nation.match(combinedRegex);
                 if (match) {
+                    // The first element of match is the full string. The subsequent elements are
+                    // the capture groups. We find the index of the first defined capture group.
                     const matchIndex = match.slice(1).findIndex(m => m !== undefined);
-                    if (matchIndex !== -1) {
+
+                    // RELIABILITY CHECK: Ensure the found index is valid.
+                    if (matchIndex !== -1 && patternDetails[matchIndex]) {
                         const winningPattern = patternDetails[matchIndex];
                         seenPuppets.add(nation);
                         tsvLines.push(`${nation}\t${winningPattern.master}\t${winningPattern.sheetName}`);
                         matchCount++;
+                    } else {
+                        // This is a safety log. It shouldn't be hit with the new validation,
+                        // but it's good to have in case of an unexpected logic error.
+                        console.error(`[LOGIC ERROR] Found a regex match for nation '${nation}', but could not map it back to a pattern. Match array:`, match);
                     }
                 }
             }
             console.log(`Found ${matchCount} new puppets via regex matching.`);
         } catch (e) {
-            console.error("Error creating or executing combined regex. Check sheet for invalid patterns:", e.message);
+            // This catch is a final fallback. Individual regexes are already validated.
+            // An error here might indicate a catastrophic issue with combining patterns.
+            console.error("CRITICAL ERROR: Failed to execute combined regex. This may be due to excessive complexity or a catastrophic backtracking issue.", e.message);
         }
     }
 
