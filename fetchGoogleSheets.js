@@ -130,7 +130,7 @@ async function fetchData(sheet) {
 
 async function processGoogleSheets() {
   const tsvLines = ['puppet\tmaster\tsheet']; // Header row
-  const seenPuppets = new Set(); // Track unique puppet names
+  const seenPuppets = new Set();
 
   try {
     console.log(`Loading all nations data from ${allNationsCompressedPath}...`);
@@ -141,8 +141,6 @@ async function processGoogleSheets() {
     for (const sheet of sheets) {
       console.log(`Fetching direct puppet data from ${sheet.name}...`);
       const sheetData = await fetchData(sheet);
-      
-      // Only add entries with unseen puppet names
       for (const line of sheetData) {
         const [puppet] = line.split('\t');
         if (puppet && !seenPuppets.has(puppet)) {
@@ -153,8 +151,6 @@ async function processGoogleSheets() {
     }
     
     const patternDetails = [];
-    const groupIndexMap = []; // This will store the correct starting index for each pattern
-    let currentGroupIndex = 1; // Regex capture groups are 1-indexed
 
     for (const sheet of regexSheets) {
         console.log(`Fetching and validating regexes from ${sheet.name}...`);
@@ -174,15 +170,8 @@ async function processGoogleSheets() {
             }
 
             try {
-                new RegExp(regexString); // Validate the pattern
+                new RegExp(regexString); // Validate pattern syntax
                 patternDetails.push({ pattern: regexString, master, sheetName: sheet.name });
-                groupIndexMap.push(currentGroupIndex);
-
-                // Count internal capture groups to correctly offset the next index.
-                // This regex finds all '(' that are NOT preceded by a '\' (escaped) and NOT followed by a '?' (non-capturing group).
-                const internalCaptureGroups = (regexString.match(/(?<!\\)\((?!\?)/g) || []).length;
-                currentGroupIndex += internalCaptureGroups + 1; // +1 for the main group we'll wrap this pattern in.
-
             } catch (e) {
                 console.error(`[ERROR] Skipping invalid regex pattern in sheet '${sheet.name}'. Master: '${master}', Pattern: '${regexString}', Error: ${e.message}`);
             }
@@ -191,6 +180,9 @@ async function processGoogleSheets() {
 
     if (patternDetails.length > 0) {
         console.log(`Combining ${patternDetails.length} valid regexes into a single pattern...`);
+        
+        // This is the Python strategy: wrap each pattern in a capture group.
+        // No complex index calculation is needed.
         const combinedPatternString = patternDetails.map(p => `(${p.pattern})`).join('|');
 
         try {
@@ -202,21 +194,21 @@ async function processGoogleSheets() {
 
                 const match = nation.match(combinedRegex);
                 if (match) {
-                    let foundMatch = false;
-                    for (let i = 0; i < patternDetails.length; i++) {
-                        const patternStartIndex = groupIndexMap[i];
-                        if (match[patternStartIndex] !== undefined) {
-                            const winningPattern = patternDetails[i];
-                            seenPuppets.add(nation);
-                            tsvLines.push(`${nation}\t${winningPattern.master}\t${winningPattern.sheetName}`);
-                            matchCount++;
-                            foundMatch = true;
-                            break; // Exit after finding the first match
-                        }
-                    }
-                    if (!foundMatch) {
-                        // This log should ideally never be hit with the new logic, but it's a good safety net.
-                        console.error(`[LOGIC ERROR] Matched nation '${nation}' but failed to map to a pattern.`);
+                    // THE CORE PYTHON-INSPIRED FIX:
+                    // Find the index of the first defined capture group.
+                    // match[0] is the full match, so we slice from index 1.
+                    const matchIndex = match.slice(1).findIndex(group => group !== undefined);
+
+                    // If a valid index is found, it directly corresponds to the index in our patternDetails array.
+                    if (matchIndex !== -1) {
+                        const winningPattern = patternDetails[matchIndex];
+                        seenPuppets.add(nation);
+                        tsvLines.push(`${nation}\t${winningPattern.master}\t${winningPattern.sheetName}`);
+                        matchCount++;
+                    } else {
+                        // This log should now only appear if a match occurs but mysteriously all capture groups are undefined,
+                        // which is highly unlikely.
+                        console.error(`[LOGIC ERROR] Matched nation '${nation}' but could not identify the winning pattern.`);
                     }
                 }
             }
@@ -225,7 +217,7 @@ async function processGoogleSheets() {
             console.error("CRITICAL ERROR: Failed to create or execute combined regex. Check for catastrophic patterns.", e.message);
         }
     }
-    
+
     const redirMap = new Map();
     for (const sheet of redirSheet) {
         console.log(`Fetching redirects from ${sheet.name}...`);
