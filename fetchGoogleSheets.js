@@ -1,7 +1,7 @@
-import { promises as fs } from 'fs'; // Node.js filesystem module
+import { promises as fs, existsSync, createReadStream } from 'fs'; // Node.js filesystem module
 import fetch from 'node-fetch'; // Use node-fetch for HTTP requests
 import { exec } from 'child_process'; // For running Git commands
-import { existsSync, rmSync } from 'fs'; // For checking and removing directories
+import { createBrotliDecompress } from 'zlib'; // For decompressing the nations list
 
 const sheets = [
   {
@@ -27,8 +27,29 @@ const sheets = [
   },
 ];
 
+const regexSheets = [
+    {
+        name: "Rot2",
+        url: "https://docs.google.com/spreadsheets/d/1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ/export?format=tsv&id=1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ",
+        regexColumn: 0,
+        mainColumn: 1,
+        headerRows: 1,
+    }
+];
+
+const redirSheet = [
+    {
+        name: "Redir",
+        url: "https://docs.google.com/spreadsheets/d/1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ/export?format=tsv&id=1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ&gid=1440877244",
+        oldMasterColumn: 0,
+        newMasterColumn: 1,
+        headerRows: 1,
+    }
+];
+
 // Paths for data files
 const mainFilePath = `public/static/puppetData.tsv`; // Path in main branch
+const allNationsCompressedPath = `public/static/allNations.txt.br`; // Path to the compressed nations list
 const worktreePath = '../gh-pages'; // Worktree directory for gh-pages
 const ghPagesFilePath = `${worktreePath}/static/puppetData.tsv`; // Path in gh-pages
 
@@ -70,6 +91,18 @@ async function setupWorktree() {
   }
 }
 
+  return new Promise((resolve, reject) => {
+    const stream = createReadStream(filePath);
+    const brotli = createBrotliDecompress();
+    const chunks = [];
+    stream.on('error', (err) => (err.code === 'ENOENT' ? resolve('') : reject(err)));
+    brotli.on('data', (chunk) => chunks.push(chunk));
+    brotli.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    brotli.on('error', (err) => reject(err));
+    stream.pipe(brotli);
+  });
+}
+
 async function fetchData(sheet) {
   try {
     const response = await fetch(sheet.url);
@@ -99,19 +132,98 @@ async function processGoogleSheets() {
   const seenPuppets = new Set(); // Track unique puppet names
 
   try {
-    // Fetch and process each sheet
+    console.log(`Loading all nations data from ${allNationsCompressedPath}...`);
+    const allNationsData = await readBrotliFile(allNationsCompressedPath);
+    const allNations = allNationsData.split('\n').filter(n => n.trim() !== '');
+    console.log(`Loaded ${allNations.length} total nations for regex matching.`);
+
     for (const sheet of sheets) {
-      console.log(`Fetching data from ${sheet.name}...`);
+      console.log(`Fetching direct puppet data from ${sheet.name}...`);
       const sheetData = await fetchData(sheet);
       
       // Only add entries with unseen puppet names
       for (const line of sheetData) {
         const [puppet] = line.split('\t');
-        if (!seenPuppets.has(puppet)) {
+        if (puppet && !seenPuppets.has(puppet)) {
           seenPuppets.add(puppet);
           tsvLines.push(line);
         }
       }
+    }
+    
+    const patternDetails = [];
+    for (const sheet of regexSheets) {
+        console.log(`Fetching regexes from ${sheet.name}...`);
+        const response = await fetch(sheet.url);
+        if (!response.ok) { console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`); continue; }
+        const data = await response.text();
+        const lines = data.split('\n').slice(sheet.headerRows);
+
+        for (const line of lines) {
+            const columns = line.split('\t');
+            const regexString = columns[sheet.regexColumn]?.trim();
+            const master = columns[sheet.mainColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
+            if (regexString && master) {
+                patternDetails.push({ pattern: regexString, master, sheetName: sheet.name });
+            }
+        }
+    }
+
+    if (patternDetails.length > 0) {
+        console.log(`Combining ${patternDetails.length} regexes into a single pattern...`);
+        const combinedPatternString = patternDetails.map(p => `(${p.pattern})`).join('|');
+        try {
+            const combinedRegex = new RegExp(combinedPatternString, 'i');
+            let matchCount = 0;
+
+            for (const nation of allNations) {
+                if (seenPuppets.has(nation)) continue;
+
+                const match = nation.match(combinedRegex);
+                if (match) {
+                    const matchIndex = match.slice(1).findIndex(m => m !== undefined);
+                    if (matchIndex !== -1) {
+                        const winningPattern = patternDetails[matchIndex];
+                        seenPuppets.add(nation);
+                        tsvLines.push(`${nation}\t${winningPattern.master}\t${winningPattern.sheetName}`);
+                        matchCount++;
+                    }
+                }
+            }
+            console.log(`Found ${matchCount} new puppets via regex matching.`);
+        } catch (e) {
+            console.error("Error creating or executing combined regex. Check sheet for invalid patterns:", e.message);
+        }
+    }
+
+    const redirMap = new Map();
+    for (const sheet of redirSheet) {
+        console.log(`Fetching redirects from ${sheet.name}...`);
+        const response = await fetch(sheet.url);
+        if (!response.ok) { console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`); continue; }
+        const data = await response.text();
+        const lines = data.split('\n').slice(sheet.headerRows);
+
+        for (const line of lines) {
+            const columns = line.split('\t');
+            const oldMaster = columns[sheet.oldMasterColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
+            const newMaster = columns[sheet.newMasterColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
+            if (oldMaster && newMaster) {
+                redirMap.set(oldMaster, newMaster);
+            }
+        }
+    }
+
+    if (redirMap.size > 0) {
+        console.log(`Applying ${redirMap.size} redirect rules...`);
+        // Start at 1 to skip the header
+        for (let i = 1; i < tsvLines.length; i++) {
+            let [puppet, master, sheet] = tsvLines[i].split('\t');
+            if (redirMap.has(master)) {
+                const newMaster = redirMap.get(master);
+                tsvLines[i] = `${puppet}\t${newMaster}\t${sheet}`;
+            }
+        }
     }
 
     const tsvContent = tsvLines.join('\n');

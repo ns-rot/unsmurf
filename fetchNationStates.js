@@ -1,18 +1,20 @@
 import { promises as fs } from 'fs'; // Node.js filesystem module
 import fetch from 'node-fetch'; // Use node-fetch for HTTP requests
 import { exec } from 'child_process'; // For running Git commands
-import { existsSync, rmSync } from 'fs'; // For checking and removing directories
+import { existsSync, createReadStream, createWriteStream } from 'fs'; // For checking dirs and streaming
 import crypto from 'crypto'; // Import crypto for hashing
+import { createBrotliCompress, createBrotliDecompress } from 'zlib'; // For Brotli compression
+import { pipeline } from 'stream/promises'; // For managing streams
 
 const nationStatesApi = "https://www.nationstates.net/cgi-bin/api.cgi?q=nations";
 const userAgent = "script=ns-unsmurf-github by=rotenaple";
 
 // Paths for data files
 const mainFilePath = `public/static/currentNations.txt`; // Path in main branch
-const allNationsPath = `public/static/allNations.txt`; // Path for all historical nations
+const allNationsPath = `public/static/allNations.txt`; // Temporary path for all historical nations
+const allNationsCompressedPath = `${allNationsPath}.br`; // Final compressed path
 const worktreePath = '../gh-pages'; // Worktree directory for gh-pages
 const ghPagesFilePath = `${worktreePath}/static/currentNations.txt`; // Path in gh-pages
-const ghPagesAllNationsPath = `${worktreePath}/static/allNations.txt`; // Path for all historical nations in gh-pages
 
 async function runGitCommand(command) {
   return new Promise((resolve, reject) => {
@@ -51,6 +53,31 @@ async function setupWorktree() {
     console.error('Error setting up worktree:', error);
   }
 }
+
+// Helper function to read and decompress the Brotli file
+async function readBrotliFile(filePath) {
+  return new Promise((resolve, reject) => {
+    const stream = createReadStream(filePath);
+    const brotli = createBrotliDecompress();
+    const chunks = [];
+
+    stream.on('error', (err) => {
+      // If the file doesn't exist (e.g., first run), resolve with an empty string.
+      if (err.code === 'ENOENT') {
+        resolve('');
+      } else {
+        reject(err);
+      }
+    });
+
+    brotli.on('data', (chunk) => chunks.push(chunk));
+    brotli.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    brotli.on('error', (err) => reject(err));
+
+    stream.pipe(brotli);
+  });
+}
+
 
 async function fetchNationStatesData() {
   try {
@@ -100,32 +127,37 @@ async function fetchNationStatesData() {
     
     // Step 1B: Update and write allNations.txt
     let existingAllNations = [];
-    try {
-        const existingData = await fs.readFile(allNationsPath, 'utf8');
-        // Filter out empty lines that might result from trailing newlines or blank lines
-        existingAllNations = existingData.split('\n').filter(n => n.trim() !== '');
-    } catch (error) {
-        // File doesn't exist (expected on first run), ignore ENOENT error
-        if (error.code !== 'ENOENT') {
-            console.error('Error reading existing allNations.txt:', error);
-        }
+    // Step 1B: Decompress, update, and re-compress allNations list
+    console.log(`Reading existing nations from ${allNationsCompressedPath}...`);
+    const existingData = await readBrotliFile(allNationsCompressedPath);
+    const existingAllNations = existingData.split('\n').filter(n => n.trim() !== '');
+    if (existingAllNations.length > 0) {
+        console.log(`Loaded ${existingAllNations.length} historical nations.`);
     }
 
     // Combine current and historical nations, make unique, and sort
     const combinedNationsSet = new Set([...existingAllNations, ...currentNations]);
     const allNations = Array.from(combinedNationsSet).sort();
 
-    // Write the combined data to allNations.txt
+    // Write the combined data to a temporary uncompressed file
     await fs.writeFile(allNationsPath, allNations.join('\n'), { encoding: 'utf8', flag: 'w' });
-    console.log(`✅ Updated ${allNationsPath} with ${allNations.length} total nations.`);
+    
+    // Compress the temporary file into the final .br file
+    const source = createReadStream(allNationsPath);
+    const destination = createWriteStream(allNationsCompressedPath);
+    const brotli = createBrotliCompress();
+    await pipeline(source, brotli, destination);
+    console.log(`✅ Compressed updated list of ${allNations.length} nations to ${allNationsCompressedPath}`);
 
+    // Clean up the temporary uncompressed file
+    await fs.unlink(allNationsPath);
 
     // Step 2: Commit & push to main branch
     console.log('Committing and pushing changes to main...');
     await runGitCommand(`
       git fetch origin main --quiet &&
       git pull --ff-only origin main &&
-      git add ${mainFilePath} ${allNationsPath} &&
+      git add ${mainFilePath} ${allNationsCompressedPath} &&
       git commit -m "Force update NationStates data in main branch" --allow-empty &&
       git push --force origin main
     `);
@@ -133,17 +165,15 @@ async function fetchNationStatesData() {
     // Step 3: Set up gh-pages worktree
     await setupWorktree();
 
-    // Step 4: Copy files from main/public/static to gh-pages/static
+    // Step 4: Copy ONLY currentNations.txt to gh-pages/static
     await fs.copyFile(mainFilePath, ghPagesFilePath);
-    await fs.copyFile(allNationsPath, ghPagesAllNationsPath);
     console.log(`Copied ${mainFilePath} to ${ghPagesFilePath}`);
-    console.log(`Copied ${allNationsPath} to ${ghPagesAllNationsPath}`);
 
     // Step 5: Commit & push to gh-pages
     console.log('Committing and pushing changes to gh-pages...');
     await runGitCommand(`
       cd ${worktreePath} &&
-      git add static/currentNations.txt static/allNations.txt &&
+      git add static/currentNations.txt &&
       git commit -m "Sync NationStates data from main to gh-pages" || true &&
       git push --force origin gh-pages
     `);
