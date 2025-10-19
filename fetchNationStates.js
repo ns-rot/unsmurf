@@ -125,8 +125,6 @@ async function fetchNationStatesData() {
       console.log("✅ File content has changed, proceeding with commit.");
     }
     
-    // Step 1B: Update and write allNations.txt
-    let existingAllNations = [];
     // Step 1B: Decompress, update, and re-compress allNations list
     console.log(`Reading existing nations from ${allNationsCompressedPath}...`);
     const existingData = await readBrotliFile(allNationsCompressedPath);

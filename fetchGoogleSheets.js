@@ -91,6 +91,7 @@ async function setupWorktree() {
   }
 }
 
+async function readBrotliFile(filePath) {
   return new Promise((resolve, reject) => {
     const stream = createReadStream(filePath);
     const brotli = createBrotliDecompress();
