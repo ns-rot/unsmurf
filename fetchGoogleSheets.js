@@ -405,7 +405,31 @@ async function processGoogleSheets() {
       }
     }
 
-    const tsvContent = tsvLines.join('\n');
+    // === SORT DATA BY MASTER THEN BY PUPPET ===
+    console.log('Sorting data by puppetmaster then by nation...');
+    const header = tsvLines[0];
+    const dataLines = tsvLines.slice(1);
+
+    // Pre-parse and create cache
+    const parsedData = dataLines.map(line => {
+      const [puppet, master, sheet] = line.split('\t');
+      return { puppet, master, sheet, original: line };
+    });
+
+    // Sort with faster comparison
+    parsedData.sort((a, b) => {
+      // Direct string comparison (faster than localeCompare for ASCII)
+      if (a.master < b.master) return -1;
+      if (a.master > b.master) return 1;
+      
+      if (a.puppet < b.puppet) return -1;
+      if (a.puppet > b.puppet) return 1;
+      
+      return 0;
+    });
+
+    const sortedLines = parsedData.map(p => p.original);
+    const tsvContent = [header, ...sortedLines].join('\n');
 
     // === WRITE AND COMMIT ===
     await fs.writeFile(mainFilePath, tsvContent, 'utf8');
