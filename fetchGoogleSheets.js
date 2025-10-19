@@ -227,41 +227,33 @@ class RegexProcessor {
     if (!text || !this.regex) return false;
     return this.regex.test(text);
   }
+}
 
-  resolve(text) {
-    if (!text || !this.regex) return text;
-
-    const execResult = this.regex.exec(text);
-    if (!execResult) return text;
-
-    // Find first non-undefined capturing group
-    let matchIndex = -1;
-    for (let i = 1; i < execResult.length; i++) {
-      if (execResult[i] !== undefined) {
-        matchIndex = i - 1;
-        break;
-      }
-    }
-
-    if (matchIndex === -1) {
-      console.error(`[LOGIC ERROR] Matched '${text}' but could not identify pattern.`);
-      return text;
-    }
-
-    const template = this.templates[matchIndex];
-
-    // Replace $1, $2, etc.
-    return template.replace(/\$(\d+)/g, (m) => {
+function createPatternCache(patternDetails) {
+  return patternDetails
+    .map(pd => {
       try {
-        const groupNum = parseInt(m[1], 10);
-        const absoluteGroupIndex = matchIndex + 1 + groupNum;
-        return execResult[absoluteGroupIndex] || '';
+        return {
+          ...pd,
+          compiledRegex: new RegExp(pd.pattern, 'i')
+        };
       } catch (e) {
-        console.warn(`[WARN] Failed to resolve group ${m[1]}`);
-        return m[0];
+        console.error(
+          `[ERROR] Failed to compile regex for caching. Pattern: '${pd.pattern}', Error: ${e.message}`
+        );
+        return null;
       }
-    });
+    })
+    .filter(Boolean);
+}
+
+function findMatchingPattern(nation, cachedPatterns) {
+  for (const pd of cachedPatterns) {
+    if (pd.compiledRegex.test(nation)) {
+      return pd;
+    }
   }
+  return null;
 }
 
 async function processGoogleSheets() {
@@ -353,12 +345,15 @@ async function processGoogleSheets() {
         patternDetails.map(p => ({ pattern: p.pattern, template: p.master }))
       );
 
+      const cachedPatterns = createPatternCache(patternDetails);
+      console.log(`Cached ${cachedPatterns.length} compiled regex patterns.`);
+
       let matchCount = 0;
       for (const nation of allNations) {
         if (seenPuppets.has(nation)) continue;
 
         if (regexProcessor.match(nation)) {
-          const matchingPattern = findMatchingPattern(nation, patternDetails);
+          const matchingPattern = findMatchingPattern(nation, cachedPatterns);
           if (matchingPattern) {
             // Check if this (nation, master) pair is excluded
             const exclusionKey = `${nation}\t${matchingPattern.master}`;
@@ -444,25 +439,6 @@ async function processGoogleSheets() {
   } catch (error) {
     console.error('Error processing Google Sheets:', error);
   }
-}
-
-/**
- * Helper function to find which pattern matched a given nation.
- * Returns the matching pattern details.
- */
-function findMatchingPattern(nation, patternDetails) {
-  for (const pd of patternDetails) {
-    try {
-      const regex = new RegExp(pd.pattern, 'i');
-      if (regex.test(nation)) {
-        return pd;
-      }
-    } catch (e) {
-      // Skip invalid patterns
-      continue;
-    }
-  }
-  return null;
 }
 
 processGoogleSheets().catch((error) => {
