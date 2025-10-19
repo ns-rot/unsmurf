@@ -44,13 +44,13 @@ jobs:
             exit 1
           fi
 
-      # Step 5-1: Run Google Sheets script
-      - name: Fetch Google Sheets Data
-        run: node fetchGoogleSheets.js
-
-      # Step 5-2: Run NationStates script
+      # Step 5-1: Run NationStates script
       - name: Fetch NationStates Data
         run: node fetchNationStates.js
+
+      # Step 5-2: Run Google Sheets script
+      - name: Fetch Google Sheets Data
+        run: node fetchGoogleSheets.js
 
       # Step 6: Commit and push Google Sheets file (if updated)
       - name: Commit and push Google Sheets file if needed
