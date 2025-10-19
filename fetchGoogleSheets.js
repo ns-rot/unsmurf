@@ -1,7 +1,7 @@
-import { promises as fs, existsSync, createReadStream } from 'fs'; // Node.js filesystem module
-import fetch from 'node-fetch'; // Use node-fetch for HTTP requests
-import { exec } from 'child_process'; // For running Git commands
-import { createBrotliDecompress } from 'zlib'; // For decompressing the nations list
+import { promises as fs, existsSync, createReadStream } from 'fs';
+import fetch from 'node-fetch';
+import { exec } from 'child_process';
+import { createBrotliDecompress } from 'zlib';
 
 const sheets = [
   {
@@ -128,6 +128,86 @@ async function fetchData(sheet) {
   }
 }
 
+class RegexProcessor {
+  constructor(rules) {
+    this.regex = null;
+    this.templates = [];
+
+    if (!rules || rules.length === 0) return;
+
+    const validPatterns = [];
+    const validTemplates = [];
+
+    for (const rule of rules) {
+      const { pattern, template } = rule;
+      try {
+        new RegExp(pattern, 'i');
+        validPatterns.push(pattern);
+        validTemplates.push(template);
+      } catch (e) {
+        console.error(
+          `[ERROR] Skipping INVALID regex pattern. Pattern: '${pattern}', ` +
+          `Template: '${template}', Reason: ${e.message}`
+        );
+      }
+    }
+
+    if (validPatterns.length === 0) return;
+
+    const combinedStr = validPatterns.map(p => `(${p})`).join('|');
+
+    try {
+      this.regex = new RegExp(combinedStr, 'i');
+      this.templates = validTemplates;
+      console.log(`Successfully compiled ${validPatterns.length} patterns into single regex`);
+    } catch (e) {
+      console.error(`[ERROR] Failed to compile combined regex: ${e.message}`);
+      this.regex = null;
+      this.templates = [];
+    }
+  }
+
+  match(text) {
+    if (!text || !this.regex) return false;
+    return this.regex.test(text);
+  }
+
+  resolve(text) {
+    if (!text || !this.regex) return text;
+
+    const execResult = this.regex.exec(text);
+    if (!execResult) return text;
+
+    // Find first non-undefined capturing group
+    let matchIndex = -1;
+    for (let i = 1; i < execResult.length; i++) {
+      if (execResult[i] !== undefined) {
+        matchIndex = i - 1;
+        break;
+      }
+    }
+
+    if (matchIndex === -1) {
+      console.error(`[LOGIC ERROR] Matched '${text}' but could not identify pattern.`);
+      return text;
+    }
+
+    const template = this.templates[matchIndex];
+
+    // Replace $1, $2, etc.
+    return template.replace(/\$(\d+)/g, (m) => {
+      try {
+        const groupNum = parseInt(m[1], 10);
+        const absoluteGroupIndex = matchIndex + 1 + groupNum;
+        return execResult[absoluteGroupIndex] || '';
+      } catch (e) {
+        console.warn(`[WARN] Failed to resolve group ${m[1]}`);
+        return m[0];
+      }
+    });
+  }
+}
+
 async function processGoogleSheets() {
   const tsvLines = ['puppet\tmaster\tsheet']; // Header row
   const seenPuppets = new Set();
@@ -153,109 +233,105 @@ async function processGoogleSheets() {
     const patternDetails = [];
 
     for (const sheet of regexSheets) {
-        console.log(`Fetching and validating regexes from ${sheet.name}...`);
-        const response = await fetch(sheet.url);
-        if (!response.ok) { console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`); continue; }
-        const data = await response.text();
-        const lines = data.split('\n').slice(sheet.headerRows);
+      console.log(`Fetching and validating regexes from ${sheet.name}...`);
+      const response = await fetch(sheet.url);
+      if (!response.ok) {
+        console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`);
+        continue;
+      }
+      const data = await response.text();
+      const lines = data.split('\n').slice(sheet.headerRows);
 
-        for (const line of lines) {
-            const columns = line.split('\t');
-            const regexString = columns[sheet.regexColumn]?.trim();
-            const master = columns[sheet.mainColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
+      for (const line of lines) {
+        const columns = line.split('\t');
+        const regexString = columns[sheet.regexColumn]?.trim();
+        const master = columns[sheet.mainColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
 
-            if (!regexString || !master) {
-                if (line.trim()) console.warn(`[WARNING] Skipping row in sheet '${sheet.name}' due to missing data. Line: "${line.trim()}"`);
-                continue;
-            }
-
-            try {
-                new RegExp(regexString); // Validate pattern syntax
-                patternDetails.push({ pattern: regexString, master, sheetName: sheet.name });
-            } catch (e) {
-                console.error(`[ERROR] Skipping invalid regex pattern in sheet '${sheet.name}'. Master: '${master}', Pattern: '${regexString}', Error: ${e.message}`);
-            }
+        if (!regexString || !master) {
+          if (line.trim()) {
+            console.warn(
+              `[WARNING] Skipping row in sheet '${sheet.name}' due to missing data. Line: "${line.trim()}"`
+            );
+          }
+          continue;
         }
+
+        try {
+          new RegExp(regexString);
+          patternDetails.push({ pattern: regexString, master, sheetName: sheet.name });
+        } catch (e) {
+          console.error(
+            `[ERROR] Skipping invalid regex pattern in sheet '${sheet.name}'. ` +
+            `Master: '${master}', Pattern: '${regexString}', Error: ${e.message}`
+          );
+        }
+      }
     }
 
     if (patternDetails.length > 0) {
-        console.log(`Combining ${patternDetails.length} valid regexes into a single pattern...`);
-        
-        // This is the Python strategy: wrap each pattern in a capture group.
-        // No complex index calculation is needed.
-        const combinedPatternString = patternDetails.map(p => `(${p.pattern})`).join('|');
+      console.log(`Compiling ${patternDetails.length} regexes using RegexProcessor...`);
+      const regexProcessor = new RegexProcessor(
+        patternDetails.map(p => ({ pattern: p.pattern, template: p.master }))
+      );
 
-        try {
-            const combinedRegex = new RegExp(combinedPatternString, 'i');
-            let matchCount = 0;
+      let matchCount = 0;
+      for (const nation of allNations) {
+        if (seenPuppets.has(nation)) continue;
 
-            for (const nation of allNations) {
-                if (seenPuppets.has(nation)) continue;
-
-                const match = nation.match(combinedRegex);
-                if (match) {
-                    // THE CORE PYTHON-INSPIRED FIX:
-                    // Find the index of the first defined capture group.
-                    // match[0] is the full match, so we slice from index 1.
-                    const matchIndex = match.slice(1).findIndex(group => group !== undefined);
-
-                    // If a valid index is found, it directly corresponds to the index in our patternDetails array.
-                    if (matchIndex !== -1) {
-                        const winningPattern = patternDetails[matchIndex];
-                        seenPuppets.add(nation);
-                        tsvLines.push(`${nation}\t${winningPattern.master}\t${winningPattern.sheetName}`);
-                        matchCount++;
-                    } else {
-                        // This log should now only appear if a match occurs but mysteriously all capture groups are undefined,
-                        // which is highly unlikely.
-                        console.error(`[LOGIC ERROR] Matched nation '${nation}' but could not identify the winning pattern.`);
-                    }
-                }
-            }
-            console.log(`Found ${matchCount} new puppets via regex matching.`);
-        } catch (e) {
-            console.error("CRITICAL ERROR: Failed to create or execute combined regex. Check for catastrophic patterns.", e.message);
+        if (regexProcessor.match(nation)) {
+          seenPuppets.add(nation);
+          // Note: We need to find which pattern matched to get the sheetName
+          // For this, we'll create a simpler matcher just for getting the index
+          const matchingPattern = findMatchingPattern(nation, patternDetails);
+          if (matchingPattern) {
+            tsvLines.push(
+              `${nation}\t${matchingPattern.master}\t${matchingPattern.sheetName}`
+            );
+            matchCount++;
+          }
         }
+      }
+      console.log(`Found ${matchCount} new puppets via regex matching.`);
     }
 
     const redirMap = new Map();
     for (const sheet of redirSheet) {
-        console.log(`Fetching redirects from ${sheet.name}...`);
-        const response = await fetch(sheet.url);
-        if (!response.ok) { console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`); continue; }
-        const data = await response.text();
-        const lines = data.split('\n').slice(sheet.headerRows);
+      console.log(`Fetching redirects from ${sheet.name}...`);
+      const response = await fetch(sheet.url);
+      if (!response.ok) {
+        console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`);
+        continue;
+      }
+      const data = await response.text();
+      const lines = data.split('\n').slice(sheet.headerRows);
 
-        for (const line of lines) {
-            const columns = line.split('\t');
-            const oldMaster = columns[sheet.oldMasterColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
-            const newMaster = columns[sheet.newMasterColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
-            if (oldMaster && newMaster) {
-                redirMap.set(oldMaster, newMaster);
-            }
+      for (const line of lines) {
+        const columns = line.split('\t');
+        const oldMaster = columns[sheet.oldMasterColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
+        const newMaster = columns[sheet.newMasterColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
+        if (oldMaster && newMaster) {
+          redirMap.set(oldMaster, newMaster);
         }
+      }
     }
 
     if (redirMap.size > 0) {
-        console.log(`Applying ${redirMap.size} redirect rules...`);
-        // Start at 1 to skip the header
-        for (let i = 1; i < tsvLines.length; i++) {
-            let [puppet, master, sheet] = tsvLines[i].split('\t');
-            if (redirMap.has(master)) {
-                const newMaster = redirMap.get(master);
-                tsvLines[i] = `${puppet}\t${newMaster}\t${sheet}`;
-            }
+      console.log(`Applying ${redirMap.size} redirect rules...`);
+      for (let i = 1; i < tsvLines.length; i++) {
+        const [puppet, master, sheet] = tsvLines[i].split('\t');
+        if (redirMap.has(master)) {
+          const newMaster = redirMap.get(master);
+          tsvLines[i] = `${puppet}\t${newMaster}\t${sheet}`;
         }
+      }
     }
 
     const tsvContent = tsvLines.join('\n');
-    
 
-    // Step 1: Write TSV to main/public/static
+    // === WRITE AND COMMIT ===
     await fs.writeFile(mainFilePath, tsvContent, 'utf8');
     console.log(`Data saved to ${mainFilePath}`);
 
-    // Step 2: Commit & push to main branch
     console.log('Committing and pushing changes to main...');
     await runGitCommand(`
       git fetch origin main --quiet &&
@@ -265,14 +341,11 @@ async function processGoogleSheets() {
       git push --force origin main
     `);
 
-    // Step 3: Set up gh-pages worktree
     await setupWorktree();
 
-    // Step 4: Copy file from main/public/static to gh-pages/static
     await fs.copyFile(mainFilePath, ghPagesFilePath);
     console.log(`Copied ${mainFilePath} to ${ghPagesFilePath}`);
 
-    // Step 5: Commit & push to gh-pages
     console.log('Committing and pushing changes to gh-pages...');
     await runGitCommand(`
       cd ${worktreePath} &&
@@ -280,15 +353,32 @@ async function processGoogleSheets() {
       git commit -m "Sync Google Sheets data from main to gh-pages" || true &&
       git push --force origin gh-pages
     `);
-    
 
-    // Step 6: Clean up worktree
     console.log('Removing gh-pages worktree...');
     await runGitCommand(`git worktree remove ${worktreePath} --force`);
 
   } catch (error) {
     console.error('Error processing Google Sheets:', error);
   }
+}
+
+/**
+ * Helper function to find which pattern matched a given nation.
+ * Returns the matching pattern details.
+ */
+function findMatchingPattern(nation, patternDetails) {
+  for (const pd of patternDetails) {
+    try {
+      const regex = new RegExp(pd.pattern, 'i');
+      if (regex.test(nation)) {
+        return pd;
+      }
+    } catch (e) {
+      // Skip invalid patterns
+      continue;
+    }
+  }
+  return null;
 }
 
 processGoogleSheets().catch((error) => {
