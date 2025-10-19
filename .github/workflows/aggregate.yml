@@ -48,27 +48,7 @@ jobs:
       - name: Fetch NationStates Data
         run: node fetchNationStates.js
 
-      # Step 5-2: Run Google Sheets script
-      - name: Fetch Google Sheets Data
-        run: node fetchGoogleSheets.js
-
-      # Step 6: Commit and push Google Sheets file (if updated)
-      - name: Commit and push Google Sheets file if needed
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "actions@github.com"
-
-          if [ -n "$(git status --porcelain googleSheetsData.tsv)" ]; then
-            git add googleSheetsData.tsv
-            git commit -m "Update Google Sheets data"
-            git push
-          else
-            echo "No changes detected in Google Sheets file, skipping commit and push."
-          fi
-
-      # Step 7: Commit and push NationStates file (if updated)
+      # Step 5-2 commit and push NationStates file (if updated)
       - name: Commit and push NationStates file if needed
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -82,4 +62,24 @@ jobs:
             git push
           else
             echo "No changes detected in NationStates file, skipping commit and push."
+          fi
+
+      # Step 6-1: Run Google Sheets script
+      - name: Fetch Google Sheets Data
+        run: node fetchGoogleSheets.js
+
+      # Step 6-2: Commit and push Google Sheets file (if updated)
+      - name: Commit and push Google Sheets file if needed
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+
+          if [ -n "$(git status --porcelain googleSheetsData.tsv)" ]; then
+            git add googleSheetsData.tsv
+            git commit -m "Update Google Sheets data"
+            git push
+          else
+            echo "No changes detected in Google Sheets file, skipping commit and push."
           fi
