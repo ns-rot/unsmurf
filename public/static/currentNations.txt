@@ -3979,7 +3979,7 @@ the_grand_republic_of_france
 kruniseig
 finalitus
 zoemead
-saint_the_vereusted
+lmanberg
 the_grendels
 the_captain
 laurarcor
@@ -8626,8 +8626,8 @@ the_atle
 castavia
 olinya
 basically_new_zealand
-zyvoris
 kleinerloffel
+vimars
 ananke
 zemnaya_svoboda
 blue_wolf_ii
@@ -9317,6 +9317,7 @@ lovarpia
 of_emptiness
 seng_lind
 dagdria
+neptunian_military_administration
 anne_of_cleves_in_tnp
 sycamorstan
 greater_chumby
@@ -9535,7 +9536,6 @@ dronelig
 hentaigraado
 west_duluth
 marlducro
-the_mercenary_syndicate
 southdog
 royal_palms
 the_canceller
@@ -14024,7 +14024,8 @@ the_backlands
 en_gland
 hundarna
 waldlanta
-krasnaya_kommissariat_soyuz
+lerplex
+queensvale
 lands_of_headington
 tropical_isles
 yy4u
@@ -17111,6 +17112,7 @@ hakeembia
 brandonkelly
 troyn
 tuzumolia
+policycollector1
 goobergunchia
 warzone_codger
 page
@@ -27359,6 +27361,7 @@ kievan_ukraine
 western_papua
 mentrass
 yelbland
+turkisan
 the_great_basin_kingdom
 locrium
 fylkjer
@@ -31063,6 +31066,7 @@ west_california
 holy_empire_of_the_deep
 tiny_fingers
 many_lies_big_bottom
+castsion
 utorialis
 i_grab_them_by_the
 byte_oooooiio
@@ -33460,6 +33464,7 @@ undertake28
 undertake30
 undertake31
 undertake32
+redwynn
 neo_oda
 blushes_owo
 maxcorp_enterprises
@@ -34166,6 +34171,7 @@ chinajapanruquizzingme
 mokolotania
 armitage
 constantinoplo
+romullus
 guhrayen
 kitraragane
 kramerica-
@@ -35049,6 +35055,7 @@ wilbert
 jolteonia
 l_e_f
 chrome_legion
+anbia
 union_republica
 stithenaece
 slabonthiam
@@ -36555,6 +36562,7 @@ quietarmy19
 quietarmy20
 mechtown
 the_magical_assassins
+certonia
 zipangese_star_empire
 gaeslan_509
 veluxia
@@ -46044,6 +46052,7 @@ sapphic_yearnings
 brationodin
 old_pennsylvania
 great_dietsland
+korble
 gilen
 harvatka
 spider_jorgensen
@@ -47328,6 +47337,7 @@ satron
 vindar
 the_order_of_man
 pakania
+soulnopold
 the_rikes
 the_wannabe_moon
 hatecrew
@@ -59803,6 +59813,7 @@ vesavia
 equetcho
 sunflower
 the_storage_nation_21
+visburg
 haerbernd
 northern_kingdom_of_galicia
 meow_87
@@ -60783,6 +60794,7 @@ comerciantes_37
 comerciantes_46
 comerciantes_47
 the_storage_nation_139
+central_vobronia
 thevonis
 minnies_botique_32
 minnies_botique_38
@@ -62520,6 +62532,7 @@ roflmao
 izern_86
 izern_87
 dasblake
+faire_bluff
 jackeechusia
 arnike
 lower_silesian_state
@@ -62735,6 +62748,7 @@ nationuraniume_missile_silo_11
 nothern_foresian_revolutionary_guard
 nationuraniume_missile_silo_15
 nationuraniume_missile_silo_23
+iknovana
 venzenuela
 calisticon
 holy_non-roman_empire
@@ -66436,7 +66450,6 @@ beelezinia
 tennyson_piraino
 fieldlandia
 tecratines
-valmorea
 new_seelie
 calluz
 allahs_holy_army
@@ -67194,7 +67207,6 @@ macaristan
 myrtle_libre
 dystopia_bay
 gloryspren
-neptunian_military_administration
 degrein
 estande
 the_federation_of_osea_and_yukotobonia
@@ -71350,6 +71362,8 @@ tyslin
 terra_brasil
 kayramina
 flying_cows
+the_tarravan_union
+knightsvale
 sunset
 treznor
 northrop_grumman
@@ -78723,6 +78737,8 @@ new_bahia
 osmoseparadise
 kinsantinsuyu
 the_pan-european_republic
+krasnaya_kommissariat_soyuz
+zyvoris
 valkalan
 sheariliik
 socialist_xlyvania
@@ -80231,7 +80247,6 @@ north_empire
 asset_management
 greengrad
 actiny
-partridge_islands
 legioni
 davertown
 hatchworth
@@ -104467,6 +104482,8 @@ deutchesreich
 lontand
 united_emirates_of_iliria
 pee_pee_69420
+tester002
+theferengi
 tcos33
 incola
 guard_155
@@ -140708,10 +140725,7 @@ babograd
 germaniens
 blunovia
 urusters_and
-south_swami
-north_swami
 north_emreldia
-lmanberg
 klony
 nordariki
 mon_cadicketion
@@ -180348,6 +180362,8 @@ conetta
 klein_moretti
 annoying_dog
 the_hampter_imperial_army
+south_swami
+north_swami
 blue_archive
 chise
 shizuko
@@ -183532,7 +183548,6 @@ volvoin
 comanche8
 indian_empire_21
 weatophin_rawats
-emperyean_tardom
 vegas_altas
 vtarlad
 great_kipchak_horde
@@ -200968,6 +200983,7 @@ larajio
 rurta
 kingdom_of_revy
 namtang
+saint_the_vereusted
 verchy_keeper_70
 lindion
 houtost_greordia
@@ -216745,6 +216761,7 @@ hurricane_mdccii
 peat_indavestan
 croatszia
 pur_holy_novu
+card_dealer_2
 napnomadia
 otters_and_pumas
 project_liberation
@@ -239187,6 +239204,7 @@ sia_ascong
 vyazmin
 carechsure
 opral
+jokupelle
 kivu_xii
 north_arkland
 opulent_ruin
@@ -241021,6 +241039,7 @@ amerobritannia
 confederate_states_of_columbia
 costa_dorada_y_romeo
 jaat_bhumi
+upper_silasia
 the_utopic_tyrant_dreams
 xalunia
 redakadia
@@ -244072,6 +244091,7 @@ anadolooo
 shreq
 we_be_committin_fraud_12
 ascended_america
+saire_ben
 essenora
 hurdy_gurdy_men
 karaoke
@@ -246495,6 +246515,7 @@ vyka
 tinzel
 miragua
 jianzhun
+north_portu
 bourgeoiss
 petroli
 mauseland
@@ -250579,6 +250600,7 @@ virq
 unified_reach_government
 skyrim_and_solitude
 volawand
+the_mercenary_syndicate
 free_tibet-
 st_helena
 not-a-spy_3
@@ -257527,7 +257549,6 @@ northern_anca
 caleria
 acy_eston
 prettyprincess
-alainian_otters
 tersova
 virelianc
 hydrea
@@ -274293,6 +274314,7 @@ emperyea
 cloventire
 imperial_swiss_amish
 pensance
+emperyean_tardom
 intelect
 san_rangulia
 moldva
@@ -274361,10 +274383,10 @@ msiana
 enclave_rebublic_army
 dollarionia
 volkengard
-whiteonly
 dancse
 dominio_de_drakmor
 free_nations_treaty_organization
+knightsbury
 168th_catgirl_division
 junk_anchor
 junk_archer
@@ -275035,6 +275057,7 @@ hurricane_mdclxxxiv
 hurricane_mdccxxi
 the_baltimore_workers_council
 condados_unidos_da_valaquia_e_moldavia
+druserberg
 bruce_springsteen
 boruturon
 americanslanda
@@ -276841,6 +276864,7 @@ hurricane_mdcciv
 hurricane_mdccxxiv
 yeringopia
 kitao
+whiteonly
 phantoms_nightmare
 kaoss
 led_zeppelin
@@ -280112,6 +280136,7 @@ we_be_committin_fraud_8
 the_vietnam_republic
 king_salif_yasin_diarra
 erupa
+tester001
 vylixan_aletheia
 occams_broom
 brandolinis_law
@@ -327187,6 +327212,7 @@ liberal_gss
 oshya_sia
 zotrailand
 thecomblo
+communist_capture_forces_hq
 the_united_soviet_states_of_liberty
 4th_communist_capture_forces
 gleion
@@ -329667,7 +329693,12 @@ rising_z
 terrascot
 twnk
 wet_floor_signs
+nevaris
+barmouthe
+elara_montaine
 fumigators
+aurivera
+fogcrest_maritimes
 bayou_vobronia
 the_united_republic_of_the_world
 the_republic_of_puerto_rico
@@ -334409,6 +334440,7 @@ libertarian_confederation_of_terranova
 the_lizard_army
 korein
 strawberry_moon
+alainian_otters
 garyite_cornfeild
 jd_vancelings
 horizon_founder
@@ -334762,10 +334794,12 @@ great_cocanda
 the_imperium_sanctum
 akunzoian_high_command
 4th_socialist_brigade
-communist_capture_forces_hq
 5th_socialist_brigade
 rank_1
 red_eyes_black_dragon
 ottia
 solidarity_2_founder
 velfarre
+6th_socialist_brigade
+valmorea
+three_sands_commission
