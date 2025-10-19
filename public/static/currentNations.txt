@@ -334475,8 +334475,6 @@ nova-militarius
 -imperium_soldier_8
 -imperium_soldier_9
 -imperium_solider_10
--imperium_soldier_18
--imperium_soldier_19
 -imperium_soldier_20
 mns_hoszt_enstin
 lightcatcher_h
@@ -334616,6 +334614,8 @@ ondrockia
 -imperium_soldier_15
 -imperium_soldier_16
 -imperium_soldier_17
+-imperium_soldier_18
+-imperium_soldier_19
 -imperial_commander
 123_progjecting_nayz10
 lightcatcher_d
