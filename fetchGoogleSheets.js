@@ -2,6 +2,7 @@ import { promises as fs, existsSync, createReadStream } from 'fs';
 import fetch from 'node-fetch';
 import { exec } from 'child_process';
 import { createBrotliDecompress } from 'zlib';
+import { log } from 'console';
 
 const sheets = [
   {
@@ -147,8 +148,9 @@ class RegexProcessor {
         // CRITICAL: Convert internal capturing groups to non-capturing groups
         // This prevents the "all undefined" problem
         // Replace ( with (?: UNLESS it's already (?:
+        log(`Normalizing pattern: ${pattern}`);
         pattern = pattern.replace(/\((?!\?)/g, '(?:');
-        
+        log(`Valid regex pattern added: ${pattern}`);
         validPatterns.push(pattern);
         validTemplates.push(template);
       } catch (e) {
