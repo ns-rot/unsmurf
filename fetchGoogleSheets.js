@@ -139,9 +139,16 @@ class RegexProcessor {
     const validTemplates = [];
 
     for (const rule of rules) {
-      const { pattern, template } = rule;
+      let { pattern, template } = rule;
+      
       try {
         new RegExp(pattern, 'i');
+        
+        // CRITICAL: Convert internal capturing groups to non-capturing groups
+        // This prevents the "all undefined" problem
+        // Replace ( with (?: UNLESS it's already (?:
+        pattern = pattern.replace(/\((?!\?)/g, '(?:');
+        
         validPatterns.push(pattern);
         validTemplates.push(template);
       } catch (e) {
@@ -154,6 +161,7 @@ class RegexProcessor {
 
     if (validPatterns.length === 0) return;
 
+    // NOW the combined regex will only have ONE capturing group per pattern
     const combinedStr = validPatterns.map(p => `(${p})`).join('|');
 
     try {
@@ -165,6 +173,44 @@ class RegexProcessor {
       this.regex = null;
       this.templates = [];
     }
+  }
+
+  resolve(text) {
+    if (!text || !this.regex) return text;
+
+    const execResult = this.regex.exec(text);
+    if (!execResult) return text;
+
+    // Now that we've normalized patterns, the first non-undefined group
+    // after index 0 will ALWAYS correspond to the matching pattern
+    let matchIndex = -1;
+    for (let i = 1; i < execResult.length; i++) {
+      if (execResult[i] !== undefined) {
+        matchIndex = i - 1;
+        break;
+      }
+    }
+
+    if (matchIndex === -1 || matchIndex >= this.templates.length) {
+      console.error(
+        `[LOGIC ERROR] Matched '${text}' but could not identify pattern. ` +
+        `Match index: ${matchIndex}, Templates: ${this.templates.length}`
+      );
+      return text;
+    }
+
+    const template = this.templates[matchIndex];
+
+    return template.replace(/\$(\d+)/g, (m) => {
+      try {
+        const groupNum = parseInt(m[1], 10);
+        const absoluteGroupIndex = matchIndex + 1 + groupNum;
+        return execResult[absoluteGroupIndex] || '';
+      } catch (e) {
+        console.warn(`[WARN] Failed to resolve group ${m[1]}`);
+        return m[0];
+      }
+    });
   }
 
   match(text) {
