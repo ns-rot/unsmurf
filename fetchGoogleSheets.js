@@ -48,6 +48,16 @@ const redirSheet = [
     }
 ];
 
+const excludeSheet = [
+    {
+        name: "Exclude",
+        url: "https://docs.google.com/spreadsheets/d/1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ/export?format=tsv&id=1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ&gid=1034512747",
+        puppetColumn: 0,
+        masterColumn: 1,
+        headerRows: 1,
+    }
+];
+
 // Paths for data files
 const mainFilePath = `public/static/puppetData.tsv`; // Path in main branch
 const allNationsCompressedPath = `public/static/allNations.txt.br`; // Path to the compressed nations list
@@ -316,6 +326,29 @@ async function processGoogleSheets() {
       }
     }
 
+    // Load exclusion rules
+    const excludeSet = new Set();
+    for (const sheet of excludeSheet) {
+      console.log(`Fetching exclusion rules from ${sheet.name}...`);
+      const response = await fetch(sheet.url);
+      if (!response.ok) {
+        console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`);
+        continue;
+      }
+      const data = await response.text();
+      const lines = data.split('\n').slice(sheet.headerRows);
+
+      for (const line of lines) {
+        const columns = line.split('\t');
+        const puppet = columns[sheet.puppetColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
+        const master = columns[sheet.masterColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
+        if (puppet && master) {
+          excludeSet.add(`${puppet}\t${master}`);
+        }
+      }
+    }
+    console.log(`Loaded ${excludeSet.size} exclusion rules.`);
+
     if (patternDetails.length > 0) {
       console.log(`Compiling ${patternDetails.length} regexes using RegexProcessor...`);
       const regexProcessor = new RegexProcessor(
@@ -327,11 +360,16 @@ async function processGoogleSheets() {
         if (seenPuppets.has(nation)) continue;
 
         if (regexProcessor.match(nation)) {
-          seenPuppets.add(nation);
-          // Note: We need to find which pattern matched to get the sheetName
-          // For this, we'll create a simpler matcher just for getting the index
           const matchingPattern = findMatchingPattern(nation, patternDetails);
           if (matchingPattern) {
+            // Check if this (nation, master) pair is excluded
+            const exclusionKey = `${nation}\t${matchingPattern.master}`;
+            if (excludeSet.has(exclusionKey)) {
+              console.log(`Skipping excluded entry: ${exclusionKey}`);
+              continue; // Skip without marking as seen
+            }
+
+            seenPuppets.add(nation);
             tsvLines.push(
               `${nation}\t${matchingPattern.master}\t${matchingPattern.sheetName}`
             );
