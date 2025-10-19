@@ -2,14 +2,17 @@ import { promises as fs } from 'fs'; // Node.js filesystem module
 import fetch from 'node-fetch'; // Use node-fetch for HTTP requests
 import { exec } from 'child_process'; // For running Git commands
 import { existsSync, rmSync } from 'fs'; // For checking and removing directories
+import crypto from 'crypto'; // Import crypto for hashing
 
 const nationStatesApi = "https://www.nationstates.net/cgi-bin/api.cgi?q=nations";
 const userAgent = "script=ns-unsmurf-github by=rotenaple";
 
 // Paths for data files
 const mainFilePath = `public/static/currentNations.txt`; // Path in main branch
+const allNationsPath = `public/static/allNations.txt`; // Path for all historical nations
 const worktreePath = '../gh-pages'; // Worktree directory for gh-pages
 const ghPagesFilePath = `${worktreePath}/static/currentNations.txt`; // Path in gh-pages
+const ghPagesAllNationsPath = `${worktreePath}/static/allNations.txt`; // Path for all historical nations in gh-pages
 
 async function runGitCommand(command) {
   return new Promise((resolve, reject) => {
@@ -72,17 +75,17 @@ async function fetchNationStatesData() {
       return [];
     }
 
-    const nations = match[1].split(',').map((nation) => {
+    const currentNations = match[1].split(',').map((nation) => {
       return nation.trim().toLowerCase().replace(/\s+/g, '_');
     });
 
-    // Step 1: Write NationStates data to main/public/static
+    // Step 1A: Write NationStates data to main/public/static (currentNations.txt)
     // Compute hash BEFORE writing
     const hashBefore = await computeFileHash(mainFilePath);
     console.log(`🔹 Hash before writing: ${hashBefore || "File does not exist"}`);
 
     // Write the updated data
-    await fs.writeFile(mainFilePath, nations.join('\n'), { encoding: 'utf8', flag: 'w' });
+    await fs.writeFile(mainFilePath, currentNations.join('\n'), { encoding: 'utf8', flag: 'w' });
 
     // Compute hash AFTER writing
     const hashAfter = await computeFileHash(mainFilePath);
@@ -94,13 +97,35 @@ async function fetchNationStatesData() {
     } else {
       console.log("✅ File content has changed, proceeding with commit.");
     }
+    
+    // Step 1B: Update and write allNations.txt
+    let existingAllNations = [];
+    try {
+        const existingData = await fs.readFile(allNationsPath, 'utf8');
+        // Filter out empty lines that might result from trailing newlines or blank lines
+        existingAllNations = existingData.split('\n').filter(n => n.trim() !== '');
+    } catch (error) {
+        // File doesn't exist (expected on first run), ignore ENOENT error
+        if (error.code !== 'ENOENT') {
+            console.error('Error reading existing allNations.txt:', error);
+        }
+    }
+
+    // Combine current and historical nations, make unique, and sort
+    const combinedNationsSet = new Set([...existingAllNations, ...currentNations]);
+    const allNations = Array.from(combinedNationsSet).sort();
+
+    // Write the combined data to allNations.txt
+    await fs.writeFile(allNationsPath, allNations.join('\n'), { encoding: 'utf8', flag: 'w' });
+    console.log(`✅ Updated ${allNationsPath} with ${allNations.length} total nations.`);
+
 
     // Step 2: Commit & push to main branch
     console.log('Committing and pushing changes to main...');
     await runGitCommand(`
       git fetch origin main --quiet &&
       git pull --ff-only origin main &&
-      git add ${mainFilePath} &&
+      git add ${mainFilePath} ${allNationsPath} &&
       git commit -m "Force update NationStates data in main branch" --allow-empty &&
       git push --force origin main
     `);
@@ -108,15 +133,17 @@ async function fetchNationStatesData() {
     // Step 3: Set up gh-pages worktree
     await setupWorktree();
 
-    // Step 4: Copy file from main/public/static to gh-pages/static
+    // Step 4: Copy files from main/public/static to gh-pages/static
     await fs.copyFile(mainFilePath, ghPagesFilePath);
+    await fs.copyFile(allNationsPath, ghPagesAllNationsPath);
     console.log(`Copied ${mainFilePath} to ${ghPagesFilePath}`);
+    console.log(`Copied ${allNationsPath} to ${ghPagesAllNationsPath}`);
 
     // Step 5: Commit & push to gh-pages
     console.log('Committing and pushing changes to gh-pages...');
     await runGitCommand(`
       cd ${worktreePath} &&
-      git add static/currentNations.txt &&
+      git add static/currentNations.txt static/allNations.txt &&
       git commit -m "Sync NationStates data from main to gh-pages" || true &&
       git push --force origin gh-pages
     `);
@@ -125,14 +152,12 @@ async function fetchNationStatesData() {
     console.log('Removing gh-pages worktree...');
     await runGitCommand(`git worktree remove ${worktreePath} --force`);
 
-    return nations;
+    return currentNations;
   } catch (error) {
     console.error('Error processing NationStates API data:', error);
     return [];
   }
 }
-
-import crypto from 'crypto'; // Import crypto for hashing
 
 // Function to compute file hash
 async function computeFileHash(filePath) {
