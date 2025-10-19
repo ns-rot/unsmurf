@@ -153,60 +153,45 @@ async function processGoogleSheets() {
     }
     
     const patternDetails = [];
-    let invalidRegexCount = 0;
+    const groupIndexMap = []; // This will store the correct starting index for each pattern
+    let currentGroupIndex = 1; // Regex capture groups are 1-indexed
 
     for (const sheet of regexSheets) {
         console.log(`Fetching and validating regexes from ${sheet.name}...`);
         const response = await fetch(sheet.url);
-        if (!response.ok) { 
-            console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`); 
-            continue; 
-        }
+        if (!response.ok) { console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`); continue; }
         const data = await response.text();
         const lines = data.split('\n').slice(sheet.headerRows);
 
-        // Validate each regex line-by-line before adding it
         for (const line of lines) {
             const columns = line.split('\t');
             const regexString = columns[sheet.regexColumn]?.trim();
             const master = columns[sheet.mainColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
 
-            // GRACEFUL HANDLING 1: Skip if data is incomplete
             if (!regexString || !master) {
-                if (line.trim()) { // Only log if the line wasn't just empty
-                    console.warn(`[WARNING] Skipping row in sheet '${sheet.name}' due to missing regex or master. Line: "${line.trim()}"`);
-                }
-                continue; // Go to the next line
+                if (line.trim()) console.warn(`[WARNING] Skipping row in sheet '${sheet.name}' due to missing data. Line: "${line.trim()}"`);
+                continue;
             }
 
-            // GRACEFUL HANDLING 2: Validate each regex pattern individually
             try {
-                new RegExp(regexString); // Try to compile the regex
+                new RegExp(regexString); // Validate the pattern
                 patternDetails.push({ pattern: regexString, master, sheetName: sheet.name });
+                groupIndexMap.push(currentGroupIndex);
+
+                // Count internal capture groups to correctly offset the next index.
+                // This regex finds all '(' that are NOT preceded by a '\' (escaped) and NOT followed by a '?' (non-capturing group).
+                const internalCaptureGroups = (regexString.match(/(?<!\\)\((?!\?)/g) || []).length;
+                currentGroupIndex += internalCaptureGroups + 1; // +1 for the main group we'll wrap this pattern in.
+
             } catch (e) {
-                invalidRegexCount++;
                 console.error(`[ERROR] Skipping invalid regex pattern in sheet '${sheet.name}'. Master: '${master}', Pattern: '${regexString}', Error: ${e.message}`);
             }
         }
     }
 
-    if (invalidRegexCount > 0) {
-        console.warn(`\n[SUMMARY] Skipped a total of ${invalidRegexCount} invalid regex patterns. Check logs above for details.\n`);
-    }
-
     if (patternDetails.length > 0) {
         console.log(`Combining ${patternDetails.length} valid regexes into a single pattern...`);
-        
-        // Before creating the combined pattern, we convert all internal capturing groups `(...)`
-        // into non-capturing groups `(?:...)` for each pattern. This prevents index conflicts.
-        const combinedPatternString = patternDetails
-            .map(p => {
-                // This regex finds all '(' that are NOT preceded by a '\' (to avoid escaped parens)
-                // and NOT followed by a '?' (to avoid breaking special groups like `(?=...)`).
-                const sanitizedPattern = p.pattern.replace(/(?<!\\)\((?!\?)/g, '(?:');
-                return `(${sanitizedPattern})`;
-            })
-            .join('|');
+        const combinedPatternString = patternDetails.map(p => `(${p.pattern})`).join('|');
 
         try {
             const combinedRegex = new RegExp(combinedPatternString, 'i');
@@ -217,29 +202,30 @@ async function processGoogleSheets() {
 
                 const match = nation.match(combinedRegex);
                 if (match) {
-                    // The first element of match is the full string. The subsequent elements are
-                    // the capture groups. We find the index of the first defined capture group.
-                    const matchIndex = match.slice(1).findIndex(m => m !== undefined);
-
-                    // RELIABILITY CHECK: Ensure the found index is valid.
-                    if (matchIndex !== -1 && patternDetails[matchIndex]) {
-                        const winningPattern = patternDetails[matchIndex];
-                        seenPuppets.add(nation);
-                        tsvLines.push(`${nation}\t${winningPattern.master}\t${winningPattern.sheetName}`);
-                        matchCount++;
-                    } else {
-                        // This is a safety log. It shouldn't be hit with the new validation,
-                        // but it's good to have in case of an unexpected logic error.
-                        console.error(`[LOGIC ERROR] Found a regex match for nation '${nation}', but could not map it back to a pattern. Match array:`, match);
+                    let foundMatch = false;
+                    for (let i = 0; i < patternDetails.length; i++) {
+                        const patternStartIndex = groupIndexMap[i];
+                        if (match[patternStartIndex] !== undefined) {
+                            const winningPattern = patternDetails[i];
+                            seenPuppets.add(nation);
+                            tsvLines.push(`${nation}\t${winningPattern.master}\t${winningPattern.sheetName}`);
+                            matchCount++;
+                            foundMatch = true;
+                            break; // Exit after finding the first match
+                        }
+                    }
+                    if (!foundMatch) {
+                        // This log should ideally never be hit with the new logic, but it's a good safety net.
+                        console.error(`[LOGIC ERROR] Matched nation '${nation}' but failed to map to a pattern.`);
                     }
                 }
             }
             console.log(`Found ${matchCount} new puppets via regex matching.`);
         } catch (e) {
-            console.error("CRITICAL ERROR: Failed to execute combined regex.", e.message);
+            console.error("CRITICAL ERROR: Failed to create or execute combined regex. Check for catastrophic patterns.", e.message);
         }
     }
-
+    
     const redirMap = new Map();
     for (const sheet of redirSheet) {
         console.log(`Fetching redirects from ${sheet.name}...`);
