@@ -13984,6 +13984,7 @@ mood_killer_xlvii
 fuqin
 the_royal_confederation_of_europe
 natakho
+lucanorian
 lands_of_headington
 tropical_isles
 yy4u
@@ -20515,7 +20516,6 @@ on_so_si_ha_he_lie_twine_erika
 kkore_a
 rising_cross-star
 southerns
-new_necrovia
 danknight
 aphroditl
 tuffian_mango
@@ -34262,6 +34262,8 @@ baiseq
 albary
 brahmaputra
 yamitt_11th_infantry_regiment
+prosperous_unity_of_northern_africa
+the_hallowed_sentinals
 dong_duong
 christianda
 aor_the_great_lakes
@@ -34822,6 +34824,7 @@ zifhst
 the_pale_white_dragon
 geen_rechten
 pulantono
+north_kutiago
 festoria
 festoria-
 varnatia
@@ -71212,7 +71215,6 @@ kiqw
 tresnicka
 mahanland
 jshzjj
-dayak_tribe
 sunset
 treznor
 northrop_grumman
@@ -139839,6 +139841,7 @@ ordassant_kindom_of_bohiem
 canadian_democratic_federation
 cogurionia
 midwest_indigo
+libriana
 republica_socialdemocratica_italiana
 new_almadi
 north_nebraska
@@ -200802,6 +200805,7 @@ holy_boletaria
 lux_enoion
 test_4_ges_arkenton
 -durandal-
+lucanion
 verchy_keeper_70
 lindion
 houtost_greordia
@@ -208775,6 +208779,8 @@ krivenberg
 mood_killer_xlvi
 mandzirosano
 the_grand_empire_of_atlantia
+usaaaaaaaaaa
+xelliancy
 the_evergreater
 jaworow
 wert
@@ -240802,6 +240808,7 @@ united_antarctic_lands
 zaziin
 wolnych_ludow_nad_wisla
 test_1_ges_arkenton
+marenne
 the_utopic_tyrant_dreams
 xalunia
 redakadia
@@ -247298,7 +247305,6 @@ the_vodka_is_water
 south_tevalu
 e_ee_eeeh
 the_kingdom_of_imperial_terra
-libriana
 freeedomlaand
 windy_10024
 ghostage
@@ -278552,6 +278558,7 @@ holy_duchy_of_the_protestant-copts
 notonerphiesion
 adesviox_kingdom
 eurruth_arcul
+dayak_tribe
 jandol
 jolanta
 danocracy
@@ -290401,7 +290408,6 @@ kellyanne
 -_n
 nguyenopolis
 serbian_empire
-ducks_looking_for_grapes
 prussian_peop1es
 new_eastern_roma
 neros_fiddle
@@ -292200,6 +292206,7 @@ eurodragonian_drussia
 america_del_norte
 republic_of_penguin_land
 republic_of_green_land
+republic_of_milo
 earth_dragons_territory
 state_of_san_antonio
 great_dritain_and_northern_direland
@@ -292511,10 +292518,27 @@ south_zobel
 hezlonia
 karislavia
 karimatia
+penguins_territory
+polar_bears_land_republic
+mammoths_land
 splantantonia
 smalltantonia
 kariskalantantonia
+pixizecia
+kuramfosta
+marikolania
+mirazon
+malikon
+kutiago
+milazobi
+republic_of_kuka
 north_smalltantonia
+mika_bika
+skytantonia
+south_skytantonia
+south_kariskalantantonia
+south_splantantonia
+northeast_kutiago_mainland
 const_rep_of_northwest_drafrica
 black_land_administrative_region
 dribya
@@ -321143,6 +321167,7 @@ stone_circle_aviators
 skodatruck_drivers
 create_nations
 kalmukia
+ducks_looking_for_grapes
 schwe
 domanon
 teacherland
@@ -333690,6 +333715,7 @@ ariannin
 nassovia
 lisander_and_alice_bay
 the_ancient_void
+new_necrovia
 the-ring
 kuchisake-onna
 vedigaria
