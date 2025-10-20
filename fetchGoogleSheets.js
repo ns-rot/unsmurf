@@ -140,6 +140,31 @@ async function fetchData(sheet) {
   }
 }
 
+// Helper function to count capturing groups in a regex pattern
+function countCaptureGroups(pattern) {
+  try {
+    let count = 0;
+    let i = 0;
+    while (i < pattern.length) {
+      if (pattern[i] === '(') {
+        // Check if it's non-capturing (?:...), (?=...), (?!...), etc.
+        if (i + 1 < pattern.length && pattern[i + 1] === '?') {
+          i += 2;
+        } else {
+          // Regular capturing group
+          count++;
+          i++;
+        }
+      } else {
+        i++;
+      }
+    }
+    return count;
+  } catch (e) {
+    return 0;
+  }
+}
+
 class RegexProcessor {
   constructor(rules) {
     this.regex = null;
@@ -163,11 +188,9 @@ class RegexProcessor {
       }
 
       try {
-        // Validate pattern compiles
         new RegExp(pattern, 'i');
         
-        // CRITICAL: Convert capturing groups to non-capturing groups
-        // Prevents "undefined groups" issue
+        // Convert capturing groups to non-capturing groups
         pattern = pattern.replace(/\((?!\?)/g, '(?:');
         
         validPatterns.push(pattern);
@@ -186,15 +209,13 @@ class RegexProcessor {
       return;
     }
 
-    // Combine all patterns: (pattern1)|(pattern2)|...|(patternN)
-    // Each pattern gets exactly ONE capturing group
     const combinedStr = validPatterns.map(p => `(${p})`).join('|');
 
     try {
       this.regex = new RegExp(combinedStr, 'i');
       this.templates = validTemplates;
       console.log(
-        `Compiled ${validPatterns.length} patterns into single regex` +
+        `  Compiled ${validPatterns.length} patterns into single regex` +
         (skippedCount > 0 ? ` (${skippedCount} skipped)` : '')
       );
     } catch (e) {
@@ -209,26 +230,17 @@ class RegexProcessor {
     return this.regex.exec(text);
   }
 
-  /**
-   * Identify which pattern matched from exec result
-   * @param {RegExpExecArray} execResult - Result from regex.exec()
-   * @returns {number} Index of matched pattern, or -1 if not found
-   */
   getMatchIndex(execResult) {
     if (!execResult) return -1;
     
-    // Find first non-undefined group (corresponds to matched pattern)
     for (let i = 1; i < execResult.length; i++) {
       if (execResult[i] !== undefined) {
-        return i - 1;  // Convert to 0-based index
+        return i - 1;
       }
     }
     return -1;
   }
 
-  /**
-   * Get template for matched pattern
-   */
   getTemplate(matchIndex) {
     if (matchIndex < 0 || matchIndex >= this.templates.length) {
       return null;
@@ -343,10 +355,22 @@ async function processGoogleSheets() {
     }
     console.log(`Total patterns before consolidation: ${patternDetails.length}\n`);
 
-    // === STEP 3.5: CONSOLIDATE PATTERNS BY MASTER ===
-    console.log('=== STEP 3.5: Consolidating patterns by master ===');
+    // === STEP 3.5: CONSOLIDATE PATTERNS BY MASTER (WITH GROUP LIMIT) ===
+    console.log('=== STEP 3.5: Consolidating patterns by master (respecting group limits) ===');
+    
+    const MAX_GROUPS_PER_CONSOLIDATED = 800;
+    const MAX_PATTERNS_PER_CONSOLIDATED = 25;
+    
     const patternsByMaster = new Map();
 
+    // First: count groups in each pattern
+    const patternGroups = new Map();
+    for (const detail of patternDetails) {
+      const groupCount = countCaptureGroups(detail.pattern);
+      patternGroups.set(detail.pattern, groupCount);
+    }
+
+    // Group patterns by master
     for (const detail of patternDetails) {
       if (!patternsByMaster.has(detail.master)) {
         patternsByMaster.set(detail.master, []);
@@ -355,53 +379,148 @@ async function processGoogleSheets() {
     }
 
     const consolidatedPatterns = [];
-    let patternsBeforeConsolidation = patternDetails.length;
     let savedAlternations = 0;
+    let consolidationStats = [];
 
     for (const [master, patterns] of patternsByMaster.entries()) {
-      if (patterns.length > 1) {
-        // Multiple patterns for same master - combine with alternation
-        const combinedPattern = patterns.map(p => p.pattern).join('|');
-        
+      if (patterns.length === 1) {
+        // Single pattern for this master - keep as is
+        consolidatedPatterns.push(patterns[0]);
+        continue;
+      }
+
+      // Multiple patterns for this master - consolidate smartly
+      let currentGroup = [];
+      let currentGroupCount = 0;
+
+      for (const pattern of patterns) {
+        const patternGroupCount = patternGroups.get(pattern.pattern) || 0;
+
+        // Check if adding this pattern would exceed limits
+        if (
+          currentGroup.length > 0 &&
+          (currentGroupCount + patternGroupCount > MAX_GROUPS_PER_CONSOLIDATED ||
+            currentGroup.length >= MAX_PATTERNS_PER_CONSOLIDATED)
+        ) {
+          // Finalize current group
+          const combinedPattern = currentGroup.map(p => p.pattern).join('|');
+          consolidatedPatterns.push({
+            pattern: combinedPattern,
+            master,
+            sheetName: currentGroup[0].sheetName,
+            patternCount: currentGroup.length,
+            groupCount: currentGroupCount
+          });
+
+          consolidationStats.push({
+            master,
+            patterns: currentGroup.length,
+            groups: currentGroupCount
+          });
+
+          savedAlternations += currentGroup.length - 1;
+
+          currentGroup = [];
+          currentGroupCount = 0;
+        }
+
+        // Add pattern to current group
+        currentGroup.push(pattern);
+        currentGroupCount += patternGroupCount;
+      }
+
+      // Don't forget the last group for this master
+      if (currentGroup.length > 0) {
+        const combinedPattern = currentGroup.map(p => p.pattern).join('|');
         consolidatedPatterns.push({
           pattern: combinedPattern,
           master,
-          sheetName: patterns[0].sheetName
+          sheetName: currentGroup[0].sheetName,
+          patternCount: currentGroup.length,
+          groupCount: currentGroupCount
         });
-        
-        savedAlternations += patterns.length - 1;
-      } else {
-        // Single pattern - keep as is
-        consolidatedPatterns.push(patterns[0]);
+
+        consolidationStats.push({
+          master,
+          patterns: currentGroup.length,
+          groups: currentGroupCount
+        });
+
+        savedAlternations += currentGroup.length - 1;
       }
     }
 
-    console.log(`Consolidated ${patternsBeforeConsolidation} patterns → ${consolidatedPatterns.length} patterns`);
+    console.log(`Consolidated ${patternDetails.length} patterns → ${consolidatedPatterns.length} consolidated patterns`);
     if (savedAlternations > 0) {
-      const reductionPercent = (100 * savedAlternations / patternsBeforeConsolidation).toFixed(1);
-      console.log(`  💾 Reduction: ${savedAlternations} fewer top-level alternatives (${reductionPercent}% reduction)\n`);
+      const reductionPercent = (100 * savedAlternations / patternDetails.length).toFixed(1);
+      console.log(`  💾 Reduction: ${savedAlternations} fewer top-level alternatives (${reductionPercent}% reduction)`);
     }
 
-    // === STEP 4: BUILD OPTIMIZED REGEX PROCESSOR ===
-    console.log('=== STEP 4: Building optimized regex processor ===');
-    const regexProcessor = new RegexProcessor(
-      consolidatedPatterns.map(p => ({ pattern: p.pattern, template: p.master }))
-    );
+    // Show consolidation stats for large masters
+    const largeConsolidations = consolidationStats
+      .filter(s => s.patterns > 1)
+      .sort((a, b) => b.patterns - a.patterns)
+      .slice(0, 10);
+    
+    if (largeConsolidations.length > 0) {
+      console.log('\n  📊 Top 10 masters by consolidation:');
+      largeConsolidations.forEach(stat => {
+        console.log(`    - ${stat.master}: ${stat.patterns} patterns → ${stat.groups} groups`);
+      });
+    }
+
+    // Check for patterns exceeding limit
+    const exceededLimitPatterns = consolidatedPatterns.filter(p => (p.groupCount || 0) > MAX_GROUPS_PER_CONSOLIDATED);
+    if (exceededLimitPatterns.length > 0) {
+      console.log(`\n  ⚠️  WARNING: ${exceededLimitPatterns.length} consolidated patterns exceed group limit:`);
+      exceededLimitPatterns.slice(0, 5).forEach(p => {
+        console.log(`    - Master: ${p.master}, Groups: ${p.groupCount}, Patterns: ${p.patternCount}`);
+      });
+    }
+
+    // Calculate total groups across all consolidated patterns
+    const totalGroupsInRegex = consolidatedPatterns.reduce((sum, p) => {
+      return sum + (p.groupCount || countCaptureGroups(p.pattern)) + 1;
+    }, 0);
+
+    console.log(`\n  📈 Final regex statistics:`);
+    console.log(`    - Consolidated patterns: ${consolidatedPatterns.length}`);
+    console.log(`    - Estimated total capturing groups: ${totalGroupsInRegex}`);
+    if (totalGroupsInRegex > 1024) {
+      console.log(`    ⚠️  EXCEEDS JavaScript limit (1024)! Consider further splitting.`);
+    } else if (totalGroupsInRegex > 800) {
+      console.log(`    ⚠️  Approaching limit. Consider splitting into multiple regex sets.`);
+    } else {
+      console.log(`    ✅ Well within JavaScript limit.`);
+    }
     console.log();
+
+    // === STEP 4: BUILD MULTIPLE REGEX PROCESSORS ===
+    console.log('=== STEP 4: Building multiple regex processors ===');
+    
+    const MAX_PATTERNS_PER_REGEX = 100;
+    const regexProcessors = [];
+    
+    for (let i = 0; i < consolidatedPatterns.length; i += MAX_PATTERNS_PER_REGEX) {
+      const chunk = consolidatedPatterns.slice(i, i + MAX_PATTERNS_PER_REGEX);
+      const processor = new RegexProcessor(
+        chunk.map(p => ({ pattern: p.pattern, template: p.master }))
+      );
+      regexProcessors.push({ processor, patterns: chunk });
+    }
+    
+    console.log(`Split into ${regexProcessors.length} regex processors (max ${MAX_PATTERNS_PER_REGEX} patterns each)\n`);
 
     // === STEP 5: REGEX MATCHING ===
     console.log('=== STEP 5: Testing nations against regex patterns ===');
-    if (consolidatedPatterns.length > 0 && regexProcessor.regex) {
+    if (consolidatedPatterns.length > 0) {
       let matchCount = 0;
       let testCount = 0;
       let errorCount = 0;
-      let excludedCount = 0;
       let timeoutCount = 0;
       const matchStats = {};
-      
-      // NEW: Track slow pattern tests
       const slowTests = [];
-      const failedPatterns = new Map();  // pattern → count of potential failures
+      const failedPatterns = new Map();
 
       const regexTestStart = Date.now();
 
@@ -413,54 +532,49 @@ async function processGoogleSheets() {
         testCount++;
 
         try {
-          // NEW: Add timeout detection
           const testStart = Date.now();
+          let matched = false;
           
-          const execResult = regexProcessor.exec(nation);
-          
-          const testDuration = Date.now() - testStart;
-          
-          // NEW: Log slow tests (>10ms is suspicious)
-          if (testDuration > 10) {
-            slowTests.push({
-              nation,
-              duration: testDuration,
-              matched: !!execResult
-            });
-          }
-          
-          if (execResult) {
-            const matchIndex = regexProcessor.getMatchIndex(execResult);
+          for (const { processor, patterns } of regexProcessors) {
+            if (!processor.regex) continue;
+            
+            const execResult = processor.exec(nation);
+            const testDuration = Date.now() - testStart;
 
-            if (matchIndex >= 0 && matchIndex < consolidatedPatterns.length) {
-              const patternDetail = consolidatedPatterns[matchIndex];
-              const exclusionKey = `${nation}\t${patternDetail.master}`;
-              
-              if (excludeSet.has(exclusionKey)) {
-                excludedCount++;
-              } else {
-                seenPuppets.add(nation);
-                tsvLines.push(`${nation}\t${patternDetail.master}\t${patternDetail.sheetName}`);
-                matchCount++;
-                
-                matchStats[patternDetail.master] = (matchStats[patternDetail.master] || 0) + 1;
-              }
-            } else {
-              console.error(
-                `[ERROR] Regex matched nation '${nation}' but could not identify pattern. ` +
-                `Match index: ${matchIndex}, Pattern count: ${consolidatedPatterns.length}`
-              );
-              errorCount++;
+            if (testDuration > 10) {
+              slowTests.push({
+                nation,
+                duration: testDuration,
+                matched: !!execResult
+              });
             }
-          } else {
-            // NEW: Track potential pattern failures
-            // Test this nation against ALL patterns individually
+            
+            if (execResult) {
+              const matchIndex = processor.getMatchIndex(execResult);
+
+              if (matchIndex >= 0 && matchIndex < patterns.length) {
+                const patternDetail = patterns[matchIndex];
+                const exclusionKey = `${nation}\t${patternDetail.master}`;
+                
+                if (!excludeSet.has(exclusionKey)) {
+                  seenPuppets.add(nation);
+                  tsvLines.push(`${nation}\t${patternDetail.master}\t${patternDetail.sheetName}`);
+                  matchCount++;
+                  matchStats[patternDetail.master] = (matchStats[patternDetail.master] || 0) + 1;
+                  matched = true;
+                  break;
+                }
+              }
+            }
+          }
+
+          // Track potential pattern failures for diagnostics
+          if (!matched) {
             for (let pi = 0; pi < consolidatedPatterns.length; pi++) {
               try {
                 const pattern = consolidatedPatterns[pi].pattern;
                 const singleRegex = new RegExp(pattern, 'i');
                 if (singleRegex.test(nation)) {
-                  // This pattern SHOULD have matched but didn't!
                   const patternKey = `${pattern.substring(0, 50)}...`;
                   failedPatterns.set(patternKey, (failedPatterns.get(patternKey) || 0) + 1);
                 }
@@ -472,12 +586,9 @@ async function processGoogleSheets() {
         } catch (e) {
           errorCount++;
           timeoutCount++;
-          console.error(
-            `[ERROR] Regex test failed on nation '${nation}': ${e.message}`
-          );
+          console.error(`[ERROR] Regex test failed on nation '${nation}': ${e.message}`);
         }
 
-        // Progress logging every 50k nations
         if (testCount % 50000 === 0) {
           const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
           const rate = (testCount / (Date.now() - startTime) * 1000).toFixed(0);
@@ -495,20 +606,18 @@ async function processGoogleSheets() {
       console.log(`Found ${matchCount} new puppets via regex matching`);
       console.log(`  - Tested: ${testCount.toLocaleString()} nations`);
       console.log(`  - Matched: ${matchCount} puppets`);
-      console.log(`  - Excluded: ${excludedCount} matches`);
       if (errorCount > 0) {
         console.log(`  - Errors: ${errorCount}`);
         console.log(`  - Timeouts: ${timeoutCount}`);
       }
-      
-      // NEW: Show diagnostics
+
       console.log('\n📊 DIAGNOSTIC DATA:');
       
       if (slowTests.length > 0) {
-        console.log(`\n⚠️  Slow pattern tests (>10ms):`);
+        console.log(`\n⚠️  Slow pattern tests (>10ms): ${slowTests.length} occurrences`);
         slowTests
           .sort((a, b) => b.duration - a.duration)
-          .slice(0, 10)
+          .slice(0, 5)
           .forEach(test => {
             console.log(`   ${test.nation}: ${test.duration}ms (${test.matched ? 'MATCHED' : 'no match'})`);
           });
@@ -518,22 +627,12 @@ async function processGoogleSheets() {
         console.log(`\n🔴 CRITICAL: Patterns that should have matched but didn't:`);
         Array.from(failedPatterns.entries())
           .sort((a, b) => b[1] - a[1])
-          .slice(0, 10)
+          .slice(0, 5)
           .forEach(([pattern, count]) => {
             console.log(`   Pattern "${pattern}" failed ${count} times`);
           });
       }
-      
-      // NEW: Check for group limit issue
-      const groupCount = (regexProcessor.regex.toString().match(/\(/g) || []).length;
-      console.log(`\n📋 Regex statistics:`);
-      console.log(`   - Consolidation level: ${consolidatedPatterns.length} patterns`);
-      console.log(`   - Estimated capturing groups: ~${groupCount}`);
-      if (groupCount > 1000) {
-        console.log(`   ⚠️  WARNING: Regex likely exceeds JavaScript's 1024 group limit!`);
-      }
-      
-      // Show top 10 masters by match count
+
       const topMasters = Object.entries(matchStats)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 10);
