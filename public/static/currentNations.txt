@@ -17045,7 +17045,6 @@ v1_from_ultrakill
 sterlinga
 qoeas
 north_chalkea
-mood_killer_xxii
 mood_killer_xxxii
 mood_killer_xxxv
 krycorolande
@@ -17055,6 +17054,7 @@ the_technarchate_of_axiom
 kaliash
 karradon
 test_1_bidimautakkee
+pityussa
 goobergunchia
 warzone_codger
 page
@@ -34814,6 +34814,7 @@ apeirogon
 zifhst
 the_pale_white_dragon
 geen_rechten
+pulantono
 festoria
 festoria-
 varnatia
@@ -45214,6 +45215,7 @@ tyllaria
 feryssia
 pyraania
 2ofrush
+kymhynistan
 peronistas
 the_indurone
 the_storage_nation_38
@@ -55405,6 +55407,7 @@ stoowie
 fractured_fairytale_victims
 the_klevs
 sav_topia
+varconia
 kodiak_legate
 nomayuki
 kodiak_foreign_office
@@ -71184,7 +71187,6 @@ deatheria
 urnera
 rusibir
 alparsia
-mood_killer_xxv
 mood_killer_xliii
 mood_killer_xlviii
 gormokra
@@ -80063,7 +80065,6 @@ zasna
 woke_the_toll
 north_empire
 asset_management
-greengrad
 actiny
 i_love_vishnu
 legioni
@@ -190804,6 +190805,7 @@ reignland
 alpasland
 hms_platoon
 angulla
+gustafsland
 helanar
 surah
 vanligberg
@@ -197906,7 +197908,6 @@ new_hypoluxo
 split_pea
 fiya_fatia
 of_serene_savo
-shimmy_shimmy_hey_shimmy_ha_swalla-la-la
 upper_nohand_ard
 sadeghl_landing
 middle_orainaresetheland
@@ -215529,7 +215530,6 @@ the_sas_israel
 flying_chickens
 vanguardai
 droganst
-mood_killer_xxiii
 mood_killer_xxxiv
 mood_killer_l
 the_callactec_empire
@@ -228520,7 +228520,6 @@ china_guangdong
 southeastern_dixieland
 tamizh_desam
 zahriya_union_fedration
-montagneland
 tylanora
 epstienia
 recon_corps
@@ -243838,6 +243837,7 @@ ascended_america
 saire_ben
 pivkino
 det_bidostallebst
+ortygia
 essenora
 hurdy_gurdy_men
 karaoke
@@ -271340,7 +271340,6 @@ san_borgia
 vimalan_holly
 cryptidss
 lift_yourself
-mood_killer_xxiv
 13th_samonian_refounder
 14th_samonian_refounder
 15th_samonian_refounder
@@ -283048,7 +283047,6 @@ ekharta
 foresian_military
 edunland
 quirkonia
-the_nakerns
 bwrainrot
 mamalkt_rab_qart_hadast_snt
 brasil_666
@@ -283196,6 +283194,7 @@ marie_josephine_moon
 vikar_coast
 pudd
 democratic_republic_of_animeo
+montagneland
 hastavia
 aletorica
 vanila
@@ -292166,6 +292165,8 @@ zengue_sung
 dragonasian_drussia
 eurodragonian_drussia
 america_del_norte
+republic_of_penguin_land
+state_of_san_antonio
 great_dritain_and_northern_direland
 islamic_republic_of_drakistan
 dryanmar
@@ -292426,6 +292427,26 @@ dralmyra_atoll
 dritcairn_islands
 drokelau
 drake_island
+drallis_and_drutuna
+drovet_islands
+drench_southern_and_drantarctic_lands
+dreard_and_dracdonald_islands
+dreter_i_island
+kereskovakia
+kurumbumia
+pilazobo
+mammoths_territory
+warizonia
+unoccupied_drantarctica_administration
+united_quantum_country
+zengue_zen
+kariskakueza
+state_of_saint_george
+karomlenia
+karompolasia
+ondovia
+united_new_antiglona
+karikalia
 republic_of_america_del_sur
 indigortan_zozumegxican_territory
 splantantonia
@@ -309050,6 +309071,7 @@ il_ordon
 libyaa
 tuniss
 algeria2
+the_nakerns
 united_arabs_emirates
 koooooooooooorea
 aeshmadeva_land
@@ -327139,6 +327161,7 @@ furtive_pygmy
 unified_democratic_europe
 gwangju_city_2
 derrick_harmon
+shimmy_shimmy_hey_shimmy_ha_swalla-la-la
 biedronka
 tunazwa_pudizan
 leonigrad
@@ -327347,6 +327370,7 @@ risvollan
 mustardtoes67
 lowwwwww_tappper_fadddde
 egb_empire
+mmmmmmmmmmnnmmmmmmmmmmmmmm
 east_temoainscan
 tridekhistan
 yourtania
@@ -328861,6 +328885,11 @@ nyamalbelle_perle
 mitsuba_eni
 kamigori_ubu
 noa_andriette
+moonlight_lunacy
+michelle_my_baby
+ellerslie_pride
+toni_bianca
+folkqueen
 hurricane_mdix
 hurricane_mdx
 hurricane_mdxi
@@ -333467,6 +333496,10 @@ mood_killer_xvii
 mood_killer_xviii
 mood_killer_xx
 mood_killer_xxi
+mood_killer_xxii
+mood_killer_xxiii
+mood_killer_xxiv
+mood_killer_xxv
 mood_killer_v
 zenhai
 liberation_armed_force
@@ -334132,6 +334165,7 @@ imperial_frey_eve
 moairovik
 free_sacyr_manoight
 new_pigeonia_cardfarm2
+new_pigeonia_cardfarm3
 thap_sole_sallet
 brockmont
 scotland_vaking
@@ -334638,3 +334672,5 @@ kahlmardhani
 baltic_duchy_of_lithuania
 the_union_of_latvia_and_estonia
 ilyastank
+greengrad
+new_telaria
