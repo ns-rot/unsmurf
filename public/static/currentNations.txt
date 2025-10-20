@@ -8595,6 +8595,8 @@ alwador
 dwarkistan
 disdernalkova
 nordic_international_school
+nordic_international_school_2
+pexk
 ananke
 zemnaya_svoboda
 blue_wolf_ii
@@ -17043,7 +17045,6 @@ v1_from_ultrakill
 sterlinga
 qoeas
 north_chalkea
-mood_killer_xxxii
 mood_killer_xxxv
 krycorolande
 siceles
@@ -19748,6 +19749,7 @@ massively_evil_incorporated
 innovaris
 outboundstagnate
 hyperspace_scout_j-40
+gang0
 cordonari
 farmlandia4
 farmlandia32
@@ -60335,6 +60337,7 @@ cm_52
 cm_53
 cm_60
 aaaaaaaaaaaaaaaaaaaaaaaa_aaaaaaaaaaaaaa
+pupachino
 grikplap
 venom_19
 replicator_mr_spider
@@ -63762,6 +63765,7 @@ kaigash
 grum_goblin
 gaspladi
 clodsireia
+west_african_socialist_union
 centrist_seatia
 thaba
 united_oregonian_countys
@@ -63836,6 +63840,7 @@ north_biracil
 purgevile
 gteag
 feorriks
+republic_of_green_land
 the_eye_of_expulsion
 the_socialist_order_of_a_down
 epasioa
@@ -63869,7 +63874,6 @@ wurtemberg
 billination
 gainga
 shlib
-dominion_of_yellow_kingdom
 spring_waldorff
 tetoism
 hatsune_mikuism
@@ -71195,6 +71199,8 @@ veritaska
 serenadica
 cottage_cheese
 kiqw
+tresnicka
+mahanland
 sunset
 treznor
 northrop_grumman
@@ -100606,6 +100612,7 @@ di_san_abbondio
 the_gates_of_eden
 west_mark
 us_republic
+norney
 doormanster
 stockgrove
 north_cegtonkia
@@ -191095,6 +191102,7 @@ a_creative_nothing
 gran_houstonia
 karazicu
 the_merry-men
+the_anti-traction_league
 new_san_andreas_republic
 los_santos_police_department
 nsar_baja_territories
@@ -197938,6 +197946,7 @@ zapdaworld
 yisorange
 mood_killer_xlii
 test_3_ges_arkenton
+gologo
 granisle
 salcedo
 sonakion
@@ -199883,7 +199892,6 @@ richie_grant
 gelnburg
 sokhaine
 luccon
-idyll
 projo
 urmomm
 prionva
@@ -208758,6 +208766,7 @@ rith_oth
 krivenberg
 mood_killer_xlvi
 mandzirosano
+the_grand_empire_of_atlantia
 the_evergreater
 jaworow
 wert
@@ -210284,7 +210293,6 @@ guarch_elitte
 ryuva_industries
 the_democratic_independent_systems
 one_earth_state
-legion_auxiliary
 bajookiesland
 sanojie
 immortalitaia
@@ -241270,7 +241278,6 @@ astetico
 amarathia
 shishling
 mood_killer_xxxix
-new_pigeonia_cardfarm_5
 luisa_madrigal
 desktop
 kingdom_of_shay
@@ -274130,6 +274137,7 @@ knightsbury
 windy_10010
 frafolaand
 waidia
+la_vozia
 168th_catgirl_division
 junk_anchor
 junk_archer
@@ -274799,6 +274807,7 @@ the_baltimore_workers_council
 condados_unidos_da_valaquia_e_moldavia
 druserberg
 adsgagd
+sir_kenrows
 bruce_springsteen
 boruturon
 americanslanda
@@ -275539,6 +275548,7 @@ tgv257
 tgv258
 tgv269
 altys185
+gang1
 tgv303
 tgv318
 tgv319
@@ -275631,6 +275641,7 @@ right_so_far
 khirland
 opztan
 okhav_league
+gangn
 foxparks_cryst
 farmlandia7
 farmlandia11
@@ -278506,6 +278517,7 @@ free_danger_zone_fdz
 grovewood
 the_steel_weapons_company_of_derumbar
 lorenskog_city
+gang56
 dr_mike_incorporated
 of_man-sized_rats
 addies
@@ -292456,6 +292468,15 @@ blue_kingdom
 dominion_of_red_kingdom
 orange_kingdom
 green_kingdom
+dominion_of_yellow_kingdom
+violet_kingdom
+white_kingdom
+south_karompoland_tribal_territory
+romblostia
+golean_islands
+parivozonia
+ausmelia
+karkezolon
 republic_of_america_del_sur
 indigortan_zozumegxican_territory
 splantantonia
@@ -294925,7 +294946,6 @@ bobbery_jr_2
 koyahnatanggal
 glathus
 windy_10011
-mood_killer_xxxi
 gas-house_gorillas
 the_galactic_armada_of_suzuki
 the_gas-house_gorillas
@@ -295131,6 +295151,7 @@ outer_datcherseaunk
 randiefr
 sil_bachan_hakun
 persisus
+raenyra
 the_interstellar_confederacy_1336
 the_interstellar_confederacy_1337
 grod_restorer_3
@@ -328949,7 +328970,6 @@ imperial-octavia
 you_have_yeed_your_last_haw
 the_saucer_pilots
 holy_federation_of_stars
-the_anti-traction_league
 taosun
 autonomous_worker_drones
 zantalio
@@ -328998,6 +329018,7 @@ cheorvo
 actually-planetary_earth_colonies
 the_an
 the_dying_band
+legion_auxiliary
 qwarz_atarz
 communist_zemisnorth
 kaikishoku
@@ -331722,7 +331743,6 @@ loger
 eimmen
 preuenberg
 doge_garrison_130
-omboonga
 northern_ireland_and_western_ireland
 jangahordian_city_forces
 king_sam_of_house_of_buca
@@ -333485,11 +333505,7 @@ the_santa_cruz_mountains
 shedret
 the_republic_of_atherland
 floydistan
-gang1
-gang0
-gangn
 mood_killer
-gang56
 mood_killer_i
 mood_killer_ii
 mood_killer_iii
@@ -333519,6 +333535,8 @@ mood_killer_xxv
 mood_killer_xxvi
 mood_killer_xxvii
 mood_killer_xxx
+mood_killer_xxxi
+mood_killer_xxxii
 mood_killer_v
 zenhai
 liberation_armed_force
@@ -334187,6 +334205,8 @@ new_pigeonia_cardfarm1
 new_pigeonia_cardfarm2
 new_pigeonia_cardfarm3
 new_pigeonia_cardfarm4
+new_pigeonia_cardfarm_5
+new_pigeonia_cardfarm6
 thap_sole_sallet
 brockmont
 scotland_vaking
@@ -334697,3 +334717,5 @@ ilyastank
 greengrad
 new_telaria
 rotila
+omboonga
+idyll
