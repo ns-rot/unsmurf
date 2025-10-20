@@ -3953,8 +3953,6 @@ kaizerburgia
 liberterania
 phansetion
 eossai
-mood_killer_xxix
-mood_killer_xxvi
 mood_killer_xli
 bhavishya_land
 the_grendels
@@ -8596,6 +8594,7 @@ east_hollywood
 alwador
 dwarkistan
 disdernalkova
+nordic_international_school
 ananke
 zemnaya_svoboda
 blue_wolf_ii
@@ -13806,7 +13805,6 @@ agormacha
 indiaaaaaaaaaaaaaaaad
 nostran
 making_money
-new_pigeonia_cardfarm1
 canthah
 censhand
 shrarks
@@ -63871,6 +63869,7 @@ wurtemberg
 billination
 gainga
 shlib
+dominion_of_yellow_kingdom
 spring_waldorff
 tetoism
 hatsune_mikuism
@@ -138272,7 +138271,6 @@ riaphe
 la_gran_colombia_ngc
 stonewall_union
 canada_in_the_empire
-felix_islands
 korndogmush
 british_goreoyo
 the_pink_elephant_followers
@@ -208758,7 +208756,6 @@ great_peace_and_eternal_magnificence
 eudorias
 rith_oth
 krivenberg
-mood_killer_xxvii
 mood_killer_xlvi
 mandzirosano
 the_evergreater
@@ -210912,7 +210909,6 @@ prada_or_nada
 dagorath
 nordhalls
 estovi
-mood_killer_xxx
 reckless_fireweaver
 princess_ccv
 dark_guard_4
@@ -241274,6 +241270,7 @@ astetico
 amarathia
 shishling
 mood_killer_xxxix
+new_pigeonia_cardfarm_5
 luisa_madrigal
 desktop
 kingdom_of_shay
@@ -274133,7 +274130,6 @@ knightsbury
 windy_10010
 frafolaand
 waidia
-mood_killer_xxviii
 168th_catgirl_division
 junk_anchor
 junk_archer
@@ -292166,6 +292162,7 @@ dragonasian_drussia
 eurodragonian_drussia
 america_del_norte
 republic_of_penguin_land
+earth_dragons_territory
 state_of_san_antonio
 great_dritain_and_northern_direland
 islamic_republic_of_drakistan
@@ -292447,6 +292444,18 @@ karompolasia
 ondovia
 united_new_antiglona
 karikalia
+wind_dragons_territory
+water_dragons_territory
+fire_dragons_territory
+ice_dragons_territory
+plant_dragons_territory
+rainbow_dragons_territory
+electric_and_thunder_dragons_territory
+lava_dragons_territory
+blue_kingdom
+dominion_of_red_kingdom
+orange_kingdom
+green_kingdom
 republic_of_america_del_sur
 indigortan_zozumegxican_territory
 splantantonia
@@ -328890,6 +328899,11 @@ michelle_my_baby
 ellerslie_pride
 toni_bianca
 folkqueen
+kraft_univer
+meikun_tsukasa
+dynamu_heroine
+blacky_ale
+dicta_striker
 hurricane_mdix
 hurricane_mdx
 hurricane_mdxi
@@ -333499,7 +333513,12 @@ mood_killer_xxi
 mood_killer_xxii
 mood_killer_xxiii
 mood_killer_xxiv
+mood_killer_xxviii
+mood_killer_xxix
 mood_killer_xxv
+mood_killer_xxvi
+mood_killer_xxvii
+mood_killer_xxx
 mood_killer_v
 zenhai
 liberation_armed_force
@@ -334164,8 +334183,10 @@ viloze_normar
 imperial_frey_eve
 moairovik
 free_sacyr_manoight
+new_pigeonia_cardfarm1
 new_pigeonia_cardfarm2
 new_pigeonia_cardfarm3
+new_pigeonia_cardfarm4
 thap_sole_sallet
 brockmont
 scotland_vaking
@@ -334526,6 +334547,7 @@ joshualuvshiswiiu
 kurohana_teikoku
 puppet_state_225
 puppet_state_182
+felix_islands
 karl_x
 zann_consortium
 richtugal
@@ -334674,3 +334696,4 @@ the_union_of_latvia_and_estonia
 ilyastank
 greengrad
 new_telaria
+rotila
