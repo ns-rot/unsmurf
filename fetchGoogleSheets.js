@@ -1,6 +1,7 @@
 // fetchGoogleSheets.js
 
 import { promises as fs, existsSync, createReadStream } from 'fs';
+import { createInterface } from 'readline';
 import fetch from 'node-fetch';
 import { exec } from 'child_process';
 import { createBrotliDecompress } from 'zlib';
@@ -67,7 +68,7 @@ const ghPagesFilePath = `${worktreePath}/static/puppetData.tsv`; // Path in gh-p
 
 async function runGitCommand(command) {
   return new Promise((resolve, reject) => {
-    console.log(`Running command: ${command}`); // Debugging output
+    console.log(`Running command: ${command}`);
     exec(command, (error, stdout, stderr) => {
       if (error) {
         console.error(`Error running command: ${command}\n`, stderr);
@@ -80,19 +81,16 @@ async function runGitCommand(command) {
   });
 }
 
-// Ensure the gh-pages worktree is clean before adding it
 async function setupWorktree() {
   try {
     console.log('Cleaning up worktree...');
     await runGitCommand(`git worktree prune`);
 
-    // Check if worktree path exists and remove it if needed
     if (existsSync(worktreePath)) {
       console.log(`Worktree ${worktreePath} exists. Removing it...`);
       await runGitCommand(`git worktree remove ${worktreePath} --force`);
     }
 
-    // Ensure gh-pages branch exists before creating worktree
     console.log('Fetching gh-pages branch...');
     await runGitCommand(`git fetch origin gh-pages || git branch gh-pages origin/gh-pages`);
 
@@ -103,16 +101,37 @@ async function setupWorktree() {
   }
 }
 
-async function readBrotliFile(filePath) {
+async function streamBrotliFile(filePath, processLine) {
   return new Promise((resolve, reject) => {
-    const stream = createReadStream(filePath);
+    const fileStream = createReadStream(filePath);
     const brotli = createBrotliDecompress();
-    const chunks = [];
-    stream.on('error', (err) => (err.code === 'ENOENT' ? resolve('') : reject(err)));
-    brotli.on('data', (chunk) => chunks.push(chunk));
-    brotli.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
-    brotli.on('error', (err) => reject(err));
-    stream.pipe(brotli);
+    const rl = createInterface({
+      input: fileStream.pipe(brotli),
+      crlfDelay: Infinity
+    });
+
+    rl.on('line', (line) => {
+      const nation = line.trim();
+      if (nation) {
+        processLine(nation);
+      }
+    });
+
+    rl.on('close', () => {
+      resolve();
+    });
+
+    rl.on('error', (err) => {
+      reject(err);
+    });
+
+    fileStream.on('error', (err) => {
+      reject(err);
+    });
+
+    brotli.on('error', (err) => {
+      reject(err);
+    });
   });
 }
 
@@ -140,18 +159,15 @@ async function fetchData(sheet) {
   }
 }
 
-// Helper function to count capturing groups in a regex pattern
 function countCaptureGroups(pattern) {
   try {
     let count = 0;
     let i = 0;
     while (i < pattern.length) {
       if (pattern[i] === '(') {
-        // Check if it's non-capturing (?:...), (?=...), (?!...), etc.
         if (i + 1 < pattern.length && pattern[i + 1] === '?') {
           i += 2;
         } else {
-          // Regular capturing group
           count++;
           i++;
         }
@@ -189,10 +205,7 @@ class RegexProcessor {
 
       try {
         new RegExp(pattern, 'i');
-        
-        // Convert capturing groups to non-capturing groups
         pattern = pattern.replace(/\((?!\?)/g, '(?:');
-        
         validPatterns.push(pattern);
         validTemplates.push(template);
       } catch (e) {
@@ -255,10 +268,7 @@ async function processGoogleSheets() {
   const seenPuppets = new Set();
 
   try {
-    console.log(`Loading all nations data from ${allNationsCompressedPath}...`);
-    const allNationsData = await readBrotliFile(allNationsCompressedPath);
-    const allNations = allNationsData.split('\n').filter(n => n.trim() !== '');
-    console.log(`Loaded ${allNations.length} total nations for regex matching.\n`);
+    console.log(`Streaming nations data from ${allNationsCompressedPath}...\n`);
 
     // === STEP 1: DIRECT PUPPETS ===
     console.log('=== STEP 1: Processing direct puppet mappings ===');
@@ -363,14 +373,12 @@ async function processGoogleSheets() {
     
     const patternsByMaster = new Map();
 
-    // First: count groups in each pattern
     const patternGroups = new Map();
     for (const detail of patternDetails) {
       const groupCount = countCaptureGroups(detail.pattern);
       patternGroups.set(detail.pattern, groupCount);
     }
 
-    // Group patterns by master
     for (const detail of patternDetails) {
       if (!patternsByMaster.has(detail.master)) {
         patternsByMaster.set(detail.master, []);
@@ -384,25 +392,21 @@ async function processGoogleSheets() {
 
     for (const [master, patterns] of patternsByMaster.entries()) {
       if (patterns.length === 1) {
-        // Single pattern for this master - keep as is
         consolidatedPatterns.push(patterns[0]);
         continue;
       }
 
-      // Multiple patterns for this master - consolidate smartly
       let currentGroup = [];
       let currentGroupCount = 0;
 
       for (const pattern of patterns) {
         const patternGroupCount = patternGroups.get(pattern.pattern) || 0;
 
-        // Check if adding this pattern would exceed limits
         if (
           currentGroup.length > 0 &&
           (currentGroupCount + patternGroupCount > MAX_GROUPS_PER_CONSOLIDATED ||
             currentGroup.length >= MAX_PATTERNS_PER_CONSOLIDATED)
         ) {
-          // Finalize current group
           const combinedPattern = currentGroup.map(p => p.pattern).join('|');
           consolidatedPatterns.push({
             pattern: combinedPattern,
@@ -424,12 +428,10 @@ async function processGoogleSheets() {
           currentGroupCount = 0;
         }
 
-        // Add pattern to current group
         currentGroup.push(pattern);
         currentGroupCount += patternGroupCount;
       }
 
-      // Don't forget the last group for this master
       if (currentGroup.length > 0) {
         const combinedPattern = currentGroup.map(p => p.pattern).join('|');
         consolidatedPatterns.push({
@@ -456,7 +458,6 @@ async function processGoogleSheets() {
       console.log(`  💾 Reduction: ${savedAlternations} fewer top-level alternatives (${reductionPercent}% reduction)`);
     }
 
-    // Show consolidation stats for large masters
     const largeConsolidations = consolidationStats
       .filter(s => s.patterns > 1)
       .sort((a, b) => b.patterns - a.patterns)
@@ -469,16 +470,6 @@ async function processGoogleSheets() {
       });
     }
 
-    // Check for patterns exceeding limit
-    const exceededLimitPatterns = consolidatedPatterns.filter(p => (p.groupCount || 0) > MAX_GROUPS_PER_CONSOLIDATED);
-    if (exceededLimitPatterns.length > 0) {
-      console.log(`\n  ⚠️  WARNING: ${exceededLimitPatterns.length} consolidated patterns exceed group limit:`);
-      exceededLimitPatterns.slice(0, 5).forEach(p => {
-        console.log(`    - Master: ${p.master}, Groups: ${p.groupCount}, Patterns: ${p.patternCount}`);
-      });
-    }
-
-    // Calculate total groups across all consolidated patterns
     const totalGroupsInRegex = consolidatedPatterns.reduce((sum, p) => {
       return sum + (p.groupCount || countCaptureGroups(p.pattern)) + 1;
     }, 0);
@@ -511,43 +502,28 @@ async function processGoogleSheets() {
     
     console.log(`Split into ${regexProcessors.length} regex processors (max ${MAX_PATTERNS_PER_REGEX} patterns each)\n`);
 
-    // === STEP 5: REGEX MATCHING ===
-    console.log('=== STEP 5: Testing nations against regex patterns ===');
+    // === STEP 5: REGEX MATCHING (STREAMING) ===
+    console.log('=== STEP 5: Testing nations against regex patterns (streaming) ===');
     if (consolidatedPatterns.length > 0) {
       let matchCount = 0;
       let testCount = 0;
       let errorCount = 0;
-      let timeoutCount = 0;
       const matchStats = {};
-      const slowTests = [];
-      const failedPatterns = new Map();
 
       const regexTestStart = Date.now();
 
-      for (let idx = 0; idx < allNations.length; idx++) {
-        const nation = allNations[idx];
-        
-        if (seenPuppets.has(nation)) continue;
+      await streamBrotliFile(allNationsCompressedPath, (nation) => {
+        if (seenPuppets.has(nation)) return;
 
         testCount++;
 
         try {
-          const testStart = Date.now();
           let matched = false;
           
           for (const { processor, patterns } of regexProcessors) {
             if (!processor.regex) continue;
             
             const execResult = processor.exec(nation);
-            const testDuration = Date.now() - testStart;
-
-            if (testDuration > 10) {
-              slowTests.push({
-                nation,
-                duration: testDuration,
-                matched: !!execResult
-              });
-            }
             
             if (execResult) {
               const matchIndex = processor.getMatchIndex(execResult);
@@ -567,25 +543,8 @@ async function processGoogleSheets() {
               }
             }
           }
-
-          // Track potential pattern failures for diagnostics
-          if (!matched) {
-            for (let pi = 0; pi < consolidatedPatterns.length; pi++) {
-              try {
-                const pattern = consolidatedPatterns[pi].pattern;
-                const singleRegex = new RegExp(pattern, 'i');
-                if (singleRegex.test(nation)) {
-                  const patternKey = `${pattern.substring(0, 50)}...`;
-                  failedPatterns.set(patternKey, (failedPatterns.get(patternKey) || 0) + 1);
-                }
-              } catch (e) {
-                // Pattern itself is broken
-              }
-            }
-          }
         } catch (e) {
           errorCount++;
-          timeoutCount++;
           console.error(`[ERROR] Regex test failed on nation '${nation}': ${e.message}`);
         }
 
@@ -593,11 +552,11 @@ async function processGoogleSheets() {
           const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
           const rate = (testCount / (Date.now() - startTime) * 1000).toFixed(0);
           console.log(
-            `  Progress: ${testCount.toLocaleString()}/${allNations.length.toLocaleString()} ` +
+            `  Progress: ${testCount.toLocaleString()} ` +
             `nations tested, ${matchCount} matches found, ${elapsed}s elapsed, ${rate} nations/sec`
           );
         }
-      }
+      });
 
       const regexTestTime = ((Date.now() - regexTestStart) / 1000).toFixed(1);
       const testsPerSecond = ((testCount * 1000) / (Date.now() - regexTestStart)).toFixed(0);
@@ -608,29 +567,6 @@ async function processGoogleSheets() {
       console.log(`  - Matched: ${matchCount} puppets`);
       if (errorCount > 0) {
         console.log(`  - Errors: ${errorCount}`);
-        console.log(`  - Timeouts: ${timeoutCount}`);
-      }
-
-      console.log('\n📊 DIAGNOSTIC DATA:');
-      
-      if (slowTests.length > 0) {
-        console.log(`\n⚠️  Slow pattern tests (>10ms): ${slowTests.length} occurrences`);
-        slowTests
-          .sort((a, b) => b.duration - a.duration)
-          .slice(0, 5)
-          .forEach(test => {
-            console.log(`   ${test.nation}: ${test.duration}ms (${test.matched ? 'MATCHED' : 'no match'})`);
-          });
-      }
-      
-      if (failedPatterns.size > 0) {
-        console.log(`\n🔴 CRITICAL: Patterns that should have matched but didn't:`);
-        Array.from(failedPatterns.entries())
-          .sort((a, b) => b[1] - a[1])
-          .slice(0, 5)
-          .forEach(([pattern, count]) => {
-            console.log(`   Pattern "${pattern}" failed ${count} times`);
-          });
       }
 
       const topMasters = Object.entries(matchStats)
