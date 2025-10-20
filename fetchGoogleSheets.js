@@ -2,7 +2,6 @@ import { promises as fs, existsSync, createReadStream } from 'fs';
 import fetch from 'node-fetch';
 import { exec } from 'child_process';
 import { createBrotliDecompress } from 'zlib';
-import { log } from 'console';
 
 const sheets = [
   {
@@ -144,40 +143,58 @@ class RegexProcessor {
     this.regex = null;
     this.templates = [];
 
-    if (!rules || rules.length === 0) return;
+    if (!rules || rules.length === 0) {
+      console.warn('[WARNING] No regex rules provided to RegexProcessor');
+      return;
+    }
 
     const validPatterns = [];
     const validTemplates = [];
+    let skippedCount = 0;
 
     for (const rule of rules) {
       let { pattern, template } = rule;
       
+      if (!pattern || !template) {
+        skippedCount++;
+        continue;
+      }
+
       try {
+        // Validate pattern compiles
         new RegExp(pattern, 'i');
         
-        // CRITICAL: Convert internal capturing groups to non-capturing groups
-        // This prevents the "all undefined" problem
-        // Replace ( with (?: UNLESS it's already (?:
+        // CRITICAL: Convert capturing groups to non-capturing groups
+        // Prevents "undefined groups" issue
         pattern = pattern.replace(/\((?!\?)/g, '(?:');
+        
         validPatterns.push(pattern);
         validTemplates.push(template);
       } catch (e) {
+        skippedCount++;
         console.error(
-          `[ERROR] Skipping INVALID regex pattern. Pattern: '${pattern}', ` +
-          `Template: '${template}', Reason: ${e.message}`
+          `[ERROR] Failed to validate regex pattern. Pattern: '${pattern}', ` +
+          `Reason: ${e.message}`
         );
       }
     }
 
-    if (validPatterns.length === 0) return;
+    if (validPatterns.length === 0) {
+      console.error('[ERROR] No valid patterns after validation');
+      return;
+    }
 
-    // NOW the combined regex will only have ONE capturing group per pattern
+    // Combine all patterns: (pattern1)|(pattern2)|...|(patternN)
+    // Each pattern gets exactly ONE capturing group
     const combinedStr = validPatterns.map(p => `(${p})`).join('|');
 
     try {
       this.regex = new RegExp(combinedStr, 'i');
       this.templates = validTemplates;
-      console.log(`Successfully compiled ${validPatterns.length} patterns into single regex`);
+      console.log(
+        `Compiled ${validPatterns.length} patterns into single regex` +
+        (skippedCount > 0 ? ` (${skippedCount} skipped)` : '')
+      );
     } catch (e) {
       console.error(`[ERROR] Failed to compile combined regex: ${e.message}`);
       this.regex = null;
@@ -185,138 +202,71 @@ class RegexProcessor {
     }
   }
 
-  resolve(text) {
-    if (!text || !this.regex) return text;
+  exec(text) {
+    if (!text || !this.regex) return null;
+    return this.regex.exec(text);
+  }
 
-    const execResult = this.regex.exec(text);
-    if (!execResult) return text;
-
-    // Now that we've normalized patterns, the first non-undefined group
-    // after index 0 will ALWAYS correspond to the matching pattern
-    let matchIndex = -1;
+  /**
+   * Identify which pattern matched from exec result
+   * @param {RegExpExecArray} execResult - Result from regex.exec()
+   * @returns {number} Index of matched pattern, or -1 if not found
+   */
+  getMatchIndex(execResult) {
+    if (!execResult) return -1;
+    
+    // Find first non-undefined group (corresponds to matched pattern)
     for (let i = 1; i < execResult.length; i++) {
       if (execResult[i] !== undefined) {
-        matchIndex = i - 1;
-        break;
+        return i - 1;  // Convert to 0-based index
       }
     }
+    return -1;
+  }
 
-    if (matchIndex === -1 || matchIndex >= this.templates.length) {
-      console.error(
-        `[LOGIC ERROR] Matched '${text}' but could not identify pattern. ` +
-        `Match index: ${matchIndex}, Templates: ${this.templates.length}`
-      );
-      return text;
+  /**
+   * Get template for matched pattern
+   */
+  getTemplate(matchIndex) {
+    if (matchIndex < 0 || matchIndex >= this.templates.length) {
+      return null;
     }
-
-    const template = this.templates[matchIndex];
-
-    return template.replace(/\$(\d+)/g, (m) => {
-      try {
-        const groupNum = parseInt(m[1], 10);
-        const absoluteGroupIndex = matchIndex + 1 + groupNum;
-        return execResult[absoluteGroupIndex] || '';
-      } catch (e) {
-        console.warn(`[WARN] Failed to resolve group ${m[1]}`);
-        return m[0];
-      }
-    });
+    return this.templates[matchIndex];
   }
-
-  match(text) {
-    if (!text || !this.regex) return false;
-    return this.regex.test(text);
-  }
-}
-
-function createPatternCache(patternDetails) {
-  return patternDetails
-    .map(pd => {
-      try {
-        return {
-          ...pd,
-          compiledRegex: new RegExp(pd.pattern, 'i')
-        };
-      } catch (e) {
-        console.error(
-          `[ERROR] Failed to compile regex for caching. Pattern: '${pd.pattern}', Error: ${e.message}`
-        );
-        return null;
-      }
-    })
-    .filter(Boolean);
-}
-
-function findMatchingPattern(nation, cachedPatterns) {
-  for (const pd of cachedPatterns) {
-    if (pd.compiledRegex.test(nation)) {
-      return pd;
-    }
-  }
-  return null;
 }
 
 async function processGoogleSheets() {
-  const tsvLines = ['puppet\tmaster\tsheet']; // Header row
+  const startTime = Date.now();
+  const tsvLines = ['puppet\tmaster\tsheet'];
   const seenPuppets = new Set();
 
   try {
     console.log(`Loading all nations data from ${allNationsCompressedPath}...`);
     const allNationsData = await readBrotliFile(allNationsCompressedPath);
     const allNations = allNationsData.split('\n').filter(n => n.trim() !== '');
-    console.log(`Loaded ${allNations.length} total nations for regex matching.`);
+    console.log(`Loaded ${allNations.length} total nations for regex matching.\n`);
 
+    // === STEP 1: DIRECT PUPPETS ===
+    console.log('=== STEP 1: Processing direct puppet mappings ===');
     for (const sheet of sheets) {
       console.log(`Fetching direct puppet data from ${sheet.name}...`);
       const sheetData = await fetchData(sheet);
+      let addedCount = 0;
+      
       for (const line of sheetData) {
         const [puppet] = line.split('\t');
         if (puppet && !seenPuppets.has(puppet)) {
           seenPuppets.add(puppet);
           tsvLines.push(line);
+          addedCount++;
         }
       }
+      console.log(`  Added ${addedCount} puppets from ${sheet.name}`);
     }
-    
-    const patternDetails = [];
+    console.log(`Total direct puppets: ${seenPuppets.size}\n`);
 
-    for (const sheet of regexSheets) {
-      console.log(`Fetching and validating regexes from ${sheet.name}...`);
-      const response = await fetch(sheet.url);
-      if (!response.ok) {
-        console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`);
-        continue;
-      }
-      const data = await response.text();
-      const lines = data.split('\n').slice(sheet.headerRows);
-
-      for (const line of lines) {
-        const columns = line.split('\t');
-        const regexString = columns[sheet.regexColumn]?.trim();
-        const master = columns[sheet.mainColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
-
-        if (!regexString || !master) {
-          if (line.trim()) {
-            console.warn(
-              `[WARNING] Skipping row in sheet '${sheet.name}' due to missing data. Line: "${line.trim()}"`
-            );
-          }
-          continue;
-        }
-
-        try {
-          new RegExp(regexString);
-          patternDetails.push({ pattern: regexString, master, sheetName: sheet.name });
-        } catch (e) {
-          console.error(
-            `[ERROR] Skipping invalid regex pattern in sheet '${sheet.name}'. ` +
-            `Master: '${master}', Pattern: '${regexString}', Error: ${e.message}`
-          );
-        }
-      }
-    }
-
-    // Load exclusion rules
+    // === STEP 2: LOAD EXCLUSIONS ===
+    console.log('=== STEP 2: Loading exclusion rules ===');
     const excludeSet = new Set();
     for (const sheet of excludeSheet) {
       console.log(`Fetching exclusion rules from ${sheet.name}...`);
@@ -337,42 +287,162 @@ async function processGoogleSheets() {
         }
       }
     }
-    console.log(`Loaded ${excludeSet.size} exclusion rules.`);
+    console.log(`Loaded ${excludeSet.size} exclusion rules.\n`);
 
-    if (patternDetails.length > 0) {
-      console.log(`Compiling ${patternDetails.length} regexes using RegexProcessor...`);
-      const regexProcessor = new RegexProcessor(
-        patternDetails.map(p => ({ pattern: p.pattern, template: p.master }))
-      );
+    // === STEP 3: LOAD AND COMPILE REGEX PATTERNS ===
+    console.log('=== STEP 3: Loading and compiling regex patterns ===');
+    const patternDetails = [];
 
-      const cachedPatterns = createPatternCache(patternDetails);
-      console.log(`Cached ${cachedPatterns.length} compiled regex patterns.`);
+    for (const sheet of regexSheets) {
+      console.log(`Fetching regexes from ${sheet.name}...`);
+      const response = await fetch(sheet.url);
+      if (!response.ok) {
+        console.error(`Failed to fetch ${sheet.name}: ${response.statusText}`);
+        continue;
+      }
+      const data = await response.text();
+      const lines = data.split('\n').slice(sheet.headerRows);
 
-      let matchCount = 0;
-      for (const nation of allNations) {
-        if (seenPuppets.has(nation)) continue;
+      let validCount = 0;
+      let invalidCount = 0;
 
-        if (regexProcessor.match(nation)) {
-          const matchingPattern = findMatchingPattern(nation, cachedPatterns);
-          if (matchingPattern) {
-            // Check if this (nation, master) pair is excluded
-            const exclusionKey = `${nation}\t${matchingPattern.master}`;
-            if (excludeSet.has(exclusionKey)) {
-              console.log(`Skipping excluded entry: ${exclusionKey}`);
-              continue; // Skip without marking as seen
-            }
+      for (const line of lines) {
+        const columns = line.split('\t');
+        const regexString = columns[sheet.regexColumn]?.trim();
+        const master = columns[sheet.mainColumn]?.trim().toLowerCase().replace(/\s+/g, '_');
 
-            seenPuppets.add(nation);
-            tsvLines.push(
-              `${nation}\t${matchingPattern.master}\t${matchingPattern.sheetName}`
+        if (!regexString || !master) {
+          if (line.trim()) {
+            console.warn(
+              `[WARNING] Skipping row in '${sheet.name}' due to missing data. ` +
+              `Line: "${line.trim()}"`
             );
-            matchCount++;
           }
+          continue;
+        }
+
+        try {
+          new RegExp(regexString, 'i');
+          patternDetails.push({
+            pattern: regexString,
+            master,
+            sheetName: sheet.name
+          });
+          validCount++;
+        } catch (e) {
+          console.error(
+            `[ERROR] Skipping invalid regex in '${sheet.name}'. ` +
+            `Master: '${master}', Pattern: '${regexString}', Error: ${e.message}`
+          );
+          invalidCount++;
         }
       }
-      console.log(`Found ${matchCount} new puppets via regex matching.`);
+      console.log(`  ${validCount} valid patterns, ${invalidCount} invalid patterns`);
+    }
+    console.log(`Total patterns to compile: ${patternDetails.length}\n`);
+
+    // === STEP 4: BUILD OPTIMIZED REGEX PROCESSOR ===
+    console.log('=== STEP 4: Building optimized regex processor ===');
+    const regexProcessor = new RegexProcessor(
+      patternDetails.map(p => ({ pattern: p.pattern, template: p.master }))
+    );
+    console.log();
+
+    // === STEP 5: REGEX MATCHING ===
+    console.log('=== STEP 5: Testing nations against regex patterns ===');
+    if (patternDetails.length > 0 && regexProcessor.regex) {
+      let matchCount = 0;
+      let testCount = 0;
+      let errorCount = 0;
+      let excludedCount = 0;
+      const matchStats = {};
+
+      const regexTestStart = Date.now();
+
+      for (let idx = 0; idx < allNations.length; idx++) {
+        const nation = allNations[idx];
+        
+        if (seenPuppets.has(nation)) continue;
+
+        testCount++;
+
+        try {
+          // Single .exec() call gets all match data
+          // No need to loop through patterns again!
+          const execResult = regexProcessor.exec(nation);
+          
+          if (execResult) {
+            // Matched pattern from exec result
+            const matchIndex = regexProcessor.getMatchIndex(execResult);
+
+            if (matchIndex >= 0 && matchIndex < patternDetails.length) {
+              const patternDetail = patternDetails[matchIndex];
+              const exclusionKey = `${nation}\t${patternDetail.master}`;
+              
+              if (excludeSet.has(exclusionKey)) {
+                console.log(`  Excluding: ${exclusionKey}`);
+                excludedCount++;
+              } else {
+                seenPuppets.add(nation);
+                tsvLines.push(`${nation}\t${patternDetail.master}\t${patternDetail.sheetName}`);
+                matchCount++;
+                
+                // Track statistics
+                matchStats[patternDetail.master] = (matchStats[patternDetail.master] || 0) + 1;
+              }
+            } else {
+              console.error(
+                `[ERROR] Regex matched nation '${nation}' but could not identify pattern. ` +
+                `Match index: ${matchIndex}, Pattern count: ${patternDetails.length}`
+              );
+              errorCount++;
+            }
+          }
+        } catch (e) {
+          errorCount++;
+          console.error(
+            `[ERROR] Regex test failed on nation '${nation}': ${e.message}`
+          );
+        }
+
+        // Progress logging every 50k nations
+        if (testCount % 50000 === 0) {
+          const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+          const rate = (testCount / (Date.now() - startTime) * 1000).toFixed(0);
+          console.log(
+            `  Progress: ${testCount.toLocaleString()}/${allNations.length.toLocaleString()} ` +
+            `nations tested, ${matchCount} matches found, ${elapsed}s elapsed, ${rate} nations/sec`
+          );
+        }
+      }
+
+      const regexTestTime = ((Date.now() - regexTestStart) / 1000).toFixed(1);
+      const testsPerSecond = ((testCount * 1000) / (Date.now() - regexTestStart)).toFixed(0);
+
+      console.log(`\nRegex matching completed in ${regexTestTime}s (${testsPerSecond} nations/sec)`);
+      console.log(`Found ${matchCount} new puppets via regex matching`);
+      console.log(`  - Tested: ${testCount.toLocaleString()} nations`);
+      console.log(`  - Matched: ${matchCount} puppets`);
+      console.log(`  - Excluded: ${excludedCount} matches`);
+      if (errorCount > 0) {
+        console.log(`  - Errors: ${errorCount}`);
+      }
+      
+      // Show top 10 masters by match count
+      const topMasters = Object.entries(matchStats)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10);
+      if (topMasters.length > 0) {
+        console.log('\n  📊 Top 10 masters by match count:');
+        topMasters.forEach(([master, count]) => {
+          console.log(`    - ${master}: ${count}`);
+        });
+      }
+      console.log();
     }
 
+    // === STEP 6: LOAD REDIRECTS ===
+    console.log('=== STEP 6: Loading redirect rules ===');
     const redirMap = new Map();
     for (const sheet of redirSheet) {
       console.log(`Fetching redirects from ${sheet.name}...`);
@@ -393,45 +463,45 @@ async function processGoogleSheets() {
         }
       }
     }
+    console.log(`Loaded ${redirMap.size} redirect rules.\n`);
 
+    // === STEP 7: APPLY REDIRECTS ===
     if (redirMap.size > 0) {
-      console.log(`Applying ${redirMap.size} redirect rules...`);
+      console.log('=== STEP 7: Applying redirect rules ===');
+      let redirectCount = 0;
       for (let i = 1; i < tsvLines.length; i++) {
         const [puppet, master, sheet] = tsvLines[i].split('\t');
         if (redirMap.has(master)) {
           const newMaster = redirMap.get(master);
           tsvLines[i] = `${puppet}\t${newMaster}\t${sheet}`;
+          redirectCount++;
         }
       }
+      console.log(`Applied ${redirectCount} redirects.\n`);
     }
 
-    // === SORT DATA BY MASTER THEN BY PUPPET ===
-    console.log('Sorting data by puppetmaster then by nation...');
+    // === STEP 8: SORT DATA ===
+    console.log('=== STEP 8: Sorting data by master then puppet ===');
     const header = tsvLines[0];
     const dataLines = tsvLines.slice(1);
 
-    // Pre-parse and create cache
     const parsedData = dataLines.map(line => {
       const [puppet, master, sheet] = line.split('\t');
       return { puppet, master, sheet, original: line };
     });
 
-    // Sort with faster comparison
     parsedData.sort((a, b) => {
-      // Direct string comparison (faster than localeCompare for ASCII)
-      if (a.master < b.master) return -1;
-      if (a.master > b.master) return 1;
-      
-      if (a.puppet < b.puppet) return -1;
-      if (a.puppet > b.puppet) return 1;
-      
-      return 0;
+      if (a.master !== b.master) {
+        return a.master < b.master ? -1 : 1;
+      }
+      return a.puppet < b.puppet ? -1 : (a.puppet > b.puppet ? 1 : 0);
     });
 
-    const sortedLines = parsedData.map(p => p.original);
-    const tsvContent = [header, ...sortedLines].join('\n');
+    const tsvContent = [header, ...parsedData.map(p => p.original)].join('\n');
+    console.log(`Total entries in final file: ${parsedData.length}\n`);
 
-    // === WRITE AND COMMIT ===
+    // === STEP 9: WRITE AND COMMIT ===
+    console.log('=== STEP 9: Writing and committing files ===');
     await fs.writeFile(mainFilePath, tsvContent, 'utf8');
     console.log(`Data saved to ${mainFilePath}`);
 
@@ -444,8 +514,9 @@ async function processGoogleSheets() {
       git push --force origin main
     `);
 
+    // === STEP 10: SYNC TO GH-PAGES ===
+    console.log('\n=== STEP 10: Syncing to gh-pages ===');
     await setupWorktree();
-
     await fs.copyFile(mainFilePath, ghPagesFilePath);
     console.log(`Copied ${mainFilePath} to ${ghPagesFilePath}`);
 
@@ -459,6 +530,9 @@ async function processGoogleSheets() {
 
     console.log('Removing gh-pages worktree...');
     await runGitCommand(`git worktree remove ${worktreePath} --force`);
+
+    const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
+    console.log(`\nCompleted in ${totalTime}s`);
 
   } catch (error) {
     console.error('Error processing Google Sheets:', error);
