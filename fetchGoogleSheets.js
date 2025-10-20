@@ -396,7 +396,12 @@ async function processGoogleSheets() {
       let testCount = 0;
       let errorCount = 0;
       let excludedCount = 0;
+      let timeoutCount = 0;
       const matchStats = {};
+      
+      // NEW: Track slow pattern tests
+      const slowTests = [];
+      const failedPatterns = new Map();  // pattern → count of potential failures
 
       const regexTestStart = Date.now();
 
@@ -408,12 +413,23 @@ async function processGoogleSheets() {
         testCount++;
 
         try {
-          // Single .exec() call gets all match data
-          // No need to loop through patterns again!
+          // NEW: Add timeout detection
+          const testStart = Date.now();
+          
           const execResult = regexProcessor.exec(nation);
           
+          const testDuration = Date.now() - testStart;
+          
+          // NEW: Log slow tests (>10ms is suspicious)
+          if (testDuration > 10) {
+            slowTests.push({
+              nation,
+              duration: testDuration,
+              matched: !!execResult
+            });
+          }
+          
           if (execResult) {
-            // Matched pattern from exec result
             const matchIndex = regexProcessor.getMatchIndex(execResult);
 
             if (matchIndex >= 0 && matchIndex < consolidatedPatterns.length) {
@@ -421,14 +437,12 @@ async function processGoogleSheets() {
               const exclusionKey = `${nation}\t${patternDetail.master}`;
               
               if (excludeSet.has(exclusionKey)) {
-                console.log(`  Excluding: ${exclusionKey}`);
                 excludedCount++;
               } else {
                 seenPuppets.add(nation);
                 tsvLines.push(`${nation}\t${patternDetail.master}\t${patternDetail.sheetName}`);
                 matchCount++;
                 
-                // Track statistics
                 matchStats[patternDetail.master] = (matchStats[patternDetail.master] || 0) + 1;
               }
             } else {
@@ -438,9 +452,26 @@ async function processGoogleSheets() {
               );
               errorCount++;
             }
+          } else {
+            // NEW: Track potential pattern failures
+            // Test this nation against ALL patterns individually
+            for (let pi = 0; pi < consolidatedPatterns.length; pi++) {
+              try {
+                const pattern = consolidatedPatterns[pi].pattern;
+                const singleRegex = new RegExp(pattern, 'i');
+                if (singleRegex.test(nation)) {
+                  // This pattern SHOULD have matched but didn't!
+                  const patternKey = `${pattern.substring(0, 50)}...`;
+                  failedPatterns.set(patternKey, (failedPatterns.get(patternKey) || 0) + 1);
+                }
+              } catch (e) {
+                // Pattern itself is broken
+              }
+            }
           }
         } catch (e) {
           errorCount++;
+          timeoutCount++;
           console.error(
             `[ERROR] Regex test failed on nation '${nation}': ${e.message}`
           );
@@ -467,6 +498,39 @@ async function processGoogleSheets() {
       console.log(`  - Excluded: ${excludedCount} matches`);
       if (errorCount > 0) {
         console.log(`  - Errors: ${errorCount}`);
+        console.log(`  - Timeouts: ${timeoutCount}`);
+      }
+      
+      // NEW: Show diagnostics
+      console.log('\n📊 DIAGNOSTIC DATA:');
+      
+      if (slowTests.length > 0) {
+        console.log(`\n⚠️  Slow pattern tests (>10ms):`);
+        slowTests
+          .sort((a, b) => b.duration - a.duration)
+          .slice(0, 10)
+          .forEach(test => {
+            console.log(`   ${test.nation}: ${test.duration}ms (${test.matched ? 'MATCHED' : 'no match'})`);
+          });
+      }
+      
+      if (failedPatterns.size > 0) {
+        console.log(`\n🔴 CRITICAL: Patterns that should have matched but didn't:`);
+        Array.from(failedPatterns.entries())
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 10)
+          .forEach(([pattern, count]) => {
+            console.log(`   Pattern "${pattern}" failed ${count} times`);
+          });
+      }
+      
+      // NEW: Check for group limit issue
+      const groupCount = (regexProcessor.regex.toString().match(/\(/g) || []).length;
+      console.log(`\n📋 Regex statistics:`);
+      console.log(`   - Consolidation level: ${consolidatedPatterns.length} patterns`);
+      console.log(`   - Estimated capturing groups: ~${groupCount}`);
+      if (groupCount > 1000) {
+        console.log(`   ⚠️  WARNING: Regex likely exceeds JavaScript's 1024 group limit!`);
       }
       
       // Show top 10 masters by match count
