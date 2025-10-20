@@ -1,3 +1,5 @@
+// fetchNationStates.js
+
 import { promises as fs } from 'fs'; // Node.js filesystem module
 import fetch from 'node-fetch'; // Use node-fetch for HTTP requests
 import { exec } from 'child_process'; // For running Git commands

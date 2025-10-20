@@ -1,3 +1,5 @@
+// fetchGoogleSheets.js
+
 import { promises as fs, existsSync, createReadStream } from 'fs';
 import fetch from 'node-fetch';
 import { exec } from 'child_process';
@@ -339,18 +341,57 @@ async function processGoogleSheets() {
       }
       console.log(`  ${validCount} valid patterns, ${invalidCount} invalid patterns`);
     }
-    console.log(`Total patterns to compile: ${patternDetails.length}\n`);
+    console.log(`Total patterns before consolidation: ${patternDetails.length}\n`);
+
+    // === STEP 3.5: CONSOLIDATE PATTERNS BY MASTER ===
+    console.log('=== STEP 3.5: Consolidating patterns by master ===');
+    const patternsByMaster = new Map();
+
+    for (const detail of patternDetails) {
+      if (!patternsByMaster.has(detail.master)) {
+        patternsByMaster.set(detail.master, []);
+      }
+      patternsByMaster.get(detail.master).push(detail);
+    }
+
+    const consolidatedPatterns = [];
+    let patternsBeforeConsolidation = patternDetails.length;
+    let savedAlternations = 0;
+
+    for (const [master, patterns] of patternsByMaster.entries()) {
+      if (patterns.length > 1) {
+        // Multiple patterns for same master - combine with alternation
+        const combinedPattern = patterns.map(p => p.pattern).join('|');
+        
+        consolidatedPatterns.push({
+          pattern: combinedPattern,
+          master,
+          sheetName: patterns[0].sheetName
+        });
+        
+        savedAlternations += patterns.length - 1;
+      } else {
+        // Single pattern - keep as is
+        consolidatedPatterns.push(patterns[0]);
+      }
+    }
+
+    console.log(`Consolidated ${patternsBeforeConsolidation} patterns → ${consolidatedPatterns.length} patterns`);
+    if (savedAlternations > 0) {
+      const reductionPercent = (100 * savedAlternations / patternsBeforeConsolidation).toFixed(1);
+      console.log(`  💾 Reduction: ${savedAlternations} fewer top-level alternatives (${reductionPercent}% reduction)\n`);
+    }
 
     // === STEP 4: BUILD OPTIMIZED REGEX PROCESSOR ===
     console.log('=== STEP 4: Building optimized regex processor ===');
     const regexProcessor = new RegexProcessor(
-      patternDetails.map(p => ({ pattern: p.pattern, template: p.master }))
+      consolidatedPatterns.map(p => ({ pattern: p.pattern, template: p.master }))
     );
     console.log();
 
     // === STEP 5: REGEX MATCHING ===
     console.log('=== STEP 5: Testing nations against regex patterns ===');
-    if (patternDetails.length > 0 && regexProcessor.regex) {
+    if (consolidatedPatterns.length > 0 && regexProcessor.regex) {
       let matchCount = 0;
       let testCount = 0;
       let errorCount = 0;
@@ -375,8 +416,8 @@ async function processGoogleSheets() {
             // Matched pattern from exec result
             const matchIndex = regexProcessor.getMatchIndex(execResult);
 
-            if (matchIndex >= 0 && matchIndex < patternDetails.length) {
-              const patternDetail = patternDetails[matchIndex];
+            if (matchIndex >= 0 && matchIndex < consolidatedPatterns.length) {
+              const patternDetail = consolidatedPatterns[matchIndex];
               const exclusionKey = `${nation}\t${patternDetail.master}`;
               
               if (excludeSet.has(exclusionKey)) {
@@ -393,7 +434,7 @@ async function processGoogleSheets() {
             } else {
               console.error(
                 `[ERROR] Regex matched nation '${nation}' but could not identify pattern. ` +
-                `Match index: ${matchIndex}, Pattern count: ${patternDetails.length}`
+                `Match index: ${matchIndex}, Pattern count: ${consolidatedPatterns.length}`
               );
               errorCount++;
             }
