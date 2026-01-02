@@ -30,7 +30,7 @@
         <input
           type="text"
           bind:value={nationId}
-          on:keypress={handleEnter}
+          on:keydown={handleEnter}
           placeholder="Testlandia"
           class="border border-gray-300 rounded-full px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
         />
