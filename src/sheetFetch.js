@@ -18,7 +18,13 @@ async function fetchWithCache(url) {
   const cacheKey = `unsmurf_cache_time_${url}`;
 
   const now = Date.now();
-  const lastCached = localStorage.getItem(cacheKey);
+  let lastCached = null;
+  try {
+    lastCached = localStorage.getItem(cacheKey);
+  } catch (e) {
+    console.warn("LocalStorage access failed", e);
+  }
+
   const isValid = lastCached && now - parseInt(lastCached) < cacheDuration;
 
   if (isValid && "caches" in window) {
@@ -39,7 +45,11 @@ async function fetchWithCache(url) {
     try {
       const cache = await caches.open(cacheName);
       await cache.put(url, response.clone());
-      localStorage.setItem(cacheKey, now.toString());
+      try {
+        localStorage.setItem(cacheKey, now.toString());
+      } catch (e) {
+        console.warn("LocalStorage write failed", e);
+      }
     } catch (e) {
       console.warn("Cache put failed", e);
     }

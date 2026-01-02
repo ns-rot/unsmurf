@@ -15,10 +15,10 @@
 {#key $settingsStore}
 <div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-2.5 md:gap-4 mt-6">
   {#each [
-    { title: 'Detailed Gifts Sent', columns: makeGiftColumns('buyer'), rows: makeGiftRows(sells, 'buyer') },
-    { title: 'Detailed Gifts Received', columns: makeGiftColumns('seller'), rows: makeGiftRows(buys, 'seller') },
-    { title: 'Detailed Cards Sold', columns: makeTradeColumns('buyer'), rows: makeTradeRows(sells, 'buyer') },
-    { title: 'Detailed Cards Purchased', columns: makeTradeColumns('seller'), rows: makeTradeRows(buys, 'seller') }
+    { title: 'Detailed Gifts Sent', columns: makeGiftColumns('buyer'), rows: makeGiftRows(sells, 'buyer', 'detailedSent') },
+    { title: 'Detailed Gifts Received', columns: makeGiftColumns('seller'), rows: makeGiftRows(buys, 'seller', 'detailedReceived') },
+    { title: 'Detailed Cards Sold', columns: makeTradeColumns('buyer'), rows: makeTradeRows(sells, 'buyer', 'detailedSent') },
+    { title: 'Detailed Cards Purchased', columns: makeTradeColumns('seller'), rows: makeTradeRows(buys, 'seller', 'detailedReceived') }
   ] as { title, columns, rows }}
     <div>
       {#if loading}

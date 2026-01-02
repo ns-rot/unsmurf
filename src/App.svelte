@@ -46,13 +46,17 @@
   let lastCacheTime = null;
   let loadedNationId = "";
 
-  $: dataReady = $settingsStore.dataFetched;
-
   $: canonicalizedName = canonicalizeName(nationId);
-  $: canonicalizedMasterName = dataReady ? (canonicalizeName(findPuppetmaster(canonicalizedName)?.master) || "") : "";
-  $: isCTE = dataReady ? !isNationCurrent(canonicalizedName) : false;
-  $: isPuppet = dataReady ? (canonicalizedMasterName && canonicalizedName !== canonicalizedMasterName) : false;
-  $: isMasterCte = dataReady ? !isNationCurrent(canonicalizedMasterName) : false;
+  $: canonicalizedMasterName = canonicalizeName(findPuppetmaster(canonicalizedName)?.master) || "";
+  $: isCTE = !isNationCurrent(canonicalizedName);
+  $: isPuppet = canonicalizedMasterName && canonicalizedName !== canonicalizedMasterName;
+  $: isMasterCte = !isNationCurrent(canonicalizedMasterName);
+
+  // Reactive tallies that update when buys/sells change OR when settings change
+  $: buyTallyTrades = $settingsStore && tallyCounts(buys, "seller", true, "tallyReceived");
+  $: buyTallyGifts = $settingsStore && tallyCounts(buys, "seller", false, "tallyReceived");
+  $: sellTallyTrades = $settingsStore && tallyCounts(sells, "buyer", true, "tallySent");
+  $: sellTallyGifts = $settingsStore && tallyCounts(sells, "buyer", false, "tallySent");
 
   async function loadTradeData(forceRefresh = false) {
     if (!nationId.trim()) {
@@ -79,11 +83,6 @@
 
     loading = false;
   }
-
-  $: buyTallyTrades = $settingsStore && tallyCounts(buys, "seller", true);
-  $: buyTallyGifts = $settingsStore && tallyCounts(buys, "seller", false);
-  $: sellTallyTrades = $settingsStore && tallyCounts(sells, "buyer", true);
-  $: sellTallyGifts = $settingsStore && tallyCounts(sells, "buyer", false);
 
   function openConfig() {
     showConfig = true;

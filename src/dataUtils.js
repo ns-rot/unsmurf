@@ -10,11 +10,13 @@ import {
 import { useSettings } from "./settingsStore";
 import { findPuppetmaster, isNationCurrent, queryS4 } from "./sheetFetch";
 
-export function tallyCounts(trades, roleKey, isTrade) {
+export function tallyCounts(trades, roleKey, isTrade, context) {
   const tally = {};
   const rawToNormalizedMap = {};
   const settings = useSettings();
   const section = settings.section;
+
+  if (!trades) return [];
 
   trades
     .filter((t) => (isTrade ? t.price !== 0 : t.price === 0))
@@ -45,10 +47,10 @@ export function tallyCounts(trades, roleKey, isTrade) {
     });
 
   // Format and return the tally
-  return buildTallyContent(tally, rawToNormalizedMap, settings);
+  return buildTallyContent(tally, rawToNormalizedMap, context, settings);
 }
 
-function buildTallyContent(tally, rawToNormalizedMap, settings) {
+function buildTallyContent(tally, rawToNormalizedMap, context, settings) {
   if (!settings) settings = useSettings();
   const section = settings.section;
   const showCTE = settings.showCTE;
@@ -69,9 +71,7 @@ function buildTallyContent(tally, rawToNormalizedMap, settings) {
         cte = isNationCurrent(aggregatedName) ? "" : `<span class="select-none">&#xe000;&#x2009;</span>`;
       }
 
-      const displayName = `<a href="https://www.nationstates.net/nation=${encodeURIComponent(
-        aggregatedName
-      )}/page=deck/show_trades" target="_blank" rel="noopener noreferrer">${cte}${formatNationName(
+      const displayName = `<a href="${getNationLink(aggregatedName, context)}" target="_blank" rel="noopener noreferrer">${cte}${formatNationName(
         aggregatedName
       )}</a>`;
 
@@ -218,7 +218,8 @@ export function makeRows(
   role,
   filterCondition,
   includePrice,
-  showRelativeDate
+  showRelativeDate,
+  context
 ) {
   return records.filter(filterCondition).map((r) => {
     let cte = "";
@@ -226,9 +227,7 @@ export function makeRows(
       cte = isNationCurrent(r[role]) ? "" : `<span class="select-none">&#xe000;&#x2009;</span>`;
     }
     let nationDisplay = cte + formatNationName(r[role] || "N/A");
-    const nationLink = `<a href="https://www.nationstates.net/nation=${encodeURIComponent(
-      r[role] || "N/A"
-    )}"
+    const nationLink = `<a href="${getNationLink(r[role] || "N/A", context)}"
         target="_blank" rel="noopener noreferrer">${nationDisplay}</a>`;
     const cardLink = `<a href="https://www.nationstates.net/page=deck/card=${
       r.card_id
@@ -261,9 +260,7 @@ export function makeRows(
         if (useSettings().showCTE) {
           cte = isNationCurrent(puppetMaster.master) ? "" : `<span class="select-none">&#xe000;&#x2009;</span>`;
         }
-        puppetMasterText += `<span class="text-gray-500 text-sm"><a href="https://www.nationstates.net/nation=${
-          puppetMaster.master
-        }"
+        puppetMasterText += `<span class="text-gray-500 text-sm"><a href="${getNationLink(puppetMaster.master, context)}"
         target="_blank" rel="noopener noreferrer">${cte}${formatNationName(
           puppetMaster.master
         )}</a></span>`;
@@ -303,13 +300,14 @@ export function makeRows(
  * @param {string} role - The role key ('buyer' or 'seller').
  * @returns {Array} - The processed rows for the trade table.
  */
-export function makeTradeRows(records, role) {
+export function makeTradeRows(records, role, context) {
   return makeRows(
     records,
     role,
     (r) => r.price !== 0,
     true,
-    useSettings().showRelativeDate
+    useSettings().showRelativeDate,
+    context
   ); // Include price
 }
 
@@ -319,13 +317,14 @@ export function makeTradeRows(records, role) {
  * @param {string} role - The role key ('buyer' or 'seller').
  * @returns {Array} - The processed rows for the gift table.
  */
-export function makeGiftRows(records, role) {
+export function makeGiftRows(records, role, context) {
   return makeRows(
     records,
     role,
     (r) => r.price === 0,
     false,
-    useSettings().showRelativeDate
+    useSettings().showRelativeDate,
+    context
   ); // Exclude price
 }
 
@@ -346,4 +345,54 @@ export function toggleDateFormat() {
       relative.classList.toggle("hidden");
     }
   });
+}
+
+function getNationLink(nationName, context) {
+  const settings = useSettings();
+  const encodedName = encodeURIComponent(nationName);
+  
+  let linkType = "nation";
+
+  // Check for CTE override first
+  if (settings.enableCTELink && !isNationCurrent(nationName)) {
+    linkType = settings.linkTypeCTE;
+  } else {
+    // Determine link type based on context
+    switch (context) {
+      case "tallySent":
+        linkType = settings.linkTypeTallySent;
+        break;
+      case "tallyReceived":
+        linkType = settings.linkTypeTallyReceived;
+        break;
+      case "detailedSent":
+        linkType = settings.linkTypeDetailedSent;
+        break;
+      case "detailedReceived":
+        linkType = settings.linkTypeDetailedReceived;
+        break;
+      default:
+        linkType = "nation";
+    }
+  }
+  
+  switch (linkType) {
+    case "trades":
+      return `https://www.nationstates.net/nation=${encodedName}/page=deck/show_trades`;
+    case "buys":
+      return `https://www.nationstates.net/nation=${encodedName}/page=deck/show_trades=buys`;
+    case "sells":
+      return `https://www.nationstates.net/nation=${encodedName}/page=deck/show_trades=sales`;
+    case "unsmurf":
+      return `https://ns-rot.github.io/unsmurf/?q=${encodedName}`;
+    case "boneyard":
+      return `https://www.nationstates.net/page=boneyard?nation=${encodedName}`;
+    case "custom":
+      return settings.customLinkTemplate
+        ? settings.customLinkTemplate.replace(/{nation}/g, encodedName).replace(/\[nation\]/g, encodedName)
+        : `https://www.nationstates.net/nation=${encodedName}`;
+    case "nation":
+    default:
+      return `https://www.nationstates.net/nation=${encodedName}`;
+  }
 }

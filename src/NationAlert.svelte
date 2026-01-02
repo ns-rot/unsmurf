@@ -12,6 +12,9 @@
 
   export let nationId = "";
 
+  // Debugging logs
+  $: console.log("nationId updated in NationAlert:", nationId);
+
   // Compute derived values reactively
   $: dataReady = $settingsStore.dataFetched;
   $: canonicalizedName = canonicalizeName(nationId);

@@ -7,6 +7,13 @@ const defaultSettings = {
   showRelativeDate: false,
   redEpics: true,
   rainbowLegs: true,
+  linkTypeTallySent: "unsmurf",
+  linkTypeTallyReceived: "unsmurf",
+  linkTypeDetailedSent: "buys",
+  linkTypeDetailedReceived: "sells",
+  linkTypeCTE: "boneyard",
+  enableCTELink: true,
+  customLinkTemplate: "https://www.nationstates.net/nation={nation}",
 };
 
 const storedSettings = JSON.parse(localStorage.getItem("unsmurfSettings")) || defaultSettings;
