@@ -99,7 +99,7 @@ export function formatNationName(name, language = "en") {
 
   // Helper to insert soft hyphens
   function insertShy(word) {
-    const shy = "<span class='select-none text-gray-600'>&shy;</span>";
+    const shy = "<span class='select-none text-indigo-800'>&shy;</span>";
     // Try using the hyphenator for the specified language
     const hyphenated = hyphenator.hyphenate(word).join(shy);
     // If no hyphenation occurred, use a fallback to insert every 3 characters
