@@ -4,14 +4,14 @@
   // Define mode-specific text content
   const headerTexts = {
     cards: {
-      subtitle: "thru Card Trades",
+      subtitle: "Card Trades",
       description: `An alternative UI for 
         <a href="https://bazaar.kractero.com/" class="text-blue-500 hover:underline">Kractero's Bazaar</a> 
         to make identifying puppets easier.`,
     },
     foundation: {
-      subtitle: "thru Foundation Time",
-      description: "View and group nations by their foundation time to make identifying puppets easier.",
+      subtitle: "Founding Time",
+      description: "View and group nations by their founding time to make identifying puppets easier.",
     },
   };
 
