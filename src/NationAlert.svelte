@@ -8,28 +8,29 @@
   } from "./sheetFetch.js";
   import PuppetPopup from "./PuppetPopup.svelte";
 
+  import { settingsStore } from "./settingsStore.js";
+
   export let nationId = "";
 
-  // Debugging logs
-  $: console.log("nationId updated in NationAlert:", nationId);
-
   // Compute derived values reactively
+  $: dataReady = $settingsStore.dataFetched;
   $: canonicalizedName = canonicalizeName(nationId);
   $: canonicalizedMasterName = (() => {
+    if (!dataReady) return "";
     const info = findPuppetmaster(canonicalizedName).master;
     return canonicalizeName(info) === canonicalizedName ? "" : info;
   })();
-  $: isCTE = !isNationCurrent(canonicalizedName);
+  $: isCTE = dataReady ? !isNationCurrent(canonicalizedName) : false;
 
   // Ensure a nation is NOT a puppet of itself
   $: isPuppet = canonicalizedMasterName != "" ? true : false;
 
   // If nation is a puppet, check if the master is a CTE
-  $: isMasterCte = !isNationCurrent(canonicalizedMasterName);
+  $: isMasterCte = dataReady ? !isNationCurrent(canonicalizedMasterName) : false;
 
   // Get puppet counts
-  $: puppetCountSelf = tallyPuppets(canonicalizedName); // Puppets under the current nation
-  $: puppetCountMaster = tallyPuppets(canonicalizedMasterName); // Puppets under the master nation
+  $: puppetCountSelf = dataReady ? tallyPuppets(canonicalizedName) : 0; // Puppets under the current nation
+  $: puppetCountMaster = dataReady ? tallyPuppets(canonicalizedMasterName) : 0; // Puppets under the master nation
 
   // Choose which tally to display
   $: puppetTally = isPuppet ? puppetCountMaster : puppetCountSelf;

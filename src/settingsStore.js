@@ -10,12 +10,16 @@ const defaultSettings = {
 };
 
 const storedSettings = JSON.parse(localStorage.getItem("unsmurfSettings")) || defaultSettings;
+// Ensure dataFetched is always false on initialization (runtime state)
+storedSettings.dataFetched = false;
 
 export const settingsStore = writable(storedSettings);
 
 settingsStore.subscribe((value) => {
   try {
-    localStorage.setItem("unsmurfSettings", JSON.stringify(value));
+    // Exclude runtime state from persistence
+    const { dataFetched, ...settingsToSave } = value;
+    localStorage.setItem("unsmurfSettings", JSON.stringify(settingsToSave));
   } catch (error) {
     console.error("Error saving to localStorage:", error);
   }

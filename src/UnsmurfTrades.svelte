@@ -1,6 +1,7 @@
 <script>
     export let nationId;
-    export let openConfig
+    export let openConfig;
+    export let loadTradeData;
     import { canonicalizeName } from "./settingsUtils.js";
 
 
@@ -11,10 +12,7 @@
       return;
     }
 
-    const safeNation = canonicalizeName(nationId.trim());
-    window.location.href = `./?q=${encodeURIComponent(safeNation)}`;
-
-    
+    loadTradeData();
   }
 
   export function handleEnter(e) {

@@ -12,6 +12,42 @@ const puppetDataUrl = "./static/puppetData.tsv"; // URL to your preprocessed Pup
 const s4DataUrl = "./static/s4.tsv"; // URL to your preprocessed S4 TSV file
 const currentNationsUrl = "./static/currentNations.txt"; // URL to your current nations file
 
+async function fetchWithCache(url) {
+  const cacheName = "unsmurf-static-data";
+  const cacheDuration = 24 * 60 * 60 * 1000; // 24 hours
+  const cacheKey = `unsmurf_cache_time_${url}`;
+
+  const now = Date.now();
+  const lastCached = localStorage.getItem(cacheKey);
+  const isValid = lastCached && now - parseInt(lastCached) < cacheDuration;
+
+  if (isValid && "caches" in window) {
+    try {
+      const cache = await caches.open(cacheName);
+      const cachedResponse = await cache.match(url);
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+    } catch (e) {
+      console.warn("Cache match failed", e);
+    }
+  }
+
+  const response = await fetch(url);
+
+  if (response.ok && "caches" in window) {
+    try {
+      const cache = await caches.open(cacheName);
+      await cache.put(url, response.clone());
+      localStorage.setItem(cacheKey, now.toString());
+    } catch (e) {
+      console.warn("Cache put failed", e);
+    }
+  }
+
+  return response;
+}
+
 /**
  * Preprocesses the current nations cache into a Set for fast lookups.
  */
@@ -36,63 +72,97 @@ export async function fetchSheets() {
   currentNationSet = null;
 
   try {
-    // Fetch and parse the Puppet Data TSV
-    const puppetResponse = await fetch(puppetDataUrl);
-    if (!puppetResponse.ok) {
-      throw new Error(`Failed to fetch puppet data: ${puppetResponse.statusText}`);
-    }
+    // Fetch all data in parallel
+    const [puppetResponse, s4Response, currentNationsResponse] = await Promise.all([
+      fetchWithCache(puppetDataUrl),
+      fetchWithCache(s4DataUrl),
+      fetchWithCache(currentNationsUrl),
+    ]);
 
-    const puppetData = await puppetResponse.text();
-    const puppetLines = puppetData.split("\n").slice(1); // Skip header row
-    puppetLines.forEach((line) => {
-      const [puppet, master, sheet] = line.split("\t").map((col) =>
-        col.trim().toLowerCase().replace(/\s+/g, "_")
-      );
+    if (!puppetResponse.ok) throw new Error(`Failed to fetch puppet data: ${puppetResponse.statusText}`);
+    if (!s4Response.ok) throw new Error(`Failed to fetch S4 data: ${s4Response.statusText}`);
+    if (!currentNationsResponse.ok) throw new Error(`Failed to fetch current nations data: ${currentNationsResponse.statusText}`);
 
-      if (puppet && master) {
-        // Store puppet-to-master mapping
-        puppetMasterCache[puppet] = { master, sheet };
+    // Get text content in parallel
+    const [puppetData, s4Data, currentNationsData] = await Promise.all([
+      puppetResponse.text(),
+      s4Response.text(),
+      currentNationsResponse.text(),
+    ]);
 
-        // Ignore self-mapping (master === puppet)
-        if (puppet !== master) {
-          if (!masterToPuppetsCache[master]) {
-            masterToPuppetsCache[master] = [];
+    // Process Puppet Data
+    // Optimized parsing: avoid split("\n") and map() overhead
+    let start = 0;
+    let next = puppetData.indexOf('\n', start);
+    if (next !== -1) start = next + 1; // Skip header
+
+    while (start < puppetData.length) {
+      next = puppetData.indexOf('\n', start);
+      const lineEnd = next === -1 ? puppetData.length : next;
+      
+      // Manual tab finding to avoid split("\t")
+      const tab1 = puppetData.indexOf('\t', start);
+      const tab2 = puppetData.indexOf('\t', tab1 + 1);
+      
+      if (tab1 !== -1 && tab1 < lineEnd && tab2 !== -1 && tab2 < lineEnd) {
+        const puppet = normalize(puppetData.substring(start, tab1));
+        const master = normalize(puppetData.substring(tab1 + 1, tab2));
+        const sheet = normalize(puppetData.substring(tab2 + 1, lineEnd));
+
+        if (puppet && master) {
+          puppetMasterCache[puppet] = { master, sheet };
+          if (puppet !== master) {
+            if (!masterToPuppetsCache[master]) masterToPuppetsCache[master] = [];
+            masterToPuppetsCache[master].push(puppet);
           }
-          masterToPuppetsCache[master].push(puppet);
         }
       }
-    });
+      
+      if (next === -1) break;
+      start = next + 1;
+    }
 
     console.log(`Loaded ${Object.keys(puppetMasterCache).length} puppets.`);
     console.log(`Loaded ${Object.keys(masterToPuppetsCache).length} masters with puppets.`);
-    
-    // Fetch and parse the S4 Data TSV
-    const s4Response = await fetch(s4DataUrl);
-    if (!s4Response.ok) {
-      throw new Error(`Failed to fetch S4 data: ${s4Response.statusText}`);
-    }
 
-    const s4Data = await s4Response.text();
-    const s4Lines = s4Data.split("\n").slice(1); // Skip header row
-    s4Lines.forEach((line) => {
-      const [cardId, cardName] = line.split("\t").map((col) =>
-        col.trim().toLowerCase().replace(/\s+/g, "_")
-      );
-      if (cardId && cardName) {
-        s4Cache[cardId] = cardName; // Store card ID-to-name mappings
+    // Process S4 Data
+    start = 0;
+    next = s4Data.indexOf('\n', start);
+    if (next !== -1) start = next + 1; // Skip header
+
+    while (start < s4Data.length) {
+      next = s4Data.indexOf('\n', start);
+      const lineEnd = next === -1 ? s4Data.length : next;
+      
+      const tab1 = s4Data.indexOf('\t', start);
+      if (tab1 !== -1 && tab1 < lineEnd) {
+        const cardId = normalize(s4Data.substring(start, tab1));
+        const cardName = normalize(s4Data.substring(tab1 + 1, lineEnd));
+        
+        if (cardId && cardName) {
+          s4Cache[cardId] = cardName;
+        }
       }
-    });
-
-    // Fetch and parse the Current Nations file
-    const currentNationsResponse = await fetch(currentNationsUrl);
-    if (!currentNationsResponse.ok) {
-      throw new Error(`Failed to fetch current nations data: ${currentNationsResponse.statusText}`);
+      
+      if (next === -1) break;
+      start = next + 1;
     }
 
-    const currentNationsData = await currentNationsResponse.text();
-    currentNationsCache = currentNationsData
-      .split("\n")
-      .map((nation) => nation.trim().toLowerCase().replace(/\s+/g, "_")); // Normalize nation names
+    // Process Current Nations Data
+    currentNationsCache = [];
+    start = 0;
+    while (start < currentNationsData.length) {
+      next = currentNationsData.indexOf('\n', start);
+      const lineEnd = next === -1 ? currentNationsData.length : next;
+      
+      if (lineEnd > start) {
+        const nation = normalize(currentNationsData.substring(start, lineEnd));
+        if (nation) currentNationsCache.push(nation);
+      }
+      
+      if (next === -1) break;
+      start = next + 1;
+    }
 
     // Preprocess the current nations into a Set for fast lookups
     preprocessCurrentNationSet();
@@ -105,6 +175,11 @@ export async function fetchSheets() {
     ...s,
     dataFetched: true,
   }));
+}
+
+// Helper for fast normalization
+function normalize(str) {
+  return str.trim().toLowerCase().replace(/\s+/g, "_");
 }
 
 /**

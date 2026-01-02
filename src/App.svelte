@@ -43,14 +43,18 @@
   let isCTE = false;
   let isPuppet = false;
   let isMasterCte = false;
+  let lastCacheTime = null;
+  let loadedNationId = "";
+
+  $: dataReady = $settingsStore.dataFetched;
 
   $: canonicalizedName = canonicalizeName(nationId);
-  $: canonicalizedMasterName = canonicalizeName(findPuppetmaster(canonicalizedName)?.master) || "";
-  $: isCTE = !isNationCurrent(canonicalizedName);
-  $: isPuppet = canonicalizedMasterName && canonicalizedName !== canonicalizedMasterName;
-  $: isMasterCte = !isNationCurrent(canonicalizedMasterName);
+  $: canonicalizedMasterName = dataReady ? (canonicalizeName(findPuppetmaster(canonicalizedName)?.master) || "") : "";
+  $: isCTE = dataReady ? !isNationCurrent(canonicalizedName) : false;
+  $: isPuppet = dataReady ? (canonicalizedMasterName && canonicalizedName !== canonicalizedMasterName) : false;
+  $: isMasterCte = dataReady ? !isNationCurrent(canonicalizedMasterName) : false;
 
-  async function loadTradeData() {
+  async function loadTradeData(forceRefresh = false) {
     if (!nationId.trim()) {
       alert("Please enter a nation name.");
       return;
@@ -63,22 +67,23 @@
 
     // Fetch Data
     const [fetchedBuys, fetchedSells] = await Promise.all([
-      fetchData("buyer", safeNation),
-      fetchData("seller", safeNation),
+      fetchData("buyer", safeNation, forceRefresh),
+      fetchData("seller", safeNation, forceRefresh),
     ]);
 
     // Assign fetched values
-    buys = fetchedBuys;
-    sells = fetchedSells;
-
-    // Calculate tallies
-    buyTallyTrades = tallyCounts(buys, "seller", true);
-    buyTallyGifts = tallyCounts(buys, "seller", false);
-    sellTallyTrades = tallyCounts(sells, "buyer", true);
-    sellTallyGifts = tallyCounts(sells, "buyer", false);
+    buys = fetchedBuys.trades;
+    sells = fetchedSells.trades;
+    lastCacheTime = fetchedBuys.cacheTime || fetchedSells.cacheTime;
+    loadedNationId = canonicalizeName(safeNation);
 
     loading = false;
   }
+
+  $: buyTallyTrades = $settingsStore && tallyCounts(buys, "seller", true);
+  $: buyTallyGifts = $settingsStore && tallyCounts(buys, "seller", false);
+  $: sellTallyTrades = $settingsStore && tallyCounts(sells, "buyer", true);
+  $: sellTallyGifts = $settingsStore && tallyCounts(sells, "buyer", false);
 
   function openConfig() {
     showConfig = true;
@@ -107,6 +112,17 @@
 
   <!-- UnsmurfTrades Input Component -->
   <UnsmurfTrades bind:nationId {loadTradeData} {showConfig} {openConfig} />
+
+  {#if lastCacheTime && canonicalizedName === loadedNationId}
+    <div class="text-center text-sm text-gray-500 mb-4">
+      cached data from {new Date(lastCacheTime).toLocaleString()}
+      <button
+        class="text-blue-500 hover:underline ml-2"
+        on:click={() => loadTradeData(true)}>refresh</button
+      >
+    </div>
+  {/if}
+
   <!-- Config Overlay -->
   <Config {showConfig} {closeConfig} />
 

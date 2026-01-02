@@ -1,6 +1,7 @@
 <script>
   import CollapsibleTable from './CollapsibleTable.svelte';
   import LoadingTable from './LoadingTable.svelte';
+  import { settingsStore } from './settingsStore';
 
   export let loading;
   export let buys = [];
@@ -11,6 +12,7 @@
   export let makeGiftRows;
 </script>
 
+{#key $settingsStore}
 <div class="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-2.5 md:gap-4 mt-6">
   {#each [
     { title: 'Detailed Gifts Sent', columns: makeGiftColumns('buyer'), rows: makeGiftRows(sells, 'buyer') },
@@ -27,3 +29,4 @@
     </div>
   {/each}
 </div>
+{/key}

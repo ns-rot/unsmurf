@@ -13,6 +13,8 @@ import { findPuppetmaster, isNationCurrent, queryS4 } from "./sheetFetch";
 export function tallyCounts(trades, roleKey, isTrade) {
   const tally = {};
   const rawToNormalizedMap = {};
+  const settings = useSettings();
+  const section = settings.section;
 
   trades
     .filter((t) => (isTrade ? t.price !== 0 : t.price === 0))
@@ -22,11 +24,11 @@ export function tallyCounts(trades, roleKey, isTrade) {
 
       let tallyName;
 
-      if (useSettings().section === "puppets") {
+      if (section === "puppets") {
         tallyName = findPuppetmaster(
           rawName.toLowerCase().replace(/\s+/g, "_")
         ).master; // Normalize and find puppet master
-      } else if (useSettings().section === "similar-name") {
+      } else if (section === "similar-name") {
         tallyName = normalizeName(rawName); // Normalize the name
       } else {
         tallyName = rawName;
@@ -43,23 +45,27 @@ export function tallyCounts(trades, roleKey, isTrade) {
     });
 
   // Format and return the tally
-  return buildTallyContent(tally, rawToNormalizedMap);
+  return buildTallyContent(tally, rawToNormalizedMap, settings);
 }
 
-function buildTallyContent(tally, rawToNormalizedMap) {
+function buildTallyContent(tally, rawToNormalizedMap, settings) {
+  if (!settings) settings = useSettings();
+  const section = settings.section;
+  const showCTE = settings.showCTE;
+
   return Object.entries(tally)
     .map(([normalizedName, count]) => {
       let rawNames = Array.from(rawToNormalizedMap[normalizedName]).sort();
       let aggregatedName;
 
-      if (useSettings().section === "puppets") {
+      if (section === "puppets") {
         aggregatedName = normalizedName;
       } else {
         aggregatedName = rawNames[0];
       }
 
       let cte = "";
-      if (useSettings().showCTE) {
+      if (showCTE) {
         cte = isNationCurrent(aggregatedName) ? "" : `<span class="select-none">&#xe000;&#x2009;</span>`;
       }
 
@@ -78,12 +84,6 @@ function buildTallyContent(tally, rawToNormalizedMap) {
       }
 
       const wrappedDisplay = `${displayName}${puppetTally}`;
-
-      console.debug({
-        aggregatedName,
-        rawNames,
-        count,
-      });
 
       return [wrappedDisplay, count];
     })
@@ -108,19 +108,47 @@ export function setQueryParam(name, value) {
 }
 
 // Fetch data from the API
-export async function fetchData(role, nationId) {
+export async function fetchData(role, nationId, forceRefresh = false) {
+  const cacheKey = `unsmurf_cache_${role}_${nationId}`;
+  const CACHE_DURATION = 6 * 60 * 60 * 1000; // 6 hours
+
+  if (!forceRefresh) {
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached);
+        if (Date.now() - parsed.timestamp < CACHE_DURATION) {
+          return { trades: parsed.data, cacheTime: parsed.timestamp };
+        }
+      } catch (e) {
+        console.error("Error parsing cache", e);
+      }
+    }
+  }
+
   const url = `https://maki.kractero.com/api/trades?limit=-1&${role}=${nationId}&category=All&sortval=Timestamp&sortorder=Desc`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
       console.error(`Failed to fetch ${role} data:`, response.status);
-      return [];
+      return { trades: [], cacheTime: null };
     }
     const data = await response.json();
-    return data.trades || [];
+    const trades = data.trades || [];
+
+    try {
+      localStorage.setItem(
+        cacheKey,
+        JSON.stringify({ timestamp: Date.now(), data: trades })
+      );
+    } catch (e) {
+      console.error("Failed to save to localStorage", e);
+    }
+
+    return { trades, cacheTime: Date.now() };
   } catch (err) {
     console.error(`Error fetching ${role} data:`, err);
-    return [];
+    return { trades: [], cacheTime: null };
   }
 }
 
