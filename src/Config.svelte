@@ -80,8 +80,8 @@
             <h4 class="font-medium text-gray-900 mb-2">Tally Tables</h4>
             
             <div class="mb-3">
-              <label class="block text-xs font-medium text-gray-500 uppercase mb-1">Sent / Sold</label>
-              <select bind:value={$settingsStore.linkTypeTallySent} class="border border-gray-300 rounded px-2 py-1 w-full text-sm">
+              <label for="tally-sent" class="block text-xs font-medium text-gray-500 uppercase mb-1">Sent / Sold</label>
+              <select id="tally-sent" bind:value={$settingsStore.linkTypeTallySent} class="border border-gray-300 rounded px-2 py-1 w-full text-sm">
                 <option value="nation">Nation Page</option>
                 <option value="trades">Trades Page</option>
                 <option value="buys">Trades (Buys)</option>
@@ -93,8 +93,8 @@
             </div>
 
             <div class="mb-1">
-              <label class="block text-xs font-medium text-gray-500 uppercase mb-1">Received / Purchased</label>
-              <select bind:value={$settingsStore.linkTypeTallyReceived} class="border border-gray-300 rounded px-2 py-1 w-full text-sm">
+              <label for="tally-received" class="block text-xs font-medium text-gray-500 uppercase mb-1">Received / Purchased</label>
+              <select id="tally-received" bind:value={$settingsStore.linkTypeTallyReceived} class="border border-gray-300 rounded px-2 py-1 w-full text-sm">
                 <option value="nation">Nation Page</option>
                 <option value="trades">Trades Page</option>
                 <option value="buys">Trades (Buys)</option>
@@ -111,8 +111,8 @@
             <h4 class="font-medium text-gray-900 mb-2">Detailed Tables</h4>
             
             <div class="mb-3">
-              <label class="block text-xs font-medium text-gray-500 uppercase mb-1">Sent / Sold</label>
-              <select bind:value={$settingsStore.linkTypeDetailedSent} class="border border-gray-300 rounded px-2 py-1 w-full text-sm">
+              <label for="detailed-sent" class="block text-xs font-medium text-gray-500 uppercase mb-1">Sent / Sold</label>
+              <select id="detailed-sent" bind:value={$settingsStore.linkTypeDetailedSent} class="border border-gray-300 rounded px-2 py-1 w-full text-sm">
                 <option value="nation">Nation Page</option>
                 <option value="trades">Trades Page</option>
                 <option value="buys">Trades (Buys)</option>
@@ -124,8 +124,8 @@
             </div>
 
             <div class="mb-1">
-              <label class="block text-xs font-medium text-gray-500 uppercase mb-1">Received / Purchased</label>
-              <select bind:value={$settingsStore.linkTypeDetailedReceived} class="border border-gray-300 rounded px-2 py-1 w-full text-sm">
+              <label for="detailed-received" class="block text-xs font-medium text-gray-500 uppercase mb-1">Received / Purchased</label>
+              <select id="detailed-received" bind:value={$settingsStore.linkTypeDetailedReceived} class="border border-gray-300 rounded px-2 py-1 w-full text-sm">
                 <option value="nation">Nation Page</option>
                 <option value="trades">Trades Page</option>
                 <option value="buys">Trades (Buys)</option>
@@ -167,8 +167,9 @@
              $settingsStore.linkTypeDetailedReceived === 'custom' || 
              ($settingsStore.enableCTELink && $settingsStore.linkTypeCTE === 'custom')}
           <div class="pt-3">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Custom URL Template</label>
+            <label for="custom-url-template" class="block text-sm font-medium text-gray-700 mb-1">Custom URL Template</label>
             <input 
+              id="custom-url-template"
               type="text" 
               bind:value={$settingsStore.customLinkTemplate} 
               placeholder="https://example.com/?nation={'{nation}'}"
