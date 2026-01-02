@@ -46,7 +46,7 @@
           <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 pb-2 pr-2 text-left transition-colors whitespace-normal break-words overflow-hidden">
             <span class="block w-full">
               {#if !isNationCurrent(canonicalizeName(puppet))}
-                <span class="font-inter">&#xe000;&#x2009;</span>
+                <span class="font-inter select-none">&#xe000;&#x2009;</span>
                 <a href="https://www.nationstates.net/page=boneyard?nation={puppet.toLowerCase().replace('cte', '').trim()}" target="_blank" rel="noopener noreferrer" class="text-black hover:text-gray-500 no-underline">
                   {puppet}
                 </a>

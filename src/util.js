@@ -250,7 +250,7 @@ export function formatNationName(name) {
 
   // Helper function to hyphenate using Hypher library
   function insertShy(word) {
-    return hyphenator.hyphenate(word).join("&shy;");
+    return hyphenator.hyphenate(word).join("<span class='select-none text-gray-600'>&shy;</span>");
   }
 
   // Helper function to capitalize the first letter of a segment

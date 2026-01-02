@@ -5,8 +5,10 @@
   "homepage": "https://ns-rot.github.io/unsmurf",
   "type": "module",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "build": "npm run build:css && rollup -c",
+    "build:css": "tailwindcss -i ./src/input.css -o ./public/build/tailwind.css",
+    "dev": "concurrently \"npm run dev:css\" \"rollup -c -w\"",
+    "dev:css": "tailwindcss -i ./src/input.css -o ./public/build/tailwind.css --watch",
     "start": "sirv public --no-clear",
     "deploy": "npm run build && gh-pages -d public --add",
     "aggregate": "node aggregateData.js"
@@ -16,6 +18,7 @@
     "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-terser": "^0.4.0",
     "autoprefixer": "^10.4.20",
+    "concurrently": "^9.2.1",
     "eslint": "^9.19.0",
     "gh-pages": "^6.3.0",
     "postcss": "^8.5.1",

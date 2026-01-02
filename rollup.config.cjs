@@ -4,7 +4,7 @@ const commonjs = require('@rollup/plugin-commonjs');
 const terser = require('@rollup/plugin-terser');
 const resolve = require('@rollup/plugin-node-resolve');
 const livereload = require('rollup-plugin-livereload');
-const postcss = require('rollup-plugin-postcss');
+const css = require('rollup-plugin-css-only');
 const sveltePreprocess = require('svelte-preprocess');
 const autoprefixer = require('autoprefixer');
 const tailwindcss = require('tailwindcss');
@@ -59,13 +59,7 @@ module.exports = {
         }),
 
         // PostCSS with TailwindCSS
-        postcss({
-            extract: true, // This will extract to bundle.css in the same directory as the JS output
-            minimize: production,
-            config: {
-                path: './postcss.config.cjs'
-            }
-        }),
+        css({ output: 'bundle.css' }),
 
         // Copy static assets
         copy({

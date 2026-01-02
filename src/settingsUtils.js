@@ -99,10 +99,11 @@ export function formatNationName(name, language = "en") {
 
   // Helper to insert soft hyphens
   function insertShy(word) {
+    const shy = "<span class='select-none text-gray-600'>&shy;</span>";
     // Try using the hyphenator for the specified language
-    const hyphenated = hyphenator.hyphenate(word).join("&shy;");
+    const hyphenated = hyphenator.hyphenate(word).join(shy);
     // If no hyphenation occurred, use a fallback to insert every 3 characters
-    return hyphenated === word ? word.match(/.{1,3}/g).join("&shy;") : hyphenated;
+    return hyphenated === word ? word.match(/.{1,3}/g).join(shy) : hyphenated;
   }
 
   // Helper to capitalize the first letter of a segment

@@ -60,7 +60,7 @@ function buildTallyContent(tally, rawToNormalizedMap) {
 
       let cte = "";
       if (useSettings().showCTE) {
-        cte = isNationCurrent(aggregatedName) ? "" : `&#xe000;&#x2009;`;
+        cte = isNationCurrent(aggregatedName) ? "" : `<span class="select-none">&#xe000;&#x2009;</span>`;
       }
 
       const displayName = `<a href="https://www.nationstates.net/nation=${encodeURIComponent(
@@ -195,7 +195,7 @@ export function makeRows(
   return records.filter(filterCondition).map((r) => {
     let cte = "";
     if (useSettings().showCTE) {
-      cte = isNationCurrent(r[role]) ? "" : `&#xe000;&#x2009;`;
+      cte = isNationCurrent(r[role]) ? "" : `<span class="select-none">&#xe000;&#x2009;</span>`;
     }
     let nationDisplay = cte + formatNationName(r[role] || "N/A");
     const nationLink = `<a href="https://www.nationstates.net/nation=${encodeURIComponent(
@@ -231,7 +231,7 @@ export function makeRows(
         // Only show if the puppet master is different
         let cte = "";
         if (useSettings().showCTE) {
-          cte = isNationCurrent(puppetMaster.master) ? "" : `&#xe000;&#x2009;`;
+          cte = isNationCurrent(puppetMaster.master) ? "" : `<span class="select-none">&#xe000;&#x2009;</span>`;
         }
         puppetMasterText += `<span class="text-gray-500 text-sm"><a href="https://www.nationstates.net/nation=${
           puppetMaster.master

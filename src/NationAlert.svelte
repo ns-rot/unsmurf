@@ -36,11 +36,11 @@
 
   // Format names for display
   $: formattedName = isCTE
-    ? "&#xe000;&#x2009;" + uncanonicalizeName(canonicalizedName)
+    ? "<span class='select-none'>&#xe000;&#x2009;</span>" + uncanonicalizeName(canonicalizedName)
     : uncanonicalizeName(canonicalizedName);
 
   $: formattedMasterName = isMasterCte
-    ? "&#xe000;&#x2009;" + uncanonicalizeName(canonicalizedMasterName)
+    ? "<span class='select-none'>&#xe000;&#x2009;</span>" + uncanonicalizeName(canonicalizedMasterName)
     : uncanonicalizeName(canonicalizedMasterName);
 
   // Background & text color logic
