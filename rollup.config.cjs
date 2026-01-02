@@ -62,10 +62,9 @@ module.exports = {
         postcss({
             extract: true, // This will extract to bundle.css in the same directory as the JS output
             minimize: production,
-            plugins: [
-                tailwindcss('./tailwind.config.js'), // Ensure Tailwind is loaded properly
-                autoprefixer(),
-            ],
+            config: {
+                path: './postcss.config.cjs'
+            }
         }),
 
         // Copy static assets
