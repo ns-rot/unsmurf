@@ -10,6 +10,17 @@
 	<link rel='stylesheet' href='./global.css'>
 	<link rel='stylesheet' href='./build/tailwind.css'>
 	<link rel='stylesheet' href='./build/bundle.css'>
+	<script>
+		// Immediate dark mode initialization to prevent flash
+		try {
+			const settings = JSON.parse(localStorage.getItem('unsmurfSettings') || '{}');
+			if (settings.darkMode) {
+				document.documentElement.classList.add('dark');
+			}
+		} catch (e) {
+			console.error('Failed to initialize theme', e);
+		}
+	</script>
 
 	<script defer src='./build/bundle.js'></script>
 </head>
