@@ -1,6 +1,5 @@
 // util.js
 
-import { get, writable } from 'svelte/store';
 import { settingsStore } from './settingsStore';
 
 import Hypher from "hypher";
@@ -174,7 +173,7 @@ function isValidRoman(roman) {
   const romanRegex = /^(M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3}))$/i;
   return romanRegex.test(roman);
 }
-  
+
 export function tallyCounts(trades, roleKey, isTrade) {
   const tally = {};
   const rawToNormalizedMap = {}; // Map to track raw names for each normalized name
@@ -242,7 +241,7 @@ export function tallyCounts(trades, roleKey, isTrade) {
     })
     .sort((a, b) => b[1] - a[1]); // Sort by count in descending order
 }
-  
+
 const hyphenator = new Hypher(english);
 
 export function formatNationName(name) {
@@ -270,31 +269,31 @@ export function formatNationName(name) {
 }
 
 
-  
-  export function formatDate(ts) {
-    if (!ts) return { formatted: "", relative: "" };
-  
-    const now = new Date();
-    const date = new Date(ts * 1000);
-  
-    // Default format: DD/MM/YY
-    const dd = String(date.getDate()).padStart(2, "0");
-    const mm = String(date.getMonth() + 1).padStart(2, "0");
-    const yy = String(date.getFullYear()).slice(-2);
-    const formatted = `${dd}/${mm}/${yy}`;
-  
-    // Relative time format
-    const diffMs = now - date;
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24)); // Convert to days
-    const diffYears = Math.floor(diffDays / 365); // Convert to years
-    const remainingDays = diffDays % 365;
-  
-    const relative =
-      diffYears > 0 ? `${diffYears}y ${remainingDays}d ago` : `${diffDays}d ago`;
-  
-    return { formatted, relative };
-  }
-    
+
+export function formatDate(ts) {
+  if (!ts) return { formatted: "", relative: "" };
+
+  const now = new Date();
+  const date = new Date(ts * 1000);
+
+  // Default format: DD/MM/YY
+  const dd = String(date.getDate()).padStart(2, "0");
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const yy = String(date.getFullYear()).slice(-2);
+  const formatted = `${dd}/${mm}/${yy}`;
+
+  // Relative time format
+  const diffMs = now - date;
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24)); // Convert to days
+  const diffYears = Math.floor(diffDays / 365); // Convert to years
+  const remainingDays = diffDays % 365;
+
+  const relative =
+    diffYears > 0 ? `${diffYears}y ${remainingDays}d ago` : `${diffDays}d ago`;
+
+  return { formatted, relative };
+}
+
 
 /**
  * Formats a price as "X.xx" with the decimal digits smaller, medium weight, and underlined.
@@ -304,22 +303,22 @@ export function formatNationName(name) {
  * @returns {string} - HTML string with formatted price using Tailwind classes.
  */
 export function formatPrice(price) {
-    if (typeof price !== 'number') return 'N/A'; // Handle invalid input
-  
-    // Split the integer and decimal parts
-    const [integer, decimal] = price.toFixed(2).split('.');
-  
-    // If decimal is "00", append an em-dash and skip the decimal part
-    if (decimal === '00') {
-        return `
+  if (typeof price !== 'number') return 'N/A'; // Handle invalid input
+
+  // Split the integer and decimal parts
+  const [integer, decimal] = price.toFixed(2).split('.');
+
+  // If decimal is "00", append an em-dash and skip the decimal part
+  if (decimal === '00') {
+    return `
           <span class="whitespace-nowrap">
             ${integer}-
           </span>
         `;
-    }
-  
-    // Otherwise, return the formatted price with decimal part
-    return `
+  }
+
+  // Otherwise, return the formatted price with decimal part
+  return `
       <span class="whitespace-nowrap">
         ${integer}<span class="text-sm font-medium underline relative top-[-0.4em]">${decimal}</span>
       </span>
@@ -408,7 +407,7 @@ export function makeGiftColumns(role) {
   return [
     { label: role === 'buyer' ? "Buyer" : "Seller", alignment: "left" },
     { label: "Card", alignment: "left" },
-    { label: "Date", alignment: "center", minWidth: "7"},
+    { label: "Date", alignment: "center", minWidth: "7" },
   ];
 }
 
@@ -438,8 +437,8 @@ export function makeRows(records, role, filterCondition, includePrice, showRelat
       const normalizedRarity = settings.redEpics && rarityCategory.toUpperCase() === "E"
         ? "E1"
         : settings.rainbowLegs && rarityCategory.toUpperCase() === "L"
-        ? "L1"
-        : rarityCategory.toUpperCase();
+          ? "L1"
+          : rarityCategory.toUpperCase();
 
       const rarityClass = `bg-rarity-${normalizedRarity}`;
       const { formatted, relative } = formatDate(r.timestamp);
@@ -497,9 +496,9 @@ export function makeGiftRows(records, role) {
 }
 
 
-  /**
- * Toggles the visibility of all formatted and relative date spans in the table.
- */
+/**
+* Toggles the visibility of all formatted and relative date spans in the table.
+*/
 export function toggleDateFormat() {
   // Select all date cells
   const dateCells = document.querySelectorAll('.date-cell');

@@ -14,6 +14,7 @@ const defaultSettings = {
   linkTypeCTE: "boneyard",
   enableCTELink: true,
   customLinkTemplate: "https://www.nationstates.net/nation={nation}",
+  darkMode: false,
 };
 
 const storedSettings = JSON.parse(localStorage.getItem("unsmurfSettings")) || defaultSettings;

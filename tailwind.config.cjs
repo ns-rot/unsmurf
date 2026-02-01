@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './src/**/*.{html,js,svelte,ts}', // Include Svelte, JS, and TS files in src/
     './public/index.html',           // Include your HTML entry file
@@ -15,6 +16,14 @@ module.exports = {
     'bg-rarity-R',
     'bg-rarity-U',
     'bg-rarity-C',
+    'dark:bg-rarityDark-L1',
+    'dark:bg-rarityDark-L',
+    'dark:bg-rarityDark-E1',
+    'dark:bg-rarityDark-E',
+    'dark:bg-rarityDark-UR',
+    'dark:bg-rarityDark-R',
+    'dark:bg-rarityDark-U',
+    'dark:bg-rarityDark-C',
     'text-center',
     'text-right',
     'font-inter',
@@ -24,9 +33,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundColor: ({ theme }) => ({
-        ...theme('colors.rarity'), // Automatically generate bg-rarity-[key] utilities
-      }),
       fontFamily: {
         sans: ['"Inter Tight"', '"UnsmurfIcons"', 'sans-serif'], // Default for all text
         inter: ['"Inter"', '"UnsmurfIcons"', 'sans-serif'],      // For large text
@@ -34,13 +40,24 @@ module.exports = {
       },
       colors: {
         rarity: {
-          L: '#FDE68A', // Yellow-300 (Legendary)
-          E1: '#FCA5A5', // Red-300 (Epic)
-          E: '#FFB86B', // Orange-300 (Epic)
-          UR: '#D8B4FE', // Purple-300 (Ultra Rare)
-          R: '#93C5FD', // Blue-300 (Rare)
-          U: '#6EE7B7', // Green-300 (Uncommon)
-          C: '#D1D5DB', // Gray-300 (Common)
+          L: '#FEF08A',
+          E1: '#FECACA',
+          E: '#FED7AA',
+          UR: '#E9D5FF',
+          R: '#BFDBFE',
+          U: '#A7F3D0',
+          C: '#E5E7EB',
+        },
+        // Dark mode specific rarity colors (slightly simplified or desaturated if needed, 
+        // but keeping same keys for logic compatibility)
+        rarityDark: {
+          L: '#615f0a',
+          E1: '#550e0e',
+          E: '#57210f',
+          UR: '#452061',
+          R: '#10255f',
+          U: '#0a4939',
+          C: '#303641',
         },
         hyphens: {
           none: 'none',
@@ -56,7 +73,8 @@ module.exports = {
         },
       },
       backgroundImage: {
-        'rarity-L1': 'linear-gradient(120deg, #FCA5A5, #FDBA74, #FDE68A, #A7F3D0, #93C5FD, #C4B5FD, #F9A8D4)',
+        'rarity-L1': 'linear-gradient(135deg, #FECACA 0%, #FED7AA 14%, #FEF08A 28%, #A7F3D0 42%, #BFDBFE 56%, #DDD6FE 70%, #FBCFE8 84%)',
+        'rarityDark-L1': 'linear-gradient(135deg, #550e0e 0%, #57210f 14%, #615f0a 28%, #0a4939 42%, #10255f 56%, #452061 70%, #5e0e19ff 84%)',
       },
       boxShadow: {
         button: '0px 2px 5px rgba(0, 0, 0, 0.1)',

@@ -24,8 +24,6 @@
     makeGiftRows,
   } from "./dataUtils";
 
-  import NationAlert from "./NationAlert.svelte";
-
   let mode = "cards";
 
   let nationId = "";
@@ -47,16 +45,22 @@
   let loadedNationId = "";
 
   $: canonicalizedName = canonicalizeName(nationId);
-  $: canonicalizedMasterName = canonicalizeName(findPuppetmaster(canonicalizedName)?.master) || "";
+  $: canonicalizedMasterName =
+    canonicalizeName(findPuppetmaster(canonicalizedName)?.master) || "";
   $: isCTE = !isNationCurrent(canonicalizedName);
-  $: isPuppet = canonicalizedMasterName && canonicalizedName !== canonicalizedMasterName;
+  $: isPuppet =
+    canonicalizedMasterName && canonicalizedName !== canonicalizedMasterName;
   $: isMasterCte = !isNationCurrent(canonicalizedMasterName);
 
   // Reactive tallies that update when buys/sells change OR when settings change
-  $: buyTallyTrades = $settingsStore && tallyCounts(buys, "seller", true, "tallyReceived");
-  $: buyTallyGifts = $settingsStore && tallyCounts(buys, "seller", false, "tallyReceived");
-  $: sellTallyTrades = $settingsStore && tallyCounts(sells, "buyer", true, "tallySent");
-  $: sellTallyGifts = $settingsStore && tallyCounts(sells, "buyer", false, "tallySent");
+  $: buyTallyTrades =
+    $settingsStore && tallyCounts(buys, "seller", true, "tallyReceived");
+  $: buyTallyGifts =
+    $settingsStore && tallyCounts(buys, "seller", false, "tallyReceived");
+  $: sellTallyTrades =
+    $settingsStore && tallyCounts(sells, "buyer", true, "tallySent");
+  $: sellTallyGifts =
+    $settingsStore && tallyCounts(sells, "buyer", false, "tallySent");
 
   async function loadTradeData(forceRefresh = false) {
     if (!nationId.trim()) {
@@ -101,11 +105,18 @@
     }
   });
 
-
+  // Dark Mode Toggle Effect
+  $: if ($settingsStore) {
+    if ($settingsStore.darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }
 </script>
 
 <!-- Page Layout Wrapper -->
-<div class="px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-16">
+<div class="px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-12 min-h-screen">
   <!-- Header -->
   <Header {mode} />
 
@@ -113,20 +124,17 @@
   <UnsmurfTrades bind:nationId {loadTradeData} {showConfig} {openConfig} />
 
   {#if lastCacheTime && canonicalizedName === loadedNationId}
-    <div class="text-center text-sm text-gray-500 mb-4">
-      cached data from {new Date(lastCacheTime).toLocaleString()}
+    <div class="text-left text-sm text-gray-500 dark:text-gray-400 mb-4">
+      Cached data from {new Date(lastCacheTime).toLocaleString()}
       <button
         class="text-blue-500 hover:underline ml-2"
-        on:click={() => loadTradeData(true)}>refresh</button
+        on:click={() => loadTradeData(true)}>Refresh</button
       >
     </div>
   {/if}
 
   <!-- Config Overlay -->
   <Config {showConfig} {closeConfig} />
-
-  <!-- Alert Banner -->
-  <NationAlert {nationId} />
 
   <!-- TALLY TABLES COMPONENT -->
   <TallyTables

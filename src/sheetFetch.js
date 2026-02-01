@@ -133,8 +133,8 @@ export async function fetchSheets() {
     console.log(`Loaded ${Object.keys(masterToPuppetsCache).length} masters with puppets.`);
 
     // Process S4 Data
-    start = 0;
-    next = s4Data.indexOf('\n', start);
+    let start = 0;
+    let next = s4Data.indexOf('\n', start);
     if (next !== -1) start = next + 1; // Skip header
 
     while (start < s4Data.length) {

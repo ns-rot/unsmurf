@@ -68,7 +68,7 @@ function buildTallyContent(tally, rawToNormalizedMap, context, settings) {
 
       let cte = "";
       if (showCTE) {
-        cte = isNationCurrent(aggregatedName) ? "" : `<span class="select-none">&#xe000;&#x2009;</span>`;
+        cte = isNationCurrent(aggregatedName) ? "" : `<span class="select-none text-red-600 dark:text-red-400">&#xe000;&#x2009;</span>`;
       }
 
       const displayName = `<a href="${getNationLink(aggregatedName, context)}" target="_blank" rel="noopener noreferrer">${cte}${formatNationName(
@@ -224,7 +224,7 @@ export function makeRows(
   return records.filter(filterCondition).map((r) => {
     let cte = "";
     if (useSettings().showCTE) {
-      cte = isNationCurrent(r[role]) ? "" : `<span class="select-none">&#xe000;&#x2009;</span>`;
+      cte = isNationCurrent(r[role]) ? "" : `<span class="select-none text-red-600 dark:text-red-400">&#xe000;&#x2009;</span>`;
     }
     let nationDisplay = cte + formatNationName(r[role] || "N/A");
     const nationLink = `<a href="${getNationLink(r[role] || "N/A", context)}"
@@ -245,7 +245,7 @@ export function makeRows(
           ? "L1"
           : rarityCategory.toUpperCase();
 
-    const rarityClass = `bg-rarity-${normalizedRarity}`;
+    const rarityClass = `bg-rarity-${normalizedRarity} dark:bg-rarityDark-${normalizedRarity}`;
     const { formatted, relative } = formatDate(r.timestamp);
 
     // Get puppet master information if the setting is enabled
@@ -254,9 +254,8 @@ export function makeRows(
       const puppetMaster = findPuppetmaster(r[role] || "N/A"); // Resolve puppet master
       if (puppetMaster.master !== r[role]) {
         // Only show if the puppet master is different
-        let cte = "";
         if (useSettings().showCTE) {
-          cte = isNationCurrent(puppetMaster.master) ? "" : `<span class="select-none">&#xe000;&#x2009;</span>`;
+          cte = isNationCurrent(puppetMaster.master) ? "" : `<span class="select-none text-red-400 dark:text-red-400 opacity-60">&#xe000;&#x2009;</span>`;
         }
         puppetMasterText += `<span class="text-gray-500 text-sm"><a href="${getNationLink(puppetMaster.master, context)}"
         target="_blank" rel="noopener noreferrer">${cte}${formatNationName(
