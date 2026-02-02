@@ -113,10 +113,10 @@ module.exports = {
     function ({ addComponents }) {
       addComponents({
         '.font-inter': {
-          fontFeatureSettings: '"liga" 1, "dlig" 1, "ss03" 1, "cv01" 1, "cv05" 1',
+          fontFeatureSettings: '"liga" 1, "dlig" 1, "ss02" 1, "ss03" 1, "cv01" 1',
         },
         '.font-sans': {
-          fontFeatureSettings: '"liga" 1, "dlig" 1, "ss03" 1, "cv01" 1, "cv05" 1',
+          fontFeatureSettings: '"liga" 1, "dlig" 1, "ss02" 1, "ss03" 1, "cv01" 1',
         },
         // Doesn't work yet
       });

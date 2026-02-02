@@ -28,7 +28,7 @@
 <div class="relative text-left mb-4 pl-1 sm:pl-0">
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    class="unsmurf-logo w-48 mb-2 dark:fill-white fill-black"
+    class="unsmurf-logo w-48 mb-1 dark:fill-white fill-black"
     viewBox="0 0 2640 970"
   >
     <g transform="matrix(.87919536 0 0 .87919763125 -870.9628 -660.76390887631)"
