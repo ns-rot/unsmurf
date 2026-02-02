@@ -92,7 +92,7 @@ export function formatNationName(name, language = "en") {
   const hyphenator = hyphenators[language] || hyphenators.en;
   const SHY = "\u00AD"; // Soft Hyphen: invisible unless it wraps
 
-  const processed = name
+  const processed = String(name)
     .replace(/_/g, " ")
     .split(/(?=[-\s])|(?<=[-\s])/g)
     .map((segment) => {
