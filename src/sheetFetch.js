@@ -247,6 +247,18 @@ export function tallyPuppets(masterName) {
   return masterToPuppetsCache[normalizedMaster]?.length || 0;
 }
 
+/**
+ * Counts the number of active (non-CTE) puppets in a given list.
+ * @param {Array<string>} puppetList - List of puppet names.
+ * @returns {number} - The count of active puppets.
+ */
+export function countActivePuppets(puppetList) {
+  if (!puppetList) return 0;
+  return puppetList.reduce((acc, p) => acc + (isNationCurrent(p) ? 1 : 0), 0);
+}
+
+
+
 
 
 /**

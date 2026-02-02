@@ -5,6 +5,7 @@
     findPuppetmaster,
     listPuppets,
     tallyPuppets,
+    countActivePuppets,
   } from "./sheetFetch.js";
   import PuppetPopup from "./PuppetPopup.svelte";
 
@@ -39,6 +40,13 @@
 
   // Choose which tally to display
   $: puppetTally = isPuppet ? puppetCountMaster : puppetCountSelf;
+
+  // Active puppet count
+  $: activePuppetTally = dataReady
+    ? countActivePuppets(
+        listPuppets(isPuppet ? canonicalizedMasterName : canonicalizedName),
+      )
+    : 0;
 
   // Format names for display
   $: formattedName = isCTE
@@ -79,7 +87,7 @@
 
   $: alertMessagePuppetCount =
     puppetTally > 0
-      ? `<br>${puppetTally} known puppets`
+      ? `<br>${puppetTally !== activePuppetTally ? ` ${activePuppetTally}/` : ""}${puppetTally} puppets`
       : "<br>No known puppets";
 
   // Whether to show the info button (only when there are puppets)

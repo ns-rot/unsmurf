@@ -1,5 +1,5 @@
 <script>
-  import { isNationCurrent } from "./sheetFetch.js";
+  import { isNationCurrent, countActivePuppets } from "./sheetFetch.js";
   import { canonicalizeName } from "./settingsUtils.js";
 
   // Props
@@ -10,6 +10,9 @@
 
   // Sort puppets alphabetically
   $: sortedPuppetList = [...puppetList].sort((a, b) => a.localeCompare(b));
+
+  // Count active (non-CTE) puppets
+  $: activePuppetCount = countActivePuppets(puppetList);
 </script>
 
 <!-- Overlay that covers the entire screen -->
@@ -29,6 +32,9 @@
           {nationName}
         </h2>
         <h3 class="text-gray-600 dark:text-gray-400">
+          {#if puppetCount !== activePuppetCount}{activePuppetCount}
+            active,
+          {/if}
           {puppetCount} known puppets
         </h3>
       </div>
