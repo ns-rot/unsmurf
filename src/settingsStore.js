@@ -15,6 +15,7 @@ const defaultSettings = {
   enableCTELink: true,
   customLinkTemplate: "https://www.nationstates.net/nation={nation}",
   darkMode: false,
+  midnightMode: false,
 };
 
 const storedSettings = JSON.parse(localStorage.getItem("unsmurfSettings")) || defaultSettings;

@@ -105,12 +105,18 @@
     }
   });
 
-  // Dark Mode Toggle Effect
+  // Dark Mode & Midnight Mode Toggle Effect
   $: if ($settingsStore) {
     if ($settingsStore.darkMode) {
       document.documentElement.classList.add("dark");
+      if ($settingsStore.midnightMode) {
+        document.documentElement.classList.add("midnight");
+      } else {
+        document.documentElement.classList.remove("midnight");
+      }
     } else {
       document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove("midnight");
     }
   }
 </script>

@@ -17,3 +17,80 @@
     @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200;
   }
 }
+
+/* Overrides must be outside @layer base to ensure they come after utilities if specificity is equal, 
+   or we just use higher specificity. Here we use html.midnight which works globally. */
+html.midnight body {
+  background-color: #000000 !important;
+  /* Force black */
+}
+
+html.midnight .settings-modal {
+  background-color: #000000 !important;
+  border-color: #1f2937 !important;
+  /* gray-800 */
+}
+
+/* Custom separation for Midnight mode headers */
+/* Custom separation for Midnight mode headers */
+/* Custom separation for Midnight mode headers */
+html.midnight table th {
+  background-color: #1f2937 !important;
+  /* Grey fill for prominence */
+  border: none !important;
+  /* Remove ALL borders/outlines from header */
+  /* We rely on utility classes for rounded corners, which will now work perfectly without borders */
+}
+
+/* Settings, Puppet Modal, and Loading backgrounds */
+html.midnight .settings-modal,
+html.midnight .puppet-modal,
+html.midnight .loading-container,
+html.midnight .nation-alert {
+  background-color: #000000 !important;
+  border-color: #1f2937 !important;
+}
+
+/* Force black background for Link Options blocks */
+html.midnight .bg-gray-50.dark\:bg-gray-700\/50 {
+  background-color: #000000 !important;
+  border: 1px solid #1f2937 !important;
+}
+
+/* Table Body Cells & Inputs */
+html.midnight table td,
+html.midnight input {
+  background-color: #000000 !important;
+  border-color: #374151 !important;
+}
+
+html.midnight table td {
+  border-top: 1px solid #374151 !important;
+  border-bottom: 1px solid #374151 !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* Spacer Row Styles - High specificity to override all themes including Midnight */
+html body table .table-spacer-row td {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+}
+
+/* Restore outer borders ONLY for body cells (td), NOT headers and NOT spacers */
+html.midnight table tbody tr:not(.table-spacer-row) td:first-child {
+  border-left: 1px solid #374151 !important;
+}
+
+html.midnight table tbody tr:not(.table-spacer-row) td:last-child {
+  border-right: 1px solid #374151 !important;
+}
+
+/* Remove or adjust hover effects for midnight mode if desired, 
+   though border outline might be enough distinction. */
+html.midnight tr:not(.table-spacer-row):hover td {
+  background-color: #0f1115 !important;
+  /* Very subtle highlight */
+}

@@ -89,43 +89,34 @@ const hyphenators = {
 export function formatNationName(name, language = "en") {
   if (!name) return name;
 
-  // Default to English if the specified language is not available
   const hyphenator = hyphenators[language] || hyphenators.en;
+  const SHY = "\u00AD"; // Soft Hyphen: invisible unless it wraps
 
-  // Helper to insert zero-width space between alpha and numeric boundaries
-  function insertZeroWidthSpace(input) {
-    return input.replace(/([a-zA-Z])(?=\d)|(\d)(?=[a-zA-Z])/g, '$1\u200B$2');
-  }
-
-  // Helper to insert soft hyphens
-  function insertShy(word) {
-    const shy = "<span class='select-none text-indigo-800'>&shy;</span>";
-    // Try using the hyphenator for the specified language
-    const hyphenated = hyphenator.hyphenate(word).join(shy);
-    // If no hyphenation occurred, use a fallback to insert every 3 characters
-    return hyphenated === word ? word.match(/.{1,3}/g).join(shy) : hyphenated;
-  }
-
-  // Helper to capitalize the first letter of a segment
-  function capitalizeSegment(segment) {
-    return segment.charAt(0).toUpperCase() + segment.slice(1);
-  }
-
-  // Process the name
-  return name
-    .replace(/_/g, " ") // Replace underscores with spaces
-    .split(/(?=[-\s])|(?<=[-\s])/g) // Split by spaces or hyphens, retaining the delimiters
+  const processed = name
+    .replace(/_/g, " ")
+    .split(/(?=[-\s])|(?<=[-\s])/g)
     .map((segment) => {
-      if (segment === "-" || segment.trim() === "") {
-        // Retain hyphens and spaces as-is
-        return segment;
+      if (segment === "-" || segment.trim() === "") return segment;
+
+      // 1. Insert Soft Hyphens at alpha-numeric boundaries
+      let text = segment.replace(/([a-zA-Z])(?=\d)|(\d)(?=[a-zA-Z])/g, `$1${SHY}$2`);
+
+      // 2. Hyphenate long segments
+      if (text.length > 8) {
+        const hyphenated = hyphenator.hyphenate(text).join(SHY);
+        text = hyphenated === text ? text.match(/.{1,3}/g).join(SHY) : hyphenated;
       }
 
-      const withZeroWidthSpace = insertZeroWidthSpace(segment); // Add zero-width space
-      const hyphenated = withZeroWidthSpace.length > 8 ? insertShy(withZeroWidthSpace) : withZeroWidthSpace; // Insert soft hyphens for long segments
-      return capitalizeSegment(hyphenated); // Capitalize each segment
+      // 3. Capitalize
+      return text.charAt(0).toUpperCase() + text.slice(1);
     })
-    .join(""); // Rejoin without adding extra spaces
+    .join("");
+
+  // 4. Wrap with the '↵' return symbol (indicating a system wrap)
+  // This character is unselectable metadata inserted by the browser.
+  // We wrap the soft hyphens in a smaller span to reduce the size of the '↵' symbol.
+  const styled = processed.replaceAll(SHY, `<span style="font-size: 0.7em; vertical-align: middle;">${SHY}</span>`);
+  return `<span style="hyphens: manual; -webkit-hyphens: manual; hyphenate-character: '↵'; -webkit-hyphenate-character: '↵';">${styled}</span>`;
 }
 
 // Utility to format dates

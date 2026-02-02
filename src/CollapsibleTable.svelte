@@ -44,8 +44,10 @@
       <tr>
         {#each columns as col, index}
           <th
-            class={`px-3 py-3 bg-gray-300 dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-bold align-top ${index === 0 ? "rounded-tl-lg rounded-bl-lg" : ""} 
-      ${index === columns.length - 1 ? "rounded-tr-lg rounded-br-lg" : ""} text-${col.alignment || "left"}`}
+            class={`px-3 py-3 bg-gray-300 dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-bold align-top 
+            border-b-4 border-gray-50 dark:border-gray-900 
+            ${index === 0 ? "rounded-tl-lg rounded-bl-lg" : ""} 
+            ${index === columns.length - 1 ? "rounded-tr-lg rounded-br-lg" : ""} text-${col.alignment || "left"}`}
           >
             {col.label}
           </th>
@@ -55,6 +57,13 @@
 
     <!-- Table Body -->
     <tbody>
+      <!-- Spacer row to create gap between header and body -->
+      <tr
+        class="table-spacer-row h-2 bg-transparent border-none"
+        aria-hidden="true"
+      >
+        <td colspan={columns.length} class="p-0 border-none">&nbsp;</td>
+      </tr>
       {#each rows.slice(0, visibleCount) as row, rowIndex}
         <tr class="group transition">
           {#each row as cell, cellIndex}

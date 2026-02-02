@@ -18,7 +18,7 @@
 >
   <!-- Popup container -->
   <div
-    class="h-3/4 w-[95%] sm:w-3/4 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg shadow-2xl flex flex-col overflow-hidden border border-gray-200 dark:border-gray-700"
+    class="puppet-modal h-3/4 w-[95%] sm:w-3/4 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg shadow-2xl flex flex-col overflow-hidden border border-gray-200 dark:border-gray-700"
   >
     <!-- Header with title and close button -->
     <div

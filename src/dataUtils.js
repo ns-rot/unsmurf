@@ -229,10 +229,9 @@ export function makeRows(
     let nationDisplay = cte + formatNationName(r[role] || "N/A");
     const nationLink = `<a href="${getNationLink(r[role] || "N/A", context)}"
         target="_blank" rel="noopener noreferrer">${nationDisplay}</a>`;
-    const cardLink = `<a href="https://www.nationstates.net/page=deck/card=${r.card_id
-      }/season=${r.season}"
-        target="_blank" rel="noopener noreferrer">S${r.season
-      } ${formatNationName(r.card_name || r.card_id)}</a>`;
+    const seasonText = `S${r.season}`;
+    const cardNameDisplay = formatNationName(r.card_name || r.card_id);
+    const cardUrl = `https://www.nationstates.net/page=deck/card=${r.card_id}/season=${r.season}`;
     const settings = useSettings();
     const rarityCategory = r.category || "C";
 
@@ -245,7 +244,21 @@ export function makeRows(
           ? "L1"
           : rarityCategory.toUpperCase();
 
-    const rarityClass = `bg-rarity-${normalizedRarity} dark:bg-rarityDark-${normalizedRarity}`;
+    let rarityClass = "";
+    let displayCardLinkContent = "";
+
+    if (settings.midnightMode && settings.darkMode) {
+      // In midnight mode, use a pill for the season number instead of a swatch
+      const pillClass = `inline-block px-1.5 py-0.5 rounded-full text-[10px] leading-none font-semibold bg-rarityMidnight-${normalizedRarity} text-black mr-1 align-middle relative -top-[1px]`;
+      displayCardLinkContent = `<span class="${pillClass}">${seasonText}</span>${cardNameDisplay}`;
+    } else {
+      // Standard mode: full background color on the cell
+      displayCardLinkContent = `${seasonText} ${cardNameDisplay}`;
+      rarityClass = `bg-rarity-${normalizedRarity} dark:bg-rarityDark-${normalizedRarity}`;
+    }
+
+    const displayCardLink = `<a href="${cardUrl}" target="_blank" rel="noopener noreferrer">${displayCardLinkContent}</a>`;
+
     const { formatted, relative } = formatDate(r.timestamp);
 
     // Get puppet master information if the setting is enabled
@@ -267,7 +280,7 @@ export function makeRows(
     // Build the base row with nation, puppet master (if enabled), and card links
     const row = [
       `${nationLink}${puppetMasterText ? `<br>${puppetMasterText}` : ""}`, // Add puppet master info below nation name
-      { value: cardLink, class: rarityClass },
+      { value: displayCardLink, class: rarityClass },
     ];
 
     // Conditionally add the price column only if `includePrice` is true

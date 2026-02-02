@@ -25,7 +25,7 @@
   {title}
 </h2>
 <div
-  class="w-full bg-white dark:bg-gray-800 rounded-lg p-6 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700"
+  class="loading-container w-full bg-white dark:bg-gray-800 rounded-lg p-6 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700"
 >
   <div class="flex items-center space-x-3 text-gray-800 dark:text-gray-200">
     <Spinner

@@ -114,13 +114,21 @@
           />
           <span>Red epics</span>
         </label>
-        <label class="flex items-center gap-2 cursor-pointer">
+        <label class="flex items-center gap-2 cursor-pointer mb-1">
           <input
             type="checkbox"
             bind:checked={$settingsStore.rainbowLegs}
             class="rounded text-blue-500 focus:ring-blue-500"
           />
           <span>Rainbow legendaries</span>
+        </label>
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            bind:checked={$settingsStore.midnightMode}
+            class="rounded text-blue-500 focus:ring-blue-500"
+          />
+          <span>Midnight (OLED) mode</span>
         </label>
       </div>
 

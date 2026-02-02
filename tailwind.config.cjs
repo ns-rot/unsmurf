@@ -24,6 +24,14 @@ module.exports = {
     'dark:bg-rarityDark-R',
     'dark:bg-rarityDark-U',
     'dark:bg-rarityDark-C',
+    'bg-rarityMidnight-L1',
+    'bg-rarityMidnight-L',
+    'bg-rarityMidnight-E1',
+    'bg-rarityMidnight-E',
+    'bg-rarityMidnight-UR',
+    'bg-rarityMidnight-R',
+    'bg-rarityMidnight-U',
+    'bg-rarityMidnight-C',
     'text-center',
     'text-right',
     'font-inter',
@@ -48,8 +56,6 @@ module.exports = {
           U: '#A7F3D0',
           C: '#E5E7EB',
         },
-        // Dark mode specific rarity colors (slightly simplified or desaturated if needed, 
-        // but keeping same keys for logic compatibility)
         rarityDark: {
           L: '#615f0a',
           E1: '#550e0e',
@@ -58,6 +64,15 @@ module.exports = {
           R: '#10255f',
           U: '#0a4939',
           C: '#303641',
+        },
+        rarityMidnight: {
+          L: '#FACC15',
+          E1: '#FF4D4D',
+          E: '#FF8C1A',
+          UR: '#B366FF',
+          R: '#3399FF',
+          U: '#00E676',
+          C: '#D1D5DB',
         },
         hyphens: {
           none: 'none',
@@ -75,6 +90,7 @@ module.exports = {
       backgroundImage: {
         'rarity-L1': 'linear-gradient(135deg, #FECACA 0%, #FED7AA 14%, #FEF08A 28%, #A7F3D0 42%, #BFDBFE 56%, #DDD6FE 70%, #FBCFE8 84%)',
         'rarityDark-L1': 'linear-gradient(135deg, #550e0e 0%, #57210f 14%, #615f0a 28%, #0a4939 42%, #10255f 56%, #452061 70%, #5e0e19ff 84%)',
+        'rarityMidnight-L1': 'linear-gradient(135deg, #FF4D4D 0%, #FF8C1A 14%, #FACC15 28%, #00E676 42%, #3399FF 56%, #B366FF 70%, #FF99CC 84%)',
       },
       boxShadow: {
         button: '0px 2px 5px rgba(0, 0, 0, 0.1)',
