@@ -16,6 +16,9 @@
 			const settings = JSON.parse(localStorage.getItem('unsmurfSettings') || '{}');
 			if (settings.darkMode) {
 				document.documentElement.classList.add('dark');
+				if (settings.midnightMode) {
+					document.documentElement.classList.add('midnight');
+				}
 			}
 		} catch (e) {
 			console.error('Failed to initialize theme', e);
