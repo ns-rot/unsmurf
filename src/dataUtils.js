@@ -8,7 +8,7 @@ import {
   normalizeName,
 } from "./settingsUtils";
 import { useSettings } from "./settingsStore";
-import { findPuppetmaster, isNationCurrent, queryS4 } from "./sheetFetch";
+import { findPuppetmaster, isNationCurrent } from "./sheetFetch";
 
 export function tallyCounts(trades, roleKey, isTrade, context) {
   const tally = {};
@@ -232,7 +232,7 @@ export function makeRows(
     const cardLink = `<a href="https://www.nationstates.net/page=deck/card=${r.card_id
       }/season=${r.season}"
         target="_blank" rel="noopener noreferrer">S${r.season
-      } ${formatNationName(r.card_name || queryS4(r.card_id))}</a>`;
+      } ${formatNationName(r.card_name || r.card_id)}</a>`;
     const settings = useSettings();
     const rarityCategory = r.category || "C";
 

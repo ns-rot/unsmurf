@@ -4,12 +4,10 @@ import { settingsStore } from "./settingsStore";
 
 export let puppetMasterCache = null; // Cache for puppet-master mappings
 export let masterToPuppetsCache = null; // Reverse cache for master-to-puppet mappings
-export let s4Cache = null; // Cache for S4 data mappings
 export let currentNationsCache = null; // Cache for current nations list
 export let currentNationSet = null; // Set for fast current nation lookups
 
 const puppetDataUrl = "https://raw.githubusercontent.com/ns-rot/unsmurf/data/static/puppetData.tsv"; // URL to your preprocessed Puppet TSV file
-const s4DataUrl = "./static/s4.tsv"; // URL to your preprocessed S4 TSV file
 const currentNationsUrl = "https://raw.githubusercontent.com/ns-rot/unsmurf/data/static/currentNations.txt"; // URL to your current nations file
 
 async function fetchWithCache(url) {
@@ -77,7 +75,6 @@ export async function fetchSheets() {
   // Reset all caches
   puppetMasterCache = {};
   masterToPuppetsCache = {}; // Initialize reverse lookup map
-  s4Cache = {};
   currentNationsCache = [];
   currentNationSet = null;
 
@@ -85,7 +82,6 @@ export async function fetchSheets() {
     // Fetch all data in parallel
     const promises = [
       fetchWithCache(puppetDataUrl),
-      fetchWithCache(s4DataUrl),
       fetchWithCache(currentNationsUrl),
     ];
 
@@ -99,15 +95,13 @@ export async function fetchSheets() {
       });
     }
 
-    const [puppetResponse, s4Response, currentNationsResponse] = await Promise.all(promises);
+    const [puppetResponse, currentNationsResponse] = await Promise.all(promises);
 
     if (!puppetResponse.ok) throw new Error(`Failed to fetch puppet data: ${puppetResponse.statusText}`);
-    if (!s4Response.ok) throw new Error(`Failed to fetch S4 data: ${s4Response.statusText}`);
     if (!currentNationsResponse.ok) throw new Error(`Failed to fetch current nations data: ${currentNationsResponse.statusText}`);
 
-    const [puppetData, s4Data, currentNationsData, auxData] = await Promise.all([
+    const [puppetData, currentNationsData, auxData] = await Promise.all([
       puppetResponse.text(),
-      s4Response.text(),
       currentNationsResponse.text(),
       auxDataPromise
     ]);
@@ -132,32 +126,10 @@ export async function fetchSheets() {
     console.log(`Loaded ${Object.keys(puppetMasterCache).length} puppets.`);
     console.log(`Loaded ${Object.keys(masterToPuppetsCache).length} masters with puppets.`);
 
-    // Process S4 Data
-    let start = 0;
-    let next = s4Data.indexOf('\n', start);
-    if (next !== -1) start = next + 1; // Skip header
-
-    while (start < s4Data.length) {
-      next = s4Data.indexOf('\n', start);
-      const lineEnd = next === -1 ? s4Data.length : next;
-
-      const tab1 = s4Data.indexOf('\t', start);
-      if (tab1 !== -1 && tab1 < lineEnd) {
-        const cardId = normalize(s4Data.substring(start, tab1));
-        const cardName = normalize(s4Data.substring(tab1 + 1, lineEnd));
-
-        if (cardId && cardName) {
-          s4Cache[cardId] = cardName;
-        }
-      }
-
-      if (next === -1) break;
-      start = next + 1;
-    }
-
     // Process Current Nations Data
     currentNationsCache = [];
-    start = 0;
+    let start = 0;
+    let next;
     while (start < currentNationsData.length) {
       next = currentNationsData.indexOf('\n', start);
       const lineEnd = next === -1 ? currentNationsData.length : next;
@@ -275,19 +247,7 @@ export function tallyPuppets(masterName) {
   return masterToPuppetsCache[normalizedMaster]?.length || 0;
 }
 
-/**
- * Query the S4 cache for a given key.
- * @param {string} key - The key to look up in the S4 cache.
- * @returns {string|null} - The corresponding value from the S4 cache, or null if not found.
- */
-export function queryS4(key) {
-  if (!s4Cache) {
-    console.warn("S4 cache is not initialized.");
-    return null;
-  }
 
-  return s4Cache[key] || null; // Default to null if not found
-}
 
 /**
  * Check if a given nation is in the current nations cache.
