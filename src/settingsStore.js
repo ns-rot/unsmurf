@@ -18,11 +18,53 @@ const defaultSettings = {
   midnightMode: false,
 };
 
-const storedSettings = JSON.parse(localStorage.getItem("unsmurfSettings")) || defaultSettings;
-// Ensure dataFetched is always false on initialization (runtime state)
-storedSettings.dataFetched = false;
+const validOptions = {
+  section: ["puppets", "similar-name", "none"],
+  linkTypeTallySent: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
+  linkTypeTallyReceived: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
+  linkTypeDetailedSent: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
+  linkTypeDetailedReceived: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
+  linkTypeCTE: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
+};
 
-export const settingsStore = writable(storedSettings);
+function repairSettings(stored) {
+  if (!stored || typeof stored !== "object") return { ...defaultSettings };
+
+  const repaired = { ...defaultSettings };
+
+  for (const key of Object.keys(defaultSettings)) {
+    if (Object.prototype.hasOwnProperty.call(stored, key)) {
+      const value = stored[key];
+
+      // Type check
+      if (typeof value !== typeof defaultSettings[key]) {
+        continue;
+      }
+
+      // Enum check
+      if (validOptions[key] && !validOptions[key].includes(value)) {
+        continue;
+      }
+
+      repaired[key] = value;
+    }
+  }
+
+  return repaired;
+}
+
+let plainSettings = { ...defaultSettings };
+try {
+  const stored = JSON.parse(localStorage.getItem("unsmurfSettings"));
+  plainSettings = repairSettings(stored);
+} catch (e) {
+  console.warn("Failed to parse settings, using defaults", e);
+}
+
+// Ensure dataFetched is always false on initialization (runtime state)
+plainSettings.dataFetched = false;
+
+export const settingsStore = writable(plainSettings);
 
 settingsStore.subscribe((value) => {
   try {
