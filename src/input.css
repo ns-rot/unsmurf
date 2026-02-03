@@ -25,8 +25,7 @@
 
   .midnight .settings-modal,
   .midnight .puppet-modal,
-  .midnight .loading-container,
-  .midnight .nation-alert {
+  .midnight .loading-container {
     @apply bg-black border-gray-800 !important;
   }
 

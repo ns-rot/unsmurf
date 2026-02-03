@@ -88,7 +88,7 @@
   $: alertMessagePuppetCount =
     puppetTally > 0
       ? `<br>${puppetTally !== activePuppetTally ? ` ${activePuppetTally}/` : ""}${puppetTally} puppets`
-      : "<br>No known puppets";
+      : "";
 
   // Whether to show the info button (only when there are puppets)
   $: showInfoButton = puppetTally > 0;
@@ -121,9 +121,7 @@
 <!-- Alert Banner -->
 {#if isCTE || puppetTally > 0}
   <div
-    class="font-inter py-2 px-6 rounded-2xl transition-all duration-200 shadow-md block w-full sm:inline-block sm:w-auto sm:min-w-[300px] {isCTE
-      ? 'bg-gray-800 dark:bg-gray-950 text-white'
-      : 'bg-gray-600 dark:bg-gray-700 text-white'}"
+    class="font-inter py-2 px-6 rounded-2xl transition-all duration-200 shadow-md block w-full sm:inline-block sm:w-auto sm:min-w-[300px] bg-gray-600 dark:bg-gray-800 text-white"
     role="alert"
   >
     <div class="text-center">
