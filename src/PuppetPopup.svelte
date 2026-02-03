@@ -8,8 +8,28 @@
   export let puppetList = [];
   export let onClose = () => {};
 
-  // Sort puppets alphabetically
-  $: sortedPuppetList = [...puppetList].sort((a, b) => a.localeCompare(b));
+  // Sort state
+  let sortByStatus = false;
+
+  function toggleSort() {
+    sortByStatus = !sortByStatus;
+  }
+
+  // Sort puppets
+  $: sortedPuppetList = [...puppetList].sort((a, b) => {
+    if (sortByStatus) {
+      // isNationCurrent already handles normalization internally
+      const aActive = isNationCurrent(a);
+      const bActive = isNationCurrent(b);
+      // We want Active (true) to come BEFORE Inactive/CTE (false)
+      // If a is Active and b is Inactive -> a < b -> -1
+      // If a is Inactive and b is Active -> a > b -> 1
+      if (aActive !== bActive) {
+        return aActive ? -1 : 1;
+      }
+    }
+    return a.localeCompare(b);
+  });
 
   // Count active (non-CTE) puppets
   $: activePuppetCount = countActivePuppets(puppetList);
@@ -39,26 +59,40 @@
         </h3>
       </div>
 
-      <button
-        on:click={onClose}
-        class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none"
-        aria-label="Close popup"
-      >
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
+      <div class="flex items-center space-x-2">
+        <button
+          on:click={toggleSort}
+          class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none font-inter"
+          title={sortByStatus ? "Sorting by Status" : "Sorting Alphabetically"}
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          ></path>
-        </svg>
-      </button>
+          {#if sortByStatus}
+            <span>&#xe000;</span>
+          {:else}
+            <span class="text-xs font-bold">A-Z</span>
+          {/if}
+        </button>
+
+        <button
+          on:click={onClose}
+          class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none"
+          aria-label="Close popup"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <!-- Content area with scrollable flex container -->

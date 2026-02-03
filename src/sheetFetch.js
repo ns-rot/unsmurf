@@ -170,12 +170,19 @@ function processPuppetData(tsvData) {
     const lineEnd = next === -1 ? tsvData.length : next;
 
     const tab1 = tsvData.indexOf('\t', start);
-    const tab2 = tsvData.indexOf('\t', tab1 + 1);
+    if (tab1 !== -1 && tab1 < lineEnd) {
+      const tab2 = tsvData.indexOf('\t', tab1 + 1);
 
-    if (tab1 !== -1 && tab1 < lineEnd && tab2 !== -1 && tab2 < lineEnd) {
       const puppet = normalize(tsvData.substring(start, tab1));
-      const master = normalize(tsvData.substring(tab1 + 1, tab2));
-      const sheet = normalize(tsvData.substring(tab2 + 1, lineEnd));
+      let master, sheet;
+
+      if (tab2 !== -1 && tab2 < lineEnd) {
+        master = normalize(tsvData.substring(tab1 + 1, tab2));
+        sheet = normalize(tsvData.substring(tab2 + 1, lineEnd));
+      } else {
+        master = normalize(tsvData.substring(tab1 + 1, lineEnd));
+        sheet = "";
+      }
 
       if (puppet && master) {
         puppetMasterCache[puppet] = { master, sheet };
