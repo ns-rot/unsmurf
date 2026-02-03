@@ -804,6 +804,10 @@ body:is(.dark *){
   height: 1.5rem;
 }
 
+.h-8{
+  height: 2rem;
+}
+
 .max-h-\[90vh\]{
   max-height: 90vh;
 }
@@ -830,6 +834,10 @@ body:is(.dark *){
 
 .w-6{
   width: 1.5rem;
+}
+
+.w-8{
+  width: 2rem;
 }
 
 .w-\[90\%\]{
@@ -981,6 +989,12 @@ body:is(.dark *){
   gap: 1rem;
 }
 
+.space-x-2 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .space-x-3 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(0.75rem * var(--tw-space-x-reverse));
@@ -1095,6 +1109,11 @@ body:is(.dark *){
 .bg-blue-500{
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
+}
+
+.bg-gray-100{
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
 }
 
 .bg-gray-200{
@@ -1645,6 +1664,11 @@ html.midnight tr:not(.table-spacer-row):hover td {
 .hover\:bg-blue-600:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-gray-200:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-gray-300:hover{
