@@ -9,31 +9,42 @@
   export let puppetList = [];
   export let onClose = () => {};
 
-  // Sort state
-  let sortByStatus = false;
+  // Sort state: 0 = Alphabetical, 1 = Active First, 2 = CTE First
+  let sortMode = 0;
 
   function toggleSort() {
-    sortByStatus = !sortByStatus;
+    sortMode = (sortMode + 1) % 3;
   }
 
   // Sort puppets
   $: sortedPuppetList = [...puppetList].sort((a, b) => {
-    if (sortByStatus) {
-      // isNationCurrent already handles normalization internally
+    if (sortMode === 1) {
+      // Active First
       const aActive = isNationCurrent(a);
       const bActive = isNationCurrent(b);
-      // We want Active (true) to come BEFORE Inactive/CTE (false)
-      // If a is Active and b is Inactive -> a < b -> -1
-      // If a is Inactive and b is Active -> a > b -> 1
       if (aActive !== bActive) {
         return aActive ? -1 : 1;
       }
+    } else if (sortMode === 2) {
+      // CTE First
+      const aActive = isNationCurrent(a);
+      const bActive = isNationCurrent(b);
+      if (aActive !== bActive) {
+        return aActive ? 1 : -1;
+      }
     }
+    // Default / Tie-breaker: Alphabetical
     return a.localeCompare(b);
   });
 
   // Count active (non-CTE) puppets
   $: activePuppetCount = countActivePuppets(puppetList);
+
+  function getSortTitle(mode) {
+    if (mode === 1) return "Sorting by Status (Active First)";
+    if (mode === 2) return "Sorting by Status (CTE First)";
+    return "Sorting Alphabetically";
+  }
 </script>
 
 <!-- Overlay that covers the entire screen -->
@@ -64,11 +75,16 @@
         <button
           on:click={toggleSort}
           class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none font-inter"
-          title={sortByStatus ? "Sorting by Status" : "Sorting Alphabetically"}
+          title={getSortTitle(sortMode)}
         >
-          {#if sortByStatus}
+          {#if sortMode === 1}
+            <!-- Active First -->
             <span>&#xe000;</span>
+          {:else if sortMode === 2}
+            <!-- CTE First -->
+            <span class="text-red-600 dark:text-red-400">&#xe000;</span>
           {:else}
+            <!-- Alphabetical -->
             <span class="text-xs font-bold">A-Z</span>
           {/if}
         </button>
