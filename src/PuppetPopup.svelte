@@ -1,6 +1,7 @@
 <script>
   import { isNationCurrent, countActivePuppets } from "./sheetFetch.js";
   import { canonicalizeName } from "./settingsUtils.js";
+  import { getNationLink } from "./dataUtils.js";
 
   // Props
   export let nationName = "";
@@ -108,27 +109,18 @@
                   class="font-inter select-none text-red-600 dark:text-red-400"
                   >&#xe000;&#x2009;</span
                 >
-                <a
-                  href="https://www.nationstates.net/page=boneyard?nation={puppet
-                    .toLowerCase()
-                    .replace('cte', '')
-                    .trim()}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-400 no-underline"
-                >
-                  {puppet}
-                </a>
-              {:else}
-                <a
-                  href="https://www.nationstates.net/{puppet.toLowerCase()}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-400 no-underline"
-                >
-                  {puppet}
-                </a>
               {/if}
+              <a
+                href={getNationLink(
+                  puppet.replace(/cte/i, "").trim(),
+                  "puppetPopup",
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-400 no-underline"
+              >
+                {puppet}
+              </a>
             </span>
           </div>
         {/each}

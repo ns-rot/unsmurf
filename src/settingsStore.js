@@ -11,6 +11,7 @@ const defaultSettings = {
   linkTypeTallyReceived: "unsmurf",
   linkTypeDetailedSent: "buys",
   linkTypeDetailedReceived: "sells",
+  linkTypePuppet: "nation",
   linkTypeCTE: "boneyard",
   enableCTELink: true,
   customLinkTemplate: "https://www.nationstates.net/nation={nation}",
@@ -24,6 +25,7 @@ const validOptions = {
   linkTypeTallyReceived: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
   linkTypeDetailedSent: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
   linkTypeDetailedReceived: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
+  linkTypePuppet: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
   linkTypeCTE: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
 };
 

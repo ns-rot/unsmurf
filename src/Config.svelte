@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
   import { settingsStore } from "./settingsStore.js";
+  import LinkSelect from "./LinkSelect.svelte";
 
   export let showConfig = false; // ✅ Prop to control visibility
   export let closeConfig; // ✅ Callback to close modal
@@ -138,7 +139,7 @@
           Link Options
         </h3>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <!-- Tally Section -->
           <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl">
             <h4
@@ -148,45 +149,19 @@
             </h4>
 
             <div class="mb-3">
-              <label
-                for="tally-sent"
-                class="block text-xs font-medium text-gray-500 dark:text-gray-400 uppercase mb-1"
-                >Sent / Sold</label
-              >
-              <select
+              <LinkSelect
                 id="tally-sent"
+                label="Sent / Sold"
                 bind:value={$settingsStore.linkTypeTallySent}
-                class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded px-2 py-1.5 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              >
-                <option value="nation">Nation Page</option>
-                <option value="trades">Trades Page</option>
-                <option value="buys">Trades (Buys)</option>
-                <option value="sells">Trades (Sales)</option>
-                <option value="unsmurf">Unsmurf</option>
-                <option value="boneyard">Boneyard</option>
-                <option value="custom">Custom URL</option>
-              </select>
+              />
             </div>
 
             <div class="mb-1">
-              <label
-                for="tally-received"
-                class="block text-xs font-medium text-gray-500 dark:text-gray-400 uppercase mb-1"
-                >Received / Purchased</label
-              >
-              <select
+              <LinkSelect
                 id="tally-received"
+                label="Received / Purchased"
                 bind:value={$settingsStore.linkTypeTallyReceived}
-                class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded px-2 py-1.5 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              >
-                <option value="nation">Nation Page</option>
-                <option value="trades">Trades Page</option>
-                <option value="buys">Trades (Buys)</option>
-                <option value="sells">Trades (Sales)</option>
-                <option value="unsmurf">Unsmurf</option>
-                <option value="boneyard">Boneyard</option>
-                <option value="custom">Custom URL</option>
-              </select>
+              />
             </div>
           </div>
 
@@ -199,45 +174,35 @@
             </h4>
 
             <div class="mb-3">
-              <label
-                for="detailed-sent"
-                class="block text-xs font-medium text-gray-500 dark:text-gray-400 uppercase mb-1"
-                >Sent / Sold</label
-              >
-              <select
+              <LinkSelect
                 id="detailed-sent"
+                label="Sent / Sold"
                 bind:value={$settingsStore.linkTypeDetailedSent}
-                class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded px-2 py-1.5 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              >
-                <option value="nation">Nation Page</option>
-                <option value="trades">Trades Page</option>
-                <option value="buys">Trades (Buys)</option>
-                <option value="sells">Trades (Sales)</option>
-                <option value="unsmurf">Unsmurf</option>
-                <option value="boneyard">Boneyard</option>
-                <option value="custom">Custom URL</option>
-              </select>
+              />
             </div>
 
             <div class="mb-1">
-              <label
-                for="detailed-received"
-                class="block text-xs font-medium text-gray-500 dark:text-gray-400 uppercase mb-1"
-                >Received / Purchased</label
-              >
-              <select
+              <LinkSelect
                 id="detailed-received"
+                label="Received / Purchased"
                 bind:value={$settingsStore.linkTypeDetailedReceived}
-                class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded px-2 py-1.5 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              >
-                <option value="nation">Nation Page</option>
-                <option value="trades">Trades Page</option>
-                <option value="buys">Trades (Buys)</option>
-                <option value="sells">Trades (Sales)</option>
-                <option value="unsmurf">Unsmurf</option>
-                <option value="boneyard">Boneyard</option>
-                <option value="custom">Custom URL</option>
-              </select>
+              />
+            </div>
+          </div>
+          <!-- Puppet Popup Section -->
+          <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl">
+            <h4
+              class="font-medium text-gray-900 dark:text-white mb-3 border-b border-gray-200 dark:border-gray-600 pb-1"
+            >
+              Puppet Popup
+            </h4>
+
+            <div class="mb-1">
+              <LinkSelect
+                id="puppet-popup"
+                label="Puppet Link"
+                bind:value={$settingsStore.linkTypePuppet}
+              />
             </div>
           </div>
         </div>
@@ -254,18 +219,11 @@
 
           {#if $settingsStore.enableCTELink}
             <div class="ml-6">
-              <select
+              <LinkSelect
+                id="cte-link"
+                label="Link Type"
                 bind:value={$settingsStore.linkTypeCTE}
-                class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded px-2 py-1.5 w-full text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-              >
-                <option value="nation">Nation Page</option>
-                <option value="trades">Trades Page</option>
-                <option value="buys">Trades (Buys)</option>
-                <option value="sells">Trades (Sales)</option>
-                <option value="unsmurf">Unsmurf</option>
-                <option value="boneyard">Boneyard</option>
-                <option value="custom">Custom URL</option>
-              </select>
+              />
               <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 Applies to all links for nations that have Ceased To Exist.
               </p>
@@ -274,7 +232,7 @@
         </div>
 
         <!-- Custom URL Input -->
-        {#if $settingsStore.linkTypeTallySent === "custom" || $settingsStore.linkTypeTallyReceived === "custom" || $settingsStore.linkTypeDetailedSent === "custom" || $settingsStore.linkTypeDetailedReceived === "custom" || ($settingsStore.enableCTELink && $settingsStore.linkTypeCTE === "custom")}
+        {#if $settingsStore.linkTypeTallySent === "custom" || $settingsStore.linkTypeTallyReceived === "custom" || $settingsStore.linkTypeDetailedSent === "custom" || $settingsStore.linkTypeDetailedReceived === "custom" || $settingsStore.linkTypePuppet === "custom" || ($settingsStore.enableCTELink && $settingsStore.linkTypeCTE === "custom")}
           <div class="pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">
             <label
               for="custom-url-template"

@@ -355,7 +355,7 @@ export function toggleDateFormat() {
   });
 }
 
-function getNationLink(nationName, context) {
+export function getNationLink(nationName, context) {
   const settings = useSettings();
   const encodedName = encodeURIComponent(nationName);
 
@@ -378,6 +378,9 @@ function getNationLink(nationName, context) {
         break;
       case "detailedReceived":
         linkType = settings.linkTypeDetailedReceived;
+        break;
+      case "puppetPopup":
+        linkType = settings.linkTypePuppet;
         break;
       default:
         linkType = "nation";
