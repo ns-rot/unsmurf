@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@106,575&family=Inter+Tight:wght@400..700&family=Inter:opsz,wght@14..32,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@106,575&family=Inter+Tight:wght@400..700&family=Inter:opsz,wght@14..32,400..700&family=Noto+Sans+Mono:wdth,wght@62.5..100,100..900&display=swap');
 
 @font-face {
   font-family: "UnsmurfIcons";
@@ -568,6 +568,14 @@ video {
   display: none;
 }
 
+.midnight body.dark\:bg-gray-700\/50{
+  border-width: 1px !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(31 41 55 / var(--tw-border-opacity, 1)) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1)) !important;
+}
+
 body{
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
@@ -578,16 +586,83 @@ body{
   transition-duration: 200ms;
 }
 
-html.midnight body.dark\:bg-gray-700\/50 {
-  background-color: #000000;
-  border: 1px solid #1f2937;
-}
-
 body:is(.dark *){
   --tw-bg-opacity: 1;
   background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity, 1));
+}
+
+/* Midnight Mode Overrides */
+
+/* Using @apply enables us to use standard tailwind colors (gray-800 = #1f2937, etc) */
+
+.midnight body{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.midnight .settings-modal,
+  .midnight .puppet-modal,
+  .midnight .loading-container,
+  .midnight .nation-alert{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(31 41 55 / var(--tw-border-opacity, 1)) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.midnight table th{
+  border-style: none !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.midnight table td,
+  .midnight input{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity, 1)) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1)) !important;
+}
+
+/* Use explicit border sides to match original CSS logic */
+
+.midnight table td{
+  border-top-width: 1px !important;
+  border-bottom-width: 1px !important;
+  border-left-width: 0px !important;
+  border-right-width: 0px !important;
+  border-style: solid !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity, 1)) !important;
+}
+
+.midnight .bg-gray-50.dark\:bg-gray-700\/50{
+  border-width: 1px !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(31 41 55 / var(--tw-border-opacity, 1)) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1)) !important;
+}
+
+/* Restore outer borders for body cells */
+
+.midnight table tbody tr:not(.table-spacer-row) td:first-child{
+  border-left-width: 1px !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity, 1)) !important;
+}
+
+.midnight table tbody tr:not(.table-spacer-row) td:last-child{
+  border-right-width: 1px !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity, 1)) !important;
+}
+
+.midnight tr:not(.table-spacer-row):hover td{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(15 17 21 / var(--tw-bg-opacity, 1)) !important;
 }
 
 .container{
@@ -644,6 +719,14 @@ body:is(.dark *){
   border-width: 0;
 }
 
+.pointer-events-none{
+  pointer-events: none;
+}
+
+.pointer-events-auto{
+  pointer-events: auto;
+}
+
 .visible{
   visibility: visible;
 }
@@ -660,6 +743,10 @@ body:is(.dark *){
   position: fixed;
 }
 
+.absolute{
+  position: absolute;
+}
+
 .relative{
   position: relative;
 }
@@ -672,12 +759,37 @@ body:is(.dark *){
   top: -1px;
 }
 
+.bottom-2{
+  bottom: 0.5rem;
+}
+
+.right-3{
+  right: 0.75rem;
+}
+
+.top-2{
+  top: 0.5rem;
+}
+
 .top-\[-0\.4em\]{
   top: -0.4em;
 }
 
+.z-10{
+  z-index: 10;
+}
+
 .z-50{
   z-index: 50;
+}
+
+.float-left{
+  float: left;
+}
+
+.my-1{
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .my-12{
@@ -723,6 +835,10 @@ body:is(.dark *){
 
 .mr-1{
   margin-right: 0.25rem;
+}
+
+.mr-12{
+  margin-right: 3rem;
 }
 
 .mt-1{
@@ -808,8 +924,16 @@ body:is(.dark *){
   height: 2rem;
 }
 
+.h-px{
+  height: 1px;
+}
+
 .max-h-\[90vh\]{
   max-height: 90vh;
+}
+
+.max-h-full{
+  max-height: 100%;
 }
 
 .min-h-screen{
@@ -822,6 +946,10 @@ body:is(.dark *){
 
 .w-10{
   width: 2.5rem;
+}
+
+.w-2{
+  width: 0.5rem;
 }
 
 .w-48{
@@ -838,6 +966,10 @@ body:is(.dark *){
 
 .w-8{
   width: 2rem;
+}
+
+.w-9{
+  width: 2.25rem;
 }
 
 .w-\[90\%\]{
@@ -953,6 +1085,10 @@ body:is(.dark *){
   flex-wrap: wrap;
 }
 
+.items-start{
+  align-items: flex-start;
+}
+
 .items-center{
   align-items: center;
 }
@@ -1011,6 +1147,10 @@ body:is(.dark *){
 
 .overflow-y-auto{
   overflow-y: auto;
+}
+
+.scroll-smooth{
+  scroll-behavior: smooth;
 }
 
 .whitespace-normal{
@@ -1101,9 +1241,17 @@ body:is(.dark *){
   border-color: rgb(249 250 251 / var(--tw-border-opacity, 1));
 }
 
+.border-transparent{
+  border-color: transparent;
+}
+
 .bg-black{
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+
+.bg-black\/20{
+  background-color: rgb(0 0 0 / 0.2);
 }
 
 .bg-blue-500{
@@ -1124,6 +1272,10 @@ body:is(.dark *){
 .bg-gray-300{
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1));
+}
+
+.bg-gray-400\/50{
+  background-color: rgb(156 163 175 / 0.5);
 }
 
 .bg-gray-50{
@@ -1252,6 +1404,11 @@ body:is(.dark *){
   padding: 1.5rem;
 }
 
+.px-1{
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .px-1\.5{
   padding-left: 0.375rem;
   padding-right: 0.375rem;
@@ -1282,6 +1439,11 @@ body:is(.dark *){
   padding-bottom: 0.125rem;
 }
 
+.py-1{
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 .py-1\.5{
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
@@ -1307,6 +1469,11 @@ body:is(.dark *){
   padding-bottom: 1rem;
 }
 
+.py-\[1px\]{
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
 .pb-1{
   padding-bottom: 0.25rem;
 }
@@ -1317,6 +1484,14 @@ body:is(.dark *){
 
 .pl-1{
   padding-left: 0.25rem;
+}
+
+.pl-3{
+  padding-left: 0.75rem;
+}
+
+.pr-14{
+  padding-right: 3.5rem;
 }
 
 .pr-2{
@@ -1370,6 +1545,10 @@ body:is(.dark *){
 
 .text-\[10px\]{
   font-size: 10px;
+}
+
+.text-\[11px\]{
+  font-size: 11px;
 }
 
 .text-lg{
@@ -1574,91 +1753,83 @@ body:is(.dark *){
   transition-duration: 200ms;
 }
 
-/* Overrides must be outside @layer base to ensure they come after utilities if specificity is equal, 
-   or we just use higher specificity. Here we use html.midnight which works globally. */
+/* Spacer Row Styles - Must remain high specificity global utility */
 
-html.midnight body {
-  background-color: #000000 !important;
-  /* Force black */
-}
-
-html.midnight .settings-modal {
-  background-color: #000000 !important;
-  border-color: #1f2937 !important;
-  /* gray-800 */
-}
-
-/* Custom separation for Midnight mode headers */
-
-/* Custom separation for Midnight mode headers */
-
-/* Custom separation for Midnight mode headers */
-
-html.midnight table th {
-  background-color: #1f2937 !important;
-  /* Grey fill for prominence */
-  border: none !important;
-  /* Remove ALL borders/outlines from header */
-  /* We rely on utility classes for rounded corners, which will now work perfectly without borders */
-}
-
-/* Settings, Puppet Modal, and Loading backgrounds */
-
-html.midnight .settings-modal,
-html.midnight .puppet-modal,
-html.midnight .loading-container,
-html.midnight .nation-alert {
-  background-color: #000000 !important;
-  border-color: #1f2937 !important;
-}
-
-/* Force black background for Link Options blocks */
-
-html.midnight .bg-gray-50.dark\:bg-gray-700\/50 {
-  background-color: #000000 !important;
-  border: 1px solid #1f2937 !important;
-}
-
-/* Table Body Cells & Inputs */
-
-html.midnight table td,
-html.midnight input {
-  background-color: #000000 !important;
-  border-color: #374151 !important;
-}
-
-html.midnight table td {
-  border-top: 1px solid #374151 !important;
-  border-bottom: 1px solid #374151 !important;
-  border-left: none !important;
-  border-right: none !important;
-}
-
-/* Spacer Row Styles - High specificity to override all themes including Midnight */
-
-html body table .table-spacer-row td {
+html body table .table-spacer-row td{
+  border-style: none !important;
   background-color: transparent !important;
-  border: none !important;
-  padding: 0 !important;
+  padding: 0px !important;
   line-height: 0 !important;
 }
 
-/* Restore outer borders ONLY for body cells (td), NOT headers and NOT spacers */
+/* Global Scrollbar Styling */
 
-html.midnight table tbody tr:not(.table-spacer-row) td:first-child {
-  border-left: 1px solid #374151 !important;
+/* Firefox */
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: rgba(156, 163, 175, 0.6) transparent;
+  /* Light mode default */
 }
 
-html.midnight table tbody tr:not(.table-spacer-row) td:last-child {
-  border-right: 1px solid #374151 !important;
+/* Dark Mode (Firefox) */
+
+.dark * {
+  scrollbar-color: rgba(107, 114, 128, 0.6) transparent;
+  /* Dark mode contrast */
 }
 
-/* Remove or adjust hover effects for midnight mode if desired, 
-   though border outline might be enough distinction. */
+/* WebKit (Chrome, Edge, Safari) */
 
-html.midnight tr:not(.table-spacer-row):hover td {
-  background-color: #0f1115 !important;
-  /* Very subtle highlight */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  /* For horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(107, 114, 128, 0.6);
+  /* Gray-500 base for Light Mode */
+  border-radius: 8px;
+  border: 4px solid transparent;
+  background-clip: content-box;
+  min-height: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(107, 114, 128, 0.9);
+  /* Darker on hover */
+}
+
+/* Dark Mode (WebKit) */
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgba(107, 114, 128, 0.6);
+  /* Gray-500 for better visibility on dark bg */
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.9);
+  /* Lighter/brighter on hover for contrast */
+}
+
+/* Ensure global app roots use stable gutter to prevent shifts */
+
+html,
+body {
+  scrollbar-gutter: stable;
+}
+
+.midnight .group:hover .group-hover\:bg-gray-50.dark\:bg-gray-700\/50{
+  border-width: 1px !important;
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(31 41 55 / var(--tw-border-opacity, 1)) !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1)) !important;
 }
 
 .hover\:bg-blue-600:hover{
@@ -1676,6 +1847,10 @@ html.midnight tr:not(.table-spacer-row):hover td {
   background-color: rgb(209 213 219 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:font-bold:hover{
+  font-weight: 700;
+}
+
 .hover\:text-gray-600:hover{
   --tw-text-opacity: 1;
   color: rgb(75 85 99 / var(--tw-text-opacity, 1));
@@ -1689,6 +1864,11 @@ html.midnight tr:not(.table-spacer-row):hover td {
 .hover\:text-gray-800:hover{
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity, 1));
+}
+
+.hover\:text-white:hover{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
 .hover\:underline:hover{
@@ -1759,6 +1939,10 @@ html.midnight tr:not(.table-spacer-row):hover td {
 .dark\:bg-black:is(.dark *){
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+
+.dark\:bg-black\/40:is(.dark *){
+  background-color: rgb(0 0 0 / 0.4);
 }
 
 .dark\:bg-gray-700:is(.dark *){
@@ -1943,8 +2127,21 @@ html.midnight tr:not(.table-spacer-row):hover td {
     padding-right: 1rem;
   }
 
+  .sm\:py-4{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
   .sm\:pl-0{
     padding-left: 0px;
+  }
+
+  .sm\:pl-4{
+    padding-left: 1rem;
+  }
+
+  .sm\:pr-14{
+    padding-right: 3.5rem;
   }
 }
 
