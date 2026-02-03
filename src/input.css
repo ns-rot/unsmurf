@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@106,575&family=Inter+Tight:wght@400..700&family=Inter:opsz,wght@14..32,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@106,575&family=Inter+Tight:wght@400..700&family=Inter:opsz,wght@14..32,400..700&family=Noto+Sans+Mono:wdth,wght@62.5..100,100..900&display=swap');
 
 @font-face {
   font-family: "UnsmurfIcons";
@@ -16,81 +16,110 @@
   body {
     @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200;
   }
+
+  /* Midnight Mode Overrides */
+  /* Using @apply enables us to use standard tailwind colors (gray-800 = #1f2937, etc) */
+  .midnight body {
+    @apply bg-black !important;
+  }
+
+  .midnight .settings-modal,
+  .midnight .puppet-modal,
+  .midnight .loading-container,
+  .midnight .nation-alert {
+    @apply bg-black border-gray-800 !important;
+  }
+
+  .midnight table th {
+    @apply bg-gray-800 border-none !important;
+  }
+
+  .midnight table td,
+  .midnight input {
+    @apply bg-black border-gray-700 !important;
+  }
+
+  /* Use explicit border sides to match original CSS logic */
+  .midnight table td {
+    @apply border-t border-b border-l-0 border-r-0 border-solid border-gray-700 !important;
+  }
+
+  .midnight .bg-gray-50.dark\:bg-gray-700\/50 {
+    @apply bg-black border border-gray-800 !important;
+  }
+
+  /* Restore outer borders for body cells */
+  .midnight table tbody tr:not(.table-spacer-row) td:first-child {
+    @apply border-l border-gray-700 !important;
+  }
+
+  .midnight table tbody tr:not(.table-spacer-row) td:last-child {
+    @apply border-r border-gray-700 !important;
+  }
+
+  .midnight tr:not(.table-spacer-row):hover td {
+    @apply bg-[#0f1115] !important;
+  }
 }
 
-/* Overrides must be outside @layer base to ensure they come after utilities if specificity is equal, 
-   or we just use higher specificity. Here we use html.midnight which works globally. */
-html.midnight body {
-  background-color: #000000 !important;
-  /* Force black */
-}
-
-html.midnight .settings-modal {
-  background-color: #000000 !important;
-  border-color: #1f2937 !important;
-  /* gray-800 */
-}
-
-/* Custom separation for Midnight mode headers */
-/* Custom separation for Midnight mode headers */
-/* Custom separation for Midnight mode headers */
-html.midnight table th {
-  background-color: #1f2937 !important;
-  /* Grey fill for prominence */
-  border: none !important;
-  /* Remove ALL borders/outlines from header */
-  /* We rely on utility classes for rounded corners, which will now work perfectly without borders */
-}
-
-/* Settings, Puppet Modal, and Loading backgrounds */
-html.midnight .settings-modal,
-html.midnight .puppet-modal,
-html.midnight .loading-container,
-html.midnight .nation-alert {
-  background-color: #000000 !important;
-  border-color: #1f2937 !important;
-}
-
-/* Force black background for Link Options blocks */
-html.midnight .bg-gray-50.dark\:bg-gray-700\/50 {
-  background-color: #000000 !important;
-  border: 1px solid #1f2937 !important;
-}
-
-/* Table Body Cells & Inputs */
-html.midnight table td,
-html.midnight input {
-  background-color: #000000 !important;
-  border-color: #374151 !important;
-}
-
-html.midnight table td {
-  border-top: 1px solid #374151 !important;
-  border-bottom: 1px solid #374151 !important;
-  border-left: none !important;
-  border-right: none !important;
-}
-
-/* Spacer Row Styles - High specificity to override all themes including Midnight */
+/* Spacer Row Styles - Must remain high specificity global utility */
 html body table .table-spacer-row td {
-  background-color: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  line-height: 0 !important;
+  @apply bg-transparent border-none p-0 leading-[0] !important;
 }
 
-/* Restore outer borders ONLY for body cells (td), NOT headers and NOT spacers */
-html.midnight table tbody tr:not(.table-spacer-row) td:first-child {
-  border-left: 1px solid #374151 !important;
+/* Global Scrollbar Styling */
+
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: rgba(156, 163, 175, 0.6) transparent;
+  /* Light mode default */
 }
 
-html.midnight table tbody tr:not(.table-spacer-row) td:last-child {
-  border-right: 1px solid #374151 !important;
+/* Dark Mode (Firefox) */
+.dark * {
+  scrollbar-color: rgba(107, 114, 128, 0.6) transparent;
+  /* Dark mode contrast */
 }
 
-/* Remove or adjust hover effects for midnight mode if desired, 
-   though border outline might be enough distinction. */
-html.midnight tr:not(.table-spacer-row):hover td {
-  background-color: #0f1115 !important;
-  /* Very subtle highlight */
+/* WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  /* For horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(107, 114, 128, 0.6);
+  /* Gray-500 base for Light Mode */
+  border-radius: 8px;
+  border: 4px solid transparent;
+  background-clip: content-box;
+  min-height: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(107, 114, 128, 0.9);
+  /* Darker on hover */
+}
+
+/* Dark Mode (WebKit) */
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgba(107, 114, 128, 0.6);
+  /* Gray-500 for better visibility on dark bg */
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.9);
+  /* Lighter/brighter on hover for contrast */
+}
+
+/* Ensure global app roots use stable gutter to prevent shifts */
+html,
+body {
+  scrollbar-gutter: stable;
 }

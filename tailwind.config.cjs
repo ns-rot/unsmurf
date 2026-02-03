@@ -110,7 +110,8 @@ module.exports = {
     },
   },
   plugins: [
-    function ({ addComponents }) {
+    function ({ addComponents, addVariant }) {
+      addVariant('midnight', '.midnight &'); // Enables 'midnight:bg-black' etc.
       addComponents({
         '.font-inter': {
           fontFeatureSettings: '"liga" 1, "dlig" 1, "ss02" 1, "ss03" 1, "cv01" 1',

@@ -1,4 +1,5 @@
 <script>
+  import { onMount, tick } from "svelte";
   import { isNationCurrent, countActivePuppets } from "./sheetFetch.js";
   import { canonicalizeName } from "./settingsUtils.js";
   import { getNationLink } from "./dataUtils.js";
@@ -45,7 +46,176 @@
     if (mode === 2) return "Sorting by Status (CTE First)";
     return "Sorting Alphabetically";
   }
+
+  let scrollContainer;
+  let containerHeight = 0;
+  let windowWidth = 0;
+
+  const ROW_HEIGHT = 40;
+
+  $: numColumns = (() => {
+    if (windowWidth >= 1280) return 6; // xl
+    if (windowWidth >= 1024) return 5; // lg
+    if (windowWidth >= 768) return 4; // md
+    if (windowWidth >= 640) return 3; // sm
+    return 2; // default
+  })();
+
+  $: seekSections = (() => {
+    if (sortedPuppetList.length === 0 || !containerHeight) return [];
+
+    const availableHeight = containerHeight - 40;
+    const LABEL_HEIGHT = 14;
+    const maxTicks = Math.floor(availableHeight / LABEL_HEIGHT);
+
+    if (maxTicks < 3) return [];
+
+    const totalItems = sortedPuppetList.length;
+
+    function getGroup(p, mode) {
+      if (mode === 0) return "All";
+      const active = isNationCurrent(p);
+      if (mode === 1) return active ? "Active" : "CTE";
+      return active ? "CTE" : "Active";
+    }
+
+    const headerCounts = new Map();
+    for (let j = 0; j < totalItems; j++) {
+      const item = sortedPuppetList[j];
+      if (!item) continue;
+      const g = getGroup(item, sortMode);
+      const c = item.charAt(0).toUpperCase();
+      const key = g + "|" + c;
+      headerCounts.set(key, (headerCounts.get(key) || 0) + 1);
+    }
+
+    const THRESHOLD = Math.ceil(totalItems * 0.02);
+
+    function isSignificant(g, c) {
+      return (headerCounts.get(g + "|" + c) || 0) >= THRESHOLD;
+    }
+
+    let targetSize = Math.max(1, Math.floor(totalItems / maxTicks));
+
+    let iterations = 0;
+    while (iterations < 8) {
+      let estimatedTicks = 0;
+      headerCounts.forEach((count) => {
+        estimatedTicks += count / targetSize;
+      });
+      estimatedTicks = Math.ceil(estimatedTicks * 1.1);
+      if (estimatedTicks <= maxTicks) break;
+      targetSize = Math.ceil(targetSize * 1.15);
+      iterations++;
+    }
+
+    const collapsed = [];
+    let sectionStart = 0;
+    let sectionStartItem = sortedPuppetList[0];
+    let sectionStartGroup = getGroup(sectionStartItem, sortMode);
+    let lastChar1 = null;
+
+    for (let i = 1; i < totalItems; i++) {
+      const p = sortedPuppetList[i];
+      const prevP = sortedPuppetList[i - 1];
+
+      const currentGroup = getGroup(p, sortMode);
+      const prevGroup = getGroup(prevP, sortMode);
+
+      const currentChar1 = p.charAt(0).toUpperCase();
+      const prevChar1 = sortedPuppetList[sectionStart].charAt(0).toUpperCase();
+
+      const currentChar2 = p.length > 1 ? p.charAt(1).toUpperCase() : "";
+      const prevChar2 = prevP.length > 1 ? prevP.charAt(1).toUpperCase() : "";
+
+      const currentCount = i - sectionStart;
+      let shouldBreak = false;
+
+      if (currentGroup !== prevGroup) {
+        shouldBreak = true;
+      } else if (currentChar1 !== prevChar1) {
+        if (currentCount >= targetSize) {
+          shouldBreak = true;
+        } else if (isSignificant(currentGroup, currentChar1)) {
+          shouldBreak = true;
+        }
+      } else if (currentChar2 !== prevChar2) {
+        if (currentCount >= targetSize) {
+          const orphanThreshold = Math.max(1, Math.floor(targetSize * 0.15));
+          let subdivisionCount = 0;
+          for (let k = i; k < totalItems; k++) {
+            const nextP = sortedPuppetList[k];
+            const nextGroup = getGroup(nextP, sortMode);
+            const nextChar1 = nextP.charAt(0).toUpperCase();
+            const nextChar2 =
+              nextP.length > 1 ? nextP.charAt(1).toUpperCase() : "";
+
+            if (nextGroup !== currentGroup || nextChar1 !== currentChar1) break;
+            if (nextChar2 !== currentChar2) break;
+
+            subdivisionCount++;
+          }
+
+          if (subdivisionCount > orphanThreshold) {
+            shouldBreak = true;
+          }
+        }
+      }
+
+      if (shouldBreak) {
+        const startP = sortedPuppetList[sectionStart];
+        const startChar1 = startP.charAt(0).toUpperCase();
+        let label = startChar1;
+
+        if (lastChar1 === startChar1) {
+          const startChar2 =
+            startP.length > 1 ? startP.charAt(1).toUpperCase() : "";
+          label = startChar1 + startChar2;
+        }
+
+        collapsed.push({
+          group: sectionStartGroup,
+          label: label,
+          startIndex: sectionStart,
+          count: currentCount,
+        });
+
+        sectionStart = i;
+        sectionStartItem = p;
+        sectionStartGroup = currentGroup;
+        lastChar1 = startChar1;
+      }
+    }
+
+    const startP = sortedPuppetList[sectionStart];
+    const startChar1 = startP.charAt(0).toUpperCase();
+    let label = startChar1;
+    if (lastChar1 === startChar1) {
+      const startChar2 =
+        startP.length > 1 ? startP.charAt(1).toUpperCase() : "";
+      label = startChar1 + startChar2;
+    }
+
+    collapsed.push({
+      group: sectionStartGroup,
+      label: label,
+      startIndex: sectionStart,
+      count: totalItems - sectionStart,
+    });
+
+    return collapsed;
+  })();
+
+  function scrollToSection(index) {
+    if (index === undefined) return;
+    const el = document.getElementById(`puppet-${index}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "auto", block: "start" });
+    }
+  }
 </script>
+
+<svelte:window bind:innerWidth={windowWidth} />
 
 <!-- Overlay that covers the entire screen -->
 <div
@@ -112,69 +282,121 @@
       </div>
     </div>
 
-    <!-- Content area with scrollable flex container -->
-    <div class="flex-grow px-3 py-4 sm:p-4 overflow-auto">
-      <div class="flex flex-wrap rounded-lg">
-        {#each sortedPuppetList as puppet}
-          <div
-            class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 pb-2 pr-2 text-left transition-colors whitespace-normal break-words overflow-hidden"
-          >
-            <span class="block w-full">
-              {#if !isNationCurrent(canonicalizeName(puppet))}
-                <span
-                  class="font-inter select-none text-red-600 dark:text-red-400"
-                  >&#xe000;&#x2009;</span
+    <!-- Content area with scrollable flex container and sidebar -->
+    <div class="flex-grow relative overflow-hidden flex">
+      <div
+        class="flex-grow pl-3 pr-14 py-4 sm:pl-4 sm:py-4 sm:pr-14 overflow-auto scroll-smooth"
+        bind:this={scrollContainer}
+        bind:clientHeight={containerHeight}
+      >
+        <!-- Full list rendering without virtualization -->
+        <div class="w-full flex flex-wrap">
+          {#each sortedPuppetList as puppet, i (puppet)}
+            <div
+              id="puppet-{i}"
+              class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 pb-2 text-left transition-colors whitespace-normal break-words overflow-hidden flex items-start pr-2"
+              style="min-height: {ROW_HEIGHT}px;"
+            >
+              <span class="block w-full leading-tight">
+                {#if !isNationCurrent(canonicalizeName(puppet))}
+                  <span
+                    class="font-inter select-none text-red-600 dark:text-red-400 mr-1 float-left"
+                    >&#xe000;</span
+                  >
+                {/if}
+                <a
+                  href={getNationLink(
+                    puppet.replace(/cte/i, "").trim(),
+                    "puppetPopup",
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-400 no-underline hover:underline"
                 >
-              {/if}
-              <a
-                href={getNationLink(
-                  puppet.replace(/cte/i, "").trim(),
-                  "puppetPopup",
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-400 no-underline"
-              >
-                {puppet}
-              </a>
-            </span>
-          </div>
-        {/each}
+                  {puppet}
+                </a>
+              </span>
+            </div>
+          {/each}
+        </div>
+
+        <!-- Disclaimer at bottom of list -->
+        <div
+          class="mt-4 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-2 mr-12"
+        >
+          <p>
+            This list may be incomplete. Data is sourced from community sheets.
+          </p>
+          <p>
+            Contribute to <a
+              href="https://docs.google.com/spreadsheets/d/1MZ-4GLWAZDgB1TDvwtssEcVKHKunOKi3l90Jof1pBB4/edit?gid=733627866#gid=733627866"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline hover:text-gray-800 dark:hover:text-gray-200"
+              >9003's sheet</a
+            >
+            through
+            <a
+              href="https://docs.google.com/forms/d/16t4mlYuSU5p0U9hVkvzKMqP1GRnpdDV7nLNLA9WdFTs/viewform?chromeless=1&edit_requested=trues"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline hover:text-gray-800 dark:hover:text-gray-200"
+              >this form</a
+            >, or to
+            <a
+              href="https://docs.google.com/spreadsheets/d/1osIbavh59GHFqQCO909jFRDX5XerSvZ7sWFfgMHLFs4/edit?gid=0#gid=0"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline hover:text-gray-800 dark:hover:text-gray-200"
+              >Rot's sheet</a
+            > by contacting @rotenaple on Discord.
+          </p>
+          <p>
+            For any inaccuracies, please contact the respective sheet owner.
+          </p>
+        </div>
       </div>
 
-      <!-- Disclaimer at bottom of list -->
-      <div
-        class="mt-4 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-2"
-      >
-        <p>
-          This list may be incomplete. Data is sourced from community sheets.
-        </p>
-        <p>
-          Contribute to <a
-            href="https://docs.google.com/spreadsheets/d/1MZ-4GLWAZDgB1TDvwtssEcVKHKunOKi3l90Jof1pBB4/edit?gid=733627866#gid=733627866"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="underline hover:text-gray-800 dark:hover:text-gray-200"
-            >9003's sheet</a
+      <!-- Enhanced Sidebar -->
+      {#if seekSections.length > 0}
+        <!-- Positioned right-3 to clear scrollbar but keep tight -->
+        <div
+          class="absolute right-3 top-2 bottom-2 w-9 flex flex-col items-center justify-center py-2 z-10 pointer-events-none"
+        >
+          <div
+            class="pointer-events-auto bg-black/20 dark:bg-black/40 backdrop-blur-sm rounded-full py-1 px-1 flex flex-col items-center shadow-sm max-h-full overflow-hidden border border-transparent dark:border-gray-600"
           >
-          through
-          <a
-            href="https://docs.google.com/forms/d/16t4mlYuSU5p0U9hVkvzKMqP1GRnpdDV7nLNLA9WdFTs/viewform?chromeless=1&edit_requested=trues"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="underline hover:text-gray-800 dark:hover:text-gray-200"
-            >this form</a
-          >, or to
-          <a
-            href="https://docs.google.com/spreadsheets/d/1osIbavh59GHFqQCO909jFRDX5XerSvZ7sWFfgMHLFs4/edit?gid=0#gid=0"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="underline hover:text-gray-800 dark:hover:text-gray-200"
-            >Rot's sheet</a
-          > by contacting @rotenaple on Discord.
-        </p>
-        <p>For any inaccuracies, please contact the respective sheet owner.</p>
-      </div>
+            {#each seekSections as section, i}
+              <!-- Group Separator -->
+              {#if i > 0 && section.group !== seekSections[i - 1].group}
+                <div class="w-2 h-px bg-gray-400/50 my-1"></div>
+              {/if}
+
+              <div
+                on:click|stopPropagation={() =>
+                  scrollToSection(section.startIndex)}
+                on:keydown={(e) =>
+                  e.key === "Enter" && scrollToSection(section.startIndex)}
+                tabindex="0"
+                class="w-full text-center cursor-pointer hover:text-white text-gray-800 dark:text-gray-200 font-medium hover:font-bold transition-all select-none py-[1px] {section
+                  .label.length > 1
+                  ? 'text-[10px]'
+                  : 'text-[11px]'}"
+                role="button"
+                aria-label="Scroll to {section.label}"
+                style="font-family: 'Noto Sans Mono', sans-serif; font-variation-settings: 'wdth' {section
+                  .label.length > 1
+                  ? 70
+                  : 100}; line-height: 1.1;"
+              >
+                {section.label.length > 5
+                  ? section.label.substring(0, 4) + ".."
+                  : section.label}
+              </div>
+            {/each}
+          </div>
+        </div>
+      {/if}
     </div>
   </div>
 </div>
