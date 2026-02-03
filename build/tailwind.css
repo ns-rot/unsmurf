@@ -604,8 +604,7 @@ body:is(.dark *){
 
 .midnight .settings-modal,
   .midnight .puppet-modal,
-  .midnight .loading-container,
-  .midnight .nation-alert{
+  .midnight .loading-container{
   --tw-border-opacity: 1 !important;
   border-color: rgb(31 41 55 / var(--tw-border-opacity, 1)) !important;
   --tw-bg-opacity: 1 !important;
