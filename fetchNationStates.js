@@ -130,6 +130,11 @@ async function fetchNationStatesData() {
       console.log("✅ File content has changed, proceeding with commit.");
     }
 
+    // Write JSON version for optimized fetching
+    const jsonPath = mainFilePath.replace('.txt', '.json');
+    await fs.writeFile(jsonPath, JSON.stringify(currentNations), { encoding: 'utf8', flag: 'w' });
+    console.log(`✅ Written ${jsonPath}`);
+
     // Step 1B: Decompress, update, and re-compress allNations list
     console.log(`Reading existing nations from ${allNationsCompressedPath}...`);
     const existingData = await readBrotliFile(allNationsCompressedPath);
@@ -159,10 +164,10 @@ async function fetchNationStatesData() {
     console.log('Committing and pushing changes to data branch...');
     await runGitCommand(`
       cd ${dataWorktreePath} &&
-      git checkout --orphan latest_snapshot &&
+      git checkout --orphan ns_snapshot &&
       git add . &&
       git commit -m "Update NationStates data" &&
-      git push origin latest_snapshot:data --force
+      git push origin ns_snapshot:data --force
     `);
 
     // Clean up worktree

@@ -326,7 +326,52 @@ async function processGoogleSheets() {
     // STEP 9: Commit to data branch (Orphan strategy)
     logStep(9, 'Writing and committing');
     await fs.writeFile(CONFIG.paths.main, content, 'utf8');
-    await runGit(`cd ${CONFIG.paths.worktree} && git checkout --orphan latest_snapshot && git add . && git commit -m "Update puppet data" && git push origin latest_snapshot:data --force`);
+
+    // Generate and write JSON with Frequency Sorting (Huffman-like optimization for indices)
+
+    // 1. Count frequencies
+    const masterCounts = {};
+    const sheetCounts = {};
+
+    for (const { master, sheet } of data) {
+      masterCounts[master] = (masterCounts[master] || 0) + 1;
+      sheetCounts[sheet] = (sheetCounts[sheet] || 0) + 1;
+    }
+
+    // 2. Create sorted lists (most frequent first -> lower index)
+    const mastersList = Object.keys(masterCounts).sort((a, b) => masterCounts[b] - masterCounts[a]);
+    const sheetsList = Object.keys(sheetCounts).sort((a, b) => sheetCounts[b] - sheetCounts[a]);
+
+    // 3. Create Maps for O(1) index lookup
+    const mastersMap = new Map(mastersList.map((m, i) => [m, i]));
+    const sheetsMap = new Map(sheetsList.map((s, i) => [s, i]));
+
+    // 4. Build puppets list using these sorted indices
+    const puppetsList = data.map(({ puppet, master, sheet }) => [
+      puppet,
+      mastersMap.get(master),
+      sheetsMap.get(sheet)
+    ]);
+
+    const jsonContent = JSON.stringify({
+      masters: mastersList,
+      sheets: sheetsList,
+      puppets: puppetsList
+    });
+
+    await fs.writeFile(CONFIG.paths.main.replace('.tsv', '.json'), jsonContent, 'utf8');
+
+    // Log file sizes
+    const tsvStats = await fs.stat(CONFIG.paths.main);
+    const jsonStats = await fs.stat(CONFIG.paths.main.replace('.tsv', '.json'));
+    log(`Generated puppetData.json: ${mastersList.length} masters, ${sheetsList.length} sheets, ${puppetsList.length} puppets`);
+    log(`  Optimization: Most frequent master '${mastersList[0]}' (${masterCounts[mastersList[0]]} occurrences) assigned index 0.`);
+    log(`  TSV Size: ${(tsvStats.size / 1024 / 1024).toFixed(2)} MB`);
+    log(`  JSON Size: ${(jsonStats.size / 1024 / 1024).toFixed(2)} MB`);
+
+
+
+    await runGit(`cd ${CONFIG.paths.worktree} && git checkout --orphan sheets_snapshot && git add . && git commit -m "Update puppet data" && git push origin sheets_snapshot:data --force`);
 
     // Cleanup
     await runGit(`git worktree remove ${CONFIG.paths.worktree} --force`);
