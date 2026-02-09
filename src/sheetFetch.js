@@ -10,199 +10,60 @@ export let currentNationSet = null; // Set for fast current nation lookups
 const puppetDataUrl = "https://raw.githubusercontent.com/ns-rot/unsmurf/data/static/puppetData.tsv"; // URL to your preprocessed Puppet TSV file
 const currentNationsUrl = "https://raw.githubusercontent.com/ns-rot/unsmurf/data/static/currentNations.txt"; // URL to your current nations file
 
-async function fetchWithCache(url) {
-  const cacheName = "unsmurf-static-data";
-  const cacheDuration = 24 * 60 * 60 * 1000; // 24 hours
-  const cacheKey = `unsmurf_cache_time_${url}`;
-
-  const now = Date.now();
-  let lastCached = null;
-  try {
-    lastCached = localStorage.getItem(cacheKey);
-  } catch (e) {
-    console.warn("LocalStorage access failed", e);
-  }
-
-  const isValid = lastCached && now - parseInt(lastCached) < cacheDuration;
-
-  if (isValid && "caches" in window) {
-    try {
-      const cache = await caches.open(cacheName);
-      const cachedResponse = await cache.match(url);
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-    } catch (e) {
-      console.warn("Cache match failed", e);
-    }
-  }
-
-  const response = await fetch(url);
-
-  if (response.ok && "caches" in window) {
-    try {
-      const cache = await caches.open(cacheName);
-      await cache.put(url, response.clone());
-      try {
-        localStorage.setItem(cacheKey, now.toString());
-      } catch (e) {
-        console.warn("LocalStorage write failed", e);
-      }
-    } catch (e) {
-      console.warn("Cache put failed", e);
-    }
-  }
-
-  return response;
-}
-
-/**
- * Preprocesses the current nations cache into a Set for fast lookups.
- */
-function preprocessCurrentNationSet() {
-  if (!currentNationsCache) {
-    console.warn("Current nations cache is not initialized.");
-    return;
-  }
-
-  currentNationSet = new Set(currentNationsCache); // Convert to Set
-}
 
 /**
  * Fetches and caches puppet data, S4 data, and current nations from their respective files.
+ * Uses a Web Worker to prevent blocking the main thread.
  */
 export async function fetchSheets() {
   // Reset all caches
   puppetMasterCache = {};
-  masterToPuppetsCache = {}; // Initialize reverse lookup map
+  masterToPuppetsCache = {};
   currentNationsCache = [];
   currentNationSet = null;
 
-  try {
-    // Fetch all data in parallel
-    const promises = [
-      fetchWithCache(puppetDataUrl),
-      fetchWithCache(currentNationsUrl),
-    ];
+  return new Promise((resolve, reject) => {
+    const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
 
-    let auxDataPromise = null;
-    if (window.UNSMURF_AUX_URL) {
-      auxDataPromise = fetch(window.UNSMURF_AUX_URL).then(res => {
-        if (!res.ok) return null;
-        return res.text();
-      }).catch(err => {
-        return null;
-      });
-    }
+    worker.onmessage = (e) => {
+      const { type, payload, message } = e.data;
 
-    const [puppetResponse, currentNationsResponse] = await Promise.all(promises);
+      if (type === 'success') {
+        puppetMasterCache = payload.puppetMasterCache;
+        masterToPuppetsCache = payload.masterToPuppetsCache;
+        currentNationsCache = payload.currentNationList;
+        currentNationSet = new Set(payload.currentNationList);
 
-    if (!puppetResponse.ok) throw new Error(`Failed to fetch puppet data: ${puppetResponse.statusText}`);
-    if (!currentNationsResponse.ok) throw new Error(`Failed to fetch current nations data: ${currentNationsResponse.statusText}`);
+        console.log(`Loaded ${Object.keys(puppetMasterCache).length} puppets.`);
+        console.log(`Loaded ${Object.keys(masterToPuppetsCache).length} masters with puppets.`);
 
-    const [puppetData, currentNationsData, auxData] = await Promise.all([
-      puppetResponse.text(),
-      currentNationsResponse.text(),
-      auxDataPromise
-    ]);
+        // Update the settings store to indicate data has been fetched
+        settingsStore.update((s) => ({
+          ...s,
+          dataFetched: true,
+        }));
 
-    processPuppetData(puppetData);
-
-    let auxLoaded = false;
-    if (auxData) {
-      processPuppetData(auxData);
-      auxLoaded = true;
-    }
-
-    if (window.UNSMURF_AUX_DATA) {
-      processPuppetData(window.UNSMURF_AUX_DATA);
-      auxLoaded = true;
-    }
-
-    if (auxLoaded) {
-      console.log("Aux Loaded.");
-    }
-
-    console.log(`Loaded ${Object.keys(puppetMasterCache).length} puppets.`);
-    console.log(`Loaded ${Object.keys(masterToPuppetsCache).length} masters with puppets.`);
-
-    // Process Current Nations Data
-    currentNationsCache = [];
-    let start = 0;
-    let next;
-    while (start < currentNationsData.length) {
-      next = currentNationsData.indexOf('\n', start);
-      const lineEnd = next === -1 ? currentNationsData.length : next;
-
-      if (lineEnd > start) {
-        const nation = normalize(currentNationsData.substring(start, lineEnd));
-        if (nation) currentNationsCache.push(nation);
+        worker.terminate();
+        resolve();
+      } else if (type === 'error') {
+        console.error("Worker error:", message);
+        worker.terminate();
+        reject(new Error(message));
       }
+    };
 
-      if (next === -1) break;
-      start = next + 1;
-    }
+    worker.onerror = (err) => {
+      console.error("Worker script error:", err);
+      reject(err);
+    };
 
-    // Preprocess the current nations into a Set for fast lookups
-    preprocessCurrentNationSet();
-  } catch (error) {
-    console.error("Error fetching sheet data:", error);
-  }
-
-  // Update the settings store to indicate data has been fetched
-  settingsStore.update((s) => ({
-    ...s,
-    dataFetched: true,
-  }));
-}
-
-/**
- * Processes raw TSV data and updates the puppet caches.
- * @param {string} tsvData - The raw TSV data string.
- */
-function processPuppetData(tsvData) {
-  let start = 0;
-  let next = tsvData.indexOf('\n', start);
-  if (next !== -1) start = next + 1;
-
-  while (start < tsvData.length) {
-    next = tsvData.indexOf('\n', start);
-    const lineEnd = next === -1 ? tsvData.length : next;
-
-    const tab1 = tsvData.indexOf('\t', start);
-    if (tab1 !== -1 && tab1 < lineEnd) {
-      const tab2 = tsvData.indexOf('\t', tab1 + 1);
-
-      const puppet = normalize(tsvData.substring(start, tab1));
-      let master, sheet;
-
-      if (tab2 !== -1 && tab2 < lineEnd) {
-        master = normalize(tsvData.substring(tab1 + 1, tab2));
-        sheet = normalize(tsvData.substring(tab2 + 1, lineEnd));
-      } else {
-        master = normalize(tsvData.substring(tab1 + 1, lineEnd));
-        sheet = "";
-      }
-
-      if (puppet && master) {
-        puppetMasterCache[puppet] = { master, sheet };
-        if (puppet !== master) {
-          if (!masterToPuppetsCache[master]) masterToPuppetsCache[master] = [];
-          if (!masterToPuppetsCache[master].includes(puppet)) {
-            masterToPuppetsCache[master].push(puppet);
-          }
-        }
-      }
-    }
-
-    if (next === -1) break;
-    start = next + 1;
-  }
-}
-
-// Helper for fast normalization
-function normalize(str) {
-  return str.trim().toLowerCase().replace(/\s+/g, "_");
+    // Send start message
+    worker.postMessage({
+      type: 'start',
+      auxUrl: window.UNSMURF_AUX_URL || null,
+      auxData: window.UNSMURF_AUX_DATA || null
+    });
+  });
 }
 
 /**
@@ -212,7 +73,8 @@ function normalize(str) {
  */
 export function findPuppetmaster(name) {
   if (!puppetMasterCache) {
-    console.warn("Puppet cache is not initialized. Returning the original name.");
+    // console.warn("Puppet cache is not initialized. Returning the original name."); 
+    // Suppress warning during init
     return { master: name, sheet: null };
   }
 
@@ -264,10 +126,6 @@ export function countActivePuppets(puppetList) {
   return puppetList.reduce((acc, p) => acc + (isNationCurrent(p) ? 1 : 0), 0);
 }
 
-
-
-
-
 /**
  * Check if a given nation is in the current nations cache.
  * @param {string} nation - The nation name to check.
@@ -275,7 +133,7 @@ export function countActivePuppets(puppetList) {
  */
 export function isNationCurrent(nation) {
   if (!currentNationSet) {
-    console.warn("Current nation Set is not initialized.");
+    // console.warn("Current nation Set is not initialized.");
     return false;
   }
 

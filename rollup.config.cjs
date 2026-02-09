@@ -65,6 +65,7 @@ module.exports = {
         copy({
             targets: [
                 { src: 'static/*', dest: 'public/static' }, // Copy all files from static/ to public/static
+                { src: 'src/worker.js', dest: 'public/build' }, // Copy worker to build folder
             ],
         }),
 
