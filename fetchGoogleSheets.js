@@ -3,7 +3,7 @@
 import { promises as fs, existsSync, createReadStream } from 'fs';
 import { createInterface } from 'readline';
 import fetch from 'node-fetch';
-import { exec } from 'child_process';
+
 import { createBrotliDecompress } from 'zlib';
 
 const CONFIG = {
@@ -27,20 +27,7 @@ const CONFIG = {
 
 const normalize = (str) => str?.trim().toLowerCase().replace(/\s+/g, '_');
 
-async function runGit(cmd) {
-  return new Promise((resolve, reject) => {
-    exec(cmd, (err, stdout, stderr) => {
-      if (err) { console.error(stderr); reject(err); } else resolve(stdout.trim());
-    });
-  });
-}
 
-async function setupWorktree() {
-  await runGit(`git worktree prune`);
-  if (existsSync(CONFIG.paths.worktree)) await runGit(`git worktree remove ${CONFIG.paths.worktree} --force`);
-  await runGit(`git fetch origin data || git branch data origin/data`);
-  await runGit(`git worktree add -f ${CONFIG.paths.worktree} data`);
-}
 
 async function streamBrotli(path, fn) {
   return new Promise((resolve, reject) => {
@@ -137,7 +124,8 @@ async function processGoogleSheets() {
     log(`Total direct puppets: ${seenPuppets.size}`);
 
     // STEP 2: Exclusions
-    await setupWorktree(); // Setup worktree early to access nations file
+    // Worktree setup is now handled by GitHub Actions
+
     logStep(2, 'Loading exclusion rules');
     const excludeSet = new Set();
     for (const sheet of CONFIG.excludeSheets) {
@@ -370,16 +358,15 @@ async function processGoogleSheets() {
     log(`  JSON Size: ${(jsonStats.size / 1024 / 1024).toFixed(2)} MB`);
 
 
+    // Logging file sizes happens above.
+    // Git commit/push logic removed. Handled by GitHub Actions.
 
-    await runGit(`cd ${CONFIG.paths.worktree} && git checkout --orphan sheets_snapshot && git add . && git commit -m "Update puppet data" && git push origin sheets_snapshot:data --force`);
-
-    // Cleanup
-    await runGit(`git worktree remove ${CONFIG.paths.worktree} --force`);
-    log('Data updated and pushed to data branch.');
+    log('Data updated in .data directory.');
 
     log(`\nCompleted in ${((Date.now() - startTime) / 1000).toFixed(1)}s`);
   } catch (e) {
     console.error('Error:', e);
+    process.exit(1);
   }
 }
 

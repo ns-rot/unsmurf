@@ -2,7 +2,7 @@
 
 import { promises as fs } from 'fs'; // Node.js filesystem module
 import fetch from 'node-fetch'; // Use node-fetch for HTTP requests
-import { exec } from 'child_process'; // For running Git commands
+
 import { existsSync, createReadStream, createWriteStream } from 'fs'; // For checking dirs and streaming
 import crypto from 'crypto'; // Import crypto for hashing
 import { createBrotliCompress, createBrotliDecompress } from 'zlib'; // For Brotli compression
@@ -18,43 +18,7 @@ const allNationsPath = `${dataWorktreePath}/static/allNations.txt`; // Temporary
 const allNationsCompressedPath = `${allNationsPath}.br`; // Final compressed path
 // Removed ghPagesFilePath as we no longer sync to gh-pages
 
-async function runGitCommand(command) {
-  return new Promise((resolve, reject) => {
-    console.log(`Running command: ${command}`); // Debugging output
-    exec(command, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error running command: ${command}\n`, stderr);
-        reject(error);
-      } else {
-        console.log(stdout.trim());
-        resolve(stdout.trim());
-      }
-    });
-  });
-}
 
-// Ensure the data worktree is clean before adding it
-async function setupWorktree() {
-  try {
-    console.log('Cleaning up worktree...');
-    await runGitCommand(`git worktree prune`);
-
-    // Check if worktree path exists and remove it if needed
-    if (existsSync(dataWorktreePath)) {
-      console.log(`Worktree ${dataWorktreePath} exists. Removing it...`);
-      await runGitCommand(`git worktree remove ${dataWorktreePath} --force`);
-    }
-
-    // Ensure data branch exists before creating worktree
-    console.log('Fetching data branch...');
-    await runGitCommand(`git fetch origin data || git branch data origin/data`);
-
-    console.log('Adding data worktree...');
-    await runGitCommand(`git worktree add -f ${dataWorktreePath} data`);
-  } catch (error) {
-    console.error('Error setting up worktree:', error);
-  }
-}
 
 // Helper function to read and decompress the Brotli file
 async function readBrotliFile(filePath) {
@@ -108,8 +72,8 @@ async function fetchNationStatesData() {
       return nation.trim().toLowerCase().replace(/\s+/g, '_');
     });
 
-    // Step 0: Setup worktree first to ensure paths exist
-    await setupWorktree();
+    // Step 0: Worktree setup is now handled by GitHub Actions
+
 
     // Step 1A: Write NationStates data to data branch
     // Compute hash BEFORE writing
@@ -160,25 +124,17 @@ async function fetchNationStatesData() {
     // Clean up the temporary uncompressed file
     await fs.unlink(allNationsPath);
 
-    // Step 2: Commit & push to data branch (Orphan strategy for single commit history)
-    console.log('Committing and pushing changes to data branch...');
-    await runGitCommand(`
-      cd ${dataWorktreePath} &&
-      git checkout --orphan ns_snapshot &&
-      git add . &&
-      git commit -m "Update NationStates data" &&
-      git push origin ns_snapshot:data --force
-    `);
+    // Step 2: Commit & push logic removed. This is now handled by the GitHub Action workflow.
+    console.log('File updates completed.');
 
-    // Clean up worktree
-    console.log('Removing data worktree...');
-    await runGitCommand(`git worktree remove ${dataWorktreePath} --force`);
+    return currentNations;
 
     return currentNations;
 
     return currentNations;
   } catch (error) {
     console.error('Error processing NationStates API data:', error);
+    process.exit(1);
     return [];
   }
 }
@@ -196,4 +152,5 @@ async function computeFileHash(filePath) {
 // Run the function
 fetchNationStatesData().catch((error) => {
   console.error('Error processing NationStates API data:', error);
+  process.exit(1);
 });
