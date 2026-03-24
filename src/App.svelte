@@ -98,6 +98,12 @@
 
   onMount(async () => {
     const fromURL = getQueryParam("q");
+    
+    window.addEventListener('UNSMURF_AUX_DATA_READY', async () => {
+      await fetchSheets();
+      if (nationId) await loadTradeData();
+    });
+    
     await fetchSheets();
     if (fromURL) {
       nationId = canonicalizeName(fromURL);
