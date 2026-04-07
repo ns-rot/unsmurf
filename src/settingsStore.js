@@ -17,6 +17,7 @@ const defaultSettings = {
   customLinkTemplate: "https://www.nationstates.net/nation={nation}",
   theme: "system", // 'light' | 'system' | 'dark'
   midnightMode: false,
+  showRarityBars: false,
 };
 
 const validOptions = {

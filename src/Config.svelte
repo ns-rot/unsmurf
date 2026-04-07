@@ -56,14 +56,23 @@
         Settings
       </h2>
 
-      <!-- Section: Data Grouping -->
-      <div class="mb-8">
+      <!-- Section: Card Trades -->
+      <div class="mb-10">
         <h3
-          class="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3 ml-1"
+          class="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 ml-1 flex items-center gap-2"
         >
-          Data Grouping
+          <span class="w-1.5 h-6 bg-blue-500 rounded-full"></span>
+          Card Trades
         </h3>
-        <div class="space-y-2 bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl">
+        <!-- Subheading: Grouping -->
+        <p
+          class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3 ml-4"
+        >
+          Grouping
+        </p>
+        <div
+          class="space-y-2 bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl mb-6"
+        >
           <label class="flex items-center gap-3 cursor-pointer">
             <input
               type="radio"
@@ -72,7 +81,7 @@
               bind:group={$settingsStore.section}
               class="w-4 h-4 text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
             />
-            <span class="text-gray-700 dark:text-gray-200"
+            <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Group records by known puppets</span
             >
           </label>
@@ -84,7 +93,7 @@
               bind:group={$settingsStore.section}
               class="w-4 h-4 text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
             />
-            <span class="text-gray-700 dark:text-gray-200"
+            <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Group records by similar name</span
             >
           </label>
@@ -96,20 +105,18 @@
               bind:group={$settingsStore.section}
               class="w-4 h-4 text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
             />
-            <span class="text-gray-700 dark:text-gray-200"
+            <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Do not group records</span
             >
           </label>
         </div>
-      </div>
 
-      <!-- Section: Display Preferences -->
-      <div class="mb-8">
-        <h3
-          class="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3 ml-1"
+        <!-- Subheading: Preferences -->
+        <p
+          class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3 ml-4"
         >
-          Display Preferences
-        </h3>
+          Preferences
+        </p>
         <div class="space-y-3 bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl">
           <label class="flex items-center gap-3 cursor-pointer">
             <input
@@ -117,7 +124,7 @@
               bind:checked={$settingsStore.showPuppetmasters}
               class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
             />
-            <span class="text-gray-700 dark:text-gray-200"
+            <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Append puppetmasters in detailed records</span
             >
           </label>
@@ -127,7 +134,7 @@
               bind:checked={$settingsStore.showCTE}
               class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
             />
-            <span class="text-gray-700 dark:text-gray-200"
+            <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Mark CTE nations</span
             >
           </label>
@@ -137,24 +144,52 @@
               bind:checked={$settingsStore.showRelativeDate}
               class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
             />
-            <span class="text-gray-700 dark:text-gray-200"
+            <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Show relative date by default</span
             >
           </label>
         </div>
       </div>
 
-      <!-- Section: Visual Style -->
-      <div class="mb-8">
+      <!-- Section: Puppetmasters -->
+      <div class="mb-10">
         <h3
-          class="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3 ml-1"
+          class="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 ml-1 flex items-center gap-2"
         >
+          <span class="w-1.5 h-6 bg-blue-500 rounded-full"></span>
+          Puppetmasters
+        </h3>
+        <div class="space-y-3 bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              bind:checked={$settingsStore.showRarityBars}
+              class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+            />
+            <span class="text-gray-700 dark:text-gray-200 font-medium"
+              >Coloured puppet count bars</span
+            >
+          </label>
+        </div>
+      </div>
+
+      <!-- Section: Visual Style -->
+      <!-- Section: Visual Style -->
+      <div class="mb-10">
+        <h3
+          class="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 ml-1 flex items-center gap-2"
+        >
+          <span class="w-1.5 h-6 bg-blue-500 rounded-full"></span>
           Visual Style
         </h3>
         <div class="space-y-4 bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl">
           <!-- Theme Tri-State Pill Toggle -->
           <div>
-            <p class="text-xs font-bold uppercase text-gray-400 mb-2">Theme</p>
+            <p
+              class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3 ml-1"
+            >
+              Theme
+            </p>
             <div
               class="flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full w-full"
             >
@@ -162,7 +197,7 @@
                 <button
                   on:click={() =>
                     settingsStore.update((s) => ({ ...s, theme: option }))}
-                  class="flex-1 py-1.5 rounded-full text-xs font-bold uppercase transition-all {$settingsStore.theme ===
+                  class="flex-1 py-1.5 rounded-full text-[11px] font-bold uppercase transition-all {$settingsStore.theme ===
                   option
                     ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow'
                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}"
@@ -206,7 +241,7 @@
               bind:checked={$settingsStore.rainbowLegs}
               class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
             />
-            <span class="text-gray-700 dark:text-gray-200"
+            <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Rainbow legendaries</span
             >
           </label>
@@ -214,10 +249,11 @@
       </div>
 
       <!-- Section: Link Behavior -->
-      <div class="mb-8">
+      <div class="mb-10">
         <h3
-          class="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3 ml-1"
+          class="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 ml-1 flex items-center gap-2"
         >
+          <span class="w-1.5 h-6 bg-blue-500 rounded-full"></span>
           Link Behavior
         </h3>
 
@@ -335,10 +371,11 @@
       </div>
 
       <!-- Section: Data Management -->
-      <div class="mb-4">
+      <div class="mb-6">
         <h3
-          class="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3 ml-1"
+          class="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 ml-1 flex items-center gap-2"
         >
+          <span class="w-1.5 h-6 bg-red-500 rounded-full"></span>
           Data Management
         </h3>
         <div

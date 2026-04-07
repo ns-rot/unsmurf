@@ -9,6 +9,7 @@
   import { uncanonicalizeName, canonicalizeName } from "./settingsUtils.js";
   import { getQueryParam, setQueryParam } from "./dataUtils.js";
   import { onMount } from "svelte";
+  import { settingsStore } from "./settingsStore.js";
 
   export let onSelectMaster;
 
@@ -79,6 +80,43 @@
     globalMaxVal = Math.max(...vals, 1);
   }
 
+  // Pre-sort counts for percentile calculation
+  $: sortedCounts = masters
+    .map((m) => (sortMode === "active" ? m.activeCount : m.count))
+    .sort((a, b) => a - b);
+
+  function getRarityColor(master) {
+    if (sortedCounts.length === 0) return "bg-gray-400";
+    if (!$settingsStore.showRarityBars) return "bg-blue-500 dark:bg-blue-600";
+
+    const count = sortMode === "active" ? master.activeCount : master.count;
+    const idx = sortedCounts.indexOf(count);
+    const percentile = (idx / sortedCounts.length) * 100;
+
+    if (percentile >= 99.9) {
+      return $settingsStore.rainbowLegs ? "" : "bg-yellow-400";
+    }
+    if (percentile >= 98.5) {
+      return $settingsStore.redEpics ? "bg-red-600" : "bg-orange-500";
+    }
+    if (percentile >= 95.5) return "bg-purple-500";
+    if (percentile >= 88.0) return "bg-blue-500";
+    if (percentile >= 65.0) return "bg-green-500";
+    return "bg-gray-400 dark:bg-gray-500";
+  }
+
+  function getRarityStyle(master) {
+    if (sortedCounts.length === 0 || !$settingsStore.showRarityBars) return "";
+    const count = sortMode === "active" ? master.activeCount : master.count;
+    const idx = sortedCounts.indexOf(count);
+    const percentile = (idx / sortedCounts.length) * 100;
+
+    if (percentile >= 99.9 && $settingsStore.rainbowLegs) {
+      return "background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981, #3b82f6, #8b5cf6, #ef4444); background-size: 200% 100%; animation: rainbow-move 3s linear infinite;";
+    }
+    return "";
+  }
+
   function updateMasters() {
     masters = getTopMasters(0);
   }
@@ -95,6 +133,13 @@
     return Math.max(5, val);
   }
 </script>
+
+<style>
+  @keyframes rainbow-move {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+</style>
 
 <div class="space-y-6 pt-4 pb-20">
   <!-- Top Command Bar -->
@@ -208,8 +253,8 @@
             class="w-full h-1.5 bg-white dark:bg-gray-900 rounded-full overflow-hidden shadow-inner mt-1"
           >
             <div
-              class="h-full bg-blue-500 transition-all duration-700"
-              style="width: {getLogWidth(master)}%"
+              class="h-full {getRarityColor(master)} transition-all duration-700"
+              style="width: {getLogWidth(master)}%; {getRarityStyle(master)}"
             ></div>
           </div>
         </div>
