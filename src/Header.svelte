@@ -15,10 +15,14 @@
       description:
         "View and group nations by their founding time to make identifying puppets easier.",
     },
+    masters: {
+      subtitle: "Puppetmasters",
+      description: "",
+    },
   };
 
-  // Get the current mode's text, fallback to default
-  const { subtitle, description } = headerTexts[mode] || headerTexts.default;
+  // Get the current mode's text, fallback to cards
+  $: ({ subtitle, description } = headerTexts[mode] || headerTexts.cards);
 
   function toggleDarkMode() {
     settingsStore.update((s) => ({ ...s, darkMode: !s.darkMode }));

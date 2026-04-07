@@ -87,7 +87,7 @@ export function findPuppetmaster(name) {
 }
 
 /**
- * Returns a list of puppets belonging to a given master.
+ * Returns a list of puppets belonging to a given master, excluding the master itself.
  * @param {string} masterName - The master nation's name.
  * @returns {Array<string>} - List of puppet nations under this master.
  */
@@ -98,7 +98,8 @@ export function listPuppets(masterName) {
   }
 
   const normalizedMaster = masterName.trim().toLowerCase().replace(/\s+/g, "_");
-  return masterToPuppetsCache[normalizedMaster] || [];
+  const puppets = masterToPuppetsCache[normalizedMaster] || [];
+  return puppets.filter((p) => p !== normalizedMaster);
 }
 
 /**
@@ -113,7 +114,8 @@ export function tallyPuppets(masterName) {
   }
 
   const normalizedMaster = masterName.trim().toLowerCase().replace(/\s+/g, "_");
-  return masterToPuppetsCache[normalizedMaster]?.length || 0;
+  const puppets = masterToPuppetsCache[normalizedMaster] || [];
+  return puppets.filter(p => p !== normalizedMaster).length;
 }
 
 /**
@@ -124,6 +126,29 @@ export function tallyPuppets(masterName) {
 export function countActivePuppets(puppetList) {
   if (!puppetList) return 0;
   return puppetList.reduce((acc, p) => acc + (isNationCurrent(p) ? 1 : 0), 0);
+}
+
+/**
+ * Returns a list of all masters sorted by active puppet count.
+ * @param {number} threshold - Minimum number of total puppets to include.
+ * @returns {Array<{name: string, count: number, activeCount: number}>} - Sorted list of masters.
+ */
+export function getTopMasters(threshold = 0) {
+  if (!masterToPuppetsCache) return [];
+
+  return Object.entries(masterToPuppetsCache)
+    .map(([name, puppets]) => {
+      // Exclude self from puppet list
+      const filteredPuppets = puppets.filter(p => p !== name);
+      const activeCount = countActivePuppets(filteredPuppets);
+      return {
+        name,
+        count: filteredPuppets.length,
+        activeCount,
+      };
+    })
+    .filter((m) => m.count > 0 && m.count >= threshold)
+    .sort((a, b) => b.activeCount - a.activeCount || b.count - a.count);
 }
 
 /**
