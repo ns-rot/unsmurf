@@ -89,6 +89,7 @@
     const [fetchedBuys, fetchedSells] = await Promise.all([
       fetchData("buyer", safeNation, forceRefresh),
       fetchData("seller", safeNation, forceRefresh),
+      fetchSheets(forceRefresh)
     ]);
 
     // Assign fetched values
@@ -109,6 +110,14 @@
   }
 
   onMount(async () => {
+    // Set up system dark mode detection
+    mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    systemDark = mediaQuery.matches;
+    mediaQuery.addEventListener('change', (e) => {
+      systemDark = e.matches;
+      applyTheme($settingsStore.theme, $settingsStore.midnightMode);
+    });
+
     const fromURL = getQueryParam("q");
     const viewFromURL = getQueryParam("v");
     const masterFromURL = getQueryParam("m");
@@ -171,11 +180,15 @@
   $: selectedMasterPuppets = selectedMaster ? listPuppets(selectedMaster).map(p => uncanonicalizeName(p)) : [];
   $: selectedMasterCount = selectedMaster ? tallyPuppets(selectedMaster) : 0;
 
-  // Dark Mode & Midnight Mode Toggle Effect
-  $: if ($settingsStore) {
-    if ($settingsStore.darkMode) {
+  // Theme: handle light / system / dark
+  let systemDark = false;
+  let mediaQuery;
+
+  function applyTheme(theme, midnight) {
+    const isDark = theme === 'dark' || (theme === 'system' && systemDark);
+    if (isDark) {
       document.documentElement.classList.add("dark");
-      if ($settingsStore.midnightMode) {
+      if (midnight) {
         document.documentElement.classList.add("midnight");
       } else {
         document.documentElement.classList.remove("midnight");
@@ -185,18 +198,23 @@
       document.documentElement.classList.remove("midnight");
     }
   }
+
+  $: if ($settingsStore) {
+    applyTheme($settingsStore.theme, $settingsStore.midnightMode);
+  }
 </script>
 
 <!-- Page Layout Wrapper -->
-<Sidebar {currentView} on:viewChange={handleViewChange} />
+<Sidebar {currentView} on:viewChange={handleViewChange} on:showSettings={openConfig} />
 
-<div class="pl-16 md:pl-20 lg:pl-24 px-1.5 sm:px-4 md:px-6 lg:px-8 xl:px-[6%] my-12 min-h-screen transition-all duration-500">
+<!-- Main Content Wrapper -->
+<div class="md:ml-16 pb-20 md:pb-0 px-4 sm:px-6 md:px-12 lg:px-16 xl:px-[8%] mt-10 md:py-12 min-h-screen transition-all duration-500">
   <!-- Header -->
   <Header mode={currentView === 'masters' ? 'masters' : mode} />
 
   {#if currentView === 'trades'}
     <!-- UnsmurfTrades Input Component -->
-    <UnsmurfTrades bind:nationId {loadTradeData} {showConfig} {openConfig} />
+    <UnsmurfTrades bind:nationId {loadTradeData} />
 
     {#if lastCacheTime && canonicalizedName === loadedNationId}
       <div class="text-left text-sm text-gray-500 dark:text-gray-400 mb-4">
@@ -207,9 +225,6 @@
         >
       </div>
     {/if}
-
-    <!-- Config Overlay -->
-    <Config {showConfig} {closeConfig} />
 
     <!-- TALLY TABLES COMPONENT -->
     <TallyTables
@@ -244,4 +259,7 @@
       />
     {/if}
   {/if}
+
+  <!-- Global Config Overlay -->
+  <Config {showConfig} {closeConfig} />
 </div>

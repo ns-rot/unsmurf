@@ -10,11 +10,11 @@ let masterToPuppetsCache = {};
 let currentNationSet = new Set();
 
 self.onmessage = async (e) => {
-    const { type, auxUrl, auxData } = e.data;
+    const { type, auxUrl, auxData, forceRefresh } = e.data;
 
     if (type === 'start') {
         try {
-            await fetchData(auxUrl, auxData);
+            await fetchData(auxUrl, auxData, forceRefresh);
 
             // Send data back to main thread
             self.postMessage({
@@ -32,11 +32,11 @@ self.onmessage = async (e) => {
     }
 };
 
-async function fetchData(auxUrl, auxData) {
+async function fetchData(auxUrl, auxData, forceRefresh) {
     // Fetch main data in parallel
     const promises = [
-        fetchWithCache(puppetDataUrl).then(res => res.json()),
-        fetchWithCache(currentNationsUrl).then(res => res.json())
+        fetchWithCache(puppetDataUrl, forceRefresh).then(res => res.json()),
+        fetchWithCache(currentNationsUrl, forceRefresh).then(res => res.json())
     ];
 
     if (auxUrl) {
@@ -60,25 +60,28 @@ async function fetchData(auxUrl, auxData) {
     if (auxData) processTsvClientSide(auxData);
 }
 
-async function fetchWithCache(url) {
+async function fetchWithCache(url, force = false) {
     const cacheName = "unsmurf-static-data";
     const cacheDuration = 24 * 60 * 60 * 1000; // 24 hours
-    // We use a simple timestamp check stored in the cache itself or metadata if possible.
-    // The original used localStorage, which IS NOT AVAILABLE in a Worker.
-    // We will rely on the header-based caching or a simplified approach, 
-    // OR we can't easily check 'cacheDuration' without IDB or passing the timestamp from main thread.
-    // For now, let's just use the Cache API and rely on standard browser rules or a simple verify.
-    // Actually, without localStorage, we can't implement the exact same "force refresh after 24h" logic easily 
-    // without using IndexedDB for metadata.
-    // Let's implement a simple Cache API usage: try cache, if fail/missing, fetch and cache.
 
-    // NOTE: Simple Cache API usage
-    if ("caches" in self) {
+    if ("caches" in self && !force) {
         try {
             const cache = await caches.open(cacheName);
             const cachedResponse = await cache.match(url);
             if (cachedResponse) {
-                return cachedResponse;
+                // Check age via Date header
+                const dateHeader = cachedResponse.headers.get("Date");
+                if (dateHeader) {
+                    const cachedTime = new Date(dateHeader).getTime();
+                    const now = Date.now();
+                    if (now - cachedTime < cacheDuration) {
+                        return cachedResponse;
+                    }
+                    console.log(`Cache for ${url} expired (${Math.round((now - cachedTime) / 3600000)}h old). Refreshing...`);
+                } else {
+                    // No date header, assume stale to be safe
+                    console.log(`Cache for ${url} has no date header. Refreshing...`);
+                }
             }
         } catch (e) {
             console.warn("Cache match failed", e);

@@ -15,12 +15,13 @@ const defaultSettings = {
   linkTypeCTE: "boneyard",
   enableCTELink: true,
   customLinkTemplate: "https://www.nationstates.net/nation={nation}",
-  darkMode: false,
+  theme: "system", // 'light' | 'system' | 'dark'
   midnightMode: false,
 };
 
 const validOptions = {
   section: ["puppets", "similar-name", "none"],
+  theme: ["light", "system", "dark"],
   linkTypeTallySent: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
   linkTypeTallyReceived: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
   linkTypeDetailedSent: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
@@ -58,6 +59,11 @@ function repairSettings(stored) {
 let plainSettings = { ...defaultSettings };
 try {
   const stored = JSON.parse(localStorage.getItem("unsmurfSettings"));
+  // Migrate legacy darkMode boolean to new theme tri-state
+  if (stored && typeof stored.darkMode === 'boolean' && !stored.theme) {
+    stored.theme = stored.darkMode ? 'dark' : 'light';
+    delete stored.darkMode;
+  }
   plainSettings = repairSettings(stored);
 } catch (e) {
   console.warn("Failed to parse settings, using defaults", e);

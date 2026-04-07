@@ -15,7 +15,7 @@ const currentNationsUrl = "https://raw.githubusercontent.com/ns-rot/unsmurf/data
  * Fetches and caches puppet data, S4 data, and current nations from their respective files.
  * Uses a Web Worker to prevent blocking the main thread.
  */
-export async function fetchSheets() {
+export async function fetchSheets(forceRefresh = false) {
   // Reset all caches
   puppetMasterCache = {};
   masterToPuppetsCache = {};
@@ -61,7 +61,8 @@ export async function fetchSheets() {
     worker.postMessage({
       type: 'start',
       auxUrl: window.UNSMURF_AUX_URL || null,
-      auxData: window.UNSMURF_AUX_DATA || null
+      auxData: window.UNSMURF_AUX_DATA || null,
+      forceRefresh
     });
   });
 }

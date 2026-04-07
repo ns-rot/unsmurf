@@ -2,6 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import { settingsStore } from "./settingsStore.js";
   import LinkSelect from "./LinkSelect.svelte";
+  import { fetchSheets } from "./sheetFetch.js";
 
   export let showConfig = false; // ✅ Prop to control visibility
   export let closeConfig; // ✅ Callback to close modal
@@ -11,6 +12,34 @@
   function saveSettings() {
     dispatch("close"); // Notify parent to close modal
     closeConfig();
+  }
+
+  let clearing = false;
+  let cleared = false;
+
+  async function clearCache() {
+    clearing = true;
+    cleared = false;
+
+    // Clear trade cache from localStorage
+    Object.keys(localStorage).forEach((key) => {
+      if (key.startsWith("unsmurf_cache_")) {
+        localStorage.removeItem(key);
+      }
+    });
+
+    try {
+      // Force refresh sheet data
+      await fetchSheets(true);
+      cleared = true;
+      setTimeout(() => {
+        cleared = false;
+      }, 3000);
+    } catch (e) {
+      console.error("Failed to clear cache:", e);
+    } finally {
+      clearing = false;
+    }
   }
 </script>
 
@@ -27,136 +56,187 @@
         Settings
       </h2>
 
-      <!-- Tally Record Options -->
-      <div class="mb-6">
-        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
-          Tally Record Options
+      <!-- Section: Data Grouping -->
+      <div class="mb-8">
+        <h3
+          class="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3 ml-1"
+        >
+          Data Grouping
         </h3>
-        <label class="flex items-center gap-2 mb-1 cursor-pointer">
-          <input
-            type="radio"
-            name="section"
-            value="puppets"
-            bind:group={$settingsStore.section}
-            class="text-blue-500 focus:ring-blue-500"
-          />
-          <span>Group records by known puppets</span>
-        </label>
-        <label class="flex items-center gap-2 mb-1 cursor-pointer">
-          <input
-            type="radio"
-            name="section"
-            value="similar-name"
-            bind:group={$settingsStore.section}
-            class="text-blue-500 focus:ring-blue-500"
-          />
-          <span>Group records by similar name</span>
-        </label>
-        <label class="flex items-center gap-2 cursor-pointer">
-          <input
-            type="radio"
-            name="section"
-            value="none"
-            bind:group={$settingsStore.section}
-            class="text-blue-500 focus:ring-blue-500"
-          />
-          <span>Do not group records</span>
-        </label>
+        <div class="space-y-2 bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="radio"
+              name="section"
+              value="puppets"
+              bind:group={$settingsStore.section}
+              class="w-4 h-4 text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+            />
+            <span class="text-gray-700 dark:text-gray-200"
+              >Group records by known puppets</span
+            >
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="radio"
+              name="section"
+              value="similar-name"
+              bind:group={$settingsStore.section}
+              class="w-4 h-4 text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+            />
+            <span class="text-gray-700 dark:text-gray-200"
+              >Group records by similar name</span
+            >
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="radio"
+              name="section"
+              value="none"
+              bind:group={$settingsStore.section}
+              class="w-4 h-4 text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+            />
+            <span class="text-gray-700 dark:text-gray-200"
+              >Do not group records</span
+            >
+          </label>
+        </div>
       </div>
 
-      <!-- Nation Display Options -->
-      <div class="mb-6">
-        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
-          Nation Display Options
+      <!-- Section: Display Preferences -->
+      <div class="mb-8">
+        <h3
+          class="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3 ml-1"
+        >
+          Display Preferences
         </h3>
-        <label class="flex items-center gap-2 mb-1 cursor-pointer">
-          <input
-            type="checkbox"
-            bind:checked={$settingsStore.showPuppetmasters}
-            class="rounded text-blue-500 focus:ring-blue-500"
-          />
-          <span>Append puppetmasters in detailed records</span>
-        </label>
-        <label class="flex items-center gap-2 cursor-pointer">
-          <input
-            type="checkbox"
-            bind:checked={$settingsStore.showCTE}
-            class="rounded text-blue-500 focus:ring-blue-500"
-          />
-          <span>Mark CTE nations</span>
-        </label>
+        <div class="space-y-3 bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              bind:checked={$settingsStore.showPuppetmasters}
+              class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+            />
+            <span class="text-gray-700 dark:text-gray-200"
+              >Append puppetmasters in detailed records</span
+            >
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              bind:checked={$settingsStore.showCTE}
+              class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+            />
+            <span class="text-gray-700 dark:text-gray-200"
+              >Mark CTE nations</span
+            >
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              bind:checked={$settingsStore.showRelativeDate}
+              class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+            />
+            <span class="text-gray-700 dark:text-gray-200"
+              >Show relative date by default</span
+            >
+          </label>
+        </div>
       </div>
 
-      <!-- Date Options -->
-      <div class="mb-6">
-        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
-          Date Options
+      <!-- Section: Visual Style -->
+      <div class="mb-8">
+        <h3
+          class="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3 ml-1"
+        >
+          Visual Style
         </h3>
-        <label class="flex items-center gap-2 cursor-pointer">
-          <input
-            type="checkbox"
-            bind:checked={$settingsStore.showRelativeDate}
-            class="rounded text-blue-500 focus:ring-blue-500"
-          />
-          <span>Show relative date by default</span>
-        </label>
+        <div class="space-y-4 bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl">
+          <!-- Theme Tri-State Pill Toggle -->
+          <div>
+            <p class="text-xs font-bold uppercase text-gray-400 mb-2">Theme</p>
+            <div
+              class="flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full w-full"
+            >
+              {#each ["light", "system", "dark"] as option}
+                <button
+                  on:click={() =>
+                    settingsStore.update((s) => ({ ...s, theme: option }))}
+                  class="flex-1 py-1.5 rounded-full text-xs font-bold uppercase transition-all {$settingsStore.theme ===
+                  option
+                    ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}"
+                >
+                  {option === "light"
+                    ? "Light"
+                    : option === "system"
+                      ? "System"
+                      : "Dark"}
+                </button>
+              {/each}
+            </div>
+          </div>
+
+          <!-- Midnight Mode (only relevant when dark is active) -->
+          {#if $settingsStore.theme === "dark" || $settingsStore.theme === "system"}
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                bind:checked={$settingsStore.midnightMode}
+                class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+              />
+              <span class="text-gray-700 dark:text-gray-200"
+                >Midnight (OLED) mode</span
+              >
+            </label>
+          {/if}
+
+          <!-- Rarity Colours -->
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              bind:checked={$settingsStore.redEpics}
+              class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+            />
+            <span class="text-gray-700 dark:text-gray-200">Red epics</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              bind:checked={$settingsStore.rainbowLegs}
+              class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+            />
+            <span class="text-gray-700 dark:text-gray-200"
+              >Rainbow legendaries</span
+            >
+          </label>
+        </div>
       </div>
 
-      <!-- UI Options -->
-      <div class="mb-6">
-        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
-          Colour Options
-        </h3>
-        <label class="flex items-center gap-2 mb-1 cursor-pointer">
-          <input
-            type="checkbox"
-            bind:checked={$settingsStore.redEpics}
-            class="rounded text-blue-500 focus:ring-blue-500"
-          />
-          <span>Red epics</span>
-        </label>
-        <label class="flex items-center gap-2 cursor-pointer mb-1">
-          <input
-            type="checkbox"
-            bind:checked={$settingsStore.rainbowLegs}
-            class="rounded text-blue-500 focus:ring-blue-500"
-          />
-          <span>Rainbow legendaries</span>
-        </label>
-        <label class="flex items-center gap-2 cursor-pointer">
-          <input
-            type="checkbox"
-            bind:checked={$settingsStore.midnightMode}
-            class="rounded text-blue-500 focus:ring-blue-500"
-          />
-          <span>Midnight (OLED) mode</span>
-        </label>
-      </div>
-
-      <!-- Link Options -->
-      <div class="mb-6">
-        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
-          Link Options
+      <!-- Section: Link Behavior -->
+      <div class="mb-8">
+        <h3
+          class="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3 ml-1"
+        >
+          Link Behavior
         </h3>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <!-- Tally Section -->
-          <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl">
+          <div
+            class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl border border-gray-100 dark:border-gray-600"
+          >
             <h4
-              class="font-medium text-gray-900 dark:text-white mb-3 border-b border-gray-200 dark:border-gray-600 pb-1"
+              class="font-bold text-xs uppercase text-gray-400 mb-3 border-b border-gray-200 dark:border-gray-600 pb-1"
             >
               Tally Tables
             </h4>
-
-            <div class="mb-3">
+            <div class="space-y-3">
               <LinkSelect
                 id="tally-sent"
                 label="Sent / Sold"
                 bind:value={$settingsStore.linkTypeTallySent}
               />
-            </div>
-
-            <div class="mb-1">
               <LinkSelect
                 id="tally-received"
                 label="Received / Purchased"
@@ -166,22 +246,20 @@
           </div>
 
           <!-- Detailed Section -->
-          <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl">
+          <div
+            class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl border border-gray-100 dark:border-gray-600"
+          >
             <h4
-              class="font-medium text-gray-900 dark:text-white mb-3 border-b border-gray-200 dark:border-gray-600 pb-1"
+              class="font-bold text-xs uppercase text-gray-400 mb-3 border-b border-gray-200 dark:border-gray-600 pb-1"
             >
               Detailed Tables
             </h4>
-
-            <div class="mb-3">
+            <div class="space-y-3">
               <LinkSelect
                 id="detailed-sent"
                 label="Sent / Sold"
                 bind:value={$settingsStore.linkTypeDetailedSent}
               />
-            </div>
-
-            <div class="mb-1">
               <LinkSelect
                 id="detailed-received"
                 label="Received / Purchased"
@@ -189,79 +267,112 @@
               />
             </div>
           </div>
+
           <!-- Puppet Popup Section -->
-          <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl">
+          <div
+            class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl border border-gray-100 dark:border-gray-600"
+          >
             <h4
-              class="font-medium text-gray-900 dark:text-white mb-3 border-b border-gray-200 dark:border-gray-600 pb-1"
+              class="font-bold text-xs uppercase text-gray-400 mb-3 border-b border-gray-200 dark:border-gray-600 pb-1"
             >
               Puppet Popup
             </h4>
-
-            <div class="mb-1">
-              <LinkSelect
-                id="puppet-popup"
-                label="Puppet Link"
-                bind:value={$settingsStore.linkTypePuppet}
-              />
-            </div>
+            <LinkSelect
+              id="puppet-popup"
+              label="Puppet Link"
+              bind:value={$settingsStore.linkTypePuppet}
+            />
           </div>
         </div>
 
-        <div class="pt-4">
-          <label class="flex items-center gap-2 mb-2 cursor-pointer">
+        <div class="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl space-y-4">
+          <label class="flex items-center gap-3 cursor-pointer">
             <input
               type="checkbox"
               bind:checked={$settingsStore.enableCTELink}
-              class="rounded text-blue-500 focus:ring-blue-500"
+              class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
             />
-            <span class="font-medium">Override for CTE Nations</span>
+            <span class="font-medium text-gray-700 dark:text-gray-200"
+              >Override for CTE Nations</span
+            >
           </label>
 
           {#if $settingsStore.enableCTELink}
-            <div class="ml-6">
+            <div class="pl-7 border-l-2 border-blue-500/30">
               <LinkSelect
                 id="cte-link"
-                label="Link Type"
+                label="CTE Link Type"
                 bind:value={$settingsStore.linkTypeCTE}
               />
-              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 italic">
                 Applies to all links for nations that have Ceased To Exist.
               </p>
             </div>
           {/if}
-        </div>
 
-        <!-- Custom URL Input -->
-        {#if $settingsStore.linkTypeTallySent === "custom" || $settingsStore.linkTypeTallyReceived === "custom" || $settingsStore.linkTypeDetailedSent === "custom" || $settingsStore.linkTypeDetailedReceived === "custom" || $settingsStore.linkTypePuppet === "custom" || ($settingsStore.enableCTELink && $settingsStore.linkTypeCTE === "custom")}
-          <div class="pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">
-            <label
-              for="custom-url-template"
-              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-              >Custom URL Template</label
-            >
-            <input
-              id="custom-url-template"
-              type="text"
-              bind:value={$settingsStore.customLinkTemplate}
-              placeholder="https://example.com/?nation={'{nation}'}"
-              class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded px-3 py-2 w-full text-sm focus:border-blue-500 outline-none"
-            />
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Use <code>{"{nation}"}</code> as a placeholder for the nation name.
-            </p>
-          </div>
-        {/if}
+          <!-- Custom URL Input -->
+          {#if $settingsStore.linkTypeTallySent === "custom" || $settingsStore.linkTypeTallyReceived === "custom" || $settingsStore.linkTypeDetailedSent === "custom" || $settingsStore.linkTypeDetailedReceived === "custom" || $settingsStore.linkTypePuppet === "custom" || ($settingsStore.enableCTELink && $settingsStore.linkTypeCTE === "custom")}
+            <div class="pt-2">
+              <label
+                for="custom-url-template"
+                class="block text-xs font-bold uppercase text-gray-400 mb-1"
+              >
+                Custom URL Template
+              </label>
+              <input
+                id="custom-url-template"
+                type="text"
+                bind:value={$settingsStore.customLinkTemplate}
+                placeholder="https://example.com/?nation={'{nation}'}"
+                class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg px-3 py-2 w-full text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+              />
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                Use <code>{"{nation}"}</code> as a placeholder for the nation name.
+              </p>
+            </div>
+          {/if}
+        </div>
       </div>
 
-      <!-- Buttons -->
+      <!-- Section: Data Management -->
+      <div class="mb-4">
+        <h3
+          class="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3 ml-1"
+        >
+          Data Management
+        </h3>
+        <div
+          class="bg-red-50/50 dark:bg-red-800/10 p-4 rounded-xl border border-red-100 dark:border-red-800/20"
+        >
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Clear cached trade data and force a fresh sync of puppet mappings
+            from the source.
+          </p>
+          <button
+            on:click={clearCache}
+            disabled={clearing}
+            class="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2.5 rounded-xl border border-red-200 dark:border-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-all disabled:opacity-50 font-bold"
+          >
+            {#if clearing}
+              Clearing...
+            {:else if cleared}
+              Cache Cleared
+            {:else}
+              Clear All Cached Data
+            {/if}
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer Buttons -->
       <div
-        class="flex justify-end mt-6 pt-4 border-t border-gray-200 dark:border-gray-700"
+        class="flex justify-end mt-8 pt-6 border-t border-gray-200 dark:border-gray-700"
       >
         <button
           on:click={saveSettings}
-          class="bg-blue-500 text-white font-bold py-2.5 px-6 rounded-full hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 transition shadow-lg"
+          class="bg-blue-500 text-white font-bold py-3 px-8 rounded-2xl hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 transition-all shadow-lg active:scale-95"
         >
-          Confirm
+          Confirm Changes
         </button>
       </div>
     </div>
