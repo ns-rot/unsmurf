@@ -128,6 +128,7 @@
   // Calculate log-scaled width
   function getLogWidth(master) {
     const count = sortMode === "active" ? master.activeCount : master.count;
+    if (count <= 0) return 0;
     if (count <= 1) return 5;
     const val = (Math.log10(count) / Math.log10(globalMaxVal)) * 100;
     return Math.max(5, val);
