@@ -12,20 +12,20 @@ jobs:
     steps:
       # Step 1: Check out repository
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Step 1.5: Check out data branch to .data directory
       - name: Check out data branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: data
           path: .data
 
       # Step 2: Set up Node.js
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
 
       # Step 3: Install dependencies
       - name: Install dependencies
