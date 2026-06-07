@@ -25,7 +25,18 @@ const CONFIG = {
   maxPatternsPerRegex: 100,
 };
 
-const normalize = (str) => str?.trim().toLowerCase().replace(/\s+/g, '_');
+const cleanStr = (str, context = {}) => {
+  if (!str) return str;
+  const cleaned = str.replace(/\u00AD/g, '');
+  if (cleaned.length !== str.length) {
+    console.warn(`  WARNING: SOFT HYPHEN (U+00AD) found and removed` +
+      (context.sheet ? `\n    Sheet: ${context.sheet}` : '') +
+      (context.row ? `\n    Row: ${context.row}` : ''));
+  }
+  return cleaned;
+};
+
+const normalize = (str, context) => cleanStr(str, context)?.trim().toLowerCase().replace(/\s+/g, '_');
 
 
 
@@ -110,9 +121,9 @@ async function processGoogleSheets() {
     for (const sheet of CONFIG.sheets) {
       const data = await fetchSheet(sheet);
       let count = 0;
-      for (const { cols } of data) {
-        const puppet = normalize(cols[sheet.puppetColumn]);
-        const master = normalize(cols[sheet.mainColumn]);
+      for (const { cols, line } of data) {
+        const puppet = normalize(cols[sheet.puppetColumn], { sheet: sheet.name, row: line });
+        const master = normalize(cols[sheet.mainColumn], { sheet: sheet.name, row: line });
         if (puppet && master && !seenPuppets.has(puppet)) {
           seenPuppets.add(puppet);
           tsvLines.push(`${puppet}\t${master}\t${sheet.name}`);
@@ -130,9 +141,9 @@ async function processGoogleSheets() {
     const excludeSet = new Set();
     for (const sheet of CONFIG.excludeSheets) {
       const data = await fetchSheet(sheet);
-      for (const { cols } of data) {
-        const puppet = normalize(cols[sheet.puppetColumn]);
-        const master = normalize(cols[sheet.masterColumn]);
+      for (const { cols, line } of data) {
+        const puppet = normalize(cols[sheet.puppetColumn], { sheet: sheet.name, row: line });
+        const master = normalize(cols[sheet.masterColumn], { sheet: sheet.name, row: line });
         if (puppet && master) excludeSet.add(`${puppet}\t${master}`);
       }
     }
@@ -144,9 +155,9 @@ async function processGoogleSheets() {
     for (const sheet of CONFIG.regexSheets) {
       const data = await fetchSheet(sheet);
       let valid = 0, invalid = 0;
-      for (const { cols } of data) {
-        const regex = cols[sheet.regexColumn]?.trim();
-        const master = normalize(cols[sheet.mainColumn]);
+      for (const { cols, line } of data) {
+        const regex = cleanStr(cols[sheet.regexColumn], { sheet: sheet.name, row: line })?.trim();
+        const master = normalize(cols[sheet.mainColumn], { sheet: sheet.name, row: line });
         if (!regex || !master) continue;
         try {
           new RegExp(regex, 'i');
@@ -226,7 +237,7 @@ async function processGoogleSheets() {
     const matchStats = {};
     const testStart = Date.now();
 
-    await streamBrotli(CONFIG.paths.nations, (nation) => {
+    await streamBrotli(CONFIG.paths.nations, (nation) => { nation = cleanStr(nation);
       if (seenPuppets.has(nation)) return;
       tested++;
 
@@ -275,9 +286,9 @@ async function processGoogleSheets() {
     const redirs = new Map();
     for (const sheet of CONFIG.redirSheets) {
       const data = await fetchSheet(sheet);
-      for (const { cols } of data) {
-        const old = normalize(cols[sheet.oldMasterColumn]);
-        const neu = normalize(cols[sheet.newMasterColumn]);
+      for (const { cols, line } of data) {
+        const old = normalize(cols[sheet.oldMasterColumn], { sheet: sheet.name, row: line });
+        const neu = normalize(cols[sheet.newMasterColumn], { sheet: sheet.name, row: line });
         if (old && neu) redirs.set(old, neu);
       }
     }
