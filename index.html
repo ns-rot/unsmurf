@@ -11,10 +11,15 @@
 	<link rel='stylesheet' href='./build/tailwind.css'>
 	<link rel='stylesheet' href='./build/bundle.css'>
 	<script>
-		// Immediate dark mode initialization to prevent flash
 		try {
 			const settings = JSON.parse(localStorage.getItem('unsmurfSettings') || '{}');
-			if (settings.darkMode) {
+			let isDark = false;
+			if (settings.theme === 'dark' || settings.darkMode === true) {
+				isDark = true;
+			} else if (settings.theme === 'system' || !settings.theme) {
+				isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			}
+			if (isDark) {
 				document.documentElement.classList.add('dark');
 				if (settings.midnightMode) {
 					document.documentElement.classList.add('midnight');
