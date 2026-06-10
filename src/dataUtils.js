@@ -247,7 +247,8 @@ export function makeRows(
     let rarityClass = "";
     let displayCardLinkContent = "";
 
-    if (settings.midnightMode && settings.darkMode) {
+    const isDark = settings.theme === 'dark' || (settings.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (settings.midnightMode && isDark) {
       // In midnight mode, use a pill for the season number instead of a swatch
       const pillClass = `inline-block px-1.5 py-0.5 rounded-full text-[10px] leading-none font-semibold bg-rarityMidnight-${normalizedRarity} text-black mr-1 align-middle relative -top-[1px]`;
       displayCardLinkContent = `<span class="${pillClass}">${seasonText}</span>${cardNameDisplay}`;

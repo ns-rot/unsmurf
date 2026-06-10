@@ -5,7 +5,8 @@
   export let title = "";
   export let content = "";
 
-  $: isDarkMode = $settingsStore.darkMode;
+  $: systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  $: isDarkMode = $settingsStore.theme === 'dark' || ($settingsStore.theme === 'system' && systemDark);
   $: spinnerProps = isDarkMode
     ? {
         ringColor: "#374151",

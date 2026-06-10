@@ -110,9 +110,7 @@
   }
 
   onMount(async () => {
-    // Set up system dark mode detection
     mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    systemDark = mediaQuery.matches;
     mediaQuery.addEventListener('change', (e) => {
       systemDark = e.matches;
       applyTheme($settingsStore.theme, $settingsStore.midnightMode);
@@ -181,7 +179,7 @@
   $: selectedMasterCount = selectedMaster ? tallyPuppets(selectedMaster) : 0;
 
   // Theme: handle light / system / dark
-  let systemDark = false;
+  let systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   let mediaQuery;
 
   function applyTheme(theme, midnight) {

@@ -1,5 +1,4 @@
 <script>
-  import { settingsStore } from "./settingsStore.js";
   export let mode = "cards"; // Default mode
 
   // Define mode-specific text content
@@ -24,9 +23,6 @@
   // Get the current mode's text, fallback to cards
   $: ({ subtitle, description } = headerTexts[mode] || headerTexts.cards);
 
-  function toggleDarkMode() {
-    settingsStore.update((s) => ({ ...s, darkMode: !s.darkMode }));
-  }
 </script>
 
 <div class="relative text-left mb-4 pl-1 sm:pl-0">
