@@ -12,9 +12,8 @@
 	<link rel='stylesheet' href='./build/bundle.css'>
 	<script>
 		try {
-			var raw = localStorage.getItem('unsmurfSettings');
-			var settings = JSON.parse(raw || '{}');
-			var isDark = false;
+			const settings = JSON.parse(localStorage.getItem('unsmurfSettings') || '{}');
+			let isDark = false;
 			if (settings.theme === 'dark' || settings.darkMode === true) {
 				isDark = true;
 			} else if (settings.theme === 'system' || !settings.theme) {
@@ -23,8 +22,6 @@
 			if (isDark) {
 				document.documentElement.classList.add('dark');
 				if (settings.midnightMode) {
-					document.documentElement.classList.add('midnight');
-				} else if (!raw && window.matchMedia('(any-pointer: coarse)').matches && window.screen.width < 768 && (window.devicePixelRatio >= 2.5 || window.matchMedia('(color-gamut: p3)').matches)) {
 					document.documentElement.classList.add('midnight');
 				}
 			}
