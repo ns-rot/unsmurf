@@ -16,12 +16,6 @@ const currentNationsUrl = "https://raw.githubusercontent.com/ns-rot/unsmurf/data
  * Uses a Web Worker to prevent blocking the main thread.
  */
 export async function fetchSheets(forceRefresh = false) {
-  // Reset all caches
-  puppetMasterCache = {};
-  masterToPuppetsCache = {};
-  currentNationsCache = [];
-  currentNationSet = null;
-
   return new Promise((resolve, reject) => {
     const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
 
@@ -153,10 +147,42 @@ export function getTopMasters(threshold = 0) {
 }
 
 /**
- * Check if a given nation is in the current nations cache.
- * @param {string} nation - The nation name to check.
- * @returns {boolean} - True if the nation is found, false otherwise.
+ * Search across both active nations and known puppets by prefix.
+ * Active nations are prioritized in results.
+ * @param {string} query - The search query.
+ * @param {number} maxResults - Maximum number of results to return.
+ * @returns {Array<string>} - Matching canonicalized names.
  */
+export function searchNations(query, maxResults = 10) {
+  if (!currentNationsCache || !query || query.trim().length < 2) return [];
+  const q = query.toLowerCase().trim().replace(/\s+/g, "_");
+
+  const results = [];
+  const seen = new Set();
+
+  for (const name of currentNationsCache) {
+    if (name.startsWith(q)) {
+      seen.add(name);
+      results.push(name);
+      if (results.length >= maxResults) return results;
+    }
+  }
+
+  if (masterToPuppetsCache) {
+    for (const puppets of Object.values(masterToPuppetsCache)) {
+      for (const puppet of puppets) {
+        if (!seen.has(puppet) && puppet.startsWith(q)) {
+          seen.add(puppet);
+          results.push(puppet);
+          if (results.length >= maxResults) return results;
+        }
+      }
+    }
+  }
+
+  return results;
+}
+
 export function isNationCurrent(nation) {
   if (!currentNationSet) {
     // console.warn("Current nation Set is not initialized.");

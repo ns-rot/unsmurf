@@ -19,6 +19,7 @@
   } from "./sheetFetch.js";
 
   import Sidebar from "./Sidebar.svelte";
+  import NationAlert from "./NationAlert.svelte";
   import Puppetmasters from "./Puppetmasters.svelte";
   import PuppetPopup from "./PuppetPopup.svelte";
 
@@ -55,6 +56,7 @@
   let isMasterCte = false;
   let lastCacheTime = null;
   let loadedNationId = "";
+  let hasSearched = false;
 
   $: canonicalizedName = canonicalizeName(nationId);
   $: canonicalizedMasterName =
@@ -63,6 +65,8 @@
   $: isPuppet =
     canonicalizedMasterName && canonicalizedName !== canonicalizedMasterName;
   $: isMasterCte = !isNationCurrent(canonicalizedMasterName);
+
+  $: centerContent = currentView === 'trades' && !hasSearched;
 
   // Reactive tallies that update when buys/sells change OR when settings change
   $: buyTallyTrades =
@@ -80,6 +84,7 @@
       return;
     }
 
+    hasSearched = true;
     loading = true;
     const safeNation = nationId.trim();
     setQueryParam("q", safeNation);
@@ -95,7 +100,7 @@
     // Assign fetched values
     buys = fetchedBuys.trades;
     sells = fetchedSells.trades;
-    lastCacheTime = fetchedBuys.cacheTime || fetchedSells.cacheTime;
+    lastCacheTime = fetchedBuys.cacheTime || fetchedSells.cacheTime || Date.now();
     loadedNationId = canonicalizeName(safeNation);
 
     loading = false;
@@ -206,45 +211,65 @@
 <Sidebar {currentView} on:viewChange={handleViewChange} on:showSettings={openConfig} />
 
 <!-- Main Content Wrapper -->
-<div class="md:ml-16 pb-20 md:pb-0 px-3 sm:px-4 md:px-8 lg:px-10 xl:px-[5%] mt-10 md:py-12 min-h-screen transition-all duration-500">
+<div
+  class="md:ml-16 pb-20 md:pb-0 px-3 sm:px-6 md:px-8 lg:px-[5%] min-h-screen transition-all duration-500"
+  class:mt-10={!centerContent}
+  class:md:py-12={!centerContent}
+  class:pt-[28vh]={centerContent}
+  class:sm:pt-[35vh]={centerContent}
+>
   <!-- Header -->
   <Header mode={currentView === 'masters' ? 'masters' : mode} />
 
   {#if currentView === 'trades'}
-    <!-- UnsmurfTrades Input Component -->
-    <UnsmurfTrades bind:nationId {loadTradeData} />
+    <UnsmurfTrades bind:nationId {loadTradeData} {loading} />
 
-    {#if lastCacheTime && canonicalizedName === loadedNationId}
-      <div class="text-left text-sm text-gray-500 dark:text-gray-400 mb-4">
-        Cached data from {new Date(lastCacheTime).toLocaleString()}
-        <button
-          class="text-gray-600 dark:text-gray-400 hover:underline ml-2"
-          on:click={() => loadTradeData(true)}>Refresh</button
-        >
+    <!-- Preview while typing (sits directly below search bar) -->
+    {#if nationId.trim().length > 2 && canonicalizedName !== loadedNationId}
+      <div class="mt-2">
+        <NationAlert {nationId} preview onSelect={(name) => { nationId = name; loadTradeData(); }} />
       </div>
     {/if}
 
-    <!-- TALLY TABLES COMPONENT -->
-    <TallyTables
-      {loading}
-      {sellTallyGifts}
-      {buyTallyGifts}
-      {sellTallyTrades}
-      {buyTallyTrades}
-      {makeTallyColumns}
-      {makeTallyRows}
-    />
+    <!-- Results header (stays visible even while typing new query) -->
+    {#if lastCacheTime && loadedNationId}
+      <div class="mt-6">
+        <NationAlert
+          nationId={loadedNationId}
+          cacheTime={lastCacheTime}
+          onRefresh={() => loadTradeData(true)}
+        />
+      </div>
+    {/if}
 
-    <!-- DETAILED TABLES COMPONENT -->
-    <DetailedTables
-      {loading}
-      {buys}
-      {sells}
-      {makeTradeColumns}
-      {makeTradeRows}
-      {makeGiftColumns}
-      {makeGiftRows}
-    />
+    <!-- Tables (stay visible until lookup is clicked) -->
+    {#if lastCacheTime}
+      {#if buys.length > 0 || sells.length > 0}
+        <TallyTables
+          {loading}
+          {sellTallyGifts}
+          {buyTallyGifts}
+          {sellTallyTrades}
+          {buyTallyTrades}
+          {makeTallyColumns}
+          {makeTallyRows}
+        />
+
+        <DetailedTables
+          {loading}
+          {buys}
+          {sells}
+          {makeTradeColumns}
+          {makeTradeRows}
+          {makeGiftColumns}
+          {makeGiftRows}
+        />
+      {:else if !loading}
+        <p class="text-gray-500 dark:text-gray-400 mt-6 text-sm">
+          No trades found for {uncanonicalizeName(canonicalizedName)}.
+        </p>
+      {/if}
+    {/if}
   {:else if currentView === 'masters'}
     <Puppetmasters onSelectMaster={handleSelectMaster} />
 
