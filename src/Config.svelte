@@ -148,6 +148,16 @@
               >Show relative date by default</span
             >
           </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              bind:checked={$settingsStore.showSource}
+              class="w-4 h-4 rounded text-blue-500 focus:ring-blue-500 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+            />
+            <span class="text-gray-700 dark:text-gray-200 font-medium"
+              >Show puppet identification source</span
+            >
+          </label>
         </div>
       </div>
 

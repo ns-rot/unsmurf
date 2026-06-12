@@ -8,11 +8,11 @@ import { createBrotliDecompress } from 'zlib';
 
 const CONFIG = {
   sheets: [
-    { name: "9003", url: "https://docs.google.com/spreadsheets/d/1MZ-4GLWAZDgB1TDvwtssEcVKHKunOKi3l90Jof1pBB4/export?format=tsv&id=1MZ-4GLWAZDgB1TDvwtssEcVKHKunOKi3l90Jof1pBB4&gid=733627866", puppetColumn: 0, mainColumn: 1, headerRows: 1 },
-    { name: "XKI", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSem15AVLXgdjxWBZOnWRFnF6NwkY0gVKPYI8aWuHJzlbyILBL3o1F5GK1hSK3iiBlXLIZBI5jdpkVr/pub?gid=916202163&single=true&output=tsv", puppetColumn: 0, mainColumn: 1, headerRows: 0 },
-    { name: "Rot", url: "https://docs.google.com/spreadsheets/d/1osIbavh59GHFqQCO909jFRDX5XerSvZ7sWFfgMHLFs4/export?format=tsv&id=1osIbavh59GHFqQCO909jFRDX5XerSvZ7sWFfgMHLFs4", puppetColumn: 0, mainColumn: 1, headerRows: 1 },
+    { name: "9003's Sheet", url: "https://docs.google.com/spreadsheets/d/1MZ-4GLWAZDgB1TDvwtssEcVKHKunOKi3l90Jof1pBB4/export?format=tsv&id=1MZ-4GLWAZDgB1TDvwtssEcVKHKunOKi3l90Jof1pBB4&gid=733627866", puppetColumn: 0, mainColumn: 1, headerRows: 1 },
+    { name: "XKI's Sheet", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSem15AVLXgdjxWBZOnWRFnF6NwkY0gVKPYI8aWuHJzlbyILBL3o1F5GK1hSK3iiBlXLIZBI5jdpkVr/pub?gid=916202163&single=true&output=tsv", puppetColumn: 0, mainColumn: 1, headerRows: 0 },
+    { name: "Rot's Sheet", url: "https://docs.google.com/spreadsheets/d/1osIbavh59GHFqQCO909jFRDX5XerSvZ7sWFfgMHLFs4/export?format=tsv&id=1osIbavh59GHFqQCO909jFRDX5XerSvZ7sWFfgMHLFs4", puppetColumn: 0, mainColumn: 1, headerRows: 1 },
   ],
-  regexSheets: [{ name: "Rot2", url: "https://docs.google.com/spreadsheets/d/1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ/export?format=tsv&id=1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ", regexColumn: 0, mainColumn: 1, headerRows: 1 }],
+  regexSheets: [{ name: "Rot's Regex Sheet", url: "https://docs.google.com/spreadsheets/d/1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ/export?format=tsv&id=1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ", regexColumn: 0, mainColumn: 1, headerRows: 1 }],
   excludeSheets: [{ name: "Exclude", url: "https://docs.google.com/spreadsheets/d/1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ/export?format=tsv&id=1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ&gid=1034512747", puppetColumn: 0, masterColumn: 1, headerRows: 1 }],
   redirSheets: [{ name: "Redir", url: "https://docs.google.com/spreadsheets/d/1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ/export?format=tsv&id=1SM4QPGoEdd-ty8-mOdXK-jMIp_2aWesfUX7EHJi4DGQ&gid=1440877244", oldMasterColumn: 0, newMasterColumn: 1, headerRows: 1 }],
   paths: {

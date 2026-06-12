@@ -18,6 +18,7 @@ const defaultSettings = {
   theme: "system", // 'light' | 'system' | 'dark'
   midnightMode: false,
   showRarityBars: false,
+  showSource: false,
 };
 
 const validOptions = {

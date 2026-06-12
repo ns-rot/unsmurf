@@ -1,8 +1,9 @@
 <script>
   import { onMount, tick } from "svelte";
-  import { isNationCurrent, countActivePuppets } from "./sheetFetch.js";
+  import { isNationCurrent, countActivePuppets, findPuppetmaster, puppetMasterCache } from "./sheetFetch.js";
   import { canonicalizeName } from "./settingsUtils.js";
   import { getNationLink } from "./dataUtils.js";
+  import { settingsStore } from "./settingsStore.js";
 
   // Props
   export let nationName = "";
@@ -12,6 +13,40 @@
 
   // Sort state: 0 = Alphabetical, 1 = Active First, 2 = CTE First
   let sortMode = 0;
+
+  const palette = [
+    "bg-[rgb(0,114,178)]",   // Blue
+    "bg-[rgb(213,94,0)]",    // Orange
+    "bg-[rgb(0,158,115)]",   // Green
+    "bg-[rgb(204,121,167)]", // Purple/Pink
+    "bg-[rgb(230,159,0)]",   // Yellow
+    "bg-[rgb(86,180,233)]",  // Light Blue
+    "bg-[rgb(240,228,66)]",  // Light Yellow
+    "bg-[rgb(0,0,0)]",       // Black
+  ];
+
+  // Dynamically build color mapping from actual sheet names in cache
+  function buildSourceColors() {
+    if (!puppetMasterCache) return { default: "bg-gray-500" };
+    const sheets = [...new Set(Object.values(puppetMasterCache).map(e => e?.sheet?.toLowerCase()).filter(Boolean))];
+    const colors = {};
+    sheets.forEach((sheet, i) => {
+      colors[sheet] = palette[i % palette.length];
+    });
+    colors.default = "bg-gray-500";
+    return colors;
+  }
+
+  // Reactive source colors - updates when cache is loaded
+  $: sourceColors = buildSourceColors();
+
+  function getSourceColor(puppet) {
+    if (!$settingsStore.showSource) return null;
+    const entry = findPuppetmaster(canonicalizeName(puppet));
+    const sheet = entry?.sheet?.toLowerCase();
+    if (!sheet) return "bg-gray-500";
+    return sourceColors[sheet] || "bg-gray-500";
+  }
 
   function toggleSort() {
     sortMode = (sortMode + 1) % 3;
@@ -40,6 +75,12 @@
 
   // Count active (non-CTE) puppets
   $: activePuppetCount = countActivePuppets(puppetList);
+
+  // Unique sources in current puppet list for dynamic legend
+  $: usedSources = [...new Set(sortedPuppetList.map(p => {
+    const entry = findPuppetmaster(canonicalizeName(p));
+    return entry?.sheet?.toLowerCase();
+  }).filter(Boolean))];
 
   function getSortTitle(mode) {
     if (mode === 1) return "Sorting by Status (Active First)";
@@ -297,12 +338,18 @@
               class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 pb-2 text-left transition-colors whitespace-normal break-words overflow-hidden flex items-start pr-2"
               style="min-height: {ROW_HEIGHT}px;"
             >
-              <span class="block w-full leading-tight">
+              <span class="block w-full leading-tight flex items-start gap-1.5 min-w-0">
                 {#if !isNationCurrent(canonicalizeName(puppet))}
                   <span
-                    class="font-inter select-none text-red-600 dark:text-red-400 mr-1 float-left"
+                    class="font-inter select-none text-red-600 dark:text-red-400 flex-shrink-0"
                     >&#xe000;</span
                   >
+                {/if}
+                {#if $settingsStore.showSource}
+                  {@const color = getSourceColor(puppet)}
+                  {#if color}
+                    <span class="w-2 h-2 rounded-full {color} flex-shrink-0 mt-1" title="Data source: {findPuppetmaster(canonicalizeName(puppet))?.sheet || 'Unknown'}"></span>
+                  {/if}
                 {/if}
                 <a
                   href={getNationLink(
@@ -311,7 +358,8 @@
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-400 no-underline hover:underline"
+                  class="text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-400 no-underline hover:underline min-w-0 break-words"
+                  style="overflow-wrap: anywhere; word-break: break-word;"
                 >
                   {puppet}
                 </a>
@@ -319,6 +367,21 @@
             </div>
           {/each}
         </div>
+
+        {#if $settingsStore.showSource && usedSources.length > 0}
+          <!-- Legend for source colors -->
+          <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 mr-12">
+            <p class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">Data Source Legend</p>
+            <div class="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-300">
+              {#each usedSources as source}
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full {sourceColors[source] || 'bg-gray-500'}"></span>
+                  {source.charAt(0).toUpperCase() + source.slice(1)}
+                </span>
+              {/each}
+            </div>
+          </div>
+        {/if}
 
         <!-- Disclaimer at bottom of list -->
         <div
