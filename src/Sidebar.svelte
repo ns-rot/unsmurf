@@ -60,8 +60,25 @@
     </button>
   </div>
 
-  <!-- Bottom Section: Settings -->
+  <!-- Bottom Section: QnA + Settings -->
   <div class="p-4 flex flex-col items-center gap-2 mb-2">
+    <!-- QnA Button -->
+    <button
+      on:click={() => setView("qna")}
+      class="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200 {currentView ===
+      'qna'
+        ? 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 shadow-md'
+        : 'bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700'}"
+      aria-label="Q&A"
+      title="Q&A"
+    >
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+        <path d="M12 17h.01" />
+      </svg>
+    </button>
+
     <button
       on:click={openSettings}
       class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700 transition-all duration-200"
@@ -123,8 +140,25 @@
     </button>
   </div>
 
-  <!-- Right: Settings -->
-  <div class="ml-auto">
+  <!-- Right: QnA + Settings -->
+  <div class="ml-auto flex items-center gap-1">
+    <!-- QnA Button -->
+    <button
+      on:click={() => setView("qna")}
+      class="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200 {currentView ===
+      'qna'
+        ? 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 shadow-md'
+        : 'bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700'}"
+      aria-label="Q&A"
+      title="Q&A"
+    >
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+        <path d="M12 17h.01" />
+      </svg>
+    </button>
+
     <button
       on:click={openSettings}
       class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700 transition-all duration-200"

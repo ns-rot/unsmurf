@@ -62,6 +62,10 @@
     @apply bg-black border border-gray-700 !important;
   }
 
+  .midnight .qna-card {
+    @apply bg-black border border-gray-700 !important;
+  }
+
   .midnight .table-spacer-row {
     @apply h-2 !important;
   }

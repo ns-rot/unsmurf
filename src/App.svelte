@@ -22,6 +22,7 @@
   import NationAlert from "./NationAlert.svelte";
   import Puppetmasters from "./Puppetmasters.svelte";
   import PuppetPopup from "./PuppetPopup.svelte";
+  import QnA from "./QnA.svelte";
 
   import {
     fetchData,
@@ -132,7 +133,9 @@
     
     await fetchSheets();
 
-    if (viewFromURL === 'm' || masterFromURL) {
+    if (viewFromURL === 'q') {
+      currentView = 'qna';
+    } else if (viewFromURL === 'm' || masterFromURL) {
       currentView = 'masters';
     }
 
@@ -149,7 +152,13 @@
   function handleViewChange(event) {
     currentView = event.detail;
     selectedMaster = "";
-    setQueryParam("v", currentView === 'trades' ? null : "m");
+    if (currentView === "trades") {
+      setQueryParam("v", null);
+    } else if (currentView === "masters") {
+      setQueryParam("v", "m");
+    } else if (currentView === "qna") {
+      setQueryParam("v", "q");
+    }
     setQueryParam("m", null);
     if (currentView === "masters") {
       setQueryParam("q", null);
@@ -161,8 +170,10 @@
     }
     if (currentView === "trades") {
       document.title = nationId ? `Unsmurf | ${uncanonicalizeName(nationId)}` : "Unsmurf";
-    } else {
+    } else if (currentView === "masters") {
       document.title = "Unsmurf | Puppetmasters";
+    } else if (currentView === "qna") {
+      document.title = "Unsmurf | Q&A";
     }
   }
 
@@ -219,7 +230,7 @@
   class:sm:pt-[35vh]={centerContent}
 >
   <!-- Header -->
-  <Header mode={currentView === 'masters' ? 'masters' : mode} />
+  <Header mode={currentView === 'masters' ? 'masters' : currentView === 'qna' ? 'qna' : mode} />
 
   {#if currentView === 'trades'}
     <UnsmurfTrades bind:nationId {loadTradeData} {loading} />
@@ -284,6 +295,8 @@
         onClose={handleBackToMasters}
       />
     {/if}
+  {:else if currentView === 'qna'}
+    <QnA />
   {/if}
 
   <!-- Global Config Overlay -->

@@ -407,12 +407,12 @@
               >this form</a
             >, or to
             <a
-              href="https://docs.google.com/spreadsheets/d/1osIbavh59GHFqQCO909jFRDX5XerSvZ7sWFfgMHLFs4/edit?gid=0#gid=0"
+              href="https://raw.githubusercontent.com/ns-rot/unsmurf/refs/heads/data/static/puppetData.tsv"
               target="_blank"
               rel="noopener noreferrer"
               class="underline hover:text-gray-800 dark:hover:text-gray-200"
-              >Rot's sheet</a
-            > by contacting @rotenaple on Discord.
+              >our sheet</a
+            > by using this form (Coming Soon).
           </p>
           <p>
             For any inaccuracies, please contact the respective sheet owner.

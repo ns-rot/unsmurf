@@ -18,6 +18,10 @@
       subtitle: "Puppetmasters",
       description: "",
     },
+    qna: {
+      subtitle: "Frequently asked questions",
+      description: "How does this work?",
+    },
   };
 
   // Get the current mode's text, fallback to cards
