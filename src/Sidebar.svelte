@@ -27,7 +27,7 @@
       on:click={() => setView("trades")}
       class="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200 {currentView ===
       'trades'
-        ? 'bg-blue-500 text-white shadow-md'
+        ? 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 shadow-md'
         : 'bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700'}"
       aria-label="Trade Search"
       title="Trade Search"
@@ -42,7 +42,7 @@
       on:click={() => setView("masters")}
       class="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200 {currentView ===
       'masters'
-        ? 'bg-blue-500 text-white shadow-md'
+        ? 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 shadow-md'
         : 'bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700'}"
       aria-label="Puppetmasters"
       title="Puppetmasters"
@@ -90,7 +90,7 @@
       on:click={() => setView("trades")}
       class="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200 {currentView ===
       'trades'
-        ? 'bg-blue-500 text-white shadow-md'
+        ? 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 shadow-md'
         : 'bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700'}"
       aria-label="Trade Search"
       title="Trade Search"
@@ -105,7 +105,7 @@
       on:click={() => setView("masters")}
       class="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200 {currentView ===
       'masters'
-        ? 'bg-blue-500 text-white shadow-md'
+        ? 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 shadow-md'
         : 'bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700'}"
       aria-label="Puppetmasters"
       title="Puppetmasters"

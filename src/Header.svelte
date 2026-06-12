@@ -6,7 +6,7 @@
     cards: {
       subtitle: "Card Trades",
       description: `An alternative UI for 
-        <a href="https://bazaar.kractero.com/" class="text-blue-500 hover:underline dark:text-blue-400">Kractero's Bazaar</a> 
+        <a href="https://bazaar.kractero.com/" class="text-gray-600 dark:text-gray-400 hover:underline">Kractero's Bazaar</a> 
         to make identifying puppets easier.`,
     },
     foundation: {

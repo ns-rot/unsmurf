@@ -10,14 +10,14 @@
   $: spinnerProps = isDarkMode
     ? {
         ringColor: "#374151",
-        spinnerHeadColor: "#3b82f6",
-        spinnerTailColor: "#1e3a8a",
-      } // Gray-700, Blue-500, Blue-900
+        spinnerHeadColor: "#9ca3af",
+        spinnerTailColor: "#6b7280",
+      } // Gray-700, Gray-400, Gray-500
     : {
         ringColor: "#e5e7eb",
-        spinnerHeadColor: "#3b82f6",
-        spinnerTailColor: "#93c5fd",
-      }; // Gray-200, Blue-500, Blue-300
+        spinnerHeadColor: "#6b7280",
+        spinnerTailColor: "#d1d5db",
+      }; // Gray-200, Gray-500, Gray-300
 </script>
 
 <h2
@@ -26,7 +26,7 @@
   {title}
 </h2>
 <div
-  class="loading-container w-full bg-white dark:bg-gray-800 rounded-lg p-6 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700"
+  class="loading-container w-full bg-white dark:bg-gray-800 rounded-xl p-6 flex items-center justify-center shadow-sm border border-gray-100 dark:border-gray-700"
 >
   <div class="flex items-center space-x-3 text-gray-800 dark:text-gray-200">
     <Spinner

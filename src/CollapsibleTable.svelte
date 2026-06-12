@@ -59,7 +59,7 @@
     <tbody>
       <!-- Spacer row to create gap between header and body -->
       <tr
-        class="table-spacer-row h-2 bg-transparent border-none"
+        class="table-spacer-row bg-transparent border-none"
         aria-hidden="true"
       >
         <td colspan={columns.length} class="p-0 border-none">&nbsp;</td>
@@ -134,11 +134,11 @@
         <button
           on:click={showMore}
           aria-label="Show More"
-          class="bg-blue-500 text-white size-6
-            rounded-full hover:bg-blue-600 focus:outline-none
+          class="bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 size-6
+            rounded-full hover:bg-gray-900 dark:hover:bg-gray-100 focus:outline-none
             transition flex items-center justify-center"
         >
-          <img src="./icons/arrow_down.svg" alt="Show More" class="size-5" />
+          <img src="./icons/arrow_down.svg" alt="Show More" class="size-5 dark:invert" />
         </button>
       {/if}
       <!-- Show All Button -->
@@ -146,11 +146,11 @@
         <button
           on:click={showAll}
           aria-label="Show All"
-          class="bg-blue-500 text-white size-6
-            rounded-full hover:bg-blue-600 focus:outline-none
+          class="bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 size-6
+            rounded-full hover:bg-gray-900 dark:hover:bg-gray-100 focus:outline-none
             transition flex items-center justify-center"
         >
-          <img src="./icons/arrows_down.svg" alt="Show More" class="size-5" />
+          <img src="./icons/arrows_down.svg" alt="Show More" class="size-5 dark:invert" />
         </button>
       {/if}
       <!-- Collapse Button -->
@@ -158,14 +158,14 @@
         <button
           on:click={collapse}
           aria-label="Collapse"
-          class="bg-blue-500 text-white size-6
-            rounded-full hover:bg-blue-600 focus:outline-none
+          class="bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 size-6
+            rounded-full hover:bg-gray-900 dark:hover:bg-gray-100 focus:outline-none
             transition flex items-center justify-center"
         >
           <img
             src="./icons/arrows_down.svg"
             alt="Collapse"
-            class="size-5 transform rotate-180"
+            class="size-5 transform rotate-180 dark:invert"
           />
         </button>
       {/if}
@@ -176,11 +176,11 @@
         on:click={onCopy}
         aria-label="Copy List"
         title="Copy List"
-        class="bg-blue-500 text-white size-6
-          rounded-full hover:bg-blue-600 focus:outline-none
+        class="bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 size-6
+          rounded-full hover:bg-gray-900 dark:hover:bg-gray-100 focus:outline-none
           transition flex items-center justify-center ml-1"
       >
-        <img src="./icons/copy.svg" alt="Copy List" class="size-4" />
+        <img src="./icons/copy.svg" alt="Copy List" class="size-4 dark:invert" />
       </button>
     {/if}
   </div>

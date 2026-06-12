@@ -23,7 +23,7 @@
     <select
         {id}
         bind:value
-        class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded px-2 py-1.5 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+        class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-full px-4 py-1.5 w-full text-sm focus:ring-2 focus:ring-gray-500 focus:border-gray-500 outline-none"
     >
         {#each options as option}
             <option value={option.value}>{option.label}</option>

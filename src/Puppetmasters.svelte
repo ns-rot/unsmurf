@@ -162,35 +162,35 @@
     <!-- Mode & Sort Toggles -->
     <div class="flex flex-wrap items-center gap-4 shrink-0">
       <div
-        class="flex items-center gap-1 p-1 bg-gray-100 dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700 h-[42px]"
+        class="flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full h-[42px]"
       >
         <button
           on:click={() => (searchAny = false)}
           class="px-5 py-1.5 h-full rounded-full text-[11px] font-bold uppercase transition-all {!searchAny
-            ? 'bg-blue-500 text-white shadow-sm'
-            : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}"
+            ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow'
+            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}"
         >
           Puppetmasters Only
         </button>
         <button
           on:click={() => (searchAny = true)}
           class="px-5 py-1.5 h-full rounded-full text-[11px] font-bold uppercase transition-all {searchAny
-            ? 'bg-blue-500 text-white shadow-sm'
-            : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}"
+            ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow'
+            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}"
         >
           All Nations
         </button>
       </div>
 
       <div
-        class="flex items-center gap-1 p-1 bg-gray-100 dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700 h-[42px]"
+        class="flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full h-[42px]"
       >
         <button
           on:click={() => (sortMode = "active")}
           class="px-5 py-1.5 h-full rounded-full text-[11px] font-bold uppercase transition-all {sortMode ===
           'active'
-            ? 'bg-blue-500 text-white shadow-sm'
-            : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}"
+            ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow'
+            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}"
         >
           Sort Active
         </button>
@@ -198,8 +198,8 @@
           on:click={() => (sortMode = "total")}
           class="px-5 py-1.5 h-full rounded-full text-[11px] font-bold uppercase transition-all {sortMode ===
           'total'
-            ? 'bg-blue-500 text-white shadow-sm'
-            : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}"
+            ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow'
+            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}"
         >
           Sort Total
         </button>
@@ -214,7 +214,7 @@
     {#each filteredMasters as master (master.name)}
       {@const active = isNationCurrent(master.name)}
       <button
-        class="group p-4 rounded-xl transition-all duration-200 bg-gray-100 dark:bg-gray-950 text-gray-900 dark:text-gray-100 active:scale-[0.98] focus:outline-none text-left flex flex-col justify-center {hasAnyMatch
+        class="group p-4 rounded-xl transition-all duration-200 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 active:scale-[0.98] focus:outline-none text-left flex flex-col justify-center puppet-card {hasAnyMatch
           ? 'min-h-[115px]'
           : 'min-h-[95px]'}"
         on:click={() => handleSelect(master.name)}
@@ -251,7 +251,7 @@
           {/if}
 
           <div
-            class="w-full h-1.5 bg-white dark:bg-gray-900 rounded-full overflow-hidden shadow-inner mt-1"
+            class="w-full h-1.5 bg-gray-100 dark:bg-gray-950 rounded-full overflow-hidden shadow-inner mt-1"
           >
             <div
               class="h-full {getRarityColor(master)} transition-all duration-700"

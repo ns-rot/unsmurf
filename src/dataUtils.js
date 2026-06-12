@@ -184,7 +184,7 @@ export function makeTradeColumns(role) {
       styles: ["min-w-[6ch]", "max-w-[12ch]"],
     },
     { label: "Price", alignment: "center", styles: ["min-w-[3ch]"] },
-    { label: "Date", alignment: "center", styles: ["min-w-[7ch]"] },
+    { label: "Date", alignment: "right", styles: ["min-w-[5ch]"] },
   ];
 }
 
@@ -200,7 +200,7 @@ export function makeGiftColumns(role) {
       alignment: "left",
       styles: ["min-w-[6ch]", "max-w-[12ch]"],
     },
-    { label: "Date", alignment: "center", styles: ["min-w-[7ch]"] },
+    { label: "Date", alignment: "right", styles: ["min-w-[5ch]"] },
   ];
 }
 

@@ -206,7 +206,7 @@
 <Sidebar {currentView} on:viewChange={handleViewChange} on:showSettings={openConfig} />
 
 <!-- Main Content Wrapper -->
-<div class="md:ml-16 pb-20 md:pb-0 px-4 sm:px-6 md:px-12 lg:px-16 xl:px-[8%] mt-10 md:py-12 min-h-screen transition-all duration-500">
+<div class="md:ml-16 pb-20 md:pb-0 px-3 sm:px-4 md:px-8 lg:px-10 xl:px-[5%] mt-10 md:py-12 min-h-screen transition-all duration-500">
   <!-- Header -->
   <Header mode={currentView === 'masters' ? 'masters' : mode} />
 
@@ -218,7 +218,7 @@
       <div class="text-left text-sm text-gray-500 dark:text-gray-400 mb-4">
         Cached data from {new Date(lastCacheTime).toLocaleString()}
         <button
-          class="text-blue-500 hover:underline ml-2"
+          class="text-gray-600 dark:text-gray-400 hover:underline ml-2"
           on:click={() => loadTradeData(true)}>Refresh</button
         >
       </div>

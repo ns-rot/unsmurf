@@ -129,14 +129,14 @@ export function formatDate(ts) {
   const dd = String(date.getDate()).padStart(2, "0");
   const mm = String(date.getMonth() + 1).padStart(2, "0");
   const yy = String(date.getFullYear()).slice(-2);
-  const formatted = `${dd}/${mm}/${yy}`;
+  const formatted = `${dd}/${mm}<wbr>/${yy}`;
 
   const diffMs = now - date;
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
   const diffYears = Math.floor(diffDays / 365);
   const remainingDays = diffDays % 365;
 
-  const relative = diffYears > 0 ? `${diffYears}y ${remainingDays}d ago` : `${diffDays}d ago`;
+  const relative = diffYears > 0 ? `${diffYears}y ${remainingDays}d` : `${diffDays}d`;
 
   return { formatted, relative };
 }

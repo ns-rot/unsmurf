@@ -14,7 +14,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200;
+    @apply bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200;
   }
 
   /* Midnight Mode Overrides */
@@ -43,9 +43,7 @@
     @apply border-t border-b border-l-0 border-r-0 border-solid border-gray-700 !important;
   }
 
-  .midnight .bg-gray-50.dark\:bg-gray-700\/50 {
-    @apply bg-black border border-gray-800 !important;
-  }
+
 
   /* Restore outer borders for body cells */
   .midnight table tbody tr:not(.table-spacer-row) td:first-child {
@@ -58,6 +56,14 @@
 
   .midnight tr:not(.table-spacer-row):hover td {
     @apply bg-[#0f1115] !important;
+  }
+
+  .midnight .puppet-card {
+    @apply bg-black border border-gray-700 !important;
+  }
+
+  .midnight .table-spacer-row {
+    @apply h-2 !important;
   }
 }
 
