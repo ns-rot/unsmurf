@@ -34,7 +34,6 @@ module.exports = {
     'bg-rarityMidnight-C',
     'text-center',
     'text-right',
-    'font-inter',
     'font-sans',
     'font-unsmurf',
     'animate-spin',
@@ -42,8 +41,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Inter Tight"', '"UnsmurfIcons"', 'sans-serif'], // Default for all text
-        inter: ['"Inter"', '"UnsmurfIcons"', 'sans-serif'],      // For large text
+        sans: ['"Vend Sans"', '"UnsmurfIcons"', 'sans-serif'], // Default for all text
         head: ['"Fredoka"', '"UnsmurfIcons"', 'sans-serif'],      // For headings
       },
       colors: {
@@ -113,13 +111,9 @@ module.exports = {
     function ({ addComponents, addVariant }) {
       addVariant('midnight', '.midnight &'); // Enables 'midnight:bg-black' etc.
       addComponents({
-        '.font-inter': {
-          fontFeatureSettings: '"liga" 1, "dlig" 1, "ss02" 1, "ss03" 1, "cv01" 1',
-        },
         '.font-sans': {
-          fontFeatureSettings: '"liga" 1, "dlig" 1, "ss02" 1, "ss03" 1, "cv01" 1',
-        },
-        // Doesn't work yet
+          fontFeatureSettings: '"liga" 1, "dlig" 1',
+        }
       });
     },
   ],
