@@ -231,9 +231,12 @@
       </div>
     {/if}
 
-    <!-- Results header (stays visible even while typing new query) -->
+    <!-- Results header (CSS-collapsed during loading so the preview is alone) -->
     {#if lastCacheTime && loadedNationId}
-      <div class="mt-6">
+      <div
+        class="transition-all duration-300 ease-out overflow-hidden"
+        style="max-height: {loading ? '0' : '500'}px; opacity: {loading ? '0' : '1'}; margin-top: {loading ? '0' : '1.5rem'}; margin-bottom: {loading ? '0' : '1.5rem'};"
+      >
         <NationAlert
           nationId={loadedNationId}
           cacheTime={lastCacheTime}
