@@ -270,6 +270,12 @@
     {/if}
 
     <!-- Results header (CSS-collapsed during loading so the preview is alone) -->
+    {#if !lastCacheTime}
+      <p class="text-gray-500 dark:text-gray-400 text-sm mt-6">
+        Puppets missing? Add them <a href="https://forms.gle/DW4CMWAVQ3TDpj25A" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">here</a>.
+      </p>
+    {/if}
+
     {#if lastCacheTime && loadedNationId}
       <div
         class="transition-all duration-300 ease-out overflow-hidden"

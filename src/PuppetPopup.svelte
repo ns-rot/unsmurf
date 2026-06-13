@@ -412,7 +412,7 @@
               rel="noopener noreferrer"
               class="underline hover:text-gray-800 dark:hover:text-gray-200"
               >our sheet</a
-            > by using this form (Coming Soon).
+            > by using <a href="https://forms.gle/DW4CMWAVQ3TDpj25A" target="_blank" rel="noopener noreferrer" class="underline hover:text-gray-800 dark:hover:text-gray-200">this form</a>.
           </p>
           <p>
             For any inaccuracies, please contact the respective sheet owner.

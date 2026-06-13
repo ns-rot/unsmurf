@@ -23,7 +23,7 @@
     {
       q: "How do I add puppets to this site?",
       parts: [
-        "Please use this form (Coming Soon).",
+        "Please use ", { text: "this form", href: "https://forms.gle/DW4CMWAVQ3TDpj25A" }, ".",
       ],
     },
     {
@@ -31,7 +31,7 @@
       parts: [
         "Check which data source the puppet comes from (In settings, enable \"Show Puppet Identification Source\"), then contact the relevant maintainer. For 9003\u2019s sheet use ",
         { text: "this form", href: "https://docs.google.com/forms/d/16t4mlYuSU5p0U9hVkvzKMqP1GRnpdDV7nLNLA9WdFTs/" },
-        ", and for our sheet use this form (Coming Soon).\n        If you believe that somebody is maliciously impersonating you, please contact NationStates staff through the ",
+        ", and for our sheet use ", { text: "this form", href: "https://forms.gle/HCPwTSAsLop69cxa7" }, ".\n        If you believe that somebody is maliciously impersonating you, please contact NationStates staff through the ",
         { text: "Getting Help Page", href: "https://www.nationstates.net/page=help" },
         ".",
       ],
