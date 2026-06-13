@@ -706,6 +706,11 @@ body:is(.dark *){
   font-feature-settings: "liga" 1, "dlig" 1;
 }
 
+.mobile-bottom-nav {
+  top: calc(var(--visual-viewport-offset-top, 0px) + var(--visual-viewport-height, 100dvh) - 4rem);
+  bottom: auto;
+}
+
 .sr-only{
   position: absolute;
   width: 1px;
@@ -756,10 +761,6 @@ body:is(.dark *){
 
 .-top-\[1px\]{
   top: -1px;
-}
-
-.bottom-0{
-  bottom: 0px;
 }
 
 .bottom-2{
