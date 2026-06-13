@@ -92,7 +92,7 @@
     </div>
   {/if}
 
-  <div class="flex items-center justify-between gap-4 mt-1.5">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mt-1.5">
     <div class="flex items-center gap-3">
       {#if puppetTally > 0}
         <span class="text-gray-500 dark:text-gray-400 transition-all duration-300 ease-out" class:text-base={!preview} class:text-sm={preview}>
@@ -111,7 +111,7 @@
     </div>
     {#if cacheTime}
       <div
-        class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap"
+        class="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap sm:self-auto"
         in:fly={{ x: 10, duration: 300, delay: 100 }}
       >
         Cached {new Date(cacheTime).toLocaleString()}

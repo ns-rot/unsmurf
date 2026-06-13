@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import Header from "./Header.svelte";
   import UnsmurfTrades from "./UnsmurfTrades.svelte";
   import { settingsStore } from "./settingsStore.js";
@@ -58,6 +58,8 @@
   let lastCacheTime = null;
   let loadedNationId = "";
   let hasSearched = false;
+  let keyboardOpen = false;
+  let cleanupViewportListener = null;
 
   $: canonicalizedName = canonicalizeName(nationId);
   $: canonicalizedMasterName =
@@ -67,7 +69,9 @@
     canonicalizedMasterName && canonicalizedName !== canonicalizedMasterName;
   $: isMasterCte = !isNationCurrent(canonicalizedMasterName);
 
-  $: centerContent = currentView === 'trades' && !hasSearched;
+  $: defaultSearchView = currentView === 'trades' && !hasSearched;
+  $: centerContent = defaultSearchView && !keyboardOpen;
+  $: compactSearchContent = defaultSearchView && keyboardOpen;
 
   // Reactive tallies that update when buys/sells change OR when settings change
   $: buyTallyTrades =
@@ -126,6 +130,24 @@
     const viewFromURL = getQueryParam("v");
     const masterFromURL = getQueryParam("m");
     
+    if (window.visualViewport) {
+      const updateViewport = () => {
+        const viewport = window.visualViewport;
+        keyboardOpen = viewport.height < window.innerHeight * 0.85;
+        document.documentElement.style.setProperty('--app-height', `${viewport.height}px`);
+        document.documentElement.style.setProperty('--visual-viewport-height', `${viewport.height}px`);
+        document.documentElement.style.setProperty('--visual-viewport-offset-top', `${viewport.offsetTop}px`);
+        document.documentElement.dataset.keyboardOpen = keyboardOpen;
+      };
+      window.visualViewport.addEventListener('resize', updateViewport);
+      window.visualViewport.addEventListener('scroll', updateViewport);
+      cleanupViewportListener = () => {
+        window.visualViewport.removeEventListener('resize', updateViewport);
+        window.visualViewport.removeEventListener('scroll', updateViewport);
+      };
+      updateViewport();
+    }
+
     window.addEventListener('UNSMURF_AUX_DATA_READY', async () => {
       await fetchSheets();
       if (nationId) await loadTradeData();
@@ -216,6 +238,10 @@
   $: if ($settingsStore) {
     applyTheme($settingsStore.theme, $settingsStore.midnightMode);
   }
+
+  onDestroy(() => {
+    if (cleanupViewportListener) cleanupViewportListener();
+  });
 </script>
 
 <!-- Page Layout Wrapper -->
@@ -223,8 +249,9 @@
 
 <!-- Main Content Wrapper -->
 <div
-  class="md:ml-16 pb-20 md:pb-0 px-3 sm:px-6 md:px-8 lg:px-[5%] min-h-screen transition-all duration-500"
+  class="md:ml-16 px-3 sm:px-6 md:px-8 lg:px-[5%] min-h-dvh pb-20 transition-all duration-500 md:pb-0"
   class:mt-10={!centerContent}
+  class:pt-4={compactSearchContent}
   class:md:py-12={!centerContent}
   class:pt-[28vh]={centerContent}
   class:sm:pt-[35vh]={centerContent}

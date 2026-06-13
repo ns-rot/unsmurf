@@ -162,7 +162,7 @@
     <!-- Mode & Sort Toggles -->
     <div class="flex flex-wrap items-center gap-4 shrink-0">
       <div
-        class="flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full h-[42px]"
+        class="toggle-track flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full h-[42px]"
       >
         <button
           on:click={() => (searchAny = false)}
@@ -183,7 +183,7 @@
       </div>
 
       <div
-        class="flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full h-[42px]"
+        class="toggle-track flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full h-[42px]"
       >
         <button
           on:click={() => (sortMode = "active")}

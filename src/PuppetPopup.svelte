@@ -285,7 +285,7 @@
       <div class="flex items-center space-x-2">
         <button
           on:click={toggleSort}
-          class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none font-inter"
+          class="sort-toggle w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none font-inter"
           title={getSortTitle(sortMode)}
         >
           {#if sortMode === 1}

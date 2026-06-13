@@ -48,7 +48,7 @@
     class="fixed inset-0 bg-gray-800 bg-opacity-50 dark:bg-black dark:bg-opacity-70 z-50 flex justify-center items-center backdrop-blur-sm transition-all"
   >
     <div
-      class="settings-modal bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-2xl shadow-2xl p-6 max-w-2xl w-[90%] md:w-[60%] lg:w-[50%] relative max-h-[90vh] overflow-y-auto border border-gray-100 dark:border-gray-700"
+      class="settings-modal bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-2xl shadow-2xl p-6 max-w-2xl w-[90%] md:w-[60%] lg:w-[50%] relative max-h-[90dvh] overflow-y-auto border border-gray-100 dark:border-gray-700"
     >
       <h2
         class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200 dark:border-gray-700"
@@ -201,7 +201,7 @@
               Theme
             </p>
             <div
-              class="flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full w-full"
+              class="toggle-track flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full w-full"
             >
               {#each ["light", "system", "dark"] as option}
                 <button

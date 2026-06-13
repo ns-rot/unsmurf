@@ -12,6 +12,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .mobile-bottom-nav {
+    top: calc(var(--visual-viewport-offset-top, 0px) + var(--visual-viewport-height, 100dvh) - 4rem);
+    bottom: auto;
+  }
+}
+
 @layer base {
   body {
     @apply bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200;
@@ -68,6 +75,30 @@
 
   .midnight .table-spacer-row {
     @apply h-2 !important;
+  }
+
+  /* Midnight nav bar overrides */
+  .midnight .sidebar-nav {
+    @apply bg-black border-gray-800 !important;
+  }
+
+  .midnight .nav-pill {
+    @apply bg-black/80 backdrop-blur-md shadow-lg shadow-black/50 !important;
+  }
+
+  /* Midnight toggle group overrides */
+  .midnight .toggle-track {
+    @apply bg-black border border-gray-800 !important;
+  }
+
+  /* Midnight dropdown overrides */
+  .midnight select {
+    @apply bg-black border-gray-700 text-gray-100 !important;
+  }
+
+  /* Midnight sort toggle (PuppetPopup) */
+  .midnight .sort-toggle {
+    @apply bg-black !important;
   }
 }
 

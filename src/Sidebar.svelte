@@ -17,7 +17,7 @@
      DESKTOP: Fixed left sidebar (md and above)
      ═══════════════════════════════════════════════════ -->
 <aside
-  class="hidden md:flex fixed left-0 top-0 h-screen w-16 bg-gray-100 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex-col z-50 transition-all duration-300"
+  class="sidebar-nav hidden md:flex fixed left-0 top-0 h-screen w-16 bg-gray-100 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex-col z-50 transition-all duration-300"
   aria-label="Main Navigation"
 >
   <!-- Top Section: Navigation (Vertically Centered) -->
@@ -61,7 +61,7 @@
   </div>
 
   <!-- Bottom Section: QnA + Settings -->
-  <div class="p-4 flex flex-col items-center gap-2 mb-2">
+  <div class="p-4 flex flex-col items-center gap-6 mb-2">
     <!-- QnA Button -->
     <button
       on:click={() => setView("qna")}
@@ -97,12 +97,11 @@
      MOBILE: Fixed bottom bar (below md)
      ═══════════════════════════════════════════════════ -->
 <nav
-  class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 flex items-center px-4 z-50"
+  class="mobile-bottom-nav md:hidden fixed left-0 right-0 bottom-0 flex items-center justify-between px-4 py-3 z-50"
   aria-label="Mobile Navigation"
 >
   <!-- Left: Nav items -->
-  <div class="flex items-center gap-3">
-    <!-- Trade icon -->
+  <div class="nav-pill flex items-center gap-3 bg-gray-100 dark:bg-gray-900 rounded-full p-2">
     <button
       on:click={() => setView("trades")}
       class="w-10 h-10 flex items-center justify-center rounded-full transition-all duration-200 {currentView ===
@@ -141,7 +140,7 @@
   </div>
 
   <!-- Right: QnA + Settings -->
-  <div class="ml-auto flex items-center gap-1">
+  <div class="nav-pill flex items-center gap-3 bg-gray-100 dark:bg-gray-900 rounded-full p-2">
     <!-- QnA Button -->
     <button
       on:click={() => setView("qna")}

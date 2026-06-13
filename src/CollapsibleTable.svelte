@@ -45,7 +45,6 @@
         {#each columns as col, index}
           <th
             class={`px-3 py-3 bg-gray-300 dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-bold align-top 
-            border-b-4 border-gray-50 dark:border-gray-900 
             ${index === 0 ? "rounded-tl-lg rounded-bl-lg" : ""} 
             ${index === columns.length - 1 ? "rounded-tr-lg rounded-br-lg" : ""} text-${col.alignment || "left"}`}
           >
