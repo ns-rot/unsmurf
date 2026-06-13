@@ -79,7 +79,7 @@
               name="section"
               value="puppets"
               bind:group={$settingsStore.section}
-              class="w-4 h-4 accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300"
+              class="w-4 h-4 accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
             />
             <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Group records by known puppets</span
@@ -91,7 +91,7 @@
               name="section"
               value="similar-name"
               bind:group={$settingsStore.section}
-              class="w-4 h-4 accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300"
+              class="w-4 h-4 accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
             />
             <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Group records by similar name</span
@@ -103,7 +103,7 @@
               name="section"
               value="none"
               bind:group={$settingsStore.section}
-              class="w-4 h-4 accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300"
+              class="w-4 h-4 accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
             />
             <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Do not group records</span
@@ -122,7 +122,7 @@
             <input
               type="checkbox"
               bind:checked={$settingsStore.showPuppetmasters}
-              class="w-4 h-4 rounded accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300"
+              class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
             />
             <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Append puppetmasters in detailed records</span
@@ -132,7 +132,7 @@
             <input
               type="checkbox"
               bind:checked={$settingsStore.showCTE}
-              class="w-4 h-4 rounded accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300"
+              class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
             />
             <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Mark CTE nations</span
@@ -142,7 +142,7 @@
             <input
               type="checkbox"
               bind:checked={$settingsStore.showRelativeDate}
-              class="w-4 h-4 rounded accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300"
+              class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
             />
             <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Show relative date by default</span
@@ -152,7 +152,7 @@
             <input
               type="checkbox"
               bind:checked={$settingsStore.showSource}
-              class="w-4 h-4 rounded accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300"
+              class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
             />
             <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Show puppet identification source</span
@@ -174,7 +174,7 @@
             <input
               type="checkbox"
               bind:checked={$settingsStore.showRarityBars}
-              class="w-4 h-4 rounded accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300"
+              class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
             />
             <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Coloured puppet count bars</span
@@ -228,7 +228,7 @@
               <input
                 type="checkbox"
                 bind:checked={$settingsStore.midnightMode}
-                class="w-4 h-4 rounded accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300"
+                class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
               />
               <span class="text-gray-700 dark:text-gray-200"
                 >Midnight (OLED) mode</span
@@ -241,7 +241,7 @@
             <input
               type="checkbox"
               bind:checked={$settingsStore.redEpics}
-              class="w-4 h-4 rounded accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300"
+              class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
             />
             <span class="text-gray-700 dark:text-gray-200 font-medium">Red epics</span>
           </label>
@@ -249,7 +249,7 @@
             <input
               type="checkbox"
               bind:checked={$settingsStore.rainbowLegs}
-              class="w-4 h-4 rounded accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300"
+              class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
             />
             <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Rainbow legendaries</span
@@ -336,7 +336,7 @@
             <input
               type="checkbox"
               bind:checked={$settingsStore.enableCTELink}
-              class="w-4 h-4 rounded accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300"
+              class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
             />
             <span class="font-medium text-gray-700 dark:text-gray-200"
               >Override for CTE Nations</span

@@ -42,7 +42,12 @@
 
   .midnight table td,
   .midnight input {
-    @apply bg-black border-gray-700 !important;
+    @apply bg-black border-gray-600 !important;
+  }
+
+  .midnight input[type="checkbox"],
+  .midnight input[type="radio"] {
+    accent-color: #818cf8;
   }
 
   /* Use explicit border sides to match original CSS logic */

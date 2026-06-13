@@ -48,7 +48,7 @@
         class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 rounded-full px-4 py-1.5 focus:outline-none w-full sm:w-64 text-sm shadow-sm"
       />
       <label class="flex items-center gap-2 px-4 py-1.5 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition shadow-sm shrink-0">
-        <input type="checkbox" bind:checked={activeOnly} class="rounded border-2 border-gray-500 dark:border-gray-300 accent-gray-600 dark:accent-gray-300 focus:ring-gray-500 bg-gray-100" />
+        <input type="checkbox" bind:checked={activeOnly} class="rounded border-2 border-gray-500 dark:border-gray-300 shrink-0 accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-gray-100" />
         <span class="text-[10px] font-black text-gray-600 dark:text-gray-400 uppercase tracking-tight">Active Only</span>
       </label>
     </div>
