@@ -3,3 +3,4 @@ public/static/allNations.txt
 /node_modules
 public/build
 .data/
+*.mjs

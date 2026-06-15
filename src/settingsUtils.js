@@ -81,15 +81,42 @@ function tokenizeWord(word) {
   if (/^\d+$/.test(word)) {
     return [{ type: 'num', val: parseInt(word, 10) }];
   }
-  if (/\d/.test(word)) {
-    return word.split(/(\d+)/g).filter(Boolean).map(p =>
-      /\d+/.test(p) ? { type: 'num', val: parseInt(p, 10) } : { type: 'text', val: p }
-    );
-  }
   return [{ type: 'text', val: word }];
 }
 
-function tokenize(s, romanMap, hexMap) {
+function detectNumericValues(items) {
+  const seriesMap = new Map();
+  items.forEach(item => {
+    const s = String(item).toLowerCase();
+    const parts = s.split(/[_\s-]+/).filter(Boolean);
+    parts.forEach((p, i) => {
+      if (/^\d+$/.test(p)) {
+        const context = [...parts.slice(0, i), ...parts.slice(i + 1)];
+        const ctxAlpha = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
+        if (ctxAlpha < 3) return;
+        const key = JSON.stringify(context) + '|' + i;
+        if (!seriesMap.has(key)) seriesMap.set(key, new Map());
+        const valMap = seriesMap.get(key);
+        const val = parseInt(p, 10);
+        if (!valMap.has(val)) valMap.set(val, new Set());
+        valMap.get(val).add(p);
+      }
+    });
+  });
+  const result = new Map();
+  for (const [key, valMap] of seriesMap) {
+    if (valMap.size >= 2) {
+      const tokens = new Set();
+      for (const ts of valMap.values()) {
+        for (const t of ts) tokens.add(t);
+      }
+      result.set(key, tokens);
+    }
+  }
+  return result;
+}
+
+function tokenize(s, romanMap, hexMap, numericMap) {
   const lower = s.toLowerCase();
   if (/[_\s-]/.test(lower)) {
     const words = lower.split(/[_\s-]+/).filter(Boolean);
@@ -108,6 +135,14 @@ function tokenize(s, romanMap, hexMap) {
         const validSet = hexMap.get(key);
         if (validSet && validSet.has(w)) {
           return [{ type: 'num', val: parseInt(w, 16), isHex: true }];
+        }
+      }
+      if (numericMap && /^\d+$/.test(w)) {
+        const context = [...words.slice(0, i), ...words.slice(i + 1)];
+        const key = JSON.stringify(context) + '|' + i;
+        const validSet = numericMap.get(key);
+        if (!(validSet && validSet.has(w))) {
+          return [{ type: 'text', val: w }];
         }
       }
       return tokenizeWord(w);
@@ -145,6 +180,13 @@ function tokenize(s, romanMap, hexMap) {
           ];
         }
       }
+    }
+  }
+  if (numericMap && /^\d+$/.test(lower)) {
+    const key = JSON.stringify([]) + '|' + 0;
+    const validSet = numericMap.get(key);
+    if (!(validSet && validSet.has(lower))) {
+      return [{ type: 'text', val: lower }];
     }
   }
   return tokenizeWord(lower);
@@ -202,7 +244,7 @@ function detectHexValues(items) {
     const s = String(item).toLowerCase();
     const parts = s.split(/[_\s-]+/).filter(Boolean);
     parts.forEach((p, i) => {
-      if (/^[0-9a-f]+$/.test(p) && /[a-f]/.test(p)) {
+      if (/^[0-9a-f]{2,}$/.test(p) && /[a-f]/.test(p)) {
         const val = parseInt(p, 16);
         const context = [...parts.slice(0, i), ...parts.slice(i + 1)];
         const ctxChars = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
@@ -276,16 +318,14 @@ function detectHexValues(items) {
 export function createNaturalCompare(items) {
   const romanMap = detectRomanValues(items);
   const hexMap = detectHexValues(items);
+  const numericMap = detectNumericValues(items);
   const cache = new Map();
 
   function prepare(s) {
     const cached = cache.get(s);
     if (cached) return cached;
-    const tokens = tokenize(s, romanMap, hexMap);
-    const firstNum = tokens.findIndex(t => t.type === 'num');
-    const pattern = firstNum >= 0
-      ? tokens.slice(0, firstNum).filter(t => t.type === 'text').map(t => t.val).join('')
-      : tokens.map(t => t.val).join('');
+    const tokens = tokenize(s, romanMap, hexMap, numericMap);
+    const pattern = tokens.filter(t => t.type === 'text').map(t => t.val).join('');
     const result = { tokens, pattern };
     cache.set(s, result);
     return result;
