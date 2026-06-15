@@ -61,6 +61,292 @@ export function canonicalizeName(name) {
     .replace(/[^a-z0-9_-]/g, ""); // Remove any character not in A-Z, a-z, 0-9, _, or -
 }
 
+const romanValues = { i: 1, v: 5, x: 10, l: 50, c: 100, d: 500, m: 1000 };
+
+function romanToNumber(s) {
+  let total = 0, prev = 0;
+  for (let i = s.length - 1; i >= 0; i--) {
+    const curr = romanValues[s[i]];
+    total += curr < prev ? -curr : curr;
+    prev = curr;
+  }
+  return total;
+}
+
+function tokenizeWord(word) {
+  const ordinalMatch = word.match(/^(\d+)(st|nd|rd|th)$/);
+  if (ordinalMatch) {
+    return [{ type: 'num', val: parseInt(ordinalMatch[1], 10) }];
+  }
+  if (/^\d+$/.test(word)) {
+    return [{ type: 'num', val: parseInt(word, 10) }];
+  }
+  if (/\d/.test(word)) {
+    return word.split(/(\d+)/g).filter(Boolean).map(p =>
+      /\d+/.test(p) ? { type: 'num', val: parseInt(p, 10) } : { type: 'text', val: p }
+    );
+  }
+  return [{ type: 'text', val: word }];
+}
+
+function tokenize(s, romanMap, hexMap) {
+  const lower = s.toLowerCase();
+  if (/[_\s-]/.test(lower)) {
+    const words = lower.split(/[_\s-]+/).filter(Boolean);
+    return words.flatMap((w, i) => {
+      if (romanMap) {
+        const context = [...words.slice(0, i), ...words.slice(i + 1)];
+        const key = JSON.stringify(context) + '|' + i;
+        const validSet = romanMap.get(key);
+        if (validSet && validSet.has(w)) {
+          return [{ type: 'num', val: romanToNumber(w), isRoman: true }];
+        }
+      }
+      if (hexMap) {
+        const context = [...words.slice(0, i), ...words.slice(i + 1)];
+        const key = JSON.stringify(context) + '|' + i;
+        const validSet = hexMap.get(key);
+        if (validSet && validSet.has(w)) {
+          return [{ type: 'num', val: parseInt(w, 16), isHex: true }];
+        }
+      }
+      return tokenizeWord(w);
+    });
+  }
+  if (romanMap) {
+    const match = lower.match(/^([a-z]+)([ivxlcdm]{2,})$/);
+    if (match) {
+      const stem = match[1];
+      const ctxChars = stem.replace(/[^a-z]/g, '').length;
+      if (ctxChars >= 3) {
+        const key = JSON.stringify([stem]) + '|' + 1;
+        const validSet = romanMap.get(key);
+        if (validSet && validSet.has(match[2])) {
+          return [
+            { type: 'text', val: stem },
+            { type: 'num', val: romanToNumber(match[2]), isRoman: true },
+          ];
+        }
+      }
+    }
+  }
+  if (hexMap) {
+    const match = lower.match(/^([a-z]+)([0-9a-f]{2,})$/);
+    if (match) {
+      const stem = match[1];
+      const ctxChars = stem.replace(/[^a-z]/g, '').length;
+      if (ctxChars >= 3) {
+        const key = JSON.stringify([stem]) + '|' + 1;
+        const validSet = hexMap.get(key);
+        if (validSet && validSet.has(match[2])) {
+          return [
+            { type: 'text', val: stem },
+            { type: 'num', val: parseInt(match[2], 16), isHex: true },
+          ];
+        }
+      }
+    }
+  }
+  return tokenizeWord(lower);
+}
+
+function detectRomanValues(items) {
+  const seriesMap = new Map();
+  items.forEach(item => {
+    const s = String(item).toLowerCase();
+    const parts = s.split(/[_\s-]+/).filter(Boolean);
+    parts.forEach((p, i) => {
+      if (/^[ivxlcdm]{2,}$/.test(p) && isValidRoman(p)) {
+        const val = romanToNumber(p);
+        const context = [...parts.slice(0, i), ...parts.slice(i + 1)];
+        const ctxChars = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
+        if (ctxChars < 3) return;
+        const key = JSON.stringify(context) + '|' + i;
+        if (!seriesMap.has(key)) seriesMap.set(key, new Map());
+        const valMap = seriesMap.get(key);
+        if (!valMap.has(val)) valMap.set(val, new Set());
+        valMap.get(val).add(p);
+      }
+    });
+    if (parts.length === 1 && !/[_\s-]/.test(s)) {
+      const m = s.match(/^([a-z]+)([ivxlcdm]{2,})$/);
+      if (m && isValidRoman(m[2])) {
+        const p = m[2], val = romanToNumber(p), i = 1;
+        const context = [m[1]];
+        const ctxChars = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
+        if (ctxChars < 3) return;
+        const key = JSON.stringify(context) + '|' + i;
+        if (!seriesMap.has(key)) seriesMap.set(key, new Map());
+        const valMap = seriesMap.get(key);
+        if (!valMap.has(val)) valMap.set(val, new Set());
+        valMap.get(val).add(p);
+      }
+    }
+  });
+  const result = new Map();
+  for (const [key, valMap] of seriesMap) {
+    if (valMap.size >= 2) {
+      const tokens = new Set();
+      for (const ts of valMap.values()) {
+        for (const t of ts) tokens.add(t);
+      }
+      result.set(key, tokens);
+    }
+  }
+  return result;
+}
+
+function detectHexValues(items) {
+  const seriesMap = new Map();
+  items.forEach(item => {
+    const s = String(item).toLowerCase();
+    const parts = s.split(/[_\s-]+/).filter(Boolean);
+    parts.forEach((p, i) => {
+      if (/^[0-9a-f]+$/.test(p) && /[a-f]/.test(p)) {
+        const val = parseInt(p, 16);
+        const context = [...parts.slice(0, i), ...parts.slice(i + 1)];
+        const ctxChars = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
+        if (ctxChars < 3) return;
+        const key = JSON.stringify(context) + '|' + i;
+        if (!seriesMap.has(key)) seriesMap.set(key, new Map());
+        const valMap = seriesMap.get(key);
+        if (!valMap.has(val)) valMap.set(val, new Set());
+        valMap.get(val).add(p);
+      }
+    });
+    if (parts.length === 1 && !/[_\s-]/.test(s)) {
+      const m = s.match(/^([a-z]+)([0-9a-f]{2,})$/);
+      if (m && /[a-f]/.test(m[2])) {
+        const p = m[2], val = parseInt(p, 16), i = 1;
+        const context = [m[1]];
+        const ctxChars = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
+        if (ctxChars < 3) return;
+        const key = JSON.stringify(context) + '|' + i;
+        if (!seriesMap.has(key)) seriesMap.set(key, new Map());
+        const valMap = seriesMap.get(key);
+        if (!valMap.has(val)) valMap.set(val, new Set());
+        valMap.get(val).add(p);
+      }
+    }
+  });
+  const result = new Map();
+  for (const [key, valMap] of seriesMap) {
+    if (valMap.size >= 2) {
+      const tokens = new Set();
+      for (const ts of valMap.values()) {
+        for (const t of ts) tokens.add(t);
+      }
+      result.set(key, tokens);
+    }
+  }
+
+  items.forEach(item => {
+    const s = String(item).toLowerCase();
+    const parts = s.split(/[_\s-]+/).filter(Boolean);
+    parts.forEach((p, i) => {
+      if (/^\d+$/.test(p)) {
+        const context = [...parts.slice(0, i), ...parts.slice(i + 1)];
+        const ctxChars = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
+        if (ctxChars < 3) return;
+        const key = JSON.stringify(context) + '|' + i;
+        if (result.has(key)) {
+          result.get(key).add(p);
+        }
+      }
+    });
+    if (parts.length === 1 && !/[_\s-]/.test(s)) {
+      const m = s.match(/^([a-z]+)(\d{2,})$/);
+      if (m) {
+        const p = m[2], i = 1;
+        const context = [m[1]];
+        const ctxChars = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
+        if (ctxChars >= 3) {
+          const key = JSON.stringify(context) + '|' + i;
+          if (result.has(key)) {
+            result.get(key).add(p);
+          }
+        }
+      }
+    }
+  });
+
+  return result;
+}
+
+export function createNaturalCompare(items) {
+  const romanMap = detectRomanValues(items);
+  const hexMap = detectHexValues(items);
+  const cache = new Map();
+
+  function prepare(s) {
+    const cached = cache.get(s);
+    if (cached) return cached;
+    const tokens = tokenize(s, romanMap, hexMap);
+    const firstNum = tokens.findIndex(t => t.type === 'num');
+    const pattern = firstNum >= 0
+      ? tokens.slice(0, firstNum).filter(t => t.type === 'text').map(t => t.val).join('')
+      : tokens.map(t => t.val).join('');
+    const result = { tokens, pattern };
+    cache.set(s, result);
+    return result;
+  }
+
+  const compare = function compare(a, b) {
+    const pA = prepare(a);
+    const pB = prepare(b);
+
+    const aAllNum = pA.tokens.every(t => t.type === 'num');
+    const bAllNum = pB.tokens.every(t => t.type === 'num');
+
+    if (aAllNum && bAllNum) {
+      const aT = pA.tokens, bT = pB.tokens;
+      if (!aT.some(t => t.isRoman) && !bT.some(t => t.isRoman) && !aT.some(t => t.isHex) && !bT.some(t => t.isHex)) {
+        const aDigitStr = aT.map(t => String(t.val)).join('');
+        const bDigitStr = bT.map(t => String(t.val)).join('');
+        const aTrim = aDigitStr.replace(/^0+/, '') || '0';
+        const bTrim = bDigitStr.replace(/^0+/, '') || '0';
+        const lenDiff = aTrim.length - bTrim.length;
+        if (lenDiff !== 0) return lenDiff;
+        const strDiff = aTrim.localeCompare(bTrim);
+        if (strDiff !== 0) return strDiff;
+      }
+    }
+
+    const patternDiff = pA.pattern.localeCompare(pB.pattern);
+    if (patternDiff !== 0) return patternDiff;
+
+    const aTokens = pA.tokens;
+    const bTokens = pB.tokens;
+    for (let i = 0; i < Math.max(aTokens.length, bTokens.length); i++) {
+      const tA = aTokens[i];
+      const tB = bTokens[i];
+      if (tA === undefined) return -1;
+      if (tB === undefined) return 1;
+
+      if (tA.type === 'num' && tB.type === 'num') {
+        const diff = tA.val - tB.val;
+        if (diff !== 0) return diff;
+      } else if (tA.type === 'text' && tB.type === 'text') {
+        const diff = tA.val.localeCompare(tB.val);
+        if (diff !== 0) return diff;
+      } else {
+        return tA.type === 'num' ? -1 : 1;
+      }
+    }
+    return 0;
+  };
+
+  compare.getStem = function(name) {
+    return prepare(name).tokens.filter(t => t.type === 'text').map(t => t.val).join('');
+  };
+
+  return compare;
+}
+
+export function naturalCompare(a, b) {
+  return createNaturalCompare([a, b])(a, b);
+}
+
 //Uncanonicalize the nation name
 export function uncanonicalizeName(name) {
   return name.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());

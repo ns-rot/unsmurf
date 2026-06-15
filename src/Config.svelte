@@ -158,6 +158,16 @@
               >Show puppet identification source</span
             >
           </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              bind:checked={$settingsStore.useNaturalSort}
+              class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
+            />
+            <span class="text-gray-700 dark:text-gray-200 font-medium"
+              >Natural sorting</span
+            >
+          </label>
         </div>
       </div>
 

@@ -19,6 +19,7 @@ const defaultSettings = {
   midnightMode: false,
   showRarityBars: false,
   showSource: false,
+  useNaturalSort: true,
 };
 
 const validOptions = {

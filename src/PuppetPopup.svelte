@@ -1,7 +1,7 @@
 <script>
   import { onMount, tick } from "svelte";
   import { isNationCurrent, countActivePuppets, findPuppetmaster, puppetMasterCache } from "./sheetFetch.js";
-  import { canonicalizeName } from "./settingsUtils.js";
+  import { canonicalizeName, createNaturalCompare } from "./settingsUtils.js";
   import { getNationLink } from "./dataUtils.js";
   import { settingsStore } from "./settingsStore.js";
 
@@ -52,26 +52,32 @@
     sortMode = (sortMode + 1) % 3;
   }
 
+  let naturalCmp = null;
+  $: naturalCmp = $settingsStore.useNaturalSort ? createNaturalCompare(puppetList) : null;
+
   // Sort puppets
-  $: sortedPuppetList = [...puppetList].sort((a, b) => {
-    if (sortMode === 1) {
-      // Active First
-      const aActive = isNationCurrent(a);
-      const bActive = isNationCurrent(b);
-      if (aActive !== bActive) {
-        return aActive ? -1 : 1;
+  $: sortedPuppetList = (() => {
+    const cmp = naturalCmp;
+    return [...puppetList].sort((a, b) => {
+      if (sortMode === 1) {
+        // Active First
+        const aActive = isNationCurrent(a);
+        const bActive = isNationCurrent(b);
+        if (aActive !== bActive) {
+          return aActive ? -1 : 1;
+        }
+      } else if (sortMode === 2) {
+        // CTE First
+        const aActive = isNationCurrent(a);
+        const bActive = isNationCurrent(b);
+        if (aActive !== bActive) {
+          return aActive ? 1 : -1;
+        }
       }
-    } else if (sortMode === 2) {
-      // CTE First
-      const aActive = isNationCurrent(a);
-      const bActive = isNationCurrent(b);
-      if (aActive !== bActive) {
-        return aActive ? 1 : -1;
-      }
-    }
-    // Default / Tie-breaker: Alphabetical
-    return a.localeCompare(b);
-  });
+      // Default / Tie-breaker
+      return cmp ? cmp(a, b) : a.localeCompare(b);
+    });
+  })();
 
   // Count active (non-CTE) puppets
   $: activePuppetCount = countActivePuppets(puppetList);
@@ -105,6 +111,22 @@
   $: seekSections = (() => {
     if (sortedPuppetList.length === 0 || !containerHeight) return [];
 
+    function ch1(s) {
+      if (naturalCmp) {
+        const stem = naturalCmp.getStem(s);
+        return stem ? stem.charAt(0).toUpperCase() : s.charAt(0).toUpperCase();
+      }
+      return s.charAt(0).toUpperCase();
+    }
+
+    function ch2(s) {
+      if (naturalCmp) {
+        const stem = naturalCmp.getStem(s);
+        return stem.length > 1 ? stem.charAt(1).toUpperCase() : "";
+      }
+      return s.length > 1 ? s.charAt(1).toUpperCase() : "";
+    }
+
     const availableHeight = containerHeight - 40;
     const LABEL_HEIGHT = 14;
     const maxTicks = Math.floor(availableHeight / LABEL_HEIGHT);
@@ -125,7 +147,7 @@
       const item = sortedPuppetList[j];
       if (!item) continue;
       const g = getGroup(item, sortMode);
-      const c = item.charAt(0).toUpperCase();
+      const c = ch1(item);
       const key = g + "|" + c;
       headerCounts.set(key, (headerCounts.get(key) || 0) + 1);
     }
@@ -163,11 +185,11 @@
       const currentGroup = getGroup(p, sortMode);
       const prevGroup = getGroup(prevP, sortMode);
 
-      const currentChar1 = p.charAt(0).toUpperCase();
-      const prevChar1 = sortedPuppetList[sectionStart].charAt(0).toUpperCase();
+      const currentChar1 = ch1(p);
+      const prevChar1 = ch1(sortedPuppetList[sectionStart]);
 
-      const currentChar2 = p.length > 1 ? p.charAt(1).toUpperCase() : "";
-      const prevChar2 = prevP.length > 1 ? prevP.charAt(1).toUpperCase() : "";
+      const currentChar2 = ch2(p);
+      const prevChar2 = ch2(prevP);
 
       const currentCount = i - sectionStart;
       let shouldBreak = false;
@@ -187,9 +209,8 @@
           for (let k = i; k < totalItems; k++) {
             const nextP = sortedPuppetList[k];
             const nextGroup = getGroup(nextP, sortMode);
-            const nextChar1 = nextP.charAt(0).toUpperCase();
-            const nextChar2 =
-              nextP.length > 1 ? nextP.charAt(1).toUpperCase() : "";
+            const nextChar1 = ch1(nextP);
+            const nextChar2 = ch2(nextP);
 
             if (nextGroup !== currentGroup || nextChar1 !== currentChar1) break;
             if (nextChar2 !== currentChar2) break;
@@ -205,12 +226,11 @@
 
       if (shouldBreak) {
         const startP = sortedPuppetList[sectionStart];
-        const startChar1 = startP.charAt(0).toUpperCase();
+        const startChar1 = ch1(startP);
         let label = startChar1;
 
         if (lastChar1 === startChar1) {
-          const startChar2 =
-            startP.length > 1 ? startP.charAt(1).toUpperCase() : "";
+          const startChar2 = ch2(startP);
           label = startChar1 + startChar2;
         }
 
@@ -229,11 +249,10 @@
     }
 
     const startP = sortedPuppetList[sectionStart];
-    const startChar1 = startP.charAt(0).toUpperCase();
+    const startChar1 = ch1(startP);
     let label = startChar1;
     if (lastChar1 === startChar1) {
-      const startChar2 =
-        startP.length > 1 ? startP.charAt(1).toUpperCase() : "";
+      const startChar2 = ch2(startP);
       label = startChar1 + startChar2;
     }
 

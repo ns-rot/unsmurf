@@ -1,6 +1,7 @@
 <script>
   import { listPuppets, isNationCurrent, countActivePuppets } from './sheetFetch.js';
-  import { uncanonicalizeName, canonicalizeName } from './settingsUtils.js';
+  import { uncanonicalizeName, canonicalizeName, createNaturalCompare } from './settingsUtils.js';
+  import { settingsStore } from './settingsStore.js';
 
   export let masterName = "";
   export let onBack;
@@ -12,9 +13,13 @@
   $: puppets = listPuppets(masterName);
   $: activeCount = countActivePuppets(puppets);
 
-  $: filteredPuppets = puppets
+  $: filteredBase = puppets
     .filter(p => p.toLowerCase().includes(searchQuery.toLowerCase().replace(/\s+/g, '_')))
     .filter(p => !activeOnly || isNationCurrent(p));
+
+  $: filteredPuppets = $settingsStore.useNaturalSort
+    ? [...filteredBase].sort(createNaturalCompare(filteredBase))
+    : [...filteredBase].sort((a, b) => a.localeCompare(b));
 </script>
 
 <div class="space-y-6">
