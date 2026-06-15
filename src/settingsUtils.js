@@ -149,7 +149,7 @@ function tokenize(s, romanMap, hexMap, numericMap) {
     });
   }
   if (romanMap) {
-    const match = lower.match(/^([a-z]+)([ivxlcdm]{2,})$/);
+    const match = lower.match(/^([a-z]+)([ivxlcdm]+)$/);
     if (match) {
       const stem = match[1];
       const ctxChars = stem.replace(/[^a-z]/g, '').length;
@@ -166,7 +166,7 @@ function tokenize(s, romanMap, hexMap, numericMap) {
     }
   }
   if (hexMap) {
-    const match = lower.match(/^([a-z]+)([0-9a-f]{2,})$/);
+    const match = lower.match(/^([a-z]+)([0-9a-f]+)$/);
     if (match) {
       const stem = match[1];
       const ctxChars = stem.replace(/[^a-z]/g, '').length;
@@ -235,6 +235,37 @@ function detectRomanValues(items) {
       result.set(key, tokens);
     }
   }
+
+  items.forEach(item => {
+    const s = String(item).toLowerCase();
+    const parts = s.split(/[_\s-]+/).filter(Boolean);
+    parts.forEach((p, i) => {
+      if (/^[ivxlcdm]+$/.test(p)) {
+        const context = [...parts.slice(0, i), ...parts.slice(i + 1)];
+        const ctxChars = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
+        if (ctxChars < 3) return;
+        const key = JSON.stringify(context) + '|' + i;
+        if (result.has(key)) {
+          result.get(key).add(p);
+        }
+      }
+    });
+    if (parts.length === 1 && !/[_\s-]/.test(s)) {
+      const m = s.match(/^([a-z]+)([ivxlcdm]+)$/);
+      if (m) {
+        const p = m[2], i = 1;
+        const context = [m[1]];
+        const ctxChars = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
+        if (ctxChars >= 3) {
+          const key = JSON.stringify(context) + '|' + i;
+          if (result.has(key)) {
+            result.get(key).add(p);
+          }
+        }
+      }
+    }
+  });
+
   return result;
 }
 
@@ -299,6 +330,36 @@ function detectHexValues(items) {
     if (parts.length === 1 && !/[_\s-]/.test(s)) {
       const m = s.match(/^([a-z]+)(\d{2,})$/);
       if (m) {
+        const p = m[2], i = 1;
+        const context = [m[1]];
+        const ctxChars = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
+        if (ctxChars >= 3) {
+          const key = JSON.stringify(context) + '|' + i;
+          if (result.has(key)) {
+            result.get(key).add(p);
+          }
+        }
+      }
+    }
+  });
+
+  items.forEach(item => {
+    const s = String(item).toLowerCase();
+    const parts = s.split(/[_\s-]+/).filter(Boolean);
+    parts.forEach((p, i) => {
+      if (/^[0-9a-f]+$/.test(p) && /[a-f]/.test(p)) {
+        const context = [...parts.slice(0, i), ...parts.slice(i + 1)];
+        const ctxChars = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
+        if (ctxChars < 3) return;
+        const key = JSON.stringify(context) + '|' + i;
+        if (result.has(key)) {
+          result.get(key).add(p);
+        }
+      }
+    });
+    if (parts.length === 1 && !/[_\s-]/.test(s)) {
+      const m = s.match(/^([a-z]+)([0-9a-f]+)$/);
+      if (m && /[a-f]/.test(m[2])) {
         const p = m[2], i = 1;
         const context = [m[1]];
         const ctxChars = context.reduce((sum, c) => sum + c.replace(/[^a-z]/g, '').length, 0);
