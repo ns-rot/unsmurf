@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount, tick } from "svelte";
   import { settingsStore } from "./settingsStore.js";
   import LinkSelect from "./LinkSelect.svelte";
   import { fetchSheets } from "./sheetFetch.js";
@@ -16,6 +16,51 @@
 
   let clearing = false;
   let cleared = false;
+  let settingsScrollContainer;
+  let observedSettingsScrollContainer;
+  let settingsResizeObserver;
+  let hasSettingsContentBelow = false;
+
+  function updateSettingsScrollIndicator() {
+    if (!settingsScrollContainer) {
+      hasSettingsContentBelow = false;
+      return;
+    }
+
+    const { scrollTop, scrollHeight, clientHeight } = settingsScrollContainer;
+    hasSettingsContentBelow = scrollTop + clientHeight < scrollHeight - 2;
+  }
+
+  $: if (showConfig && $settingsStore) {
+    tick().then(updateSettingsScrollIndicator);
+  }
+
+  $: if (settingsResizeObserver && settingsScrollContainer !== observedSettingsScrollContainer) {
+    if (observedSettingsScrollContainer) {
+      settingsResizeObserver.unobserve(observedSettingsScrollContainer);
+    }
+
+    if (settingsScrollContainer) {
+      settingsResizeObserver.observe(settingsScrollContainer);
+    }
+
+    observedSettingsScrollContainer = settingsScrollContainer;
+  }
+
+  onMount(() => {
+    const handleResize = () => updateSettingsScrollIndicator();
+
+    window.addEventListener("resize", handleResize);
+
+    if (typeof ResizeObserver !== "undefined") {
+      settingsResizeObserver = new ResizeObserver(updateSettingsScrollIndicator);
+    }
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      settingsResizeObserver?.disconnect();
+    };
+  });
 
   async function clearCache() {
     clearing = true;
@@ -57,7 +102,11 @@
         Settings
       </h2>
 
-      <div class="flex-1 overflow-y-auto min-h-0 lg:columns-2 lg:gap-x-8">
+      <div
+        bind:this={settingsScrollContainer}
+        on:scroll={updateSettingsScrollIndicator}
+        class="flex-1 overflow-y-auto min-h-0 lg:columns-2 lg:gap-x-8"
+      >
           <!-- Section: Card Trades -->
       <div class="mb-10 break-inside-avoid">
         <h3
@@ -436,6 +485,11 @@
         </div>
       </div>
       </div>
+
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-x-0 bottom-0 h-24 rounded-b-2xl bg-gradient-to-t from-white via-white/80 to-transparent transition-opacity duration-200 ease-out dark:from-gray-800 dark:via-gray-800/80 {hasSettingsContentBelow ? 'opacity-100' : 'opacity-0'}"
+      ></div>
     </div>
 
       <button
