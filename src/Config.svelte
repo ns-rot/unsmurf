@@ -92,7 +92,7 @@
     <div
       class="fixed inset-0 bg-gray-800 bg-opacity-50 dark:bg-black dark:bg-opacity-70 z-50 flex justify-center items-center backdrop-blur-sm transition-all"
     >
-      <div class="w-full max-w-2xl lg:max-w-6xl flex flex-col items-center gap-4 px-4 sm:px-0">
+      <div class="w-full max-w-2xl lg:max-w-6xl flex flex-col items-center gap-2 px-4 sm:px-0">
       <div
         class="settings-modal w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-2xl shadow-2xl p-6 relative max-h-[80dvh] flex flex-col overflow-clip border border-gray-100 dark:border-gray-700"
       >
@@ -453,7 +453,7 @@
       </div>
 
       <!-- Section: Data Management -->
-      <div class="mb-6 break-inside-avoid">
+      <div class="mb-3 break-inside-avoid">
         <h3
           class="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 ml-1 flex items-center gap-2"
         >
