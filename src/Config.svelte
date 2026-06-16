@@ -44,20 +44,22 @@
 </script>
 
 {#if showConfig}
-  <div
-    class="fixed inset-0 bg-gray-800 bg-opacity-50 dark:bg-black dark:bg-opacity-70 z-50 flex justify-center items-center backdrop-blur-sm transition-all"
-  >
     <div
-      class="settings-modal bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-2xl shadow-2xl p-6 max-w-2xl w-[90%] md:w-[60%] lg:w-[50%] relative max-h-[90dvh] overflow-y-auto border border-gray-100 dark:border-gray-700"
+      class="fixed inset-0 bg-gray-800 bg-opacity-50 dark:bg-black dark:bg-opacity-70 z-50 flex justify-center items-center backdrop-blur-sm transition-all"
     >
+      <div class="w-full max-w-2xl lg:max-w-6xl flex flex-col items-center gap-4 px-4 sm:px-0">
+      <div
+        class="settings-modal w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-2xl shadow-2xl p-6 relative max-h-[80dvh] flex flex-col overflow-clip border border-gray-100 dark:border-gray-700"
+      >
       <h2
-        class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200 dark:border-gray-700"
+        class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200 dark:border-gray-700 shrink-0"
       >
         Settings
       </h2>
 
-      <!-- Section: Card Trades -->
-      <div class="mb-10">
+      <div class="flex-1 overflow-y-auto min-h-0 lg:columns-2 lg:gap-x-8">
+          <!-- Section: Card Trades -->
+      <div class="mb-10 break-inside-avoid">
         <h3
           class="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 ml-1 flex items-center gap-2"
         >
@@ -183,7 +185,7 @@
       </div>
 
       <!-- Section: Puppetmasters -->
-      <div class="mb-10">
+      <div class="mb-10 break-inside-avoid">
         <h3
           class="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 ml-1 flex items-center gap-2"
         >
@@ -206,7 +208,7 @@
 
       <!-- Section: Visual Style -->
       <!-- Section: Visual Style -->
-      <div class="mb-10">
+      <div class="mb-10 break-inside-avoid">
         <h3
           class="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 ml-1 flex items-center gap-2"
         >
@@ -280,7 +282,7 @@
       </div>
 
       <!-- Section: Link Behavior -->
-      <div class="mb-10">
+      <div class="mb-10 break-inside-avoid">
         <h3
           class="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 ml-1 flex items-center gap-2"
         >
@@ -402,7 +404,7 @@
       </div>
 
       <!-- Section: Data Management -->
-      <div class="mb-6">
+      <div class="mb-6 break-inside-avoid">
         <h3
           class="text-base font-bold text-gray-800 dark:text-gray-200 mb-4 ml-1 flex items-center gap-2"
         >
@@ -433,18 +435,15 @@
           </div>
         </div>
       </div>
-
-      <!-- Footer Buttons -->
-      <div
-        class="flex justify-end mt-8 pt-6 border-t border-gray-200 dark:border-gray-700"
-      >
-        <button
-          on:click={saveSettings}
-          class="bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 font-bold py-3 px-8 rounded-full hover:bg-gray-900 dark:hover:bg-gray-100 focus:ring-4 focus:ring-gray-400 dark:focus:ring-gray-500 transition-all shadow-lg active:scale-95"
-        >
-          Confirm Changes
-        </button>
       </div>
+    </div>
+
+      <button
+        on:click={saveSettings}
+        class="self-end bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 font-bold py-3 px-8 rounded-full hover:bg-gray-900 dark:hover:bg-gray-100 focus:ring-4 focus:ring-gray-400 dark:focus:ring-gray-500 transition-all shadow-xl active:scale-95"
+      >
+        Confirm Changes
+      </button>
     </div>
   </div>
 {/if}
