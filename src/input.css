@@ -36,6 +36,10 @@
     @apply bg-black border-gray-800 !important;
   }
 
+  .midnight .settings-scroll-fade {
+    background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0.8), transparent) !important;
+  }
+
   .midnight table th {
     @apply bg-gray-800 border-none !important;
   }
