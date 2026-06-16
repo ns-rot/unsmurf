@@ -40,124 +40,148 @@ function alphaChars(parts) {
 
 /** Build a context key from surrounding words and position. */
 function contextKey(contextParts, index) {
-  return JSON.stringify(contextParts) + '|' + index;
+  return contextParts.join('|') + '|' + index;
 }
 
-// --- Two-pass context map builder ---
-
 /**
- * Build a Map of contextKey → Set{rawToken} for tokens matching a numeric type.
+ * Detect Roman, hex, and numeric series in a single 2-pass scan.
  *
- * First pass: find "confirmed" series (same context+position with >=2 distinct numeric values).
- * Second pass: at confirmed positions, add any token from any item that would fit the type.
+ * Pass 1: find "confirmed" series (same context+position with >=2 distinct numeric values)
+ * for all three types simultaneously.  Pass 2: at confirmed positions, add permissive matches.
  *
- * @param {string[]} items - all names being sorted
- * @param {object} opts
- * @param {(w:string)=>boolean} opts.matches    - first-pass filter (stringent)
- * @param {(w:string)=>boolean} opts.catches    - second-pass filter (permissive)
- * @param {(w:string)=>number}  opts.toValue    - convert token to its numeric value
- * @param {(w:string, key:string)=>boolean} [opts.stemCheck] - optional, for concat names
+ * Returns { romanMap, hexMap, numericMap } — each is Map<contextKey, Set<rawToken>>.
  */
-function detectSeries(items, opts) {
-  const { matches, catches, toValue, matchConcat, catchConcat } = opts;
-  const seriesMap = new Map();
+function detectAllSeries(items) {
+  const romanSeries = new Map(), hexSeries = new Map(), numericSeries = new Map();
 
-  // --- First pass: find confirmed series ---
-  for (const item of items) {
+  // Pre-split to avoid redundant work across passes and types
+  const prepped = items.map(item => {
     const s = String(item).toLowerCase();
     const parts = s.split(SEP).filter(Boolean);
+    const alphaPerPart = parts.map(p => p.replace(/[^a-z]/g, '').length);
+    const totalAlpha = alphaPerPart.reduce((a, b) => a + b, 0);
+    return { s, parts, alphaPerPart, totalAlpha };
+  });
+
+  // ── Pass 1: stringent matches for all 3 types ──
+  for (const { s, parts, alphaPerPart, totalAlpha } of prepped) {
     for (let i = 0; i < parts.length; i++) {
       const w = parts[i];
-      if (!matches(w)) continue;
+      if (totalAlpha - alphaPerPart[i] < 3) continue;
       const context = [...parts.slice(0, i), ...parts.slice(i + 1)];
-      if (alphaChars(context) < 3) continue;
       const key = contextKey(context, i);
-      if (!seriesMap.has(key)) seriesMap.set(key, new Map());
-      const valMap = seriesMap.get(key);
-      const val = toValue(w);
-      if (!valMap.has(val)) valMap.set(val, new Set());
-      valMap.get(val).add(w);
+
+      if (w.length >= 2 && isValidRoman(w)) {
+        const val = romanToNumber(w);
+        if (!romanSeries.has(key)) romanSeries.set(key, new Map());
+        const m = romanSeries.get(key);
+        if (!m.has(val)) m.set(val, new Set());
+        m.get(val).add(w);
+      }
+      if (w.length >= 2 && HEX_WORD_RE.test(w) && HEX_HAS_LETTER.test(w)) {
+        const val = parseInt(w, 16);
+        if (!hexSeries.has(key)) hexSeries.set(key, new Map());
+        const m = hexSeries.get(key);
+        if (!m.has(val)) m.set(val, new Set());
+        m.get(val).add(w);
+      }
+      if (DIGIT_RE.test(w)) {
+        const val = parseInt(w, 10);
+        if (!numericSeries.has(key)) numericSeries.set(key, new Map());
+        const m = numericSeries.get(key);
+        if (!m.has(val)) m.set(val, new Set());
+        m.get(val).add(w);
+      }
     }
-    // Concat names
-    if (matchConcat && parts.length === 1) {
-      const r = matchConcat(s);
-      if (r) {
-        if (alphaChars([r.stem]) < 3) continue;
-        const key = contextKey([r.stem], 1);
-        if (!seriesMap.has(key)) seriesMap.set(key, new Map());
-        const valMap = seriesMap.get(key);
-        const val = toValue(r.suffix);
-        if (!valMap.has(val)) valMap.set(val, new Set());
-        valMap.get(val).add(r.suffix);
+
+    // Concat names (single-part)
+    if (parts.length === 1) {
+      const rm = s.match(/^([a-z]+)([ivxlcdm]{2,})$/);
+      if (rm && isValidRoman(rm[2]) && alphaChars([rm[1]]) >= 3) {
+        const key = contextKey([rm[1]], 1);
+        const val = romanToNumber(rm[2]);
+        if (!romanSeries.has(key)) romanSeries.set(key, new Map());
+        const m = romanSeries.get(key);
+        if (!m.has(val)) m.set(val, new Set());
+        m.get(val).add(rm[2]);
+      }
+      const hm = s.match(/^([a-z]+)([0-9a-f]{2,})$/);
+      if (hm && HEX_HAS_LETTER.test(hm[2]) && alphaChars([hm[1]]) >= 3) {
+        const key = contextKey([hm[1]], 1);
+        const val = parseInt(hm[2], 16);
+        if (!hexSeries.has(key)) hexSeries.set(key, new Map());
+        const m = hexSeries.get(key);
+        if (!m.has(val)) m.set(val, new Set());
+        m.get(val).add(hm[2]);
+      }
+      const nm = s.match(/^([a-z]{3,})(\d+)$/);
+      if (nm && alphaChars([nm[1]]) >= 3) {
+        const key = contextKey([nm[1]], 1);
+        const val = parseInt(nm[2], 10);
+        if (!numericSeries.has(key)) numericSeries.set(key, new Map());
+        const m = numericSeries.get(key);
+        if (!m.has(val)) m.set(val, new Set());
+        m.get(val).add(nm[2]);
       }
     }
   }
 
   // Keep only groups with >=2 distinct numeric values
-  const result = new Map();
-  for (const [key, valMap] of seriesMap) {
-    if (valMap.size >= 2) {
-      const tokens = new Set();
-      for (const ts of valMap.values()) for (const t of ts) tokens.add(t);
-      result.set(key, tokens);
+  function filterMap(seriesMap) {
+    const result = new Map();
+    for (const [key, valMap] of seriesMap) {
+      if (valMap.size >= 2) {
+        const tokens = new Set();
+        for (const ts of valMap.values()) for (const t of ts) tokens.add(t);
+        result.set(key, tokens);
+      }
     }
+    return result;
   }
+  const romanMap = filterMap(romanSeries);
+  const hexMap = filterMap(hexSeries);
+  const numericMap = filterMap(numericSeries);
 
-  // --- Second pass: add permissive matches at confirmed positions ---
-  for (const item of items) {
-    const s = String(item).toLowerCase();
-    const parts = s.split(SEP).filter(Boolean);
+  // ── Pass 2: permissive matches at confirmed positions ──
+  for (const { s, parts, alphaPerPart, totalAlpha } of prepped) {
     for (let i = 0; i < parts.length; i++) {
       const w = parts[i];
-      if (!catches(w)) continue;
+      if (totalAlpha - alphaPerPart[i] < 3) continue;
       const context = [...parts.slice(0, i), ...parts.slice(i + 1)];
-      if (alphaChars(context) < 3) continue;
       const key = contextKey(context, i);
-      if (result.has(key)) result.get(key).add(w);
+
+      if (romanMap.has(key) && ROMAN_WORD_RE.test(w)) romanMap.get(key).add(w);
+      if (hexMap.has(key) && ((HEX_WORD_RE.test(w) && HEX_HAS_LETTER.test(w)) || DIGIT_RE.test(w))) hexMap.get(key).add(w);
+      if (numericMap.has(key) && DIGIT_RE.test(w)) numericMap.get(key).add(w);
     }
-    // Concat names (second pass)
-    if (catchConcat && parts.length === 1) {
-      const r = catchConcat(s);
-      if (r) {
-        if (alphaChars([r.stem]) < 3) continue;
-        const key = contextKey([r.stem], 1);
-        if (result.has(key)) result.get(key).add(r.suffix);
+
+    // Concat second pass
+    if (parts.length === 1) {
+      const rc = s.match(CONCAT_ROMAN_RE);
+      if (rc && alphaChars([rc[1]]) >= 3) {
+        const key = contextKey([rc[1]], 1);
+        if (romanMap.has(key)) romanMap.get(key).add(rc[2]);
+      }
+      const dc = s.match(/^([a-z]+)(\d{2,})$/);
+      if (dc && alphaChars([dc[1]]) >= 3) {
+        const key = contextKey([dc[1]], 1);
+        if (hexMap.has(key)) hexMap.get(key).add(dc[2]);
+      }
+      const hc = s.match(CONCAT_HEX_RE);
+      if (hc && HEX_HAS_LETTER.test(hc[2]) && alphaChars([hc[1]]) >= 3) {
+        const key = contextKey([hc[1]], 1);
+        if (hexMap.has(key)) hexMap.get(key).add(hc[2]);
+      }
+      const nc = s.match(/^([a-z]{3,})(\d+)$/);
+      if (nc && alphaChars([nc[1]]) >= 3) {
+        const key = contextKey([nc[1]], 1);
+        if (numericMap.has(key)) numericMap.get(key).add(nc[2]);
       }
     }
   }
 
-  return result;
+  return { romanMap, hexMap, numericMap };
 }
-
-// --- Detection configs ---
-
-const romanOpts = {
-  matches:  (w) => w.length >= 2 && isValidRoman(w),
-  catches:  (w) => ROMAN_WORD_RE.test(w),
-  toValue:  (w) => romanToNumber(w),
-  matchConcat: (s) => { const m = s.match(/^([a-z]+)([ivxlcdm]{2,})$/); return m && isValidRoman(m[2]) ? { stem: m[1], suffix: m[2] } : null; },
-  catchConcat: (s) => { const m = s.match(CONCAT_ROMAN_RE); return m ? { stem: m[1], suffix: m[2] } : null; },
-};
-const hexOpts = {
-  matches:  (w) => w.length >= 2 && HEX_WORD_RE.test(w) && HEX_HAS_LETTER.test(w),
-  catches:  (w) => (HEX_WORD_RE.test(w) && HEX_HAS_LETTER.test(w)) || DIGIT_RE.test(w),
-  toValue:  (w) => parseInt(w, 16),
-  matchConcat: (s) => { const m = s.match(/^([a-z]+)([0-9a-f]{2,})$/); return m && HEX_HAS_LETTER.test(m[2]) ? { stem: m[1], suffix: m[2] } : null; },
-  catchConcat: (s) => {
-    const dm = s.match(/^([a-z]+)(\d{2,})$/);
-    if (dm) return { stem: dm[1], suffix: dm[2] };
-    const hm = s.match(CONCAT_HEX_RE);
-    if (hm && HEX_HAS_LETTER.test(hm[2])) return { stem: hm[1], suffix: hm[2] };
-    return null;
-  },
-};
-const numericOpts = {
-  matches:  (w) => DIGIT_RE.test(w),
-  catches:  (w) => DIGIT_RE.test(w),
-  toValue:  (w) => parseInt(w, 10),
-  matchConcat: (s) => { const m = s.match(/^([a-z]{3,})(\d+)$/); return m ? { stem: m[1], suffix: m[2] } : null; },
-  catchConcat: (s) => { const m = s.match(/^([a-z]{3,})(\d+)$/); return m ? { stem: m[1], suffix: m[2] } : null; },
-};
 
 // --- Tokenize ---
 
@@ -235,9 +259,11 @@ function tokenizeWord(w) {
 
 function tokenize(name, romanMap, hexMap, numericMap) {
   const lower = String(name).toLowerCase();
-  const parts = lower.split(SEP).filter(Boolean);
+  const raw = lower.split(/([_\s-]+)/).filter(Boolean);
+  const parts = raw.filter((_, i) => i % 2 === 0);
+  const seps = raw.filter((_, i) => i % 2 === 1);
 
-  if (parts.length === 1 && !SEP.test(lower)) {
+  if (parts.length === 1 && seps.length === 0) {
     return tokenizeConcat(parts[0], romanMap, hexMap, numericMap);
   }
 
@@ -249,7 +275,7 @@ function tokenize(name, romanMap, hexMap, numericMap) {
     if (romanMap) {
       const vs = romanMap.get(key);
       if (vs && vs.has(w)) {
-        return [{ type: 'num', val: romanToNumber(w), isRoman: true }];
+        return [{ type: 'num', val: romanToNumber(w), isRoman: true }, ...(i < seps.length ? [{ type: 'text', val: seps[i] }] : [])];
       }
     }
 
@@ -257,26 +283,25 @@ function tokenize(name, romanMap, hexMap, numericMap) {
     if (hexMap) {
       const vs = hexMap.get(key);
       if (vs && vs.has(w)) {
-        return [{ type: 'num', val: parseInt(w, 16), isHex: true }];
+        return [{ type: 'num', val: parseInt(w, 16), isHex: true }, ...(i < seps.length ? [{ type: 'text', val: seps[i] }] : [])];
       }
     }
 
     // Numeric inverted check
     if (numericMap && DIGIT_RE.test(w)) {
       const vs = numericMap.get(key);
-      if (!(vs && vs.has(w))) return [{ type: 'text', val: w }];
+      if (!(vs && vs.has(w))) return [{ type: 'text', val: w }, ...(i < seps.length ? [{ type: 'text', val: seps[i] }] : [])];
     }
 
-    return tokenizeWord(w);
+    const wordTokens = tokenizeWord(w);
+    return [...wordTokens, ...(i < seps.length ? [{ type: 'text', val: seps[i] }] : [])];
   });
 }
 
 // --- Compare ---
 
 export function createNaturalCompare(items) {
-  const romanMap   = detectSeries(items, romanOpts);
-  const hexMap     = detectSeries(items, hexOpts);
-  const numericMap = detectSeries(items, numericOpts);
+  const { romanMap, hexMap, numericMap } = detectAllSeries(items);
   const cache = new Map();
 
   function prepare(s) {
@@ -340,4 +365,25 @@ export function createNaturalCompare(items) {
 
 export function naturalCompare(a, b) {
   return createNaturalCompare([a, b])(a, b);
+}
+
+/**
+ * Classic natural sort — splits strings by digit boundaries and compares
+ * numerically where possible, lexicographically elsewhere.
+ */
+export function classicNaturalCompare(a, b) {
+  const split = (s) => (String(s).toLowerCase().match(/\d+|\D+/g) || []);
+  const aParts = split(a), bParts = split(b);
+  for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+    if (aParts[i] === undefined) return -1;
+    if (bParts[i] === undefined) return 1;
+    if (/\d/.test(aParts[i]) && /\d/.test(bParts[i])) {
+      const d = parseInt(aParts[i], 10) - parseInt(bParts[i], 10);
+      if (d !== 0) return d;
+    } else {
+      const d = aParts[i].localeCompare(bParts[i]);
+      if (d !== 0) return d;
+    }
+  }
+  return 0;
 }

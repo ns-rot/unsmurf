@@ -210,7 +210,7 @@ export function makeGiftColumns(role) {
  * @param {string} role - The role key ('buyer' or 'seller').
  * @param {function} filterCondition - A function to filter records (e.g., price !== 0 for trades, price === 0 for gifts).
  * @param {boolean} includePrice - Whether to include the price column (only applies to trades).
- * @param {boolean} showRelativeDate - Whether to show relative date by default.
+ * @param {string} dateFormat - "absolute" or "relative".
  * @returns {Array} - An array of processed rows for the table.
  */
 export function makeRows(
@@ -218,7 +218,7 @@ export function makeRows(
   role,
   filterCondition,
   includePrice,
-  showRelativeDate,
+  dateFormat,
   context
 ) {
   return records.filter(filterCondition).map((r) => {
@@ -291,9 +291,9 @@ export function makeRows(
 
     // Add the date column
     row.push({
-      value: `<span class="date-formatted ${showRelativeDate ? "hidden" : "block"
+      value: `<span class="date-formatted ${dateFormat === "relative" ? "hidden" : "block"
         }">${formatted}</span>
-                <span class="date-relative ${showRelativeDate ? "block" : "hidden"
+                <span class="date-relative ${dateFormat === "relative" ? "block" : "hidden"
         }">${relative}</span>`,
       class: "date-cell",
       onClick: toggleDateFormat, // Attach click handler for toggling
@@ -315,7 +315,7 @@ export function makeTradeRows(records, role, context) {
     role,
     (r) => r.price !== 0,
     true,
-    useSettings().showRelativeDate,
+    useSettings().dateFormat,
     context
   ); // Include price
 }
@@ -332,7 +332,7 @@ export function makeGiftRows(records, role, context) {
     role,
     (r) => r.price === 0,
     false,
-    useSettings().showRelativeDate,
+    useSettings().dateFormat,
     context
   ); // Exclude price
 }

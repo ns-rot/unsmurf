@@ -4,7 +4,7 @@ const defaultSettings = {
   section: "puppets",
   showPuppetmasters: true,
   showCTE: true,
-  showRelativeDate: false,
+  dateFormat: "absolute", // "absolute" | "relative"
   redEpics: true,
   rainbowLegs: true,
   linkTypeTallySent: "unsmurf",
@@ -19,12 +19,14 @@ const defaultSettings = {
   midnightMode: false,
   showRarityBars: false,
   showSource: false,
-  useNaturalSort: true,
+  sortMode: "context", // "classic" (alphabetic) | "natural" | "context" (contextual)
 };
 
 const validOptions = {
   section: ["puppets", "similar-name", "none"],
   theme: ["light", "system", "dark"],
+  sortMode: ["classic", "natural", "context"],
+  dateFormat: ["absolute", "relative"],
   linkTypeTallySent: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
   linkTypeTallyReceived: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
   linkTypeDetailedSent: ["nation", "trades", "buys", "sells", "unsmurf", "boneyard", "custom"],
@@ -62,10 +64,20 @@ function repairSettings(stored) {
 let plainSettings = { ...defaultSettings };
 try {
   const stored = JSON.parse(localStorage.getItem("unsmurfSettings"));
-  // Migrate legacy darkMode boolean to new theme tri-state
-  if (stored && typeof stored.darkMode === 'boolean' && !stored.theme) {
-    stored.theme = stored.darkMode ? 'dark' : 'light';
-    delete stored.darkMode;
+  // Migrate legacy settings
+  if (stored) {
+    if (typeof stored.darkMode === 'boolean' && !stored.theme) {
+      stored.theme = stored.darkMode ? 'dark' : 'light';
+      delete stored.darkMode;
+    }
+    if (typeof stored.useNaturalSort === 'boolean') {
+      stored.sortMode = stored.useNaturalSort ? 'context' : 'classic';
+      delete stored.useNaturalSort;
+    }
+    if (typeof stored.showRelativeDate === 'boolean') {
+      stored.dateFormat = stored.showRelativeDate ? 'relative' : 'absolute';
+      delete stored.showRelativeDate;
+    }
   }
   plainSettings = repairSettings(stored);
 } catch (e) {

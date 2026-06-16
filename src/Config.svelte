@@ -64,60 +64,91 @@
           <span class="w-1.5 h-6 bg-gray-400 dark:bg-gray-500 rounded-full"></span>
           Card Trades
         </h3>
-        <!-- Subheading: Grouping -->
-        <p
-          class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3 ml-4"
-        >
-          Grouping
-        </p>
-        <div
-          class="space-y-2 bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl mb-6"
-        >
-          <label class="flex items-center gap-3 cursor-pointer">
-            <input
-              type="radio"
-              name="section"
-              value="puppets"
-              bind:group={$settingsStore.section}
-              class="w-4 h-4 accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
-            />
-            <span class="text-gray-700 dark:text-gray-200 font-medium"
-              >Group records by known puppets</span
-            >
-          </label>
-          <label class="flex items-center gap-3 cursor-pointer">
-            <input
-              type="radio"
-              name="section"
-              value="similar-name"
-              bind:group={$settingsStore.section}
-              class="w-4 h-4 accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
-            />
-            <span class="text-gray-700 dark:text-gray-200 font-medium"
-              >Group records by similar name</span
-            >
-          </label>
-          <label class="flex items-center gap-3 cursor-pointer">
-            <input
-              type="radio"
-              name="section"
-              value="none"
-              bind:group={$settingsStore.section}
-              class="w-4 h-4 accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
-            />
-            <span class="text-gray-700 dark:text-gray-200 font-medium"
-              >Do not group records</span
-            >
-          </label>
-        </div>
-
-        <!-- Subheading: Preferences -->
-        <p
-          class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3 ml-4"
-        >
-          Preferences
-        </p>
         <div class="space-y-3 bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl">
+          <div class="flex flex-col gap-1.5">
+          <p
+            class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 ml-1"
+          >
+            Group tally table nations
+          </p>
+        <div
+          class="toggle-track flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full w-full"
+        >
+          {#each ["puppets", "similar-name", "none"] as option}
+            <button
+              on:click={() =>
+                settingsStore.update((s) => ({ ...s, section: option }))}
+              class="flex-1 py-1.5 rounded-full text-[11px] font-bold uppercase transition-all {$settingsStore.section ===
+              option
+                ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow'
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}"
+            >
+              {option === "puppets"
+                ? "Puppets"
+                : option === "similar-name"
+                  ? "Similar Name"
+                  : "None"}
+            </button>
+          {/each}
+        </div>
+        </div>
+          <div class="flex flex-col gap-1.5">
+            <p
+              class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 ml-1"
+            >
+              Default date display
+            </p>
+            <div
+              class="toggle-track flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full w-full"
+            >
+              {#each ["absolute", "relative"] as option}
+                <button
+                  on:click={() =>
+                    settingsStore.update((s) => ({ ...s, dateFormat: option }))}
+                  class="flex-1 py-1.5 rounded-full text-[11px] font-bold uppercase transition-all {$settingsStore.dateFormat ===
+                  option
+                    ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}"
+                >
+                  {option === "absolute" ? "Absolute" : "Relative"}
+                </button>
+              {/each}
+            </div>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <p
+              class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 ml-1"
+            >
+              Name sorting
+            </p>
+            <div
+              class="toggle-track flex items-center gap-1 p-1 bg-gray-200 dark:bg-gray-800 rounded-full w-full"
+            >
+              {#each ["classic", "natural", "context"] as option}
+                <button
+                  on:click={() =>
+                    settingsStore.update((s) => ({ ...s, sortMode: option }))}
+                  class="flex-1 py-1.5 rounded-full text-[11px] font-bold uppercase transition-all {$settingsStore.sortMode ===
+                  option
+                    ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}"
+                >
+                  {option === "classic"
+                    ? "Classic"
+                    : option === "natural"
+                      ? "Natural"
+                      : "Contextual"}
+                </button>
+              {/each}
+            </div>
+            <p class="text-xs text-gray-500 dark:text-gray-400 italic">
+              {$settingsStore.sortMode === "classic"
+                ? "Standard alphabetic sort"
+                : $settingsStore.sortMode === "natural"
+                  ? "Digit-aware natural sorting (Puppet 2 before Puppet 10)"
+                  : "More advanced sorting that also handles Roman, hex and ordinal numbers"}
+            </p>
+          </div>
           <label class="flex items-center gap-3 cursor-pointer">
             <input
               type="checkbox"
@@ -141,31 +172,11 @@
           <label class="flex items-center gap-3 cursor-pointer">
             <input
               type="checkbox"
-              bind:checked={$settingsStore.showRelativeDate}
-              class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
-            />
-            <span class="text-gray-700 dark:text-gray-200 font-medium"
-              >Show relative date by default</span
-            >
-          </label>
-          <label class="flex items-center gap-3 cursor-pointer">
-            <input
-              type="checkbox"
               bind:checked={$settingsStore.showSource}
               class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
             />
             <span class="text-gray-700 dark:text-gray-200 font-medium"
               >Show puppet identification source</span
-            >
-          </label>
-          <label class="flex items-center gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              bind:checked={$settingsStore.useNaturalSort}
-              class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
-            />
-            <span class="text-gray-700 dark:text-gray-200 font-medium"
-              >Natural sorting</span
             >
           </label>
         </div>
@@ -204,9 +215,9 @@
         </h3>
         <div class="space-y-4 bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl">
           <!-- Theme Tri-State Pill Toggle -->
-          <div>
+          <div class="flex flex-col gap-1.5">
             <p
-              class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3 ml-1"
+              class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 ml-1"
             >
               Theme
             </p>

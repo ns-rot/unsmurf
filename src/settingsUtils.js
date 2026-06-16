@@ -6,7 +6,7 @@ import Hypher from "hypher";
 import english from "hyphenation.en-us";
 import french from "hyphenation.fr";
 import german from "hyphenation.de";
-import { createNaturalCompare, naturalCompare } from './naturalSort.js';
+import { createNaturalCompare, naturalCompare, classicNaturalCompare } from './contextAwareSort.js';
 
 
 // Normalize names using constant time patterns
@@ -74,9 +74,8 @@ function romanToNumber(s) {
   return total;
 }
 
-// The natural sort implementation has moved to naturalSort.js
-// createNaturalCompare and naturalCompare are re-exported from there
-export { createNaturalCompare, naturalCompare } from './naturalSort.js';
+// createNaturalCompare and naturalCompare are re-exported from contextAwareSort.js
+export { createNaturalCompare, naturalCompare, classicNaturalCompare } from './contextAwareSort.js';
 
 //Uncanonicalize the nation name
 export function uncanonicalizeName(name) {

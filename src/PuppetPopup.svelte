@@ -1,7 +1,7 @@
 <script>
   import { onMount, tick } from "svelte";
   import { isNationCurrent, countActivePuppets, findPuppetmaster, puppetMasterCache } from "./sheetFetch.js";
-  import { canonicalizeName, createNaturalCompare } from "./settingsUtils.js";
+  import { canonicalizeName, createNaturalCompare, classicNaturalCompare } from "./settingsUtils.js";
   import { getNationLink } from "./dataUtils.js";
   import { settingsStore } from "./settingsStore.js";
 
@@ -52,12 +52,14 @@
     sortMode = (sortMode + 1) % 3;
   }
 
-  let naturalCmp = null;
-  $: naturalCmp = $settingsStore.useNaturalSort ? createNaturalCompare(puppetList) : null;
+  let sortCmp = null;
+  $: sortCmp = $settingsStore.sortMode === 'context' ? createNaturalCompare(puppetList)
+    : $settingsStore.sortMode === 'natural' ? classicNaturalCompare
+    : null;
 
   // Sort puppets
   $: sortedPuppetList = (() => {
-    const cmp = naturalCmp;
+    const cmp = sortCmp;
     return [...puppetList].sort((a, b) => {
       if (sortMode === 1) {
         // Active First
@@ -112,16 +114,16 @@
     if (sortedPuppetList.length === 0 || !containerHeight) return [];
 
     function ch1(s) {
-      if (naturalCmp) {
-        const stem = naturalCmp.getStem(s);
+      if ($settingsStore.sortMode === 'context' && sortCmp) {
+        const stem = sortCmp.getStem(s);
         return stem ? stem.charAt(0).toUpperCase() : s.charAt(0).toUpperCase();
       }
       return s.charAt(0).toUpperCase();
     }
 
     function ch2(s) {
-      if (naturalCmp) {
-        const stem = naturalCmp.getStem(s);
+      if ($settingsStore.sortMode === 'context' && sortCmp) {
+        const stem = sortCmp.getStem(s);
         return stem.length > 1 ? stem.charAt(1).toUpperCase() : "";
       }
       return s.length > 1 ? s.charAt(1).toUpperCase() : "";

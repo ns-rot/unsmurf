@@ -1,6 +1,6 @@
 <script>
   import { listPuppets, isNationCurrent, countActivePuppets } from './sheetFetch.js';
-  import { uncanonicalizeName, canonicalizeName, createNaturalCompare } from './settingsUtils.js';
+  import { uncanonicalizeName, canonicalizeName, createNaturalCompare, classicNaturalCompare } from './settingsUtils.js';
   import { settingsStore } from './settingsStore.js';
 
   export let masterName = "";
@@ -17,9 +17,12 @@
     .filter(p => p.toLowerCase().includes(searchQuery.toLowerCase().replace(/\s+/g, '_')))
     .filter(p => !activeOnly || isNationCurrent(p));
 
-  $: filteredPuppets = $settingsStore.useNaturalSort
-    ? [...filteredBase].sort(createNaturalCompare(filteredBase))
-    : [...filteredBase].sort((a, b) => a.localeCompare(b));
+  $: filteredPuppets = (() => {
+    const mode = $settingsStore.sortMode;
+    if (mode === 'context') return [...filteredBase].sort(createNaturalCompare(filteredBase));
+    if (mode === 'natural') return [...filteredBase].sort(classicNaturalCompare);
+    return [...filteredBase].sort((a, b) => a.localeCompare(b));
+  })();
 </script>
 
 <div class="space-y-6">
