@@ -92,7 +92,7 @@
     <div
       class="fixed inset-0 bg-gray-800 bg-opacity-50 dark:bg-black dark:bg-opacity-70 z-50 flex justify-center items-center backdrop-blur-sm transition-all"
     >
-      <div class="w-full max-w-2xl lg:max-w-6xl flex flex-col items-center gap-4 px-4 sm:px-0">
+      <div class="w-full max-w-2xl xl:max-w-6xl flex flex-col items-center gap-4 px-4 sm:px-0">
       <div
         class="settings-modal w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-2xl shadow-2xl p-6 relative max-h-[80dvh] flex flex-col overflow-clip border border-gray-100 dark:border-gray-700"
       >
@@ -105,7 +105,7 @@
       <div
         bind:this={settingsScrollContainer}
         on:scroll={updateSettingsScrollIndicator}
-        class="flex-1 overflow-y-auto min-h-0 lg:columns-2 lg:gap-x-8"
+        class="flex-1 overflow-y-auto min-h-0 xl:columns-2 xl:gap-x-8"
       >
           <!-- Section: Card Trades -->
       <div class="mb-10 break-inside-avoid">
