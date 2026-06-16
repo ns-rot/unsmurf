@@ -155,6 +155,8 @@ const numericOpts = {
   matches:  (w) => DIGIT_RE.test(w),
   catches:  (w) => DIGIT_RE.test(w),
   toValue:  (w) => parseInt(w, 10),
+  matchConcat: (s) => { const m = s.match(/^([a-z]{3,})(\d+)$/); return m ? { stem: m[1], suffix: m[2] } : null; },
+  catchConcat: (s) => { const m = s.match(/^([a-z]{3,})(\d+)$/); return m ? { stem: m[1], suffix: m[2] } : null; },
 };
 
 // --- Tokenize ---
@@ -194,6 +196,22 @@ function tokenizeConcat(s, romanMap, hexMap, numericMap) {
             { type: 'num', val: parseInt(suffix, 16), isHex: true },
           ];
         }
+      }
+    }
+  }
+
+  // Try numeric suffix
+  if (numericMap) {
+    const m = lower.match(/^([a-z]{3,})(\d+)$/);
+    if (m) {
+      const stem = m[1], suffix = m[2];
+      const key = contextKey([stem], 1);
+      const vs = numericMap.get(key);
+      if (vs && vs.has(suffix)) {
+        return [
+          { type: 'text', val: stem },
+          { type: 'num', val: parseInt(suffix, 10) },
+        ];
       }
     }
   }
