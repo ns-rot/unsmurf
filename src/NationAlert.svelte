@@ -18,6 +18,7 @@
   export let onRefresh = null;
   export let preview = false;
   export let onSelect = null;
+  export let onReport = null;
 
   $: dataReady = $settingsStore.dataFetched;
   $: canonicalizedName = canonicalizeName(nationId);
@@ -106,6 +107,14 @@
           class="text-sm font-medium px-3 py-1 rounded-full border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 transition shrink-0 focus:outline-none"
         >
           View All
+        </button>
+      {:else if dataReady && cacheTime && !preview && !isPuppet}
+        <span class="text-sm text-gray-500 dark:text-gray-400">No known puppet connections.</span>
+        <button
+          on:click={() => onReport?.()}
+          class="text-sm font-medium px-3 py-1 rounded-full border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 transition focus:outline-none"
+        >
+          Flag for review
         </button>
       {/if}
     </div>

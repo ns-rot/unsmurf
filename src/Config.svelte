@@ -92,21 +92,22 @@
     <div
       class="fixed inset-0 bg-gray-800 bg-opacity-50 dark:bg-black dark:bg-opacity-70 z-50 flex justify-center items-center backdrop-blur-sm transition-all"
     >
-      <div class="w-full max-w-2xl lg:max-w-6xl flex flex-col items-center gap-2 px-4 sm:px-0">
+      <div class="w-full max-w-2xl flex flex-col items-center gap-2 px-4 sm:px-0">
       <div
-        class="settings-modal w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-2xl shadow-2xl p-6 relative max-h-[80dvh] flex flex-col overflow-clip border border-gray-100 dark:border-gray-700"
+        class="settings-modal w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-2xl shadow-2xl relative max-h-[80dvh] flex flex-col overflow-clip border border-gray-200 dark:border-gray-700"
       >
       <div
         bind:this={settingsScrollContainer}
         on:scroll={updateSettingsScrollIndicator}
-        class="flex-1 overflow-y-auto min-h-0 lg:columns-2 lg:gap-x-8"
+        class="flex-1 overflow-y-auto min-h-0"
       >
-      <h2
-        class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200 dark:border-gray-700 break-inside-avoid"
-      >
-        Settings
-      </h2>
+      <div class="px-5 py-4 border-b border-gray-200 dark:border-gray-700">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+          Settings
+        </h2>
+      </div>
 
+      <div class="px-5 py-4">
           <!-- Section: Card Trades -->
       <div class="mb-10 break-inside-avoid">
         <h3
@@ -483,6 +484,7 @@
             </button>
           </div>
         </div>
+      </div>
       </div>
       </div>
 

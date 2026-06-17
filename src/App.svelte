@@ -22,6 +22,7 @@
   import NationAlert from "./NationAlert.svelte";
   import Puppetmasters from "./Puppetmasters.svelte";
   import PuppetPopup from "./PuppetPopup.svelte";
+  import ReportPuppetPopup from "./ReportPuppetPopup.svelte";
   import QnA from "./QnA.svelte";
 
   import {
@@ -60,6 +61,8 @@
   let hasSearched = false;
   let keyboardOpen = false;
   let cleanupViewportListener = null;
+  let showReportPopup = false;
+  let reportNationName = "";
 
   $: canonicalizedName = canonicalizeName(nationId);
   $: canonicalizedMasterName =
@@ -285,6 +288,7 @@
           nationId={loadedNationId}
           cacheTime={lastCacheTime}
           onRefresh={() => loadTradeData(true)}
+          onReport={() => { reportNationName = uncanonicalizeName(loadedNationId); showReportPopup = true; }}
         />
       </div>
     {/if}
@@ -335,3 +339,14 @@
   <!-- Global Config Overlay -->
   <Config {showConfig} {closeConfig} />
 </div>
+
+{#if showReportPopup}
+  <ReportPuppetPopup
+    nationName={reportNationName}
+    {sellTallyTrades}
+    {sellTallyGifts}
+    {buyTallyTrades}
+    {buyTallyGifts}
+    onClose={() => { showReportPopup = false; }}
+  />
+{/if}
