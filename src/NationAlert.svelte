@@ -19,6 +19,7 @@
   export let preview = false;
   export let onSelect = null;
   export let onReport = null;
+  export let hasRecords = true;
 
   $: dataReady = $settingsStore.dataFetched;
   $: canonicalizedName = canonicalizeName(nationId);
@@ -108,7 +109,7 @@
         >
           View All
         </button>
-      {:else if dataReady && cacheTime && !preview && !isPuppet}
+      {:else if dataReady && cacheTime && !preview && !isPuppet && hasRecords}
         <span class="text-sm text-gray-500 dark:text-gray-400">No known puppet connections.</span>
         <button
           on:click={() => onReport?.()}

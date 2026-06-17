@@ -289,6 +289,7 @@
           cacheTime={lastCacheTime}
           onRefresh={() => loadTradeData(true)}
           onReport={() => { reportNationName = uncanonicalizeName(loadedNationId); showReportPopup = true; }}
+          hasRecords={buys.length > 0 || sells.length > 0}
         />
       </div>
     {/if}
