@@ -21,6 +21,7 @@ const defaultSettings = {
   showRarityBars: false,
   showSource: false,
   sortMode: "context", // "classic" (alphabetic) | "natural" | "context" (contextual)
+  enableRightClickPopup: true,
 };
 
 const validOptions = {

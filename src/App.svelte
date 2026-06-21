@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from "svelte";
   import Header from "./Header.svelte";
   import UnsmurfTrades from "./UnsmurfTrades.svelte";
-  import { settingsStore } from "./settingsStore.js";
+  import { settingsStore, useSettings } from "./settingsStore.js";
   import Config from "./Config.svelte";
   import { fetchSheets } from "./sheetFetch";
   import { getQueryParam, setQueryParam, getAllNationLinks } from "./dataUtils";
@@ -166,6 +166,7 @@
   }
 
   function handleContextMenu(e) {
+    if (!useSettings().enableRightClickPopup) return;
     const link = e.target.closest("[data-nation]");
     if (link) {
       e.preventDefault();
@@ -177,6 +178,7 @@
   }
 
   function handleTouchStart(e) {
+    if (!useSettings().enableRightClickPopup) return;
     const link = e.target.closest("[data-nation]");
     if (link) {
       longPressTarget = link;

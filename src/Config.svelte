@@ -429,6 +429,17 @@
             </div>
           {/if}
 
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              bind:checked={$settingsStore.enableRightClickPopup}
+              class="w-4 h-4 rounded accent-gray-600 dark:accent-indigo-400 focus:ring-gray-500 bg-white dark:bg-gray-800 border-2 border-gray-500 dark:border-gray-300 shrink-0"
+            />
+            <span class="font-medium text-gray-700 dark:text-gray-200"
+              >Show link menu on right-click / long-press</span
+            >
+          </label>
+
           <!-- Custom URL Input -->
           {#if $settingsStore.linkTypeTallySent === "custom" || $settingsStore.linkTypeTallyReceived === "custom" || $settingsStore.linkTypeDetailedSent === "custom" || $settingsStore.linkTypeDetailedReceived === "custom" || $settingsStore.linkTypePuppet === "custom" || ($settingsStore.enableCTELink && $settingsStore.linkTypeCTE === "custom")}
             <div class="pt-2 space-y-3">
