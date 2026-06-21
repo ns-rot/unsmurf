@@ -379,6 +379,8 @@
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-nation="true"
+                  data-nation-name={puppet.replace(/cte/i, "").trim()}
                   class="text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-400 no-underline hover:underline min-w-0 break-words"
                   style="overflow-wrap: anywhere; word-break: break-word;"
                 >

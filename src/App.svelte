@@ -5,7 +5,7 @@
   import { settingsStore } from "./settingsStore.js";
   import Config from "./Config.svelte";
   import { fetchSheets } from "./sheetFetch";
-  import { getQueryParam, setQueryParam } from "./dataUtils";
+  import { getQueryParam, setQueryParam, getAllNationLinks } from "./dataUtils";
 
   import TallyTables from "./TallyTables.svelte";
   import DetailedTables from "./DetailedTables.svelte";
@@ -24,6 +24,7 @@
   import PuppetPopup from "./PuppetPopup.svelte";
   import ReportPuppetPopup from "./ReportPuppetPopup.svelte";
   import QnA from "./QnA.svelte";
+  import NationLinkPopup from "./NationLinkPopup.svelte";
 
   import {
     fetchData,
@@ -63,6 +64,14 @@
   let cleanupViewportListener = null;
   let showReportPopup = false;
   let reportNationName = "";
+  let showNationPopup = false;
+  let popupNations = [];
+  let popupX = 0;
+  let popupY = 0;
+
+  let longPressTimer = null;
+  let longPressTarget = null;
+  let popupCloseHandler = null;
 
   $: canonicalizedName = canonicalizeName(nationId);
   $: canonicalizedMasterName =
@@ -122,7 +131,97 @@
     showConfig = false;
   }
 
+  function closeNationPopup() {
+    showNationPopup = false;
+    if (popupCloseHandler) {
+      window.removeEventListener("scroll", popupCloseHandler, true);
+      window.removeEventListener("resize", popupCloseHandler);
+      window.removeEventListener("click", popupCloseHandler);
+      popupCloseHandler = null;
+    }
+  }
+
+  function showPopupForNation(names, el) {
+    popupNations = Array.isArray(names) ? names : [names];
+    const rect = el.getBoundingClientRect();
+    popupX = rect.left;
+    popupY = rect.bottom;
+    showNationPopup = true;
+    popupCloseHandler = () => { closeNationPopup(); };
+    window.addEventListener("scroll", popupCloseHandler, true);
+    window.addEventListener("resize", popupCloseHandler);
+    setTimeout(() => {
+      window.addEventListener("click", popupCloseHandler);
+    }, 0);
+  }
+
+  function getPopupNations(el) {
+    const cell = el.closest("td, li, [data-nation-container]");
+    if (cell) {
+      const links = cell.querySelectorAll("[data-nation-name]");
+      const names = [...new Set(Array.from(links).map(l => l.getAttribute("data-nation-name")).filter(Boolean))];
+      return names.length > 0 ? names : [el.getAttribute("data-nation-name")];
+    }
+    return [el.getAttribute("data-nation-name")];
+  }
+
+  function handleContextMenu(e) {
+    const link = e.target.closest("[data-nation]");
+    if (link) {
+      e.preventDefault();
+      const names = getPopupNations(link);
+      if (names.length > 0) {
+        showPopupForNation(names, link);
+      }
+    }
+  }
+
+  function handleTouchStart(e) {
+    const link = e.target.closest("[data-nation]");
+    if (link) {
+      longPressTarget = link;
+      longPressTimer = setTimeout(() => {
+        if (longPressTarget) {
+          const names = getPopupNations(longPressTarget);
+          if (names.length > 0) {
+            showPopupForNation(names, longPressTarget);
+          }
+        }
+        longPressTimer = null;
+        longPressTarget = null;
+      }, 500);
+    }
+  }
+
+  function handleTouchMove() {
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+      longPressTarget = null;
+    }
+  }
+
+  function handleTouchEnd() {
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+      longPressTarget = null;
+    }
+  }
+
+  // Keep Escape to close popup
+  function handleKeyDown(e) {
+    if (e.key === "Escape" && showNationPopup) {
+      closeNationPopup();
+    }
+  }
+
   onMount(async () => {
+    document.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("touchstart", handleTouchStart, { passive: true });
+    document.addEventListener("touchmove", handleTouchMove, { passive: true });
+    document.addEventListener("touchend", handleTouchEnd);
+    document.addEventListener("keydown", handleKeyDown);
     mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     mediaQuery.addEventListener('change', (e) => {
       systemDark = e.matches;
@@ -243,6 +342,11 @@
   }
 
   onDestroy(() => {
+    document.removeEventListener("contextmenu", handleContextMenu);
+    document.removeEventListener("touchstart", handleTouchStart);
+    document.removeEventListener("touchmove", handleTouchMove);
+    document.removeEventListener("touchend", handleTouchEnd);
+    document.removeEventListener("keydown", handleKeyDown);
     if (cleanupViewportListener) cleanupViewportListener();
   });
 </script>
@@ -350,4 +454,29 @@
     {buyTallyGifts}
     onClose={() => { showReportPopup = false; }}
   />
+{/if}
+
+{#if showNationPopup}
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div id="nation-popup" class="fixed z-[9999] bg-white dark:bg-gray-800 midnight:!bg-black border border-gray-200 dark:border-gray-700 midnight:!border-gray-800 rounded-md shadow-xl py-1 text-xs overflow-hidden" style="left: {popupX}px; top: {popupY}px;" on:click|stopPropagation>
+    <div class="flex flex-row">
+      {#each popupNations as nation, i}
+        <div class="w-32" class:border-l={i > 0} class:border-gray-200={i > 0} class:dark:border-gray-700={i > 0} class:midnight:!border-gray-800={i > 0}>
+          {#if popupNations.length > 1}
+            <div class="px-2 py-0.5 font-bold text-gray-400 uppercase tracking-wider text-[10px] truncate">{nation}</div>
+          {/if}
+          {#each getAllNationLinks(nation) as link}
+            <button
+              on:click={() => { if (link.url) window.open(link.url, "_blank"); closeNationPopup(); }}
+              class="w-full text-left px-2 py-0.5 text-gray-700 dark:text-gray-200 midnight:!text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 midnight:hover:!bg-[#0f1115] transition-colors truncate"
+              disabled={!link.url}
+              title={link.url || "No custom URL configured"}
+            >
+              {link.label}
+            </button>
+          {/each}
+        </div>
+      {/each}
+    </div>
+  </div>
 {/if}

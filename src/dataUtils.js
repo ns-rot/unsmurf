@@ -71,7 +71,7 @@ function buildTallyContent(tally, rawToNormalizedMap, context, settings) {
         cte = isNationCurrent(aggregatedName) ? "" : `<span class="select-none text-red-600 dark:text-red-400">&#xe000;&#x2009;</span>`;
       }
 
-      const displayName = `<a href="${getNationLink(aggregatedName, context)}" target="_blank" rel="noopener noreferrer">${cte}${formatNationName(
+      const displayName = `<a href="${getNationLink(aggregatedName, context)}" target="_blank" rel="noopener noreferrer" data-nation="true" data-nation-name="${aggregatedName}">${cte}${formatNationName(
         aggregatedName
       )}</a>`;
 
@@ -228,7 +228,7 @@ export function makeRows(
     }
     let nationDisplay = cte + formatNationName(r[role] || "N/A");
     const nationLink = `<a href="${getNationLink(r[role] || "N/A", context)}"
-        target="_blank" rel="noopener noreferrer">${nationDisplay}</a>`;
+        target="_blank" rel="noopener noreferrer" data-nation="true" data-nation-name="${r[role] || "N/A"}">${nationDisplay}</a>`;
     const seasonText = `S${r.season}`;
     const cardNameDisplay = formatNationName(r.card_name || r.card_id);
     const cardUrl = `https://www.nationstates.net/page=deck/card=${r.card_id}/season=${r.season}`;
@@ -272,7 +272,7 @@ export function makeRows(
           cte = isNationCurrent(puppetMaster.master) ? "" : `<span class="select-none text-red-400 dark:text-red-400 opacity-60">&#xe000;&#x2009;</span>`;
         }
         puppetMasterText += `<span class="text-gray-500 text-sm"><a href="${getNationLink(puppetMaster.master, context)}"
-        target="_blank" rel="noopener noreferrer">${cte}${formatNationName(
+        target="_blank" rel="noopener noreferrer" data-nation="true" data-nation-name="${puppetMaster.master}">${cte}${formatNationName(
           puppetMaster.master
         )}</a></span>`;
       }
@@ -407,4 +407,33 @@ export function getNationLink(nationName, context) {
     default:
       return `https://www.nationstates.net/nation=${encodedName}`;
   }
+}
+
+export function getAllNationLinks(nationName) {
+  const settings = useSettings();
+  const encodedName = encodeURIComponent(nationName);
+
+  const links = [
+    { value: "unsmurf", label: "Unsmurf", url: `https://ns-rot.github.io/unsmurf/?q=${encodedName}` },
+    { value: "nation", label: "NationStates", url: `https://www.nationstates.net/nation=${encodedName}` },
+    { value: "trades", label: "NS Deck", url: `https://www.nationstates.net/nation=${encodedName}/page=deck/show_trades` },
+    { value: "buys", label: "NS Card Buys", url: `https://www.nationstates.net/nation=${encodedName}/page=deck/show_trades=buys` },
+    { value: "sells", label: "NS Card Sales", url: `https://www.nationstates.net/nation=${encodedName}/page=deck/show_trades=sales` },
+    { value: "boneyard", label: "NS Boneyard", url: `https://www.nationstates.net/page=boneyard?nation=${encodedName}` },
+    { value: "custom", label: settings.customLinkLabel || "Custom URL", url: null },
+  ];
+
+  const custom = links.find((l) => l.value === "custom");
+  if (custom) {
+    if (settings.customLinkTemplate && settings.customLinkTemplate !== "https://www.nationstates.net/nation={nation}") {
+      custom.url = settings.customLinkTemplate
+        .replace(/{nation}/g, encodedName)
+        .replace(/\[nation\]/g, encodedName);
+    }
+    if (!custom.url) {
+      return links.filter((l) => l.value !== "custom");
+    }
+  }
+
+  return links;
 }

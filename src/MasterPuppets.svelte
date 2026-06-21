@@ -2,6 +2,7 @@
   import { listPuppets, isNationCurrent, countActivePuppets } from './sheetFetch.js';
   import { uncanonicalizeName, canonicalizeName, createNaturalCompare, classicNaturalCompare } from './settingsUtils.js';
   import { settingsStore } from './settingsStore.js';
+  import { getNationLink } from './dataUtils.js';
 
   export let masterName = "";
   export let onBack;
@@ -72,9 +73,11 @@
             <span class="select-none text-red-600 dark:text-red-400 mr-1 float-left">&#xe000;</span>
           {/if}
           <a
-            href="https://www.nationstates.net/nation={puppet}"
+            href={getNationLink(puppet, "puppetPopup")}
             target="_blank"
             rel="noopener noreferrer"
+            data-nation="true"
+            data-nation-name={puppet}
             class="text-gray-900 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-400 no-underline hover:underline"
           >
             {uncanonicalizeName(puppet)}

@@ -4,12 +4,12 @@
     export let value;
 
     const options = [
-        { value: "nation", label: "Nation Page" },
-        { value: "trades", label: "Trades Page" },
-        { value: "buys", label: "Trades (Buys)" },
-        { value: "sells", label: "Trades (Sales)" },
         { value: "unsmurf", label: "Unsmurf" },
-        { value: "boneyard", label: "Boneyard" },
+        { value: "nation", label: "NationStates" },
+        { value: "trades", label: "NS Deck" },
+        { value: "buys", label: "NS Card Buys" },
+        { value: "sells", label: "NS Card Sales" },
+        { value: "boneyard", label: "NS Boneyard" },
         { value: "custom", label: "Custom URL" },
     ];
 </script>

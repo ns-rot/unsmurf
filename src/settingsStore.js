@@ -15,6 +15,7 @@ const defaultSettings = {
   linkTypeCTE: "boneyard",
   enableCTELink: true,
   customLinkTemplate: "https://www.nationstates.net/nation={nation}",
+  customLinkLabel: "Custom URL",
   theme: "system", // 'light' | 'system' | 'dark'
   midnightMode: false,
   showRarityBars: false,

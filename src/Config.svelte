@@ -431,23 +431,40 @@
 
           <!-- Custom URL Input -->
           {#if $settingsStore.linkTypeTallySent === "custom" || $settingsStore.linkTypeTallyReceived === "custom" || $settingsStore.linkTypeDetailedSent === "custom" || $settingsStore.linkTypeDetailedReceived === "custom" || $settingsStore.linkTypePuppet === "custom" || ($settingsStore.enableCTELink && $settingsStore.linkTypeCTE === "custom")}
-            <div class="pt-2">
-              <label
-                for="custom-url-template"
-                class="block text-xs font-bold uppercase text-gray-400 mb-1"
-              >
-                Custom URL Template
-              </label>
-              <input
-                id="custom-url-template"
-                type="text"
-                bind:value={$settingsStore.customLinkTemplate}
-                placeholder="https://example.com/?nation={'{nation}'}"
-                class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-full px-4 py-2 w-full text-sm focus:ring-2 focus:ring-gray-500 outline-none transition-all"
-              />
-              <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                Use <code>{"{nation}"}</code> as a placeholder for the nation name.
-              </p>
+            <div class="pt-2 space-y-3">
+              <div>
+                <label
+                  for="custom-url-label"
+                  class="block text-xs font-bold uppercase text-gray-400 mb-1"
+                >
+                  Custom URL Label
+                </label>
+                <input
+                  id="custom-url-label"
+                  type="text"
+                  bind:value={$settingsStore.customLinkLabel}
+                  placeholder="Custom URL"
+                  class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-full px-4 py-2 w-full text-sm focus:ring-2 focus:ring-gray-500 outline-none transition-all"
+                />
+              </div>
+              <div>
+                <label
+                  for="custom-url-template"
+                  class="block text-xs font-bold uppercase text-gray-400 mb-1"
+                >
+                  Custom URL Template
+                </label>
+                <input
+                  id="custom-url-template"
+                  type="text"
+                  bind:value={$settingsStore.customLinkTemplate}
+                  placeholder="https://example.com/?nation={'{nation}'}"
+                  class="border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-full px-4 py-2 w-full text-sm focus:ring-2 focus:ring-gray-500 outline-none transition-all"
+                />
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                  Use <code>{"{nation}"}</code> as a placeholder for the nation name.
+                </p>
+              </div>
             </div>
           {/if}
         </div>
