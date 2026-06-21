@@ -90,8 +90,8 @@
     }
   }
 
-  $: nationLinks = !preview && dataReady ? getAllNationLinks(uncanonicalizeName(canonicalizedName)) : [];
-  $: masterLinks = !preview && dataReady && isPuppet ? getAllNationLinks(uncanonicalizeName(canonicalizedMasterName)) : [];
+  $: nationLinks = dataReady ? getAllNationLinks(uncanonicalizeName(canonicalizedName)) : [];
+  $: masterLinks = dataReady && isPuppet ? getAllNationLinks(uncanonicalizeName(canonicalizedMasterName)) : [];
 
   $: popupNationName = isPuppet
     ? uncanonicalizeName(canonicalizedMasterName)
@@ -131,7 +131,7 @@
       {#if isCTE}<span class="select-none text-red-600 dark:text-red-400">&#xe000;&#x2009;</span>{/if}
       {uncanonicalizeName(canonicalizedName)}
     {/if}
-    {#if !isPuppet && !preview}
+    {#if !isPuppet}
       <button
         on:click={openLinksPopup}
         aria-label="Nation links"
@@ -154,15 +154,13 @@
           {#if isMasterCte}<span class="select-none text-red-600 dark:text-red-400">&#xe000;&#x2009;</span>{/if}
           <strong class="text-gray-900 dark:text-gray-100">{uncanonicalizeName(canonicalizedMasterName)}</strong>
         {/if}
-        {#if !preview}
-          <button
-            on:click={openLinksPopup}
-            aria-label="Nation links"
-            class="text-sm font-bold px-2 py-1 rounded-full border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 transition shrink-0 focus:outline-none leading-none tracking-wider ml-2 align-middle"
-          >
-            ...
-          </button>
-        {/if}
+        <button
+          on:click={openLinksPopup}
+          aria-label="Nation links"
+          class="text-sm font-bold px-2 py-1 rounded-full border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 transition shrink-0 focus:outline-none leading-none tracking-wider ml-2 align-middle"
+        >
+          ...
+        </button>
       {/if}
     </div>
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
