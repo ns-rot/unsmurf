@@ -373,7 +373,7 @@
       <UnsmurfTrades bind:nationId {loadTradeData} {loading} />
 
       {#if nationId.trim().length > 2 && canonicalizedName !== loadedNationId}
-        <div class="bg-white dark:bg-gray-800 midnight:!bg-black border border-gray-300 dark:border-gray-600 midnight:!border-gray-600 rounded-xl shadow-lg mt-2">
+        <div class="bg-white dark:bg-gray-800 midnight:!bg-black midnight:!border midnight:!border-gray-600 rounded-xl shadow-lg mt-2">
           <NationAlert {nationId} preview onSelect={(name) => { nationId = name; loadTradeData(); }} />
         </div>
       {/if}
