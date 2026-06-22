@@ -109,11 +109,6 @@
 
 <div
   class="transition-all duration-300 ease-out"
-  class:border-2={preview}
-  class:border-dashed={preview}
-  class:border-gray-300={preview}
-  class:dark:border-gray-600={preview}
-  class:rounded-2xl={preview}
   class:p-4={preview}
   class:pb-4={!preview}
   class:border-b={cacheTime}
@@ -141,6 +136,7 @@
       </button>
     {/if}
   </div>
+  {#if isPuppet || puppetTally > 0 || cacheTime}
   <div class="flex flex-col gap-1 mt-1.5">
     <div class="text-gray-500 dark:text-gray-400 transition-all duration-300 ease-out" class:text-base={!preview} class:text-sm={preview}>
       {#if isPuppet}
@@ -201,11 +197,13 @@
             >
               Refresh
             </button>
-          {/if}
+{/if}
+
         </div>
       {/if}
     </div>
   </div>
+  {/if}
 
   {#if preview && matchingNations.length > 0}
     <div class="mt-2.5 pt-2.5 border-t border-gray-200 dark:border-gray-600">

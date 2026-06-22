@@ -369,14 +369,15 @@
   <Header mode={currentView === 'masters' ? 'masters' : currentView === 'qna' ? 'qna' : mode} />
 
   {#if currentView === 'trades'}
-    <UnsmurfTrades bind:nationId {loadTradeData} {loading} />
+    <div class="w-full max-w-xl">
+      <UnsmurfTrades bind:nationId {loadTradeData} {loading} />
 
-    <!-- Preview while typing (sits directly below search bar) -->
-    {#if nationId.trim().length > 2 && canonicalizedName !== loadedNationId}
-      <div class="mt-2">
-        <NationAlert {nationId} preview onSelect={(name) => { nationId = name; loadTradeData(); }} />
-      </div>
-    {/if}
+      {#if nationId.trim().length > 2 && canonicalizedName !== loadedNationId}
+        <div class="bg-white dark:bg-gray-800 midnight:!bg-black border border-gray-300 dark:border-gray-600 midnight:!border-gray-600 rounded-xl shadow-lg mt-2">
+          <NationAlert {nationId} preview onSelect={(name) => { nationId = name; loadTradeData(); }} />
+        </div>
+      {/if}
+    </div>
 
     <!-- Results header (CSS-collapsed during loading so the preview is alone) -->
     {#if !lastCacheTime}
