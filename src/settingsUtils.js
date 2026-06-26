@@ -98,41 +98,144 @@ const hyphenators = {
 
 /**
  * Format a nation name with optional language selection.
+ * Uses Knuth-Plass-style DP to pick optimal line break points,
+ * preferring higher-quality breaks (spaces > hard hyphens > soft hyphens)
+ * when the line count is the same.
+ *
  * @param {string} name - The name to format.
  * @param {string} [language='en'] - The language for hyphenation ('en', 'fr', 'de', etc.).
  * @returns {string} - The formatted name.
  */
+const nameFormatCache = new Map();
+
 export function formatNationName(name, language = "en") {
   if (!name) return name;
+  const cacheKey = `${name}|${language}`;
+  const cached = nameFormatCache.get(cacheKey);
+  if (cached !== undefined) return cached;
 
   const hyphenator = hyphenators[language] || hyphenators.en;
-  const SHY = "\u00AD"; // Soft Hyphen: invisible unless it wraps
+  const SHY = "\u00AD";
+  const TARGET = 12;    // ideal line length in chars (matches max-w-[12ch])
+  const MAX_LINE = 12;  // hard cap matching max-w-[12ch]
+  const COST = { 0: 0, 1: 3, 2: 21 };  // space > hard hyphen > SHY tiebreaker
 
-  const processed = String(name)
+  // --- Step 1: Parse into plain text + all possible break points ---
+  const segments = String(name)
     .replace(/_/g, " ")
-    .split(/(?=[-\s])|(?<=[-\s])/g)
-    .map((segment) => {
-      if (segment === "-" || segment.trim() === "") return segment;
+    .split(/(?=[-\s])|(?<=[-\s])/g);
 
-      // 1. Insert Soft Hyphens at alpha-numeric boundaries
-      let text = segment.replace(/([a-zA-Z])(?=\d)|(\d)(?=[a-zA-Z])/g, `$1${SHY}$2`);
+  let text = "";           // plain text (no SHY)
+  let breaks = [];         // { pos: number, priority: 0|1|2 }
 
-      // 2. Hyphenate long segments
-      if (text.length > 8) {
-        const hyphenated = hyphenator.hyphenate(text).join(SHY);
-        text = hyphenated === text ? text.match(/.{1,3}/g).join(SHY) : hyphenated;
+  for (const seg of segments) {
+    if (seg === " " || seg === "") {
+      // space break — highest priority
+      breaks.push({ pos: text.length + seg.length, priority: 0 });
+      text += seg;
+      continue;
+    }
+
+    if (seg === "-") {
+      hardHyphen: {
+        // break after the hard hyphen — medium priority
+        text += seg;
+        breaks.push({ pos: text.length, priority: 1 });
       }
+      continue;
+    }
 
-      // 3. Capitalize
-      return text.charAt(0).toUpperCase() + text.slice(1);
+    // Word segment
+    const start = text.length;
+    let word = seg.charAt(0).toUpperCase() + seg.slice(1);
+    text += word;
+
+    // Break at alpha-numeric boundary (e.g. abc123)
+    const anRe = /([a-zA-Z])(?=\d)|(\d)(?=[a-zA-Z])/g;
+    let m;
+    while ((m = anRe.exec(word)) !== null) {
+      breaks.push({ pos: start + m.index + 1, priority: 2 });
+    }
+
+    // Hyphenation breaks from Hypher (only for words long enough to need it)
+    if (word.length > 8) {
+      const syllables = hyphenator.hyphenate(word);
+      if (syllables.length > 1) {
+        let pos = start;
+        for (let i = 0; i < syllables.length - 1; i++) {
+          pos += syllables[i].length;
+          breaks.push({ pos, priority: 2 });
+        }
+      }
+    }
+  }
+
+  // Remove trailing space break (no content after it)
+  if (text.endsWith(" ") && breaks.length > 0 && breaks[breaks.length - 1].pos === text.length) {
+    breaks.pop();
+  }
+
+  // --- Step 2: DP to select optimal break positions ---
+  const n = text.length;
+  const INF = 1e9;
+  const dp = new Array(n + 1).fill(INF);
+  const nextPos = new Array(n + 1).fill(-1);
+  dp[n] = 0;
+
+  for (let i = n - 1; i >= 0; i--) {
+    // Option: go straight to end of text
+    const lineToEnd = n - i;
+    if (lineToEnd <= MAX_LINE) {
+      dp[i] = Math.pow(TARGET - lineToEnd, 2);
+      nextPos[i] = n;
+    }
+
+    // Option: break at one of the recorded break points
+    for (const bp of breaks) {
+      if (bp.pos <= i) continue;
+      const lineLen = bp.pos - i;
+      if (lineLen > MAX_LINE) continue;
+
+      const badness = Math.pow(TARGET - lineLen, 2) + COST[bp.priority];
+      const total = badness + dp[bp.pos];
+      if (total < dp[i]) {
+        dp[i] = total;
+        nextPos[i] = bp.pos;
+      }
+    }
+  }
+
+  // Reconstruct selected break positions
+  const selected = new Set();
+  let i = 0;
+  while (i < n && nextPos[i] > i && nextPos[i] <= n) {
+    if (nextPos[i] < n) selected.add(nextPos[i]);
+    i = nextPos[i];
+  }
+
+  // --- Step 3: Build output with SHY only at selected positions ---
+  const styled = text
+    .split("")
+    .map((ch, idx) => {
+      if (ch === "-") {
+        // hard hyphen: append ZWSP so the DP-chosen break can activate
+        return selected.has(idx + 1) ? `${ch}\u200B` : ch;
+      }
+      if (ch === " ") {
+        // space: naturally breakable, no marker needed
+        return ch;
+      }
+      // word character: if a break was selected here, insert SHY before it
+      if (selected.has(idx)) {
+        return `<span style="font-size: 0.7em; vertical-align: middle;">${SHY}</span>${ch}`;
+      }
+      return ch;
     })
     .join("");
 
-  // 4. Wrap with the '↵' return symbol (indicating a system wrap)
-  // This character is unselectable metadata inserted by the browser.
-  // We wrap the soft hyphens in a smaller span to reduce the size of the '↵' symbol.
-  const styled = processed.replaceAll(SHY, `<span style="font-size: 0.7em; vertical-align: middle;">${SHY}</span>`);
-  return `<span style="hyphens: manual; -webkit-hyphens: manual; hyphenate-character: '↵'; -webkit-hyphenate-character: '↵';">${styled}</span>`;
+  const result = `<span style="hyphens: manual; -webkit-hyphens: manual; hyphenate-character: '↵'; -webkit-hyphenate-character: '↵'; overflow-wrap: break-word;">${styled}</span>`;
+  nameFormatCache.set(cacheKey, result);
+  return result;
 }
 
 // Utility to format dates
