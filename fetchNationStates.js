@@ -1,10 +1,5 @@
-// fetchNationStates.js
-
-import { promises as fs } from 'fs'; // Node.js filesystem module
-import fetch from 'node-fetch'; // Use node-fetch for HTTP requests
-
-import { createReadStream } from 'fs';
-import { createBrotliCompress, createBrotliDecompress, constants } from 'zlib'; // For Brotli compression
+import { promises as fs, createReadStream } from 'fs';
+import { gunzipSync, inflateRawSync, createBrotliCompress, createBrotliDecompress, constants } from 'zlib';
 
 const nationStatesApi = "https://www.nationstates.net/cgi-bin/api.cgi?q=nations";
 const userAgent = "script=ns-unsmurf-github by=rotenaple";
@@ -54,6 +49,22 @@ function mergeSortedDedup(a, b) {
   return result;
 }
 
+function tryDecompress(raw) {
+  try {
+    return { ok: true, data: gunzipSync(raw) };
+  } catch (err) {
+    const label = err.code === 'Z_DATA_ERROR' ? 'Z_DATA_ERROR (corrupt/truncated)' : err.code;
+    console.warn(`  gzip full decompress failed: ${label} (${raw.length} raw bytes)`);
+    try {
+      const partial = inflateRawSync(raw.subarray(10));
+      return { ok: true, data: partial };
+    } catch {
+      console.warn(`  partial inflate also failed (${raw.length} raw bytes)`);
+      return { ok: false, raw };
+    }
+  }
+}
+
 async function fetchNationStatesData() {
   try {
     console.log('Fetching data from NationStates API...');
@@ -68,10 +79,28 @@ async function fetchNationStatesData() {
       return [];
     }
 
-    const data = await response.text();
+    const raw = Buffer.from(await response.arrayBuffer());
+    console.log(`  Raw compressed response: ${raw.length} bytes`);
+
+    const { ok, data } = tryDecompress(raw);
+
+    if (!ok) {
+      console.error(`Cannot decompress response body (${raw.length} raw bytes, first 40 hex: ${raw.subarray(0, 40).toString('hex')}). Aborting.`);
+      return [];
+    }
+
+    const dataStr = data.toString('utf8');
+    const dataBytes = Buffer.byteLength(dataStr, 'utf8');
+    console.log(`  Decompressed response: ${(dataBytes / 1024 / 1024).toFixed(2)} MB`);
+
+    const hasClosingTag = dataStr.includes('</NATIONS>');
+    if (!hasClosingTag) {
+      console.error(`Response body is truncated — missing </NATIONS> (${raw.length} raw bytes, ${dataBytes} decompressed bytes). Aborting to preserve existing data.`);
+      return [];
+    }
 
     // Extract nations from XML
-    const match = data.match(/<NATIONS>(.*?)<\/NATIONS>/s);
+    const match = dataStr.match(/<NATIONS>(.*?)<\/NATIONS>/s);
     if (!match) {
       console.error('No nations found in NationStates API response.');
       return [];
@@ -82,10 +111,9 @@ async function fetchNationStatesData() {
     }).sort();
 
     // Validate response completeness before overwriting files
-    const responseBytes = Buffer.byteLength(data, 'utf8');
     const hasY = currentNations.some(n => n.startsWith('y'));
     const hasZ = currentNations.some(n => n.startsWith('z'));
-    console.log(`Response: ${(responseBytes / 1024 / 1024).toFixed(2)} MB, ${currentNations.length} nations`);
+    console.log(`  ${currentNations.length} nations, y=${hasY}, z=${hasZ}`);
     if (currentNations.length < 250000 || !hasY || !hasZ) {
       console.error(`Response appears truncated (${currentNations.length} nations, y=${hasY}, z=${hasZ}). Aborting to preserve existing data.`);
       return [];
