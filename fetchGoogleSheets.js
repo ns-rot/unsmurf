@@ -2,9 +2,8 @@
 
 import { promises as fs, existsSync, createReadStream } from 'fs';
 import { createInterface } from 'readline';
-import fetch from 'node-fetch';
 
-import { createBrotliDecompress } from 'zlib';
+import { gunzipSync, inflateRawSync, createBrotliDecompress } from 'zlib';
 
 const CONFIG = {
   sheets: [
@@ -38,6 +37,34 @@ const cleanStr = (str, context = {}) => {
 
 const normalize = (str, context) => cleanStr(str, context)?.trim().toLowerCase().replace(/\s+/g, '_');
 
+function tryDecompress(raw) {
+  if (raw.length < 2) return { ok: false, raw };
+  if (raw[0] !== 0x1f || raw[1] !== 0x8b) {
+    return { ok: true, data: raw };
+  }
+  try {
+    return { ok: true, data: gunzipSync(raw) };
+  } catch (err) {
+    console.warn(`  gzip decompress failed: ${err.code} (${raw.length} raw bytes)`);
+    try {
+      const partial = inflateRawSync(raw.subarray(10));
+      return { ok: true, data: partial };
+    } catch {
+      console.warn(`  partial inflate also failed`);
+      return { ok: false, raw };
+    }
+  }
+}
+
+async function safeFetch(url, label) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`${label}: ${res.statusText}`);
+  const raw = Buffer.from(await res.arrayBuffer());
+  const { ok, data } = tryDecompress(raw);
+  if (!ok) throw new Error(`${label}: cannot decompress response (${raw.length} bytes)`);
+  return data.toString('utf8');
+}
+
 
 
 async function streamBrotli(path, fn) {
@@ -51,9 +78,8 @@ async function streamBrotli(path, fn) {
 
 async function fetchSheet(sheet) {
   try {
-    const res = await fetch(sheet.url);
-    if (!res.ok) throw new Error(res.statusText);
-    const lines = (await res.text()).split('\n').slice(sheet.headerRows);
+    const text = await safeFetch(sheet.url, sheet.name);
+    const lines = text.split('\n').slice(sheet.headerRows);
     return lines.map(line => {
       const cols = line.split('\t');
       return { line, cols };
@@ -324,7 +350,18 @@ async function processGoogleSheets() {
 
     // STEP 9: Commit to data branch (Orphan strategy)
     logStep(9, 'Writing and committing');
-    await fs.writeFile(CONFIG.paths.main, content, 'utf8');
+
+    // Guard: abort if new data is >50% smaller than existing files
+    const newTsvBytes = Buffer.byteLength(content, 'utf8');
+    try {
+      const existing = await fs.stat(CONFIG.paths.main);
+      if (newTsvBytes < existing.size * 0.5) {
+        console.error(`puppetData.tsv is ${((1 - newTsvBytes / existing.size) * 100).toFixed(0)}% smaller than existing (${newTsvBytes} vs ${existing.size} bytes). Aborting to preserve existing data.`);
+        process.exit(1);
+      }
+    } catch (e) {
+      if (e.code !== 'ENOENT') throw e;
+    }
 
     // Generate and write JSON with Frequency Sorting (Huffman-like optimization for indices)
 
@@ -358,7 +395,19 @@ async function processGoogleSheets() {
       puppets: puppetsList
     });
 
-    await fs.writeFile(CONFIG.paths.main.replace('.tsv', '.json'), jsonContent, 'utf8');
+    const jsonPath = CONFIG.paths.main.replace('.tsv', '.json');
+    const newJsonBytes = Buffer.byteLength(jsonContent, 'utf8');
+    try {
+      const existing = await fs.stat(jsonPath);
+      if (newJsonBytes < existing.size * 0.5) {
+        console.error(`puppetData.json is ${((1 - newJsonBytes / existing.size) * 100).toFixed(0)}% smaller than existing (${newJsonBytes} vs ${existing.size} bytes). Aborting to preserve existing data.`);
+        process.exit(1);
+      }
+    } catch (e) {
+      if (e.code !== 'ENOENT') throw e;
+    }
+
+    await fs.writeFile(jsonPath, jsonContent, 'utf8');
 
     // Log file sizes
     const tsvStats = await fs.stat(CONFIG.paths.main);

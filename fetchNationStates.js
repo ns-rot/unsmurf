@@ -50,6 +50,13 @@ function mergeSortedDedup(a, b) {
 }
 
 function tryDecompress(raw) {
+  if (raw.length < 2) {
+    return { ok: false, raw };
+  }
+  if (raw[0] !== 0x1f || raw[1] !== 0x8b) {
+    console.warn(`  response is not gzip (first bytes: 0x${raw[0].toString(16)} 0x${raw[1].toString(16)}), treating as plaintext`);
+    return { ok: true, data: raw };
+  }
   try {
     return { ok: true, data: gunzipSync(raw) };
   } catch (err) {
@@ -122,13 +129,21 @@ async function fetchNationStatesData() {
     // Step 0: Worktree setup is now handled by GitHub Actions
 
 
-    // Step 1A: Write NationStates data to data branch
-    await fs.writeFile(mainFilePath, currentNations.join('\n'), { encoding: 'utf8', flag: 'w' });
+    // Guard: reject if current nations data is >50% smaller than existing
+    const currentBytes = Buffer.byteLength(currentNations.join('\n'), 'utf8');
+    try {
+      const existing = await fs.stat(mainFilePath);
+      if (currentBytes < existing.size * 0.5) {
+        console.error(`currentNations is ${((1 - currentBytes / existing.size) * 100).toFixed(0)}% smaller than existing (${currentBytes} vs ${existing.size} bytes). Aborting to preserve existing data.`);
+        return [];
+      }
+    } catch (e) {
+      if (e.code !== 'ENOENT') throw e;
+    }
 
-    // Write JSON version for optimized fetching
+    await fs.writeFile(mainFilePath, currentNations.join('\n'), { encoding: 'utf8', flag: 'w' });
     const jsonPath = mainFilePath.replace('.txt', '.json');
     await fs.writeFile(jsonPath, JSON.stringify(currentNations), { encoding: 'utf8', flag: 'w' });
-    console.log(`✅ Written ${jsonPath}`);
 
     // Step 1B: Merge current with historical and compress
     console.log(`Reading existing nations from ${allNationsCompressedPath}...`);
@@ -153,6 +168,12 @@ async function fetchNationStatesData() {
       brotli.on('error', reject);
       brotli.end(input);
     });
+    // Guard: allNations archive should never have fewer nations
+    if (existingAllNations.length > allNations.length) {
+      console.error(`allNations lost nations (${allNations.length} vs ${existingAllNations.length} previously). Aborting to preserve existing data.`);
+      return [];
+    }
+
     await fs.writeFile(allNationsCompressedPath, compressed);
     console.log(`✅ Compressed updated list of ${allNations.length} nations to ${allNationsCompressedPath}`);
 
