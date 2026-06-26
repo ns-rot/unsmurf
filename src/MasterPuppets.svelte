@@ -40,7 +40,7 @@
       <h2 class="text-2xl font-black text-gray-900 dark:text-gray-100 uppercase tracking-tight">
         {uncanonicalizeName(masterName)}
       </h2>
-      <div class="text-gray-600 dark:text-gray-400 font-inter text-sm">
+      <div class="text-gray-600 dark:text-gray-400 font-sans text-sm">
         {#if puppets.length !== activeCount}
           {activeCount} active,
         {/if}
@@ -68,7 +68,7 @@
     {#each filteredPuppets as puppet (puppet)}
       {@const active = isNationCurrent(puppet)}
       <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 xl:w-1/6 py-1 text-left whitespace-normal break-words overflow-hidden flex items-start pr-2">
-        <span class="block w-full leading-tight text-sm font-inter">
+        <span class="block w-full leading-tight text-sm font-sans">
           {#if !active}
             <span class="select-none text-red-600 dark:text-red-400 mr-1 float-left">&#xe000;</span>
           {/if}

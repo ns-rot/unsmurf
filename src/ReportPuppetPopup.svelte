@@ -171,7 +171,7 @@
           class="flex-1 overflow-y-auto min-h-0"
         >
           <div class="px-5 py-4 border-b border-gray-200 dark:border-gray-700">
-            <h2 class="text-xl font-semibold font-inter text-gray-900 dark:text-gray-100">Report suspected puppets</h2>
+            <h2 class="text-xl font-semibold font-sans text-gray-900 dark:text-gray-100">Report suspected puppets</h2>
           </div>
           <div class="px-5 py-4">
           <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">

@@ -292,7 +292,7 @@
       class="flex justify-between items-center px-3 py-4 sm:p-4 border-b border-gray-200 dark:border-gray-700"
     >
       <div class="flex flex-col">
-        <h2 class="text-xl font-semibold font-inter">
+        <h2 class="text-xl font-semibold font-sans">
           {nationName}
         </h2>
         <h3 class="text-gray-600 dark:text-gray-400">
@@ -306,7 +306,7 @@
       <div class="flex items-center space-x-2">
         <button
           on:click={toggleSort}
-          class="sort-toggle w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none font-inter"
+          class="sort-toggle w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none font-sans"
           title={getSortTitle(sortMode)}
         >
           {#if sortMode === 1}
@@ -362,7 +362,7 @@
               <span class="block w-full leading-tight flex items-start gap-1.5 min-w-0">
                 {#if !isNationCurrent(canonicalizeName(puppet))}
                   <span
-                    class="font-inter select-none text-red-600 dark:text-red-400 flex-shrink-0"
+                    class="font-sans select-none text-red-600 dark:text-red-400 flex-shrink-0"
                     >&#xe000;</span
                   >
                 {/if}

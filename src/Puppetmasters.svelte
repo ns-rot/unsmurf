@@ -264,7 +264,7 @@
   </div>
 
   {#if filteredMasters.length === 0}
-    <div class="text-center py-20 text-gray-400 font-inter text-xs italic">
+    <div class="text-center py-20 text-gray-400 font-sans text-xs italic">
       No puppetmasters found.
     </div>
   {/if}

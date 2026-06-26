@@ -29,7 +29,7 @@
   <!-- Optional Title -->
   {#if title}
     <h2
-      class="text-xl font-semibold font-inter mt-2 mb-2 text-gray-800 dark:text-gray-200"
+      class="text-xl font-semibold font-sans mt-2 mb-2 text-gray-800 dark:text-gray-200"
     >
       {title}
     </h2>
