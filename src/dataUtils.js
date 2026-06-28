@@ -6,9 +6,16 @@ import {
   formatDate,
   formatLargeNumber,
   normalizeName,
+  canonicalizeName,
 } from "./settingsUtils";
 import { useSettings } from "./settingsStore";
-import { findPuppetmaster, isNationCurrent } from "./sheetFetch";
+import { createVersionedStorage } from "./storageUtils";
+import {
+  findPuppetmaster,
+  isNationCurrent,
+  puppetMasterCache,
+  masterToPuppetsCache,
+} from "./sheetFetch";
 
 export function tallyCounts(trades, roleKey, isTrade, context) {
   const tally = {};
@@ -109,7 +116,8 @@ export function setQueryParam(name, value) {
 
 // Fetch data from the API
 export async function fetchData(role, nationId, forceRefresh = false) {
-  const cacheKey = `unsmurf_cache_${role}_${nationId}`;
+  const canonicalNationId = canonicalizeName(nationId);
+  const cacheKey = `unsmurf_cache_${role}_${canonicalNationId}`;
   const CACHE_DURATION = 6 * 60 * 60 * 1000; // 6 hours
 
   if (!forceRefresh) {
@@ -126,7 +134,7 @@ export async function fetchData(role, nationId, forceRefresh = false) {
     }
   }
 
-  const url = `https://maki.kractero.com/api/trades?limit=-1&${role}=${nationId}&category=All&sortval=Timestamp&sortorder=Desc`;
+  const url = `https://maki.kractero.com/api/trades?limit=-1&${role}=${canonicalNationId}&category=All&sortval=Timestamp&sortorder=Desc`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -436,4 +444,166 @@ export function getAllNationLinks(nationName) {
   }
 
   return links;
+}
+
+const RANDOM_STATE_VERSION = 1;
+
+// Random state schema v1 — single source of truth for shape, types, and defaults
+const randomStateSchema = {
+  candidates:         { type: "array:string", default: [] },
+  blacklist:          { type: "array:string", default: [] },
+  completedDays:      { type: "array:string", default: [] },
+  dayPageMap:         { type: "map:number", default: {} },
+  lastBlacklistReset: { type: "number", default: "Date.now()" },
+  createdAt:          { type: "number", default: "Date.now()" },
+};
+
+function fmtDate(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+const randomStateMigrations = {
+  1: (s) => {
+    if (!Array.isArray(s.candidates)) s.candidates = [];
+    if (!Array.isArray(s.blacklist)) s.blacklist = [];
+    if (!Array.isArray(s.completedDays)) s.completedDays = [];
+    if (!s.dayPageMap || typeof s.dayPageMap !== "object" || Array.isArray(s.dayPageMap)) {
+      s.dayPageMap = {};
+    } else {
+      for (const [k, v] of Object.entries(s.dayPageMap)) {
+        if (typeof v !== "number" || !Number.isFinite(v) || v < 1) {
+          delete s.dayPageMap[k];
+        }
+      }
+    }
+    if (typeof s.lastBlacklistReset !== "number" || !Number.isFinite(s.lastBlacklistReset)) {
+      s.lastBlacklistReset = Date.now();
+    }
+    if (typeof s.createdAt !== "number" || !Number.isFinite(s.createdAt)) {
+      s.createdAt = Date.now();
+    }
+    s.version = 1;
+    return s;
+  },
+};
+
+function repairRandomState(s) {
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 28);
+  const cutoffStr = fmtDate(cutoff);
+  s.completedDays = (s.completedDays || []).filter((d) => d >= cutoffStr);
+  s.dayPageMap = s.dayPageMap || {};
+  for (const d of Object.keys(s.dayPageMap)) {
+    if (d < cutoffStr) delete s.dayPageMap[d];
+  }
+  if (Date.now() - (s.lastBlacklistReset || 0) > 24 * 60 * 60 * 1000) {
+    s.candidates = [];
+    s.blacklist = [];
+    s.lastBlacklistReset = Date.now();
+  }
+  s.candidates = s.candidates || [];
+  s.blacklist = s.blacklist || [];
+  return s;
+}
+
+const randomDefaults = Object.fromEntries(
+  Object.entries(randomStateSchema).map(([k, v]) => [
+    k,
+    v.default === "Date.now()" ? Date.now() : v.default,
+  ])
+);
+
+const randomStorage = createVersionedStorage("unsmurf_random_state", {
+  defaults: randomDefaults,
+  migrations: randomStateMigrations,
+  currentVersion: RANDOM_STATE_VERSION,
+  repair: repairRandomState,
+});
+
+function readRandomState() {
+  return randomStorage.read();
+}
+
+function saveRandomState(state) {
+  randomStorage.save(state);
+}
+
+export function pickRandomCandidate() {
+  const state = readRandomState();
+  if (state.candidates.length === 0) return null;
+  const idx = Math.floor(Math.random() * state.candidates.length);
+  const pick = state.candidates[idx];
+  state.candidates.splice(idx, 1);
+  const norm = pick.toLowerCase().replace(/\s+/g, "_");
+  if (!state.blacklist.includes(norm)) {
+    state.blacklist.push(norm);
+  }
+  saveRandomState(state);
+  return pick;
+}
+
+export function randomCandidateCount() {
+  return readRandomState().candidates.length;
+}
+
+export async function refillRandomCandidates() {
+  const state = readRandomState();
+
+  const now = new Date();
+  const available = [];
+  for (let i = 1; i <= 28; i++) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    const ds = fmtDate(d);
+    if (!state.completedDays.includes(ds)) {
+      available.push(ds);
+    }
+  }
+  if (available.length === 0) return false;
+
+  const day = available[Math.floor(Math.random() * available.length)];
+  const page = state.dayPageMap[day] || 1;
+  const d = new Date(day);
+  d.setDate(d.getDate() + 1);
+  const beforetime = fmtDate(d);
+  const url = `https://maki.kractero.com/api/trades-paginated?page=${page}&maxprice=0&sincetime=${day}&beforetime=${beforetime}&limit=50`;
+
+  let response;
+  try {
+    response = await fetch(url);
+  } catch (e) {
+    return false;
+  }
+  if (!response.ok) return false;
+
+  const data = await response.json();
+  const trades = data.trades || data || [];
+
+  for (const trade of trades) {
+    const seller = trade.seller;
+    if (!seller) continue;
+    const norm = seller.toLowerCase().replace(/\s+/g, "_");
+    if (state.blacklist.includes(norm)) continue;
+    const isKnownPuppet = puppetMasterCache && puppetMasterCache[norm];
+    const isKnownMaster = masterToPuppetsCache && masterToPuppetsCache[norm];
+    if (!isKnownPuppet && !isKnownMaster) {
+      state.candidates.push(seller);
+      state.blacklist.push(norm);
+    }
+  }
+
+  if (trades.length < 50) {
+    if (!state.completedDays.includes(day)) {
+      state.completedDays.push(day);
+    }
+    delete state.dayPageMap[day];
+  } else {
+    state.dayPageMap[day] = page + 1;
+  }
+
+  saveRandomState(state);
+  return state.candidates.length > 0;
 }

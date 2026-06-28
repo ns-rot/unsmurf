@@ -1,8 +1,9 @@
 <script>
   import { createEventDispatcher, onMount, tick } from "svelte";
-  import { settingsStore } from "./settingsStore.js";
+  import { settingsStore, resetSettings } from "./settingsStore.js";
   import LinkSelect from "./LinkSelect.svelte";
   import { fetchSheets } from "./sheetFetch.js";
+  import { refillRandomCandidates } from "./dataUtils.js";
 
   export let showConfig = false; // ✅ Prop to control visibility
   export let closeConfig; // ✅ Callback to close modal
@@ -14,8 +15,9 @@
     closeConfig();
   }
 
-  let clearing = false;
-  let cleared = false;
+  let clearing = null; // 'all' | 'sheets' | 'trades' | 'random' | null
+  let cleared = null;  // which action just succeeded
+  let showResetConfirm = false;
   let settingsScrollContainer;
   let observedSettingsScrollContainer;
   let settingsResizeObserver;
@@ -62,28 +64,87 @@
     };
   });
 
-  async function clearCache() {
-    clearing = true;
-    cleared = false;
-
-    // Clear trade cache from localStorage
+  function clearLocalStorageKeys(prefix) {
     Object.keys(localStorage).forEach((key) => {
-      if (key.startsWith("unsmurf_cache_")) {
-        localStorage.removeItem(key);
-      }
+      if (key.startsWith(prefix)) localStorage.removeItem(key);
     });
+  }
 
+  function flashCleared(action) {
+    cleared = action;
+    setTimeout(() => { cleared = null; }, 3000);
+  }
+
+  async function clearAll() {
+    clearing = 'all';
     try {
-      // Force refresh sheet data
+      clearLocalStorageKeys("unsmurf_cache_");
+      clearLocalStorageKeys("unsmurf_random_state");
+      if (typeof caches !== "undefined") {
+        await caches.delete("unsmurf-static-data");
+      }
       await fetchSheets(true);
-      cleared = true;
-      setTimeout(() => {
-        cleared = false;
-      }, 3000);
+      flashCleared('all');
     } catch (e) {
-      console.error("Failed to clear cache:", e);
+      console.error("Failed to clear all:", e);
     } finally {
-      clearing = false;
+      clearing = null;
+    }
+  }
+
+  function confirmResetSettings() {
+    showResetConfirm = true;
+  }
+
+  function executeReset() {
+    showResetConfirm = false;
+    clearLocalStorageKeys("unsmurfSettings");
+    resetSettings();
+  }
+
+  function cancelReset() {
+    showResetConfirm = false;
+  }
+
+  async function clearSheets() {
+    clearing = 'sheets';
+    try {
+      if (typeof caches !== "undefined") {
+        await caches.delete("unsmurf-static-data");
+      }
+      await fetchSheets(true);
+      flashCleared('sheets');
+    } catch (e) {
+      console.error("Failed to clear sheets:", e);
+    } finally {
+      clearing = null;
+    }
+  }
+
+  async function clearTradeCache() {
+    clearing = 'trades';
+    try {
+      clearLocalStorageKeys("unsmurf_cache_");
+      flashCleared('trades');
+    } catch (e) {
+      console.error("Failed to clear trade cache:", e);
+    } finally {
+      clearing = null;
+    }
+  }
+
+  async function clearRandomList() {
+    clearing = 'random';
+    try {
+      clearLocalStorageKeys("unsmurf_random_state");
+      while (!(await refillRandomCandidates())) {
+        // keep fetching until we get candidates or run out of days
+      }
+      flashCleared('random');
+    } catch (e) {
+      console.error("Failed to clear random list:", e);
+    } finally {
+      clearing = null;
     }
   }
 </script>
@@ -490,29 +551,131 @@
           Data Management
         </h3>
         <div
-          class="bg-red-50 dark:bg-red-900/20 p-4 rounded-xl border border-red-200 dark:border-red-800/30"
+          class="bg-red-50 dark:bg-red-900/20 p-4 rounded-xl border border-red-200 dark:border-red-800/30 space-y-4"
         >
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            Clear cached trade data and force a fresh sync of puppet mappings
-            from the source.
+          <!-- Refresh Puppet Sheets -->
+          <div class="flex items-start justify-between gap-4">
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              Clear and refetch cached puppet and CTE data.
+            </p>
+            <button
+              on:click={clearSheets}
+              disabled={clearing}
+              class="shrink-0 px-5 py-2 rounded-full border border-red-300 dark:border-red-700/50 text-red-600 dark:text-red-400 hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-all disabled:opacity-50 font-bold text-sm"
+            >
+              {#if clearing === 'sheets'}
+                Clearing...
+              {:else if cleared === 'sheets'}
+                Cleared
+              {:else}
+                Clear
+              {/if}
+            </button>
+          </div>
+
+          <!-- Clear Trade Cache -->
+          <div class="flex items-start justify-between gap-4">
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              Clear all cached trade lookups.
+            </p>
+            <button
+              on:click={clearTradeCache}
+              disabled={clearing}
+              class="shrink-0 px-5 py-2 rounded-full border border-red-300 dark:border-red-700/50 text-red-600 dark:text-red-400 hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-all disabled:opacity-50 font-bold text-sm"
+            >
+              {#if clearing === 'trades'}
+                Clearing...
+              {:else if cleared === 'trades'}
+                Cleared
+              {:else}
+                Clear
+              {/if}
+            </button>
+          </div>
+
+          <!-- Clear Random List -->
+          <div class="flex items-start justify-between gap-4">
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              Clear the cached random nation queue.
+            </p>
+            <button
+              on:click={clearRandomList}
+              disabled={clearing}
+              class="shrink-0 px-5 py-2 rounded-full border border-red-300 dark:border-red-700/50 text-red-600 dark:text-red-400 hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-all disabled:opacity-50 font-bold text-sm"
+            >
+              {#if clearing === 'random'}
+                Clearing...
+              {:else if cleared === 'random'}
+                Cleared
+              {:else}
+                Clear
+              {/if}
+            </button>
+          </div>
+
+          <!-- Clear All Data -->
+          <div class="flex items-start justify-between gap-4">
+            <span class="flex-1"></span>
+            <button
+              on:click={clearAll}
+              disabled={clearing}
+              class="shrink-0 px-6 py-2 rounded-full border-2 border-red-500 text-red-600 dark:text-red-400 font-bold hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-all disabled:opacity-50"
+            >
+              {#if clearing === 'all'}
+                Clearing...
+              {:else if cleared === 'all'}
+                Cleared
+              {:else}
+                Clear All
+              {/if}
+            </button>
+          </div>
+
+          <hr class="border-red-200 dark:border-red-800/30">
+
+          <!-- Reset Settings -->
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Restore all settings to their default values. This cannot be undone.
           </p>
           <div class="flex justify-end">
             <button
-              on:click={clearCache}
-              disabled={clearing}
-              class="flex items-center justify-center gap-2 px-8 py-3 rounded-full border border-red-300 dark:border-red-700/50 text-red-600 dark:text-red-400 hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-all disabled:opacity-50 font-bold"
+              on:click={confirmResetSettings}
+              class="shrink-0 px-6 py-2 rounded-full border-2 border-red-500 text-red-600 dark:text-red-400 font-bold hover:bg-red-500 hover:text-white dark:hover:bg-red-500 dark:hover:text-white transition-all"
             >
-              {#if clearing}
-                Clearing...
-              {:else if cleared}
-                Cache Cleared
-              {:else}
-                Clear All Cached Data
-              {/if}
+              Reset Settings
             </button>
           </div>
         </div>
       </div>
+
+      {#if showResetConfirm}
+        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" on:click={cancelReset}>
+          <div class="mx-4 flex flex-col items-center gap-2" on:click|stopPropagation>
+            <div class="bg-white dark:bg-gray-800 midnight:!bg-black rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 midnight:!border-gray-600 max-w-sm w-full overflow-clip">
+              <div class="px-8 py-6">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">Reset Settings?</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                  This will restore all settings to their default values and cannot be undone.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center justify-between gap-2 w-full">
+              <button
+                on:click={cancelReset}
+                class="font-bold py-3 px-8 rounded-full transition bg-white dark:bg-gray-800 midnight:!bg-black midnight:!border midnight:!border-gray-700 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+              >
+                Cancel
+              </button>
+              <button
+                on:click={executeReset}
+                class="font-bold py-3 px-8 rounded-full transition shadow-md bg-red-500 hover:bg-red-600 text-white"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      {/if}
       </div>
       </div>
 

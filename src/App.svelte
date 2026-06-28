@@ -26,16 +26,19 @@
   import QnA from "./QnA.svelte";
   import NationLinkPopup from "./NationLinkPopup.svelte";
 
-  import {
-    fetchData,
-    tallyCounts,
-    makeTallyColumns,
-    makeTallyRows,
-    makeTradeColumns,
-    makeGiftColumns,
-    makeTradeRows,
-    makeGiftRows,
-  } from "./dataUtils";
+import {
+  fetchData,
+  tallyCounts,
+  makeTallyColumns,
+  makeTallyRows,
+  makeTradeColumns,
+  makeGiftColumns,
+  makeTradeRows,
+  makeGiftRows,
+  pickRandomCandidate,
+  refillRandomCandidates,
+  randomCandidateCount,
+} from "./dataUtils";
 
   let mode = "cards";
 
@@ -44,6 +47,7 @@
 
   let nationId = "";
   let loading = false;
+  let randomLoading = false;
   let buys = [];
   let sells = [];
   let buyTallyTrades = [];
@@ -121,6 +125,29 @@
     loadedNationId = canonicalizeName(safeNation);
 
     loading = false;
+  }
+
+  async function handleRandom() {
+    randomLoading = true;
+    try {
+      let pick = pickRandomCandidate();
+      while (!pick) {
+        if (!(await refillRandomCandidates())) break;
+        pick = pickRandomCandidate();
+      }
+      if (pick) {
+        nationId = pick;
+        await loadTradeData();
+        nationId = uncanonicalizeName(pick);
+        if (randomCandidateCount() === 0) {
+          await refillRandomCandidates();
+        }
+      } else {
+        alert("No random candidates available right now.");
+      }
+    } finally {
+      randomLoading = false;
+    }
   }
 
   function openConfig() {
@@ -270,7 +297,7 @@
     }
 
     if (fromURL) {
-      nationId = canonicalizeName(fromURL);
+      nationId = uncanonicalizeName(fromURL);
       await loadTradeData();
     }
   });
@@ -370,11 +397,11 @@
 
   {#if currentView === 'trades'}
     <div class="w-full max-w-xl">
-      <UnsmurfTrades bind:nationId {loadTradeData} {loading} />
+      <UnsmurfTrades bind:nationId {loadTradeData} {loading} randomLoading={randomLoading} onRandom={handleRandom} />
 
       {#if nationId.trim().length > 2 && canonicalizedName !== loadedNationId}
         <div class="bg-white dark:bg-gray-800 midnight:!bg-black midnight:!border midnight:!border-gray-600 rounded-xl shadow-lg mt-2">
-          <NationAlert {nationId} preview onSelect={(name) => { nationId = name; loadTradeData(); }} />
+          <NationAlert {nationId} preview onSelect={(name) => { nationId = uncanonicalizeName(name); loadTradeData(); }} />
         </div>
       {/if}
     </div>
