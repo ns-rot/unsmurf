@@ -11,6 +11,14 @@
 	<link rel='stylesheet' href='./build/tailwind.css'>
 	<link rel='stylesheet' href='./build/bundle.css'>
 	<script>
+		if (location.pathname.includes('/beta/')) {
+			var _g = Storage.prototype.getItem, _s = Storage.prototype.setItem, _r = Storage.prototype.removeItem;
+			Storage.prototype.getItem = function(k) { return _g.call(this, 'beta_' + k); };
+			Storage.prototype.setItem = function(k, v) { return _s.call(this, 'beta_' + k, v); };
+			Storage.prototype.removeItem = function(k) { return _r.call(this, 'beta_' + k); };
+		}
+	</script>
+	<script>
 		try {
 			const settings = JSON.parse(localStorage.getItem('unsmurfSettings') || '{}');
 			let isDark = false;
