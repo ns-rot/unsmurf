@@ -10,7 +10,8 @@
     "dev": "concurrently \"npm run dev:css\" \"rollup -c -w\"",
     "dev:css": "tailwindcss -i ./src/input.css -o ./public/build/tailwind.css --watch",
     "start": "sirv public --no-clear",
-    "deploy": "npm run build && gh-pages -d public",
+    "deploy": "npm run build && gh-pages -d public --add",
+    "deploy:beta": "npm run build && gh-pages -d public --dest beta --add",
     "aggregate": "node aggregateData.js"
   },
   "devDependencies": {
