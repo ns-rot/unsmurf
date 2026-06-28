@@ -16,8 +16,10 @@
 			Storage.prototype.getItem = function(k) { return _g.call(this, 'beta_' + k); };
 			Storage.prototype.setItem = function(k, v) { return _s.call(this, 'beta_' + k, v); };
 			Storage.prototype.removeItem = function(k) { return _r.call(this, 'beta_' + k); };
+			document.documentElement.classList.add('beta');
 		}
 	</script>
+	<style>.beta h1::after{content:" (Beta)";font-size:.6em;font-weight:400;opacity:.6;margin-left:.5em}</style>
 	<script>
 		try {
 			const settings = JSON.parse(localStorage.getItem('unsmurfSettings') || '{}');
