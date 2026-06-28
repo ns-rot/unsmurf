@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width,initial-scale=1,interactive-widget=resizes-content'>
+
+	<title>Unsmurf</title>
+
+	<link rel='icon' type='image/svg' href='./unsmurf.svg'>
+	<link rel='stylesheet' href='./build/tailwind.css'>
+	<link rel='stylesheet' href='./build/bundle.css'>
+	<script>
+		try {
+			const settings = JSON.parse(localStorage.getItem('unsmurfSettings') || '{}');
+			let isDark = false;
+			if (settings.theme === 'dark' || settings.darkMode === true) {
+				isDark = true;
+			} else if (settings.theme === 'system' || !settings.theme) {
+				isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			}
+			if (isDark) {
+				document.documentElement.classList.add('dark');
+				if (settings.midnightMode) {
+					document.documentElement.classList.add('midnight');
+				}
+			}
+		} catch (e) {
+			console.error('Failed to initialize theme', e);
+		}
+	</script>
+
+	<script defer src='./build/bundle.js'></script>
+</head>
+
+<body>
+</body>
+
+</html>
