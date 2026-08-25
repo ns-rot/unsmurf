@@ -363,6 +363,8 @@ async function processGoogleSheets() {
       if (e.code !== 'ENOENT') throw e;
     }
 
+    await fs.writeFile(CONFIG.paths.main, content, 'utf8');
+
     // Generate and write JSON with Frequency Sorting (Huffman-like optimization for indices)
 
     // 1. Count frequencies
