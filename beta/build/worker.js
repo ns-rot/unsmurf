@@ -8,6 +8,7 @@ const currentNationsUrl = "https://raw.githubusercontent.com/ns-rot/unsmurf/data
 let puppetMasterCache = {};
 let masterToPuppetsCache = {};
 let currentNationSet = new Set();
+let puppetDataVersion = 1;
 
 self.onmessage = async (e) => {
     const { type, auxUrl, auxData, forceRefresh } = e.data;
@@ -20,6 +21,7 @@ self.onmessage = async (e) => {
             self.postMessage({
                 type: 'success',
                 payload: {
+                    puppetDataVersion,
                     puppetMasterCache,
                     masterToPuppetsCache, // This will be sent as a plain object/array structure
                     currentNationList: Array.from(currentNationSet)
@@ -46,6 +48,9 @@ async function fetchData(auxUrl, auxData, forceRefresh) {
     }
 
     const [puppetData, currentNations, fetchedAuxData] = await Promise.all(promises);
+
+    // Record the schema version of the fetched puppet data (older clients keep parsing v1 rows)
+    puppetDataVersion = typeof puppetData?.version === 'number' ? puppetData.version : 1;
 
     // Process Main Puppet Data (JSON)
     processGroupedJson(puppetData);
@@ -103,26 +108,28 @@ async function fetchWithCache(url, force = false) {
 }
 
 function processGroupedJson(data) {
-    const { masters, sheets, puppets, sourceSheets } = data;
+    const { masters, sheets, puppets, version } = data;
 
-    // Additional source sheets per puppet (secondary sheets that identified the same master)
-    const extraSheetsByPuppet = new Map();
-    if (Array.isArray(sourceSheets)) {
-        for (const [pIdx, sIdx] of sourceSheets) {
-            if (!extraSheetsByPuppet.has(pIdx)) extraSheetsByPuppet.set(pIdx, []);
-            extraSheetsByPuppet.get(pIdx).push(sheets[sIdx]);
-        }
-    }
-
-    // Reconstruct from dictionary encoding
+    // Reconstruct from dictionary encoding.
+    // Each row is [puppet, masterIdx, sheet] where sheet is either a plain dictionary
+    // index (legacy data, < v2) or a bitmask over the sheets list (v2+): bit n = sheets[n]
+    // identified this puppet under its winning master; bit 0 is the winner's sheet.
     for (let idx = 0; idx < puppets.length; idx++) {
-        const [puppet, mIdx, sIdx] = puppets[idx];
+        const [puppet, mIdx, sIdxOrMask] = puppets[idx];
         const master = masters[mIdx];
-        const sheet = sheets[sIdx];
 
-        const entry = { master, sheet };
-        const extras = extraSheetsByPuppet.get(idx);
-        if (extras && extras.length) entry.sheets = [sheet, ...extras];
+        let sheetList;
+        if (version === 2) {
+            sheetList = [];
+            for (let i = 0, m = sIdxOrMask; m > 0; i++, m >>= 1) {
+                if (m & 1) sheetList.push(sheets[i]);
+            }
+        } else {
+            sheetList = [sheets[sIdxOrMask]];
+        }
+
+        const entry = { master, sheet: sheetList[0] };
+        if (sheetList.length > 1) entry.sheets = sheetList;
 
         // Cache: Puppet -> Master
         puppetMasterCache[puppet] = entry;
