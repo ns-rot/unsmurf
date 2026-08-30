@@ -15,33 +15,58 @@
   let sortMode = 0;
 
   const palette = [
-    "bg-[rgb(0,114,178)]",   // Blue
-    "bg-[rgb(213,94,0)]",    // Orange
     "bg-[rgb(0,158,115)]",   // Green
+    "bg-[rgb(0,114,178)]",   // Blue
+    "bg-[rgb(86,180,233)]",  // Cyan
     "bg-[rgb(204,121,167)]", // Purple/Pink
+    "bg-[rgb(213,94,0)]",    // Orange
     "bg-[rgb(230,159,0)]",   // Yellow
-    "bg-[rgb(86,180,233)]",  // Light Blue
     "bg-[rgb(240,228,66)]",  // Light Yellow
     "bg-[rgb(0,0,0)]",       // Black
   ];
 
+  const paletteRgb = [
+    "rgb(0,158,115)",
+    "rgb(0,114,178)",
+    "rgb(86,180,233)",
+    "rgb(204,121,167)",
+    "rgb(213,94,0)",
+    "rgb(230,159,0)",
+    "rgb(240,228,66)",
+    "rgb(0,0,0)",
+  ];
+
   // Dynamically build color mapping from actual sheet names in cache
   function buildSourceColors() {
-    if (!puppetMasterCache) return { default: "bg-gray-500" };
+    if (!puppetMasterCache) return { colors: { default: "bg-gray-500" }, order: [] };
     const sheets = new Set();
     for (const e of Object.values(puppetMasterCache)) {
       (e?.sheets || [e?.sheet]).filter(Boolean).forEach(s => sheets.add(s.toLowerCase()));
     }
     const colors = {};
+    const order = [];
     [...sheets].forEach((sheet, i) => {
       colors[sheet] = palette[i % palette.length];
+      order.push(sheet);
     });
     colors.default = "bg-gray-500";
-    return colors;
+    return { colors, order };
   }
 
   // Reactive source colors - updates when cache is loaded
-  $: sourceColors = buildSourceColors();
+  $: ({ colors: sourceColors, order: sourceOrder } = buildSourceColors());
+
+  // Equal-angle conic gradient split across source colors
+  function conicStops(sheets) {
+    const n = sheets.length;
+    return sheets
+      .map((s, i) => {
+        const idx = sourceOrder.indexOf(s);
+        const col = idx === -1 ? "rgb(107,114,128)" : paletteRgb[idx % paletteRgb.length];
+        return `${col} ${((i / n) * 100).toFixed(2)}% ${(((i + 1) / n) * 100).toFixed(2)}%`;
+      })
+      .join(", ");
+  }
 
   function getSourceSheets(puppet) {
     if (!$settingsStore.showSource) return [];
@@ -367,12 +392,17 @@
                 {/if}
                 {#if $settingsStore.showSource}
                   {@const srcs = getSourceSheets(puppet)}
-                  {#if srcs.length > 0}
-                    <span class="flex flex-shrink-0 gap-0.5 mt-1">
-                      {#each srcs as s (s)}
-                        <span class="w-2 h-2 rounded-full {sourceColors[s] || 'bg-gray-500'}" title="Data source: {s.charAt(0).toUpperCase() + s.slice(1)}"></span>
-                      {/each}
-                    </span>
+                  {#if srcs.length === 1}
+                    <span
+                      class="w-2 h-2 rounded-full flex-shrink-0 mt-1 {sourceColors[srcs[0]] || 'bg-gray-500'}"
+                      title="Data source: {srcs[0].charAt(0).toUpperCase() + srcs[0].slice(1)}"
+                    ></span>
+                  {:else if srcs.length > 1}
+                    <span
+                      class="w-2 h-2 rounded-full flex-shrink-0 mt-1"
+                      style="background: conic-gradient({conicStops(srcs)})"
+                      title="Data source: {srcs.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(', ')}"
+                    ></span>
                   {/if}
                 {/if}
                 <a
