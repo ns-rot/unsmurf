@@ -103,15 +103,29 @@ async function fetchWithCache(url, force = false) {
 }
 
 function processGroupedJson(data) {
-    const { masters, sheets, puppets } = data;
+    const { masters, sheets, puppets, sourceSheets } = data;
+
+    // Additional source sheets per puppet (secondary sheets that identified the same master)
+    const extraSheetsByPuppet = new Map();
+    if (Array.isArray(sourceSheets)) {
+        for (const [pIdx, sIdx] of sourceSheets) {
+            if (!extraSheetsByPuppet.has(pIdx)) extraSheetsByPuppet.set(pIdx, []);
+            extraSheetsByPuppet.get(pIdx).push(sheets[sIdx]);
+        }
+    }
 
     // Reconstruct from dictionary encoding
-    for (const [puppet, mIdx, sIdx] of puppets) {
+    for (let idx = 0; idx < puppets.length; idx++) {
+        const [puppet, mIdx, sIdx] = puppets[idx];
         const master = masters[mIdx];
         const sheet = sheets[sIdx];
 
+        const entry = { master, sheet };
+        const extras = extraSheetsByPuppet.get(idx);
+        if (extras && extras.length) entry.sheets = [sheet, ...extras];
+
         // Cache: Puppet -> Master
-        puppetMasterCache[puppet] = { master, sheet };
+        puppetMasterCache[puppet] = entry;
 
         // Cache: Master -> Puppets
         // Optimization: masterToPuppets maps to a Set initially for fast localized dedup logic if needed,
@@ -151,18 +165,23 @@ function processTsvClientSide(tsvData) {
             const tab2 = tsvData.indexOf('\t', tab1 + 1);
 
             const puppet = normalize(tsvData.substring(start, tab1));
-            let master, sheet;
+            let master, sheet, extras;
 
             if (tab2 !== -1 && tab2 < lineEnd) {
                 master = normalize(tsvData.substring(tab1 + 1, tab2));
-                sheet = normalize(tsvData.substring(tab2 + 1, lineEnd));
+                const cols = tsvData.substring(tab2 + 1, lineEnd).split('\t');
+                sheet = normalize(cols[0]);
+                extras = cols.slice(1).map(c => normalize(c)).filter(Boolean);
             } else {
                 master = normalize(tsvData.substring(tab1 + 1, lineEnd));
                 sheet = "";
+                extras = [];
             }
 
             if (puppet && master) {
-                puppetMasterCache[puppet] = { master, sheet };
+                const entry = { master, sheet };
+                if (extras.length) entry.sheets = [sheet, ...extras];
+                puppetMasterCache[puppet] = entry;
 
                 if (puppet !== master) {
                     if (!masterToPuppetsCache[master]) masterToPuppetsCache[master] = [];
