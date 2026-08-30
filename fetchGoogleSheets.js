@@ -137,9 +137,15 @@ class RegexProcessor {
 async function processGoogleSheets() {
   const startTime = Date.now();
   const tsvLines = ['puppet\tmaster\tsheet'];
-  const seenPuppets = new Set();
+  const seenPuppets = new Map();
+  const identifications = new Map();
   const log = (msg) => console.log(msg);
   const logStep = (num, title) => log(`\n=== STEP ${num}: ${title} ===`);
+  const addIdentification = (puppet, master, sheet) => {
+    const entries = identifications.get(puppet);
+    if (!entries) { identifications.set(puppet, [{ master, sheet }]); return; }
+    if (!entries.some(e => e.master === master && e.sheet === sheet)) entries.push({ master, sheet });
+  };
 
   try {
     // STEP 1: Direct puppets
@@ -150,8 +156,10 @@ async function processGoogleSheets() {
       for (const { cols, line } of data) {
         const puppet = normalize(cols[sheet.puppetColumn], { sheet: sheet.name, row: line });
         const master = normalize(cols[sheet.mainColumn], { sheet: sheet.name, row: line });
-        if (puppet && master && !seenPuppets.has(puppet)) {
-          seenPuppets.add(puppet);
+        if (!puppet || !master) continue;
+        addIdentification(puppet, master, sheet.name);
+        if (!seenPuppets.has(puppet)) {
+          seenPuppets.set(puppet, { master, sheet: sheet.name });
           tsvLines.push(`${puppet}\t${master}\t${sheet.name}`);
           count++;
         }
@@ -264,7 +272,6 @@ async function processGoogleSheets() {
     const testStart = Date.now();
 
     await streamBrotli(CONFIG.paths.nations, (nation) => { nation = cleanStr(nation);
-      if (seenPuppets.has(nation)) return;
       tested++;
 
       try {
@@ -275,9 +282,14 @@ async function processGoogleSheets() {
             const idx = processor.getMatchIndex(result);
             if (idx >= 0 && idx < pts.length) {
               const detail = pts[idx];
+              if (seenPuppets.has(nation)) {
+                addIdentification(nation, detail.master, detail.sheetName);
+                break;
+              }
               const key = `${nation}\t${detail.master}`;
               if (!excludeSet.has(key)) {
-                seenPuppets.add(nation);
+                addIdentification(nation, detail.master, detail.sheetName);
+                seenPuppets.set(nation, { master: detail.master, sheet: detail.sheetName });
                 tsvLines.push(`${nation}\t${detail.master}\t${detail.sheetName}`);
                 matched++;
                 matchStats[detail.master] = (matchStats[detail.master] || 0) + 1;
@@ -332,6 +344,72 @@ async function processGoogleSheets() {
         }
       }
       log(`Applied ${redirectCount} redirects`);
+    }
+
+    // STEP 7.5: Post-redirect overlap & conflict analysis
+    logStep('7.5', 'Analyzing post-redirect identifications');
+    const sheetRank = new Map();
+    let rankCounter = 0;
+    for (const list of [CONFIG.sheets, CONFIG.regexSheets, CONFIG.excludeSheets, CONFIG.redirSheets]) {
+      for (const s of list) if (!sheetRank.has(s.name)) sheetRank.set(s.name, rankCounter++);
+    }
+    const rankOf = (n) => sheetRank.get(n) ?? rankCounter;
+    const orderedSheets = (names) => names.sort((a, b) => rankOf(a) - rankOf(b));
+    const joinSheets = (names) => names.length === 2
+      ? names.join(' and ')
+      : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+
+    const tally = new Map();
+    const singleSheetTally = new Map();
+    const conflictList = [];
+    for (const [puppet, entries] of identifications) {
+      const states = new Map();
+      for (const { master, sheet } of entries) {
+        const resolved = redirs.get(master) || master;
+        if (!states.has(resolved)) states.set(resolved, new Set());
+        states.get(resolved).add(sheet);
+      }
+      if (states.size === 1) {
+        const sheets = [...states.values()][0];
+        if (sheets.size >= 2) {
+          const key = joinSheets(orderedSheets([...sheets]));
+          tally.set(key, (tally.get(key) || 0) + 1);
+        } else {
+          const [sheet] = sheets;
+          singleSheetTally.set(sheet, (singleSheetTally.get(sheet) || 0) + 1);
+        }
+      } else {
+        conflictList.push({ puppet, states });
+      }
+    }
+
+    if (conflictList.length) {
+      const conflictKey = ({ states }) => [...states.keys()].sort()[0];
+      conflictList.sort((a, b) => {
+        const ma = conflictKey(a), mb = conflictKey(b);
+        if (ma !== mb) return ma < mb ? -1 : 1;
+        return a.puppet < b.puppet ? -1 : (a.puppet > b.puppet ? 1 : 0);
+      });
+      log(`\nNation conflicts after redirects (${conflictList.length}):`);
+      for (const { puppet, states } of conflictList) {
+        const parts = [...states.entries()].sort((a, b) => (a[0] < b[0] ? -1 : 1))
+          .map(([master, sheets]) => `${master} (${orderedSheets([...sheets]).join(', ')})`);
+        log(`  ${puppet}: ${parts.join('; ')}`);
+      }
+    }
+
+    if (tally.size) {
+      log(`\nNations identified by multiple sheets after redirects:`);
+      for (const [key, c] of [...tally.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))) {
+        log(`  identified ${key}: ${c} nations`);
+      }
+    }
+
+    if (singleSheetTally.size) {
+      log(`\nNations identified by a single sheet after redirects:`);
+      for (const [key, c] of [...singleSheetTally.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))) {
+        log(`  identified ${key}: ${c} nations`);
+      }
     }
 
     // STEP 8: Sort
