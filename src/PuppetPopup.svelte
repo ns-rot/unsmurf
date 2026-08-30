@@ -28,9 +28,12 @@
   // Dynamically build color mapping from actual sheet names in cache
   function buildSourceColors() {
     if (!puppetMasterCache) return { default: "bg-gray-500" };
-    const sheets = [...new Set(Object.values(puppetMasterCache).map(e => e?.sheet?.toLowerCase()).filter(Boolean))];
+    const sheets = new Set();
+    for (const e of Object.values(puppetMasterCache)) {
+      (e?.sheets || [e?.sheet]).filter(Boolean).forEach(s => sheets.add(s.toLowerCase()));
+    }
     const colors = {};
-    sheets.forEach((sheet, i) => {
+    [...sheets].forEach((sheet, i) => {
       colors[sheet] = palette[i % palette.length];
     });
     colors.default = "bg-gray-500";
@@ -40,12 +43,11 @@
   // Reactive source colors - updates when cache is loaded
   $: sourceColors = buildSourceColors();
 
-  function getSourceColor(puppet) {
-    if (!$settingsStore.showSource) return null;
+  function getSourceSheets(puppet) {
+    if (!$settingsStore.showSource) return [];
     const entry = findPuppetmaster(canonicalizeName(puppet));
-    const sheet = entry?.sheet?.toLowerCase();
-    if (!sheet) return "bg-gray-500";
-    return sourceColors[sheet] || "bg-gray-500";
+    if (!entry || entry.sheets.length === 0) return [];
+    return [...new Set(entry.sheets.map(s => s?.toLowerCase()).filter(Boolean))];
   }
 
   function toggleSort() {
@@ -85,10 +87,7 @@
   $: activePuppetCount = countActivePuppets(puppetList);
 
   // Unique sources in current puppet list for dynamic legend
-  $: usedSources = [...new Set(sortedPuppetList.map(p => {
-    const entry = findPuppetmaster(canonicalizeName(p));
-    return entry?.sheet?.toLowerCase();
-  }).filter(Boolean))];
+  $: usedSources = [...new Set(sortedPuppetList.flatMap(p => getSourceSheets(p)).filter(Boolean))];
 
   function getSortTitle(mode) {
     if (mode === 1) return "Sorting by Status (Active First)";
@@ -367,9 +366,13 @@
                   >
                 {/if}
                 {#if $settingsStore.showSource}
-                  {@const color = getSourceColor(puppet)}
-                  {#if color}
-                    <span class="w-2 h-2 rounded-full {color} flex-shrink-0 mt-1" title="Data source: {findPuppetmaster(canonicalizeName(puppet))?.sheet || 'Unknown'}"></span>
+                  {@const srcs = getSourceSheets(puppet)}
+                  {#if srcs.length > 0}
+                    <span class="flex flex-shrink-0 gap-0.5 mt-1">
+                      {#each srcs as s (s)}
+                        <span class="w-2 h-2 rounded-full {sourceColors[s] || 'bg-gray-500'}" title="Data source: {s.charAt(0).toUpperCase() + s.slice(1)}"></span>
+                      {/each}
+                    </span>
                   {/if}
                 {/if}
                 <a

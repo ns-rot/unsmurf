@@ -8,6 +8,7 @@ const currentNationsUrl = "https://raw.githubusercontent.com/ns-rot/unsmurf/data
 let puppetMasterCache = {};
 let masterToPuppetsCache = {};
 let currentNationSet = new Set();
+let puppetDataVersion = 1;
 
 self.onmessage = async (e) => {
     const { type, auxUrl, auxData, forceRefresh } = e.data;
@@ -20,6 +21,7 @@ self.onmessage = async (e) => {
             self.postMessage({
                 type: 'success',
                 payload: {
+                    puppetDataVersion,
                     puppetMasterCache,
                     masterToPuppetsCache, // This will be sent as a plain object/array structure
                     currentNationList: Array.from(currentNationSet)
@@ -46,6 +48,9 @@ async function fetchData(auxUrl, auxData, forceRefresh) {
     }
 
     const [puppetData, currentNations, fetchedAuxData] = await Promise.all(promises);
+
+    // Record the schema version of the fetched puppet data (older clients keep parsing v1 rows)
+    puppetDataVersion = typeof puppetData?.version === 'number' ? puppetData.version : 1;
 
     // Process Main Puppet Data (JSON)
     processGroupedJson(puppetData);
@@ -103,15 +108,31 @@ async function fetchWithCache(url, force = false) {
 }
 
 function processGroupedJson(data) {
-    const { masters, sheets, puppets } = data;
+    const { masters, sheets, puppets, version } = data;
 
-    // Reconstruct from dictionary encoding
-    for (const [puppet, mIdx, sIdx] of puppets) {
+    // Reconstruct from dictionary encoding.
+    // Each row is [puppet, masterIdx, sheet] where sheet is either a plain dictionary
+    // index (legacy data, < v2) or a bitmask over the sheets list (v2+): bit n = sheets[n]
+    // identified this puppet under its winning master; bit 0 is the winner's sheet.
+    for (let idx = 0; idx < puppets.length; idx++) {
+        const [puppet, mIdx, sIdxOrMask] = puppets[idx];
         const master = masters[mIdx];
-        const sheet = sheets[sIdx];
+
+        let sheetList;
+        if (version === 2) {
+            sheetList = [];
+            for (let i = 0, m = sIdxOrMask; m > 0; i++, m >>= 1) {
+                if (m & 1) sheetList.push(sheets[i]);
+            }
+        } else {
+            sheetList = [sheets[sIdxOrMask]];
+        }
+
+        const entry = { master, sheet: sheetList[0] };
+        if (sheetList.length > 1) entry.sheets = sheetList;
 
         // Cache: Puppet -> Master
-        puppetMasterCache[puppet] = { master, sheet };
+        puppetMasterCache[puppet] = entry;
 
         // Cache: Master -> Puppets
         // Optimization: masterToPuppets maps to a Set initially for fast localized dedup logic if needed,
@@ -151,18 +172,23 @@ function processTsvClientSide(tsvData) {
             const tab2 = tsvData.indexOf('\t', tab1 + 1);
 
             const puppet = normalize(tsvData.substring(start, tab1));
-            let master, sheet;
+            let master, sheet, extras;
 
             if (tab2 !== -1 && tab2 < lineEnd) {
                 master = normalize(tsvData.substring(tab1 + 1, tab2));
-                sheet = normalize(tsvData.substring(tab2 + 1, lineEnd));
+                const cols = tsvData.substring(tab2 + 1, lineEnd).split('\t');
+                sheet = normalize(cols[0]);
+                extras = cols.slice(1).map(c => normalize(c)).filter(Boolean);
             } else {
                 master = normalize(tsvData.substring(tab1 + 1, lineEnd));
                 sheet = "";
+                extras = [];
             }
 
             if (puppet && master) {
-                puppetMasterCache[puppet] = { master, sheet };
+                const entry = { master, sheet };
+                if (extras.length) entry.sheets = [sheet, ...extras];
+                puppetMasterCache[puppet] = entry;
 
                 if (puppet !== master) {
                     if (!masterToPuppetsCache[master]) masterToPuppetsCache[master] = [];

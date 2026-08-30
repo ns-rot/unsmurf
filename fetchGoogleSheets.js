@@ -467,8 +467,34 @@ async function processGoogleSheets() {
         ? (a.master < b.master ? -1 : 1)
         : (a.puppet < b.puppet ? -1 : (a.puppet > b.puppet ? 1 : 0))
     );
-    const content = [tsvLines[0], ...data.map(p => p.original)].join('\n');
+
+    // Attach extra source sheets: additional sheets that identified this puppet under its winning master.
+    // Alternate masters are deliberately not emitted (the primary winner stays canonical in the output files).
+    const extraSheets = new Map();
+    for (const { puppet, master, sheet } of data) {
+      const entries = identifications.get(puppet);
+      if (!entries) continue;
+      const extras = [];
+      for (const e of entries) {
+        if (e.sheet === sheet) continue;
+        if ((redirs.get(e.master) || e.master) !== master) continue;
+        if (!extras.includes(e.sheet)) extras.push(e.sheet);
+      }
+      if (extras.length) extraSheets.set(puppet, orderedSheets([...extras]));
+    }
+    let maxExtras = 0;
+    for (const v of extraSheets.values()) if (v.length > maxExtras) maxExtras = v.length;
+
+    const header = ['puppet', 'master', 'sheet'];
+    for (let i = 2; i < 2 + maxExtras; i++) header.push(`sheet${i}`);
+    const rowOf = (d) => {
+      const cols = [d.puppet, d.master, d.sheet, ...(extraSheets.get(d.puppet) || [])];
+      while (cols.length < header.length) cols.push('');
+      return cols.join('\t');
+    };
+    const content = [header.join('\t'), ...data.map(rowOf)].join('\n');
     log(`Total entries: ${data.length}`);
+    if (extraSheets.size) log(`  ${extraSheets.size} puppets carry additional source sheets`);
 
     // STEP 9: Commit to data branch (Orphan strategy)
     logStep(9, 'Writing and committing');
@@ -506,14 +532,18 @@ async function processGoogleSheets() {
     const mastersMap = new Map(mastersList.map((m, i) => [m, i]));
     const sheetsMap = new Map(sheetsList.map((s, i) => [s, i]));
 
-    // 4. Build puppets list using these sorted indices
-    const puppetsList = data.map(({ puppet, master, sheet }) => [
-      puppet,
-      mastersMap.get(master),
-      sheetsMap.get(sheet)
-    ]);
+    // 4. Build puppets list using these sorted indices, with source sheets encoded as a bitmask
+    // (bit n = sheets[n] identified this puppet under its winning master; bit 0 = the winner's sheet).
+    const extraCount = [...extraSheets.values()].reduce((sum, v) => sum + v.length, 0);
+    const puppetsList = data.map(({ puppet, master, sheet }) => {
+      let mask = 1 << sheetsMap.get(sheet);
+      const extras = extraSheets.get(puppet);
+      if (extras) for (const s of extras) mask |= 1 << sheetsMap.get(s);
+      return [puppet, mastersMap.get(master), mask];
+    });
 
     const jsonContent = JSON.stringify({
+      version: 2,
       masters: mastersList,
       sheets: sheetsList,
       puppets: puppetsList
@@ -536,7 +566,7 @@ async function processGoogleSheets() {
     // Log file sizes
     const tsvStats = await fs.stat(CONFIG.paths.main);
     const jsonStats = await fs.stat(CONFIG.paths.main.replace('.tsv', '.json'));
-    log(`Generated puppetData.json: ${mastersList.length} masters, ${sheetsList.length} sheets, ${puppetsList.length} puppets`);
+    log(`Generated puppetData.json: ${mastersList.length} masters, ${sheetsList.length} sheets, ${puppetsList.length} puppets${extraCount ? `, ${extraCount} extra sheets` : ''}`);
     log(`  Optimization: Most frequent master '${mastersList[0]}' (${masterCounts[mastersList[0]]} occurrences) assigned index 0.`);
     log(`  TSV Size: ${(tsvStats.size / 1024 / 1024).toFixed(2)} MB`);
     log(`  JSON Size: ${(jsonStats.size / 1024 / 1024).toFixed(2)} MB`);

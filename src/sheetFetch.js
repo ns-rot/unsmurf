@@ -1,6 +1,16 @@
 // sheetFetch.js
 
 import { settingsStore } from "./settingsStore";
+import { createVersionedStorage } from "./storageUtils";
+
+// Tracks the puppetData.json schema version this deployment understands.
+// If a previous session stored an older schema, we bypass the HTTP cache and refetch.
+const DATA_SCHEMA_KEY = "unsmurfDataSchema";
+const DATA_SCHEMA_VERSION = 2;
+const dataSchemaStorage = createVersionedStorage(DATA_SCHEMA_KEY, {
+  defaults: { schema: 1 },
+  currentVersion: 1,
+});
 
 export let puppetMasterCache = null; // Cache for puppet-master mappings
 export let masterToPuppetsCache = null; // Reverse cache for master-to-puppet mappings
@@ -28,6 +38,13 @@ export async function fetchSheets(forceRefresh = false) {
         currentNationsCache = payload.currentNationList;
         currentNationSet = new Set(payload.currentNationList);
 
+        if (typeof payload.puppetDataVersion === 'number') {
+          if (payload.puppetDataVersion !== DATA_SCHEMA_VERSION) {
+            console.warn(`Server data uses schema v${payload.puppetDataVersion}, this build expects v${DATA_SCHEMA_VERSION}.`);
+          }
+          dataSchemaStorage.save({ schema: DATA_SCHEMA_VERSION, version: 1 });
+        }
+
         console.log(`Loaded ${Object.keys(puppetMasterCache).length} puppets.`);
         console.log(`Loaded ${Object.keys(masterToPuppetsCache).length} masters with puppets.`);
 
@@ -51,12 +68,19 @@ export async function fetchSheets(forceRefresh = false) {
       reject(err);
     };
 
+    // Force a refetch if a schema bump is pending from an earlier session
+    const storedSchema = dataSchemaStorage.read().schema || 1;
+    const force = forceRefresh || storedSchema < DATA_SCHEMA_VERSION;
+    if (force && !forceRefresh) {
+      console.log(`Data schema bumped (${storedSchema} -> ${DATA_SCHEMA_VERSION}); bypassing cache.`);
+    }
+
     // Send start message
     worker.postMessage({
       type: 'start',
       auxUrl: window.UNSMURF_AUX_URL || null,
       auxData: window.UNSMURF_AUX_DATA || null,
-      forceRefresh
+      forceRefresh: force
     });
   });
 }
@@ -70,15 +94,15 @@ export function findPuppetmaster(name) {
   if (!puppetMasterCache) {
     // console.warn("Puppet cache is not initialized. Returning the original name."); 
     // Suppress warning during init
-    return { master: name, sheet: null };
+    return { master: name, sheet: null, sheets: [] };
   }
 
   const entry = puppetMasterCache[name.toLowerCase()];
   if (entry) {
-    return { master: entry.master, sheet: entry.sheet }; // Return master and sheet name
+    return { master: entry.master, sheet: entry.sheet, sheets: entry.sheets || [entry.sheet] }; // Return master, sheet, and all source sheets
   }
 
-  return { master: name, sheet: null }; // Default to original name if not found
+  return { master: name, sheet: null, sheets: [] }; // Default to original name if not found
 }
 
 /**
