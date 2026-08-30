@@ -183,6 +183,22 @@ async function processGoogleSheets() {
     }
     log(`Loaded ${excludeSet.size} exclusion rules`);
 
+    let pruned = 0;
+    for (let i = tsvLines.length - 1; i >= 1; i--) {
+      const [puppet, master] = tsvLines[i].split('\t');
+      if (excludeSet.has(`${puppet}\t${master}`)) {
+        tsvLines.splice(i, 1);
+        seenPuppets.delete(puppet);
+        pruned++;
+      }
+    }
+    for (const [puppet, entries] of identifications) {
+      const kept = entries.filter(e => !excludeSet.has(`${puppet}\t${e.master}`));
+      if (kept.length) identifications.set(puppet, kept);
+      else identifications.delete(puppet);
+    }
+    if (pruned) log(`Removed ${pruned} rows matching exclusion rules`);
+
     // STEP 3: Load regex patterns
     logStep(3, 'Loading and compiling regex patterns');
     const patterns = [];
@@ -283,7 +299,9 @@ async function processGoogleSheets() {
             if (idx >= 0 && idx < pts.length) {
               const detail = pts[idx];
               if (seenPuppets.has(nation)) {
-                addIdentification(nation, detail.master, detail.sheetName);
+                if (!excludeSet.has(`${nation}\t${detail.master}`)) {
+                  addIdentification(nation, detail.master, detail.sheetName);
+                }
                 break;
               }
               const key = `${nation}\t${detail.master}`;
@@ -365,6 +383,7 @@ async function processGoogleSheets() {
     for (const [puppet, entries] of identifications) {
       const states = new Map();
       for (const { master, sheet } of entries) {
+        if (excludeSet.has(`${puppet}\t${master}`)) continue;
         const resolved = redirs.get(master) || master;
         if (!states.has(resolved)) states.set(resolved, new Set());
         states.get(resolved).add(sheet);
@@ -397,6 +416,31 @@ async function processGoogleSheets() {
         log(`  ${puppet}: ${parts.join('; ')}`);
       }
     }
+
+    const conflictsPath = CONFIG.paths.main.replace('.tsv', '.conflicts.tsv');
+    const existingFirstFound = new Map();
+    try {
+      const prev = await fs.readFile(conflictsPath, 'utf8');
+      for (const line of prev.split('\n').slice(1)) {
+        const [nation, ts] = line.split('\t');
+        if (nation && ts) existingFirstFound.set(nation, ts);
+      }
+    } catch (e) {
+      if (e.code !== 'ENOENT') throw e;
+    }
+
+    const firstFoundNow = Math.floor(Date.now() / 1000);
+    const sheetStr = (sheets) => orderedSheets([...sheets]).join(', ');
+    const rows = conflictList.map(({ puppet, states }) => {
+      const sorted = [...states.entries()].sort((a, b) => (a[0] < b[0] ? -1 : 1));
+      const [[m1, s1], [m2, s2] = ['', '']] = sorted;
+      const extra = sorted.slice(2).map(([m, sheets]) => `\t${m}\t${sheetStr(sheets)}`).join('');
+      const firstFound = existingFirstFound.get(puppet) || firstFoundNow;
+      return `${puppet}\t${firstFound}\t${m1}\t${sheetStr(s1)}\t${m2}\t${sheetStr(s2)}${extra}`;
+    });
+    const conflictsContent = `nation\tcollisionFirstFoundUnix\tmaster1\tsheet1\tmaster2\tsheet2\n${rows.join('\n')}\n`;
+    await fs.writeFile(conflictsPath, conflictsContent, 'utf8');
+    log(`Wrote conflicts TSV (${rows.length} rows)`);
 
     if (tally.size) {
       log(`\nNations identified by multiple sheets after redirects:`);
