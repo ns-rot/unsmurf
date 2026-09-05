@@ -210,8 +210,8 @@ async function processGoogleSheets() {
         const master = normalize(cols[sheet.mainColumn], { sheet: sheet.name, row: line });
         if (!regex || !master) continue;
         try {
-          new RegExp(regex, 'i');
-          patterns.push({ pattern: regex, master, sheetName: sheet.name });
+          const compiled = new RegExp(regex, 'i');
+          patterns.push({ pattern: regex, master, sheetName: sheet.name, regex: compiled });
           valid++;
         } catch (e) {
           console.error(`Invalid regex in ${sheet.name}: ${master}`);
@@ -237,7 +237,10 @@ async function processGoogleSheets() {
     let saved = 0;
 
     for (const [master, pts] of byMaster) {
-      if (pts.length === 1) { consolidated.push(pts[0]); continue; }
+      if (pts.length === 1) {
+        consolidated.push({ ...pts[0], sourcePatterns: pts });
+        continue;
+      }
 
       let group = [], groupCount = 0;
       for (const p of pts) {
@@ -247,7 +250,8 @@ async function processGoogleSheets() {
             pattern: group.map(x => x.pattern).join('|'),
             master,
             sheetName: group[0].sheetName,
-            groupCount
+            groupCount,
+            sourcePatterns: group
           });
           saved += group.length - 1;
           group = [];
@@ -261,7 +265,8 @@ async function processGoogleSheets() {
           pattern: group.map(x => x.pattern).join('|'),
           master,
           sheetName: group[0].sheetName,
-          groupCount
+          groupCount,
+          sourcePatterns: group
         });
         saved += group.length - 1;
       }
@@ -272,6 +277,7 @@ async function processGoogleSheets() {
     // STEP 4: Build regex processors
     logStep(4, 'Building multiple regex processors');
     const processors = [];
+    const matchedPatterns = new Set();
     for (let i = 0; i < consolidated.length; i += CONFIG.maxPatternsPerRegex) {
       const chunk = consolidated.slice(i, i + CONFIG.maxPatternsPerRegex);
       processors.push({
@@ -298,25 +304,31 @@ async function processGoogleSheets() {
             const idx = processor.getMatchIndex(result);
             if (idx >= 0 && idx < pts.length) {
               const detail = pts[idx];
-              if (seenPuppets.has(nation)) {
-                if (!excludeSet.has(`${nation}\t${detail.master}`)) {
-                  addIdentification(nation, detail.master, detail.sheetName);
+              const isSeen = seenPuppets.has(nation);
+              const key = `${nation}\t${detail.master}`;
+              if (!excludeSet.has(key)) {
+                if (detail.sourcePatterns.length === 1) {
+                  matchedPatterns.add(detail.sourcePatterns[0]);
+                } else {
+                  for (const sp of detail.sourcePatterns) {
+                    if (sp.regex.test(nation)) matchedPatterns.add(sp);
+                  }
+                }
+                addIdentification(nation, detail.master, detail.sheetName);
+                if (!isSeen) {
+                  seenPuppets.set(nation, { master: detail.master, sheet: detail.sheetName });
+                  tsvLines.push(`${nation}\t${detail.master}\t${detail.sheetName}`);
+                  matched++;
+                  matchStats[detail.master] = (matchStats[detail.master] || 0) + 1;
                 }
                 break;
               }
-              const key = `${nation}\t${detail.master}`;
-              if (!excludeSet.has(key)) {
-                addIdentification(nation, detail.master, detail.sheetName);
-                seenPuppets.set(nation, { master: detail.master, sheet: detail.sheetName });
-                tsvLines.push(`${nation}\t${detail.master}\t${detail.sheetName}`);
-                matched++;
-                matchStats[detail.master] = (matchStats[detail.master] || 0) + 1;
-                break;
-              }
+              if (isSeen) break;
             }
           }
         }
       } catch (e) {
+        if (errors === 0) console.error(`Error during regex matching: ${e.message}`, e);
         errors++;
       }
 
@@ -330,6 +342,14 @@ async function processGoogleSheets() {
     const duration = ((Date.now() - testStart) / 1000).toFixed(1);
     log(`\nMatched ${matched} in ${duration}s (${((tested * 1000) / (Date.now() - testStart)).toFixed(0)}ns/sec)`);
     if (errors > 0) log(`Errors: ${errors}`);
+
+    const unmatchedPatterns = patterns.filter(pattern => !matchedPatterns.has(pattern));
+    if (unmatchedPatterns.length > 0) {
+      console.warn(`WARNING: ${unmatchedPatterns.length} regex pattern(s) returned no results`);
+      for (const { pattern, master, sheetName } of unmatchedPatterns) {
+        console.warn(`  ${sheetName} -> ${master}: ${pattern}`);
+      }
+    }
 
     const top = Object.entries(matchStats).sort((a, b) => b[1] - a[1]).slice(0, 10);
     if (top.length) {
