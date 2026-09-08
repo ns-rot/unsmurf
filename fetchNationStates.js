@@ -2,11 +2,13 @@ import { promises as fs, createReadStream } from 'fs';
 import { gunzipSync, inflateRawSync, createBrotliCompress, createBrotliDecompress, constants } from 'zlib';
 
 const nationStatesApi = "https://www.nationstates.net/cgi-bin/api.cgi?q=nations";
+const nationStatesWaApi = "https://www.nationstates.net/cgi-bin/api.cgi?wa=1&q=members";
 const userAgent = "script=ns-unsmurf-github by=rotenaple";
 
 // Paths for data files
 const dataWorktreePath = '.data'; // Worktree path for data branch
 const mainFilePath = `${dataWorktreePath}/static/currentNations.txt`; // Path in data branch
+const waFilePath = `${dataWorktreePath}/static/currentWANations.txt`; // Path in data branch
 const allNationsCompressedPath = `${dataWorktreePath}/static/allNations.txt.br`; // Final compressed path
 // Removed ghPagesFilePath as we no longer sync to gh-pages
 
@@ -188,8 +190,82 @@ async function fetchNationStatesData() {
   }
 }
 
+// Fetch WA member nations and store alongside currentNations.
+// Non-fatal on failure: existing WA file is preserved and fetchGoogleSheets.js will warn if it is missing.
+async function fetchWANationsData() {
+  try {
+    console.log('Fetching WA membership from NationStates API...');
+    const response = await fetch(nationStatesWaApi, {
+      headers: {
+        'User-Agent': userAgent,
+      },
+    });
+
+    if (!response.ok) {
+      console.error(`Failed to fetch WA membership: ${response.statusText}`);
+      return false;
+    }
+
+    const raw = Buffer.from(await response.arrayBuffer());
+    console.log(`  Raw response: ${raw.length} bytes`);
+
+    const { ok, data } = tryDecompress(raw);
+
+    if (!ok) {
+      console.error(`Cannot decompress WA response body (${raw.length} raw bytes). Aborting WA update.`);
+      return false;
+    }
+
+    const dataStr = data.toString('utf8');
+    if (!dataStr.includes('</MEMBERS>')) {
+      console.error(`WA response is truncated — missing </MEMBERS> (${raw.length} raw bytes). Aborting WA update.`);
+      return false;
+    }
+
+    const match = dataStr.match(/<MEMBERS>(.*?)<\/MEMBERS>/s);
+    if (!match) {
+      console.error('No members found in WA membership response.');
+      return false;
+    }
+
+    const waNations = match[1].split(',').map((nation) => {
+      return nation.trim().toLowerCase().replace(/\s+/g, '_');
+    }).sort();
+
+    console.log(`  ${waNations.length} WA member nations`);
+    if (waNations.length < 5000) {
+      console.error(`WA response appears truncated (${waNations.length} nations). Aborting WA update.`);
+      return false;
+    }
+
+    // Guard: reject if WA list is >50% smaller than existing
+    const waBytes = Buffer.byteLength(waNations.join('\n'), 'utf8');
+    try {
+      const existing = await fs.stat(waFilePath);
+      if (waBytes < existing.size * 0.5) {
+        console.error(`currentWANations is ${((1 - waBytes / existing.size) * 100).toFixed(0)}% smaller than existing (${waBytes} vs ${existing.size} bytes). Aborting WA update.`);
+        return false;
+      }
+    } catch (e) {
+      if (e.code !== 'ENOENT') throw e;
+    }
+
+    await fs.writeFile(waFilePath, waNations.join('\n'), { encoding: 'utf8', flag: 'w' });
+    const jsonPath = waFilePath.replace('.txt', '.json');
+    await fs.writeFile(jsonPath, JSON.stringify(waNations), { encoding: 'utf8', flag: 'w' });
+
+    console.log(`✅ Wrote ${waNations.length} WA member nations to ${waFilePath}`);
+    return true;
+  } catch (error) {
+    console.error('Error processing WA membership data:', error);
+    return false;
+  }
+}
+
 // Run the function
-fetchNationStatesData().catch((error) => {
-  console.error('Error processing NationStates API data:', error);
-  process.exit(1);
-});
+fetchNationStatesData()
+  .then(() => fetchWANationsData())
+  .catch((error) => {
+    console.error('Error processing NationStates API data:', error);
+    process.exit(1);
+  });

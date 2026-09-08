@@ -18,6 +18,7 @@ const CONFIG = {
     worktree: '.data',
     main: '.data/static/puppetData.tsv',
     nations: '.data/static/allNations.txt.br',
+    waNations: '.data/static/currentWANations.txt',
   },
   maxGroupsPerPattern: 800,
   maxPatternsPerGroup: 25,
@@ -515,6 +516,42 @@ async function processGoogleSheets() {
     const content = [header.join('\t'), ...data.map(rowOf)].join('\n');
     log(`Total entries: ${data.length}`);
     if (extraSheets.size) log(`  ${extraSheets.size} puppets carry additional source sheets`);
+
+    // STEP 8.5: WA membership check
+    // Each master group (the master nation and its puppets) should contain at most one WA member
+    // nation; warn about any group containing more than one.
+    logStep('8.5', 'Checking WA membership per master');
+    let waSet = null;
+    try {
+      const waText = await fs.readFile(CONFIG.paths.waNations, 'utf8');
+      waSet = new Set(waText.split('\n').map(n => n.trim()).filter(n => n !== ''));
+    } catch (e) {
+      if (e.code !== 'ENOENT') throw e;
+    }
+    if (!waSet || waSet.size === 0) {
+      console.warn(`WARNING: WA membership data unavailable (${CONFIG.paths.waNations} missing or empty) — skipping WA check. Run fetchNationStates.js first.`);
+    } else {
+      const masterGroups = new Map();
+      for (const { puppet, master } of data) {
+        let group = masterGroups.get(master);
+        if (!group) { group = new Set(); masterGroups.set(master, group); }
+        group.add(puppet);
+      }
+      const mastersWithMultipleWa = [];
+      for (const [master, nations] of masterGroups) {
+        nations.add(master);
+        const waMembers = [...nations].filter(nation => waSet.has(nation));
+        if (waMembers.length > 1) mastersWithMultipleWa.push({ master, waMembers });
+      }
+      if (mastersWithMultipleWa.length) {
+        console.warn(`WARNING: ${mastersWithMultipleWa.length} master(s) have more than one WA member among the master and its puppets:`);
+        for (const { master, waMembers } of mastersWithMultipleWa.sort((a, b) => (a.master < b.master ? -1 : 1))) {
+          console.warn(`  ${master}: ${waMembers.sort().join(', ')}`);
+        }
+      } else {
+        log(`All ${masterGroups.size} master groups have at most one WA member`);
+      }
+    }
 
     // STEP 9: Commit to data branch (Orphan strategy)
     logStep(9, 'Writing and committing');
