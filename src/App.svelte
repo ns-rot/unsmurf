@@ -279,22 +279,24 @@ import {
       updateViewport();
     }
 
+    if (viewFromURL === 'q') {
+      currentView = 'qna';
+      document.title = "Unsmurf | Q&A";
+    } else if (viewFromURL === 'm' || masterFromURL) {
+      currentView = 'masters';
+      document.title = "Unsmurf | Puppetmasters";
+    }
+
+    if (masterFromURL) {
+      selectedMaster = masterFromURL;
+    }
+
     window.addEventListener('UNSMURF_AUX_DATA_READY', async () => {
       await fetchSheets();
       if (nationId) await loadTradeData();
     });
     
     await fetchSheets();
-
-    if (viewFromURL === 'q') {
-      currentView = 'qna';
-    } else if (viewFromURL === 'm' || masterFromURL) {
-      currentView = 'masters';
-    }
-
-    if (masterFromURL) {
-      selectedMaster = masterFromURL;
-    }
 
     if (fromURL) {
       nationId = uncanonicalizeName(fromURL);
