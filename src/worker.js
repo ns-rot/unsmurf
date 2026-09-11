@@ -111,9 +111,9 @@ function processGroupedJson(data) {
     const { masters, sheets, puppets, version } = data;
 
     // Reconstruct from dictionary encoding.
-    // Each row is [puppet, masterIdx, sheet] where sheet is either a plain dictionary
+    // Each row is [puppet, masterIdx, mask] where mask is either a plain dictionary
     // index (legacy data, < v2) or a bitmask over the sheets list (v2+): bit n = sheets[n]
-    // identified this puppet under its winning master; bit 0 is the winner's sheet.
+    // identified this puppet under its winning master (including the winner's own bit).
     for (let idx = 0; idx < puppets.length; idx++) {
         const [puppet, mIdx, sIdxOrMask] = puppets[idx];
         const master = masters[mIdx];

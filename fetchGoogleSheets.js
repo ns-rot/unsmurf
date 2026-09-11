@@ -580,6 +580,11 @@ async function processGoogleSheets() {
       masterCounts[master] = (masterCounts[master] || 0) + 1;
       sheetCounts[sheet] = (sheetCounts[sheet] || 0) + 1;
     }
+    // Include sheets that only ever appear as extras (puppets won by other sheets)
+    // so every attributed sheet gets a valid bitmask index.
+    for (const extras of extraSheets.values()) {
+      for (const s of extras) sheetCounts[s] = (sheetCounts[s] || 0) + 1;
+    }
 
     // 2. Create sorted lists (most frequent first -> lower index)
     const mastersList = Object.keys(masterCounts).sort((a, b) => masterCounts[b] - masterCounts[a]);
@@ -589,8 +594,15 @@ async function processGoogleSheets() {
     const mastersMap = new Map(mastersList.map((m, i) => [m, i]));
     const sheetsMap = new Map(sheetsList.map((s, i) => [s, i]));
 
+    // Guard: every extra sheet must be resolvable to a bitmask index.
+    for (const extras of extraSheets.values()) {
+      for (const s of extras) {
+        if (!sheetsMap.has(s)) throw new Error(`Internal: extra sheet "${s}" has no bitmask index — sheets universe incomplete`);
+      }
+    }
+
     // 4. Build puppets list using these sorted indices, with source sheets encoded as a bitmask
-    // (bit n = sheets[n] identified this puppet under its winning master; bit 0 = the winner's sheet).
+    // (bit n = sheets[n] identified this puppet under its winning master).
     const extraCount = [...extraSheets.values()].reduce((sum, v) => sum + v.length, 0);
     const puppetsList = data.map(({ puppet, master, sheet }) => {
       let mask = 1 << sheetsMap.get(sheet);
