@@ -116,6 +116,20 @@ html body table .table-spacer-row td {
   @apply bg-transparent border-none p-0 leading-[0] !important;
 }
 
+/* Date column: one wrapper class switches both formats, so virtualized rows
+   created later inherit the current mode without per-cell DOM writes. */
+.data-table .date-relative {
+  display: none;
+}
+
+.data-table.show-relative .date-formatted {
+  display: none;
+}
+
+.data-table.show-relative .date-relative {
+  display: block;
+}
+
 /* Global Scrollbar Styling */
 
 /* Firefox */

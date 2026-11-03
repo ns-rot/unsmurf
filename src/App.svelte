@@ -301,6 +301,9 @@ import {
     if (fromURL) {
       nationId = uncanonicalizeName(fromURL);
       await loadTradeData();
+    } else if (masterFromURL && currentView === 'masters') {
+      // If loading masters view directly with ?m= parameter, ensure data is ready
+      // Data is fetched above, component will react to settingsStore.dataFetched
     }
   });
 

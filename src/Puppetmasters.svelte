@@ -5,6 +5,7 @@
     tallyPuppets,
     listPuppets,
     isNationCurrent,
+    masterToPuppetsCache,
   } from "./sheetFetch.js";
   import { uncanonicalizeName, canonicalizeName } from "./settingsUtils.js";
   import { getQueryParam, setQueryParam } from "./dataUtils.js";
@@ -13,12 +14,13 @@
 
   export let onSelectMaster;
 
-  let masters = [];
   let searchQuery = "";
   let searchAny = false;
   let sortMode = "active";
   let globalMaxVal = 1;
   let initialized = false;
+
+  $: masters = ($settingsStore?.dataFetched || masterToPuppetsCache) ? getTopMasters(0) : [];
 
   onMount(() => {
     // Initialize from URL
@@ -30,7 +32,6 @@
     if (a === "1") searchAny = true;
     if (s === "t") sortMode = "total";
 
-    updateMasters();
     initialized = true;
   });
 
@@ -118,7 +119,7 @@
   }
 
   function updateMasters() {
-    masters = getTopMasters(0);
+    // masters are now reactive
   }
 
   function handleSelect(masterName) {

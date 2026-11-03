@@ -180,6 +180,7 @@ export function formatNationName(name, language = "en") {
   const INF = 1e9;
   const dp = new Array(n + 1).fill(INF);
   const nextPos = new Array(n + 1).fill(-1);
+  const nextPriority = new Array(n + 1).fill(-1);
   dp[n] = 0;
 
   for (let i = n - 1; i >= 0; i--) {
@@ -188,6 +189,7 @@ export function formatNationName(name, language = "en") {
     if (lineToEnd <= MAX_LINE) {
       dp[i] = Math.pow(TARGET - lineToEnd, 2);
       nextPos[i] = n;
+      nextPriority[i] = -1;
     }
 
     // Option: break at one of the recorded break points
@@ -201,35 +203,44 @@ export function formatNationName(name, language = "en") {
       if (total < dp[i]) {
         dp[i] = total;
         nextPos[i] = bp.pos;
+        nextPriority[i] = bp.priority;
       }
     }
   }
 
-  // Reconstruct selected break positions
-  const selected = new Set();
+  // Reconstruct selected breaks. Keep the priority: only a soft-hyphen break
+  // (priority 2) may become a SHY. Space and hard-hyphen breaks are already
+  // break opportunities in the browser and must not be marked.
+  const selected = new Map();
   let i = 0;
   while (i < n && nextPos[i] > i && nextPos[i] <= n) {
-    if (nextPos[i] < n) selected.add(nextPos[i]);
+    if (nextPos[i] < n) selected.set(nextPos[i], nextPriority[i]);
     i = nextPos[i];
   }
 
-  // --- Step 3: Build output with SHY only at selected positions ---
+  // --- Step 3: Build output with SHY only at real hyphenation points ---
+  const htmlEscape = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  };
   const styled = text
     .split("")
     .map((ch, idx) => {
-      if (ch === "-") {
-        // hard hyphen: append ZWSP so the DP-chosen break can activate
-        return selected.has(idx + 1) ? `${ch}\u200B` : ch;
+      // Spaces and hard hyphens stay natural: the browser breaks there on its
+      // own, and the source character must remain copyable unchanged.
+      if (ch === " " || ch === "-") return ch;
+
+      // A soft-hyphen break is presentation only. `select-none` is required so
+      // Firefox's clipboard cannot turn the SHY into "-" and change the name.
+      // `line-height: 0` keeps the small marker from changing row height.
+      if (selected.get(idx) === 2) {
+        return `<span class="select-none" style="font-size: 0.7em; line-height: 0; vertical-align: middle;">${SHY}</span>${htmlEscape[ch] ?? ch}`;
       }
-      if (ch === " ") {
-        // space: naturally breakable, no marker needed
-        return ch;
-      }
-      // word character: if a break was selected here, insert SHY before it
-      if (selected.has(idx)) {
-        return `<span style="font-size: 0.7em; vertical-align: middle;">${SHY}</span>${ch}`;
-      }
-      return ch;
+
+      return htmlEscape[ch] ?? ch;
     })
     .join("");
 

@@ -85,7 +85,7 @@ function buildTallyContent(tally, rawToNormalizedMap, context, settings) {
       // Only add tally info if there are multiple nations grouped
       let puppetTally = "";
       if (rawNames.length > 1) {
-        puppetTally = `<div class="tally-info ml-0.25 inline text-gray-500">
+        puppetTally = `<div class="tally-info ml-0.25 inline text-gray-500 select-none">
           <span>[${rawNames.length}]</span>
         </div>`;
       }
@@ -164,8 +164,8 @@ export async function fetchData(role, nationId, forceRefresh = false) {
 export function makeTallyColumns(tally) {
   const totalCount = tally.reduce((sum, [_n, c]) => sum + c, 0);
   return [
-    { label: "Nation", alignment: "left" },
-    { label: formatLargeNumber(totalCount), alignment: "right" },
+    { label: "Nation", alignment: "left", weight: 78 },
+    { label: formatLargeNumber(totalCount), alignment: "right", weight: 22, nowrap: true },
   ];
 }
 
@@ -185,14 +185,16 @@ export function makeTradeColumns(role) {
       label: role === "buyer" ? "Buyer" : "Seller",
       alignment: "left",
       styles: ["min-w-[6ch]", "max-w-[12ch]"],
+      weight: 28,
     },
     {
       label: "Card",
       alignment: "left",
       styles: ["min-w-[6ch]", "max-w-[12ch]"],
+      weight: 28,
     },
-    { label: "Price", alignment: "center", styles: ["min-w-[3ch]"] },
-    { label: "Date", alignment: "right", styles: ["min-w-[5ch]"] },
+    { label: "Price", alignment: "center", styles: ["min-w-[3ch]"], weight: 22, nowrap: true },
+    { label: "Date", alignment: "right", styles: ["min-w-[5ch]"], weight: 22, nowrap: true },
   ];
 }
 
@@ -202,13 +204,15 @@ export function makeGiftColumns(role) {
       label: role === "buyer" ? "Buyer" : "Seller",
       alignment: "left",
       styles: ["min-w-[6ch]", "max-w-[12ch]"],
+      weight: 34,
     },
     {
       label: "Card",
       alignment: "left",
       styles: ["min-w-[6ch]", "max-w-[12ch]"],
+      weight: 34,
     },
-    { label: "Date", alignment: "right", styles: ["min-w-[5ch]"] },
+    { label: "Date", alignment: "right", styles: ["min-w-[5ch]"], weight: 32, nowrap: true },
   ];
 }
 
@@ -218,7 +222,6 @@ export function makeGiftColumns(role) {
  * @param {string} role - The role key ('buyer' or 'seller').
  * @param {function} filterCondition - A function to filter records (e.g., price !== 0 for trades, price === 0 for gifts).
  * @param {boolean} includePrice - Whether to include the price column (only applies to trades).
- * @param {string} dateFormat - "absolute" or "relative".
  * @returns {Array} - An array of processed rows for the table.
  */
 export function makeRows(
@@ -226,7 +229,6 @@ export function makeRows(
   role,
   filterCondition,
   includePrice,
-  dateFormat,
   context
 ) {
   return records.filter(filterCondition).map((r) => {
@@ -272,14 +274,16 @@ export function makeRows(
 
     // Get puppet master information if the setting is enabled
     let puppetMasterText = "";
+    let puppetMasterName = "";
     if (settings.showPuppetmasters) {
       const puppetMaster = findPuppetmaster(r[role] || "N/A"); // Resolve puppet master
       if (puppetMaster.master !== r[role]) {
+        puppetMasterName = puppetMaster.master;
         // Only show if the puppet master is different
         if (useSettings().showCTE) {
           cte = isNationCurrent(puppetMaster.master) ? "" : `<span class="select-none text-red-400 dark:text-red-400 opacity-60">&#xe000;&#x2009;</span>`;
         }
-        puppetMasterText += `<span class="text-gray-500 text-sm"><a href="${getNationLink(puppetMaster.master, context)}"
+        puppetMasterText += `<span class="text-gray-500 text-[13px]"><a href="${getNationLink(puppetMaster.master, context)}"
         target="_blank" rel="noopener noreferrer" data-nation="true" data-nation-name="${puppetMaster.master}">${cte}${formatNationName(
           puppetMaster.master
         )}</a></span>`;
@@ -288,23 +292,29 @@ export function makeRows(
 
     // Build the base row with nation, puppet master (if enabled), and card links
     const row = [
-      `${nationLink}${puppetMasterText ? `<br>${puppetMasterText}` : ""}`, // Add puppet master info below nation name
-      { value: displayCardLink, class: rarityClass },
+      {
+        value: `${nationLink}${puppetMasterText ? `<br>${puppetMasterText}` : ""}`, // Add puppet master info below nation name
+        copy: `${r[role] || "N/A"}${puppetMasterName ? `\n${puppetMasterName}` : ""}`,
+      },
+      {
+        value: displayCardLink,
+        class: rarityClass,
+        copy: `${seasonText} ${r.card_name || r.card_id}`,
+      },
     ];
 
     // Conditionally add the price column only if `includePrice` is true
     if (includePrice) {
-      row.push({ value: formatPrice(r.price), class: "" });
+      row.push({ value: formatPrice(r.price), class: "", copy: String(r.price) });
     }
 
-    // Add the date column
+    // Add the date column. Both formats stay in the DOM; a `.show-relative`
+    // class on the table switches between them without per-cell DOM writes.
     row.push({
-      value: `<span class="date-formatted ${dateFormat === "relative" ? "hidden" : "block"
-        }">${formatted}</span>
-                <span class="date-relative ${dateFormat === "relative" ? "block" : "hidden"
-        }">${relative}</span>`,
+      value: `<span class="date-formatted block">${formatted}</span><span class="date-relative">${relative}</span>`,
       class: "date-cell",
       onClick: toggleDateFormat, // Attach click handler for toggling
+      copy: formatted.replace(/<wbr\s*\/?>/gi, ""),
     });
 
     return row;
@@ -323,7 +333,6 @@ export function makeTradeRows(records, role, context) {
     role,
     (r) => r.price !== 0,
     true,
-    useSettings().dateFormat,
     context
   ); // Include price
 }
@@ -340,28 +349,24 @@ export function makeGiftRows(records, role, context) {
     role,
     (r) => r.price === 0,
     false,
-    useSettings().dateFormat,
     context
   ); // Exclude price
 }
 
 /**
- * Toggles the visibility of all formatted and relative date spans in the table.
+ * Toggles the date format for the table containing the clicked cell.
+ * The table component owns the state; this only asks it to switch.
+ * @param {Event} [event]
  */
-export function toggleDateFormat() {
-  // Select all date cells
-  const dateCells = document.querySelectorAll(".date-cell");
-
-  dateCells.forEach((cell) => {
-    const formatted = cell.querySelector(".date-formatted");
-    const relative = cell.querySelector(".date-relative");
-
-    if (formatted && relative) {
-      // Toggle visibility for all date cells
-      formatted.classList.toggle("hidden");
-      relative.classList.toggle("hidden");
-    }
-  });
+export function toggleDateFormat(event) {
+  const table = event?.currentTarget?.closest?.(".data-table");
+  if (table) {
+    table.dispatchEvent(new CustomEvent("toggle-date-format", { bubbles: true }));
+    return;
+  }
+  document
+    .querySelectorAll(".data-table")
+    .forEach((t) => t.dispatchEvent(new CustomEvent("toggle-date-format", { bubbles: true })));
 }
 
 export function getNationLink(nationName, context) {

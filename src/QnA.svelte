@@ -17,7 +17,7 @@
     {
       q: "Who runs this site?",
       parts: [
-        "The site is maintained by Rotenaplistan, and the dataset is primarily maintained by Rotenaplistan and Caffeinated. To contact us please reach out to @rotenaple or @latterstarsigngirl on Discord.",
+        "The site is maintained by Rotenaplistan, and the dataset is maintained by Rotenaplistan, Caffeinated and Catfeine. To contact us please reach out to @rotenaple, @latterstarsigngirl or @chocoberriez on Discord.",
       ],
     },
     {
