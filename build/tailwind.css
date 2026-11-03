@@ -1223,6 +1223,10 @@ body:is(.dark *){
   flex-shrink: 0;
 }
 
+.shrink{
+  flex-shrink: 1;
+}
+
 .shrink-0{
   flex-shrink: 0;
 }
@@ -1850,10 +1854,6 @@ body:is(.dark *){
   fill: #000;
 }
 
-.p-0{
-  padding: 0px;
-}
-
 .p-1{
   padding: 0.25rem;
 }
@@ -2421,6 +2421,21 @@ html body table .table-spacer-row td{
   background-color: transparent !important;
   padding: 0px !important;
   line-height: 0 !important;
+}
+
+/* Date column: one wrapper class switches both formats, so virtualized rows
+   created later inherit the current mode without per-cell DOM writes. */
+
+.data-table .date-relative {
+  display: none;
+}
+
+.data-table.show-relative .date-formatted {
+  display: none;
+}
+
+.data-table.show-relative .date-relative {
+  display: block;
 }
 
 /* Global Scrollbar Styling */
