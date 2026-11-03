@@ -16,6 +16,7 @@
     findPuppetmaster,
     listPuppets,
     tallyPuppets,
+    masterToPuppetsCache,
   } from "./sheetFetch.js";
 
   import Sidebar from "./Sidebar.svelte";
@@ -302,8 +303,8 @@ import {
       nationId = uncanonicalizeName(fromURL);
       await loadTradeData();
     } else if (masterFromURL && currentView === 'masters') {
-      // If loading masters view directly with ?m= parameter, ensure data is ready
-      // Data is fetched above, component will react to settingsStore.dataFetched
+      // Force update after data loads
+      selectedMaster = selectedMaster;
     }
   });
 
@@ -349,8 +350,8 @@ import {
     }
   }
 
-  $: selectedMasterPuppets = selectedMaster ? listPuppets(selectedMaster).map(p => uncanonicalizeName(p)) : [];
-  $: selectedMasterCount = selectedMaster ? tallyPuppets(selectedMaster) : 0;
+  $: selectedMasterPuppets = (selectedMaster && $settingsStore?.dataFetched) ? (() => { void masterToPuppetsCache; return listPuppets(selectedMaster).map(p => uncanonicalizeName(p)); })() : (selectedMaster ? (() => { void masterToPuppetsCache; return listPuppets(selectedMaster).map(p => uncanonicalizeName(p)); })() : []);
+  $: selectedMasterCount = (selectedMaster && $settingsStore?.dataFetched) ? (() => { void masterToPuppetsCache; return tallyPuppets(selectedMaster); })() : (selectedMaster ? (() => { void masterToPuppetsCache; return tallyPuppets(selectedMaster); })() : 0);
 
   // Theme: handle light / system / dark
   let systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;

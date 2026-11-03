@@ -1,6 +1,6 @@
 <script>
   import { onMount, tick } from "svelte";
-  import { isNationCurrent, countActivePuppets, findPuppetmaster, puppetMasterCache } from "./sheetFetch.js";
+  import { isNationCurrent, countActivePuppets, findPuppetmaster, puppetMasterCache, masterToPuppetsCache } from "./sheetFetch.js";
   import { canonicalizeName, createNaturalCompare, classicNaturalCompare } from "./settingsUtils.js";
   import { getNationLink } from "./dataUtils.js";
   import { settingsStore } from "./settingsStore.js";
@@ -86,6 +86,8 @@
 
   // Sort puppets
   $: sortedPuppetList = (() => {
+    void masterToPuppetsCache;
+    void puppetMasterCache;
     const cmp = sortCmp;
     return [...puppetList].sort((a, b) => {
       if (sortMode === 1) {
