@@ -1,6 +1,7 @@
 .DS_Store
 public/static/allNations.txt
 /node_modules
+/bin/
 public/build
 .data/
 *.mjs

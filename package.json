@@ -12,7 +12,11 @@
     "start": "sirv public --no-clear",
     "deploy": "npm run build && gh-pages -d public --add",
     "deploy:beta": "npm run build && gh-pages -d public --dest beta --add",
-    "aggregate": "node aggregateData.js"
+    "aggregate": "go run ./cmd/unsmurf all",
+    "aggregate:nations": "go run ./cmd/unsmurf nations",
+    "aggregate:sheets": "go run ./cmd/unsmurf sheets",
+    "aggregate:js:nations": "node fetchNationStates.js",
+    "aggregate:js:sheets": "node fetchGoogleSheets.js"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
